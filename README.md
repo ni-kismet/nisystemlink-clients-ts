@@ -1,4 +1,4 @@
-# systemlink-ts-api
+# nisystemlink-clients-ts
 
 Auto-generated TypeScript API clients for all NI SystemLink services, generated from their official OpenAPI specifications.
 
@@ -11,38 +11,38 @@ Auto-generated TypeScript API clients for all NI SystemLink services, generated 
 ## Installation
 
 ```bash
-npm install systemlink-ts-api
+npm install nisystemlink-clients-ts
 ```
 
 ## Quick start (Angular)
 
 Each service has two sub-paths:
 
-| Import path | What you get |
-|---|---|
-| `systemlink-ts-api/<service>` | SDK functions + all TypeScript types |
-| `systemlink-ts-api/<service>/client` | `createClient`, `createConfig`, and the default client instance |
+| Import path                          | What you get                                                    |
+| ------------------------------------ | --------------------------------------------------------------- |
+| `nisystemlink-clients-ts/<service>`        | SDK functions + all TypeScript types                            |
+| `nisystemlink-clients-ts/<service>/client` | `createClient`, `createConfig`, and the default client instance |
 
 ### Inject a configured client in an Angular service
 
 ```typescript
 // src/app/core/alarm.service.ts
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { Injectable } from "@angular/core";
+import { environment } from "../../environments/environment";
 
-import { createClient, createConfig } from 'systemlink-ts-api/alarm/client';
+import { createClient, createConfig } from "nisystemlink-clients-ts/alarm/client";
 import {
   postNialarmV1QueryInstances,
   type QueryRequest,
   type QueryResponse,
-} from 'systemlink-ts-api/alarm';
+} from "nisystemlink-clients-ts/alarm";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class AlarmService {
   private readonly client = createClient(
     createConfig({
       baseUrl: environment.systemlinkBaseUrl,
-      headers: { 'x-ni-api-key': environment.apiKey },
+      headers: { "x-ni-api-key": environment.apiKey },
     }),
   );
 
@@ -63,8 +63,8 @@ export class AlarmService {
 // src/environments/environment.ts
 export const environment = {
   production: false,
-  systemlinkBaseUrl: 'https://your-systemlink-server.example.com',
-  apiKey: 'your-x-ni-api-key',
+  systemlinkBaseUrl: "https://your-systemlink-server.example.com",
+  apiKey: "your-x-ni-api-key",
 };
 ```
 
@@ -72,35 +72,35 @@ export const environment = {
 
 ## Available services
 
-| Sub-path | Description |
-|---|---|
-| `alarm` | Alarm management (instances, acknowledgement) |
-| `asset-management` | Assets, calibration history, asset summary |
-| `auth` | Authentication and authorization tokens |
-| `comments` | Comments on SystemLink resources |
-| `dataframe` | DataFrame table service |
-| `dynamic-form-fields` | Custom fields and schema management |
-| `feeds` | Package feed management |
-| `file-ingestion` | File upload and ingestion |
-| `location` | Location hierarchy and geospatial |
-| `notebook` | Jupyter notebook management |
-| `notebook-execution` | Notebook execution jobs |
-| `notebook-execution-artifact` | Execution output artifacts |
-| `notification` | Notifications and subscriptions |
-| `repository` | Package repository (NI Package Manager) |
-| `routines` | Scheduled and event-driven routines |
-| `routines-v2` | Routines API v2 |
-| `specification-management` | Test specification management |
-| `systems-management` | Managed systems fleet |
-| `systems-state` | System state and health |
-| `tag-historian` | Historical tag values |
-| `tags` | Tag reads and writes |
-| `test-monitor` | Test results, steps, products |
-| `user` | Users, workspaces, and access |
-| `user-data` | User-defined structured data |
-| `web-application` | Web application registry |
-| `work-item` | Work items (tasks, defects) |
-| `work-order` | Work orders |
+| Sub-path                      | Description                                   |
+| ----------------------------- | --------------------------------------------- |
+| `alarm`                       | Alarm management (instances, acknowledgement) |
+| `asset-management`            | Assets, calibration history, asset summary    |
+| `auth`                        | Authentication and authorization tokens       |
+| `comments`                    | Comments on SystemLink resources              |
+| `dataframe`                   | DataFrame table service                       |
+| `dynamic-form-fields`         | Custom fields and schema management           |
+| `feeds`                       | Package feed management                       |
+| `file-ingestion`              | File upload and ingestion                     |
+| `location`                    | Location hierarchy and geospatial             |
+| `notebook`                    | Jupyter notebook management                   |
+| `notebook-execution`          | Notebook execution jobs                       |
+| `notebook-execution-artifact` | Execution output artifacts                    |
+| `notification`                | Notifications and subscriptions               |
+| `repository`                  | Package repository (NI Package Manager)       |
+| `routines`                    | Scheduled and event-driven routines           |
+| `routines-v2`                 | Routines API v2                               |
+| `specification-management`    | Test specification management                 |
+| `systems-management`          | Managed systems fleet                         |
+| `systems-state`               | System state and health                       |
+| `tag-historian`               | Historical tag values                         |
+| `tags`                        | Tag reads and writes                          |
+| `test-monitor`                | Test results, steps, products                 |
+| `user`                        | Users, workspaces, and access                 |
+| `user-data`                   | User-defined structured data                  |
+| `web-application`             | Web application registry                      |
+| `work-item`                   | Work items (tasks, defects)                   |
+| `work-order`                  | Work orders                                   |
 
 ---
 
@@ -109,13 +109,16 @@ export const environment = {
 ### One shared client per Angular module
 
 ```typescript
-import { createClient, createConfig } from 'systemlink-ts-api/test-monitor/client';
+import {
+  createClient,
+  createConfig,
+} from "nisystemlink-clients-ts/test-monitor/client";
 
 // Create once, inject everywhere
 export const testMonitorClient = createClient(
   createConfig({
-    baseUrl: 'https://your-server.example.com/nitestmonitor',
-    headers: { 'x-ni-api-key': 'your-key' },
+    baseUrl: "https://your-server.example.com/nitestmonitor",
+    headers: { "x-ni-api-key": "your-key" },
   }),
 );
 ```
@@ -127,11 +130,11 @@ export const testMonitorClient = createClient(
 
 ### Services with path-prefixed base URLs
 
-| Service | Required `baseUrl` suffix |
-|---|---|
-| `test-monitor` | `/nitestmonitor` |
-| `tags` | `/nitag` |
-| `user` | `/niuser/v1` |
+| Service        | Required `baseUrl` suffix |
+| -------------- | ------------------------- |
+| `test-monitor` | `/nitestmonitor`          |
+| `tags`         | `/nitag`                  |
+| `user`         | `/niuser/v1`              |
 
 All other services: use the bare server root as `baseUrl`.
 
