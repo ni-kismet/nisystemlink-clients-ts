@@ -1,0 +1,331 @@
+{
+  "name": "systemlink-ts-api",
+  "version": "1.0.0",
+  "description": "TypeScript API clients for NI SystemLink services, generated from OpenAPI specifications",
+  "type": "module",
+  "main": "./dist/client.cjs",
+  "module": "./dist/client.js",
+  "types": "./dist/client.d.ts",
+  "files": [
+    "dist",
+    "src/generated",
+    "src/client.ts",
+    "tsconfig.json",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "generate": "tsx scripts/generate-all.ts",
+    "generate:exports": "tsx scripts/generate-exports.ts",
+    "prebuild": "tsx scripts/generate-exports.ts",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' tsup",
+    "build:watch": "NODE_OPTIONS='--max-old-space-size=8192' tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --config test-app/vitest.config.ts",
+    "test:watch": "vitest --config test-app/vitest.config.ts",
+    "test:ui": "vitest --ui --config test-app/vitest.config.ts"
+  },
+  "keywords": [
+    "systemlink",
+    "ni",
+    "openapi",
+    "typescript",
+    "sdk"
+  ],
+  "author": "NI",
+  "license": "MIT",
+  "peerDependencies": {
+    "typescript": ">=5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@hey-api/openapi-ts": "^0.94.0",
+    "@types/node": "^25.3.5",
+    "dotenv": "^16.4.7",
+    "tsup": "^8.5.1",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.9"
+  },
+  "exports": {
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js",
+      "require": "./dist/client.cjs"
+    },
+    "./alarm": {
+      "types": "./dist/alarm.d.ts",
+      "import": "./dist/alarm.js",
+      "require": "./dist/alarm.cjs"
+    },
+    "./alarm/client": {
+      "types": "./dist/alarm/client.d.ts",
+      "import": "./dist/alarm/client.js",
+      "require": "./dist/alarm/client.cjs"
+    },
+    "./asset-management": {
+      "types": "./dist/asset-management.d.ts",
+      "import": "./dist/asset-management.js",
+      "require": "./dist/asset-management.cjs"
+    },
+    "./asset-management/client": {
+      "types": "./dist/asset-management/client.d.ts",
+      "import": "./dist/asset-management/client.js",
+      "require": "./dist/asset-management/client.cjs"
+    },
+    "./auth": {
+      "types": "./dist/auth.d.ts",
+      "import": "./dist/auth.js",
+      "require": "./dist/auth.cjs"
+    },
+    "./auth/client": {
+      "types": "./dist/auth/client.d.ts",
+      "import": "./dist/auth/client.js",
+      "require": "./dist/auth/client.cjs"
+    },
+    "./comments": {
+      "types": "./dist/comments.d.ts",
+      "import": "./dist/comments.js",
+      "require": "./dist/comments.cjs"
+    },
+    "./comments/client": {
+      "types": "./dist/comments/client.d.ts",
+      "import": "./dist/comments/client.js",
+      "require": "./dist/comments/client.cjs"
+    },
+    "./dataframe": {
+      "types": "./dist/dataframe.d.ts",
+      "import": "./dist/dataframe.js",
+      "require": "./dist/dataframe.cjs"
+    },
+    "./dataframe/client": {
+      "types": "./dist/dataframe/client.d.ts",
+      "import": "./dist/dataframe/client.js",
+      "require": "./dist/dataframe/client.cjs"
+    },
+    "./dynamic-form-fields": {
+      "types": "./dist/dynamic-form-fields.d.ts",
+      "import": "./dist/dynamic-form-fields.js",
+      "require": "./dist/dynamic-form-fields.cjs"
+    },
+    "./dynamic-form-fields/client": {
+      "types": "./dist/dynamic-form-fields/client.d.ts",
+      "import": "./dist/dynamic-form-fields/client.js",
+      "require": "./dist/dynamic-form-fields/client.cjs"
+    },
+    "./feeds": {
+      "types": "./dist/feeds.d.ts",
+      "import": "./dist/feeds.js",
+      "require": "./dist/feeds.cjs"
+    },
+    "./feeds/client": {
+      "types": "./dist/feeds/client.d.ts",
+      "import": "./dist/feeds/client.js",
+      "require": "./dist/feeds/client.cjs"
+    },
+    "./file-ingestion": {
+      "types": "./dist/file-ingestion.d.ts",
+      "import": "./dist/file-ingestion.js",
+      "require": "./dist/file-ingestion.cjs"
+    },
+    "./file-ingestion/client": {
+      "types": "./dist/file-ingestion/client.d.ts",
+      "import": "./dist/file-ingestion/client.js",
+      "require": "./dist/file-ingestion/client.cjs"
+    },
+    "./location": {
+      "types": "./dist/location.d.ts",
+      "import": "./dist/location.js",
+      "require": "./dist/location.cjs"
+    },
+    "./location/client": {
+      "types": "./dist/location/client.d.ts",
+      "import": "./dist/location/client.js",
+      "require": "./dist/location/client.cjs"
+    },
+    "./notebook": {
+      "types": "./dist/notebook.d.ts",
+      "import": "./dist/notebook.js",
+      "require": "./dist/notebook.cjs"
+    },
+    "./notebook/client": {
+      "types": "./dist/notebook/client.d.ts",
+      "import": "./dist/notebook/client.js",
+      "require": "./dist/notebook/client.cjs"
+    },
+    "./notebook-execution": {
+      "types": "./dist/notebook-execution.d.ts",
+      "import": "./dist/notebook-execution.js",
+      "require": "./dist/notebook-execution.cjs"
+    },
+    "./notebook-execution/client": {
+      "types": "./dist/notebook-execution/client.d.ts",
+      "import": "./dist/notebook-execution/client.js",
+      "require": "./dist/notebook-execution/client.cjs"
+    },
+    "./notebook-execution-artifact": {
+      "types": "./dist/notebook-execution-artifact.d.ts",
+      "import": "./dist/notebook-execution-artifact.js",
+      "require": "./dist/notebook-execution-artifact.cjs"
+    },
+    "./notebook-execution-artifact/client": {
+      "types": "./dist/notebook-execution-artifact/client.d.ts",
+      "import": "./dist/notebook-execution-artifact/client.js",
+      "require": "./dist/notebook-execution-artifact/client.cjs"
+    },
+    "./notification": {
+      "types": "./dist/notification.d.ts",
+      "import": "./dist/notification.js",
+      "require": "./dist/notification.cjs"
+    },
+    "./notification/client": {
+      "types": "./dist/notification/client.d.ts",
+      "import": "./dist/notification/client.js",
+      "require": "./dist/notification/client.cjs"
+    },
+    "./repository": {
+      "types": "./dist/repository.d.ts",
+      "import": "./dist/repository.js",
+      "require": "./dist/repository.cjs"
+    },
+    "./repository/client": {
+      "types": "./dist/repository/client.d.ts",
+      "import": "./dist/repository/client.js",
+      "require": "./dist/repository/client.cjs"
+    },
+    "./routines": {
+      "types": "./dist/routines.d.ts",
+      "import": "./dist/routines.js",
+      "require": "./dist/routines.cjs"
+    },
+    "./routines/client": {
+      "types": "./dist/routines/client.d.ts",
+      "import": "./dist/routines/client.js",
+      "require": "./dist/routines/client.cjs"
+    },
+    "./routines-v2": {
+      "types": "./dist/routines-v2.d.ts",
+      "import": "./dist/routines-v2.js",
+      "require": "./dist/routines-v2.cjs"
+    },
+    "./routines-v2/client": {
+      "types": "./dist/routines-v2/client.d.ts",
+      "import": "./dist/routines-v2/client.js",
+      "require": "./dist/routines-v2/client.cjs"
+    },
+    "./specification-management": {
+      "types": "./dist/specification-management.d.ts",
+      "import": "./dist/specification-management.js",
+      "require": "./dist/specification-management.cjs"
+    },
+    "./specification-management/client": {
+      "types": "./dist/specification-management/client.d.ts",
+      "import": "./dist/specification-management/client.js",
+      "require": "./dist/specification-management/client.cjs"
+    },
+    "./systems-management": {
+      "types": "./dist/systems-management.d.ts",
+      "import": "./dist/systems-management.js",
+      "require": "./dist/systems-management.cjs"
+    },
+    "./systems-management/client": {
+      "types": "./dist/systems-management/client.d.ts",
+      "import": "./dist/systems-management/client.js",
+      "require": "./dist/systems-management/client.cjs"
+    },
+    "./systems-state": {
+      "types": "./dist/systems-state.d.ts",
+      "import": "./dist/systems-state.js",
+      "require": "./dist/systems-state.cjs"
+    },
+    "./systems-state/client": {
+      "types": "./dist/systems-state/client.d.ts",
+      "import": "./dist/systems-state/client.js",
+      "require": "./dist/systems-state/client.cjs"
+    },
+    "./tag-historian": {
+      "types": "./dist/tag-historian.d.ts",
+      "import": "./dist/tag-historian.js",
+      "require": "./dist/tag-historian.cjs"
+    },
+    "./tag-historian/client": {
+      "types": "./dist/tag-historian/client.d.ts",
+      "import": "./dist/tag-historian/client.js",
+      "require": "./dist/tag-historian/client.cjs"
+    },
+    "./tags": {
+      "types": "./dist/tags.d.ts",
+      "import": "./dist/tags.js",
+      "require": "./dist/tags.cjs"
+    },
+    "./tags/client": {
+      "types": "./dist/tags/client.d.ts",
+      "import": "./dist/tags/client.js",
+      "require": "./dist/tags/client.cjs"
+    },
+    "./test-monitor": {
+      "types": "./dist/test-monitor.d.ts",
+      "import": "./dist/test-monitor.js",
+      "require": "./dist/test-monitor.cjs"
+    },
+    "./test-monitor/client": {
+      "types": "./dist/test-monitor/client.d.ts",
+      "import": "./dist/test-monitor/client.js",
+      "require": "./dist/test-monitor/client.cjs"
+    },
+    "./user": {
+      "types": "./dist/user.d.ts",
+      "import": "./dist/user.js",
+      "require": "./dist/user.cjs"
+    },
+    "./user/client": {
+      "types": "./dist/user/client.d.ts",
+      "import": "./dist/user/client.js",
+      "require": "./dist/user/client.cjs"
+    },
+    "./user-data": {
+      "types": "./dist/user-data.d.ts",
+      "import": "./dist/user-data.js",
+      "require": "./dist/user-data.cjs"
+    },
+    "./user-data/client": {
+      "types": "./dist/user-data/client.d.ts",
+      "import": "./dist/user-data/client.js",
+      "require": "./dist/user-data/client.cjs"
+    },
+    "./web-application": {
+      "types": "./dist/web-application.d.ts",
+      "import": "./dist/web-application.js",
+      "require": "./dist/web-application.cjs"
+    },
+    "./web-application/client": {
+      "types": "./dist/web-application/client.d.ts",
+      "import": "./dist/web-application/client.js",
+      "require": "./dist/web-application/client.cjs"
+    },
+    "./work-item": {
+      "types": "./dist/work-item.d.ts",
+      "import": "./dist/work-item.js",
+      "require": "./dist/work-item.cjs"
+    },
+    "./work-item/client": {
+      "types": "./dist/work-item/client.d.ts",
+      "import": "./dist/work-item/client.js",
+      "require": "./dist/work-item/client.cjs"
+    },
+    "./work-order": {
+      "types": "./dist/work-order.d.ts",
+      "import": "./dist/work-order.js",
+      "require": "./dist/work-order.cjs"
+    },
+    "./work-order/client": {
+      "types": "./dist/work-order/client.d.ts",
+      "import": "./dist/work-order/client.js",
+      "require": "./dist/work-order/client.cjs"
+    }
+  }
+}
