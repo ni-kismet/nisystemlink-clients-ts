@@ -18,8 +18,8 @@ npm install nisystemlink-clients-ts
 
 Each service has two sub-paths:
 
-| Import path                          | What you get                                                    |
-| ------------------------------------ | --------------------------------------------------------------- |
+| Import path                                | What you get                                                    |
+| ------------------------------------------ | --------------------------------------------------------------- |
 | `nisystemlink-clients-ts/<service>`        | SDK functions + all TypeScript types                            |
 | `nisystemlink-clients-ts/<service>/client` | `createClient`, `createConfig`, and the default client instance |
 
@@ -30,7 +30,10 @@ Each service has two sub-paths:
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 
-import { createClient, createConfig } from "nisystemlink-clients-ts/alarm/client";
+import {
+  createClient,
+  createConfig,
+} from "nisystemlink-clients-ts/alarm/client";
 import {
   postNialarmV1QueryInstances,
   type QueryRequest,
