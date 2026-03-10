@@ -13,8 +13,10 @@
  */
 
 import { createClient as generate } from '@hey-api/openapi-ts';
+import yaml from 'js-yaml';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { specPatches } from './spec-patches.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -52,6 +54,44 @@ const SERVICES = [
   { name: 'work-order',               spec: '/niworkorder/swagger/v1/niworkorder.json' },
 ] as const;
 
+type Spec = Record<string, unknown>;
+
+function withSourceBaseUrl(spec: Spec, sourceUrl: string): Spec {
+  const url = new URL(sourceUrl);
+
+  if (typeof spec.openapi === 'string') {
+    const openApiSpec = spec as Spec & { servers?: Array<{ url: string }> };
+    if (!openApiSpec.servers || openApiSpec.servers.length === 0) {
+      openApiSpec.servers = [{ url: url.origin }];
+    }
+    return openApiSpec;
+  }
+
+  if (typeof spec.swagger === 'string') {
+    const swaggerSpec = spec as Spec & { host?: string; schemes?: string[] };
+    if (!swaggerSpec.host) {
+      swaggerSpec.host = url.host;
+    }
+    if (!swaggerSpec.schemes || swaggerSpec.schemes.length === 0) {
+      swaggerSpec.schemes = [url.protocol.replace(':', '')];
+    }
+  }
+
+  return spec;
+}
+
+/**
+ * Fetches an OpenAPI spec URL and returns the parsed object.
+ * Handles both JSON and YAML formats based on the URL file extension.
+ */
+async function fetchSpec(url: string): Promise<Spec> {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status} fetching spec: ${url}`);
+  const text = await res.text();
+  const isYaml = /\.ya?ml$/i.test(url);
+  return withSourceBaseUrl((isYaml ? yaml.load(text) : JSON.parse(text)) as Spec, url);
+}
+
 /** Plugins to include in every generated client. */
 const PLUGINS = [
   '@hey-api/typescript',
@@ -72,8 +112,16 @@ async function main(): Promise<void> {
     process.stdout.write(`  [${String(SERVICES.indexOf(service) + 1).padStart(2)}/${SERVICES.length}] ${service.name} ... `);
 
     try {
+      const patchFn = specPatches[service.name];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let specInput: any = inputUrl;
+      if (patchFn) {
+        const rawSpec = await fetchSpec(inputUrl);
+        specInput = patchFn(rawSpec);
+      }
+
       await generate({
-        input: inputUrl,
+        input: specInput,
         output: { path: outputPath },
         plugins: [...PLUGINS],
       });

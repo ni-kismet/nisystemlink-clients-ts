@@ -264,19 +264,14 @@ export type GrainsNetworkSettings = {
 
 export type GrainsNetworkSettingsInterface = {
     label?: string | null;
-    connectionid?: string | null;
-    hwaddr?: string | null;
+    connectionId?: string | null;
+    hwAddr?: string | null;
     up?: boolean | null;
     ipv4?: GrainsNetworkSettingsInterfaceIpv4;
     ipv6?: GrainsNetworkSettingsInterfaceIpv6;
-    ethercat?: GrainsNetworkSettingsInterfaceEthercat;
-    supported_adapter_modes?: Array<string> | null;
-    adapter_mode?: string | null;
+    supportedAdapterModes?: Array<string> | null;
+    adapterMode?: string | null;
     wireless?: boolean | null;
-};
-
-export type GrainsNetworkSettingsInterfaceEthercat = {
-    masterid?: string | null;
 };
 
 export type GrainsNetworkSettingsInterfaceIpv4 = {
@@ -284,8 +279,8 @@ export type GrainsNetworkSettingsInterfaceIpv4 = {
     netmask?: string | null;
     gateway?: string | null;
     dns?: Array<string> | null;
-    requestmode?: string | null;
-    supportedrequestmodes?: Array<string> | null;
+    requestMode?: string | null;
+    supportedRequestModes?: Array<string> | null;
 };
 
 export type GrainsNetworkSettingsInterfaceIpv6 = {
@@ -296,11 +291,11 @@ export type GrainsNetworkSettingsInterfaceIpv6 = {
 };
 
 export type GrainsStartupSettings = {
-    ConsoleOut?: string | null;
-    EmbeddedUI?: string | null;
-    LabVIEWAccess?: string | null;
-    NoApp?: string | null;
-    NoFPGAApp?: string | null;
+    consoleOut?: string | null;
+    embeddedUI?: string | null;
+    labVIEWAccess?: string | null;
+    noApp?: string | null;
+    noFPGAApp?: string | null;
 };
 
 /**

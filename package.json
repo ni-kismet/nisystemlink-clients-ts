@@ -23,7 +23,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run --config test-app/vitest.config.ts",
     "test:watch": "vitest --config test-app/vitest.config.ts",
-    "test:ui": "vitest --ui --config test-app/vitest.config.ts"
+    "test:ui": "vitest --ui --config test-app/vitest.config.ts",
+    "pack": "npm run build && npm pack"
   },
   "keywords": [
     "systemlink",
@@ -44,7 +45,9 @@
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "^0.94.0",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^25.3.5",
+    "@vitest/ui": "^3.2.4",
     "dotenv": "^16.4.7",
     "tsup": "^8.5.1",
     "tsx": "^4.19.3",

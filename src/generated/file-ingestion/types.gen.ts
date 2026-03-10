@@ -448,7 +448,7 @@ export type ListAvailableFilesGetData = {
         /**
          * The name of the metadata key to sort by. The value of the orderBy field should be the name of a metadata key.
          */
-        orderBy?: 'created' | 'id' | 'size' | 'lastUpdatedTimestamp';
+        orderBy?: 'created' | 'id' | 'size';
         /**
          * Whether to sort descending instead of ascending. The elements in the list are sorted ascending by default. If the orderByDescending parameter is specified, the elements in the list are sorted based on it's value. The orderByDescending value must be a boolean string. The elements in the list are sorted ascending if false and descending if true.
          */
@@ -722,7 +722,7 @@ export type QueryAvailableFilesData = {
         sizeMinQuery?: IntegerQuery;
         createdQuery?: DateQuery;
         /**
-         * An array of queries for file properties
+         * An array of queries for file properties Warning: queries on custom (un-indexed) properties are very likely to time out on the server for large file collections. For large datasets, prefer listing files with `GET /v1/service-groups/Default/files` and filtering client-side, or use `POST /v1/service-groups/Default/query-files-linq` with indexed filter expressions.
          */
         propertiesQuery?: Array<PropertyQuery>;
     };

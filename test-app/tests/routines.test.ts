@@ -1,14 +1,15 @@
 /**
  * Integration tests for the Routines Service.
  *
- * Validates routine listing.  The slcli routine_click.py uses the v1 routines
- * endpoint — these tests verify the TypeScript client produces compatible
- * requests with correctly typed responses.
+ * NOTE: routines-v2 is the preferred API for new code (general-purpose
+ * event-driven routines). routines-v1 only supports notebook-backed routines.
+ * This file tests v1 to confirm backward compatibility; see routines-v2.test.ts
+ * for the recommended patterns.
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
 import { isConfigured } from '../../src/client';
-import { getNiroutineV1Routines } from '../../src/generated/routines';
+import { getNiroutineV1Routines, getNiroutine } from '../../src/generated/routines';
 import { createClient, createConfig } from '../../src/generated/routines/client';
 
 const configured = isConfigured();
@@ -25,7 +26,12 @@ describe.skipIf(!configured)('Routines Service', () => {
     );
   });
 
-  it('lists routines', async () => {
+  it('root endpoint is reachable', async () => {
+    const { response } = await getNiroutine({ client });
+    expect(response.status).toBeLessThan(400);
+  });
+
+  it('lists routines (v1 — notebook routines only; prefer v2 for new code)', async () => {
     // The routines list endpoint does not support skip/take — returns all routines
     const { data, error, response } = await getNiroutineV1Routines({ client });
 

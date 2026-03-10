@@ -29,6 +29,12 @@ export const getNiroutine = <ThrowOnError extends boolean = false>(options?: Opt
 
 /**
  * Returns information and available operations for version 1 of the API.
+ *
+ *
+ *
+ * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
+ *
+ * @deprecated
  */
 export const getNiroutineV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNiroutineV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNiroutineV1Responses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -38,6 +44,12 @@ export const getNiroutineV1 = <ThrowOnError extends boolean = false>(options?: O
 
 /**
  * Query routines that trigger Jupyter notebook executions
+ *
+ *
+ *
+ * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
+ *
+ * @deprecated
  */
 export const getNiroutineV1Routines = <ThrowOnError extends boolean = false>(options?: Options<GetNiroutineV1RoutinesData, ThrowOnError>) => (options?.client ?? client).get<GetNiroutineV1RoutinesResponses, GetNiroutineV1RoutinesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -47,6 +59,12 @@ export const getNiroutineV1Routines = <ThrowOnError extends boolean = false>(opt
 
 /**
  * Creates a new routine that triggers a Jupyter notebook execution
+ *
+ *
+ *
+ * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
+ *
+ * @deprecated
  */
 export const postNiroutineV1Routines = <ThrowOnError extends boolean = false>(options?: Options<PostNiroutineV1RoutinesData, ThrowOnError>) => (options?.client ?? client).post<PostNiroutineV1RoutinesResponses, PostNiroutineV1RoutinesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -60,6 +78,12 @@ export const postNiroutineV1Routines = <ThrowOnError extends boolean = false>(op
 
 /**
  * Delete a routine by id
+ *
+ *
+ *
+ * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
+ *
+ * @deprecated
  */
 export const deleteNiroutineV1RoutinesById = <ThrowOnError extends boolean = false>(options: Options<DeleteNiroutineV1RoutinesByIdData, ThrowOnError>) => (options.client ?? client).delete<DeleteNiroutineV1RoutinesByIdResponses, DeleteNiroutineV1RoutinesByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -69,6 +93,12 @@ export const deleteNiroutineV1RoutinesById = <ThrowOnError extends boolean = fal
 
 /**
  * Query routines by id that trigger Jupyter notebook executions
+ *
+ *
+ *
+ * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
+ *
+ * @deprecated
  */
 export const getNiroutineV1RoutinesById = <ThrowOnError extends boolean = false>(options: Options<GetNiroutineV1RoutinesByIdData, ThrowOnError>) => (options.client ?? client).get<GetNiroutineV1RoutinesByIdResponses, GetNiroutineV1RoutinesByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -78,6 +108,12 @@ export const getNiroutineV1RoutinesById = <ThrowOnError extends boolean = false>
 
 /**
  * Updates a routine that triggers a Jupyter notebook execution
+ *
+ *
+ *
+ * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
+ *
+ * @deprecated
  */
 export const patchNiroutineV1RoutinesById = <ThrowOnError extends boolean = false>(options: Options<PatchNiroutineV1RoutinesByIdData, ThrowOnError>) => (options.client ?? client).patch<PatchNiroutineV1RoutinesByIdResponses, PatchNiroutineV1RoutinesByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -91,6 +127,12 @@ export const patchNiroutineV1RoutinesById = <ThrowOnError extends boolean = fals
 
 /**
  * Get execution definition by the routine id
+ *
+ *
+ *
+ * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
+ *
+ * @deprecated
  */
 export const getNiroutineV1RoutinesByIdExecution = <ThrowOnError extends boolean = false>(options: Options<GetNiroutineV1RoutinesByIdExecutionData, ThrowOnError>) => (options.client ?? client).get<GetNiroutineV1RoutinesByIdExecutionResponses, GetNiroutineV1RoutinesByIdExecutionErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
