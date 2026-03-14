@@ -21,7 +21,6 @@ jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
-    environment: npm-publish
     steps:
       - uses: actions/checkout@v4
         with:
