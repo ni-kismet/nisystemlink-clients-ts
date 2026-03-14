@@ -23,16 +23,17 @@ jobs:
     runs-on: ubuntu-latest
     environment: npm-publish
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Use Node.js 22
-        uses: actions/setup-node@v4
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
+          registry-url: https://registry.npmjs.org
 
       - name: Configure git
         run: |
@@ -48,6 +49,15 @@ jobs:
       - name: Publish (dry-run)
         if: inputs.dry-run == 'true'
         run: npx beachball publish --no-push --no-publish
+
+      - name: Get npm OIDC token
+        if: inputs.dry-run != 'true'
+        run: |
+          TOKEN=$(curl -fsSL \
+            -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=npm" \
+            | jq -r '.value')
+          echo "NODE_AUTH_TOKEN=${TOKEN}" >> "$GITHUB_ENV"
 
       - name: Publish
         if: inputs.dry-run != 'true'

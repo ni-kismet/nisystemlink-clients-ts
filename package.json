@@ -48,7 +48,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "peerDependencies": {
     "typescript": ">=5.0.0"
