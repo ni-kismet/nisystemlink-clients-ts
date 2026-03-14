@@ -1,6 +1,6 @@
 {
   "name": "nisystemlink-clients-ts",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "TypeScript API clients for NI SystemLink services, generated from OpenAPI specifications",
   "type": "module",
   "main": "./dist/client.cjs",
