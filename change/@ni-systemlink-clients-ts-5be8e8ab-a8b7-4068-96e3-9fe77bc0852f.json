@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Initial public release of TypeScript API clients for 27 NI SystemLink services",
-  "packageName": "@ni/systemlink-clients-ts",
-  "email": "ni@ni.com",
-  "dependentChangeType": "patch"
-}
