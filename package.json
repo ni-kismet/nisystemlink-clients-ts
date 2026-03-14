@@ -8,9 +8,7 @@
   "types": "./dist/client.d.ts",
   "files": [
     "dist",
-    "src/generated",
-    "src/client.ts",
-    "tsconfig.json",
+    "LICENSE",
     "README.md"
   ],
   "sideEffects": false,

@@ -1,4 +1,4 @@
-# nisystemlink-clients-ts
+# @ni/systemlink-clients-ts
 
 Auto-generated TypeScript API clients for all NI SystemLink services, generated from their official OpenAPI specifications.
 
@@ -167,3 +167,13 @@ npm run typecheck      # TypeScript type check (no emit)
 cp .env.example .env   # fill in SYSTEMLINK_API_URL and SYSTEMLINK_API_KEY
 npm test
 ```
+
+### Change files
+
+This project uses [beachball](https://microsoft.github.io/beachball/) for semantic versioning. Before submitting a PR, create a change file:
+
+```bash
+npm run change
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for full details.
