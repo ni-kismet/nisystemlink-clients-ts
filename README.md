@@ -11,17 +11,17 @@ Auto-generated TypeScript API clients for all NI SystemLink services, generated 
 ## Installation
 
 ```bash
-npm install nisystemlink-clients-ts
+npm install @ni/systemlink-clients-ts
 ```
 
 ## Quick start (Angular)
 
 Each service has two sub-paths:
 
-| Import path                                | What you get                                                    |
-| ------------------------------------------ | --------------------------------------------------------------- |
-| `nisystemlink-clients-ts/<service>`        | SDK functions + all TypeScript types                            |
-| `nisystemlink-clients-ts/<service>/client` | `createClient`, `createConfig`, and the default client instance |
+| Import path                                  | What you get                                                    |
+| -------------------------------------------- | --------------------------------------------------------------- |
+| `@ni/systemlink-clients-ts/<service>`        | SDK functions + all TypeScript types                            |
+| `@ni/systemlink-clients-ts/<service>/client` | `createClient`, `createConfig`, and the default client instance |
 
 ### Inject a configured client in an Angular service
 
@@ -33,12 +33,12 @@ import { environment } from "../../environments/environment";
 import {
   createClient,
   createConfig,
-} from "nisystemlink-clients-ts/alarm/client";
+} from "@ni/systemlink-clients-ts/alarm/client";
 import {
   postNialarmV1QueryInstances,
   type QueryRequest,
   type QueryResponse,
-} from "nisystemlink-clients-ts/alarm";
+} from "@ni/systemlink-clients-ts/alarm";
 
 @Injectable({ providedIn: "root" })
 export class AlarmService {
@@ -115,7 +115,7 @@ export const environment = {
 import {
   createClient,
   createConfig,
-} from "nisystemlink-clients-ts/test-monitor/client";
+} from "@ni/systemlink-clients-ts/test-monitor/client";
 
 // Create once, inject everywhere
 export const testMonitorClient = createClient(

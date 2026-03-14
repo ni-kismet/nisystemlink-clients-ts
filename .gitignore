@@ -5,5 +5,8 @@ dist/
 .env
 .env.local
 
+# Pack artifacts
+*.tgz
+
 # OS artifacts
 .DS_Store

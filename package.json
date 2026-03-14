@@ -1,5 +1,5 @@
 {
-  "name": "nisystemlink-clients-ts",
+  "name": "@ni/systemlink-clients-ts",
   "version": "0.1.1",
   "description": "TypeScript API clients for NI SystemLink services, generated from OpenAPI specifications",
   "type": "module",
@@ -24,7 +24,9 @@
     "test": "vitest run --config test-app/vitest.config.ts",
     "test:watch": "vitest --config test-app/vitest.config.ts",
     "test:ui": "vitest --ui --config test-app/vitest.config.ts",
-    "pack": "npm run build && npm pack"
+    "pack": "npm run build && npm pack",
+    "change": "beachball change",
+    "check": "beachball check --changehint \"Run 'npm run change' to generate a change file\""
   },
   "keywords": [
     "systemlink",
@@ -35,6 +37,21 @@
   ],
   "author": "NI",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ni-kismet/nisystemlink-clients-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ni-kismet/nisystemlink-clients-ts/issues"
+  },
+  "homepage": "https://github.com/ni-kismet/nisystemlink-clients-ts#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "peerDependencies": {
     "typescript": ">=5.0.0"
   },
@@ -48,6 +65,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^25.3.5",
     "@vitest/ui": "^3.2.4",
+    "beachball": "^2.63.1",
     "dotenv": "^16.4.7",
     "tsup": "^8.5.1",
     "tsx": "^4.19.3",
