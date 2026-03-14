@@ -21,6 +21,7 @@ jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
+    environment: npm-publish
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,7 +33,6 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          registry-url: https://registry.npmjs.org
 
       - name: Configure git
         run: |
@@ -48,11 +48,9 @@ jobs:
       - name: Publish (dry-run)
         if: inputs.dry-run == 'true'
         run: npx beachball publish --no-push --no-publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish
         if: inputs.dry-run != 'true'
         run: npx beachball publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: 'true'
