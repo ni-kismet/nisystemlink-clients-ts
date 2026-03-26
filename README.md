@@ -71,6 +71,11 @@ export const environment = {
 };
 ```
 
+> **Note**: `systemlinkBaseUrl` above is the bare server origin and works for services whose generated
+> operation URLs already include the service prefix (e.g. `alarm`, `feeds`, `asset-management`).
+> Services such as `tags`, `test-monitor`, and `user` require a service-specific prefix in `baseUrl`.
+> See [Services with path-prefixed base URLs](#services-with-path-prefixed-base-urls) for the full list.
+
 ---
 
 ## Available services
@@ -126,20 +131,44 @@ export const testMonitorClient = createClient(
 );
 ```
 
-> **Note on base URLs**: Some services embed the service prefix in their spec server URL
-> (e.g. `test-monitor` → `/nitestmonitor`, `tags` → `/nitag/v2`, `user` → `/niuser/v1`).
-> The `baseUrl` must include this prefix. For services like `alarm`, `feeds`, and `asset-management`
-> the prefix is already part of every operation path, so `baseUrl` is just the server root.
+> **Note on base URLs**: The correct `baseUrl` depends on whether the generated operation URLs for
+> that service already include the service prefix.
+>
+> - If the operation URL starts with `/v1`, `/v2`, `/users`, `/workspaces`, `/webapps`, or any other
+>   path that does **not** begin with `/ni…`, include the service prefix in `baseUrl`.
+> - If the operation URL already starts with `/nifeed`, `/niapm`, `/nisysmgmt`, `/niworkitem`,
+>   `/niworkorder`, `/ninotebook`, etc., use the bare server origin as `baseUrl`.
+>
+> When in doubt, check the URL of any operation exported by that service's generated client.
 
 ### Services with path-prefixed base URLs
 
-| Service        | Required `baseUrl` suffix |
-| -------------- | ------------------------- |
-| `test-monitor` | `/nitestmonitor`          |
-| `tags`         | `/nitag`                  |
-| `user`         | `/niuser/v1`              |
+These services have operation URLs that do **not** include the service prefix
+(e.g. `/v2/subscriptions`, `/users`, `/webapps`), so the prefix must be part of `baseUrl`:
 
-All other services: use the bare server root as `baseUrl`.
+| Service            | Required `baseUrl`                                   |
+| ------------------ | ---------------------------------------------------- |
+| `tags`             | `https://your-server.example.com/nitag`              |
+| `user`             | `https://your-server.example.com/niuser/v1`          |
+| `web-application`  | `https://your-server.example.com/niapp/v1`           |
+| `file-ingestion`   | `https://your-server.example.com/nifile`             |
+| `test-monitor`     | `https://your-server.example.com/nitestmonitor`      |
+| `tag-historian`    | `https://your-server.example.com/nitaghistorian`     |
+
+**Bare origin services** — use `https://your-server.example.com` (no suffix) because their
+generated operation URLs already include the full service path:
+
+| Service              | Example operation URL                    |
+| -------------------- | ---------------------------------------- |
+| `alarm`              | `/nialarm/v1/instances`                  |
+| `feeds`              | `/nifeed/v1/feeds`                       |
+| `asset-management`   | `/niapm/v1/assets`                       |
+| `systems-management` | `/nisysmgmt/v1/jobs`                     |
+| `notebook`           | `/ninotebook/v1/notebook/...`            |
+| `work-item`          | `/niworkitem/v1/workitems`               |
+| `work-order`         | `/niworkorder/v1/testplans`              |
+
+All remaining services follow the same bare-origin pattern.
 
 ---
 
