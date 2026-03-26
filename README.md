@@ -146,27 +146,27 @@ export const testMonitorClient = createClient(
 These services have operation URLs that do **not** include the service prefix
 (e.g. `/v2/subscriptions`, `/users`, `/webapps`), so the prefix must be part of `baseUrl`:
 
-| Service            | Required `baseUrl`                                   |
-| ------------------ | ---------------------------------------------------- |
-| `tags`             | `https://your-server.example.com/nitag`              |
-| `user`             | `https://your-server.example.com/niuser/v1`          |
-| `web-application`  | `https://your-server.example.com/niapp/v1`           |
-| `file-ingestion`   | `https://your-server.example.com/nifile`             |
-| `test-monitor`     | `https://your-server.example.com/nitestmonitor`      |
-| `tag-historian`    | `https://your-server.example.com/nitaghistorian`     |
+| Service           | Required `baseUrl`                               |
+| ----------------- | ------------------------------------------------ |
+| `tags`            | `https://your-server.example.com/nitag`          |
+| `user`            | `https://your-server.example.com/niuser/v1`      |
+| `web-application` | `https://your-server.example.com/niapp/v1`       |
+| `file-ingestion`  | `https://your-server.example.com/nifile`         |
+| `test-monitor`    | `https://your-server.example.com/nitestmonitor`  |
+| `tag-historian`   | `https://your-server.example.com/nitaghistorian` |
 
 **Bare origin services** — use `https://your-server.example.com` (no suffix) because their
 generated operation URLs already include the full service path:
 
-| Service              | Example operation URL                    |
-| -------------------- | ---------------------------------------- |
-| `alarm`              | `/nialarm/v1/instances`                  |
-| `feeds`              | `/nifeed/v1/feeds`                       |
-| `asset-management`   | `/niapm/v1/assets`                       |
-| `systems-management` | `/nisysmgmt/v1/jobs`                     |
-| `notebook`           | `/ninotebook/v1/notebook/...`            |
-| `work-item`          | `/niworkitem/v1/workitems`               |
-| `work-order`         | `/niworkorder/v1/testplans`              |
+| Service              | Example operation URL         |
+| -------------------- | ----------------------------- |
+| `alarm`              | `/nialarm/v1/instances`       |
+| `feeds`              | `/nifeed/v1/feeds`            |
+| `asset-management`   | `/niapm/v1/assets`            |
+| `systems-management` | `/nisysmgmt/v1/jobs`          |
+| `notebook`           | `/ninotebook/v1/notebook/...` |
+| `work-item`          | `/niworkitem/v1/workitems`    |
+| `work-order`         | `/niworkorder/v1/testplans`   |
 
 All remaining services follow the same bare-origin pattern.
 
