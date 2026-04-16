@@ -1,7 +1,0 @@
-{
-  "type": "major",
-  "comment": "Regenerate the published SDK from stabilized operationIds. Many named exports and generated request/response types now use operationId-based names instead of path-derived names, some generated model shapes changed, and several generated client defaults now use service-relative baseUrl values.",
-  "packageName": "@ni/systemlink-clients-ts",
-  "email": "1458528+fredvisser@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
