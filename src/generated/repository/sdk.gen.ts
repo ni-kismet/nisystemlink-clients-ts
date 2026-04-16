@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetNirepoV1StoreItemsByStoreItemIdData, GetNirepoV1StoreItemsByStoreItemIdErrors, GetNirepoV1StoreItemsByStoreItemIdResponses, GetNirepoV1StoreItemsData, GetNirepoV1StoreItemsErrors, GetNirepoV1StoreItemsResponses, PostNirepoV1ConfigureFeedsData, PostNirepoV1ConfigureFeedsErrors, PostNirepoV1ConfigureFeedsResponses, PostNirepoV1QueryAvailablePackagesData, PostNirepoV1QueryAvailablePackagesErrors, PostNirepoV1QueryAvailablePackagesResponses } from './types.gen';
+import type { ConfigureFeedsData, ConfigureFeedsErrors, ConfigureFeedsResponses, GetStoreItemData, GetStoreItemErrors, GetStoreItemResponses, QueryAvailablePackagesData, QueryAvailablePackagesErrors, QueryAvailablePackagesResponses, QueryStoreItemsData, QueryStoreItemsErrors, QueryStoreItemsResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -27,7 +27,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
  * "https://download.ni.com/support/nipkg/products/ni-package-manager/released"
  * ]
  */
-export const postNirepoV1ConfigureFeeds = <ThrowOnError extends boolean = false>(options?: Options<PostNirepoV1ConfigureFeedsData, ThrowOnError>) => (options?.client ?? client).post<PostNirepoV1ConfigureFeedsResponses, PostNirepoV1ConfigureFeedsErrors, ThrowOnError>({
+export const configureFeeds = <ThrowOnError extends boolean = false>(options?: Options<ConfigureFeedsData, ThrowOnError>) => (options?.client ?? client).post<ConfigureFeedsResponses, ConfigureFeedsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nirepo/v1/configure-feeds',
     ...options,
@@ -40,7 +40,7 @@ export const postNirepoV1ConfigureFeeds = <ThrowOnError extends boolean = false>
 /**
  * Query the available packages from the configured feeds
  */
-export const postNirepoV1QueryAvailablePackages = <ThrowOnError extends boolean = false>(options?: Options<PostNirepoV1QueryAvailablePackagesData, ThrowOnError>) => (options?.client ?? client).post<PostNirepoV1QueryAvailablePackagesResponses, PostNirepoV1QueryAvailablePackagesErrors, ThrowOnError>({
+export const queryAvailablePackages = <ThrowOnError extends boolean = false>(options?: Options<QueryAvailablePackagesData, ThrowOnError>) => (options?.client ?? client).post<QueryAvailablePackagesResponses, QueryAvailablePackagesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nirepo/v1/query-available-packages',
     ...options,
@@ -53,7 +53,7 @@ export const postNirepoV1QueryAvailablePackages = <ThrowOnError extends boolean 
 /**
  * Query store items from the cache
  */
-export const getNirepoV1StoreItems = <ThrowOnError extends boolean = false>(options?: Options<GetNirepoV1StoreItemsData, ThrowOnError>) => (options?.client ?? client).get<GetNirepoV1StoreItemsResponses, GetNirepoV1StoreItemsErrors, ThrowOnError>({
+export const queryStoreItems = <ThrowOnError extends boolean = false>(options?: Options<QueryStoreItemsData, ThrowOnError>) => (options?.client ?? client).get<QueryStoreItemsResponses, QueryStoreItemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nirepo/v1/store/items',
     ...options
@@ -62,7 +62,7 @@ export const getNirepoV1StoreItems = <ThrowOnError extends boolean = false>(opti
 /**
  * Get a store item by id
  */
-export const getNirepoV1StoreItemsByStoreItemId = <ThrowOnError extends boolean = false>(options: Options<GetNirepoV1StoreItemsByStoreItemIdData, ThrowOnError>) => (options.client ?? client).get<GetNirepoV1StoreItemsByStoreItemIdResponses, GetNirepoV1StoreItemsByStoreItemIdErrors, ThrowOnError>({
+export const getStoreItem = <ThrowOnError extends boolean = false>(options: Options<GetStoreItemData, ThrowOnError>) => (options.client ?? client).get<GetStoreItemResponses, GetStoreItemErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nirepo/v1/store/items/{storeItemId}',
     ...options

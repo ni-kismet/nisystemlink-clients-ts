@@ -356,7 +356,7 @@ export type SystemConfiguration = {
     userVisible?: boolean | null;
 };
 
-export type PostNirepoV1ConfigureFeedsData = {
+export type ConfigureFeedsData = {
     /**
      * The list of feedURLs to configure
      */
@@ -366,16 +366,16 @@ export type PostNirepoV1ConfigureFeedsData = {
     url: '/nirepo/v1/configure-feeds';
 };
 
-export type PostNirepoV1ConfigureFeedsErrors = {
+export type ConfigureFeedsErrors = {
     /**
      * Bad Request
      */
     400: HttpError;
 };
 
-export type PostNirepoV1ConfigureFeedsError = PostNirepoV1ConfigureFeedsErrors[keyof PostNirepoV1ConfigureFeedsErrors];
+export type ConfigureFeedsError = ConfigureFeedsErrors[keyof ConfigureFeedsErrors];
 
-export type PostNirepoV1ConfigureFeedsResponses = {
+export type ConfigureFeedsResponses = {
     /**
      * Returns the list of failed feeds
      */
@@ -386,9 +386,9 @@ export type PostNirepoV1ConfigureFeedsResponses = {
     204: void;
 };
 
-export type PostNirepoV1ConfigureFeedsResponse = PostNirepoV1ConfigureFeedsResponses[keyof PostNirepoV1ConfigureFeedsResponses];
+export type ConfigureFeedsResponse = ConfigureFeedsResponses[keyof ConfigureFeedsResponses];
 
-export type PostNirepoV1QueryAvailablePackagesData = {
+export type QueryAvailablePackagesData = {
     /**
      * An instance of NationalInstruments.RepositoryService.Model.API.QueryAvailablePackagesRequest that contains the feeds from which the packages are retrieved
      */
@@ -398,25 +398,25 @@ export type PostNirepoV1QueryAvailablePackagesData = {
     url: '/nirepo/v1/query-available-packages';
 };
 
-export type PostNirepoV1QueryAvailablePackagesErrors = {
+export type QueryAvailablePackagesErrors = {
     /**
      * Bad Request
      */
     400: HttpError;
 };
 
-export type PostNirepoV1QueryAvailablePackagesError = PostNirepoV1QueryAvailablePackagesErrors[keyof PostNirepoV1QueryAvailablePackagesErrors];
+export type QueryAvailablePackagesError = QueryAvailablePackagesErrors[keyof QueryAvailablePackagesErrors];
 
-export type PostNirepoV1QueryAvailablePackagesResponses = {
+export type QueryAvailablePackagesResponses = {
     /**
      * List of available packages from feeds
      */
     200: Array<PackageResponse>;
 };
 
-export type PostNirepoV1QueryAvailablePackagesResponse = PostNirepoV1QueryAvailablePackagesResponses[keyof PostNirepoV1QueryAvailablePackagesResponses];
+export type QueryAvailablePackagesResponse = QueryAvailablePackagesResponses[keyof QueryAvailablePackagesResponses];
 
-export type GetNirepoV1StoreItemsData = {
+export type QueryStoreItemsData = {
     body?: never;
     path?: never;
     query?: {
@@ -436,23 +436,23 @@ export type GetNirepoV1StoreItemsData = {
     url: '/nirepo/v1/store/items';
 };
 
-export type GetNirepoV1StoreItemsErrors = {
+export type QueryStoreItemsErrors = {
     /**
      * Gateway Timeout
      */
     504: unknown;
 };
 
-export type GetNirepoV1StoreItemsResponses = {
+export type QueryStoreItemsResponses = {
     /**
      * List of store items from the cache
      */
     200: StoreItemsExtendedResponse;
 };
 
-export type GetNirepoV1StoreItemsResponse = GetNirepoV1StoreItemsResponses[keyof GetNirepoV1StoreItemsResponses];
+export type QueryStoreItemsResponse = QueryStoreItemsResponses[keyof QueryStoreItemsResponses];
 
-export type GetNirepoV1StoreItemsByStoreItemIdData = {
+export type GetStoreItemData = {
     body?: never;
     path: {
         /**
@@ -464,7 +464,7 @@ export type GetNirepoV1StoreItemsByStoreItemIdData = {
     url: '/nirepo/v1/store/items/{storeItemId}';
 };
 
-export type GetNirepoV1StoreItemsByStoreItemIdErrors = {
+export type GetStoreItemErrors = {
     /**
      * Bad Request
      */
@@ -475,13 +475,13 @@ export type GetNirepoV1StoreItemsByStoreItemIdErrors = {
     504: unknown;
 };
 
-export type GetNirepoV1StoreItemsByStoreItemIdError = GetNirepoV1StoreItemsByStoreItemIdErrors[keyof GetNirepoV1StoreItemsByStoreItemIdErrors];
+export type GetStoreItemError = GetStoreItemErrors[keyof GetStoreItemErrors];
 
-export type GetNirepoV1StoreItemsByStoreItemIdResponses = {
+export type GetStoreItemResponses = {
     /**
      * Store item with a matching storeItemId
      */
     200: StoreItemResponse;
 };
 
-export type GetNirepoV1StoreItemsByStoreItemIdResponse = GetNirepoV1StoreItemsByStoreItemIdResponses[keyof GetNirepoV1StoreItemsByStoreItemIdResponses];
+export type GetStoreItemResponse = GetStoreItemResponses[keyof GetStoreItemResponses];

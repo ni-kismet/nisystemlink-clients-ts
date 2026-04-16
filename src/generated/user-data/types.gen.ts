@@ -373,7 +373,7 @@ export type V1OperationsModelWritable = {
     [key: string]: never;
 };
 
-export type PostNiuserdataV1QueryItemsData = {
+export type QueryItemsEndPointData = {
     body?: QueryUserDataItemRequestModel;
     path?: never;
     query?: {
@@ -389,7 +389,7 @@ export type PostNiuserdataV1QueryItemsData = {
     url: '/niuserdata/v1/query-items';
 };
 
-export type PostNiuserdataV1QueryItemsErrors = {
+export type QueryItemsEndPointErrors = {
     /**
      * Bad Request
      */
@@ -400,25 +400,25 @@ export type PostNiuserdataV1QueryItemsErrors = {
     401: unknown;
 };
 
-export type PostNiuserdataV1QueryItemsError = PostNiuserdataV1QueryItemsErrors[keyof PostNiuserdataV1QueryItemsErrors];
+export type QueryItemsEndPointError = QueryItemsEndPointErrors[keyof QueryItemsEndPointErrors];
 
-export type PostNiuserdataV1QueryItemsResponses = {
+export type QueryItemsEndPointResponses = {
     /**
      * OK
      */
     200: GetUserDataItemsResponseModel;
 };
 
-export type PostNiuserdataV1QueryItemsResponse = PostNiuserdataV1QueryItemsResponses[keyof PostNiuserdataV1QueryItemsResponses];
+export type QueryItemsEndPointResponse = QueryItemsEndPointResponses[keyof QueryItemsEndPointResponses];
 
-export type PostNiuserdataV1UpdateItemsData = {
+export type UpdateItemsEndPointData = {
     body?: Array<UpdateUserDataItemRequestModel>;
     path?: never;
     query?: never;
     url: '/niuserdata/v1/update-items';
 };
 
-export type PostNiuserdataV1UpdateItemsErrors = {
+export type UpdateItemsEndPointErrors = {
     /**
      * Bad Request
      */
@@ -433,9 +433,9 @@ export type PostNiuserdataV1UpdateItemsErrors = {
     409: BaseResponse;
 };
 
-export type PostNiuserdataV1UpdateItemsError = PostNiuserdataV1UpdateItemsErrors[keyof PostNiuserdataV1UpdateItemsErrors];
+export type UpdateItemsEndPointError = UpdateItemsEndPointErrors[keyof UpdateItemsEndPointErrors];
 
-export type PostNiuserdataV1UpdateItemsResponses = {
+export type UpdateItemsEndPointResponses = {
     /**
      * OK
      */
@@ -446,16 +446,16 @@ export type PostNiuserdataV1UpdateItemsResponses = {
     201: Array<string>;
 };
 
-export type PostNiuserdataV1UpdateItemsResponse = PostNiuserdataV1UpdateItemsResponses[keyof PostNiuserdataV1UpdateItemsResponses];
+export type UpdateItemsEndPointResponse = UpdateItemsEndPointResponses[keyof UpdateItemsEndPointResponses];
 
-export type PostNiuserdataV1DeleteItemsData = {
+export type DeleteItemsEndPointData = {
     body?: Array<string>;
     path?: never;
     query?: never;
     url: '/niuserdata/v1/delete-items';
 };
 
-export type PostNiuserdataV1DeleteItemsErrors = {
+export type DeleteItemsEndPointErrors = {
     /**
      * Bad Request
      */
@@ -466,9 +466,9 @@ export type PostNiuserdataV1DeleteItemsErrors = {
     401: unknown;
 };
 
-export type PostNiuserdataV1DeleteItemsError = PostNiuserdataV1DeleteItemsErrors[keyof PostNiuserdataV1DeleteItemsErrors];
+export type DeleteItemsEndPointError = DeleteItemsEndPointErrors[keyof DeleteItemsEndPointErrors];
 
-export type PostNiuserdataV1DeleteItemsResponses = {
+export type DeleteItemsEndPointResponses = {
     /**
      * OK
      */
@@ -479,9 +479,9 @@ export type PostNiuserdataV1DeleteItemsResponses = {
     204: void;
 };
 
-export type PostNiuserdataV1DeleteItemsResponse = PostNiuserdataV1DeleteItemsResponses[keyof PostNiuserdataV1DeleteItemsResponses];
+export type DeleteItemsEndPointResponse = DeleteItemsEndPointResponses[keyof DeleteItemsEndPointResponses];
 
-export type GetNiuserdataV1ItemsData = {
+export type GetAllUserDataItemsEndPointData = {
     body?: never;
     path?: never;
     query?: {
@@ -508,7 +508,7 @@ export type GetNiuserdataV1ItemsData = {
     url: '/niuserdata/v1/items';
 };
 
-export type GetNiuserdataV1ItemsErrors = {
+export type GetAllUserDataItemsEndPointErrors = {
     /**
      * Bad Request
      */
@@ -519,25 +519,25 @@ export type GetNiuserdataV1ItemsErrors = {
     401: unknown;
 };
 
-export type GetNiuserdataV1ItemsError = GetNiuserdataV1ItemsErrors[keyof GetNiuserdataV1ItemsErrors];
+export type GetAllUserDataItemsEndPointError = GetAllUserDataItemsEndPointErrors[keyof GetAllUserDataItemsEndPointErrors];
 
-export type GetNiuserdataV1ItemsResponses = {
+export type GetAllUserDataItemsEndPointResponses = {
     /**
      * OK
      */
     200: GetUserDataItemsResponseModel;
 };
 
-export type GetNiuserdataV1ItemsResponse = GetNiuserdataV1ItemsResponses[keyof GetNiuserdataV1ItemsResponses];
+export type GetAllUserDataItemsEndPointResponse = GetAllUserDataItemsEndPointResponses[keyof GetAllUserDataItemsEndPointResponses];
 
-export type PostNiuserdataV1ItemsData = {
+export type CreateOrUpdateUserDataItemsEndPointData = {
     body?: Array<CreateOrUpdateUserDataItemRequestModel>;
     path?: never;
     query?: never;
     url: '/niuserdata/v1/items';
 };
 
-export type PostNiuserdataV1ItemsErrors = {
+export type CreateOrUpdateUserDataItemsEndPointErrors = {
     /**
      * Bad Request
      */
@@ -552,9 +552,9 @@ export type PostNiuserdataV1ItemsErrors = {
     409: BaseResponse;
 };
 
-export type PostNiuserdataV1ItemsError = PostNiuserdataV1ItemsErrors[keyof PostNiuserdataV1ItemsErrors];
+export type CreateOrUpdateUserDataItemsEndPointError = CreateOrUpdateUserDataItemsEndPointErrors[keyof CreateOrUpdateUserDataItemsEndPointErrors];
 
-export type PostNiuserdataV1ItemsResponses = {
+export type CreateOrUpdateUserDataItemsEndPointResponses = {
     /**
      * OK
      */
@@ -565,9 +565,9 @@ export type PostNiuserdataV1ItemsResponses = {
     201: Array<UserDataItemModel>;
 };
 
-export type PostNiuserdataV1ItemsResponse = PostNiuserdataV1ItemsResponses[keyof PostNiuserdataV1ItemsResponses];
+export type CreateOrUpdateUserDataItemsEndPointResponse = CreateOrUpdateUserDataItemsEndPointResponses[keyof CreateOrUpdateUserDataItemsEndPointResponses];
 
-export type DeleteNiuserdataV1ItemsByIdData = {
+export type DeleteUserDataItemEndPointData = {
     body?: never;
     path: {
         id: string;
@@ -576,7 +576,7 @@ export type DeleteNiuserdataV1ItemsByIdData = {
     url: '/niuserdata/v1/items/{id}';
 };
 
-export type DeleteNiuserdataV1ItemsByIdErrors = {
+export type DeleteUserDataItemEndPointErrors = {
     /**
      * Bad Request
      */
@@ -587,18 +587,18 @@ export type DeleteNiuserdataV1ItemsByIdErrors = {
     401: unknown;
 };
 
-export type DeleteNiuserdataV1ItemsByIdError = DeleteNiuserdataV1ItemsByIdErrors[keyof DeleteNiuserdataV1ItemsByIdErrors];
+export type DeleteUserDataItemEndPointError = DeleteUserDataItemEndPointErrors[keyof DeleteUserDataItemEndPointErrors];
 
-export type DeleteNiuserdataV1ItemsByIdResponses = {
+export type DeleteUserDataItemEndPointResponses = {
     /**
      * No Content
      */
     204: void;
 };
 
-export type DeleteNiuserdataV1ItemsByIdResponse = DeleteNiuserdataV1ItemsByIdResponses[keyof DeleteNiuserdataV1ItemsByIdResponses];
+export type DeleteUserDataItemEndPointResponse = DeleteUserDataItemEndPointResponses[keyof DeleteUserDataItemEndPointResponses];
 
-export type GetNiuserdataV1ItemsByIdData = {
+export type GetUserDataItemEndPointData = {
     body?: never;
     path: {
         id: string;
@@ -607,7 +607,7 @@ export type GetNiuserdataV1ItemsByIdData = {
     url: '/niuserdata/v1/items/{id}';
 };
 
-export type GetNiuserdataV1ItemsByIdErrors = {
+export type GetUserDataItemEndPointErrors = {
     /**
      * Bad Request
      */
@@ -618,45 +618,45 @@ export type GetNiuserdataV1ItemsByIdErrors = {
     401: unknown;
 };
 
-export type GetNiuserdataV1ItemsByIdError = GetNiuserdataV1ItemsByIdErrors[keyof GetNiuserdataV1ItemsByIdErrors];
+export type GetUserDataItemEndPointError = GetUserDataItemEndPointErrors[keyof GetUserDataItemEndPointErrors];
 
-export type GetNiuserdataV1ItemsByIdResponses = {
+export type GetUserDataItemEndPointResponses = {
     /**
      * OK
      */
     200: UserDataItemModel;
 };
 
-export type GetNiuserdataV1ItemsByIdResponse = GetNiuserdataV1ItemsByIdResponses[keyof GetNiuserdataV1ItemsByIdResponses];
+export type GetUserDataItemEndPointResponse = GetUserDataItemEndPointResponses[keyof GetUserDataItemEndPointResponses];
 
-export type GetNiuserdataData = {
+export type GetData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niuserdata';
 };
 
-export type GetNiuserdataResponses = {
+export type GetResponses = {
     /**
      * Returns success
      */
     200: RootEndpointResponseModel;
 };
 
-export type GetNiuserdataResponse = GetNiuserdataResponses[keyof GetNiuserdataResponses];
+export type GetResponse = GetResponses[keyof GetResponses];
 
-export type GetNiuserdataV1Data = {
+export type V1EndpointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niuserdata/v1';
 };
 
-export type GetNiuserdataV1Responses = {
+export type V1EndpointResponses = {
     /**
      * Returns success
      */
     200: V1OperationsModel;
 };
 
-export type GetNiuserdataV1Response = GetNiuserdataV1Responses[keyof GetNiuserdataV1Responses];
+export type V1EndpointResponse = V1EndpointResponses[keyof V1EndpointResponses];

@@ -3016,32 +3016,32 @@ export type UpdateTablePropertyResponseWritable = {
     frame?: DataFrame;
 };
 
-export type PostNidynamicformfieldsV1QueryResolvedConfigurationsData = {
+export type QueryResolvedDynamicFormConfigurationData = {
     body?: DynamicFormResolvedQueryRequest;
     path?: never;
     query?: never;
     url: '/nidynamicformfields/v1/query-resolved-configurations';
 };
 
-export type PostNidynamicformfieldsV1QueryResolvedConfigurationsErrors = {
+export type QueryResolvedDynamicFormConfigurationErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type PostNidynamicformfieldsV1QueryResolvedConfigurationsError = PostNidynamicformfieldsV1QueryResolvedConfigurationsErrors[keyof PostNidynamicformfieldsV1QueryResolvedConfigurationsErrors];
+export type QueryResolvedDynamicFormConfigurationError = QueryResolvedDynamicFormConfigurationErrors[keyof QueryResolvedDynamicFormConfigurationErrors];
 
-export type PostNidynamicformfieldsV1QueryResolvedConfigurationsResponses = {
+export type QueryResolvedDynamicFormConfigurationResponses = {
     /**
      * OK
      */
     200: DynamicFormResolvedQueryResponse;
 };
 
-export type PostNidynamicformfieldsV1QueryResolvedConfigurationsResponse = PostNidynamicformfieldsV1QueryResolvedConfigurationsResponses[keyof PostNidynamicformfieldsV1QueryResolvedConfigurationsResponses];
+export type QueryResolvedDynamicFormConfigurationResponse = QueryResolvedDynamicFormConfigurationResponses[keyof QueryResolvedDynamicFormConfigurationResponses];
 
-export type GetNidynamicformfieldsV1ResolvedConfigurationData = {
+export type GetDynamicFormConfigurationByIdData = {
     body?: never;
     path?: never;
     query?: {
@@ -3050,25 +3050,25 @@ export type GetNidynamicformfieldsV1ResolvedConfigurationData = {
     url: '/nidynamicformfields/v1/resolved-configuration';
 };
 
-export type GetNidynamicformfieldsV1ResolvedConfigurationErrors = {
+export type GetDynamicFormConfigurationByIdErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type GetNidynamicformfieldsV1ResolvedConfigurationError = GetNidynamicformfieldsV1ResolvedConfigurationErrors[keyof GetNidynamicformfieldsV1ResolvedConfigurationErrors];
+export type GetDynamicFormConfigurationByIdError = GetDynamicFormConfigurationByIdErrors[keyof GetDynamicFormConfigurationByIdErrors];
 
-export type GetNidynamicformfieldsV1ResolvedConfigurationResponses = {
+export type GetDynamicFormConfigurationByIdResponses = {
     /**
      * OK
      */
     200: GetDynamicFormConfigurationByIdResponse;
 };
 
-export type GetNidynamicformfieldsV1ResolvedConfigurationResponse = GetNidynamicformfieldsV1ResolvedConfigurationResponses[keyof GetNidynamicformfieldsV1ResolvedConfigurationResponses];
+export type GetDynamicFormConfigurationByIdResponse2 = GetDynamicFormConfigurationByIdResponses[keyof GetDynamicFormConfigurationByIdResponses];
 
-export type GetNidynamicformfieldsV1ConfigurationsData = {
+export type GetDynamicFormConfigurationsData = {
     body?: never;
     path?: never;
     query?: {
@@ -3092,41 +3092,41 @@ export type GetNidynamicformfieldsV1ConfigurationsData = {
     url: '/nidynamicformfields/v1/configurations';
 };
 
-export type GetNidynamicformfieldsV1ConfigurationsErrors = {
+export type GetDynamicFormConfigurationsErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type GetNidynamicformfieldsV1ConfigurationsError = GetNidynamicformfieldsV1ConfigurationsErrors[keyof GetNidynamicformfieldsV1ConfigurationsErrors];
+export type GetDynamicFormConfigurationsError = GetDynamicFormConfigurationsErrors[keyof GetDynamicFormConfigurationsErrors];
 
-export type GetNidynamicformfieldsV1ConfigurationsResponses = {
+export type GetDynamicFormConfigurationsResponses = {
     /**
      * OK
      */
     200: ListDynamicFormConfigurationsResponse;
 };
 
-export type GetNidynamicformfieldsV1ConfigurationsResponse = GetNidynamicformfieldsV1ConfigurationsResponses[keyof GetNidynamicformfieldsV1ConfigurationsResponses];
+export type GetDynamicFormConfigurationsResponse = GetDynamicFormConfigurationsResponses[keyof GetDynamicFormConfigurationsResponses];
 
-export type PostNidynamicformfieldsV1ConfigurationsData = {
+export type CreateDynamicFormConfigurationData = {
     body?: DynamicFormConfigurationCreateRequest;
     path?: never;
     query?: never;
     url: '/nidynamicformfields/v1/configurations';
 };
 
-export type PostNidynamicformfieldsV1ConfigurationsErrors = {
+export type CreateDynamicFormConfigurationErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type PostNidynamicformfieldsV1ConfigurationsError = PostNidynamicformfieldsV1ConfigurationsErrors[keyof PostNidynamicformfieldsV1ConfigurationsErrors];
+export type CreateDynamicFormConfigurationError = CreateDynamicFormConfigurationErrors[keyof CreateDynamicFormConfigurationErrors];
 
-export type PostNidynamicformfieldsV1ConfigurationsResponses = {
+export type CreateDynamicFormConfigurationResponses = {
     /**
      * OK
      */
@@ -3137,9 +3137,9 @@ export type PostNidynamicformfieldsV1ConfigurationsResponses = {
     201: CreateDynamicFormConfigurationsResponse;
 };
 
-export type PostNidynamicformfieldsV1ConfigurationsResponse = PostNidynamicformfieldsV1ConfigurationsResponses[keyof PostNidynamicformfieldsV1ConfigurationsResponses];
+export type CreateDynamicFormConfigurationResponse2 = CreateDynamicFormConfigurationResponses[keyof CreateDynamicFormConfigurationResponses];
 
-export type GetNidynamicformfieldsV1GroupsData = {
+export type GetDynamicFormGroupsData = {
     body?: never;
     path?: never;
     query?: {
@@ -3163,25 +3163,25 @@ export type GetNidynamicformfieldsV1GroupsData = {
     url: '/nidynamicformfields/v1/groups';
 };
 
-export type GetNidynamicformfieldsV1GroupsErrors = {
+export type GetDynamicFormGroupsErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type GetNidynamicformfieldsV1GroupsError = GetNidynamicformfieldsV1GroupsErrors[keyof GetNidynamicformfieldsV1GroupsErrors];
+export type GetDynamicFormGroupsError = GetDynamicFormGroupsErrors[keyof GetDynamicFormGroupsErrors];
 
-export type GetNidynamicformfieldsV1GroupsResponses = {
+export type GetDynamicFormGroupsResponses = {
     /**
      * OK
      */
     200: ListDynamicFormGroupsResponse;
 };
 
-export type GetNidynamicformfieldsV1GroupsResponse = GetNidynamicformfieldsV1GroupsResponses[keyof GetNidynamicformfieldsV1GroupsResponses];
+export type GetDynamicFormGroupsResponse = GetDynamicFormGroupsResponses[keyof GetDynamicFormGroupsResponses];
 
-export type GetNidynamicformfieldsV1FieldsData = {
+export type GetDynamicFormFieldsData = {
     body?: never;
     path?: never;
     query?: {
@@ -3205,66 +3205,66 @@ export type GetNidynamicformfieldsV1FieldsData = {
     url: '/nidynamicformfields/v1/fields';
 };
 
-export type GetNidynamicformfieldsV1FieldsErrors = {
+export type GetDynamicFormFieldsErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type GetNidynamicformfieldsV1FieldsError = GetNidynamicformfieldsV1FieldsErrors[keyof GetNidynamicformfieldsV1FieldsErrors];
+export type GetDynamicFormFieldsError = GetDynamicFormFieldsErrors[keyof GetDynamicFormFieldsErrors];
 
-export type GetNidynamicformfieldsV1FieldsResponses = {
+export type GetDynamicFormFieldsResponses = {
     /**
      * OK
      */
     200: ListDynamicFormFieldsResponse;
 };
 
-export type GetNidynamicformfieldsV1FieldsResponse = GetNidynamicformfieldsV1FieldsResponses[keyof GetNidynamicformfieldsV1FieldsResponses];
+export type GetDynamicFormFieldsResponse = GetDynamicFormFieldsResponses[keyof GetDynamicFormFieldsResponses];
 
-export type PostNidynamicformfieldsV1UpdateConfigurationsData = {
+export type UpdateDynamicFormConfigurationsData = {
     body?: DynamicFormConfigurationsUpdateRequestWritable;
     path?: never;
     query?: never;
     url: '/nidynamicformfields/v1/update-configurations';
 };
 
-export type PostNidynamicformfieldsV1UpdateConfigurationsErrors = {
+export type UpdateDynamicFormConfigurationsErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type PostNidynamicformfieldsV1UpdateConfigurationsError = PostNidynamicformfieldsV1UpdateConfigurationsErrors[keyof PostNidynamicformfieldsV1UpdateConfigurationsErrors];
+export type UpdateDynamicFormConfigurationsError = UpdateDynamicFormConfigurationsErrors[keyof UpdateDynamicFormConfigurationsErrors];
 
-export type PostNidynamicformfieldsV1UpdateConfigurationsResponses = {
+export type UpdateDynamicFormConfigurationsResponses = {
     /**
      * OK
      */
     200: UpdateDynamicFormConfigurationsPartialSuccessResponse;
 };
 
-export type PostNidynamicformfieldsV1UpdateConfigurationsResponse = PostNidynamicformfieldsV1UpdateConfigurationsResponses[keyof PostNidynamicformfieldsV1UpdateConfigurationsResponses];
+export type UpdateDynamicFormConfigurationsResponse = UpdateDynamicFormConfigurationsResponses[keyof UpdateDynamicFormConfigurationsResponses];
 
-export type PostNidynamicformfieldsV1DeleteData = {
+export type DeleteDynamicFormConfigurationData = {
     body?: DynamicFormConfigurationsDeleteRequest;
     path?: never;
     query?: never;
     url: '/nidynamicformfields/v1/delete';
 };
 
-export type PostNidynamicformfieldsV1DeleteErrors = {
+export type DeleteDynamicFormConfigurationErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type PostNidynamicformfieldsV1DeleteError = PostNidynamicformfieldsV1DeleteErrors[keyof PostNidynamicformfieldsV1DeleteErrors];
+export type DeleteDynamicFormConfigurationError = DeleteDynamicFormConfigurationErrors[keyof DeleteDynamicFormConfigurationErrors];
 
-export type PostNidynamicformfieldsV1DeleteResponses = {
+export type DeleteDynamicFormConfigurationResponses = {
     /**
      * OK
      */
@@ -3275,25 +3275,25 @@ export type PostNidynamicformfieldsV1DeleteResponses = {
     204: void;
 };
 
-export type PostNidynamicformfieldsV1DeleteResponse = PostNidynamicformfieldsV1DeleteResponses[keyof PostNidynamicformfieldsV1DeleteResponses];
+export type DeleteDynamicFormConfigurationResponse = DeleteDynamicFormConfigurationResponses[keyof DeleteDynamicFormConfigurationResponses];
 
-export type PostNidynamicformfieldsV1TablesData = {
+export type CreateTablesData = {
     body?: CreateTablePropertiesRequest;
     path?: never;
     query?: never;
     url: '/nidynamicformfields/v1/tables';
 };
 
-export type PostNidynamicformfieldsV1TablesErrors = {
+export type CreateTablesErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type PostNidynamicformfieldsV1TablesError = PostNidynamicformfieldsV1TablesErrors[keyof PostNidynamicformfieldsV1TablesErrors];
+export type CreateTablesError = CreateTablesErrors[keyof CreateTablesErrors];
 
-export type PostNidynamicformfieldsV1TablesResponses = {
+export type CreateTablesResponses = {
     /**
      * OK
      */
@@ -3304,34 +3304,34 @@ export type PostNidynamicformfieldsV1TablesResponses = {
     201: CreateTablePropertiesResponse;
 };
 
-export type PostNidynamicformfieldsV1TablesResponse = PostNidynamicformfieldsV1TablesResponses[keyof PostNidynamicformfieldsV1TablesResponses];
+export type CreateTablesResponse = CreateTablesResponses[keyof CreateTablesResponses];
 
-export type PostNidynamicformfieldsV1QueryTablesData = {
+export type QueryTablesData = {
     body?: QueryTablePropertiesRequest;
     path?: never;
     query?: never;
     url: '/nidynamicformfields/v1/query-tables';
 };
 
-export type PostNidynamicformfieldsV1QueryTablesErrors = {
+export type QueryTablesErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type PostNidynamicformfieldsV1QueryTablesError = PostNidynamicformfieldsV1QueryTablesErrors[keyof PostNidynamicformfieldsV1QueryTablesErrors];
+export type QueryTablesError = QueryTablesErrors[keyof QueryTablesErrors];
 
-export type PostNidynamicformfieldsV1QueryTablesResponses = {
+export type QueryTablesResponses = {
     /**
      * OK
      */
     200: QueryTablePropertiesResponse;
 };
 
-export type PostNidynamicformfieldsV1QueryTablesResponse = PostNidynamicformfieldsV1QueryTablesResponses[keyof PostNidynamicformfieldsV1QueryTablesResponses];
+export type QueryTablesResponse = QueryTablesResponses[keyof QueryTablesResponses];
 
-export type GetNidynamicformfieldsV1TableData = {
+export type GetTablePropertyByIdData = {
     body?: never;
     path?: never;
     query?: {
@@ -3340,41 +3340,41 @@ export type GetNidynamicformfieldsV1TableData = {
     url: '/nidynamicformfields/v1/table';
 };
 
-export type GetNidynamicformfieldsV1TableErrors = {
+export type GetTablePropertyByIdErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type GetNidynamicformfieldsV1TableError = GetNidynamicformfieldsV1TableErrors[keyof GetNidynamicformfieldsV1TableErrors];
+export type GetTablePropertyByIdError = GetTablePropertyByIdErrors[keyof GetTablePropertyByIdErrors];
 
-export type GetNidynamicformfieldsV1TableResponses = {
+export type GetTablePropertyByIdResponses = {
     /**
      * OK
      */
     200: GetTablePropertyByIdResponse;
 };
 
-export type GetNidynamicformfieldsV1TableResponse = GetNidynamicformfieldsV1TableResponses[keyof GetNidynamicformfieldsV1TableResponses];
+export type GetTablePropertyByIdResponse2 = GetTablePropertyByIdResponses[keyof GetTablePropertyByIdResponses];
 
-export type PostNidynamicformfieldsV1DeleteTablesData = {
+export type DeleteTablePropertiesData = {
     body?: DeleteTablePropertiesRequest;
     path?: never;
     query?: never;
     url: '/nidynamicformfields/v1/delete-tables';
 };
 
-export type PostNidynamicformfieldsV1DeleteTablesErrors = {
+export type DeleteTablePropertiesErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type PostNidynamicformfieldsV1DeleteTablesError = PostNidynamicformfieldsV1DeleteTablesErrors[keyof PostNidynamicformfieldsV1DeleteTablesErrors];
+export type DeleteTablePropertiesError = DeleteTablePropertiesErrors[keyof DeleteTablePropertiesErrors];
 
-export type PostNidynamicformfieldsV1DeleteTablesResponses = {
+export type DeleteTablePropertiesResponses = {
     /**
      * OK
      */
@@ -3385,75 +3385,75 @@ export type PostNidynamicformfieldsV1DeleteTablesResponses = {
     204: void;
 };
 
-export type PostNidynamicformfieldsV1DeleteTablesResponse = PostNidynamicformfieldsV1DeleteTablesResponses[keyof PostNidynamicformfieldsV1DeleteTablesResponses];
+export type DeleteTablePropertiesResponse = DeleteTablePropertiesResponses[keyof DeleteTablePropertiesResponses];
 
-export type PostNidynamicformfieldsV1UpdateTablesData = {
+export type UpdateTablePropertiesData = {
     body?: UpdateTablePropertiesRequest;
     path?: never;
     query?: never;
     url: '/nidynamicformfields/v1/update-tables';
 };
 
-export type PostNidynamicformfieldsV1UpdateTablesErrors = {
+export type UpdateTablePropertiesErrors = {
     /**
      * Error
      */
     default: HttpError;
 };
 
-export type PostNidynamicformfieldsV1UpdateTablesError = PostNidynamicformfieldsV1UpdateTablesErrors[keyof PostNidynamicformfieldsV1UpdateTablesErrors];
+export type UpdateTablePropertiesError = UpdateTablePropertiesErrors[keyof UpdateTablePropertiesErrors];
 
-export type PostNidynamicformfieldsV1UpdateTablesResponses = {
+export type UpdateTablePropertiesResponses = {
     /**
      * OK
      */
     200: UpdateTablePropertiesPartialSuccessResponse;
 };
 
-export type PostNidynamicformfieldsV1UpdateTablesResponse = PostNidynamicformfieldsV1UpdateTablesResponses[keyof PostNidynamicformfieldsV1UpdateTablesResponses];
+export type UpdateTablePropertiesResponse = UpdateTablePropertiesResponses[keyof UpdateTablePropertiesResponses];
 
-export type GetNidynamicformfieldsUpData = {
+export type UpData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nidynamicformfields/up';
 };
 
-export type GetNidynamicformfieldsUpResponses = {
+export type UpResponses = {
     /**
      * OK
      */
     200: unknown;
 };
 
-export type GetNidynamicformfieldsData = {
+export type RootEndPointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nidynamicformfields';
 };
 
-export type GetNidynamicformfieldsResponses = {
+export type RootEndPointResponses = {
     /**
      * OK
      */
     200: Versions;
 };
 
-export type GetNidynamicformfieldsResponse = GetNidynamicformfieldsResponses[keyof GetNidynamicformfieldsResponses];
+export type RootEndPointResponse = RootEndPointResponses[keyof RootEndPointResponses];
 
-export type GetNidynamicformfieldsV1Data = {
+export type V1OperationsRootEndPointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nidynamicformfields/v1';
 };
 
-export type GetNidynamicformfieldsV1Responses = {
+export type V1OperationsRootEndPointResponses = {
     /**
      * OK
      */
     200: V1Operations;
 };
 
-export type GetNidynamicformfieldsV1Response = GetNidynamicformfieldsV1Responses[keyof GetNidynamicformfieldsV1Responses];
+export type V1OperationsRootEndPointResponse = V1OperationsRootEndPointResponses[keyof V1OperationsRootEndPointResponses];

@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { DeleteNialarmV1InstancesByInstanceIdData, DeleteNialarmV1InstancesByInstanceIdErrors, DeleteNialarmV1InstancesByInstanceIdResponses, GetNialarmByVersionData, GetNialarmByVersionErrors, GetNialarmByVersionResponses, GetNialarmData, GetNialarmResponses, GetNialarmV1InstancesByInstanceIdData, GetNialarmV1InstancesByInstanceIdErrors, GetNialarmV1InstancesByInstanceIdResponses, PostNialarmV1AcknowledgeInstancesByInstanceIdData, PostNialarmV1AcknowledgeInstancesByInstanceIdErrors, PostNialarmV1AcknowledgeInstancesByInstanceIdResponses, PostNialarmV1DeleteInstancesByInstanceIdData, PostNialarmV1DeleteInstancesByInstanceIdErrors, PostNialarmV1DeleteInstancesByInstanceIdResponses, PostNialarmV1InstancesData, PostNialarmV1InstancesErrors, PostNialarmV1InstancesResponses, PostNialarmV1QueryInstancesData, PostNialarmV1QueryInstancesErrors, PostNialarmV1QueryInstancesResponses, PostNialarmV1QueryInstancesWithFilterData, PostNialarmV1QueryInstancesWithFilterErrors, PostNialarmV1QueryInstancesWithFilterResponses } from './types.gen';
+import type { AcknowledgeByInstanceIdsData, AcknowledgeByInstanceIdsErrors, AcknowledgeByInstanceIdsResponses, CreateOrUpdateAlarmData, CreateOrUpdateAlarmErrors, CreateOrUpdateAlarmResponses, DeleteAlarmData, DeleteAlarmErrors, DeleteAlarmResponses, DeleteAlarmsByInstanceIdData, DeleteAlarmsByInstanceIdErrors, DeleteAlarmsByInstanceIdResponses, GetAlarmData, GetAlarmErrors, GetAlarmResponses, QueryAlarmsData, QueryAlarmsErrors, QueryAlarmsResponses, QueryAlarmsWithFilterData, QueryAlarmsWithFilterErrors, QueryAlarmsWithFilterResponses, RootEndpointData, RootEndpointResponses, RootEndpointWithVersionData, RootEndpointWithVersionErrors, RootEndpointWithVersionResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -24,7 +24,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
  * Acknowledges one or more instances, or occurrences, of alarms, optionally
  * forcing them clear. Added in version 2 of the `writeAlarmInstances` operation.
  */
-export const postNialarmV1AcknowledgeInstancesByInstanceId = <ThrowOnError extends boolean = false>(options?: Options<PostNialarmV1AcknowledgeInstancesByInstanceIdData, ThrowOnError>) => (options?.client ?? client).post<PostNialarmV1AcknowledgeInstancesByInstanceIdResponses, PostNialarmV1AcknowledgeInstancesByInstanceIdErrors, ThrowOnError>({
+export const acknowledgeByInstanceIds = <ThrowOnError extends boolean = false>(options?: Options<AcknowledgeByInstanceIdsData, ThrowOnError>) => (options?.client ?? client).post<AcknowledgeByInstanceIdsResponses, AcknowledgeByInstanceIdsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nialarm/v1/acknowledge-instances-by-instance-id',
     ...options,
@@ -41,7 +41,7 @@ export const postNialarmV1AcknowledgeInstancesByInstanceId = <ThrowOnError exten
  * the requested transition and the state of the current active alarm
  * with the given `alarmId`.
  */
-export const postNialarmV1Instances = <ThrowOnError extends boolean = false>(options?: Options<PostNialarmV1InstancesData, ThrowOnError>) => (options?.client ?? client).post<PostNialarmV1InstancesResponses, PostNialarmV1InstancesErrors, ThrowOnError>({
+export const createOrUpdateAlarm = <ThrowOnError extends boolean = false>(options?: Options<CreateOrUpdateAlarmData, ThrowOnError>) => (options?.client ?? client).post<CreateOrUpdateAlarmResponses, CreateOrUpdateAlarmErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nialarm/v1/instances',
     ...options,
@@ -56,7 +56,7 @@ export const postNialarmV1Instances = <ThrowOnError extends boolean = false>(opt
  *
  * Deletes an alarm by its `instanceId`.
  */
-export const deleteNialarmV1InstancesByInstanceId = <ThrowOnError extends boolean = false>(options: Options<DeleteNialarmV1InstancesByInstanceIdData, ThrowOnError>) => (options.client ?? client).delete<DeleteNialarmV1InstancesByInstanceIdResponses, DeleteNialarmV1InstancesByInstanceIdErrors, ThrowOnError>({
+export const deleteAlarm = <ThrowOnError extends boolean = false>(options: Options<DeleteAlarmData, ThrowOnError>) => (options.client ?? client).delete<DeleteAlarmResponses, DeleteAlarmErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nialarm/v1/instances/{instanceId}',
     ...options
@@ -67,7 +67,7 @@ export const deleteNialarmV1InstancesByInstanceId = <ThrowOnError extends boolea
  *
  * Gets an alarm by its `instanceId`.
  */
-export const getNialarmV1InstancesByInstanceId = <ThrowOnError extends boolean = false>(options: Options<GetNialarmV1InstancesByInstanceIdData, ThrowOnError>) => (options.client ?? client).get<GetNialarmV1InstancesByInstanceIdResponses, GetNialarmV1InstancesByInstanceIdErrors, ThrowOnError>({
+export const getAlarm = <ThrowOnError extends boolean = false>(options: Options<GetAlarmData, ThrowOnError>) => (options.client ?? client).get<GetAlarmResponses, GetAlarmErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nialarm/v1/instances/{instanceId}',
     ...options
@@ -87,7 +87,7 @@ export const getNialarmV1InstancesByInstanceId = <ThrowOnError extends boolean =
  *
  * @deprecated
  */
-export const postNialarmV1QueryInstances = <ThrowOnError extends boolean = false>(options?: Options<PostNialarmV1QueryInstancesData, ThrowOnError>) => (options?.client ?? client).post<PostNialarmV1QueryInstancesResponses, PostNialarmV1QueryInstancesErrors, ThrowOnError>({
+export const queryAlarms = <ThrowOnError extends boolean = false>(options?: Options<QueryAlarmsData, ThrowOnError>) => (options?.client ?? client).post<QueryAlarmsResponses, QueryAlarmsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nialarm/v1/query-instances',
     ...options,
@@ -103,7 +103,7 @@ export const postNialarmV1QueryInstances = <ThrowOnError extends boolean = false
  * Queries for instances, or occurrences, of alarms. Specifying an empty JSON object
  * in the request body will result in all alarms being returned.
  */
-export const postNialarmV1QueryInstancesWithFilter = <ThrowOnError extends boolean = false>(options?: Options<PostNialarmV1QueryInstancesWithFilterData, ThrowOnError>) => (options?.client ?? client).post<PostNialarmV1QueryInstancesWithFilterResponses, PostNialarmV1QueryInstancesWithFilterErrors, ThrowOnError>({
+export const queryAlarmsWithFilter = <ThrowOnError extends boolean = false>(options?: Options<QueryAlarmsWithFilterData, ThrowOnError>) => (options?.client ?? client).post<QueryAlarmsWithFilterResponses, QueryAlarmsWithFilterErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nialarm/v1/query-instances-with-filter',
     ...options,
@@ -118,7 +118,7 @@ export const postNialarmV1QueryInstancesWithFilter = <ThrowOnError extends boole
  *
  * Deletes multiple alarm instances by their `instanceId`s.
  */
-export const postNialarmV1DeleteInstancesByInstanceId = <ThrowOnError extends boolean = false>(options?: Options<PostNialarmV1DeleteInstancesByInstanceIdData, ThrowOnError>) => (options?.client ?? client).post<PostNialarmV1DeleteInstancesByInstanceIdResponses, PostNialarmV1DeleteInstancesByInstanceIdErrors, ThrowOnError>({
+export const deleteAlarmsByInstanceId = <ThrowOnError extends boolean = false>(options?: Options<DeleteAlarmsByInstanceIdData, ThrowOnError>) => (options?.client ?? client).post<DeleteAlarmsByInstanceIdResponses, DeleteAlarmsByInstanceIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nialarm/v1/delete-instances-by-instance-id',
     ...options,
@@ -133,7 +133,7 @@ export const postNialarmV1DeleteInstancesByInstanceId = <ThrowOnError extends bo
  *
  * Returns information about API versions and available operations.
  */
-export const getNialarm = <ThrowOnError extends boolean = false>(options?: Options<GetNialarmData, ThrowOnError>) => (options?.client ?? client).get<GetNialarmResponses, unknown, ThrowOnError>({
+export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nialarm',
     ...options
@@ -144,7 +144,7 @@ export const getNialarm = <ThrowOnError extends boolean = false>(options?: Optio
  *
  * Returns available operations for a single version of the API.
  */
-export const getNialarmByVersion = <ThrowOnError extends boolean = false>(options: Options<GetNialarmByVersionData, ThrowOnError>) => (options.client ?? client).get<GetNialarmByVersionResponses, GetNialarmByVersionErrors, ThrowOnError>({
+export const rootEndpointWithVersion = <ThrowOnError extends boolean = false>(options: Options<RootEndpointWithVersionData, ThrowOnError>) => (options.client ?? client).get<RootEndpointWithVersionResponses, RootEndpointWithVersionErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nialarm/{version}',
     ...options

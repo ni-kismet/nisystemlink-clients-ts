@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { DeleteNiuserdataV1ItemsByIdData, DeleteNiuserdataV1ItemsByIdErrors, DeleteNiuserdataV1ItemsByIdResponses, GetNiuserdataData, GetNiuserdataResponses, GetNiuserdataV1Data, GetNiuserdataV1ItemsByIdData, GetNiuserdataV1ItemsByIdErrors, GetNiuserdataV1ItemsByIdResponses, GetNiuserdataV1ItemsData, GetNiuserdataV1ItemsErrors, GetNiuserdataV1ItemsResponses, GetNiuserdataV1Responses, PostNiuserdataV1DeleteItemsData, PostNiuserdataV1DeleteItemsErrors, PostNiuserdataV1DeleteItemsResponses, PostNiuserdataV1ItemsData, PostNiuserdataV1ItemsErrors, PostNiuserdataV1ItemsResponses, PostNiuserdataV1QueryItemsData, PostNiuserdataV1QueryItemsErrors, PostNiuserdataV1QueryItemsResponses, PostNiuserdataV1UpdateItemsData, PostNiuserdataV1UpdateItemsErrors, PostNiuserdataV1UpdateItemsResponses } from './types.gen';
+import type { CreateOrUpdateUserDataItemsEndPointData, CreateOrUpdateUserDataItemsEndPointErrors, CreateOrUpdateUserDataItemsEndPointResponses, DeleteItemsEndPointData, DeleteItemsEndPointErrors, DeleteItemsEndPointResponses, DeleteUserDataItemEndPointData, DeleteUserDataItemEndPointErrors, DeleteUserDataItemEndPointResponses, GetAllUserDataItemsEndPointData, GetAllUserDataItemsEndPointErrors, GetAllUserDataItemsEndPointResponses, GetData, GetResponses, GetUserDataItemEndPointData, GetUserDataItemEndPointErrors, GetUserDataItemEndPointResponses, QueryItemsEndPointData, QueryItemsEndPointErrors, QueryItemsEndPointResponses, UpdateItemsEndPointData, UpdateItemsEndPointErrors, UpdateItemsEndPointResponses, V1EndpointData, V1EndpointResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -21,7 +21,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Queries the user data items.
  */
-export const postNiuserdataV1QueryItems = <ThrowOnError extends boolean = false>(options?: Options<PostNiuserdataV1QueryItemsData, ThrowOnError>) => (options?.client ?? client).post<PostNiuserdataV1QueryItemsResponses, PostNiuserdataV1QueryItemsErrors, ThrowOnError>({
+export const queryItemsEndPoint = <ThrowOnError extends boolean = false>(options?: Options<QueryItemsEndPointData, ThrowOnError>) => (options?.client ?? client).post<QueryItemsEndPointResponses, QueryItemsEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niuserdata/v1/query-items',
     ...options,
@@ -34,7 +34,7 @@ export const postNiuserdataV1QueryItems = <ThrowOnError extends boolean = false>
 /**
  * Updates one or more user data items.
  */
-export const postNiuserdataV1UpdateItems = <ThrowOnError extends boolean = false>(options?: Options<PostNiuserdataV1UpdateItemsData, ThrowOnError>) => (options?.client ?? client).post<PostNiuserdataV1UpdateItemsResponses, PostNiuserdataV1UpdateItemsErrors, ThrowOnError>({
+export const updateItemsEndPoint = <ThrowOnError extends boolean = false>(options?: Options<UpdateItemsEndPointData, ThrowOnError>) => (options?.client ?? client).post<UpdateItemsEndPointResponses, UpdateItemsEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niuserdata/v1/update-items',
     ...options,
@@ -47,7 +47,7 @@ export const postNiuserdataV1UpdateItems = <ThrowOnError extends boolean = false
 /**
  * Deletes multiple user data items in a single API call.
  */
-export const postNiuserdataV1DeleteItems = <ThrowOnError extends boolean = false>(options?: Options<PostNiuserdataV1DeleteItemsData, ThrowOnError>) => (options?.client ?? client).post<PostNiuserdataV1DeleteItemsResponses, PostNiuserdataV1DeleteItemsErrors, ThrowOnError>({
+export const deleteItemsEndPoint = <ThrowOnError extends boolean = false>(options?: Options<DeleteItemsEndPointData, ThrowOnError>) => (options?.client ?? client).post<DeleteItemsEndPointResponses, DeleteItemsEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niuserdata/v1/delete-items',
     ...options,
@@ -65,7 +65,7 @@ export const postNiuserdataV1DeleteItems = <ThrowOnError extends boolean = false
  * Use the skip and take parameters to return paged responses.
  * The orderBy and orderByDescending fields can be used to manage sorting the list by specific fields.
  */
-export const getNiuserdataV1Items = <ThrowOnError extends boolean = false>(options?: Options<GetNiuserdataV1ItemsData, ThrowOnError>) => (options?.client ?? client).get<GetNiuserdataV1ItemsResponses, GetNiuserdataV1ItemsErrors, ThrowOnError>({
+export const getAllUserDataItemsEndPoint = <ThrowOnError extends boolean = false>(options?: Options<GetAllUserDataItemsEndPointData, ThrowOnError>) => (options?.client ?? client).get<GetAllUserDataItemsEndPointResponses, GetAllUserDataItemsEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niuserdata/v1/items',
     ...options
@@ -74,7 +74,7 @@ export const getNiuserdataV1Items = <ThrowOnError extends boolean = false>(optio
 /**
  * Creates or updates one or more user data items.
  */
-export const postNiuserdataV1Items = <ThrowOnError extends boolean = false>(options?: Options<PostNiuserdataV1ItemsData, ThrowOnError>) => (options?.client ?? client).post<PostNiuserdataV1ItemsResponses, PostNiuserdataV1ItemsErrors, ThrowOnError>({
+export const createOrUpdateUserDataItemsEndPoint = <ThrowOnError extends boolean = false>(options?: Options<CreateOrUpdateUserDataItemsEndPointData, ThrowOnError>) => (options?.client ?? client).post<CreateOrUpdateUserDataItemsEndPointResponses, CreateOrUpdateUserDataItemsEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niuserdata/v1/items',
     ...options,
@@ -87,7 +87,7 @@ export const postNiuserdataV1Items = <ThrowOnError extends boolean = false>(opti
 /**
  * Deletes the specified user data item.
  */
-export const deleteNiuserdataV1ItemsById = <ThrowOnError extends boolean = false>(options: Options<DeleteNiuserdataV1ItemsByIdData, ThrowOnError>) => (options.client ?? client).delete<DeleteNiuserdataV1ItemsByIdResponses, DeleteNiuserdataV1ItemsByIdErrors, ThrowOnError>({
+export const deleteUserDataItemEndPoint = <ThrowOnError extends boolean = false>(options: Options<DeleteUserDataItemEndPointData, ThrowOnError>) => (options.client ?? client).delete<DeleteUserDataItemEndPointResponses, DeleteUserDataItemEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niuserdata/v1/items/{id}',
     ...options
@@ -96,7 +96,7 @@ export const deleteNiuserdataV1ItemsById = <ThrowOnError extends boolean = false
 /**
  * Get information about the specified user data item.
  */
-export const getNiuserdataV1ItemsById = <ThrowOnError extends boolean = false>(options: Options<GetNiuserdataV1ItemsByIdData, ThrowOnError>) => (options.client ?? client).get<GetNiuserdataV1ItemsByIdResponses, GetNiuserdataV1ItemsByIdErrors, ThrowOnError>({
+export const getUserDataItemEndPoint = <ThrowOnError extends boolean = false>(options: Options<GetUserDataItemEndPointData, ThrowOnError>) => (options.client ?? client).get<GetUserDataItemEndPointResponses, GetUserDataItemEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niuserdata/v1/items/{id}',
     ...options
@@ -105,7 +105,7 @@ export const getNiuserdataV1ItemsById = <ThrowOnError extends boolean = false>(o
 /**
  * Returns the root `niuserdata` operations.
  */
-export const getNiuserdata = <ThrowOnError extends boolean = false>(options?: Options<GetNiuserdataData, ThrowOnError>) => (options?.client ?? client).get<GetNiuserdataResponses, unknown, ThrowOnError>({
+export const get = <ThrowOnError extends boolean = false>(options?: Options<GetData, ThrowOnError>) => (options?.client ?? client).get<GetResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niuserdata',
     ...options
@@ -114,7 +114,7 @@ export const getNiuserdata = <ThrowOnError extends boolean = false>(options?: Op
 /**
  * Returns the `V1` operations.
  */
-export const getNiuserdataV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNiuserdataV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNiuserdataV1Responses, unknown, ThrowOnError>({
+export const v1Endpoint = <ThrowOnError extends boolean = false>(options?: Options<V1EndpointData, ThrowOnError>) => (options?.client ?? client).get<V1EndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niuserdata/v1',
     ...options

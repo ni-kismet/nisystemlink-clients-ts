@@ -545,7 +545,7 @@ export type Versions = {
     v1?: Version;
 };
 
-export type GetNifeedV1FeedsData = {
+export type QueryFeedsData = {
     body?: never;
     path?: never;
     query?: {
@@ -561,50 +561,50 @@ export type GetNifeedV1FeedsData = {
     url: '/nifeed/v1/feeds';
 };
 
-export type GetNifeedV1FeedsErrors = {
+export type QueryFeedsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNifeedV1FeedsError = GetNifeedV1FeedsErrors[keyof GetNifeedV1FeedsErrors];
+export type QueryFeedsError = QueryFeedsErrors[keyof QueryFeedsErrors];
 
-export type GetNifeedV1FeedsResponses = {
+export type QueryFeedsResponses = {
     /**
      * OK
      */
     200: ListFeedsResponse;
 };
 
-export type GetNifeedV1FeedsResponse = GetNifeedV1FeedsResponses[keyof GetNifeedV1FeedsResponses];
+export type QueryFeedsResponse = QueryFeedsResponses[keyof QueryFeedsResponses];
 
-export type PostNifeedV1FeedsData = {
+export type CreateFeedData = {
     body?: CreateFeedRequest;
     path?: never;
     query?: never;
     url: '/nifeed/v1/feeds';
 };
 
-export type PostNifeedV1FeedsErrors = {
+export type CreateFeedErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNifeedV1FeedsError = PostNifeedV1FeedsErrors[keyof PostNifeedV1FeedsErrors];
+export type CreateFeedError = CreateFeedErrors[keyof CreateFeedErrors];
 
-export type PostNifeedV1FeedsResponses = {
+export type CreateFeedResponses = {
     /**
      * Created
      */
     201: Feed;
 };
 
-export type PostNifeedV1FeedsResponse = PostNifeedV1FeedsResponses[keyof PostNifeedV1FeedsResponses];
+export type CreateFeedResponse = CreateFeedResponses[keyof CreateFeedResponses];
 
-export type DeleteNifeedV1FeedsByFeedIdData = {
+export type DeleteFeedData = {
     body?: never;
     path: {
         /**
@@ -616,25 +616,25 @@ export type DeleteNifeedV1FeedsByFeedIdData = {
     url: '/nifeed/v1/feeds/{feedId}';
 };
 
-export type DeleteNifeedV1FeedsByFeedIdErrors = {
+export type DeleteFeedErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type DeleteNifeedV1FeedsByFeedIdError = DeleteNifeedV1FeedsByFeedIdErrors[keyof DeleteNifeedV1FeedsByFeedIdErrors];
+export type DeleteFeedError = DeleteFeedErrors[keyof DeleteFeedErrors];
 
-export type DeleteNifeedV1FeedsByFeedIdResponses = {
+export type DeleteFeedResponses = {
     /**
      * No content
      */
     204: void;
 };
 
-export type DeleteNifeedV1FeedsByFeedIdResponse = DeleteNifeedV1FeedsByFeedIdResponses[keyof DeleteNifeedV1FeedsByFeedIdResponses];
+export type DeleteFeedResponse = DeleteFeedResponses[keyof DeleteFeedResponses];
 
-export type GetNifeedV1FeedsByFeedIdData = {
+export type GetFeedByIdData = {
     body?: never;
     path: {
         /**
@@ -646,25 +646,25 @@ export type GetNifeedV1FeedsByFeedIdData = {
     url: '/nifeed/v1/feeds/{feedId}';
 };
 
-export type GetNifeedV1FeedsByFeedIdErrors = {
+export type GetFeedByIdErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNifeedV1FeedsByFeedIdError = GetNifeedV1FeedsByFeedIdErrors[keyof GetNifeedV1FeedsByFeedIdErrors];
+export type GetFeedByIdError = GetFeedByIdErrors[keyof GetFeedByIdErrors];
 
-export type GetNifeedV1FeedsByFeedIdResponses = {
+export type GetFeedByIdResponses = {
     /**
      * OK
      */
     200: Feed;
 };
 
-export type GetNifeedV1FeedsByFeedIdResponse = GetNifeedV1FeedsByFeedIdResponses[keyof GetNifeedV1FeedsByFeedIdResponses];
+export type GetFeedByIdResponse = GetFeedByIdResponses[keyof GetFeedByIdResponses];
 
-export type PatchNifeedV1FeedsByFeedIdMetadataData = {
+export type UpdateFeedMetadataData = {
     body?: UpdateFeedMetadataRequest;
     path: {
         /**
@@ -676,25 +676,25 @@ export type PatchNifeedV1FeedsByFeedIdMetadataData = {
     url: '/nifeed/v1/feeds/{feedId}/metadata';
 };
 
-export type PatchNifeedV1FeedsByFeedIdMetadataErrors = {
+export type UpdateFeedMetadataErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PatchNifeedV1FeedsByFeedIdMetadataError = PatchNifeedV1FeedsByFeedIdMetadataErrors[keyof PatchNifeedV1FeedsByFeedIdMetadataErrors];
+export type UpdateFeedMetadataError = UpdateFeedMetadataErrors[keyof UpdateFeedMetadataErrors];
 
-export type PatchNifeedV1FeedsByFeedIdMetadataResponses = {
+export type UpdateFeedMetadataResponses = {
     /**
      * OK
      */
     200: Feed;
 };
 
-export type PatchNifeedV1FeedsByFeedIdMetadataResponse = PatchNifeedV1FeedsByFeedIdMetadataResponses[keyof PatchNifeedV1FeedsByFeedIdMetadataResponses];
+export type UpdateFeedMetadataResponse = UpdateFeedMetadataResponses[keyof UpdateFeedMetadataResponses];
 
-export type PostNifeedV1DeleteFeedsData = {
+export type DeleteFeedsData = {
     /**
      * A list of IDs of the feeds that are going to be deleted.
      */
@@ -704,25 +704,25 @@ export type PostNifeedV1DeleteFeedsData = {
     url: '/nifeed/v1/delete-feeds';
 };
 
-export type PostNifeedV1DeleteFeedsErrors = {
+export type DeleteFeedsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNifeedV1DeleteFeedsError = PostNifeedV1DeleteFeedsErrors[keyof PostNifeedV1DeleteFeedsErrors];
+export type DeleteFeedsError = DeleteFeedsErrors[keyof DeleteFeedsErrors];
 
-export type PostNifeedV1DeleteFeedsResponses = {
+export type DeleteFeedsResponses = {
     /**
      * No content
      */
     201: DeleteFeedsResponse;
 };
 
-export type PostNifeedV1DeleteFeedsResponse = PostNifeedV1DeleteFeedsResponses[keyof PostNifeedV1DeleteFeedsResponses];
+export type DeleteFeedsResponse2 = DeleteFeedsResponses[keyof DeleteFeedsResponses];
 
-export type PostNifeedV1ReplicateFeedData = {
+export type ReplicateFeedData = {
     body?: ReplicateFeedRequest;
     path?: never;
     query?: {
@@ -734,25 +734,25 @@ export type PostNifeedV1ReplicateFeedData = {
     url: '/nifeed/v1/replicate-feed';
 };
 
-export type PostNifeedV1ReplicateFeedErrors = {
+export type ReplicateFeedErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNifeedV1ReplicateFeedError = PostNifeedV1ReplicateFeedErrors[keyof PostNifeedV1ReplicateFeedErrors];
+export type ReplicateFeedError = ReplicateFeedErrors[keyof ReplicateFeedErrors];
 
-export type PostNifeedV1ReplicateFeedResponses = {
+export type ReplicateFeedResponses = {
     /**
      * Created
      */
     201: ReplicateFeedResult;
 };
 
-export type PostNifeedV1ReplicateFeedResponse = PostNifeedV1ReplicateFeedResponses[keyof PostNifeedV1ReplicateFeedResponses];
+export type ReplicateFeedResponse = ReplicateFeedResponses[keyof ReplicateFeedResponses];
 
-export type PostNifeedV1ReplicateFeedsData = {
+export type ReplicateFeedsData = {
     body?: ReplicateFeedsRequest;
     path?: never;
     query?: {
@@ -764,16 +764,16 @@ export type PostNifeedV1ReplicateFeedsData = {
     url: '/nifeed/v1/replicate-feeds';
 };
 
-export type PostNifeedV1ReplicateFeedsErrors = {
+export type ReplicateFeedsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNifeedV1ReplicateFeedsError = PostNifeedV1ReplicateFeedsErrors[keyof PostNifeedV1ReplicateFeedsErrors];
+export type ReplicateFeedsError = ReplicateFeedsErrors[keyof ReplicateFeedsErrors];
 
-export type PostNifeedV1ReplicateFeedsResponses = {
+export type ReplicateFeedsResponses = {
     /**
      * OK
      */
@@ -784,9 +784,9 @@ export type PostNifeedV1ReplicateFeedsResponses = {
     201: ReplicateFeedsResult;
 };
 
-export type PostNifeedV1ReplicateFeedsResponse = PostNifeedV1ReplicateFeedsResponses[keyof PostNifeedV1ReplicateFeedsResponses];
+export type ReplicateFeedsResponse = ReplicateFeedsResponses[keyof ReplicateFeedsResponses];
 
-export type PostNifeedV1FeedsByFeedIdCheckForUpdatesData = {
+export type CheckFeedForUpdatesData = {
     body?: never;
     path: {
         /**
@@ -798,25 +798,25 @@ export type PostNifeedV1FeedsByFeedIdCheckForUpdatesData = {
     url: '/nifeed/v1/feeds/{feedId}/check-for-updates';
 };
 
-export type PostNifeedV1FeedsByFeedIdCheckForUpdatesErrors = {
+export type CheckFeedForUpdatesErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNifeedV1FeedsByFeedIdCheckForUpdatesError = PostNifeedV1FeedsByFeedIdCheckForUpdatesErrors[keyof PostNifeedV1FeedsByFeedIdCheckForUpdatesErrors];
+export type CheckFeedForUpdatesError = CheckFeedForUpdatesErrors[keyof CheckFeedForUpdatesErrors];
 
-export type PostNifeedV1FeedsByFeedIdCheckForUpdatesResponses = {
+export type CheckFeedForUpdatesResponses = {
     /**
      * Created
      */
     201: JobIdResponse;
 };
 
-export type PostNifeedV1FeedsByFeedIdCheckForUpdatesResponse = PostNifeedV1FeedsByFeedIdCheckForUpdatesResponses[keyof PostNifeedV1FeedsByFeedIdCheckForUpdatesResponses];
+export type CheckFeedForUpdatesResponse = CheckFeedForUpdatesResponses[keyof CheckFeedForUpdatesResponses];
 
-export type PostNifeedV1FeedsByFeedIdApplyUpdatesData = {
+export type ApplyUpdatesForFeedData = {
     body?: ApplyFeedUpdatesRequest;
     path: {
         /**
@@ -833,25 +833,25 @@ export type PostNifeedV1FeedsByFeedIdApplyUpdatesData = {
     url: '/nifeed/v1/feeds/{feedId}/apply-updates';
 };
 
-export type PostNifeedV1FeedsByFeedIdApplyUpdatesErrors = {
+export type ApplyUpdatesForFeedErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNifeedV1FeedsByFeedIdApplyUpdatesError = PostNifeedV1FeedsByFeedIdApplyUpdatesErrors[keyof PostNifeedV1FeedsByFeedIdApplyUpdatesErrors];
+export type ApplyUpdatesForFeedError = ApplyUpdatesForFeedErrors[keyof ApplyUpdatesForFeedErrors];
 
-export type PostNifeedV1FeedsByFeedIdApplyUpdatesResponses = {
+export type ApplyUpdatesForFeedResponses = {
     /**
      * Created
      */
     201: JobIdResponse;
 };
 
-export type PostNifeedV1FeedsByFeedIdApplyUpdatesResponse = PostNifeedV1FeedsByFeedIdApplyUpdatesResponses[keyof PostNifeedV1FeedsByFeedIdApplyUpdatesResponses];
+export type ApplyUpdatesForFeedResponse = ApplyUpdatesForFeedResponses[keyof ApplyUpdatesForFeedResponses];
 
-export type GetNifeedV1FeedUpdatesByUpdateDescriptorListIdData = {
+export type GetUpdateDescriptorsData = {
     body?: never;
     path: {
         /**
@@ -863,25 +863,25 @@ export type GetNifeedV1FeedUpdatesByUpdateDescriptorListIdData = {
     url: '/nifeed/v1/feed-updates/{updateDescriptorListId}';
 };
 
-export type GetNifeedV1FeedUpdatesByUpdateDescriptorListIdErrors = {
+export type GetUpdateDescriptorsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNifeedV1FeedUpdatesByUpdateDescriptorListIdError = GetNifeedV1FeedUpdatesByUpdateDescriptorListIdErrors[keyof GetNifeedV1FeedUpdatesByUpdateDescriptorListIdErrors];
+export type GetUpdateDescriptorsError = GetUpdateDescriptorsErrors[keyof GetUpdateDescriptorsErrors];
 
-export type GetNifeedV1FeedUpdatesByUpdateDescriptorListIdResponses = {
+export type GetUpdateDescriptorsResponses = {
     /**
      * OK
      */
     200: GetUpdateDescriptorsResponse;
 };
 
-export type GetNifeedV1FeedUpdatesByUpdateDescriptorListIdResponse = GetNifeedV1FeedUpdatesByUpdateDescriptorListIdResponses[keyof GetNifeedV1FeedUpdatesByUpdateDescriptorListIdResponses];
+export type GetUpdateDescriptorsResponse2 = GetUpdateDescriptorsResponses[keyof GetUpdateDescriptorsResponses];
 
-export type PostNifeedV1FeedsByFeedIdCleanData = {
+export type CleanFeedData = {
     body?: never;
     path: {
         /**
@@ -893,25 +893,25 @@ export type PostNifeedV1FeedsByFeedIdCleanData = {
     url: '/nifeed/v1/feeds/{feedId}/clean';
 };
 
-export type PostNifeedV1FeedsByFeedIdCleanErrors = {
+export type CleanFeedErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNifeedV1FeedsByFeedIdCleanError = PostNifeedV1FeedsByFeedIdCleanErrors[keyof PostNifeedV1FeedsByFeedIdCleanErrors];
+export type CleanFeedError = CleanFeedErrors[keyof CleanFeedErrors];
 
-export type PostNifeedV1FeedsByFeedIdCleanResponses = {
+export type CleanFeedResponses = {
     /**
      * Created
      */
     201: JobIdResponse;
 };
 
-export type PostNifeedV1FeedsByFeedIdCleanResponse = PostNifeedV1FeedsByFeedIdCleanResponses[keyof PostNifeedV1FeedsByFeedIdCleanResponses];
+export type CleanFeedResponse = CleanFeedResponses[keyof CleanFeedResponses];
 
-export type GetNifeedV1FeedsByFeedIdFilesPackagesGzData = {
+export type DownloadFeedContentGzData = {
     body?: never;
     path: {
         /**
@@ -923,25 +923,25 @@ export type GetNifeedV1FeedsByFeedIdFilesPackagesGzData = {
     url: '/nifeed/v1/feeds/{feedId}/files/Packages.gz';
 };
 
-export type GetNifeedV1FeedsByFeedIdFilesPackagesGzErrors = {
+export type DownloadFeedContentGzErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNifeedV1FeedsByFeedIdFilesPackagesGzError = GetNifeedV1FeedsByFeedIdFilesPackagesGzErrors[keyof GetNifeedV1FeedsByFeedIdFilesPackagesGzErrors];
+export type DownloadFeedContentGzError = DownloadFeedContentGzErrors[keyof DownloadFeedContentGzErrors];
 
-export type GetNifeedV1FeedsByFeedIdFilesPackagesGzResponses = {
+export type DownloadFeedContentGzResponses = {
     /**
      * OK
      */
     200: Blob | File;
 };
 
-export type GetNifeedV1FeedsByFeedIdFilesPackagesGzResponse = GetNifeedV1FeedsByFeedIdFilesPackagesGzResponses[keyof GetNifeedV1FeedsByFeedIdFilesPackagesGzResponses];
+export type DownloadFeedContentGzResponse = DownloadFeedContentGzResponses[keyof DownloadFeedContentGzResponses];
 
-export type HeadNifeedV1FeedsByFeedIdFilesPackagesGzData = {
+export type HeadFeedContentGzData = {
     body?: never;
     path: {
         /**
@@ -953,25 +953,25 @@ export type HeadNifeedV1FeedsByFeedIdFilesPackagesGzData = {
     url: '/nifeed/v1/feeds/{feedId}/files/Packages.gz';
 };
 
-export type HeadNifeedV1FeedsByFeedIdFilesPackagesGzErrors = {
+export type HeadFeedContentGzErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type HeadNifeedV1FeedsByFeedIdFilesPackagesGzError = HeadNifeedV1FeedsByFeedIdFilesPackagesGzErrors[keyof HeadNifeedV1FeedsByFeedIdFilesPackagesGzErrors];
+export type HeadFeedContentGzError = HeadFeedContentGzErrors[keyof HeadFeedContentGzErrors];
 
-export type HeadNifeedV1FeedsByFeedIdFilesPackagesGzResponses = {
+export type HeadFeedContentGzResponses = {
     /**
      * OK
      */
     200: Blob | File;
 };
 
-export type HeadNifeedV1FeedsByFeedIdFilesPackagesGzResponse = HeadNifeedV1FeedsByFeedIdFilesPackagesGzResponses[keyof HeadNifeedV1FeedsByFeedIdFilesPackagesGzResponses];
+export type HeadFeedContentGzResponse = HeadFeedContentGzResponses[keyof HeadFeedContentGzResponses];
 
-export type GetNifeedV1FeedsByFeedIdFilesPackagesData = {
+export type DownloadFeedContentData = {
     body?: never;
     path: {
         /**
@@ -983,25 +983,25 @@ export type GetNifeedV1FeedsByFeedIdFilesPackagesData = {
     url: '/nifeed/v1/feeds/{feedId}/files/Packages';
 };
 
-export type GetNifeedV1FeedsByFeedIdFilesPackagesErrors = {
+export type DownloadFeedContentErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNifeedV1FeedsByFeedIdFilesPackagesError = GetNifeedV1FeedsByFeedIdFilesPackagesErrors[keyof GetNifeedV1FeedsByFeedIdFilesPackagesErrors];
+export type DownloadFeedContentError = DownloadFeedContentErrors[keyof DownloadFeedContentErrors];
 
-export type GetNifeedV1FeedsByFeedIdFilesPackagesResponses = {
+export type DownloadFeedContentResponses = {
     /**
      * OK
      */
     200: Blob | File;
 };
 
-export type GetNifeedV1FeedsByFeedIdFilesPackagesResponse = GetNifeedV1FeedsByFeedIdFilesPackagesResponses[keyof GetNifeedV1FeedsByFeedIdFilesPackagesResponses];
+export type DownloadFeedContentResponse = DownloadFeedContentResponses[keyof DownloadFeedContentResponses];
 
-export type HeadNifeedV1FeedsByFeedIdFilesPackagesData = {
+export type HeadFeedContentData = {
     body?: never;
     path: {
         /**
@@ -1013,25 +1013,25 @@ export type HeadNifeedV1FeedsByFeedIdFilesPackagesData = {
     url: '/nifeed/v1/feeds/{feedId}/files/Packages';
 };
 
-export type HeadNifeedV1FeedsByFeedIdFilesPackagesErrors = {
+export type HeadFeedContentErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type HeadNifeedV1FeedsByFeedIdFilesPackagesError = HeadNifeedV1FeedsByFeedIdFilesPackagesErrors[keyof HeadNifeedV1FeedsByFeedIdFilesPackagesErrors];
+export type HeadFeedContentError = HeadFeedContentErrors[keyof HeadFeedContentErrors];
 
-export type HeadNifeedV1FeedsByFeedIdFilesPackagesResponses = {
+export type HeadFeedContentResponses = {
     /**
      * OK
      */
     200: Blob | File;
 };
 
-export type HeadNifeedV1FeedsByFeedIdFilesPackagesResponse = HeadNifeedV1FeedsByFeedIdFilesPackagesResponses[keyof HeadNifeedV1FeedsByFeedIdFilesPackagesResponses];
+export type HeadFeedContentResponse = HeadFeedContentResponses[keyof HeadFeedContentResponses];
 
-export type GetNifeedV1FeedsByFeedIdJobsData = {
+export type QueryJobsForFeedData = {
     body?: never;
     path: {
         /**
@@ -1043,25 +1043,25 @@ export type GetNifeedV1FeedsByFeedIdJobsData = {
     url: '/nifeed/v1/feeds/{feedId}/jobs';
 };
 
-export type GetNifeedV1FeedsByFeedIdJobsErrors = {
+export type QueryJobsForFeedErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNifeedV1FeedsByFeedIdJobsError = GetNifeedV1FeedsByFeedIdJobsErrors[keyof GetNifeedV1FeedsByFeedIdJobsErrors];
+export type QueryJobsForFeedError = QueryJobsForFeedErrors[keyof QueryJobsForFeedErrors];
 
-export type GetNifeedV1FeedsByFeedIdJobsResponses = {
+export type QueryJobsForFeedResponses = {
     /**
      * OK
      */
     200: ListJobsResponse;
 };
 
-export type GetNifeedV1FeedsByFeedIdJobsResponse = GetNifeedV1FeedsByFeedIdJobsResponses[keyof GetNifeedV1FeedsByFeedIdJobsResponses];
+export type QueryJobsForFeedResponse = QueryJobsForFeedResponses[keyof QueryJobsForFeedResponses];
 
-export type GetNifeedV1JobsByJobIdData = {
+export type GetJobData = {
     body?: never;
     path: {
         /**
@@ -1073,25 +1073,25 @@ export type GetNifeedV1JobsByJobIdData = {
     url: '/nifeed/v1/jobs/{jobId}';
 };
 
-export type GetNifeedV1JobsByJobIdErrors = {
+export type GetJobErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNifeedV1JobsByJobIdError = GetNifeedV1JobsByJobIdErrors[keyof GetNifeedV1JobsByJobIdErrors];
+export type GetJobError = GetJobErrors[keyof GetJobErrors];
 
-export type GetNifeedV1JobsByJobIdResponses = {
+export type GetJobResponses = {
     /**
      * OK
      */
     200: Job;
 };
 
-export type GetNifeedV1JobsByJobIdResponse = GetNifeedV1JobsByJobIdResponses[keyof GetNifeedV1JobsByJobIdResponses];
+export type GetJobResponse = GetJobResponses[keyof GetJobResponses];
 
-export type GetNifeedV1FeedsByFeedIdPackagesData = {
+export type QueryPackagesForFeedData = {
     body?: never;
     path: {
         /**
@@ -1103,23 +1103,23 @@ export type GetNifeedV1FeedsByFeedIdPackagesData = {
     url: '/nifeed/v1/feeds/{feedId}/packages';
 };
 
-export type GetNifeedV1FeedsByFeedIdPackagesErrors = {
+export type QueryPackagesForFeedErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNifeedV1FeedsByFeedIdPackagesError = GetNifeedV1FeedsByFeedIdPackagesErrors[keyof GetNifeedV1FeedsByFeedIdPackagesErrors];
+export type QueryPackagesForFeedError = QueryPackagesForFeedErrors[keyof QueryPackagesForFeedErrors];
 
-export type GetNifeedV1FeedsByFeedIdPackagesResponses = {
+export type QueryPackagesForFeedResponses = {
     /**
      * OK
      */
     200: ListPackagesResponse;
 };
 
-export type GetNifeedV1FeedsByFeedIdPackagesResponse = GetNifeedV1FeedsByFeedIdPackagesResponses[keyof GetNifeedV1FeedsByFeedIdPackagesResponses];
+export type QueryPackagesForFeedResponse = QueryPackagesForFeedResponses[keyof QueryPackagesForFeedResponses];
 
 export type UploadPackageToFeedAsyncData = {
     body?: {
@@ -1158,7 +1158,7 @@ export type UploadPackageToFeedAsyncResponses = {
 
 export type UploadPackageToFeedAsyncResponse = UploadPackageToFeedAsyncResponses[keyof UploadPackageToFeedAsyncResponses];
 
-export type DeleteNifeedV1PackagesByPackageIdData = {
+export type DeletePackageByIdData = {
     body?: never;
     path: {
         /**
@@ -1170,25 +1170,25 @@ export type DeleteNifeedV1PackagesByPackageIdData = {
     url: '/nifeed/v1/packages/{packageId}';
 };
 
-export type DeleteNifeedV1PackagesByPackageIdErrors = {
+export type DeletePackageByIdErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type DeleteNifeedV1PackagesByPackageIdError = DeleteNifeedV1PackagesByPackageIdErrors[keyof DeleteNifeedV1PackagesByPackageIdErrors];
+export type DeletePackageByIdError = DeletePackageByIdErrors[keyof DeletePackageByIdErrors];
 
-export type DeleteNifeedV1PackagesByPackageIdResponses = {
+export type DeletePackageByIdResponses = {
     /**
      * No content
      */
     204: void;
 };
 
-export type DeleteNifeedV1PackagesByPackageIdResponse = DeleteNifeedV1PackagesByPackageIdResponses[keyof DeleteNifeedV1PackagesByPackageIdResponses];
+export type DeletePackageByIdResponse = DeletePackageByIdResponses[keyof DeletePackageByIdResponses];
 
-export type GetNifeedV1PackagesByPackageIdData = {
+export type GetPackageByIdData = {
     body?: never;
     path: {
         /**
@@ -1200,50 +1200,50 @@ export type GetNifeedV1PackagesByPackageIdData = {
     url: '/nifeed/v1/packages/{packageId}';
 };
 
-export type GetNifeedV1PackagesByPackageIdErrors = {
+export type GetPackageByIdErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNifeedV1PackagesByPackageIdError = GetNifeedV1PackagesByPackageIdErrors[keyof GetNifeedV1PackagesByPackageIdErrors];
+export type GetPackageByIdError = GetPackageByIdErrors[keyof GetPackageByIdErrors];
 
-export type GetNifeedV1PackagesByPackageIdResponses = {
+export type GetPackageByIdResponses = {
     /**
      * OK
      */
     200: Package;
 };
 
-export type GetNifeedV1PackagesByPackageIdResponse = GetNifeedV1PackagesByPackageIdResponses[keyof GetNifeedV1PackagesByPackageIdResponses];
+export type GetPackageByIdResponse = GetPackageByIdResponses[keyof GetPackageByIdResponses];
 
-export type PostNifeedV1DeletePackagesData = {
+export type DeletePackagesData = {
     body?: DeletePackagesRequest;
     path?: never;
     query?: never;
     url: '/nifeed/v1/delete-packages';
 };
 
-export type PostNifeedV1DeletePackagesErrors = {
+export type DeletePackagesErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNifeedV1DeletePackagesError = PostNifeedV1DeletePackagesErrors[keyof PostNifeedV1DeletePackagesErrors];
+export type DeletePackagesError = DeletePackagesErrors[keyof DeletePackagesErrors];
 
-export type PostNifeedV1DeletePackagesResponses = {
+export type DeletePackagesResponses = {
     /**
      * No content
      */
     204: void;
 };
 
-export type PostNifeedV1DeletePackagesResponse = PostNifeedV1DeletePackagesResponses[keyof PostNifeedV1DeletePackagesResponses];
+export type DeletePackagesResponse = DeletePackagesResponses[keyof DeletePackagesResponses];
 
-export type GetNifeedV1FeedsByFeedIdFilesByFileNameData = {
+export type DownloadPackageData = {
     body?: never;
     path: {
         /**
@@ -1259,25 +1259,25 @@ export type GetNifeedV1FeedsByFeedIdFilesByFileNameData = {
     url: '/nifeed/v1/feeds/{feedId}/files/{fileName}';
 };
 
-export type GetNifeedV1FeedsByFeedIdFilesByFileNameErrors = {
+export type DownloadPackageErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNifeedV1FeedsByFeedIdFilesByFileNameError = GetNifeedV1FeedsByFeedIdFilesByFileNameErrors[keyof GetNifeedV1FeedsByFeedIdFilesByFileNameErrors];
+export type DownloadPackageError = DownloadPackageErrors[keyof DownloadPackageErrors];
 
-export type GetNifeedV1FeedsByFeedIdFilesByFileNameResponses = {
+export type DownloadPackageResponses = {
     /**
      * OK
      */
     200: Blob | File;
 };
 
-export type GetNifeedV1FeedsByFeedIdFilesByFileNameResponse = GetNifeedV1FeedsByFeedIdFilesByFileNameResponses[keyof GetNifeedV1FeedsByFeedIdFilesByFileNameResponses];
+export type DownloadPackageResponse = DownloadPackageResponses[keyof DownloadPackageResponses];
 
-export type HeadNifeedV1FeedsByFeedIdFilesByFileNameData = {
+export type DownloadPackageHeadData = {
     body?: never;
     path: {
         /**
@@ -1293,52 +1293,52 @@ export type HeadNifeedV1FeedsByFeedIdFilesByFileNameData = {
     url: '/nifeed/v1/feeds/{feedId}/files/{fileName}';
 };
 
-export type HeadNifeedV1FeedsByFeedIdFilesByFileNameErrors = {
+export type DownloadPackageHeadErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type HeadNifeedV1FeedsByFeedIdFilesByFileNameError = HeadNifeedV1FeedsByFeedIdFilesByFileNameErrors[keyof HeadNifeedV1FeedsByFeedIdFilesByFileNameErrors];
+export type DownloadPackageHeadError = DownloadPackageHeadErrors[keyof DownloadPackageHeadErrors];
 
-export type HeadNifeedV1FeedsByFeedIdFilesByFileNameResponses = {
+export type DownloadPackageHeadResponses = {
     /**
      * OK
      */
     200: Blob | File;
 };
 
-export type HeadNifeedV1FeedsByFeedIdFilesByFileNameResponse = HeadNifeedV1FeedsByFeedIdFilesByFileNameResponses[keyof HeadNifeedV1FeedsByFeedIdFilesByFileNameResponses];
+export type DownloadPackageHeadResponse = DownloadPackageHeadResponses[keyof DownloadPackageHeadResponses];
 
-export type GetNifeedData = {
+export type RootEndpointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nifeed';
 };
 
-export type GetNifeedResponses = {
+export type RootEndpointResponses = {
     /**
      * OK
      */
     200: Versions;
 };
 
-export type GetNifeedResponse = GetNifeedResponses[keyof GetNifeedResponses];
+export type RootEndpointResponse = RootEndpointResponses[keyof RootEndpointResponses];
 
-export type GetNifeedV1Data = {
+export type GetV1Data = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nifeed/v1';
 };
 
-export type GetNifeedV1Responses = {
+export type GetV1Responses = {
     /**
      * OK
      */
     200: Version;
 };
 
-export type GetNifeedV1Response = GetNifeedV1Responses[keyof GetNifeedV1Responses];
+export type GetV1Response = GetV1Responses[keyof GetV1Responses];

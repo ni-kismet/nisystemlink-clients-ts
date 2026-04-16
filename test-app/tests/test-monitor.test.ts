@@ -20,15 +20,49 @@ import {
   getProductsV2,
   queryProductsV2,
   queryProductValuesV2,
-  getPathsV2,
+  queryPathsV2,
   queryResultValuesV2,
   rootEndpoint,
   rootEndpointV2,
+  type PathsAdvancedQuery,
+  type ResultsAdvancedQuery,
 } from '../../src/generated/test-monitor';
 import { createClient, createConfig } from '../../src/generated/test-monitor/client';
 import { client as generatedClient } from '../../src/generated/test-monitor/client.gen';
 
 const configured = isConfigured();
+
+const createProjectedResultsQuery = (
+  overrides: ResultsAdvancedQuery = {},
+): ResultsAdvancedQuery => ({
+  productFilter: '',
+  filter: '',
+  projection: [
+    'ID',
+    'PART_NUMBER',
+    'PROGRAM_NAME',
+    'PROPERTIES',
+    'SERIAL_NUMBER',
+    'STARTED_AT',
+    'STATUS',
+    'SYSTEM_ID',
+    'TOTAL_TIME_IN_SECONDS',
+    'WORKSPACE',
+  ],
+  orderBy: 'STARTED_AT',
+  descending: true,
+  orderByComparisonType: 'DEFAULT',
+  take: 100,
+  ...overrides,
+});
+
+const projectedPathsQuery: PathsAdvancedQuery = {
+  projection: ['ID', 'PROGRAM_NAME', 'PART_NUMBER', 'PATH', 'PATH_NAMES'],
+  take: 1,
+};
+
+const escapeDynamicLinqString = (value: string): string =>
+  value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 
 describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
   let client: ReturnType<typeof createClient>;
@@ -67,7 +101,7 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
       const start = Date.now();
       const { data, error, response } = await queryResultsV2({
         client,
-        body: { take: 10 },
+        body: createProjectedResultsQuery({ take: 10 }),
       });
       const elapsed = Date.now() - start;
 
@@ -80,7 +114,10 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
     });
 
     it('result objects have expected shape', async () => {
-      const { data } = await queryResultsV2({ client, body: { take: 5 } });
+      const { data } = await queryResultsV2({
+        client,
+        body: createProjectedResultsQuery({ take: 5 }),
+      });
       const results = data?.results ?? [];
       if (results.length > 0) {
         const r = results[0];
@@ -90,18 +127,24 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
     });
 
     it('respects take limit', async () => {
-      const { data } = await queryResultsV2({ client, body: { take: 2 } });
+      const { data } = await queryResultsV2({
+        client,
+        body: createProjectedResultsQuery({ take: 2 }),
+      });
       expect((data?.results ?? []).length).toBeLessThanOrEqual(2);
     });
 
     it('supports continuationToken pagination', async () => {
-      const first = await queryResultsV2({ client, body: { take: 1 } });
+      const first = await queryResultsV2({
+        client,
+        body: createProjectedResultsQuery({ take: 1 }),
+      });
       const token = first.data?.continuationToken;
       if (!token) return; // fewer than 1 result in this environment
 
       const second = await queryResultsV2({
         client,
-        body: { take: 1, continuationToken: token },
+        body: createProjectedResultsQuery({ take: 1, continuationToken: token }),
       });
       expect(second.response.status).toBe(200);
     });
@@ -109,14 +152,20 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
     it('supports Dynamic LINQ filter', async () => {
       const { data, response } = await queryResultsV2({
         client,
-        body: { filter: 'Status.StatusType = "Passed"', take: 5 },
+        body: createProjectedResultsQuery({
+          filter: 'Status.StatusType = "Passed"',
+          take: 5,
+        }),
       });
       expect(response.status).toBe(200);
       expect(Array.isArray(data?.results)).toBe(true);
     });
 
     it('returns totalCount when requested', async () => {
-      const { data } = await queryResultsV2({ client, body: { take: 1, returnCount: true } });
+      const { data } = await queryResultsV2({
+        client,
+        body: createProjectedResultsQuery({ take: 1, returnCount: true }),
+      });
       if (data?.totalCount !== undefined) {
         expect(typeof data.totalCount).toBe('number');
       }
@@ -196,10 +245,32 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
   });
 
   describe('Paths', () => {
-    it('getPathsV2 lists test paths', async () => {
-      const { data, response } = await getPathsV2({ client, query: { take: 10 } });
+    it('queryPathsV2 lists test paths with projection', async () => {
+      const results = await queryResultsV2({
+        client,
+        body: createProjectedResultsQuery({ take: 1 }),
+      });
+
+      const seedResult = results.data?.results?.[0];
+      const pathFilterParts: string[] = [];
+
+      if (seedResult?.programName) {
+        pathFilterParts.push(`ProgramName = "${escapeDynamicLinqString(seedResult.programName)}"`);
+      }
+
+      if (seedResult?.partNumber) {
+        pathFilterParts.push(`PartNumber = "${escapeDynamicLinqString(seedResult.partNumber)}"`);
+      }
+
+      const { data, response } = await queryPathsV2({
+        client,
+        body: {
+          ...projectedPathsQuery,
+          ...(pathFilterParts.length > 0 ? { filter: pathFilterParts.join(' AND ') } : {}),
+        },
+      });
       expect(response.status).toBe(200);
-      expect(data).toBeDefined();
+      expect(Array.isArray(data?.paths)).toBe(true);
     });
   });
 });

@@ -8,9 +8,10 @@
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
-import { isConfigured } from '../../src/client';
-import { getNiroutineV1Routines, getNiroutine } from '../../src/generated/routines';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
+import { queryRoutines as getNiroutineV1Routines, rootEndpoint as getNiroutine } from '../../src/generated/routines';
 import { createClient, createConfig } from '../../src/generated/routines/client';
+import { client as generatedClient } from '../../src/generated/routines/client.gen';
 
 const configured = isConfigured();
 
@@ -18,9 +19,10 @@ describe.skipIf(!configured)('Routines Service', () => {
   let client: ReturnType<typeof createClient>;
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

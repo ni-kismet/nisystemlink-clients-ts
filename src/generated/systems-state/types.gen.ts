@@ -296,7 +296,7 @@ export type SystemImage = {
     version?: string | null;
 };
 
-export type GetNisystemsstateV1StatesByStateIdHistoryData = {
+export type GetStateHistoryData = {
     body?: never;
     path: {
         /**
@@ -317,7 +317,7 @@ export type GetNisystemsstateV1StatesByStateIdHistoryData = {
     url: '/nisystemsstate/v1/states/{stateId}/history';
 };
 
-export type GetNisystemsstateV1StatesByStateIdHistoryErrors = {
+export type GetStateHistoryErrors = {
     /**
      * Unauthorized
      */
@@ -328,18 +328,18 @@ export type GetNisystemsstateV1StatesByStateIdHistoryErrors = {
     404: BaseResponse;
 };
 
-export type GetNisystemsstateV1StatesByStateIdHistoryError = GetNisystemsstateV1StatesByStateIdHistoryErrors[keyof GetNisystemsstateV1StatesByStateIdHistoryErrors];
+export type GetStateHistoryError = GetStateHistoryErrors[keyof GetStateHistoryErrors];
 
-export type GetNisystemsstateV1StatesByStateIdHistoryResponses = {
+export type GetStateHistoryResponses = {
     /**
      * The history of the given state.
      */
     200: StateHistoryResponse;
 };
 
-export type GetNisystemsstateV1StatesByStateIdHistoryResponse = GetNisystemsstateV1StatesByStateIdHistoryResponses[keyof GetNisystemsstateV1StatesByStateIdHistoryResponses];
+export type GetStateHistoryResponse = GetStateHistoryResponses[keyof GetStateHistoryResponses];
 
-export type GetNisystemsstateV1StatesByStateIdHistoryByVersionData = {
+export type GetStateVersionData = {
     body?: never;
     path: {
         /**
@@ -355,7 +355,7 @@ export type GetNisystemsstateV1StatesByStateIdHistoryByVersionData = {
     url: '/nisystemsstate/v1/states/{stateId}/history/{version}';
 };
 
-export type GetNisystemsstateV1StatesByStateIdHistoryByVersionErrors = {
+export type GetStateVersionErrors = {
     /**
      * Unauthorized
      */
@@ -366,18 +366,18 @@ export type GetNisystemsstateV1StatesByStateIdHistoryByVersionErrors = {
     404: BaseResponse;
 };
 
-export type GetNisystemsstateV1StatesByStateIdHistoryByVersionError = GetNisystemsstateV1StatesByStateIdHistoryByVersionErrors[keyof GetNisystemsstateV1StatesByStateIdHistoryByVersionErrors];
+export type GetStateVersionError = GetStateVersionErrors[keyof GetStateVersionErrors];
 
-export type GetNisystemsstateV1StatesByStateIdHistoryByVersionResponses = {
+export type GetStateVersionResponses = {
     /**
      * The state at the specified version.
      */
     200: StateResponse;
 };
 
-export type GetNisystemsstateV1StatesByStateIdHistoryByVersionResponse = GetNisystemsstateV1StatesByStateIdHistoryByVersionResponses[keyof GetNisystemsstateV1StatesByStateIdHistoryByVersionResponses];
+export type GetStateVersionResponse = GetStateVersionResponses[keyof GetStateVersionResponses];
 
-export type PostNisystemsstateV1RevertStateVersionData = {
+export type RevertStateVersionData = {
     /**
      * Instance of NationalInstruments.SystemsStateService.Model.API.RevertStateRequest which contains the id of the state to be reverted and the specific version to revert to.
      */
@@ -387,7 +387,7 @@ export type PostNisystemsstateV1RevertStateVersionData = {
     url: '/nisystemsstate/v1/revert-state-version';
 };
 
-export type PostNisystemsstateV1RevertStateVersionErrors = {
+export type RevertStateVersionErrors = {
     /**
      * Bad Request
      */
@@ -402,9 +402,9 @@ export type PostNisystemsstateV1RevertStateVersionErrors = {
     404: BaseResponse;
 };
 
-export type PostNisystemsstateV1RevertStateVersionError = PostNisystemsstateV1RevertStateVersionErrors[keyof PostNisystemsstateV1RevertStateVersionErrors];
+export type RevertStateVersionError = RevertStateVersionErrors[keyof RevertStateVersionErrors];
 
-export type PostNisystemsstateV1RevertStateVersionResponses = {
+export type RevertStateVersionResponses = {
     /**
      * Failure when attempting to revert
      */
@@ -415,37 +415,37 @@ export type PostNisystemsstateV1RevertStateVersionResponses = {
     204: void;
 };
 
-export type PostNisystemsstateV1RevertStateVersionResponse = PostNisystemsstateV1RevertStateVersionResponses[keyof PostNisystemsstateV1RevertStateVersionResponses];
+export type RevertStateVersionResponse = RevertStateVersionResponses[keyof RevertStateVersionResponses];
 
-export type GetNisystemsstateData = {
+export type RootEndpointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nisystemsstate';
 };
 
-export type GetNisystemsstateResponses = {
+export type RootEndpointResponses = {
     /**
      * OK
      */
     200: unknown;
 };
 
-export type GetNisystemsstateV1Data = {
+export type V1Data = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nisystemsstate/v1';
 };
 
-export type GetNisystemsstateV1Responses = {
+export type V1Responses = {
     /**
      * OK
      */
     200: unknown;
 };
 
-export type GetNisystemsstateV1StatesData = {
+export type GetStatesData = {
     body?: never;
     path?: never;
     query?: {
@@ -479,25 +479,25 @@ export type GetNisystemsstateV1StatesData = {
     url: '/nisystemsstate/v1/states';
 };
 
-export type GetNisystemsstateV1StatesErrors = {
+export type GetStatesErrors = {
     /**
      * Unauthorized
      */
     401: ProblemDetails;
 };
 
-export type GetNisystemsstateV1StatesError = GetNisystemsstateV1StatesErrors[keyof GetNisystemsstateV1StatesErrors];
+export type GetStatesError = GetStatesErrors[keyof GetStatesErrors];
 
-export type GetNisystemsstateV1StatesResponses = {
+export type GetStatesResponses = {
     /**
      * The list of states
      */
     200: StateDescriptionListResponse;
 };
 
-export type GetNisystemsstateV1StatesResponse = GetNisystemsstateV1StatesResponses[keyof GetNisystemsstateV1StatesResponses];
+export type GetStatesResponse = GetStatesResponses[keyof GetStatesResponses];
 
-export type PostNisystemsstateV1StatesData = {
+export type CreateStateData = {
     /**
      * An instance of NationalInstruments.SystemsStateService.Model.API.StateRequest which contains information about the state to be created.
      */
@@ -507,7 +507,7 @@ export type PostNisystemsstateV1StatesData = {
     url: '/nisystemsstate/v1/states';
 };
 
-export type PostNisystemsstateV1StatesErrors = {
+export type CreateStateErrors = {
     /**
      * Bad Request
      */
@@ -526,18 +526,18 @@ export type PostNisystemsstateV1StatesErrors = {
     409: BaseResponse;
 };
 
-export type PostNisystemsstateV1StatesError = PostNisystemsstateV1StatesErrors[keyof PostNisystemsstateV1StatesErrors];
+export type CreateStateError = CreateStateErrors[keyof CreateStateErrors];
 
-export type PostNisystemsstateV1StatesResponses = {
+export type CreateStateResponses = {
     /**
      * The created state
      */
     200: StateResponse;
 };
 
-export type PostNisystemsstateV1StatesResponse = PostNisystemsstateV1StatesResponses[keyof PostNisystemsstateV1StatesResponses];
+export type CreateStateResponse = CreateStateResponses[keyof CreateStateResponses];
 
-export type PostNisystemsstateV1ExportStateData = {
+export type ExportStateData = {
     /**
      * An instance of NationalInstruments.SystemsStateService.Model.API.ExportStateRequest which contains identifying information on the state to export.
      */
@@ -547,7 +547,7 @@ export type PostNisystemsstateV1ExportStateData = {
     url: '/nisystemsstate/v1/export-state';
 };
 
-export type PostNisystemsstateV1ExportStateErrors = {
+export type ExportStateErrors = {
     /**
      * Bad Request
      */
@@ -562,18 +562,18 @@ export type PostNisystemsstateV1ExportStateErrors = {
     404: BaseResponse;
 };
 
-export type PostNisystemsstateV1ExportStateError = PostNisystemsstateV1ExportStateErrors[keyof PostNisystemsstateV1ExportStateErrors];
+export type ExportStateError = ExportStateErrors[keyof ExportStateErrors];
 
-export type PostNisystemsstateV1ExportStateResponses = {
+export type ExportStateResponses = {
     /**
      * The exported state as a file.
      */
     200: Blob | File;
 };
 
-export type PostNisystemsstateV1ExportStateResponse = PostNisystemsstateV1ExportStateResponses[keyof PostNisystemsstateV1ExportStateResponses];
+export type ExportStateResponse = ExportStateResponses[keyof ExportStateResponses];
 
-export type PostNisystemsstateV1ExportStateFromSystemData = {
+export type ExportStateFromSystemData = {
     /**
      * An instance of NationalInstruments.SystemsStateService.Model.API.ExportStateFromSystemRequest which contains the system id from which to export the state.
      */
@@ -583,7 +583,7 @@ export type PostNisystemsstateV1ExportStateFromSystemData = {
     url: '/nisystemsstate/v1/export-state-from-system';
 };
 
-export type PostNisystemsstateV1ExportStateFromSystemErrors = {
+export type ExportStateFromSystemErrors = {
     /**
      * Bad Request
      */
@@ -598,18 +598,18 @@ export type PostNisystemsstateV1ExportStateFromSystemErrors = {
     404: BaseResponse;
 };
 
-export type PostNisystemsstateV1ExportStateFromSystemError = PostNisystemsstateV1ExportStateFromSystemErrors[keyof PostNisystemsstateV1ExportStateFromSystemErrors];
+export type ExportStateFromSystemError = ExportStateFromSystemErrors[keyof ExportStateFromSystemErrors];
 
-export type PostNisystemsstateV1ExportStateFromSystemResponses = {
+export type ExportStateFromSystemResponses = {
     /**
      * The exported state of the system as a file.
      */
     200: Blob | File;
 };
 
-export type PostNisystemsstateV1ExportStateFromSystemResponse = PostNisystemsstateV1ExportStateFromSystemResponses[keyof PostNisystemsstateV1ExportStateFromSystemResponses];
+export type ExportStateFromSystemResponse = ExportStateFromSystemResponses[keyof ExportStateFromSystemResponses];
 
-export type DeleteNisystemsstateV1StatesByStateIdData = {
+export type DeleteStateData = {
     body?: never;
     path: {
         /**
@@ -621,7 +621,7 @@ export type DeleteNisystemsstateV1StatesByStateIdData = {
     url: '/nisystemsstate/v1/states/{stateId}';
 };
 
-export type DeleteNisystemsstateV1StatesByStateIdErrors = {
+export type DeleteStateErrors = {
     /**
      * Bad Request
      */
@@ -640,18 +640,18 @@ export type DeleteNisystemsstateV1StatesByStateIdErrors = {
     409: BaseResponse;
 };
 
-export type DeleteNisystemsstateV1StatesByStateIdError = DeleteNisystemsstateV1StatesByStateIdErrors[keyof DeleteNisystemsstateV1StatesByStateIdErrors];
+export type DeleteStateError = DeleteStateErrors[keyof DeleteStateErrors];
 
-export type DeleteNisystemsstateV1StatesByStateIdResponses = {
+export type DeleteStateResponses = {
     /**
      * Success
      */
     204: void;
 };
 
-export type DeleteNisystemsstateV1StatesByStateIdResponse = DeleteNisystemsstateV1StatesByStateIdResponses[keyof DeleteNisystemsstateV1StatesByStateIdResponses];
+export type DeleteStateResponse = DeleteStateResponses[keyof DeleteStateResponses];
 
-export type GetNisystemsstateV1StatesByStateIdData = {
+export type GetStateData = {
     body?: never;
     path: {
         /**
@@ -663,7 +663,7 @@ export type GetNisystemsstateV1StatesByStateIdData = {
     url: '/nisystemsstate/v1/states/{stateId}';
 };
 
-export type GetNisystemsstateV1StatesByStateIdErrors = {
+export type GetStateErrors = {
     /**
      * Unauthorized
      */
@@ -674,18 +674,18 @@ export type GetNisystemsstateV1StatesByStateIdErrors = {
     404: BaseResponse;
 };
 
-export type GetNisystemsstateV1StatesByStateIdError = GetNisystemsstateV1StatesByStateIdErrors[keyof GetNisystemsstateV1StatesByStateIdErrors];
+export type GetStateError = GetStateErrors[keyof GetStateErrors];
 
-export type GetNisystemsstateV1StatesByStateIdResponses = {
+export type GetStateResponses = {
     /**
      * The state of the given id
      */
     200: StateResponse;
 };
 
-export type GetNisystemsstateV1StatesByStateIdResponse = GetNisystemsstateV1StatesByStateIdResponses[keyof GetNisystemsstateV1StatesByStateIdResponses];
+export type GetStateResponse = GetStateResponses[keyof GetStateResponses];
 
-export type PatchNisystemsstateV1StatesByStateIdData = {
+export type UpdateStateData = {
     /**
      * A dictionary which contains key-value pairs as such: the key is the state property to be updated (e.g. "name") and the value is the new/updated value of the property (e.g. "A nice state")
      */
@@ -702,7 +702,7 @@ export type PatchNisystemsstateV1StatesByStateIdData = {
     url: '/nisystemsstate/v1/states/{stateId}';
 };
 
-export type PatchNisystemsstateV1StatesByStateIdErrors = {
+export type UpdateStateErrors = {
     /**
      * Bad Request
      */
@@ -721,18 +721,18 @@ export type PatchNisystemsstateV1StatesByStateIdErrors = {
     409: BaseResponse;
 };
 
-export type PatchNisystemsstateV1StatesByStateIdError = PatchNisystemsstateV1StatesByStateIdErrors[keyof PatchNisystemsstateV1StatesByStateIdErrors];
+export type UpdateStateError = UpdateStateErrors[keyof UpdateStateErrors];
 
-export type PatchNisystemsstateV1StatesByStateIdResponses = {
+export type UpdateStateResponses = {
     /**
      * The updated state
      */
     200: StateResponse;
 };
 
-export type PatchNisystemsstateV1StatesByStateIdResponse = PatchNisystemsstateV1StatesByStateIdResponses[keyof PatchNisystemsstateV1StatesByStateIdResponses];
+export type UpdateStateResponse = UpdateStateResponses[keyof UpdateStateResponses];
 
-export type PostNisystemsstateV1ReplaceStateContentData = {
+export type ReplaceStateContentData = {
     body?: {
         /**
          * Gets or sets the id of the state that is to have its content replaced.
@@ -752,7 +752,7 @@ export type PostNisystemsstateV1ReplaceStateContentData = {
     url: '/nisystemsstate/v1/replace-state-content';
 };
 
-export type PostNisystemsstateV1ReplaceStateContentErrors = {
+export type ReplaceStateContentErrors = {
     /**
      * Errors durring execution.
      */
@@ -775,18 +775,18 @@ export type PostNisystemsstateV1ReplaceStateContentErrors = {
     default: HttpError;
 };
 
-export type PostNisystemsstateV1ReplaceStateContentError = PostNisystemsstateV1ReplaceStateContentErrors[keyof PostNisystemsstateV1ReplaceStateContentErrors];
+export type ReplaceStateContentError = ReplaceStateContentErrors[keyof ReplaceStateContentErrors];
 
-export type PostNisystemsstateV1ReplaceStateContentResponses = {
+export type ReplaceStateContentResponses = {
     /**
      * The replaced state.
      */
     200: StateResponse;
 };
 
-export type PostNisystemsstateV1ReplaceStateContentResponse = PostNisystemsstateV1ReplaceStateContentResponses[keyof PostNisystemsstateV1ReplaceStateContentResponses];
+export type ReplaceStateContentResponse = ReplaceStateContentResponses[keyof ReplaceStateContentResponses];
 
-export type PostNisystemsstateV1ImportStateData = {
+export type ImportStateData = {
     body?: {
         /**
          * Gets or sets the name of the state. Required.
@@ -823,7 +823,7 @@ export type PostNisystemsstateV1ImportStateData = {
     url: '/nisystemsstate/v1/import-state';
 };
 
-export type PostNisystemsstateV1ImportStateErrors = {
+export type ImportStateErrors = {
     /**
      * Errors durring execution.
      */
@@ -842,18 +842,18 @@ export type PostNisystemsstateV1ImportStateErrors = {
     409: BaseResponse;
 };
 
-export type PostNisystemsstateV1ImportStateError = PostNisystemsstateV1ImportStateErrors[keyof PostNisystemsstateV1ImportStateErrors];
+export type ImportStateError = ImportStateErrors[keyof ImportStateErrors];
 
-export type PostNisystemsstateV1ImportStateResponses = {
+export type ImportStateResponses = {
     /**
      * The imported state
      */
     200: StateResponse;
 };
 
-export type PostNisystemsstateV1ImportStateResponse = PostNisystemsstateV1ImportStateResponses[keyof PostNisystemsstateV1ImportStateResponses];
+export type ImportStateResponse = ImportStateResponses[keyof ImportStateResponses];
 
-export type PostNisystemsstateV1DeleteStatesData = {
+export type DeleteStatesData = {
     /**
      * A list of state ids for the states that are to be deleted.
      */
@@ -863,7 +863,7 @@ export type PostNisystemsstateV1DeleteStatesData = {
     url: '/nisystemsstate/v1/delete-states';
 };
 
-export type PostNisystemsstateV1DeleteStatesErrors = {
+export type DeleteStatesErrors = {
     /**
      * Bad Request
      */
@@ -874,9 +874,9 @@ export type PostNisystemsstateV1DeleteStatesErrors = {
     401: ProblemDetails;
 };
 
-export type PostNisystemsstateV1DeleteStatesError = PostNisystemsstateV1DeleteStatesErrors[keyof PostNisystemsstateV1DeleteStatesErrors];
+export type DeleteStatesError = DeleteStatesErrors[keyof DeleteStatesErrors];
 
-export type PostNisystemsstateV1DeleteStatesResponses = {
+export type DeleteStatesResponses = {
     /**
      * Errors when attempting to delete.
      */
@@ -887,4 +887,4 @@ export type PostNisystemsstateV1DeleteStatesResponses = {
     204: void;
 };
 
-export type PostNisystemsstateV1DeleteStatesResponse = PostNisystemsstateV1DeleteStatesResponses[keyof PostNisystemsstateV1DeleteStatesResponses];
+export type DeleteStatesResponse = DeleteStatesResponses[keyof DeleteStatesResponses];

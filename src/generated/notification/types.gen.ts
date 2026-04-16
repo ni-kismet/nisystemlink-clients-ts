@@ -442,37 +442,37 @@ export type V1OperationsModelWritable = {
     [key: string]: never;
 };
 
-export type GetNinotificationV1AddressGroupsData = {
+export type GetAddressGroupsData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/ninotification/v1/address-groups';
 };
 
-export type GetNinotificationV1AddressGroupsErrors = {
+export type GetAddressGroupsErrors = {
     /**
      * Unauthorized
      */
     401: unknown;
 };
 
-export type GetNinotificationV1AddressGroupsResponses = {
+export type GetAddressGroupsResponses = {
     /**
      * Returns success
      */
     200: Array<AddressGroupModel>;
 };
 
-export type GetNinotificationV1AddressGroupsResponse = GetNinotificationV1AddressGroupsResponses[keyof GetNinotificationV1AddressGroupsResponses];
+export type GetAddressGroupsResponse = GetAddressGroupsResponses[keyof GetAddressGroupsResponses];
 
-export type PostNinotificationV1AddressGroupsData = {
+export type CreateAddressGroupData = {
     body?: CreateAddressGroupRequestModel;
     path?: never;
     query?: never;
     url: '/ninotification/v1/address-groups';
 };
 
-export type PostNinotificationV1AddressGroupsErrors = {
+export type CreateAddressGroupErrors = {
     /**
      * Bad Request
      */
@@ -483,18 +483,18 @@ export type PostNinotificationV1AddressGroupsErrors = {
     401: unknown;
 };
 
-export type PostNinotificationV1AddressGroupsError = PostNinotificationV1AddressGroupsErrors[keyof PostNinotificationV1AddressGroupsErrors];
+export type CreateAddressGroupError = CreateAddressGroupErrors[keyof CreateAddressGroupErrors];
 
-export type PostNinotificationV1AddressGroupsResponses = {
+export type CreateAddressGroupResponses = {
     /**
      * Returns success
      */
     200: AddressGroupModel;
 };
 
-export type PostNinotificationV1AddressGroupsResponse = PostNinotificationV1AddressGroupsResponses[keyof PostNinotificationV1AddressGroupsResponses];
+export type CreateAddressGroupResponse = CreateAddressGroupResponses[keyof CreateAddressGroupResponses];
 
-export type DeleteNinotificationV1AddressGroupsByIdData = {
+export type DeleteAddressGroupData = {
     body?: never;
     path: {
         id: string;
@@ -503,7 +503,7 @@ export type DeleteNinotificationV1AddressGroupsByIdData = {
     url: '/ninotification/v1/address-groups/{id}';
 };
 
-export type DeleteNinotificationV1AddressGroupsByIdErrors = {
+export type DeleteAddressGroupErrors = {
     /**
      * Bad Request
      */
@@ -518,9 +518,9 @@ export type DeleteNinotificationV1AddressGroupsByIdErrors = {
     404: unknown;
 };
 
-export type DeleteNinotificationV1AddressGroupsByIdError = DeleteNinotificationV1AddressGroupsByIdErrors[keyof DeleteNinotificationV1AddressGroupsByIdErrors];
+export type DeleteAddressGroupError = DeleteAddressGroupErrors[keyof DeleteAddressGroupErrors];
 
-export type DeleteNinotificationV1AddressGroupsByIdResponses = {
+export type DeleteAddressGroupResponses = {
     /**
      * Returns success
      */
@@ -531,9 +531,9 @@ export type DeleteNinotificationV1AddressGroupsByIdResponses = {
     204: void;
 };
 
-export type DeleteNinotificationV1AddressGroupsByIdResponse = DeleteNinotificationV1AddressGroupsByIdResponses[keyof DeleteNinotificationV1AddressGroupsByIdResponses];
+export type DeleteAddressGroupResponse = DeleteAddressGroupResponses[keyof DeleteAddressGroupResponses];
 
-export type GetNinotificationV1AddressGroupsByIdData = {
+export type GetAddressGroupData = {
     body?: never;
     path: {
         id: string;
@@ -542,7 +542,7 @@ export type GetNinotificationV1AddressGroupsByIdData = {
     url: '/ninotification/v1/address-groups/{id}';
 };
 
-export type GetNinotificationV1AddressGroupsByIdErrors = {
+export type GetAddressGroupErrors = {
     /**
      * Bad Request
      */
@@ -553,18 +553,18 @@ export type GetNinotificationV1AddressGroupsByIdErrors = {
     401: unknown;
 };
 
-export type GetNinotificationV1AddressGroupsByIdError = GetNinotificationV1AddressGroupsByIdErrors[keyof GetNinotificationV1AddressGroupsByIdErrors];
+export type GetAddressGroupError = GetAddressGroupErrors[keyof GetAddressGroupErrors];
 
-export type GetNinotificationV1AddressGroupsByIdResponses = {
+export type GetAddressGroupResponses = {
     /**
      * Returns success
      */
     200: AddressGroupModel;
 };
 
-export type GetNinotificationV1AddressGroupsByIdResponse = GetNinotificationV1AddressGroupsByIdResponses[keyof GetNinotificationV1AddressGroupsByIdResponses];
+export type GetAddressGroupResponse = GetAddressGroupResponses[keyof GetAddressGroupResponses];
 
-export type PatchNinotificationV1AddressGroupsByIdData = {
+export type UpdateAddressGroupData = {
     body?: UpdateAddressGroupRequestModel;
     path: {
         id: string;
@@ -573,7 +573,7 @@ export type PatchNinotificationV1AddressGroupsByIdData = {
     url: '/ninotification/v1/address-groups/{id}';
 };
 
-export type PatchNinotificationV1AddressGroupsByIdErrors = {
+export type UpdateAddressGroupErrors = {
     /**
      * BadRequest
      */
@@ -592,48 +592,48 @@ export type PatchNinotificationV1AddressGroupsByIdErrors = {
     409: unknown;
 };
 
-export type PatchNinotificationV1AddressGroupsByIdError = PatchNinotificationV1AddressGroupsByIdErrors[keyof PatchNinotificationV1AddressGroupsByIdErrors];
+export type UpdateAddressGroupError = UpdateAddressGroupErrors[keyof UpdateAddressGroupErrors];
 
-export type PatchNinotificationV1AddressGroupsByIdResponses = {
+export type UpdateAddressGroupResponses = {
     /**
      * OK
      */
     200: AddressGroupModel;
 };
 
-export type PatchNinotificationV1AddressGroupsByIdResponse = PatchNinotificationV1AddressGroupsByIdResponses[keyof PatchNinotificationV1AddressGroupsByIdResponses];
+export type UpdateAddressGroupResponse = UpdateAddressGroupResponses[keyof UpdateAddressGroupResponses];
 
-export type GetNinotificationV1MessageTemplatesData = {
+export type GetMessageTemplatesData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/ninotification/v1/message-templates';
 };
 
-export type GetNinotificationV1MessageTemplatesErrors = {
+export type GetMessageTemplatesErrors = {
     /**
      * Unauthorized
      */
     401: unknown;
 };
 
-export type GetNinotificationV1MessageTemplatesResponses = {
+export type GetMessageTemplatesResponses = {
     /**
      * Returns success
      */
     200: Array<MessageTemplateModel>;
 };
 
-export type GetNinotificationV1MessageTemplatesResponse = GetNinotificationV1MessageTemplatesResponses[keyof GetNinotificationV1MessageTemplatesResponses];
+export type GetMessageTemplatesResponse = GetMessageTemplatesResponses[keyof GetMessageTemplatesResponses];
 
-export type PostNinotificationV1MessageTemplatesData = {
+export type CreateMessageTemplateData = {
     body?: CreateMessageTemplateRequestModel;
     path?: never;
     query?: never;
     url: '/ninotification/v1/message-templates';
 };
 
-export type PostNinotificationV1MessageTemplatesErrors = {
+export type CreateMessageTemplateErrors = {
     /**
      * Bad Request
      */
@@ -644,18 +644,18 @@ export type PostNinotificationV1MessageTemplatesErrors = {
     401: unknown;
 };
 
-export type PostNinotificationV1MessageTemplatesError = PostNinotificationV1MessageTemplatesErrors[keyof PostNinotificationV1MessageTemplatesErrors];
+export type CreateMessageTemplateError = CreateMessageTemplateErrors[keyof CreateMessageTemplateErrors];
 
-export type PostNinotificationV1MessageTemplatesResponses = {
+export type CreateMessageTemplateResponses = {
     /**
      * Returns success
      */
     200: MessageTemplateModel;
 };
 
-export type PostNinotificationV1MessageTemplatesResponse = PostNinotificationV1MessageTemplatesResponses[keyof PostNinotificationV1MessageTemplatesResponses];
+export type CreateMessageTemplateResponse = CreateMessageTemplateResponses[keyof CreateMessageTemplateResponses];
 
-export type DeleteNinotificationV1MessageTemplatesByIdData = {
+export type DeleteMessageTemplateData = {
     body?: never;
     path: {
         id: string;
@@ -664,7 +664,7 @@ export type DeleteNinotificationV1MessageTemplatesByIdData = {
     url: '/ninotification/v1/message-templates/{id}';
 };
 
-export type DeleteNinotificationV1MessageTemplatesByIdErrors = {
+export type DeleteMessageTemplateErrors = {
     /**
      * Bad Request
      */
@@ -679,9 +679,9 @@ export type DeleteNinotificationV1MessageTemplatesByIdErrors = {
     404: unknown;
 };
 
-export type DeleteNinotificationV1MessageTemplatesByIdError = DeleteNinotificationV1MessageTemplatesByIdErrors[keyof DeleteNinotificationV1MessageTemplatesByIdErrors];
+export type DeleteMessageTemplateError = DeleteMessageTemplateErrors[keyof DeleteMessageTemplateErrors];
 
-export type DeleteNinotificationV1MessageTemplatesByIdResponses = {
+export type DeleteMessageTemplateResponses = {
     /**
      * Returns success
      */
@@ -692,9 +692,9 @@ export type DeleteNinotificationV1MessageTemplatesByIdResponses = {
     204: void;
 };
 
-export type DeleteNinotificationV1MessageTemplatesByIdResponse = DeleteNinotificationV1MessageTemplatesByIdResponses[keyof DeleteNinotificationV1MessageTemplatesByIdResponses];
+export type DeleteMessageTemplateResponse = DeleteMessageTemplateResponses[keyof DeleteMessageTemplateResponses];
 
-export type GetNinotificationV1MessageTemplatesByIdData = {
+export type GetMessageTemplateData = {
     body?: never;
     path: {
         id: string;
@@ -703,7 +703,7 @@ export type GetNinotificationV1MessageTemplatesByIdData = {
     url: '/ninotification/v1/message-templates/{id}';
 };
 
-export type GetNinotificationV1MessageTemplatesByIdErrors = {
+export type GetMessageTemplateErrors = {
     /**
      * Bad Request
      */
@@ -714,18 +714,18 @@ export type GetNinotificationV1MessageTemplatesByIdErrors = {
     401: unknown;
 };
 
-export type GetNinotificationV1MessageTemplatesByIdError = GetNinotificationV1MessageTemplatesByIdErrors[keyof GetNinotificationV1MessageTemplatesByIdErrors];
+export type GetMessageTemplateError = GetMessageTemplateErrors[keyof GetMessageTemplateErrors];
 
-export type GetNinotificationV1MessageTemplatesByIdResponses = {
+export type GetMessageTemplateResponses = {
     /**
      * Returns success
      */
     200: MessageTemplateModel;
 };
 
-export type GetNinotificationV1MessageTemplatesByIdResponse = GetNinotificationV1MessageTemplatesByIdResponses[keyof GetNinotificationV1MessageTemplatesByIdResponses];
+export type GetMessageTemplateResponse = GetMessageTemplateResponses[keyof GetMessageTemplateResponses];
 
-export type PatchNinotificationV1MessageTemplatesByIdData = {
+export type UpdateMessageTemplateData = {
     body?: UpdateMessageTemplateRequestModel;
     path: {
         id: string;
@@ -734,7 +734,7 @@ export type PatchNinotificationV1MessageTemplatesByIdData = {
     url: '/ninotification/v1/message-templates/{id}';
 };
 
-export type PatchNinotificationV1MessageTemplatesByIdErrors = {
+export type UpdateMessageTemplateErrors = {
     /**
      * BadRequest
      */
@@ -753,18 +753,18 @@ export type PatchNinotificationV1MessageTemplatesByIdErrors = {
     409: unknown;
 };
 
-export type PatchNinotificationV1MessageTemplatesByIdError = PatchNinotificationV1MessageTemplatesByIdErrors[keyof PatchNinotificationV1MessageTemplatesByIdErrors];
+export type UpdateMessageTemplateError = UpdateMessageTemplateErrors[keyof UpdateMessageTemplateErrors];
 
-export type PatchNinotificationV1MessageTemplatesByIdResponses = {
+export type UpdateMessageTemplateResponses = {
     /**
      * OK
      */
     200: MessageTemplateModel;
 };
 
-export type PatchNinotificationV1MessageTemplatesByIdResponse = PatchNinotificationV1MessageTemplatesByIdResponses[keyof PatchNinotificationV1MessageTemplatesByIdResponses];
+export type UpdateMessageTemplateResponse = UpdateMessageTemplateResponses[keyof UpdateMessageTemplateResponses];
 
-export type PostNinotificationV1NotificationStrategiesByIdApplyData = {
+export type ApplyNotificationStrategyData = {
     body?: ApplyNotificationStrategyRequestModel;
     path: {
         id: string;
@@ -773,7 +773,7 @@ export type PostNinotificationV1NotificationStrategiesByIdApplyData = {
     url: '/ninotification/v1/notification-strategies/{id}/apply';
 };
 
-export type PostNinotificationV1NotificationStrategiesByIdApplyErrors = {
+export type ApplyNotificationStrategyErrors = {
     /**
      * BadRequest
      */
@@ -788,9 +788,9 @@ export type PostNinotificationV1NotificationStrategiesByIdApplyErrors = {
     404: BaseResponse;
 };
 
-export type PostNinotificationV1NotificationStrategiesByIdApplyError = PostNinotificationV1NotificationStrategiesByIdApplyErrors[keyof PostNinotificationV1NotificationStrategiesByIdApplyErrors];
+export type ApplyNotificationStrategyError = ApplyNotificationStrategyErrors[keyof ApplyNotificationStrategyErrors];
 
-export type PostNinotificationV1NotificationStrategiesByIdApplyResponses = {
+export type ApplyNotificationStrategyResponses = {
     /**
      * Returns success
      */
@@ -801,16 +801,16 @@ export type PostNinotificationV1NotificationStrategiesByIdApplyResponses = {
     204: void;
 };
 
-export type PostNinotificationV1NotificationStrategiesByIdApplyResponse = PostNinotificationV1NotificationStrategiesByIdApplyResponses[keyof PostNinotificationV1NotificationStrategiesByIdApplyResponses];
+export type ApplyNotificationStrategyResponse = ApplyNotificationStrategyResponses[keyof ApplyNotificationStrategyResponses];
 
-export type PostNinotificationV1ApplyDynamicStrategyData = {
+export type ApplyDynamicNotificationStrategyData = {
     body?: ApplyDynamicNotificationStrategyRequestModel;
     path?: never;
     query?: never;
     url: '/ninotification/v1/apply-dynamic-strategy';
 };
 
-export type PostNinotificationV1ApplyDynamicStrategyErrors = {
+export type ApplyDynamicNotificationStrategyErrors = {
     /**
      * BadRequest
      */
@@ -821,9 +821,9 @@ export type PostNinotificationV1ApplyDynamicStrategyErrors = {
     401: unknown;
 };
 
-export type PostNinotificationV1ApplyDynamicStrategyError = PostNinotificationV1ApplyDynamicStrategyErrors[keyof PostNinotificationV1ApplyDynamicStrategyErrors];
+export type ApplyDynamicNotificationStrategyError = ApplyDynamicNotificationStrategyErrors[keyof ApplyDynamicNotificationStrategyErrors];
 
-export type PostNinotificationV1ApplyDynamicStrategyResponses = {
+export type ApplyDynamicNotificationStrategyResponses = {
     /**
      * Returns success
      */
@@ -834,9 +834,9 @@ export type PostNinotificationV1ApplyDynamicStrategyResponses = {
     204: void;
 };
 
-export type PostNinotificationV1ApplyDynamicStrategyResponse = PostNinotificationV1ApplyDynamicStrategyResponses[keyof PostNinotificationV1ApplyDynamicStrategyResponses];
+export type ApplyDynamicNotificationStrategyResponse = ApplyDynamicNotificationStrategyResponses[keyof ApplyDynamicNotificationStrategyResponses];
 
-export type GetNinotificationV1NotificationStrategiesData = {
+export type GetNotificationStrategiesData = {
     body?: never;
     path?: never;
     query?: {
@@ -848,7 +848,7 @@ export type GetNinotificationV1NotificationStrategiesData = {
     url: '/ninotification/v1/notification-strategies';
 };
 
-export type GetNinotificationV1NotificationStrategiesErrors = {
+export type GetNotificationStrategiesErrors = {
     /**
      * BadRequest
      */
@@ -859,23 +859,23 @@ export type GetNinotificationV1NotificationStrategiesErrors = {
     401: unknown;
 };
 
-export type GetNinotificationV1NotificationStrategiesResponses = {
+export type GetNotificationStrategiesResponses = {
     /**
      * Returns success
      */
     200: Array<NotificationStrategyModel>;
 };
 
-export type GetNinotificationV1NotificationStrategiesResponse = GetNinotificationV1NotificationStrategiesResponses[keyof GetNinotificationV1NotificationStrategiesResponses];
+export type GetNotificationStrategiesResponse = GetNotificationStrategiesResponses[keyof GetNotificationStrategiesResponses];
 
-export type PostNinotificationV1NotificationStrategiesData = {
+export type CreateNotificationStrategyData = {
     body?: CreateNotificationStrategyRequestModel;
     path?: never;
     query?: never;
     url: '/ninotification/v1/notification-strategies';
 };
 
-export type PostNinotificationV1NotificationStrategiesErrors = {
+export type CreateNotificationStrategyErrors = {
     /**
      * BadRequest
      */
@@ -886,18 +886,18 @@ export type PostNinotificationV1NotificationStrategiesErrors = {
     401: unknown;
 };
 
-export type PostNinotificationV1NotificationStrategiesError = PostNinotificationV1NotificationStrategiesErrors[keyof PostNinotificationV1NotificationStrategiesErrors];
+export type CreateNotificationStrategyError = CreateNotificationStrategyErrors[keyof CreateNotificationStrategyErrors];
 
-export type PostNinotificationV1NotificationStrategiesResponses = {
+export type CreateNotificationStrategyResponses = {
     /**
      * Returns success
      */
     200: NotificationStrategyModel;
 };
 
-export type PostNinotificationV1NotificationStrategiesResponse = PostNinotificationV1NotificationStrategiesResponses[keyof PostNinotificationV1NotificationStrategiesResponses];
+export type CreateNotificationStrategyResponse = CreateNotificationStrategyResponses[keyof CreateNotificationStrategyResponses];
 
-export type DeleteNinotificationV1NotificationStrategiesByIdData = {
+export type DeleteNotificationStrategyData = {
     body?: never;
     path: {
         id: string;
@@ -906,7 +906,7 @@ export type DeleteNinotificationV1NotificationStrategiesByIdData = {
     url: '/ninotification/v1/notification-strategies/{id}';
 };
 
-export type DeleteNinotificationV1NotificationStrategiesByIdErrors = {
+export type DeleteNotificationStrategyErrors = {
     /**
      * BadRequest
      */
@@ -921,9 +921,9 @@ export type DeleteNinotificationV1NotificationStrategiesByIdErrors = {
     404: BaseResponse;
 };
 
-export type DeleteNinotificationV1NotificationStrategiesByIdError = DeleteNinotificationV1NotificationStrategiesByIdErrors[keyof DeleteNinotificationV1NotificationStrategiesByIdErrors];
+export type DeleteNotificationStrategyError = DeleteNotificationStrategyErrors[keyof DeleteNotificationStrategyErrors];
 
-export type DeleteNinotificationV1NotificationStrategiesByIdResponses = {
+export type DeleteNotificationStrategyResponses = {
     /**
      * Returns success
      */
@@ -934,9 +934,9 @@ export type DeleteNinotificationV1NotificationStrategiesByIdResponses = {
     204: void;
 };
 
-export type DeleteNinotificationV1NotificationStrategiesByIdResponse = DeleteNinotificationV1NotificationStrategiesByIdResponses[keyof DeleteNinotificationV1NotificationStrategiesByIdResponses];
+export type DeleteNotificationStrategyResponse = DeleteNotificationStrategyResponses[keyof DeleteNotificationStrategyResponses];
 
-export type GetNinotificationV1NotificationStrategiesByIdData = {
+export type GetNotificationStrategyData = {
     body?: never;
     path: {
         id: string;
@@ -950,7 +950,7 @@ export type GetNinotificationV1NotificationStrategiesByIdData = {
     url: '/ninotification/v1/notification-strategies/{id}';
 };
 
-export type GetNinotificationV1NotificationStrategiesByIdErrors = {
+export type GetNotificationStrategyErrors = {
     /**
      * BadRequest
      */
@@ -965,18 +965,18 @@ export type GetNinotificationV1NotificationStrategiesByIdErrors = {
     404: BaseResponse;
 };
 
-export type GetNinotificationV1NotificationStrategiesByIdError = GetNinotificationV1NotificationStrategiesByIdErrors[keyof GetNinotificationV1NotificationStrategiesByIdErrors];
+export type GetNotificationStrategyError = GetNotificationStrategyErrors[keyof GetNotificationStrategyErrors];
 
-export type GetNinotificationV1NotificationStrategiesByIdResponses = {
+export type GetNotificationStrategyResponses = {
     /**
      * Returns success
      */
     200: NotificationStrategyModel;
 };
 
-export type GetNinotificationV1NotificationStrategiesByIdResponse = GetNinotificationV1NotificationStrategiesByIdResponses[keyof GetNinotificationV1NotificationStrategiesByIdResponses];
+export type GetNotificationStrategyResponse = GetNotificationStrategyResponses[keyof GetNotificationStrategyResponses];
 
-export type PatchNinotificationV1NotificationStrategiesByIdData = {
+export type UpdateNotificationStrategyData = {
     body?: UpdateNotificationStrategyRequestModel;
     path: {
         id: string;
@@ -985,7 +985,7 @@ export type PatchNinotificationV1NotificationStrategiesByIdData = {
     url: '/ninotification/v1/notification-strategies/{id}';
 };
 
-export type PatchNinotificationV1NotificationStrategiesByIdErrors = {
+export type UpdateNotificationStrategyErrors = {
     /**
      * BadRequest
      */
@@ -1000,45 +1000,45 @@ export type PatchNinotificationV1NotificationStrategiesByIdErrors = {
     404: BaseResponse;
 };
 
-export type PatchNinotificationV1NotificationStrategiesByIdError = PatchNinotificationV1NotificationStrategiesByIdErrors[keyof PatchNinotificationV1NotificationStrategiesByIdErrors];
+export type UpdateNotificationStrategyError = UpdateNotificationStrategyErrors[keyof UpdateNotificationStrategyErrors];
 
-export type PatchNinotificationV1NotificationStrategiesByIdResponses = {
+export type UpdateNotificationStrategyResponses = {
     /**
      * OK
      */
     200: NotificationStrategyModel;
 };
 
-export type PatchNinotificationV1NotificationStrategiesByIdResponse = PatchNinotificationV1NotificationStrategiesByIdResponses[keyof PatchNinotificationV1NotificationStrategiesByIdResponses];
+export type UpdateNotificationStrategyResponse = UpdateNotificationStrategyResponses[keyof UpdateNotificationStrategyResponses];
 
-export type GetNinotificationData = {
+export type GetData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/ninotification';
 };
 
-export type GetNinotificationResponses = {
+export type GetResponses = {
     /**
      * Returns success
      */
     200: RootEndpointResponseModel;
 };
 
-export type GetNinotificationResponse = GetNinotificationResponses[keyof GetNinotificationResponses];
+export type GetResponse = GetResponses[keyof GetResponses];
 
-export type GetNinotificationV1Data = {
+export type V1EndpointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/ninotification/v1';
 };
 
-export type GetNinotificationV1Responses = {
+export type V1EndpointResponses = {
     /**
      * Returns success
      */
     200: V1OperationsModel;
 };
 
-export type GetNinotificationV1Response = GetNinotificationV1Responses[keyof GetNinotificationV1Responses];
+export type V1EndpointResponse = V1EndpointResponses[keyof V1EndpointResponses];

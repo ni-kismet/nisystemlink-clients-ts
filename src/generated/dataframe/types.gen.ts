@@ -939,7 +939,7 @@ export type V1Operations = {
     operations: AvailableV1Operations;
 };
 
-export type GetNidataframeV1TablesByIdDataData = {
+export type GetTableDataData = {
     body?: never;
     path: {
         /**
@@ -983,25 +983,25 @@ export type GetNidataframeV1TablesByIdDataData = {
     url: '/nidataframe/v1/tables/{id}/data';
 };
 
-export type GetNidataframeV1TablesByIdDataErrors = {
+export type GetTableDataErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type GetNidataframeV1TablesByIdDataError = GetNidataframeV1TablesByIdDataErrors[keyof GetNidataframeV1TablesByIdDataErrors];
+export type GetTableDataError = GetTableDataErrors[keyof GetTableDataErrors];
 
-export type GetNidataframeV1TablesByIdDataResponses = {
+export type GetTableDataResponses = {
     /**
      * OK
      */
     200: DataFrameQueryResponse;
 };
 
-export type GetNidataframeV1TablesByIdDataResponse = GetNidataframeV1TablesByIdDataResponses[keyof GetNidataframeV1TablesByIdDataResponses];
+export type GetTableDataResponse = GetTableDataResponses[keyof GetTableDataResponses];
 
-export type PostNidataframeV1TablesByIdDataData = {
+export type PostTableDataData = {
     /**
      * Request body.
      */
@@ -1023,7 +1023,7 @@ export type PostNidataframeV1TablesByIdDataData = {
     url: '/nidataframe/v1/tables/{id}/data';
 };
 
-export type PostNidataframeV1TablesByIdDataErrors = {
+export type PostTableDataErrors = {
     /**
      * The table does not support appending additional rows.
      */
@@ -1038,18 +1038,18 @@ export type PostNidataframeV1TablesByIdDataErrors = {
     default: ErrorResponse;
 };
 
-export type PostNidataframeV1TablesByIdDataError = PostNidataframeV1TablesByIdDataErrors[keyof PostNidataframeV1TablesByIdDataErrors];
+export type PostTableDataError = PostTableDataErrors[keyof PostTableDataErrors];
 
-export type PostNidataframeV1TablesByIdDataResponses = {
+export type PostTableDataResponses = {
     /**
      * OK
      */
     204: void;
 };
 
-export type PostNidataframeV1TablesByIdDataResponse = PostNidataframeV1TablesByIdDataResponses[keyof PostNidataframeV1TablesByIdDataResponses];
+export type PostTableDataResponse = PostTableDataResponses[keyof PostTableDataResponses];
 
-export type PostNidataframeV1TablesByIdQueryDataData = {
+export type QueryTableDataData = {
     /**
      * Request body.
      */
@@ -1064,25 +1064,25 @@ export type PostNidataframeV1TablesByIdQueryDataData = {
     url: '/nidataframe/v1/tables/{id}/query-data';
 };
 
-export type PostNidataframeV1TablesByIdQueryDataErrors = {
+export type QueryTableDataErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type PostNidataframeV1TablesByIdQueryDataError = PostNidataframeV1TablesByIdQueryDataErrors[keyof PostNidataframeV1TablesByIdQueryDataErrors];
+export type QueryTableDataError = QueryTableDataErrors[keyof QueryTableDataErrors];
 
-export type PostNidataframeV1TablesByIdQueryDataResponses = {
+export type QueryTableDataResponses = {
     /**
      * OK
      */
     200: DataFrameQueryResponse;
 };
 
-export type PostNidataframeV1TablesByIdQueryDataResponse = PostNidataframeV1TablesByIdQueryDataResponses[keyof PostNidataframeV1TablesByIdQueryDataResponses];
+export type QueryTableDataResponse = QueryTableDataResponses[keyof QueryTableDataResponses];
 
-export type PostNidataframeV1TablesByIdExportDataData = {
+export type ExportTableDataData = {
     /**
      * Request body.
      */
@@ -1097,16 +1097,16 @@ export type PostNidataframeV1TablesByIdExportDataData = {
     url: '/nidataframe/v1/tables/{id}/export-data';
 };
 
-export type PostNidataframeV1TablesByIdExportDataErrors = {
+export type ExportTableDataErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type PostNidataframeV1TablesByIdExportDataError = PostNidataframeV1TablesByIdExportDataErrors[keyof PostNidataframeV1TablesByIdExportDataErrors];
+export type ExportTableDataError = ExportTableDataErrors[keyof ExportTableDataErrors];
 
-export type PostNidataframeV1TablesByIdExportDataResponses = {
+export type ExportTableDataResponses = {
     /**
      * OK
      */
@@ -1117,7 +1117,7 @@ export type PostNidataframeV1TablesByIdExportDataResponses = {
     201: unknown;
 };
 
-export type PostNidataframeV1TablesByIdQueryDecimatedDataData = {
+export type QueryDecimatedTableDataData = {
     /**
      * Request body.
      */
@@ -1132,25 +1132,25 @@ export type PostNidataframeV1TablesByIdQueryDecimatedDataData = {
     url: '/nidataframe/v1/tables/{id}/query-decimated-data';
 };
 
-export type PostNidataframeV1TablesByIdQueryDecimatedDataErrors = {
+export type QueryDecimatedTableDataErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type PostNidataframeV1TablesByIdQueryDecimatedDataError = PostNidataframeV1TablesByIdQueryDecimatedDataErrors[keyof PostNidataframeV1TablesByIdQueryDecimatedDataErrors];
+export type QueryDecimatedTableDataError = QueryDecimatedTableDataErrors[keyof QueryDecimatedTableDataErrors];
 
-export type PostNidataframeV1TablesByIdQueryDecimatedDataResponses = {
+export type QueryDecimatedTableDataResponses = {
     /**
      * OK
      */
     200: DecimatedDataFrameQueryResponse;
 };
 
-export type PostNidataframeV1TablesByIdQueryDecimatedDataResponse = PostNidataframeV1TablesByIdQueryDecimatedDataResponses[keyof PostNidataframeV1TablesByIdQueryDecimatedDataResponses];
+export type QueryDecimatedTableDataResponse = QueryDecimatedTableDataResponses[keyof QueryDecimatedTableDataResponses];
 
-export type GetNidataframeV1TablesData = {
+export type GetTablesData = {
     body?: never;
     path?: never;
     query?: {
@@ -1197,25 +1197,25 @@ export type GetNidataframeV1TablesData = {
     url: '/nidataframe/v1/tables';
 };
 
-export type GetNidataframeV1TablesErrors = {
+export type GetTablesErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type GetNidataframeV1TablesError = GetNidataframeV1TablesErrors[keyof GetNidataframeV1TablesErrors];
+export type GetTablesError = GetTablesErrors[keyof GetTablesErrors];
 
-export type GetNidataframeV1TablesResponses = {
+export type GetTablesResponses = {
     /**
      * OK
      */
     200: ListTablesResponse;
 };
 
-export type GetNidataframeV1TablesResponse = GetNidataframeV1TablesResponses[keyof GetNidataframeV1TablesResponses];
+export type GetTablesResponse = GetTablesResponses[keyof GetTablesResponses];
 
-export type PostNidataframeV1TablesData = {
+export type CreateTableData = {
     /**
      * Request body.
      */
@@ -1225,25 +1225,25 @@ export type PostNidataframeV1TablesData = {
     url: '/nidataframe/v1/tables';
 };
 
-export type PostNidataframeV1TablesErrors = {
+export type CreateTableErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type PostNidataframeV1TablesError = PostNidataframeV1TablesErrors[keyof PostNidataframeV1TablesErrors];
+export type CreateTableError = CreateTableErrors[keyof CreateTableErrors];
 
-export type PostNidataframeV1TablesResponses = {
+export type CreateTableResponses = {
     /**
      * Created
      */
     201: CreatedResponse;
 };
 
-export type PostNidataframeV1TablesResponse = PostNidataframeV1TablesResponses[keyof PostNidataframeV1TablesResponses];
+export type CreateTableResponse = CreateTableResponses[keyof CreateTableResponses];
 
-export type PostNidataframeV1QueryTablesData = {
+export type QueryTablesData = {
     /**
      * The parameters for querying the tables.
      */
@@ -1253,25 +1253,25 @@ export type PostNidataframeV1QueryTablesData = {
     url: '/nidataframe/v1/query-tables';
 };
 
-export type PostNidataframeV1QueryTablesErrors = {
+export type QueryTablesErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type PostNidataframeV1QueryTablesError = PostNidataframeV1QueryTablesErrors[keyof PostNidataframeV1QueryTablesErrors];
+export type QueryTablesError = QueryTablesErrors[keyof QueryTablesErrors];
 
-export type PostNidataframeV1QueryTablesResponses = {
+export type QueryTablesResponses = {
     /**
      * OK
      */
     200: ListTablesResponse;
 };
 
-export type PostNidataframeV1QueryTablesResponse = PostNidataframeV1QueryTablesResponses[keyof PostNidataframeV1QueryTablesResponses];
+export type QueryTablesResponse = QueryTablesResponses[keyof QueryTablesResponses];
 
-export type DeleteNidataframeV1TablesByIdData = {
+export type DeleteTableData = {
     body?: never;
     path: {
         /**
@@ -1283,25 +1283,25 @@ export type DeleteNidataframeV1TablesByIdData = {
     url: '/nidataframe/v1/tables/{id}';
 };
 
-export type DeleteNidataframeV1TablesByIdErrors = {
+export type DeleteTableErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type DeleteNidataframeV1TablesByIdError = DeleteNidataframeV1TablesByIdErrors[keyof DeleteNidataframeV1TablesByIdErrors];
+export type DeleteTableError = DeleteTableErrors[keyof DeleteTableErrors];
 
-export type DeleteNidataframeV1TablesByIdResponses = {
+export type DeleteTableResponses = {
     /**
      * No content
      */
     204: void;
 };
 
-export type DeleteNidataframeV1TablesByIdResponse = DeleteNidataframeV1TablesByIdResponses[keyof DeleteNidataframeV1TablesByIdResponses];
+export type DeleteTableResponse = DeleteTableResponses[keyof DeleteTableResponses];
 
-export type GetNidataframeV1TablesByIdData = {
+export type GetTableData = {
     body?: never;
     path: {
         /**
@@ -1313,25 +1313,25 @@ export type GetNidataframeV1TablesByIdData = {
     url: '/nidataframe/v1/tables/{id}';
 };
 
-export type GetNidataframeV1TablesByIdErrors = {
+export type GetTableErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type GetNidataframeV1TablesByIdError = GetNidataframeV1TablesByIdErrors[keyof GetNidataframeV1TablesByIdErrors];
+export type GetTableError = GetTableErrors[keyof GetTableErrors];
 
-export type GetNidataframeV1TablesByIdResponses = {
+export type GetTableResponses = {
     /**
      * OK
      */
     200: HttpTableMetadata;
 };
 
-export type GetNidataframeV1TablesByIdResponse = GetNidataframeV1TablesByIdResponses[keyof GetNidataframeV1TablesByIdResponses];
+export type GetTableResponse = GetTableResponses[keyof GetTableResponses];
 
-export type PatchNidataframeV1TablesByIdData = {
+export type ModifyTableData = {
     /**
      * Contains the metadata properties to modify. Values not included in the request body will remain unchanged.
      */
@@ -1346,25 +1346,25 @@ export type PatchNidataframeV1TablesByIdData = {
     url: '/nidataframe/v1/tables/{id}';
 };
 
-export type PatchNidataframeV1TablesByIdErrors = {
+export type ModifyTableErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type PatchNidataframeV1TablesByIdError = PatchNidataframeV1TablesByIdErrors[keyof PatchNidataframeV1TablesByIdErrors];
+export type ModifyTableError = ModifyTableErrors[keyof ModifyTableErrors];
 
-export type PatchNidataframeV1TablesByIdResponses = {
+export type ModifyTableResponses = {
     /**
      * No content
      */
     204: void;
 };
 
-export type PatchNidataframeV1TablesByIdResponse = PatchNidataframeV1TablesByIdResponses[keyof PatchNidataframeV1TablesByIdResponses];
+export type ModifyTableResponse = ModifyTableResponses[keyof ModifyTableResponses];
 
-export type PostNidataframeV1DeleteTablesData = {
+export type DeleteTablesData = {
     /**
      * The parameters for deleting tables.
      */
@@ -1374,16 +1374,16 @@ export type PostNidataframeV1DeleteTablesData = {
     url: '/nidataframe/v1/delete-tables';
 };
 
-export type PostNidataframeV1DeleteTablesErrors = {
+export type DeleteTablesErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type PostNidataframeV1DeleteTablesError = PostNidataframeV1DeleteTablesErrors[keyof PostNidataframeV1DeleteTablesErrors];
+export type DeleteTablesError = DeleteTablesErrors[keyof DeleteTablesErrors];
 
-export type PostNidataframeV1DeleteTablesResponses = {
+export type DeleteTablesResponses = {
     /**
      * Partial success: one or more tables could not be deleted
      */
@@ -1394,9 +1394,9 @@ export type PostNidataframeV1DeleteTablesResponses = {
     204: void;
 };
 
-export type PostNidataframeV1DeleteTablesResponse = PostNidataframeV1DeleteTablesResponses[keyof PostNidataframeV1DeleteTablesResponses];
+export type DeleteTablesResponse = DeleteTablesResponses[keyof DeleteTablesResponses];
 
-export type PostNidataframeV1ModifyTablesData = {
+export type ModifyTablesData = {
     /**
      * Contains the table modifications to apply.
      */
@@ -1406,16 +1406,16 @@ export type PostNidataframeV1ModifyTablesData = {
     url: '/nidataframe/v1/modify-tables';
 };
 
-export type PostNidataframeV1ModifyTablesErrors = {
+export type ModifyTablesErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type PostNidataframeV1ModifyTablesError = PostNidataframeV1ModifyTablesErrors[keyof PostNidataframeV1ModifyTablesErrors];
+export type ModifyTablesError = ModifyTablesErrors[keyof ModifyTablesErrors];
 
-export type PostNidataframeV1ModifyTablesResponses = {
+export type ModifyTablesResponses = {
     /**
      * Partial success: one or more tables could not be modified
      */
@@ -1426,25 +1426,25 @@ export type PostNidataframeV1ModifyTablesResponses = {
     204: void;
 };
 
-export type PostNidataframeV1ModifyTablesResponse = PostNidataframeV1ModifyTablesResponses[keyof PostNidataframeV1ModifyTablesResponses];
+export type ModifyTablesResponse = ModifyTablesResponses[keyof ModifyTablesResponses];
 
-export type GetNidataframeData = {
+export type RootEndpointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nidataframe';
 };
 
-export type GetNidataframeResponses = {
+export type RootEndpointResponses = {
     /**
      * OK
      */
     200: RootEndpointResponse;
 };
 
-export type GetNidataframeResponse = GetNidataframeResponses[keyof GetNidataframeResponses];
+export type RootEndpointResponse2 = RootEndpointResponses[keyof RootEndpointResponses];
 
-export type GetNidataframeByVersionData = {
+export type RootEndpointWithVersionData = {
     body?: never;
     path: {
         /**
@@ -1456,20 +1456,20 @@ export type GetNidataframeByVersionData = {
     url: '/nidataframe/{version}';
 };
 
-export type GetNidataframeByVersionErrors = {
+export type RootEndpointWithVersionErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type GetNidataframeByVersionError = GetNidataframeByVersionErrors[keyof GetNidataframeByVersionErrors];
+export type RootEndpointWithVersionError = RootEndpointWithVersionErrors[keyof RootEndpointWithVersionErrors];
 
-export type GetNidataframeByVersionResponses = {
+export type RootEndpointWithVersionResponses = {
     /**
      * OK
      */
     200: V1Operations;
 };
 
-export type GetNidataframeByVersionResponse = GetNidataframeByVersionResponses[keyof GetNidataframeByVersionResponses];
+export type RootEndpointWithVersionResponse = RootEndpointWithVersionResponses[keyof RootEndpointWithVersionResponses];

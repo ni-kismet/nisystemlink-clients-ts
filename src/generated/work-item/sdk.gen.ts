@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetNiworkitemData, GetNiworkitemResponses, GetNiworkitemV1Data, GetNiworkitemV1Responses, GetNiworkitemV1WorkflowsByWorkflowIdData, GetNiworkitemV1WorkflowsByWorkflowIdErrors, GetNiworkitemV1WorkflowsByWorkflowIdResponses, GetNiworkitemV1WorkitemsByWorkItemIdData, GetNiworkitemV1WorkitemsByWorkItemIdErrors, GetNiworkitemV1WorkitemsByWorkItemIdResponses, GetNiworkitemV1WorkitemsSummaryData, GetNiworkitemV1WorkitemsSummaryErrors, GetNiworkitemV1WorkitemsSummaryResponses, GetNiworkitemV1WorkitemtypesData, GetNiworkitemV1WorkitemtypesErrors, GetNiworkitemV1WorkitemtypesResponses, PostNiworkitemV1DeleteWorkflowsData, PostNiworkitemV1DeleteWorkflowsErrors, PostNiworkitemV1DeleteWorkflowsResponses, PostNiworkitemV1DeleteWorkitemsData, PostNiworkitemV1DeleteWorkitemsErrors, PostNiworkitemV1DeleteWorkitemsResponses, PostNiworkitemV1DeleteWorkitemTemplatesData, PostNiworkitemV1DeleteWorkitemTemplatesErrors, PostNiworkitemV1DeleteWorkitemTemplatesResponses, PostNiworkitemV1QueryWorkflowsData, PostNiworkitemV1QueryWorkflowsErrors, PostNiworkitemV1QueryWorkflowsResponses, PostNiworkitemV1QueryWorkitemsData, PostNiworkitemV1QueryWorkitemsErrors, PostNiworkitemV1QueryWorkitemsResponses, PostNiworkitemV1QueryWorkitemTemplatesData, PostNiworkitemV1QueryWorkitemTemplatesErrors, PostNiworkitemV1QueryWorkitemTemplatesResponses, PostNiworkitemV1ScheduleWorkitemsData, PostNiworkitemV1ScheduleWorkitemsErrors, PostNiworkitemV1ScheduleWorkitemsResponses, PostNiworkitemV1UpdateWorkitemsData, PostNiworkitemV1UpdateWorkitemsErrors, PostNiworkitemV1UpdateWorkitemsResponses, PostNiworkitemV1UpdateWorkitemTemplatesData, PostNiworkitemV1UpdateWorkitemTemplatesErrors, PostNiworkitemV1UpdateWorkitemTemplatesResponses, PostNiworkitemV1WorkflowsData, PostNiworkitemV1WorkflowsErrors, PostNiworkitemV1WorkflowsResponses, PostNiworkitemV1WorkitemsByWorkItemIdExecuteData, PostNiworkitemV1WorkitemsByWorkItemIdExecuteErrors, PostNiworkitemV1WorkitemsByWorkItemIdExecuteResponses, PostNiworkitemV1WorkitemsData, PostNiworkitemV1WorkitemsErrors, PostNiworkitemV1WorkitemsResponses, PostNiworkitemV1WorkitemTemplatesData, PostNiworkitemV1WorkitemTemplatesErrors, PostNiworkitemV1WorkitemTemplatesResponses, PutNiworkitemV1WorkflowsByWorkflowIdData, PutNiworkitemV1WorkflowsByWorkflowIdErrors, PutNiworkitemV1WorkflowsByWorkflowIdResponses } from './types.gen';
+import type { CreateWorkflowData, CreateWorkflowErrors, CreateWorkflowResponses, CreateWorkItemsData, CreateWorkItemsErrors, CreateWorkItemsResponses, CreateWorkItemTemplatesData, CreateWorkItemTemplatesErrors, CreateWorkItemTemplatesResponses, DeleteWorkflowsData, DeleteWorkflowsErrors, DeleteWorkflowsResponses, DeleteWorkItemsData, DeleteWorkItemsErrors, DeleteWorkItemsResponses, DeleteWorkItemTemplatesData, DeleteWorkItemTemplatesErrors, DeleteWorkItemTemplatesResponses, ExecuteWorkItemData, ExecuteWorkItemErrors, ExecuteWorkItemResponses, GetWorkflowData, GetWorkflowErrors, GetWorkflowResponses, GetWorkItemData, GetWorkItemErrors, GetWorkItemResponses, GetWorkItemsSummaryData, GetWorkItemsSummaryErrors, GetWorkItemsSummaryResponses, GetWorkItemTypesData, GetWorkItemTypesErrors, GetWorkItemTypesResponses, QueryWorkflowsData, QueryWorkflowsErrors, QueryWorkflowsResponses, QueryWorkItemsData, QueryWorkItemsErrors, QueryWorkItemsResponses, QueryWorkItemTemplatesData, QueryWorkItemTemplatesErrors, QueryWorkItemTemplatesResponses, RootEndPointData, RootEndPointResponses, ScheduleWorkItemsData, ScheduleWorkItemsErrors, ScheduleWorkItemsResponses, UpdateWorkflowData, UpdateWorkflowErrors, UpdateWorkflowResponses, UpdateWorkItemsData, UpdateWorkItemsErrors, UpdateWorkItemsResponses, UpdateWorkItemTemplatesData, UpdateWorkItemTemplatesErrors, UpdateWorkItemTemplatesResponses, WorkItemV1OperationsRootEndPointData, WorkItemV1OperationsRootEndPointResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -23,7 +23,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
  *
  * Creates one workflow with the provided data.
  */
-export const postNiworkitemV1Workflows = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkitemV1WorkflowsData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkitemV1WorkflowsResponses, PostNiworkitemV1WorkflowsErrors, ThrowOnError>({
+export const createWorkflow = <ThrowOnError extends boolean = false>(options?: Options<CreateWorkflowData, ThrowOnError>) => (options?.client ?? client).post<CreateWorkflowResponses, CreateWorkflowErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/workflows',
     ...options,
@@ -38,7 +38,7 @@ export const postNiworkitemV1Workflows = <ThrowOnError extends boolean = false>(
  *
  * Queries workflows.
  */
-export const postNiworkitemV1QueryWorkflows = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkitemV1QueryWorkflowsData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkitemV1QueryWorkflowsResponses, PostNiworkitemV1QueryWorkflowsErrors, ThrowOnError>({
+export const queryWorkflows = <ThrowOnError extends boolean = false>(options?: Options<QueryWorkflowsData, ThrowOnError>) => (options?.client ?? client).post<QueryWorkflowsResponses, QueryWorkflowsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/query-workflows',
     ...options,
@@ -53,7 +53,7 @@ export const postNiworkitemV1QueryWorkflows = <ThrowOnError extends boolean = fa
  *
  * Gets a workflow with the provided ID.
  */
-export const getNiworkitemV1WorkflowsByWorkflowId = <ThrowOnError extends boolean = false>(options: Options<GetNiworkitemV1WorkflowsByWorkflowIdData, ThrowOnError>) => (options.client ?? client).get<GetNiworkitemV1WorkflowsByWorkflowIdResponses, GetNiworkitemV1WorkflowsByWorkflowIdErrors, ThrowOnError>({
+export const getWorkflow = <ThrowOnError extends boolean = false>(options: Options<GetWorkflowData, ThrowOnError>) => (options.client ?? client).get<GetWorkflowResponses, GetWorkflowErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/workflows/{workflowId}',
     ...options
@@ -64,7 +64,7 @@ export const getNiworkitemV1WorkflowsByWorkflowId = <ThrowOnError extends boolea
  *
  * Updates the workflow with the provided ID.
  */
-export const putNiworkitemV1WorkflowsByWorkflowId = <ThrowOnError extends boolean = false>(options: Options<PutNiworkitemV1WorkflowsByWorkflowIdData, ThrowOnError>) => (options.client ?? client).put<PutNiworkitemV1WorkflowsByWorkflowIdResponses, PutNiworkitemV1WorkflowsByWorkflowIdErrors, ThrowOnError>({
+export const updateWorkflow = <ThrowOnError extends boolean = false>(options: Options<UpdateWorkflowData, ThrowOnError>) => (options.client ?? client).put<UpdateWorkflowResponses, UpdateWorkflowErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/workflows/{workflowId}',
     ...options,
@@ -79,7 +79,7 @@ export const putNiworkitemV1WorkflowsByWorkflowId = <ThrowOnError extends boolea
  *
  * Deletes one or more workflows identified by their IDs.
  */
-export const postNiworkitemV1DeleteWorkflows = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkitemV1DeleteWorkflowsData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkitemV1DeleteWorkflowsResponses, PostNiworkitemV1DeleteWorkflowsErrors, ThrowOnError>({
+export const deleteWorkflows = <ThrowOnError extends boolean = false>(options?: Options<DeleteWorkflowsData, ThrowOnError>) => (options?.client ?? client).post<DeleteWorkflowsResponses, DeleteWorkflowsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/delete-workflows',
     ...options,
@@ -94,7 +94,7 @@ export const postNiworkitemV1DeleteWorkflows = <ThrowOnError extends boolean = f
  *
  * Creates one or more work items with the provided data.
  */
-export const postNiworkitemV1Workitems = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkitemV1WorkitemsData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkitemV1WorkitemsResponses, PostNiworkitemV1WorkitemsErrors, ThrowOnError>({
+export const createWorkItems = <ThrowOnError extends boolean = false>(options?: Options<CreateWorkItemsData, ThrowOnError>) => (options?.client ?? client).post<CreateWorkItemsResponses, CreateWorkItemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/workitems',
     ...options,
@@ -124,7 +124,7 @@ export const postNiworkitemV1Workitems = <ThrowOnError extends boolean = false>(
  *
  * Uses the `projection` to only include the specified fields in the response.
  */
-export const postNiworkitemV1QueryWorkitems = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkitemV1QueryWorkitemsData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkitemV1QueryWorkitemsResponses, PostNiworkitemV1QueryWorkitemsErrors, ThrowOnError>({
+export const queryWorkItems = <ThrowOnError extends boolean = false>(options?: Options<QueryWorkItemsData, ThrowOnError>) => (options?.client ?? client).post<QueryWorkItemsResponses, QueryWorkItemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/query-workitems',
     ...options,
@@ -139,7 +139,7 @@ export const postNiworkitemV1QueryWorkitems = <ThrowOnError extends boolean = fa
  *
  * Get the work items summary.
  */
-export const getNiworkitemV1WorkitemsSummary = <ThrowOnError extends boolean = false>(options?: Options<GetNiworkitemV1WorkitemsSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetNiworkitemV1WorkitemsSummaryResponses, GetNiworkitemV1WorkitemsSummaryErrors, ThrowOnError>({
+export const getWorkItemsSummary = <ThrowOnError extends boolean = false>(options?: Options<GetWorkItemsSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetWorkItemsSummaryResponses, GetWorkItemsSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/workitems-summary',
     ...options
@@ -150,7 +150,7 @@ export const getNiworkitemV1WorkitemsSummary = <ThrowOnError extends boolean = f
  *
  * Gets a work item with the provided ID.
  */
-export const getNiworkitemV1WorkitemsByWorkItemId = <ThrowOnError extends boolean = false>(options: Options<GetNiworkitemV1WorkitemsByWorkItemIdData, ThrowOnError>) => (options.client ?? client).get<GetNiworkitemV1WorkitemsByWorkItemIdResponses, GetNiworkitemV1WorkitemsByWorkItemIdErrors, ThrowOnError>({
+export const getWorkItem = <ThrowOnError extends boolean = false>(options: Options<GetWorkItemData, ThrowOnError>) => (options.client ?? client).get<GetWorkItemResponses, GetWorkItemErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/workitems/{workItemId}',
     ...options
@@ -161,7 +161,7 @@ export const getNiworkitemV1WorkitemsByWorkItemId = <ThrowOnError extends boolea
  *
  * Deletes one or more work items identified by their IDs.
  */
-export const postNiworkitemV1DeleteWorkitems = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkitemV1DeleteWorkitemsData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkitemV1DeleteWorkitemsResponses, PostNiworkitemV1DeleteWorkitemsErrors, ThrowOnError>({
+export const deleteWorkItems = <ThrowOnError extends boolean = false>(options?: Options<DeleteWorkItemsData, ThrowOnError>) => (options?.client ?? client).post<DeleteWorkItemsResponses, DeleteWorkItemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/delete-workitems',
     ...options,
@@ -178,7 +178,7 @@ export const postNiworkitemV1DeleteWorkitems = <ThrowOnError extends boolean = f
  * <ol>Note: Only basic work item properties can be updated using this API.
  * To update scheduling related properties such as `plannedStartDateTime`, `plannedEndDateTime` and `plannedDurationInSeconds`, utilize the `schedule-workitems` API.</ol>
  */
-export const postNiworkitemV1UpdateWorkitems = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkitemV1UpdateWorkitemsData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkitemV1UpdateWorkitemsResponses, PostNiworkitemV1UpdateWorkitemsErrors, ThrowOnError>({
+export const updateWorkItems = <ThrowOnError extends boolean = false>(options?: Options<UpdateWorkItemsData, ThrowOnError>) => (options?.client ?? client).post<UpdateWorkItemsResponses, UpdateWorkItemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/update-workitems',
     ...options,
@@ -195,7 +195,7 @@ export const postNiworkitemV1UpdateWorkitems = <ThrowOnError extends boolean = f
  * <ol>Note: Only scheduling related work item properties can be updated using this API.
  * To update other properties, utilize the `update-workitems` API.</ol>
  */
-export const postNiworkitemV1ScheduleWorkitems = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkitemV1ScheduleWorkitemsData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkitemV1ScheduleWorkitemsResponses, PostNiworkitemV1ScheduleWorkitemsErrors, ThrowOnError>({
+export const scheduleWorkItems = <ThrowOnError extends boolean = false>(options?: Options<ScheduleWorkItemsData, ThrowOnError>) => (options?.client ?? client).post<ScheduleWorkItemsResponses, ScheduleWorkItemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/schedule-workitems',
     ...options,
@@ -212,7 +212,7 @@ export const postNiworkitemV1ScheduleWorkitems = <ThrowOnError extends boolean =
  * <ol>Note: START and END actions will always be enabled, even if the action is not defined on the work item. If no action
  * is defined for START or END, the default action will be MANUAL.</ol>
  */
-export const postNiworkitemV1WorkitemsByWorkItemIdExecute = <ThrowOnError extends boolean = false>(options: Options<PostNiworkitemV1WorkitemsByWorkItemIdExecuteData, ThrowOnError>) => (options.client ?? client).post<PostNiworkitemV1WorkitemsByWorkItemIdExecuteResponses, PostNiworkitemV1WorkitemsByWorkItemIdExecuteErrors, ThrowOnError>({
+export const executeWorkItem = <ThrowOnError extends boolean = false>(options: Options<ExecuteWorkItemData, ThrowOnError>) => (options.client ?? client).post<ExecuteWorkItemResponses, ExecuteWorkItemErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/workitems/{workItemId}/execute',
     ...options,
@@ -227,7 +227,7 @@ export const postNiworkitemV1WorkitemsByWorkItemIdExecute = <ThrowOnError extend
  *
  * Creates one or more work item templates with the provided data.
  */
-export const postNiworkitemV1WorkitemTemplates = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkitemV1WorkitemTemplatesData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkitemV1WorkitemTemplatesResponses, PostNiworkitemV1WorkitemTemplatesErrors, ThrowOnError>({
+export const createWorkItemTemplates = <ThrowOnError extends boolean = false>(options?: Options<CreateWorkItemTemplatesData, ThrowOnError>) => (options?.client ?? client).post<CreateWorkItemTemplatesResponses, CreateWorkItemTemplatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/workitem-templates',
     ...options,
@@ -256,7 +256,7 @@ export const postNiworkitemV1WorkitemTemplates = <ThrowOnError extends boolean =
  *
  *
  */
-export const postNiworkitemV1QueryWorkitemTemplates = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkitemV1QueryWorkitemTemplatesData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkitemV1QueryWorkitemTemplatesResponses, PostNiworkitemV1QueryWorkitemTemplatesErrors, ThrowOnError>({
+export const queryWorkItemTemplates = <ThrowOnError extends boolean = false>(options?: Options<QueryWorkItemTemplatesData, ThrowOnError>) => (options?.client ?? client).post<QueryWorkItemTemplatesResponses, QueryWorkItemTemplatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/query-workitem-templates',
     ...options,
@@ -271,7 +271,7 @@ export const postNiworkitemV1QueryWorkitemTemplates = <ThrowOnError extends bool
  *
  * Updates one or more work item templates with the provided data.
  */
-export const postNiworkitemV1UpdateWorkitemTemplates = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkitemV1UpdateWorkitemTemplatesData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkitemV1UpdateWorkitemTemplatesResponses, PostNiworkitemV1UpdateWorkitemTemplatesErrors, ThrowOnError>({
+export const updateWorkItemTemplates = <ThrowOnError extends boolean = false>(options?: Options<UpdateWorkItemTemplatesData, ThrowOnError>) => (options?.client ?? client).post<UpdateWorkItemTemplatesResponses, UpdateWorkItemTemplatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/update-workitem-templates',
     ...options,
@@ -286,7 +286,7 @@ export const postNiworkitemV1UpdateWorkitemTemplates = <ThrowOnError extends boo
  *
  * Deletes one or more work item templates identified by their IDs.
  */
-export const postNiworkitemV1DeleteWorkitemTemplates = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkitemV1DeleteWorkitemTemplatesData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkitemV1DeleteWorkitemTemplatesResponses, PostNiworkitemV1DeleteWorkitemTemplatesErrors, ThrowOnError>({
+export const deleteWorkItemTemplates = <ThrowOnError extends boolean = false>(options?: Options<DeleteWorkItemTemplatesData, ThrowOnError>) => (options?.client ?? client).post<DeleteWorkItemTemplatesResponses, DeleteWorkItemTemplatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/delete-workitem-templates',
     ...options,
@@ -301,7 +301,7 @@ export const postNiworkitemV1DeleteWorkitemTemplates = <ThrowOnError extends boo
  *
  * Gets all the work item types.
  */
-export const getNiworkitemV1Workitemtypes = <ThrowOnError extends boolean = false>(options?: Options<GetNiworkitemV1WorkitemtypesData, ThrowOnError>) => (options?.client ?? client).get<GetNiworkitemV1WorkitemtypesResponses, GetNiworkitemV1WorkitemtypesErrors, ThrowOnError>({
+export const getWorkItemTypes = <ThrowOnError extends boolean = false>(options?: Options<GetWorkItemTypesData, ThrowOnError>) => (options?.client ?? client).get<GetWorkItemTypesResponses, GetWorkItemTypesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1/workitemtypes',
     ...options
@@ -312,7 +312,7 @@ export const getNiworkitemV1Workitemtypes = <ThrowOnError extends boolean = fals
  *
  * Returns information about API and available operations.
  */
-export const getNiworkitem = <ThrowOnError extends boolean = false>(options?: Options<GetNiworkitemData, ThrowOnError>) => (options?.client ?? client).get<GetNiworkitemResponses, unknown, ThrowOnError>({
+export const rootEndPoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndPointData, ThrowOnError>) => (options?.client ?? client).get<RootEndPointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem',
     ...options
@@ -323,7 +323,7 @@ export const getNiworkitem = <ThrowOnError extends boolean = false>(options?: Op
  *
  * Returns available operations for version V1 of the API.
  */
-export const getNiworkitemV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNiworkitemV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNiworkitemV1Responses, unknown, ThrowOnError>({
+export const workItemV1OperationsRootEndPoint = <ThrowOnError extends boolean = false>(options?: Options<WorkItemV1OperationsRootEndPointData, ThrowOnError>) => (options?.client ?? client).get<WorkItemV1OperationsRootEndPointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkitem/v1',
     ...options

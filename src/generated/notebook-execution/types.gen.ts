@@ -403,32 +403,32 @@ export type Versions = {
     v1?: Version;
 };
 
-export type PostNinbexecutionV1ExecutionsData = {
+export type CreateExecutionsData = {
     body?: Array<CreateExecution>;
     path?: never;
     query?: never;
     url: '/ninbexecution/v1/executions';
 };
 
-export type PostNinbexecutionV1ExecutionsErrors = {
+export type CreateExecutionsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNinbexecutionV1ExecutionsError = PostNinbexecutionV1ExecutionsErrors[keyof PostNinbexecutionV1ExecutionsErrors];
+export type CreateExecutionsError = CreateExecutionsErrors[keyof CreateExecutionsErrors];
 
-export type PostNinbexecutionV1ExecutionsResponses = {
+export type CreateExecutionsResponses = {
     /**
      * OK.
      */
     200: CreateExecutionsResponse;
 };
 
-export type PostNinbexecutionV1ExecutionsResponse = PostNinbexecutionV1ExecutionsResponses[keyof PostNinbexecutionV1ExecutionsResponses];
+export type CreateExecutionsResponse2 = CreateExecutionsResponses[keyof CreateExecutionsResponses];
 
-export type PostNinbexecutionV1CreateExecutionsFromExistingData = {
+export type CreateExecutionsFromExistingData = {
     /**
      * List of execution IDs to run again.
      * Example: ["40c45213-8627-4948-8248-3b7a40ea6fa0", "ab1ada3c-7cd0-4189-b687-aabb3c6a4070"]
@@ -439,25 +439,25 @@ export type PostNinbexecutionV1CreateExecutionsFromExistingData = {
     url: '/ninbexecution/v1/create-executions-from-existing';
 };
 
-export type PostNinbexecutionV1CreateExecutionsFromExistingErrors = {
+export type CreateExecutionsFromExistingErrors = {
     /**
      * Unauthorized
      */
     401: BaseResponse;
 };
 
-export type PostNinbexecutionV1CreateExecutionsFromExistingError = PostNinbexecutionV1CreateExecutionsFromExistingErrors[keyof PostNinbexecutionV1CreateExecutionsFromExistingErrors];
+export type CreateExecutionsFromExistingError = CreateExecutionsFromExistingErrors[keyof CreateExecutionsFromExistingErrors];
 
-export type PostNinbexecutionV1CreateExecutionsFromExistingResponses = {
+export type CreateExecutionsFromExistingResponses = {
     /**
      * OK
      */
     200: CreateExecutionsResponse;
 };
 
-export type PostNinbexecutionV1CreateExecutionsFromExistingResponse = PostNinbexecutionV1CreateExecutionsFromExistingResponses[keyof PostNinbexecutionV1CreateExecutionsFromExistingResponses];
+export type CreateExecutionsFromExistingResponse = CreateExecutionsFromExistingResponses[keyof CreateExecutionsFromExistingResponses];
 
-export type GetNinbexecutionV1ExecutionsByIdData = {
+export type GetExecutionData = {
     body?: never;
     path: {
         /**
@@ -469,7 +469,7 @@ export type GetNinbexecutionV1ExecutionsByIdData = {
     url: '/ninbexecution/v1/executions/{id}';
 };
 
-export type GetNinbexecutionV1ExecutionsByIdErrors = {
+export type GetExecutionErrors = {
     /**
      * Execution not found.
      */
@@ -480,41 +480,41 @@ export type GetNinbexecutionV1ExecutionsByIdErrors = {
     default: BaseResponse;
 };
 
-export type GetNinbexecutionV1ExecutionsByIdError = GetNinbexecutionV1ExecutionsByIdErrors[keyof GetNinbexecutionV1ExecutionsByIdErrors];
+export type GetExecutionError = GetExecutionErrors[keyof GetExecutionErrors];
 
-export type GetNinbexecutionV1ExecutionsByIdResponses = {
+export type GetExecutionResponses = {
     /**
      * Execution returned.
      */
     200: unknown;
 };
 
-export type PostNinbexecutionV1QueryExecutionsData = {
+export type QueryExecutionsData = {
     body?: QueryExecutions;
     path?: never;
     query?: never;
     url: '/ninbexecution/v1/query-executions';
 };
 
-export type PostNinbexecutionV1QueryExecutionsErrors = {
+export type QueryExecutionsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNinbexecutionV1QueryExecutionsError = PostNinbexecutionV1QueryExecutionsErrors[keyof PostNinbexecutionV1QueryExecutionsErrors];
+export type QueryExecutionsError = QueryExecutionsErrors[keyof QueryExecutionsErrors];
 
-export type PostNinbexecutionV1QueryExecutionsResponses = {
+export type QueryExecutionsResponses = {
     /**
      * Queried executions returned.
      */
     200: Array<Execution>;
 };
 
-export type PostNinbexecutionV1QueryExecutionsResponse = PostNinbexecutionV1QueryExecutionsResponses[keyof PostNinbexecutionV1QueryExecutionsResponses];
+export type QueryExecutionsResponse = QueryExecutionsResponses[keyof QueryExecutionsResponses];
 
-export type PostNinbexecutionV1CancelExecutionsData = {
+export type CancelExecutionsData = {
     /**
      * List of execution IDs to cancel.
      * Example: ["40c45213-8627-4948-8248-3b7a40ea6fa0", "ab1ada3c-7cd0-4189-b687-aabb3c6a4070"]
@@ -525,16 +525,16 @@ export type PostNinbexecutionV1CancelExecutionsData = {
     url: '/ninbexecution/v1/cancel-executions';
 };
 
-export type PostNinbexecutionV1CancelExecutionsErrors = {
+export type CancelExecutionsErrors = {
     /**
      * Unauthorized
      */
     401: BaseResponse;
 };
 
-export type PostNinbexecutionV1CancelExecutionsError = PostNinbexecutionV1CancelExecutionsErrors[keyof PostNinbexecutionV1CancelExecutionsErrors];
+export type CancelExecutionsError = CancelExecutionsErrors[keyof CancelExecutionsErrors];
 
-export type PostNinbexecutionV1CancelExecutionsResponses = {
+export type CancelExecutionsResponses = {
     /**
      * OK
      */
@@ -545,9 +545,9 @@ export type PostNinbexecutionV1CancelExecutionsResponses = {
     204: void;
 };
 
-export type PostNinbexecutionV1CancelExecutionsResponse = PostNinbexecutionV1CancelExecutionsResponses[keyof PostNinbexecutionV1CancelExecutionsResponses];
+export type CancelExecutionsResponse = CancelExecutionsResponses[keyof CancelExecutionsResponses];
 
-export type PostNinbexecutionV1RetryExecutionsData = {
+export type RetryExecutionsData = {
     /**
      * List of execution IDs to retry.
      * Example: ["40c45213-8627-4948-8248-3b7a40ea6fa0", "ab1ada3c-7cd0-4189-b687-aabb3c6a4070"]
@@ -558,16 +558,16 @@ export type PostNinbexecutionV1RetryExecutionsData = {
     url: '/ninbexecution/v1/retry-executions';
 };
 
-export type PostNinbexecutionV1RetryExecutionsErrors = {
+export type RetryExecutionsErrors = {
     /**
      * Unauthorized
      */
     401: BaseResponse;
 };
 
-export type PostNinbexecutionV1RetryExecutionsError = PostNinbexecutionV1RetryExecutionsErrors[keyof PostNinbexecutionV1RetryExecutionsErrors];
+export type RetryExecutionsError = RetryExecutionsErrors[keyof RetryExecutionsErrors];
 
-export type PostNinbexecutionV1RetryExecutionsResponses = {
+export type RetryExecutionsResponses = {
     /**
      * OK
      */
@@ -578,36 +578,36 @@ export type PostNinbexecutionV1RetryExecutionsResponses = {
     204: void;
 };
 
-export type PostNinbexecutionV1RetryExecutionsResponse = PostNinbexecutionV1RetryExecutionsResponses[keyof PostNinbexecutionV1RetryExecutionsResponses];
+export type RetryExecutionsResponse = RetryExecutionsResponses[keyof RetryExecutionsResponses];
 
-export type GetNinbexecutionData = {
+export type RootEndpointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/ninbexecution';
 };
 
-export type GetNinbexecutionResponses = {
+export type RootEndpointResponses = {
     /**
      * OK
      */
     200: Versions;
 };
 
-export type GetNinbexecutionResponse = GetNinbexecutionResponses[keyof GetNinbexecutionResponses];
+export type RootEndpointResponse = RootEndpointResponses[keyof RootEndpointResponses];
 
-export type GetNinbexecutionV1Data = {
+export type GetV1Data = {
     body?: never;
     path?: never;
     query?: never;
     url: '/ninbexecution/v1';
 };
 
-export type GetNinbexecutionV1Responses = {
+export type GetV1Responses = {
     /**
      * OK
      */
     200: Version;
 };
 
-export type GetNinbexecutionV1Response = GetNinbexecutionV1Responses[keyof GetNinbexecutionV1Responses];
+export type GetV1Response = GetV1Responses[keyof GetV1Responses];

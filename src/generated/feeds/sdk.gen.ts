@@ -2,7 +2,7 @@
 
 import { type Client, formDataBodySerializer, type Options as Options2, type TDataShape } from './client';
 import { client } from './client.gen';
-import type { DeleteNifeedV1FeedsByFeedIdData, DeleteNifeedV1FeedsByFeedIdErrors, DeleteNifeedV1FeedsByFeedIdResponses, DeleteNifeedV1PackagesByPackageIdData, DeleteNifeedV1PackagesByPackageIdErrors, DeleteNifeedV1PackagesByPackageIdResponses, GetNifeedData, GetNifeedResponses, GetNifeedV1Data, GetNifeedV1FeedsByFeedIdData, GetNifeedV1FeedsByFeedIdErrors, GetNifeedV1FeedsByFeedIdFilesByFileNameData, GetNifeedV1FeedsByFeedIdFilesByFileNameErrors, GetNifeedV1FeedsByFeedIdFilesByFileNameResponses, GetNifeedV1FeedsByFeedIdFilesPackagesData, GetNifeedV1FeedsByFeedIdFilesPackagesErrors, GetNifeedV1FeedsByFeedIdFilesPackagesGzData, GetNifeedV1FeedsByFeedIdFilesPackagesGzErrors, GetNifeedV1FeedsByFeedIdFilesPackagesGzResponses, GetNifeedV1FeedsByFeedIdFilesPackagesResponses, GetNifeedV1FeedsByFeedIdJobsData, GetNifeedV1FeedsByFeedIdJobsErrors, GetNifeedV1FeedsByFeedIdJobsResponses, GetNifeedV1FeedsByFeedIdPackagesData, GetNifeedV1FeedsByFeedIdPackagesErrors, GetNifeedV1FeedsByFeedIdPackagesResponses, GetNifeedV1FeedsByFeedIdResponses, GetNifeedV1FeedsData, GetNifeedV1FeedsErrors, GetNifeedV1FeedsResponses, GetNifeedV1FeedUpdatesByUpdateDescriptorListIdData, GetNifeedV1FeedUpdatesByUpdateDescriptorListIdErrors, GetNifeedV1FeedUpdatesByUpdateDescriptorListIdResponses, GetNifeedV1JobsByJobIdData, GetNifeedV1JobsByJobIdErrors, GetNifeedV1JobsByJobIdResponses, GetNifeedV1PackagesByPackageIdData, GetNifeedV1PackagesByPackageIdErrors, GetNifeedV1PackagesByPackageIdResponses, GetNifeedV1Responses, HeadNifeedV1FeedsByFeedIdFilesByFileNameData, HeadNifeedV1FeedsByFeedIdFilesByFileNameErrors, HeadNifeedV1FeedsByFeedIdFilesByFileNameResponses, HeadNifeedV1FeedsByFeedIdFilesPackagesData, HeadNifeedV1FeedsByFeedIdFilesPackagesErrors, HeadNifeedV1FeedsByFeedIdFilesPackagesGzData, HeadNifeedV1FeedsByFeedIdFilesPackagesGzErrors, HeadNifeedV1FeedsByFeedIdFilesPackagesGzResponses, HeadNifeedV1FeedsByFeedIdFilesPackagesResponses, PatchNifeedV1FeedsByFeedIdMetadataData, PatchNifeedV1FeedsByFeedIdMetadataErrors, PatchNifeedV1FeedsByFeedIdMetadataResponses, PostNifeedV1DeleteFeedsData, PostNifeedV1DeleteFeedsErrors, PostNifeedV1DeleteFeedsResponses, PostNifeedV1DeletePackagesData, PostNifeedV1DeletePackagesErrors, PostNifeedV1DeletePackagesResponses, PostNifeedV1FeedsByFeedIdApplyUpdatesData, PostNifeedV1FeedsByFeedIdApplyUpdatesErrors, PostNifeedV1FeedsByFeedIdApplyUpdatesResponses, PostNifeedV1FeedsByFeedIdCheckForUpdatesData, PostNifeedV1FeedsByFeedIdCheckForUpdatesErrors, PostNifeedV1FeedsByFeedIdCheckForUpdatesResponses, PostNifeedV1FeedsByFeedIdCleanData, PostNifeedV1FeedsByFeedIdCleanErrors, PostNifeedV1FeedsByFeedIdCleanResponses, PostNifeedV1FeedsData, PostNifeedV1FeedsErrors, PostNifeedV1FeedsResponses, PostNifeedV1ReplicateFeedData, PostNifeedV1ReplicateFeedErrors, PostNifeedV1ReplicateFeedResponses, PostNifeedV1ReplicateFeedsData, PostNifeedV1ReplicateFeedsErrors, PostNifeedV1ReplicateFeedsResponses, UploadPackageToFeedAsyncData, UploadPackageToFeedAsyncErrors, UploadPackageToFeedAsyncResponses } from './types.gen';
+import type { ApplyUpdatesForFeedData, ApplyUpdatesForFeedErrors, ApplyUpdatesForFeedResponses, CheckFeedForUpdatesData, CheckFeedForUpdatesErrors, CheckFeedForUpdatesResponses, CleanFeedData, CleanFeedErrors, CleanFeedResponses, CreateFeedData, CreateFeedErrors, CreateFeedResponses, DeleteFeedData, DeleteFeedErrors, DeleteFeedResponses, DeleteFeedsData, DeleteFeedsErrors, DeleteFeedsResponses, DeletePackageByIdData, DeletePackageByIdErrors, DeletePackageByIdResponses, DeletePackagesData, DeletePackagesErrors, DeletePackagesResponses, DownloadFeedContentData, DownloadFeedContentErrors, DownloadFeedContentGzData, DownloadFeedContentGzErrors, DownloadFeedContentGzResponses, DownloadFeedContentResponses, DownloadPackageData, DownloadPackageErrors, DownloadPackageHeadData, DownloadPackageHeadErrors, DownloadPackageHeadResponses, DownloadPackageResponses, GetFeedByIdData, GetFeedByIdErrors, GetFeedByIdResponses, GetJobData, GetJobErrors, GetJobResponses, GetPackageByIdData, GetPackageByIdErrors, GetPackageByIdResponses, GetUpdateDescriptorsData, GetUpdateDescriptorsErrors, GetUpdateDescriptorsResponses, GetV1Data, GetV1Responses, HeadFeedContentData, HeadFeedContentErrors, HeadFeedContentGzData, HeadFeedContentGzErrors, HeadFeedContentGzResponses, HeadFeedContentResponses, QueryFeedsData, QueryFeedsErrors, QueryFeedsResponses, QueryJobsForFeedData, QueryJobsForFeedErrors, QueryJobsForFeedResponses, QueryPackagesForFeedData, QueryPackagesForFeedErrors, QueryPackagesForFeedResponses, ReplicateFeedData, ReplicateFeedErrors, ReplicateFeedResponses, ReplicateFeedsData, ReplicateFeedsErrors, ReplicateFeedsResponses, RootEndpointData, RootEndpointResponses, UpdateFeedMetadataData, UpdateFeedMetadataErrors, UpdateFeedMetadataResponses, UploadPackageToFeedAsyncData, UploadPackageToFeedAsyncErrors, UploadPackageToFeedAsyncResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -21,7 +21,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Query feeds.
  */
-export const getNifeedV1Feeds = <ThrowOnError extends boolean = false>(options?: Options<GetNifeedV1FeedsData, ThrowOnError>) => (options?.client ?? client).get<GetNifeedV1FeedsResponses, GetNifeedV1FeedsErrors, ThrowOnError>({
+export const queryFeeds = <ThrowOnError extends boolean = false>(options?: Options<QueryFeedsData, ThrowOnError>) => (options?.client ?? client).get<QueryFeedsResponses, QueryFeedsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds',
     ...options
@@ -30,7 +30,7 @@ export const getNifeedV1Feeds = <ThrowOnError extends boolean = false>(options?:
 /**
  * Create a new feed.
  */
-export const postNifeedV1Feeds = <ThrowOnError extends boolean = false>(options?: Options<PostNifeedV1FeedsData, ThrowOnError>) => (options?.client ?? client).post<PostNifeedV1FeedsResponses, PostNifeedV1FeedsErrors, ThrowOnError>({
+export const createFeed = <ThrowOnError extends boolean = false>(options?: Options<CreateFeedData, ThrowOnError>) => (options?.client ?? client).post<CreateFeedResponses, CreateFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds',
     ...options,
@@ -43,7 +43,7 @@ export const postNifeedV1Feeds = <ThrowOnError extends boolean = false>(options?
 /**
  * Delete feed and its packages.
  */
-export const deleteNifeedV1FeedsByFeedId = <ThrowOnError extends boolean = false>(options: Options<DeleteNifeedV1FeedsByFeedIdData, ThrowOnError>) => (options.client ?? client).delete<DeleteNifeedV1FeedsByFeedIdResponses, DeleteNifeedV1FeedsByFeedIdErrors, ThrowOnError>({
+export const deleteFeed = <ThrowOnError extends boolean = false>(options: Options<DeleteFeedData, ThrowOnError>) => (options.client ?? client).delete<DeleteFeedResponses, DeleteFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}',
     ...options
@@ -52,7 +52,7 @@ export const deleteNifeedV1FeedsByFeedId = <ThrowOnError extends boolean = false
 /**
  * Query feed by ID.
  */
-export const getNifeedV1FeedsByFeedId = <ThrowOnError extends boolean = false>(options: Options<GetNifeedV1FeedsByFeedIdData, ThrowOnError>) => (options.client ?? client).get<GetNifeedV1FeedsByFeedIdResponses, GetNifeedV1FeedsByFeedIdErrors, ThrowOnError>({
+export const getFeedById = <ThrowOnError extends boolean = false>(options: Options<GetFeedByIdData, ThrowOnError>) => (options.client ?? client).get<GetFeedByIdResponses, GetFeedByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}',
     ...options
@@ -61,7 +61,7 @@ export const getNifeedV1FeedsByFeedId = <ThrowOnError extends boolean = false>(o
 /**
  * Update feed metadata.
  */
-export const patchNifeedV1FeedsByFeedIdMetadata = <ThrowOnError extends boolean = false>(options: Options<PatchNifeedV1FeedsByFeedIdMetadataData, ThrowOnError>) => (options.client ?? client).patch<PatchNifeedV1FeedsByFeedIdMetadataResponses, PatchNifeedV1FeedsByFeedIdMetadataErrors, ThrowOnError>({
+export const updateFeedMetadata = <ThrowOnError extends boolean = false>(options: Options<UpdateFeedMetadataData, ThrowOnError>) => (options.client ?? client).patch<UpdateFeedMetadataResponses, UpdateFeedMetadataErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}/metadata',
     ...options,
@@ -74,7 +74,7 @@ export const patchNifeedV1FeedsByFeedIdMetadata = <ThrowOnError extends boolean 
 /**
  * Delete multiple feeds and their packages.
  */
-export const postNifeedV1DeleteFeeds = <ThrowOnError extends boolean = false>(options?: Options<PostNifeedV1DeleteFeedsData, ThrowOnError>) => (options?.client ?? client).post<PostNifeedV1DeleteFeedsResponses, PostNifeedV1DeleteFeedsErrors, ThrowOnError>({
+export const deleteFeeds = <ThrowOnError extends boolean = false>(options?: Options<DeleteFeedsData, ThrowOnError>) => (options?.client ?? client).post<DeleteFeedsResponses, DeleteFeedsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/delete-feeds',
     ...options,
@@ -87,7 +87,7 @@ export const postNifeedV1DeleteFeeds = <ThrowOnError extends boolean = false>(op
 /**
  * Replicate a feed.
  */
-export const postNifeedV1ReplicateFeed = <ThrowOnError extends boolean = false>(options?: Options<PostNifeedV1ReplicateFeedData, ThrowOnError>) => (options?.client ?? client).post<PostNifeedV1ReplicateFeedResponses, PostNifeedV1ReplicateFeedErrors, ThrowOnError>({
+export const replicateFeed = <ThrowOnError extends boolean = false>(options?: Options<ReplicateFeedData, ThrowOnError>) => (options?.client ?? client).post<ReplicateFeedResponses, ReplicateFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/replicate-feed',
     ...options,
@@ -100,7 +100,7 @@ export const postNifeedV1ReplicateFeed = <ThrowOnError extends boolean = false>(
 /**
  * Replicate multiple feeds.
  */
-export const postNifeedV1ReplicateFeeds = <ThrowOnError extends boolean = false>(options?: Options<PostNifeedV1ReplicateFeedsData, ThrowOnError>) => (options?.client ?? client).post<PostNifeedV1ReplicateFeedsResponses, PostNifeedV1ReplicateFeedsErrors, ThrowOnError>({
+export const replicateFeeds = <ThrowOnError extends boolean = false>(options?: Options<ReplicateFeedsData, ThrowOnError>) => (options?.client ?? client).post<ReplicateFeedsResponses, ReplicateFeedsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/replicate-feeds',
     ...options,
@@ -113,7 +113,7 @@ export const postNifeedV1ReplicateFeeds = <ThrowOnError extends boolean = false>
 /**
  * Asynchronously checks for updates to a feed.
  */
-export const postNifeedV1FeedsByFeedIdCheckForUpdates = <ThrowOnError extends boolean = false>(options: Options<PostNifeedV1FeedsByFeedIdCheckForUpdatesData, ThrowOnError>) => (options.client ?? client).post<PostNifeedV1FeedsByFeedIdCheckForUpdatesResponses, PostNifeedV1FeedsByFeedIdCheckForUpdatesErrors, ThrowOnError>({
+export const checkFeedForUpdates = <ThrowOnError extends boolean = false>(options: Options<CheckFeedForUpdatesData, ThrowOnError>) => (options.client ?? client).post<CheckFeedForUpdatesResponses, CheckFeedForUpdatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}/check-for-updates',
     ...options
@@ -122,7 +122,7 @@ export const postNifeedV1FeedsByFeedIdCheckForUpdates = <ThrowOnError extends bo
 /**
  * Asynchronously apply updates for a feed.
  */
-export const postNifeedV1FeedsByFeedIdApplyUpdates = <ThrowOnError extends boolean = false>(options: Options<PostNifeedV1FeedsByFeedIdApplyUpdatesData, ThrowOnError>) => (options.client ?? client).post<PostNifeedV1FeedsByFeedIdApplyUpdatesResponses, PostNifeedV1FeedsByFeedIdApplyUpdatesErrors, ThrowOnError>({
+export const applyUpdatesForFeed = <ThrowOnError extends boolean = false>(options: Options<ApplyUpdatesForFeedData, ThrowOnError>) => (options.client ?? client).post<ApplyUpdatesForFeedResponses, ApplyUpdatesForFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}/apply-updates',
     ...options,
@@ -135,7 +135,7 @@ export const postNifeedV1FeedsByFeedIdApplyUpdates = <ThrowOnError extends boole
 /**
  * Get update descriptor list by ID
  */
-export const getNifeedV1FeedUpdatesByUpdateDescriptorListId = <ThrowOnError extends boolean = false>(options: Options<GetNifeedV1FeedUpdatesByUpdateDescriptorListIdData, ThrowOnError>) => (options.client ?? client).get<GetNifeedV1FeedUpdatesByUpdateDescriptorListIdResponses, GetNifeedV1FeedUpdatesByUpdateDescriptorListIdErrors, ThrowOnError>({
+export const getUpdateDescriptors = <ThrowOnError extends boolean = false>(options: Options<GetUpdateDescriptorsData, ThrowOnError>) => (options.client ?? client).get<GetUpdateDescriptorsResponses, GetUpdateDescriptorsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feed-updates/{updateDescriptorListId}',
     ...options
@@ -144,7 +144,7 @@ export const getNifeedV1FeedUpdatesByUpdateDescriptorListId = <ThrowOnError exte
 /**
  * Enqueues a job for package cleanup
  */
-export const postNifeedV1FeedsByFeedIdClean = <ThrowOnError extends boolean = false>(options: Options<PostNifeedV1FeedsByFeedIdCleanData, ThrowOnError>) => (options.client ?? client).post<PostNifeedV1FeedsByFeedIdCleanResponses, PostNifeedV1FeedsByFeedIdCleanErrors, ThrowOnError>({
+export const cleanFeed = <ThrowOnError extends boolean = false>(options: Options<CleanFeedData, ThrowOnError>) => (options.client ?? client).post<CleanFeedResponses, CleanFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}/clean',
     ...options
@@ -153,7 +153,7 @@ export const postNifeedV1FeedsByFeedIdClean = <ThrowOnError extends boolean = fa
 /**
  * Download Packages.gz.
  */
-export const getNifeedV1FeedsByFeedIdFilesPackagesGz = <ThrowOnError extends boolean = false>(options: Options<GetNifeedV1FeedsByFeedIdFilesPackagesGzData, ThrowOnError>) => (options.client ?? client).get<GetNifeedV1FeedsByFeedIdFilesPackagesGzResponses, GetNifeedV1FeedsByFeedIdFilesPackagesGzErrors, ThrowOnError>({
+export const downloadFeedContentGz = <ThrowOnError extends boolean = false>(options: Options<DownloadFeedContentGzData, ThrowOnError>) => (options.client ?? client).get<DownloadFeedContentGzResponses, DownloadFeedContentGzErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}/files/Packages.gz',
     ...options
@@ -162,7 +162,7 @@ export const getNifeedV1FeedsByFeedIdFilesPackagesGz = <ThrowOnError extends boo
 /**
  * HEAD request for Feed content.
  */
-export const headNifeedV1FeedsByFeedIdFilesPackagesGz = <ThrowOnError extends boolean = false>(options: Options<HeadNifeedV1FeedsByFeedIdFilesPackagesGzData, ThrowOnError>) => (options.client ?? client).head<HeadNifeedV1FeedsByFeedIdFilesPackagesGzResponses, HeadNifeedV1FeedsByFeedIdFilesPackagesGzErrors, ThrowOnError>({
+export const headFeedContentGz = <ThrowOnError extends boolean = false>(options: Options<HeadFeedContentGzData, ThrowOnError>) => (options.client ?? client).head<HeadFeedContentGzResponses, HeadFeedContentGzErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}/files/Packages.gz',
     ...options
@@ -171,7 +171,7 @@ export const headNifeedV1FeedsByFeedIdFilesPackagesGz = <ThrowOnError extends bo
 /**
  * Download Package file.
  */
-export const getNifeedV1FeedsByFeedIdFilesPackages = <ThrowOnError extends boolean = false>(options: Options<GetNifeedV1FeedsByFeedIdFilesPackagesData, ThrowOnError>) => (options.client ?? client).get<GetNifeedV1FeedsByFeedIdFilesPackagesResponses, GetNifeedV1FeedsByFeedIdFilesPackagesErrors, ThrowOnError>({
+export const downloadFeedContent = <ThrowOnError extends boolean = false>(options: Options<DownloadFeedContentData, ThrowOnError>) => (options.client ?? client).get<DownloadFeedContentResponses, DownloadFeedContentErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}/files/Packages',
     ...options
@@ -180,7 +180,7 @@ export const getNifeedV1FeedsByFeedIdFilesPackages = <ThrowOnError extends boole
 /**
  * HEAD request for Feed content.
  */
-export const headNifeedV1FeedsByFeedIdFilesPackages = <ThrowOnError extends boolean = false>(options: Options<HeadNifeedV1FeedsByFeedIdFilesPackagesData, ThrowOnError>) => (options.client ?? client).head<HeadNifeedV1FeedsByFeedIdFilesPackagesResponses, HeadNifeedV1FeedsByFeedIdFilesPackagesErrors, ThrowOnError>({
+export const headFeedContent = <ThrowOnError extends boolean = false>(options: Options<HeadFeedContentData, ThrowOnError>) => (options.client ?? client).head<HeadFeedContentResponses, HeadFeedContentErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}/files/Packages',
     ...options
@@ -189,7 +189,7 @@ export const headNifeedV1FeedsByFeedIdFilesPackages = <ThrowOnError extends bool
 /**
  * Query jobs for a feed id.
  */
-export const getNifeedV1FeedsByFeedIdJobs = <ThrowOnError extends boolean = false>(options: Options<GetNifeedV1FeedsByFeedIdJobsData, ThrowOnError>) => (options.client ?? client).get<GetNifeedV1FeedsByFeedIdJobsResponses, GetNifeedV1FeedsByFeedIdJobsErrors, ThrowOnError>({
+export const queryJobsForFeed = <ThrowOnError extends boolean = false>(options: Options<QueryJobsForFeedData, ThrowOnError>) => (options.client ?? client).get<QueryJobsForFeedResponses, QueryJobsForFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}/jobs',
     ...options
@@ -198,7 +198,7 @@ export const getNifeedV1FeedsByFeedIdJobs = <ThrowOnError extends boolean = fals
 /**
  * Query jobs for a job id.
  */
-export const getNifeedV1JobsByJobId = <ThrowOnError extends boolean = false>(options: Options<GetNifeedV1JobsByJobIdData, ThrowOnError>) => (options.client ?? client).get<GetNifeedV1JobsByJobIdResponses, GetNifeedV1JobsByJobIdErrors, ThrowOnError>({
+export const getJob = <ThrowOnError extends boolean = false>(options: Options<GetJobData, ThrowOnError>) => (options.client ?? client).get<GetJobResponses, GetJobErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/jobs/{jobId}',
     ...options
@@ -207,7 +207,7 @@ export const getNifeedV1JobsByJobId = <ThrowOnError extends boolean = false>(opt
 /**
  * Query packages for a feed.
  */
-export const getNifeedV1FeedsByFeedIdPackages = <ThrowOnError extends boolean = false>(options: Options<GetNifeedV1FeedsByFeedIdPackagesData, ThrowOnError>) => (options.client ?? client).get<GetNifeedV1FeedsByFeedIdPackagesResponses, GetNifeedV1FeedsByFeedIdPackagesErrors, ThrowOnError>({
+export const queryPackagesForFeed = <ThrowOnError extends boolean = false>(options: Options<QueryPackagesForFeedData, ThrowOnError>) => (options.client ?? client).get<QueryPackagesForFeedResponses, QueryPackagesForFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}/packages',
     ...options
@@ -230,7 +230,7 @@ export const uploadPackageToFeedAsync = <ThrowOnError extends boolean = false>(o
 /**
  * Delete a package.
  */
-export const deleteNifeedV1PackagesByPackageId = <ThrowOnError extends boolean = false>(options: Options<DeleteNifeedV1PackagesByPackageIdData, ThrowOnError>) => (options.client ?? client).delete<DeleteNifeedV1PackagesByPackageIdResponses, DeleteNifeedV1PackagesByPackageIdErrors, ThrowOnError>({
+export const deletePackageById = <ThrowOnError extends boolean = false>(options: Options<DeletePackageByIdData, ThrowOnError>) => (options.client ?? client).delete<DeletePackageByIdResponses, DeletePackageByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/packages/{packageId}',
     ...options
@@ -239,7 +239,7 @@ export const deleteNifeedV1PackagesByPackageId = <ThrowOnError extends boolean =
 /**
  * Get package by ID.
  */
-export const getNifeedV1PackagesByPackageId = <ThrowOnError extends boolean = false>(options: Options<GetNifeedV1PackagesByPackageIdData, ThrowOnError>) => (options.client ?? client).get<GetNifeedV1PackagesByPackageIdResponses, GetNifeedV1PackagesByPackageIdErrors, ThrowOnError>({
+export const getPackageById = <ThrowOnError extends boolean = false>(options: Options<GetPackageByIdData, ThrowOnError>) => (options.client ?? client).get<GetPackageByIdResponses, GetPackageByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/packages/{packageId}',
     ...options
@@ -248,7 +248,7 @@ export const getNifeedV1PackagesByPackageId = <ThrowOnError extends boolean = fa
 /**
  * Delete multiple packages.
  */
-export const postNifeedV1DeletePackages = <ThrowOnError extends boolean = false>(options?: Options<PostNifeedV1DeletePackagesData, ThrowOnError>) => (options?.client ?? client).post<PostNifeedV1DeletePackagesResponses, PostNifeedV1DeletePackagesErrors, ThrowOnError>({
+export const deletePackages = <ThrowOnError extends boolean = false>(options?: Options<DeletePackagesData, ThrowOnError>) => (options?.client ?? client).post<DeletePackagesResponses, DeletePackagesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/delete-packages',
     ...options,
@@ -261,7 +261,7 @@ export const postNifeedV1DeletePackages = <ThrowOnError extends boolean = false>
 /**
  * Download a package from a feed.
  */
-export const getNifeedV1FeedsByFeedIdFilesByFileName = <ThrowOnError extends boolean = false>(options: Options<GetNifeedV1FeedsByFeedIdFilesByFileNameData, ThrowOnError>) => (options.client ?? client).get<GetNifeedV1FeedsByFeedIdFilesByFileNameResponses, GetNifeedV1FeedsByFeedIdFilesByFileNameErrors, ThrowOnError>({
+export const downloadPackage = <ThrowOnError extends boolean = false>(options: Options<DownloadPackageData, ThrowOnError>) => (options.client ?? client).get<DownloadPackageResponses, DownloadPackageErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}/files/{fileName}',
     ...options
@@ -270,7 +270,7 @@ export const getNifeedV1FeedsByFeedIdFilesByFileName = <ThrowOnError extends boo
 /**
  * Returns headers for downloading a package from a feed.
  */
-export const headNifeedV1FeedsByFeedIdFilesByFileName = <ThrowOnError extends boolean = false>(options: Options<HeadNifeedV1FeedsByFeedIdFilesByFileNameData, ThrowOnError>) => (options.client ?? client).head<HeadNifeedV1FeedsByFeedIdFilesByFileNameResponses, HeadNifeedV1FeedsByFeedIdFilesByFileNameErrors, ThrowOnError>({
+export const downloadPackageHead = <ThrowOnError extends boolean = false>(options: Options<DownloadPackageHeadData, ThrowOnError>) => (options.client ?? client).head<DownloadPackageHeadResponses, DownloadPackageHeadErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1/feeds/{feedId}/files/{fileName}',
     ...options
@@ -279,7 +279,7 @@ export const headNifeedV1FeedsByFeedIdFilesByFileName = <ThrowOnError extends bo
 /**
  * Returns information about API versions and available operations.
  */
-export const getNifeed = <ThrowOnError extends boolean = false>(options?: Options<GetNifeedData, ThrowOnError>) => (options?.client ?? client).get<GetNifeedResponses, unknown, ThrowOnError>({
+export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed',
     ...options
@@ -288,7 +288,7 @@ export const getNifeed = <ThrowOnError extends boolean = false>(options?: Option
 /**
  * Returns information and available operations for version 1 of the API.
  */
-export const getNifeedV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNifeedV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNifeedV1Responses, unknown, ThrowOnError>({
+export const getV1 = <ThrowOnError extends boolean = false>(options?: Options<GetV1Data, ThrowOnError>) => (options?.client ?? client).get<GetV1Responses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nifeed/v1',
     ...options

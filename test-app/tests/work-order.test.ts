@@ -20,18 +20,19 @@
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
-  getNiworkorder,
-  getNiworkorderV1,
+  rootEndPoint as getNiworkorder,
+  v1OperationsRootEndPoint as getNiworkorderV1,
   /** @deprecated use postNiworkitemV1QueryWorkitems */
-  postNiworkorderV1QueryTestplans,
+  queryTestPlans as postNiworkorderV1QueryTestplans,
   /** @deprecated use postNiworkitemV1QueryWorkflows */
-  postNiworkorderV1QueryWorkflows,
-  postNiworkorderV1QueryWorkorders,
-  getNiworkorderV1WorkordersSummary,
+  queryWorkflows as postNiworkorderV1QueryWorkflows,
+  queryWorkOrders as postNiworkorderV1QueryWorkorders,
+  getWorkOrdersSummary as getNiworkorderV1WorkordersSummary,
 } from '../../src/generated/work-order';
 import { createClient, createConfig } from '../../src/generated/work-order/client';
+import { client as generatedClient } from '../../src/generated/work-order/client.gen';
 
 const configured = isConfigured();
 
@@ -39,9 +40,10 @@ describe.skipIf(!configured)('Work Order Service (DEPRECATED — use work-item)'
   let client: ReturnType<typeof createClient>;
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

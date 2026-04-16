@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetNisysmgmtData, GetNisysmgmtResponses, GetNisysmgmtV1Data, GetNisysmgmtV1GetJobsSummaryData, GetNisysmgmtV1GetJobsSummaryErrors, GetNisysmgmtV1GetJobsSummaryResponses, GetNisysmgmtV1GetPendingSystemsSummaryData, GetNisysmgmtV1GetPendingSystemsSummaryErrors, GetNisysmgmtV1GetPendingSystemsSummaryResponses, GetNisysmgmtV1GetSystemsKeysData, GetNisysmgmtV1GetSystemsKeysErrors, GetNisysmgmtV1GetSystemsKeysResponses, GetNisysmgmtV1GetSystemsSummaryData, GetNisysmgmtV1GetSystemsSummaryErrors, GetNisysmgmtV1GetSystemsSummaryResponses, GetNisysmgmtV1JobsData, GetNisysmgmtV1JobsErrors, GetNisysmgmtV1JobsResponses, GetNisysmgmtV1Responses, GetNisysmgmtV1SystemsData, GetNisysmgmtV1SystemsErrors, GetNisysmgmtV1SystemsResponses, PatchNisysmgmtV1SystemsManagedByIdData, PatchNisysmgmtV1SystemsManagedByIdErrors, PatchNisysmgmtV1SystemsManagedByIdResponses, PostNisysmgmtV1CancelJobsData, PostNisysmgmtV1CancelJobsErrors, PostNisysmgmtV1CancelJobsResponses, PostNisysmgmtV1GenerateSystemsReportData, PostNisysmgmtV1GenerateSystemsReportErrors, PostNisysmgmtV1GenerateSystemsReportResponses, PostNisysmgmtV1GetSystemsKeysData, PostNisysmgmtV1GetSystemsKeysErrors, PostNisysmgmtV1GetSystemsKeysResponses, PostNisysmgmtV1JobsData, PostNisysmgmtV1JobsErrors, PostNisysmgmtV1JobsResponses, PostNisysmgmtV1ManageSystemsKeysData, PostNisysmgmtV1ManageSystemsKeysErrors, PostNisysmgmtV1ManageSystemsKeysResponses, PostNisysmgmtV1MaterializedSearchSystemsData, PostNisysmgmtV1MaterializedSearchSystemsErrors, PostNisysmgmtV1MaterializedSearchSystemsResponses, PostNisysmgmtV1QueryJobsData, PostNisysmgmtV1QueryJobsErrors, PostNisysmgmtV1QueryJobsResponses, PostNisysmgmtV1QuerySystemsData, PostNisysmgmtV1QuerySystemsErrors, PostNisysmgmtV1QuerySystemsResponses, PostNisysmgmtV1RemoveSystemsData, PostNisysmgmtV1RemoveSystemsErrors, PostNisysmgmtV1RemoveSystemsResponses, PostNisysmgmtV1UpdateSystemsData, PostNisysmgmtV1UpdateSystemsErrors, PostNisysmgmtV1UpdateSystemsResponses, PostNisysmgmtV1VirtualData, PostNisysmgmtV1VirtualErrors, PostNisysmgmtV1VirtualGenerateSystemApikeyData, PostNisysmgmtV1VirtualGenerateSystemApikeyErrors, PostNisysmgmtV1VirtualGenerateSystemApikeyResponses, PostNisysmgmtV1VirtualResponses } from './types.gen';
+import type { CancelJobsData, CancelJobsErrors, CancelJobsResponses, CreateJobData, CreateJobErrors, CreateJobResponses, CreateVirtualSystemData, CreateVirtualSystemErrors, CreateVirtualSystemResponses, GenerateSystemsReportData, GenerateSystemsReportErrors, GenerateSystemsReportResponses, GenerateVirtualSystemApiKeyData, GenerateVirtualSystemApiKeyErrors, GenerateVirtualSystemApiKeyResponses, GetAllSystemsKeysData, GetAllSystemsKeysErrors, GetAllSystemsKeysResponses, GetJobsData, GetJobsErrors, GetJobsResponses, GetJobsSummaryData, GetJobsSummaryErrors, GetJobsSummaryResponses, GetPendingSystemsSummaryData, GetPendingSystemsSummaryErrors, GetPendingSystemsSummaryResponses, GetSystemsData, GetSystemsErrors, GetSystemsKeysData, GetSystemsKeysErrors, GetSystemsKeysResponses, GetSystemsResponses, GetSystemsSummaryData, GetSystemsSummaryErrors, GetSystemsSummaryResponses, ManageSystemsKeysData, ManageSystemsKeysErrors, ManageSystemsKeysResponses, QueryJobsData, QueryJobsErrors, QueryJobsResponses, QuerySystemsData, QuerySystemsErrors, QuerySystemsResponses, RemoveSystemsData, RemoveSystemsErrors, RemoveSystemsResponses, RootEndpointData, RootEndpointResponses, SearchSystemsData, SearchSystemsErrors, SearchSystemsResponses, UpdateSystemMetadataData, UpdateSystemMetadataErrors, UpdateSystemMetadataResponses, UpdateSystemsMetadataData, UpdateSystemsMetadataErrors, UpdateSystemsMetadataResponses, V1Data, V1Responses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -21,7 +21,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Get jobs
  */
-export const getNisysmgmtV1Jobs = <ThrowOnError extends boolean = false>(options?: Options<GetNisysmgmtV1JobsData, ThrowOnError>) => (options?.client ?? client).get<GetNisysmgmtV1JobsResponses, GetNisysmgmtV1JobsErrors, ThrowOnError>({
+export const getJobs = <ThrowOnError extends boolean = false>(options?: Options<GetJobsData, ThrowOnError>) => (options?.client ?? client).get<GetJobsResponses, GetJobsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/jobs',
     ...options
@@ -30,7 +30,7 @@ export const getNisysmgmtV1Jobs = <ThrowOnError extends boolean = false>(options
 /**
  * Create job
  */
-export const postNisysmgmtV1Jobs = <ThrowOnError extends boolean = false>(options?: Options<PostNisysmgmtV1JobsData, ThrowOnError>) => (options?.client ?? client).post<PostNisysmgmtV1JobsResponses, PostNisysmgmtV1JobsErrors, ThrowOnError>({
+export const createJob = <ThrowOnError extends boolean = false>(options?: Options<CreateJobData, ThrowOnError>) => (options?.client ?? client).post<CreateJobResponses, CreateJobErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/jobs',
     ...options,
@@ -43,7 +43,7 @@ export const postNisysmgmtV1Jobs = <ThrowOnError extends boolean = false>(option
 /**
  * Get jobs summary
  */
-export const getNisysmgmtV1GetJobsSummary = <ThrowOnError extends boolean = false>(options?: Options<GetNisysmgmtV1GetJobsSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetNisysmgmtV1GetJobsSummaryResponses, GetNisysmgmtV1GetJobsSummaryErrors, ThrowOnError>({
+export const getJobsSummary = <ThrowOnError extends boolean = false>(options?: Options<GetJobsSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetJobsSummaryResponses, GetJobsSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/get-jobs-summary',
     ...options
@@ -52,7 +52,7 @@ export const getNisysmgmtV1GetJobsSummary = <ThrowOnError extends boolean = fals
 /**
  * Query jobs
  */
-export const postNisysmgmtV1QueryJobs = <ThrowOnError extends boolean = false>(options?: Options<PostNisysmgmtV1QueryJobsData, ThrowOnError>) => (options?.client ?? client).post<PostNisysmgmtV1QueryJobsResponses, PostNisysmgmtV1QueryJobsErrors, ThrowOnError>({
+export const queryJobs = <ThrowOnError extends boolean = false>(options?: Options<QueryJobsData, ThrowOnError>) => (options?.client ?? client).post<QueryJobsResponses, QueryJobsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/query-jobs',
     ...options,
@@ -65,7 +65,7 @@ export const postNisysmgmtV1QueryJobs = <ThrowOnError extends boolean = false>(o
 /**
  * Cancel jobs
  */
-export const postNisysmgmtV1CancelJobs = <ThrowOnError extends boolean = false>(options?: Options<PostNisysmgmtV1CancelJobsData, ThrowOnError>) => (options?.client ?? client).post<PostNisysmgmtV1CancelJobsResponses, PostNisysmgmtV1CancelJobsErrors, ThrowOnError>({
+export const cancelJobs = <ThrowOnError extends boolean = false>(options?: Options<CancelJobsData, ThrowOnError>) => (options?.client ?? client).post<CancelJobsResponses, CancelJobsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/cancel-jobs',
     ...options,
@@ -78,7 +78,7 @@ export const postNisysmgmtV1CancelJobs = <ThrowOnError extends boolean = false>(
 /**
  * API information
  */
-export const getNisysmgmt = <ThrowOnError extends boolean = false>(options?: Options<GetNisysmgmtData, ThrowOnError>) => (options?.client ?? client).get<GetNisysmgmtResponses, unknown, ThrowOnError>({
+export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt',
     ...options
@@ -87,7 +87,7 @@ export const getNisysmgmt = <ThrowOnError extends boolean = false>(options?: Opt
 /**
  * API version information
  */
-export const getNisysmgmtV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNisysmgmtV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNisysmgmtV1Responses, unknown, ThrowOnError>({
+export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Data, ThrowOnError>) => (options?.client ?? client).get<V1Responses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1',
     ...options
@@ -96,7 +96,7 @@ export const getNisysmgmtV1 = <ThrowOnError extends boolean = false>(options?: O
 /**
  * Advanced system search.
  */
-export const postNisysmgmtV1MaterializedSearchSystems = <ThrowOnError extends boolean = false>(options?: Options<PostNisysmgmtV1MaterializedSearchSystemsData, ThrowOnError>) => (options?.client ?? client).post<PostNisysmgmtV1MaterializedSearchSystemsResponses, PostNisysmgmtV1MaterializedSearchSystemsErrors, ThrowOnError>({
+export const searchSystems = <ThrowOnError extends boolean = false>(options?: Options<SearchSystemsData, ThrowOnError>) => (options?.client ?? client).post<SearchSystemsResponses, SearchSystemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/materialized/search-systems',
     ...options,
@@ -109,7 +109,7 @@ export const postNisysmgmtV1MaterializedSearchSystems = <ThrowOnError extends bo
 /**
  * Query systems
  */
-export const postNisysmgmtV1QuerySystems = <ThrowOnError extends boolean = false>(options?: Options<PostNisysmgmtV1QuerySystemsData, ThrowOnError>) => (options?.client ?? client).post<PostNisysmgmtV1QuerySystemsResponses, PostNisysmgmtV1QuerySystemsErrors, ThrowOnError>({
+export const querySystems = <ThrowOnError extends boolean = false>(options?: Options<QuerySystemsData, ThrowOnError>) => (options?.client ?? client).post<QuerySystemsResponses, QuerySystemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/query-systems',
     ...options,
@@ -122,7 +122,7 @@ export const postNisysmgmtV1QuerySystems = <ThrowOnError extends boolean = false
 /**
  * Generate systems report
  */
-export const postNisysmgmtV1GenerateSystemsReport = <ThrowOnError extends boolean = false>(options?: Options<PostNisysmgmtV1GenerateSystemsReportData, ThrowOnError>) => (options?.client ?? client).post<PostNisysmgmtV1GenerateSystemsReportResponses, PostNisysmgmtV1GenerateSystemsReportErrors, ThrowOnError>({
+export const generateSystemsReport = <ThrowOnError extends boolean = false>(options?: Options<GenerateSystemsReportData, ThrowOnError>) => (options?.client ?? client).post<GenerateSystemsReportResponses, GenerateSystemsReportErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/generate-systems-report',
     ...options,
@@ -135,7 +135,7 @@ export const postNisysmgmtV1GenerateSystemsReport = <ThrowOnError extends boolea
 /**
  * Get pending systems summary
  */
-export const getNisysmgmtV1GetPendingSystemsSummary = <ThrowOnError extends boolean = false>(options?: Options<GetNisysmgmtV1GetPendingSystemsSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetNisysmgmtV1GetPendingSystemsSummaryResponses, GetNisysmgmtV1GetPendingSystemsSummaryErrors, ThrowOnError>({
+export const getPendingSystemsSummary = <ThrowOnError extends boolean = false>(options?: Options<GetPendingSystemsSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetPendingSystemsSummaryResponses, GetPendingSystemsSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/get-pending-systems-summary',
     ...options
@@ -144,7 +144,7 @@ export const getNisysmgmtV1GetPendingSystemsSummary = <ThrowOnError extends bool
 /**
  * Get systems summary
  */
-export const getNisysmgmtV1GetSystemsSummary = <ThrowOnError extends boolean = false>(options?: Options<GetNisysmgmtV1GetSystemsSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetNisysmgmtV1GetSystemsSummaryResponses, GetNisysmgmtV1GetSystemsSummaryErrors, ThrowOnError>({
+export const getSystemsSummary = <ThrowOnError extends boolean = false>(options?: Options<GetSystemsSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetSystemsSummaryResponses, GetSystemsSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/get-systems-summary',
     ...options
@@ -153,7 +153,7 @@ export const getNisysmgmtV1GetSystemsSummary = <ThrowOnError extends boolean = f
 /**
  * Get systems keys for all systems
  */
-export const getNisysmgmtV1GetSystemsKeys = <ThrowOnError extends boolean = false>(options?: Options<GetNisysmgmtV1GetSystemsKeysData, ThrowOnError>) => (options?.client ?? client).get<GetNisysmgmtV1GetSystemsKeysResponses, GetNisysmgmtV1GetSystemsKeysErrors, ThrowOnError>({
+export const getAllSystemsKeys = <ThrowOnError extends boolean = false>(options?: Options<GetAllSystemsKeysData, ThrowOnError>) => (options?.client ?? client).get<GetAllSystemsKeysResponses, GetAllSystemsKeysErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/get-systems-keys',
     ...options
@@ -162,7 +162,7 @@ export const getNisysmgmtV1GetSystemsKeys = <ThrowOnError extends boolean = fals
 /**
  * Get keys for a set of systemes
  */
-export const postNisysmgmtV1GetSystemsKeys = <ThrowOnError extends boolean = false>(options?: Options<PostNisysmgmtV1GetSystemsKeysData, ThrowOnError>) => (options?.client ?? client).post<PostNisysmgmtV1GetSystemsKeysResponses, PostNisysmgmtV1GetSystemsKeysErrors, ThrowOnError>({
+export const getSystemsKeys = <ThrowOnError extends boolean = false>(options?: Options<GetSystemsKeysData, ThrowOnError>) => (options?.client ?? client).post<GetSystemsKeysResponses, GetSystemsKeysErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/get-systems-keys',
     ...options,
@@ -175,7 +175,7 @@ export const postNisysmgmtV1GetSystemsKeys = <ThrowOnError extends boolean = fal
 /**
  * Manage systems keys
  */
-export const postNisysmgmtV1ManageSystemsKeys = <ThrowOnError extends boolean = false>(options?: Options<PostNisysmgmtV1ManageSystemsKeysData, ThrowOnError>) => (options?.client ?? client).post<PostNisysmgmtV1ManageSystemsKeysResponses, PostNisysmgmtV1ManageSystemsKeysErrors, ThrowOnError>({
+export const manageSystemsKeys = <ThrowOnError extends boolean = false>(options?: Options<ManageSystemsKeysData, ThrowOnError>) => (options?.client ?? client).post<ManageSystemsKeysResponses, ManageSystemsKeysErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/manage-systems-keys',
     ...options,
@@ -188,7 +188,7 @@ export const postNisysmgmtV1ManageSystemsKeys = <ThrowOnError extends boolean = 
 /**
  * Create virtual system
  */
-export const postNisysmgmtV1Virtual = <ThrowOnError extends boolean = false>(options?: Options<PostNisysmgmtV1VirtualData, ThrowOnError>) => (options?.client ?? client).post<PostNisysmgmtV1VirtualResponses, PostNisysmgmtV1VirtualErrors, ThrowOnError>({
+export const createVirtualSystem = <ThrowOnError extends boolean = false>(options?: Options<CreateVirtualSystemData, ThrowOnError>) => (options?.client ?? client).post<CreateVirtualSystemResponses, CreateVirtualSystemErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/virtual',
     ...options,
@@ -201,7 +201,7 @@ export const postNisysmgmtV1Virtual = <ThrowOnError extends boolean = false>(opt
 /**
  * Generate API key for a virtual system
  */
-export const postNisysmgmtV1VirtualGenerateSystemApikey = <ThrowOnError extends boolean = false>(options?: Options<PostNisysmgmtV1VirtualGenerateSystemApikeyData, ThrowOnError>) => (options?.client ?? client).post<PostNisysmgmtV1VirtualGenerateSystemApikeyResponses, PostNisysmgmtV1VirtualGenerateSystemApikeyErrors, ThrowOnError>({
+export const generateVirtualSystemApiKey = <ThrowOnError extends boolean = false>(options?: Options<GenerateVirtualSystemApiKeyData, ThrowOnError>) => (options?.client ?? client).post<GenerateVirtualSystemApiKeyResponses, GenerateVirtualSystemApiKeyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/virtual/generate-system-apikey',
     ...options,
@@ -214,7 +214,7 @@ export const postNisysmgmtV1VirtualGenerateSystemApikey = <ThrowOnError extends 
 /**
  * Get systems
  */
-export const getNisysmgmtV1Systems = <ThrowOnError extends boolean = false>(options?: Options<GetNisysmgmtV1SystemsData, ThrowOnError>) => (options?.client ?? client).get<GetNisysmgmtV1SystemsResponses, GetNisysmgmtV1SystemsErrors, ThrowOnError>({
+export const getSystems = <ThrowOnError extends boolean = false>(options?: Options<GetSystemsData, ThrowOnError>) => (options?.client ?? client).get<GetSystemsResponses, GetSystemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/systems',
     ...options
@@ -223,7 +223,7 @@ export const getNisysmgmtV1Systems = <ThrowOnError extends boolean = false>(opti
 /**
  * Remove systems
  */
-export const postNisysmgmtV1RemoveSystems = <ThrowOnError extends boolean = false>(options?: Options<PostNisysmgmtV1RemoveSystemsData, ThrowOnError>) => (options?.client ?? client).post<PostNisysmgmtV1RemoveSystemsResponses, PostNisysmgmtV1RemoveSystemsErrors, ThrowOnError>({
+export const removeSystems = <ThrowOnError extends boolean = false>(options?: Options<RemoveSystemsData, ThrowOnError>) => (options?.client ?? client).post<RemoveSystemsResponses, RemoveSystemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/remove-systems',
     ...options,
@@ -236,7 +236,7 @@ export const postNisysmgmtV1RemoveSystems = <ThrowOnError extends boolean = fals
 /**
  * Update systems metadata
  */
-export const postNisysmgmtV1UpdateSystems = <ThrowOnError extends boolean = false>(options?: Options<PostNisysmgmtV1UpdateSystemsData, ThrowOnError>) => (options?.client ?? client).post<PostNisysmgmtV1UpdateSystemsResponses, PostNisysmgmtV1UpdateSystemsErrors, ThrowOnError>({
+export const updateSystemsMetadata = <ThrowOnError extends boolean = false>(options?: Options<UpdateSystemsMetadataData, ThrowOnError>) => (options?.client ?? client).post<UpdateSystemsMetadataResponses, UpdateSystemsMetadataErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/update-systems',
     ...options,
@@ -249,7 +249,7 @@ export const postNisysmgmtV1UpdateSystems = <ThrowOnError extends boolean = fals
 /**
  * Update system metadata
  */
-export const patchNisysmgmtV1SystemsManagedById = <ThrowOnError extends boolean = false>(options: Options<PatchNisysmgmtV1SystemsManagedByIdData, ThrowOnError>) => (options.client ?? client).patch<PatchNisysmgmtV1SystemsManagedByIdResponses, PatchNisysmgmtV1SystemsManagedByIdErrors, ThrowOnError>({
+export const updateSystemMetadata = <ThrowOnError extends boolean = false>(options: Options<UpdateSystemMetadataData, ThrowOnError>) => (options.client ?? client).patch<UpdateSystemMetadataResponses, UpdateSystemMetadataErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisysmgmt/v1/systems/managed/{id}',
     ...options,

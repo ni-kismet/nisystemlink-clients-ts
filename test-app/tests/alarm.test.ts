@@ -8,14 +8,15 @@
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
-  getNialarm,
-  getNialarmByVersion,
-  postNialarmV1QueryInstancesWithFilter,
-  postNialarmV1QueryInstances,
+  rootEndpoint as getNialarm,
+  rootEndpointWithVersion as getNialarmByVersion,
+  queryAlarmsWithFilter as postNialarmV1QueryInstancesWithFilter,
+  queryAlarms as postNialarmV1QueryInstances,
 } from '../../src/generated/alarm';
 import { createClient, createConfig } from '../../src/generated/alarm/client';
+import { client as generatedClient } from '../../src/generated/alarm/client.gen';
 
 const configured = isConfigured();
 
@@ -23,9 +24,10 @@ describe.skipIf(!configured)('Alarm Service', () => {
   let client: ReturnType<typeof createClient>;
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

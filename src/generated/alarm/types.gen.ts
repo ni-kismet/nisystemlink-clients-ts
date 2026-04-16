@@ -1112,7 +1112,7 @@ export type QueryWithFilterResponseWritable = {
     continuationToken?: string | null;
 };
 
-export type PostNialarmV1AcknowledgeInstancesByInstanceIdData = {
+export type AcknowledgeByInstanceIdsData = {
     /**
      * Information about the alarms to acknowledge.
      */
@@ -1122,16 +1122,16 @@ export type PostNialarmV1AcknowledgeInstancesByInstanceIdData = {
     url: '/nialarm/v1/acknowledge-instances-by-instance-id';
 };
 
-export type PostNialarmV1AcknowledgeInstancesByInstanceIdErrors = {
+export type AcknowledgeByInstanceIdsErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type PostNialarmV1AcknowledgeInstancesByInstanceIdError = PostNialarmV1AcknowledgeInstancesByInstanceIdErrors[keyof PostNialarmV1AcknowledgeInstancesByInstanceIdErrors];
+export type AcknowledgeByInstanceIdsError = AcknowledgeByInstanceIdsErrors[keyof AcknowledgeByInstanceIdsErrors];
 
-export type PostNialarmV1AcknowledgeInstancesByInstanceIdResponses = {
+export type AcknowledgeByInstanceIdsResponses = {
     /**
      * Success - Indicates the request to acknowledge was processed successfully. If any
      * alarms failed to be acknowledged, the included `error` object will contain an
@@ -1140,9 +1140,9 @@ export type PostNialarmV1AcknowledgeInstancesByInstanceIdResponses = {
     200: AcknowledgeByInstanceIdResponse;
 };
 
-export type PostNialarmV1AcknowledgeInstancesByInstanceIdResponse = PostNialarmV1AcknowledgeInstancesByInstanceIdResponses[keyof PostNialarmV1AcknowledgeInstancesByInstanceIdResponses];
+export type AcknowledgeByInstanceIdsResponse = AcknowledgeByInstanceIdsResponses[keyof AcknowledgeByInstanceIdsResponses];
 
-export type PostNialarmV1InstancesData = {
+export type CreateOrUpdateAlarmData = {
     /**
      * Information about the alarm to create or update. If an alarm is being
      * updated, only `alarmId`, `workspace`, and `transition`
@@ -1154,7 +1154,7 @@ export type PostNialarmV1InstancesData = {
     url: '/nialarm/v1/instances';
 };
 
-export type PostNialarmV1InstancesErrors = {
+export type CreateOrUpdateAlarmErrors = {
     /**
      * For requests which would result in an update to an existing alarm, this
      * is returned when the request does not represent a valid transition for
@@ -1169,18 +1169,18 @@ export type PostNialarmV1InstancesErrors = {
     default: ErrorResponse;
 };
 
-export type PostNialarmV1InstancesError = PostNialarmV1InstancesErrors[keyof PostNialarmV1InstancesErrors];
+export type CreateOrUpdateAlarmError = CreateOrUpdateAlarmErrors[keyof CreateOrUpdateAlarmErrors];
 
-export type PostNialarmV1InstancesResponses = {
+export type CreateOrUpdateAlarmResponses = {
     /**
      * OK
      */
     200: CreateOrUpdateAlarmResponse;
 };
 
-export type PostNialarmV1InstancesResponse = PostNialarmV1InstancesResponses[keyof PostNialarmV1InstancesResponses];
+export type CreateOrUpdateAlarmResponse2 = CreateOrUpdateAlarmResponses[keyof CreateOrUpdateAlarmResponses];
 
-export type DeleteNialarmV1InstancesByInstanceIdData = {
+export type DeleteAlarmData = {
     body?: never;
     path: {
         /**
@@ -1192,25 +1192,25 @@ export type DeleteNialarmV1InstancesByInstanceIdData = {
     url: '/nialarm/v1/instances/{instanceId}';
 };
 
-export type DeleteNialarmV1InstancesByInstanceIdErrors = {
+export type DeleteAlarmErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type DeleteNialarmV1InstancesByInstanceIdError = DeleteNialarmV1InstancesByInstanceIdErrors[keyof DeleteNialarmV1InstancesByInstanceIdErrors];
+export type DeleteAlarmError = DeleteAlarmErrors[keyof DeleteAlarmErrors];
 
-export type DeleteNialarmV1InstancesByInstanceIdResponses = {
+export type DeleteAlarmResponses = {
     /**
      * No Content
      */
     204: void;
 };
 
-export type DeleteNialarmV1InstancesByInstanceIdResponse = DeleteNialarmV1InstancesByInstanceIdResponses[keyof DeleteNialarmV1InstancesByInstanceIdResponses];
+export type DeleteAlarmResponse = DeleteAlarmResponses[keyof DeleteAlarmResponses];
 
-export type GetNialarmV1InstancesByInstanceIdData = {
+export type GetAlarmData = {
     body?: never;
     path: {
         /**
@@ -1222,25 +1222,25 @@ export type GetNialarmV1InstancesByInstanceIdData = {
     url: '/nialarm/v1/instances/{instanceId}';
 };
 
-export type GetNialarmV1InstancesByInstanceIdErrors = {
+export type GetAlarmErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type GetNialarmV1InstancesByInstanceIdError = GetNialarmV1InstancesByInstanceIdErrors[keyof GetNialarmV1InstancesByInstanceIdErrors];
+export type GetAlarmError = GetAlarmErrors[keyof GetAlarmErrors];
 
-export type GetNialarmV1InstancesByInstanceIdResponses = {
+export type GetAlarmResponses = {
     /**
      * OK
      */
     200: HttpAlarm;
 };
 
-export type GetNialarmV1InstancesByInstanceIdResponse = GetNialarmV1InstancesByInstanceIdResponses[keyof GetNialarmV1InstancesByInstanceIdResponses];
+export type GetAlarmResponse = GetAlarmResponses[keyof GetAlarmResponses];
 
-export type PostNialarmV1QueryInstancesData = {
+export type QueryAlarmsData = {
     /**
      * Filter information for querying alarms.
      */
@@ -1250,25 +1250,25 @@ export type PostNialarmV1QueryInstancesData = {
     url: '/nialarm/v1/query-instances';
 };
 
-export type PostNialarmV1QueryInstancesErrors = {
+export type QueryAlarmsErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type PostNialarmV1QueryInstancesError = PostNialarmV1QueryInstancesErrors[keyof PostNialarmV1QueryInstancesErrors];
+export type QueryAlarmsError = QueryAlarmsErrors[keyof QueryAlarmsErrors];
 
-export type PostNialarmV1QueryInstancesResponses = {
+export type QueryAlarmsResponses = {
     /**
      * OK
      */
     200: QueryResponse;
 };
 
-export type PostNialarmV1QueryInstancesResponse = PostNialarmV1QueryInstancesResponses[keyof PostNialarmV1QueryInstancesResponses];
+export type QueryAlarmsResponse = QueryAlarmsResponses[keyof QueryAlarmsResponses];
 
-export type PostNialarmV1QueryInstancesWithFilterData = {
+export type QueryAlarmsWithFilterData = {
     /**
      * Filter information for querying alarms.
      */
@@ -1278,25 +1278,25 @@ export type PostNialarmV1QueryInstancesWithFilterData = {
     url: '/nialarm/v1/query-instances-with-filter';
 };
 
-export type PostNialarmV1QueryInstancesWithFilterErrors = {
+export type QueryAlarmsWithFilterErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type PostNialarmV1QueryInstancesWithFilterError = PostNialarmV1QueryInstancesWithFilterErrors[keyof PostNialarmV1QueryInstancesWithFilterErrors];
+export type QueryAlarmsWithFilterError = QueryAlarmsWithFilterErrors[keyof QueryAlarmsWithFilterErrors];
 
-export type PostNialarmV1QueryInstancesWithFilterResponses = {
+export type QueryAlarmsWithFilterResponses = {
     /**
      * OK
      */
     200: QueryWithFilterResponse;
 };
 
-export type PostNialarmV1QueryInstancesWithFilterResponse = PostNialarmV1QueryInstancesWithFilterResponses[keyof PostNialarmV1QueryInstancesWithFilterResponses];
+export type QueryAlarmsWithFilterResponse = QueryAlarmsWithFilterResponses[keyof QueryAlarmsWithFilterResponses];
 
-export type PostNialarmV1DeleteInstancesByInstanceIdData = {
+export type DeleteAlarmsByInstanceIdData = {
     /**
      * Information about the alarms to delete.
      */
@@ -1306,16 +1306,16 @@ export type PostNialarmV1DeleteInstancesByInstanceIdData = {
     url: '/nialarm/v1/delete-instances-by-instance-id';
 };
 
-export type PostNialarmV1DeleteInstancesByInstanceIdErrors = {
+export type DeleteAlarmsByInstanceIdErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type PostNialarmV1DeleteInstancesByInstanceIdError = PostNialarmV1DeleteInstancesByInstanceIdErrors[keyof PostNialarmV1DeleteInstancesByInstanceIdErrors];
+export type DeleteAlarmsByInstanceIdError = DeleteAlarmsByInstanceIdErrors[keyof DeleteAlarmsByInstanceIdErrors];
 
-export type PostNialarmV1DeleteInstancesByInstanceIdResponses = {
+export type DeleteAlarmsByInstanceIdResponses = {
     /**
      * Partial Success - Indicates the request to delete was processed successfully,
      * but one or more instances failed to delete. The included error object will
@@ -1328,25 +1328,25 @@ export type PostNialarmV1DeleteInstancesByInstanceIdResponses = {
     204: void;
 };
 
-export type PostNialarmV1DeleteInstancesByInstanceIdResponse = PostNialarmV1DeleteInstancesByInstanceIdResponses[keyof PostNialarmV1DeleteInstancesByInstanceIdResponses];
+export type DeleteAlarmsByInstanceIdResponse = DeleteAlarmsByInstanceIdResponses[keyof DeleteAlarmsByInstanceIdResponses];
 
-export type GetNialarmData = {
+export type RootEndpointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nialarm';
 };
 
-export type GetNialarmResponses = {
+export type RootEndpointResponses = {
     /**
      * OK
      */
     200: RootEndpointResponse;
 };
 
-export type GetNialarmResponse = GetNialarmResponses[keyof GetNialarmResponses];
+export type RootEndpointResponse2 = RootEndpointResponses[keyof RootEndpointResponses];
 
-export type GetNialarmByVersionData = {
+export type RootEndpointWithVersionData = {
     body?: never;
     path: {
         /**
@@ -1358,20 +1358,20 @@ export type GetNialarmByVersionData = {
     url: '/nialarm/{version}';
 };
 
-export type GetNialarmByVersionErrors = {
+export type RootEndpointWithVersionErrors = {
     /**
      * Error
      */
     default: ErrorResponse;
 };
 
-export type GetNialarmByVersionError = GetNialarmByVersionErrors[keyof GetNialarmByVersionErrors];
+export type RootEndpointWithVersionError = RootEndpointWithVersionErrors[keyof RootEndpointWithVersionErrors];
 
-export type GetNialarmByVersionResponses = {
+export type RootEndpointWithVersionResponses = {
     /**
      * OK
      */
     200: V1Operations;
 };
 
-export type GetNialarmByVersionResponse = GetNialarmByVersionResponses[keyof GetNialarmByVersionResponses];
+export type RootEndpointWithVersionResponse = RootEndpointWithVersionResponses[keyof RootEndpointWithVersionResponses];

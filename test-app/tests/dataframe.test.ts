@@ -11,17 +11,18 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
-  getNidataframe,
-  getNidataframeV1Tables,
-  postNidataframeV1Tables,
-  postNidataframeV1QueryTables,
-  postNidataframeV1TablesByIdData,
-  postNidataframeV1TablesByIdQueryData,
-  deleteNidataframeV1TablesById,
+  rootEndpoint as getNidataframe,
+  getTables as getNidataframeV1Tables,
+  createTable as postNidataframeV1Tables,
+  queryTables as postNidataframeV1QueryTables,
+  postTableData as postNidataframeV1TablesByIdData,
+  queryTableData as postNidataframeV1TablesByIdQueryData,
+  deleteTable as deleteNidataframeV1TablesById,
 } from '../../src/generated/dataframe';
 import { createClient, createConfig } from '../../src/generated/dataframe/client';
+import { client as generatedClient } from '../../src/generated/dataframe/client.gen';
 
 const configured = isConfigured();
 
@@ -30,9 +31,10 @@ describe.skipIf(!configured)('DataFrame Service', () => {
   let createdTableId: string | undefined;
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

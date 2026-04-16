@@ -282,39 +282,39 @@ export type Versions = {
     v1?: Version;
 };
 
-export type GetNiroutineData = {
+export type RootEndpointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niroutine';
 };
 
-export type GetNiroutineResponses = {
+export type RootEndpointResponses = {
     /**
      * OK
      */
     200: Versions;
 };
 
-export type GetNiroutineResponse = GetNiroutineResponses[keyof GetNiroutineResponses];
+export type RootEndpointResponse = RootEndpointResponses[keyof RootEndpointResponses];
 
-export type GetNiroutineV1Data = {
+export type GetV1Data = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niroutine/v1';
 };
 
-export type GetNiroutineV1Responses = {
+export type GetV1Responses = {
     /**
      * OK
      */
     200: Version;
 };
 
-export type GetNiroutineV1Response = GetNiroutineV1Responses[keyof GetNiroutineV1Responses];
+export type GetV1Response = GetV1Responses[keyof GetV1Responses];
 
-export type GetNiroutineV1RoutinesData = {
+export type QueryRoutinesData = {
     body?: never;
     path?: never;
     query?: {
@@ -330,50 +330,50 @@ export type GetNiroutineV1RoutinesData = {
     url: '/niroutine/v1/routines';
 };
 
-export type GetNiroutineV1RoutinesErrors = {
+export type QueryRoutinesErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNiroutineV1RoutinesError = GetNiroutineV1RoutinesErrors[keyof GetNiroutineV1RoutinesErrors];
+export type QueryRoutinesError = QueryRoutinesErrors[keyof QueryRoutinesErrors];
 
-export type GetNiroutineV1RoutinesResponses = {
+export type QueryRoutinesResponses = {
     /**
      * OK
      */
     200: ListRoutinesResponse;
 };
 
-export type GetNiroutineV1RoutinesResponse = GetNiroutineV1RoutinesResponses[keyof GetNiroutineV1RoutinesResponses];
+export type QueryRoutinesResponse = QueryRoutinesResponses[keyof QueryRoutinesResponses];
 
-export type PostNiroutineV1RoutinesData = {
+export type CreateRoutinesData = {
     body?: CreateRoutineRequest;
     path?: never;
     query?: never;
     url: '/niroutine/v1/routines';
 };
 
-export type PostNiroutineV1RoutinesErrors = {
+export type CreateRoutinesErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiroutineV1RoutinesError = PostNiroutineV1RoutinesErrors[keyof PostNiroutineV1RoutinesErrors];
+export type CreateRoutinesError = CreateRoutinesErrors[keyof CreateRoutinesErrors];
 
-export type PostNiroutineV1RoutinesResponses = {
+export type CreateRoutinesResponses = {
     /**
      * Created
      */
     201: Routine;
 };
 
-export type PostNiroutineV1RoutinesResponse = PostNiroutineV1RoutinesResponses[keyof PostNiroutineV1RoutinesResponses];
+export type CreateRoutinesResponse = CreateRoutinesResponses[keyof CreateRoutinesResponses];
 
-export type DeleteNiroutineV1RoutinesByIdData = {
+export type DeleteRoutineData = {
     body?: never;
     path: {
         id: string;
@@ -382,25 +382,25 @@ export type DeleteNiroutineV1RoutinesByIdData = {
     url: '/niroutine/v1/routines/{id}';
 };
 
-export type DeleteNiroutineV1RoutinesByIdErrors = {
+export type DeleteRoutineErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type DeleteNiroutineV1RoutinesByIdError = DeleteNiroutineV1RoutinesByIdErrors[keyof DeleteNiroutineV1RoutinesByIdErrors];
+export type DeleteRoutineError = DeleteRoutineErrors[keyof DeleteRoutineErrors];
 
-export type DeleteNiroutineV1RoutinesByIdResponses = {
+export type DeleteRoutineResponses = {
     /**
      * No content
      */
     204: void;
 };
 
-export type DeleteNiroutineV1RoutinesByIdResponse = DeleteNiroutineV1RoutinesByIdResponses[keyof DeleteNiroutineV1RoutinesByIdResponses];
+export type DeleteRoutineResponse = DeleteRoutineResponses[keyof DeleteRoutineResponses];
 
-export type GetNiroutineV1RoutinesByIdData = {
+export type GetRoutineByIdData = {
     body?: never;
     path: {
         id: string;
@@ -409,25 +409,25 @@ export type GetNiroutineV1RoutinesByIdData = {
     url: '/niroutine/v1/routines/{id}';
 };
 
-export type GetNiroutineV1RoutinesByIdErrors = {
+export type GetRoutineByIdErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNiroutineV1RoutinesByIdError = GetNiroutineV1RoutinesByIdErrors[keyof GetNiroutineV1RoutinesByIdErrors];
+export type GetRoutineByIdError = GetRoutineByIdErrors[keyof GetRoutineByIdErrors];
 
-export type GetNiroutineV1RoutinesByIdResponses = {
+export type GetRoutineByIdResponses = {
     /**
      * OK
      */
     200: Routine;
 };
 
-export type GetNiroutineV1RoutinesByIdResponse = GetNiroutineV1RoutinesByIdResponses[keyof GetNiroutineV1RoutinesByIdResponses];
+export type GetRoutineByIdResponse = GetRoutineByIdResponses[keyof GetRoutineByIdResponses];
 
-export type PatchNiroutineV1RoutinesByIdData = {
+export type UpdateRoutineData = {
     body?: UpdateRoutineRequest;
     path: {
         id: string;
@@ -436,7 +436,7 @@ export type PatchNiroutineV1RoutinesByIdData = {
     url: '/niroutine/v1/routines/{id}';
 };
 
-export type PatchNiroutineV1RoutinesByIdErrors = {
+export type UpdateRoutineErrors = {
     /**
      * Unauthorized
      */
@@ -459,16 +459,16 @@ export type PatchNiroutineV1RoutinesByIdErrors = {
     default: BaseResponse;
 };
 
-export type PatchNiroutineV1RoutinesByIdError = PatchNiroutineV1RoutinesByIdErrors[keyof PatchNiroutineV1RoutinesByIdErrors];
+export type UpdateRoutineError = UpdateRoutineErrors[keyof UpdateRoutineErrors];
 
-export type PatchNiroutineV1RoutinesByIdResponses = {
+export type UpdateRoutineResponses = {
     /**
      * OK
      */
     200: unknown;
 };
 
-export type GetNiroutineV1RoutinesByIdExecutionData = {
+export type GetExecutionDefinitionByRoutineIdData = {
     body?: never;
     path: {
         id: string;
@@ -477,20 +477,20 @@ export type GetNiroutineV1RoutinesByIdExecutionData = {
     url: '/niroutine/v1/routines/{id}/execution';
 };
 
-export type GetNiroutineV1RoutinesByIdExecutionErrors = {
+export type GetExecutionDefinitionByRoutineIdErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNiroutineV1RoutinesByIdExecutionError = GetNiroutineV1RoutinesByIdExecutionErrors[keyof GetNiroutineV1RoutinesByIdExecutionErrors];
+export type GetExecutionDefinitionByRoutineIdError = GetExecutionDefinitionByRoutineIdErrors[keyof GetExecutionDefinitionByRoutineIdErrors];
 
-export type GetNiroutineV1RoutinesByIdExecutionResponses = {
+export type GetExecutionDefinitionByRoutineIdResponses = {
     /**
      * OK
      */
     200: GetExecutionDefinitionResponse;
 };
 
-export type GetNiroutineV1RoutinesByIdExecutionResponse = GetNiroutineV1RoutinesByIdExecutionResponses[keyof GetNiroutineV1RoutinesByIdExecutionResponses];
+export type GetExecutionDefinitionByRoutineIdResponse = GetExecutionDefinitionByRoutineIdResponses[keyof GetExecutionDefinitionByRoutineIdResponses];

@@ -201,7 +201,7 @@ export type UpdateLocationsRequest = {
     locations?: Array<LocationUpdateInformation> | null;
 };
 
-export type GetNilocationV1LocationsData = {
+export type GetLocationsData = {
     body?: never;
     path?: never;
     query?: {
@@ -221,7 +221,7 @@ export type GetNilocationV1LocationsData = {
     url: '/nilocation/v1/locations';
 };
 
-export type GetNilocationV1LocationsErrors = {
+export type GetLocationsErrors = {
     /**
      * Unauthorized
      */
@@ -232,25 +232,25 @@ export type GetNilocationV1LocationsErrors = {
     default: HttpError;
 };
 
-export type GetNilocationV1LocationsError = GetNilocationV1LocationsErrors[keyof GetNilocationV1LocationsErrors];
+export type GetLocationsError = GetLocationsErrors[keyof GetLocationsErrors];
 
-export type GetNilocationV1LocationsResponses = {
+export type GetLocationsResponses = {
     /**
      * OK
      */
     200: GetLocationsResponse;
 };
 
-export type GetNilocationV1LocationsResponse = GetNilocationV1LocationsResponses[keyof GetNilocationV1LocationsResponses];
+export type GetLocationsResponse2 = GetLocationsResponses[keyof GetLocationsResponses];
 
-export type PostNilocationV1LocationsData = {
+export type CreateLocationData = {
     body?: CreateLocationRequest;
     path?: never;
     query?: never;
     url: '/nilocation/v1/locations';
 };
 
-export type PostNilocationV1LocationsErrors = {
+export type CreateLocationErrors = {
     /**
      * Bad Request
      */
@@ -269,18 +269,18 @@ export type PostNilocationV1LocationsErrors = {
     default: HttpError;
 };
 
-export type PostNilocationV1LocationsError = PostNilocationV1LocationsErrors[keyof PostNilocationV1LocationsErrors];
+export type CreateLocationError = CreateLocationErrors[keyof CreateLocationErrors];
 
-export type PostNilocationV1LocationsResponses = {
+export type CreateLocationResponses = {
     /**
      * Created
      */
     201: Location;
 };
 
-export type PostNilocationV1LocationsResponse = PostNilocationV1LocationsResponses[keyof PostNilocationV1LocationsResponses];
+export type CreateLocationResponse = CreateLocationResponses[keyof CreateLocationResponses];
 
-export type GetNilocationV1LocationsByLocationIdData = {
+export type GetLocationByIdData = {
     body?: never;
     path: {
         locationId: string;
@@ -289,7 +289,7 @@ export type GetNilocationV1LocationsByLocationIdData = {
     url: '/nilocation/v1/locations/{locationId}';
 };
 
-export type GetNilocationV1LocationsByLocationIdErrors = {
+export type GetLocationByIdErrors = {
     /**
      * Unauthorized
      */
@@ -304,25 +304,25 @@ export type GetNilocationV1LocationsByLocationIdErrors = {
     default: HttpError;
 };
 
-export type GetNilocationV1LocationsByLocationIdError = GetNilocationV1LocationsByLocationIdErrors[keyof GetNilocationV1LocationsByLocationIdErrors];
+export type GetLocationByIdError = GetLocationByIdErrors[keyof GetLocationByIdErrors];
 
-export type GetNilocationV1LocationsByLocationIdResponses = {
+export type GetLocationByIdResponses = {
     /**
      * OK
      */
     200: Location;
 };
 
-export type GetNilocationV1LocationsByLocationIdResponse = GetNilocationV1LocationsByLocationIdResponses[keyof GetNilocationV1LocationsByLocationIdResponses];
+export type GetLocationByIdResponse = GetLocationByIdResponses[keyof GetLocationByIdResponses];
 
-export type PostNilocationV1LocationsUpdateManyData = {
+export type UpdateLocationsData = {
     body?: UpdateLocationsRequest;
     path?: never;
     query?: never;
     url: '/nilocation/v1/locations:updateMany';
 };
 
-export type PostNilocationV1LocationsUpdateManyErrors = {
+export type UpdateLocationsErrors = {
     /**
      * Bad Request
      */
@@ -337,9 +337,9 @@ export type PostNilocationV1LocationsUpdateManyErrors = {
     default: HttpError;
 };
 
-export type PostNilocationV1LocationsUpdateManyError = PostNilocationV1LocationsUpdateManyErrors[keyof PostNilocationV1LocationsUpdateManyErrors];
+export type UpdateLocationsError = UpdateLocationsErrors[keyof UpdateLocationsErrors];
 
-export type PostNilocationV1LocationsUpdateManyResponses = {
+export type UpdateLocationsResponses = {
     /**
      * OK
      */
@@ -350,16 +350,16 @@ export type PostNilocationV1LocationsUpdateManyResponses = {
     204: void;
 };
 
-export type PostNilocationV1LocationsUpdateManyResponse = PostNilocationV1LocationsUpdateManyResponses[keyof PostNilocationV1LocationsUpdateManyResponses];
+export type UpdateLocationsResponse = UpdateLocationsResponses[keyof UpdateLocationsResponses];
 
-export type PostNilocationV1LocationsDeleteManyData = {
+export type DeleteLocationsData = {
     body?: DeleteLocationsRequest;
     path?: never;
     query?: never;
     url: '/nilocation/v1/locations:deleteMany';
 };
 
-export type PostNilocationV1LocationsDeleteManyErrors = {
+export type DeleteLocationsErrors = {
     /**
      * Bad Request
      */
@@ -374,9 +374,9 @@ export type PostNilocationV1LocationsDeleteManyErrors = {
     default: HttpError;
 };
 
-export type PostNilocationV1LocationsDeleteManyError = PostNilocationV1LocationsDeleteManyErrors[keyof PostNilocationV1LocationsDeleteManyErrors];
+export type DeleteLocationsError = DeleteLocationsErrors[keyof DeleteLocationsErrors];
 
-export type PostNilocationV1LocationsDeleteManyResponses = {
+export type DeleteLocationsResponses = {
     /**
      * OK
      */
@@ -387,30 +387,30 @@ export type PostNilocationV1LocationsDeleteManyResponses = {
     204: void;
 };
 
-export type PostNilocationV1LocationsDeleteManyResponse = PostNilocationV1LocationsDeleteManyResponses[keyof PostNilocationV1LocationsDeleteManyResponses];
+export type DeleteLocationsResponse = DeleteLocationsResponses[keyof DeleteLocationsResponses];
 
-export type GetNilocationData = {
+export type RootEndpointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nilocation';
 };
 
-export type GetNilocationResponses = {
+export type RootEndpointResponses = {
     /**
      * OK
      */
     200: unknown;
 };
 
-export type GetNilocationV1Data = {
+export type V1Data = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nilocation/v1';
 };
 
-export type GetNilocationV1Responses = {
+export type V1Responses = {
     /**
      * OK
      */

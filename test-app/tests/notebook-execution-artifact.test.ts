@@ -14,14 +14,15 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
   createArtifact,
-  getNinbartifactV1ArtifactsByArtifactId,
-  deleteNinbartifactV1ArtifactsByArtifactId,
-  patchNinbartifactV1ArtifactsByArtifactId,
+  downloadArtifact as getNinbartifactV1ArtifactsByArtifactId,
+  deleteArtifact as deleteNinbartifactV1ArtifactsByArtifactId,
+  updateArtifactTtl as patchNinbartifactV1ArtifactsByArtifactId,
 } from '../../src/generated/notebook-execution-artifact';
 import { createClient, createConfig } from '../../src/generated/notebook-execution-artifact/client';
+import { client as generatedClient } from '../../src/generated/notebook-execution-artifact/client.gen';
 
 const configured = isConfigured();
 
@@ -31,9 +32,10 @@ describe.skipIf(!configured)('Notebook Execution Artifact Service', () => {
   const testArtifactName = `ts-sdk-e2e-${Date.now()}.txt`;
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

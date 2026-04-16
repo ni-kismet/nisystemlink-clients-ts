@@ -11,15 +11,16 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
-  getNinbexecution,
-  getNinbexecutionV1,
-  postNinbexecutionV1QueryExecutions,
-  getNinbexecutionV1ExecutionsById,
-  postNinbexecutionV1CancelExecutions,
+  rootEndpoint as getNinbexecution,
+  getV1 as getNinbexecutionV1,
+  queryExecutions as postNinbexecutionV1QueryExecutions,
+  getExecution as getNinbexecutionV1ExecutionsById,
+  cancelExecutions as postNinbexecutionV1CancelExecutions,
 } from '../../src/generated/notebook-execution';
 import { createClient, createConfig } from '../../src/generated/notebook-execution/client';
+import { client as generatedClient } from '../../src/generated/notebook-execution/client.gen';
 
 const configured = isConfigured();
 
@@ -28,9 +29,10 @@ describe.skipIf(!configured)('Notebook Execution Service', () => {
   const cancelledExecutionIds: string[] = [];
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

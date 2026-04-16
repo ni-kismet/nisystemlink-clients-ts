@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetNinbexecutionData, GetNinbexecutionResponses, GetNinbexecutionV1Data, GetNinbexecutionV1ExecutionsByIdData, GetNinbexecutionV1ExecutionsByIdErrors, GetNinbexecutionV1ExecutionsByIdResponses, GetNinbexecutionV1Responses, PostNinbexecutionV1CancelExecutionsData, PostNinbexecutionV1CancelExecutionsErrors, PostNinbexecutionV1CancelExecutionsResponses, PostNinbexecutionV1CreateExecutionsFromExistingData, PostNinbexecutionV1CreateExecutionsFromExistingErrors, PostNinbexecutionV1CreateExecutionsFromExistingResponses, PostNinbexecutionV1ExecutionsData, PostNinbexecutionV1ExecutionsErrors, PostNinbexecutionV1ExecutionsResponses, PostNinbexecutionV1QueryExecutionsData, PostNinbexecutionV1QueryExecutionsErrors, PostNinbexecutionV1QueryExecutionsResponses, PostNinbexecutionV1RetryExecutionsData, PostNinbexecutionV1RetryExecutionsErrors, PostNinbexecutionV1RetryExecutionsResponses } from './types.gen';
+import type { CancelExecutionsData, CancelExecutionsErrors, CancelExecutionsResponses, CreateExecutionsData, CreateExecutionsErrors, CreateExecutionsFromExistingData, CreateExecutionsFromExistingErrors, CreateExecutionsFromExistingResponses, CreateExecutionsResponses, GetExecutionData, GetExecutionErrors, GetExecutionResponses, GetV1Data, GetV1Responses, QueryExecutionsData, QueryExecutionsErrors, QueryExecutionsResponses, RetryExecutionsData, RetryExecutionsErrors, RetryExecutionsResponses, RootEndpointData, RootEndpointResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -21,7 +21,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Create one or more executions of Jupyter notebooks.
  */
-export const postNinbexecutionV1Executions = <ThrowOnError extends boolean = false>(options?: Options<PostNinbexecutionV1ExecutionsData, ThrowOnError>) => (options?.client ?? client).post<PostNinbexecutionV1ExecutionsResponses, PostNinbexecutionV1ExecutionsErrors, ThrowOnError>({
+export const createExecutions = <ThrowOnError extends boolean = false>(options?: Options<CreateExecutionsData, ThrowOnError>) => (options?.client ?? client).post<CreateExecutionsResponses, CreateExecutionsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninbexecution/v1/executions',
     ...options,
@@ -34,7 +34,7 @@ export const postNinbexecutionV1Executions = <ThrowOnError extends boolean = fal
 /**
  * Create new executions based on already existing succeeded executions.
  */
-export const postNinbexecutionV1CreateExecutionsFromExisting = <ThrowOnError extends boolean = false>(options?: Options<PostNinbexecutionV1CreateExecutionsFromExistingData, ThrowOnError>) => (options?.client ?? client).post<PostNinbexecutionV1CreateExecutionsFromExistingResponses, PostNinbexecutionV1CreateExecutionsFromExistingErrors, ThrowOnError>({
+export const createExecutionsFromExisting = <ThrowOnError extends boolean = false>(options?: Options<CreateExecutionsFromExistingData, ThrowOnError>) => (options?.client ?? client).post<CreateExecutionsFromExistingResponses, CreateExecutionsFromExistingErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninbexecution/v1/create-executions-from-existing',
     ...options,
@@ -47,7 +47,7 @@ export const postNinbexecutionV1CreateExecutionsFromExisting = <ThrowOnError ext
 /**
  * Get information about the specified execution of a Jupyter notebook.
  */
-export const getNinbexecutionV1ExecutionsById = <ThrowOnError extends boolean = false>(options: Options<GetNinbexecutionV1ExecutionsByIdData, ThrowOnError>) => (options.client ?? client).get<GetNinbexecutionV1ExecutionsByIdResponses, GetNinbexecutionV1ExecutionsByIdErrors, ThrowOnError>({
+export const getExecution = <ThrowOnError extends boolean = false>(options: Options<GetExecutionData, ThrowOnError>) => (options.client ?? client).get<GetExecutionResponses, GetExecutionErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninbexecution/v1/executions/{id}',
     ...options
@@ -56,7 +56,7 @@ export const getNinbexecutionV1ExecutionsById = <ThrowOnError extends boolean = 
 /**
  * Query executions of Jupyter notebooks.
  */
-export const postNinbexecutionV1QueryExecutions = <ThrowOnError extends boolean = false>(options?: Options<PostNinbexecutionV1QueryExecutionsData, ThrowOnError>) => (options?.client ?? client).post<PostNinbexecutionV1QueryExecutionsResponses, PostNinbexecutionV1QueryExecutionsErrors, ThrowOnError>({
+export const queryExecutions = <ThrowOnError extends boolean = false>(options?: Options<QueryExecutionsData, ThrowOnError>) => (options?.client ?? client).post<QueryExecutionsResponses, QueryExecutionsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninbexecution/v1/query-executions',
     ...options,
@@ -69,7 +69,7 @@ export const postNinbexecutionV1QueryExecutions = <ThrowOnError extends boolean 
 /**
  * Cancel queued and in progress executions.
  */
-export const postNinbexecutionV1CancelExecutions = <ThrowOnError extends boolean = false>(options?: Options<PostNinbexecutionV1CancelExecutionsData, ThrowOnError>) => (options?.client ?? client).post<PostNinbexecutionV1CancelExecutionsResponses, PostNinbexecutionV1CancelExecutionsErrors, ThrowOnError>({
+export const cancelExecutions = <ThrowOnError extends boolean = false>(options?: Options<CancelExecutionsData, ThrowOnError>) => (options?.client ?? client).post<CancelExecutionsResponses, CancelExecutionsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninbexecution/v1/cancel-executions',
     ...options,
@@ -82,7 +82,7 @@ export const postNinbexecutionV1CancelExecutions = <ThrowOnError extends boolean
 /**
  * Retries existing executions based on failed, canceled or timed-out executions.
  */
-export const postNinbexecutionV1RetryExecutions = <ThrowOnError extends boolean = false>(options?: Options<PostNinbexecutionV1RetryExecutionsData, ThrowOnError>) => (options?.client ?? client).post<PostNinbexecutionV1RetryExecutionsResponses, PostNinbexecutionV1RetryExecutionsErrors, ThrowOnError>({
+export const retryExecutions = <ThrowOnError extends boolean = false>(options?: Options<RetryExecutionsData, ThrowOnError>) => (options?.client ?? client).post<RetryExecutionsResponses, RetryExecutionsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninbexecution/v1/retry-executions',
     ...options,
@@ -97,7 +97,7 @@ export const postNinbexecutionV1RetryExecutions = <ThrowOnError extends boolean 
  *
  * Returns information about API versions and available operations.
  */
-export const getNinbexecution = <ThrowOnError extends boolean = false>(options?: Options<GetNinbexecutionData, ThrowOnError>) => (options?.client ?? client).get<GetNinbexecutionResponses, unknown, ThrowOnError>({
+export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninbexecution',
     ...options
@@ -108,7 +108,7 @@ export const getNinbexecution = <ThrowOnError extends boolean = false>(options?:
  *
  * Returns information and available operations for version 3 of the API.
  */
-export const getNinbexecutionV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNinbexecutionV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNinbexecutionV1Responses, unknown, ThrowOnError>({
+export const getV1 = <ThrowOnError extends boolean = false>(options?: Options<GetV1Data, ThrowOnError>) => (options?.client ?? client).get<GetV1Responses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninbexecution/v1',
     ...options

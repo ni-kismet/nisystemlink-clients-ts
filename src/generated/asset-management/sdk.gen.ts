@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { DeleteNiapmV1AssetsByAssetIdFilesByFileIdData, DeleteNiapmV1AssetsByAssetIdFilesByFileIdErrors, DeleteNiapmV1AssetsByAssetIdFilesByFileIdResponses, GetNiapmData, GetNiapmResponses, GetNiapmV1AssetsByAssetIdData, GetNiapmV1AssetsByAssetIdErrors, GetNiapmV1AssetsByAssetIdHistoryCalibrationData, GetNiapmV1AssetsByAssetIdHistoryCalibrationErrors, GetNiapmV1AssetsByAssetIdHistoryCalibrationResponses, GetNiapmV1AssetsByAssetIdResponses, GetNiapmV1AssetsData, GetNiapmV1AssetsErrors, GetNiapmV1AssetsResponses, GetNiapmV1AssetSummaryData, GetNiapmV1AssetSummaryErrors, GetNiapmV1AssetSummaryResponses, GetNiapmV1Data, GetNiapmV1Responses, PatchNiapmV1AssetsByAssetIdMetadataData, PatchNiapmV1AssetsByAssetIdMetadataErrors, PatchNiapmV1AssetsByAssetIdMetadataResponses, PostNiapmV1AssetsByAssetIdFileData, PostNiapmV1AssetsByAssetIdFileErrors, PostNiapmV1AssetsByAssetIdFileResponses, PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsData, PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsErrors, PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsResponses, PostNiapmV1AssetsByAssetIdHistoryExportCalibrationData, PostNiapmV1AssetsByAssetIdHistoryExportCalibrationErrors, PostNiapmV1AssetsByAssetIdHistoryExportCalibrationResponses, PostNiapmV1AssetsByAssetIdHistoryQueryLocationData, PostNiapmV1AssetsByAssetIdHistoryQueryLocationErrors, PostNiapmV1AssetsByAssetIdHistoryQueryLocationResponses, PostNiapmV1AssetsData, PostNiapmV1AssetsEndUtilizationData, PostNiapmV1AssetsEndUtilizationErrors, PostNiapmV1AssetsEndUtilizationResponses, PostNiapmV1AssetsErrors, PostNiapmV1AssetsMoveLocationData, PostNiapmV1AssetsMoveLocationDryRunData, PostNiapmV1AssetsMoveLocationDryRunErrors, PostNiapmV1AssetsMoveLocationDryRunResponses, PostNiapmV1AssetsMoveLocationErrors, PostNiapmV1AssetsMoveLocationResponses, PostNiapmV1AssetsQueryLocationMovesData, PostNiapmV1AssetsQueryLocationMovesErrors, PostNiapmV1AssetsQueryLocationMovesResponses, PostNiapmV1AssetsReceiveFromCalibrationData, PostNiapmV1AssetsReceiveFromCalibrationDryRunData, PostNiapmV1AssetsReceiveFromCalibrationDryRunErrors, PostNiapmV1AssetsReceiveFromCalibrationDryRunResponses, PostNiapmV1AssetsReceiveFromCalibrationErrors, PostNiapmV1AssetsReceiveFromCalibrationResponses, PostNiapmV1AssetsResponses, PostNiapmV1AssetsSendForCalibrationData, PostNiapmV1AssetsSendForCalibrationDryRunData, PostNiapmV1AssetsSendForCalibrationDryRunErrors, PostNiapmV1AssetsSendForCalibrationDryRunResponses, PostNiapmV1AssetsSendForCalibrationErrors, PostNiapmV1AssetsSendForCalibrationResponses, PostNiapmV1AssetsStartUtilizationData, PostNiapmV1AssetsStartUtilizationErrors, PostNiapmV1AssetsStartUtilizationResponses, PostNiapmV1AssetsUtilizationHeartbeatData, PostNiapmV1AssetsUtilizationHeartbeatErrors, PostNiapmV1AssetsUtilizationHeartbeatResponses, PostNiapmV1DeleteAssetsData, PostNiapmV1DeleteAssetsErrors, PostNiapmV1DeleteAssetsResponses, PostNiapmV1ExportAssetsData, PostNiapmV1ExportAssetsErrors, PostNiapmV1ExportAssetsResponses, PostNiapmV1MaterializedExportAssetsData, PostNiapmV1MaterializedExportAssetsErrors, PostNiapmV1MaterializedExportAssetsResponses, PostNiapmV1MaterializedSearchAssetsData, PostNiapmV1MaterializedSearchAssetsErrors, PostNiapmV1MaterializedSearchAssetsResponses, PostNiapmV1QueryAssetsData, PostNiapmV1QueryAssetsErrors, PostNiapmV1QueryAssetsResponses, PostNiapmV1QueryAssetUtilizationHistoryData, PostNiapmV1QueryAssetUtilizationHistoryErrors, PostNiapmV1QueryAssetUtilizationHistoryResponses, PostNiapmV1UpdateAssetsData, PostNiapmV1UpdateAssetsErrors, PostNiapmV1UpdateAssetsResponses } from './types.gen';
+import type { AssetSummaryData, AssetSummaryErrors, AssetSummaryResponses, CalculateCalibrationForecastData, CalculateCalibrationForecastErrors, CalculateCalibrationForecastResponses, CreateAssetsData, CreateAssetsErrors, CreateAssetsResponses, DeleteAssetsData, DeleteAssetsErrors, DeleteAssetsResponses, DeleteCalibrationHistoryData, DeleteCalibrationHistoryErrors, DeleteCalibrationHistoryResponses, EndUtilizationData, EndUtilizationErrors, EndUtilizationResponses, ExportAssetsData, ExportAssetsErrors, ExportAssetsResponses, ExportCalibrationHistoryData, ExportCalibrationHistoryErrors, ExportCalibrationHistoryResponses, ExportMaterializedAssetsData, ExportMaterializedAssetsErrors, ExportMaterializedAssetsResponses, GetAssetCalibrationHistoryData, GetAssetCalibrationHistoryErrors, GetAssetCalibrationHistoryResponses, GetAssetData, GetAssetErrors, GetAssetResponses, GetAssetsData, GetAssetsErrors, GetAssetsResponses, LinkFilesData, LinkFilesErrors, LinkFilesResponses, MoveAssetsLocationData, MoveAssetsLocationDryRunData, MoveAssetsLocationDryRunErrors, MoveAssetsLocationDryRunResponses, MoveAssetsLocationErrors, MoveAssetsLocationResponses, PostAssetQueryConnectionHistoryData, PostAssetQueryConnectionHistoryErrors, PostAssetQueryConnectionHistoryResponses, QueryAssetsData, QueryAssetsErrors, QueryAssetsResponses, QueryAssetUtilizationHistoryData, QueryAssetUtilizationHistoryErrors, QueryAssetUtilizationHistoryResponses, QueryLocationMovesData, QueryLocationMovesErrors, QueryLocationMovesResponses, ReceiveFromCalibrationData, ReceiveFromCalibrationDryRunData, ReceiveFromCalibrationDryRunErrors, ReceiveFromCalibrationDryRunResponses, ReceiveFromCalibrationErrors, ReceiveFromCalibrationResponses, RootEndpointData, RootEndpointResponses, SearchAssetsData, SearchAssetsErrors, SearchAssetsResponses, SendForCalibrationData, SendForCalibrationDryRunData, SendForCalibrationDryRunErrors, SendForCalibrationDryRunResponses, SendForCalibrationErrors, SendForCalibrationResponses, StartUtilizationData, StartUtilizationErrors, StartUtilizationResponses, UnlinkFileFromAssetData, UnlinkFileFromAssetErrors, UnlinkFileFromAssetResponses, UpdateAssetsData, UpdateAssetsErrors, UpdateAssetsResponses, UpdateMetadataData, UpdateMetadataErrors, UpdateMetadataResponses, UtilizationHeartbeatData, UtilizationHeartbeatErrors, UtilizationHeartbeatResponses, V1Data, V1Responses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -21,7 +21,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Get assets
  */
-export const getNiapmV1Assets = <ThrowOnError extends boolean = false>(options?: Options<GetNiapmV1AssetsData, ThrowOnError>) => (options?.client ?? client).get<GetNiapmV1AssetsResponses, GetNiapmV1AssetsErrors, ThrowOnError>({
+export const getAssets = <ThrowOnError extends boolean = false>(options?: Options<GetAssetsData, ThrowOnError>) => (options?.client ?? client).get<GetAssetsResponses, GetAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets',
     ...options
@@ -30,7 +30,7 @@ export const getNiapmV1Assets = <ThrowOnError extends boolean = false>(options?:
 /**
  * Create assets
  */
-export const postNiapmV1Assets = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1AssetsData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1AssetsResponses, PostNiapmV1AssetsErrors, ThrowOnError>({
+export const createAssets = <ThrowOnError extends boolean = false>(options?: Options<CreateAssetsData, ThrowOnError>) => (options?.client ?? client).post<CreateAssetsResponses, CreateAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets',
     ...options,
@@ -43,7 +43,7 @@ export const postNiapmV1Assets = <ThrowOnError extends boolean = false>(options?
 /**
  * Get asset summary
  */
-export const getNiapmV1AssetSummary = <ThrowOnError extends boolean = false>(options?: Options<GetNiapmV1AssetSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetNiapmV1AssetSummaryResponses, GetNiapmV1AssetSummaryErrors, ThrowOnError>({
+export const assetSummary = <ThrowOnError extends boolean = false>(options?: Options<AssetSummaryData, ThrowOnError>) => (options?.client ?? client).get<AssetSummaryResponses, AssetSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/asset-summary',
     ...options
@@ -52,7 +52,7 @@ export const getNiapmV1AssetSummary = <ThrowOnError extends boolean = false>(opt
 /**
  * Query assets
  */
-export const postNiapmV1QueryAssets = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1QueryAssetsData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1QueryAssetsResponses, PostNiapmV1QueryAssetsErrors, ThrowOnError>({
+export const queryAssets = <ThrowOnError extends boolean = false>(options?: Options<QueryAssetsData, ThrowOnError>) => (options?.client ?? client).post<QueryAssetsResponses, QueryAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/query-assets',
     ...options,
@@ -65,7 +65,7 @@ export const postNiapmV1QueryAssets = <ThrowOnError extends boolean = false>(opt
 /**
  * Export assets report
  */
-export const postNiapmV1ExportAssets = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1ExportAssetsData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1ExportAssetsResponses, PostNiapmV1ExportAssetsErrors, ThrowOnError>({
+export const exportAssets = <ThrowOnError extends boolean = false>(options?: Options<ExportAssetsData, ThrowOnError>) => (options?.client ?? client).post<ExportAssetsResponses, ExportAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/export-assets',
     ...options,
@@ -84,7 +84,7 @@ export const postNiapmV1ExportAssets = <ThrowOnError extends boolean = false>(op
  *
  * @deprecated
  */
-export const patchNiapmV1AssetsByAssetIdMetadata = <ThrowOnError extends boolean = false>(options: Options<PatchNiapmV1AssetsByAssetIdMetadataData, ThrowOnError>) => (options.client ?? client).patch<PatchNiapmV1AssetsByAssetIdMetadataResponses, PatchNiapmV1AssetsByAssetIdMetadataErrors, ThrowOnError>({
+export const updateMetadata = <ThrowOnError extends boolean = false>(options: Options<UpdateMetadataData, ThrowOnError>) => (options.client ?? client).patch<UpdateMetadataResponses, UpdateMetadataErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/{assetId}/metadata',
     ...options,
@@ -97,7 +97,7 @@ export const patchNiapmV1AssetsByAssetIdMetadata = <ThrowOnError extends boolean
 /**
  * Update assets
  */
-export const postNiapmV1UpdateAssets = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1UpdateAssetsData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1UpdateAssetsResponses, PostNiapmV1UpdateAssetsErrors, ThrowOnError>({
+export const updateAssets = <ThrowOnError extends boolean = false>(options?: Options<UpdateAssetsData, ThrowOnError>) => (options?.client ?? client).post<UpdateAssetsResponses, UpdateAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/update-assets',
     ...options,
@@ -110,7 +110,7 @@ export const postNiapmV1UpdateAssets = <ThrowOnError extends boolean = false>(op
 /**
  * Query asset location history
  */
-export const postNiapmV1AssetsByAssetIdHistoryQueryLocation = <ThrowOnError extends boolean = false>(options: Options<PostNiapmV1AssetsByAssetIdHistoryQueryLocationData, ThrowOnError>) => (options.client ?? client).post<PostNiapmV1AssetsByAssetIdHistoryQueryLocationResponses, PostNiapmV1AssetsByAssetIdHistoryQueryLocationErrors, ThrowOnError>({
+export const postAssetQueryConnectionHistory = <ThrowOnError extends boolean = false>(options: Options<PostAssetQueryConnectionHistoryData, ThrowOnError>) => (options.client ?? client).post<PostAssetQueryConnectionHistoryResponses, PostAssetQueryConnectionHistoryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/{assetId}/history/query-location',
     ...options,
@@ -123,7 +123,7 @@ export const postNiapmV1AssetsByAssetIdHistoryQueryLocation = <ThrowOnError exte
 /**
  * Delete assets
  */
-export const postNiapmV1DeleteAssets = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1DeleteAssetsData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1DeleteAssetsResponses, PostNiapmV1DeleteAssetsErrors, ThrowOnError>({
+export const deleteAssets = <ThrowOnError extends boolean = false>(options?: Options<DeleteAssetsData, ThrowOnError>) => (options?.client ?? client).post<DeleteAssetsResponses, DeleteAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/delete-assets',
     ...options,
@@ -136,7 +136,7 @@ export const postNiapmV1DeleteAssets = <ThrowOnError extends boolean = false>(op
 /**
  * Get asset
  */
-export const getNiapmV1AssetsByAssetId = <ThrowOnError extends boolean = false>(options: Options<GetNiapmV1AssetsByAssetIdData, ThrowOnError>) => (options.client ?? client).get<GetNiapmV1AssetsByAssetIdResponses, GetNiapmV1AssetsByAssetIdErrors, ThrowOnError>({
+export const getAsset = <ThrowOnError extends boolean = false>(options: Options<GetAssetData, ThrowOnError>) => (options.client ?? client).get<GetAssetResponses, GetAssetErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/{assetId}',
     ...options
@@ -145,7 +145,7 @@ export const getNiapmV1AssetsByAssetId = <ThrowOnError extends boolean = false>(
 /**
  * Link files to asset
  */
-export const postNiapmV1AssetsByAssetIdFile = <ThrowOnError extends boolean = false>(options: Options<PostNiapmV1AssetsByAssetIdFileData, ThrowOnError>) => (options.client ?? client).post<PostNiapmV1AssetsByAssetIdFileResponses, PostNiapmV1AssetsByAssetIdFileErrors, ThrowOnError>({
+export const linkFiles = <ThrowOnError extends boolean = false>(options: Options<LinkFilesData, ThrowOnError>) => (options.client ?? client).post<LinkFilesResponses, LinkFilesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/{assetId}/file',
     ...options,
@@ -158,7 +158,7 @@ export const postNiapmV1AssetsByAssetIdFile = <ThrowOnError extends boolean = fa
 /**
  * Unlink file from asset
  */
-export const deleteNiapmV1AssetsByAssetIdFilesByFileId = <ThrowOnError extends boolean = false>(options: Options<DeleteNiapmV1AssetsByAssetIdFilesByFileIdData, ThrowOnError>) => (options.client ?? client).delete<DeleteNiapmV1AssetsByAssetIdFilesByFileIdResponses, DeleteNiapmV1AssetsByAssetIdFilesByFileIdErrors, ThrowOnError>({
+export const unlinkFileFromAsset = <ThrowOnError extends boolean = false>(options: Options<UnlinkFileFromAssetData, ThrowOnError>) => (options.client ?? client).delete<UnlinkFileFromAssetResponses, UnlinkFileFromAssetErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/{assetId}/files/{fileId}',
     ...options
@@ -167,7 +167,7 @@ export const deleteNiapmV1AssetsByAssetIdFilesByFileId = <ThrowOnError extends b
 /**
  * Delete one or more calibration history entries for an asset
  */
-export const postNiapmV1AssetsByAssetIdHistoryDeleteCalibrations = <ThrowOnError extends boolean = false>(options: Options<PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsData, ThrowOnError>) => (options.client ?? client).post<PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsResponses, PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsErrors, ThrowOnError>({
+export const deleteCalibrationHistory = <ThrowOnError extends boolean = false>(options: Options<DeleteCalibrationHistoryData, ThrowOnError>) => (options.client ?? client).post<DeleteCalibrationHistoryResponses, DeleteCalibrationHistoryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/{assetId}/history/delete-calibrations',
     ...options,
@@ -180,7 +180,7 @@ export const postNiapmV1AssetsByAssetIdHistoryDeleteCalibrations = <ThrowOnError
 /**
  * Get asset calibration history
  */
-export const getNiapmV1AssetsByAssetIdHistoryCalibration = <ThrowOnError extends boolean = false>(options: Options<GetNiapmV1AssetsByAssetIdHistoryCalibrationData, ThrowOnError>) => (options.client ?? client).get<GetNiapmV1AssetsByAssetIdHistoryCalibrationResponses, GetNiapmV1AssetsByAssetIdHistoryCalibrationErrors, ThrowOnError>({
+export const getAssetCalibrationHistory = <ThrowOnError extends boolean = false>(options: Options<GetAssetCalibrationHistoryData, ThrowOnError>) => (options.client ?? client).get<GetAssetCalibrationHistoryResponses, GetAssetCalibrationHistoryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/{assetId}/history/calibration',
     ...options
@@ -189,7 +189,7 @@ export const getNiapmV1AssetsByAssetIdHistoryCalibration = <ThrowOnError extends
 /**
  * Export calibration history
  */
-export const postNiapmV1AssetsByAssetIdHistoryExportCalibration = <ThrowOnError extends boolean = false>(options: Options<PostNiapmV1AssetsByAssetIdHistoryExportCalibrationData, ThrowOnError>) => (options.client ?? client).post<PostNiapmV1AssetsByAssetIdHistoryExportCalibrationResponses, PostNiapmV1AssetsByAssetIdHistoryExportCalibrationErrors, ThrowOnError>({
+export const exportCalibrationHistory = <ThrowOnError extends boolean = false>(options: Options<ExportCalibrationHistoryData, ThrowOnError>) => (options.client ?? client).post<ExportCalibrationHistoryResponses, ExportCalibrationHistoryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/{assetId}/history/export-calibration',
     ...options,
@@ -200,10 +200,23 @@ export const postNiapmV1AssetsByAssetIdHistoryExportCalibration = <ThrowOnError 
 });
 
 /**
+ * Calculates the asset calibration forecast for a configured timeframe.
+ */
+export const calculateCalibrationForecast = <ThrowOnError extends boolean = false>(options?: Options<CalculateCalibrationForecastData, ThrowOnError>) => (options?.client ?? client).post<CalculateCalibrationForecastResponses, CalculateCalibrationForecastErrors, ThrowOnError>({
+    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
+    url: '/niapm/v1/assets/calibration-forecast',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options?.headers
+    }
+});
+
+/**
  * Simulate receiving an asset from calibration lab, the purpose of doing a dry run is to offer the UI a list of
  * validation errors and warnings that the UI can't know otherwise.
  */
-export const postNiapmV1AssetsReceiveFromCalibrationDryRun = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1AssetsReceiveFromCalibrationDryRunData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1AssetsReceiveFromCalibrationDryRunResponses, PostNiapmV1AssetsReceiveFromCalibrationDryRunErrors, ThrowOnError>({
+export const receiveFromCalibrationDryRun = <ThrowOnError extends boolean = false>(options?: Options<ReceiveFromCalibrationDryRunData, ThrowOnError>) => (options?.client ?? client).post<ReceiveFromCalibrationDryRunResponses, ReceiveFromCalibrationDryRunErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/receive-from-calibration-dry-run',
     ...options,
@@ -216,7 +229,7 @@ export const postNiapmV1AssetsReceiveFromCalibrationDryRun = <ThrowOnError exten
 /**
  * Move assets from calibration to locations.
  */
-export const postNiapmV1AssetsReceiveFromCalibration = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1AssetsReceiveFromCalibrationData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1AssetsReceiveFromCalibrationResponses, PostNiapmV1AssetsReceiveFromCalibrationErrors, ThrowOnError>({
+export const receiveFromCalibration = <ThrowOnError extends boolean = false>(options?: Options<ReceiveFromCalibrationData, ThrowOnError>) => (options?.client ?? client).post<ReceiveFromCalibrationResponses, ReceiveFromCalibrationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/receive-from-calibration',
     ...options,
@@ -230,7 +243,7 @@ export const postNiapmV1AssetsReceiveFromCalibration = <ThrowOnError extends boo
  * Simulate sending an asset to calibration lab, the purpose of doing a dry run is to offer the UI a list of
  * validation errors and warnings that the UI can't know otherwise.
  */
-export const postNiapmV1AssetsSendForCalibrationDryRun = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1AssetsSendForCalibrationDryRunData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1AssetsSendForCalibrationDryRunResponses, PostNiapmV1AssetsSendForCalibrationDryRunErrors, ThrowOnError>({
+export const sendForCalibrationDryRun = <ThrowOnError extends boolean = false>(options?: Options<SendForCalibrationDryRunData, ThrowOnError>) => (options?.client ?? client).post<SendForCalibrationDryRunResponses, SendForCalibrationDryRunErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/send-for-calibration-dry-run',
     ...options,
@@ -243,7 +256,7 @@ export const postNiapmV1AssetsSendForCalibrationDryRun = <ThrowOnError extends b
 /**
  * Send an asset to calibration lab
  */
-export const postNiapmV1AssetsSendForCalibration = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1AssetsSendForCalibrationData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1AssetsSendForCalibrationResponses, PostNiapmV1AssetsSendForCalibrationErrors, ThrowOnError>({
+export const sendForCalibration = <ThrowOnError extends boolean = false>(options?: Options<SendForCalibrationData, ThrowOnError>) => (options?.client ?? client).post<SendForCalibrationResponses, SendForCalibrationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/send-for-calibration',
     ...options,
@@ -257,7 +270,7 @@ export const postNiapmV1AssetsSendForCalibration = <ThrowOnError extends boolean
  * Simulate moving an assets location, the purpose of doing a dry run is to offer the UI a list of
  * validation errors and warnings that the UI can't know otherwise.
  */
-export const postNiapmV1AssetsMoveLocationDryRun = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1AssetsMoveLocationDryRunData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1AssetsMoveLocationDryRunResponses, PostNiapmV1AssetsMoveLocationDryRunErrors, ThrowOnError>({
+export const moveAssetsLocationDryRun = <ThrowOnError extends boolean = false>(options?: Options<MoveAssetsLocationDryRunData, ThrowOnError>) => (options?.client ?? client).post<MoveAssetsLocationDryRunResponses, MoveAssetsLocationDryRunErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/move-location-dry-run',
     ...options,
@@ -270,7 +283,7 @@ export const postNiapmV1AssetsMoveLocationDryRun = <ThrowOnError extends boolean
 /**
  * Moving an asset to a new location
  */
-export const postNiapmV1AssetsMoveLocation = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1AssetsMoveLocationData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1AssetsMoveLocationResponses, PostNiapmV1AssetsMoveLocationErrors, ThrowOnError>({
+export const moveAssetsLocation = <ThrowOnError extends boolean = false>(options?: Options<MoveAssetsLocationData, ThrowOnError>) => (options?.client ?? client).post<MoveAssetsLocationResponses, MoveAssetsLocationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/move-location',
     ...options,
@@ -283,7 +296,7 @@ export const postNiapmV1AssetsMoveLocation = <ThrowOnError extends boolean = fal
 /**
  * Query the ids of assets that are in progress of moving.
  */
-export const postNiapmV1AssetsQueryLocationMoves = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1AssetsQueryLocationMovesData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1AssetsQueryLocationMovesResponses, PostNiapmV1AssetsQueryLocationMovesErrors, ThrowOnError>({
+export const queryLocationMoves = <ThrowOnError extends boolean = false>(options?: Options<QueryLocationMovesData, ThrowOnError>) => (options?.client ?? client).post<QueryLocationMovesResponses, QueryLocationMovesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/query-location-moves',
     ...options,
@@ -296,7 +309,7 @@ export const postNiapmV1AssetsQueryLocationMoves = <ThrowOnError extends boolean
 /**
  * Get information about the service API
  */
-export const getNiapm = <ThrowOnError extends boolean = false>(options?: Options<GetNiapmData, ThrowOnError>) => (options?.client ?? client).get<GetNiapmResponses, unknown, ThrowOnError>({
+export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm',
     ...options
@@ -305,7 +318,7 @@ export const getNiapm = <ThrowOnError extends boolean = false>(options?: Options
 /**
  * Get information about the service V1 API
  */
-export const getNiapmV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNiapmV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNiapmV1Responses, unknown, ThrowOnError>({
+export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Data, ThrowOnError>) => (options?.client ?? client).get<V1Responses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1',
     ...options
@@ -314,7 +327,7 @@ export const getNiapmV1 = <ThrowOnError extends boolean = false>(options?: Optio
 /**
  * Advanced asset search.
  */
-export const postNiapmV1MaterializedSearchAssets = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1MaterializedSearchAssetsData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1MaterializedSearchAssetsResponses, PostNiapmV1MaterializedSearchAssetsErrors, ThrowOnError>({
+export const searchAssets = <ThrowOnError extends boolean = false>(options?: Options<SearchAssetsData, ThrowOnError>) => (options?.client ?? client).post<SearchAssetsResponses, SearchAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/materialized/search-assets',
     ...options,
@@ -327,7 +340,7 @@ export const postNiapmV1MaterializedSearchAssets = <ThrowOnError extends boolean
 /**
  * Export materialized assets report
  */
-export const postNiapmV1MaterializedExportAssets = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1MaterializedExportAssetsData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1MaterializedExportAssetsResponses, PostNiapmV1MaterializedExportAssetsErrors, ThrowOnError>({
+export const exportMaterializedAssets = <ThrowOnError extends boolean = false>(options?: Options<ExportMaterializedAssetsData, ThrowOnError>) => (options?.client ?? client).post<ExportMaterializedAssetsResponses, ExportMaterializedAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/materialized/export-assets',
     ...options,
@@ -340,7 +353,7 @@ export const postNiapmV1MaterializedExportAssets = <ThrowOnError extends boolean
 /**
  * Query asset utilization history
  */
-export const postNiapmV1QueryAssetUtilizationHistory = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1QueryAssetUtilizationHistoryData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1QueryAssetUtilizationHistoryResponses, PostNiapmV1QueryAssetUtilizationHistoryErrors, ThrowOnError>({
+export const queryAssetUtilizationHistory = <ThrowOnError extends boolean = false>(options?: Options<QueryAssetUtilizationHistoryData, ThrowOnError>) => (options?.client ?? client).post<QueryAssetUtilizationHistoryResponses, QueryAssetUtilizationHistoryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/query-asset-utilization-history',
     ...options,
@@ -353,7 +366,7 @@ export const postNiapmV1QueryAssetUtilizationHistory = <ThrowOnError extends boo
 /**
  * Start utilization
  */
-export const postNiapmV1AssetsStartUtilization = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1AssetsStartUtilizationData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1AssetsStartUtilizationResponses, PostNiapmV1AssetsStartUtilizationErrors, ThrowOnError>({
+export const startUtilization = <ThrowOnError extends boolean = false>(options?: Options<StartUtilizationData, ThrowOnError>) => (options?.client ?? client).post<StartUtilizationResponses, StartUtilizationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/start-utilization',
     ...options,
@@ -366,7 +379,7 @@ export const postNiapmV1AssetsStartUtilization = <ThrowOnError extends boolean =
 /**
  * End utilization
  */
-export const postNiapmV1AssetsEndUtilization = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1AssetsEndUtilizationData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1AssetsEndUtilizationResponses, PostNiapmV1AssetsEndUtilizationErrors, ThrowOnError>({
+export const endUtilization = <ThrowOnError extends boolean = false>(options?: Options<EndUtilizationData, ThrowOnError>) => (options?.client ?? client).post<EndUtilizationResponses, EndUtilizationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/end-utilization',
     ...options,
@@ -379,7 +392,7 @@ export const postNiapmV1AssetsEndUtilization = <ThrowOnError extends boolean = f
 /**
  * Utilization heartbeat
  */
-export const postNiapmV1AssetsUtilizationHeartbeat = <ThrowOnError extends boolean = false>(options?: Options<PostNiapmV1AssetsUtilizationHeartbeatData, ThrowOnError>) => (options?.client ?? client).post<PostNiapmV1AssetsUtilizationHeartbeatResponses, PostNiapmV1AssetsUtilizationHeartbeatErrors, ThrowOnError>({
+export const utilizationHeartbeat = <ThrowOnError extends boolean = false>(options?: Options<UtilizationHeartbeatData, ThrowOnError>) => (options?.client ?? client).post<UtilizationHeartbeatResponses, UtilizationHeartbeatErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/utilization-heartbeat',
     ...options,

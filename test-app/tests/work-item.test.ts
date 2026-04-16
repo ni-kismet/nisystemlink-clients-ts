@@ -14,23 +14,24 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
-  getNiworkitem,
-  getNiworkitemV1,
-  postNiworkitemV1QueryWorkitems,
-  postNiworkitemV1QueryWorkflows,
-  postNiworkitemV1Workflows,
-  getNiworkitemV1WorkflowsByWorkflowId,
-  putNiworkitemV1WorkflowsByWorkflowId,
-  postNiworkitemV1DeleteWorkflows,
-  postNiworkitemV1Workitems,
-  getNiworkitemV1WorkitemsByWorkItemId,
-  getNiworkitemV1WorkitemsSummary,
-  postNiworkitemV1DeleteWorkitems,
-  getNiworkitemV1Workitemtypes,
+  rootEndPoint as getNiworkitem,
+  workItemV1OperationsRootEndPoint as getNiworkitemV1,
+  queryWorkItems as postNiworkitemV1QueryWorkitems,
+  queryWorkflows as postNiworkitemV1QueryWorkflows,
+  createWorkflow as postNiworkitemV1Workflows,
+  getWorkflow as getNiworkitemV1WorkflowsByWorkflowId,
+  updateWorkflow as putNiworkitemV1WorkflowsByWorkflowId,
+  deleteWorkflows as postNiworkitemV1DeleteWorkflows,
+  createWorkItems as postNiworkitemV1Workitems,
+  getWorkItem as getNiworkitemV1WorkitemsByWorkItemId,
+  getWorkItemsSummary as getNiworkitemV1WorkitemsSummary,
+  deleteWorkItems as postNiworkitemV1DeleteWorkitems,
+  getWorkItemTypes as getNiworkitemV1Workitemtypes,
 } from '../../src/generated/work-item';
 import { createClient, createConfig } from '../../src/generated/work-item/client';
+import { client as generatedClient } from '../../src/generated/work-item/client.gen';
 
 const configured = isConfigured();
 
@@ -41,9 +42,10 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
   const testName = `ts-sdk-e2e-${Date.now()}`;
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

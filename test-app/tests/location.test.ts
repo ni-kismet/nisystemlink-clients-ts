@@ -6,15 +6,16 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
-  getNilocation,
-  getNilocationV1Locations,
-  postNilocationV1Locations,
-  getNilocationV1LocationsByLocationId,
-  postNilocationV1LocationsDeleteMany,
+  rootEndpoint as getNilocation,
+  getLocations as getNilocationV1Locations,
+  createLocation as postNilocationV1Locations,
+  getLocationById as getNilocationV1LocationsByLocationId,
+  deleteLocations as postNilocationV1LocationsDeleteMany,
 } from '../../src/generated/location';
 import { createClient, createConfig } from '../../src/generated/location/client';
+import { client as generatedClient } from '../../src/generated/location/client.gen';
 
 const configured = isConfigured();
 
@@ -23,9 +24,10 @@ describe.skipIf(!configured)('Location Service', () => {
   const createdLocationIds: string[] = [];
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

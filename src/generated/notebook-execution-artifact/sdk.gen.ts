@@ -2,7 +2,7 @@
 
 import { type Client, formDataBodySerializer, type Options as Options2, type TDataShape } from './client';
 import { client } from './client.gen';
-import type { CreateArtifactData, CreateArtifactErrors, CreateArtifactResponses, DeleteNinbartifactV1ArtifactsByArtifactIdData, DeleteNinbartifactV1ArtifactsByArtifactIdErrors, DeleteNinbartifactV1ArtifactsByArtifactIdResponses, GetNinbartifactV1ArtifactsByArtifactIdData, GetNinbartifactV1ArtifactsByArtifactIdErrors, GetNinbartifactV1ArtifactsByArtifactIdResponses, PatchNinbartifactV1ArtifactsByArtifactIdData, PatchNinbartifactV1ArtifactsByArtifactIdErrors, PatchNinbartifactV1ArtifactsByArtifactIdResponses } from './types.gen';
+import type { CreateArtifactData, CreateArtifactErrors, CreateArtifactResponses, DeleteArtifactData, DeleteArtifactErrors, DeleteArtifactResponses, DownloadArtifactData, DownloadArtifactErrors, DownloadArtifactResponses, UpdateArtifactTtlData, UpdateArtifactTtlErrors, UpdateArtifactTtlResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -35,7 +35,7 @@ export const createArtifact = <ThrowOnError extends boolean = false>(options?: O
 /**
  * Deletes an artifact.
  */
-export const deleteNinbartifactV1ArtifactsByArtifactId = <ThrowOnError extends boolean = false>(options: Options<DeleteNinbartifactV1ArtifactsByArtifactIdData, ThrowOnError>) => (options.client ?? client).delete<DeleteNinbartifactV1ArtifactsByArtifactIdResponses, DeleteNinbartifactV1ArtifactsByArtifactIdErrors, ThrowOnError>({
+export const deleteArtifact = <ThrowOnError extends boolean = false>(options: Options<DeleteArtifactData, ThrowOnError>) => (options.client ?? client).delete<DeleteArtifactResponses, DeleteArtifactErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninbartifact/v1/artifacts/{artifactId}',
     ...options
@@ -44,7 +44,7 @@ export const deleteNinbartifactV1ArtifactsByArtifactId = <ThrowOnError extends b
 /**
  * Download an artifact.
  */
-export const getNinbartifactV1ArtifactsByArtifactId = <ThrowOnError extends boolean = false>(options: Options<GetNinbartifactV1ArtifactsByArtifactIdData, ThrowOnError>) => (options.client ?? client).get<GetNinbartifactV1ArtifactsByArtifactIdResponses, GetNinbartifactV1ArtifactsByArtifactIdErrors, ThrowOnError>({
+export const downloadArtifact = <ThrowOnError extends boolean = false>(options: Options<DownloadArtifactData, ThrowOnError>) => (options.client ?? client).get<DownloadArtifactResponses, DownloadArtifactErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninbartifact/v1/artifacts/{artifactId}',
     ...options
@@ -53,7 +53,7 @@ export const getNinbartifactV1ArtifactsByArtifactId = <ThrowOnError extends bool
 /**
  * Updates the TTL of an artifact.
  */
-export const patchNinbartifactV1ArtifactsByArtifactId = <ThrowOnError extends boolean = false>(options: Options<PatchNinbartifactV1ArtifactsByArtifactIdData, ThrowOnError>) => (options.client ?? client).patch<PatchNinbartifactV1ArtifactsByArtifactIdResponses, PatchNinbartifactV1ArtifactsByArtifactIdErrors, ThrowOnError>({
+export const updateArtifactTtl = <ThrowOnError extends boolean = false>(options: Options<UpdateArtifactTtlData, ThrowOnError>) => (options.client ?? client).patch<UpdateArtifactTtlResponses, UpdateArtifactTtlErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninbartifact/v1/artifacts/{artifactId}',
     ...options,

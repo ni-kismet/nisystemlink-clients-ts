@@ -11,18 +11,19 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
-  getNiuserdata,
-  getNiuserdataV1,
-  postNiuserdataV1QueryItems,
-  getNiuserdataV1Items,
-  postNiuserdataV1Items,
-  getNiuserdataV1ItemsById,
-  postNiuserdataV1UpdateItems,
-  postNiuserdataV1DeleteItems,
+  get as getNiuserdata,
+  v1Endpoint as getNiuserdataV1,
+  queryItemsEndPoint as postNiuserdataV1QueryItems,
+  getAllUserDataItemsEndPoint as getNiuserdataV1Items,
+  createOrUpdateUserDataItemsEndPoint as postNiuserdataV1Items,
+  getUserDataItemEndPoint as getNiuserdataV1ItemsById,
+  updateItemsEndPoint as postNiuserdataV1UpdateItems,
+  deleteItemsEndPoint as postNiuserdataV1DeleteItems,
 } from '../../src/generated/user-data';
 import { createClient, createConfig } from '../../src/generated/user-data/client';
+import { client as generatedClient } from '../../src/generated/user-data/client.gen';
 
 const configured = isConfigured();
 
@@ -32,9 +33,10 @@ describe.skipIf(!configured)('User Data Service', () => {
   const testKey = `ts-sdk-e2e-${Date.now()}`;
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );
@@ -155,7 +157,7 @@ describe.skipIf(!configured)('User Data Service', () => {
         body: { names: [testKey] },
       });
       expect(response.status).toBe(200);
-      const found = data?.items?.some((i) => i.id === createdItemIds[0]);
+      const found = data?.items?.some((item: { id?: string | null }) => item.id === createdItemIds[0]);
       if (!found) {
         console.log('[INFO] Created item not yet visible in query (possible indexing delay)');
       }
