@@ -86,7 +86,7 @@ export type CreateArtifactResponses = {
 
 export type CreateArtifactResponse2 = CreateArtifactResponses[keyof CreateArtifactResponses];
 
-export type DeleteNinbartifactV1ArtifactsByArtifactIdData = {
+export type DeleteArtifactData = {
     body?: never;
     path: {
         /**
@@ -98,25 +98,25 @@ export type DeleteNinbartifactV1ArtifactsByArtifactIdData = {
     url: '/ninbartifact/v1/artifacts/{artifactId}';
 };
 
-export type DeleteNinbartifactV1ArtifactsByArtifactIdErrors = {
+export type DeleteArtifactErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type DeleteNinbartifactV1ArtifactsByArtifactIdError = DeleteNinbartifactV1ArtifactsByArtifactIdErrors[keyof DeleteNinbartifactV1ArtifactsByArtifactIdErrors];
+export type DeleteArtifactError = DeleteArtifactErrors[keyof DeleteArtifactErrors];
 
-export type DeleteNinbartifactV1ArtifactsByArtifactIdResponses = {
+export type DeleteArtifactResponses = {
     /**
      * Delete acknowledged.
      */
     204: void;
 };
 
-export type DeleteNinbartifactV1ArtifactsByArtifactIdResponse = DeleteNinbartifactV1ArtifactsByArtifactIdResponses[keyof DeleteNinbartifactV1ArtifactsByArtifactIdResponses];
+export type DeleteArtifactResponse = DeleteArtifactResponses[keyof DeleteArtifactResponses];
 
-export type GetNinbartifactV1ArtifactsByArtifactIdData = {
+export type DownloadArtifactData = {
     body?: never;
     path: {
         /**
@@ -128,25 +128,25 @@ export type GetNinbartifactV1ArtifactsByArtifactIdData = {
     url: '/ninbartifact/v1/artifacts/{artifactId}';
 };
 
-export type GetNinbartifactV1ArtifactsByArtifactIdErrors = {
+export type DownloadArtifactErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNinbartifactV1ArtifactsByArtifactIdError = GetNinbartifactV1ArtifactsByArtifactIdErrors[keyof GetNinbartifactV1ArtifactsByArtifactIdErrors];
+export type DownloadArtifactError = DownloadArtifactErrors[keyof DownloadArtifactErrors];
 
-export type GetNinbartifactV1ArtifactsByArtifactIdResponses = {
+export type DownloadArtifactResponses = {
     /**
      * OK
      */
     200: Blob | File;
 };
 
-export type GetNinbartifactV1ArtifactsByArtifactIdResponse = GetNinbartifactV1ArtifactsByArtifactIdResponses[keyof GetNinbartifactV1ArtifactsByArtifactIdResponses];
+export type DownloadArtifactResponse = DownloadArtifactResponses[keyof DownloadArtifactResponses];
 
-export type PatchNinbartifactV1ArtifactsByArtifactIdData = {
+export type UpdateArtifactTtlData = {
     /**
      * The expiry in days value to be updated
      */
@@ -161,20 +161,20 @@ export type PatchNinbartifactV1ArtifactsByArtifactIdData = {
     url: '/ninbartifact/v1/artifacts/{artifactId}';
 };
 
-export type PatchNinbartifactV1ArtifactsByArtifactIdErrors = {
+export type UpdateArtifactTtlErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PatchNinbartifactV1ArtifactsByArtifactIdError = PatchNinbartifactV1ArtifactsByArtifactIdErrors[keyof PatchNinbartifactV1ArtifactsByArtifactIdErrors];
+export type UpdateArtifactTtlError = UpdateArtifactTtlErrors[keyof UpdateArtifactTtlErrors];
 
-export type PatchNinbartifactV1ArtifactsByArtifactIdResponses = {
+export type UpdateArtifactTtlResponses = {
     /**
      * Update acknowledged.
      */
     204: void;
 };
 
-export type PatchNinbartifactV1ArtifactsByArtifactIdResponse = PatchNinbartifactV1ArtifactsByArtifactIdResponses[keyof PatchNinbartifactV1ArtifactsByArtifactIdResponses];
+export type UpdateArtifactTtlResponse = UpdateArtifactTtlResponses[keyof UpdateArtifactTtlResponses];

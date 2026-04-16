@@ -6,17 +6,18 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
-  getNinotification,
-  getNinotificationV1AddressGroups,
-  postNinotificationV1AddressGroups,
-  deleteNinotificationV1AddressGroupsById,
-  getNinotificationV1AddressGroupsById,
-  getNinotificationV1MessageTemplates,
-  getNinotificationV1NotificationStrategies,
+  get as getNinotification,
+  getAddressGroups as getNinotificationV1AddressGroups,
+  createAddressGroup as postNinotificationV1AddressGroups,
+  deleteAddressGroup as deleteNinotificationV1AddressGroupsById,
+  getAddressGroup as getNinotificationV1AddressGroupsById,
+  getMessageTemplates as getNinotificationV1MessageTemplates,
+  getNotificationStrategies as getNinotificationV1NotificationStrategies,
 } from '../../src/generated/notification';
 import { createClient, createConfig } from '../../src/generated/notification/client';
+import { client as generatedClient } from '../../src/generated/notification/client.gen';
 
 const configured = isConfigured();
 
@@ -25,9 +26,10 @@ describe.skipIf(!configured)('Notification Service', () => {
   const createdAddressGroupIds: string[] = [];
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

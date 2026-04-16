@@ -590,7 +590,7 @@ export type Versions = {
     version?: string | null;
 };
 
-export type PostNispecV1SpecsData = {
+export type CreateSpecificationsData = {
     /**
      * Information to create specifications
      */
@@ -600,7 +600,7 @@ export type PostNispecV1SpecsData = {
     url: '/nispec/v1/specs';
 };
 
-export type PostNispecV1SpecsErrors = {
+export type CreateSpecificationsErrors = {
     /**
      * Unauthorized
      */
@@ -611,9 +611,9 @@ export type PostNispecV1SpecsErrors = {
     default: BaseResponse;
 };
 
-export type PostNispecV1SpecsError = PostNispecV1SpecsErrors[keyof PostNispecV1SpecsErrors];
+export type CreateSpecificationsError = CreateSpecificationsErrors[keyof CreateSpecificationsErrors];
 
-export type PostNispecV1SpecsResponses = {
+export type CreateSpecificationsResponses = {
     /**
      * Create Specifications Partial Success Response
      */
@@ -624,9 +624,9 @@ export type PostNispecV1SpecsResponses = {
     201: CreateSpecificationsResponse;
 };
 
-export type PostNispecV1SpecsResponse = PostNispecV1SpecsResponses[keyof PostNispecV1SpecsResponses];
+export type CreateSpecificationsResponse2 = CreateSpecificationsResponses[keyof CreateSpecificationsResponses];
 
-export type PostNispecV1UpdateSpecsData = {
+export type UpdateSpecificationsData = {
     /**
      * Information to update specifications
      */
@@ -636,7 +636,7 @@ export type PostNispecV1UpdateSpecsData = {
     url: '/nispec/v1/update-specs';
 };
 
-export type PostNispecV1UpdateSpecsErrors = {
+export type UpdateSpecificationsErrors = {
     /**
      * Unauthorized
      */
@@ -647,18 +647,18 @@ export type PostNispecV1UpdateSpecsErrors = {
     default: BaseResponse;
 };
 
-export type PostNispecV1UpdateSpecsError = PostNispecV1UpdateSpecsErrors[keyof PostNispecV1UpdateSpecsErrors];
+export type UpdateSpecificationsError = UpdateSpecificationsErrors[keyof UpdateSpecificationsErrors];
 
-export type PostNispecV1UpdateSpecsResponses = {
+export type UpdateSpecificationsResponses = {
     /**
      * Update Specifications Partial Success Response
      */
     200: UpdateSpecificationsPartialSuccessResponse;
 };
 
-export type PostNispecV1UpdateSpecsResponse = PostNispecV1UpdateSpecsResponses[keyof PostNispecV1UpdateSpecsResponses];
+export type UpdateSpecificationsResponse = UpdateSpecificationsResponses[keyof UpdateSpecificationsResponses];
 
-export type PostNispecV1QuerySpecsData = {
+export type QuerySpecificationsData = {
     /**
      * Parameters for querying the specifications.
      */
@@ -668,7 +668,7 @@ export type PostNispecV1QuerySpecsData = {
     url: '/nispec/v1/query-specs';
 };
 
-export type PostNispecV1QuerySpecsErrors = {
+export type QuerySpecificationsErrors = {
     /**
      * Unauthorized
      */
@@ -679,18 +679,18 @@ export type PostNispecV1QuerySpecsErrors = {
     default: BaseResponse;
 };
 
-export type PostNispecV1QuerySpecsError = PostNispecV1QuerySpecsErrors[keyof PostNispecV1QuerySpecsErrors];
+export type QuerySpecificationsError = QuerySpecificationsErrors[keyof QuerySpecificationsErrors];
 
-export type PostNispecV1QuerySpecsResponses = {
+export type QuerySpecificationsResponses = {
     /**
      * Specifications of the given products along with a continuation token.
      */
     200: QuerySpecificationsResponse;
 };
 
-export type PostNispecV1QuerySpecsResponse = PostNispecV1QuerySpecsResponses[keyof PostNispecV1QuerySpecsResponses];
+export type QuerySpecificationsResponse2 = QuerySpecificationsResponses[keyof QuerySpecificationsResponses];
 
-export type GetNispecV1SpecsByIdData = {
+export type GetSpecificationData = {
     body?: never;
     path: {
         /**
@@ -702,7 +702,7 @@ export type GetNispecV1SpecsByIdData = {
     url: '/nispec/v1/specs/{id}';
 };
 
-export type GetNispecV1SpecsByIdErrors = {
+export type GetSpecificationErrors = {
     /**
      * Unauthorized
      */
@@ -713,18 +713,18 @@ export type GetNispecV1SpecsByIdErrors = {
     default: BaseResponse;
 };
 
-export type GetNispecV1SpecsByIdError = GetNispecV1SpecsByIdErrors[keyof GetNispecV1SpecsByIdErrors];
+export type GetSpecificationError = GetSpecificationErrors[keyof GetSpecificationErrors];
 
-export type GetNispecV1SpecsByIdResponses = {
+export type GetSpecificationResponses = {
     /**
      * Specification with the provided ID.
      */
     200: QuerySpecificationResponseObject;
 };
 
-export type GetNispecV1SpecsByIdResponse = GetNispecV1SpecsByIdResponses[keyof GetNispecV1SpecsByIdResponses];
+export type GetSpecificationResponse = GetSpecificationResponses[keyof GetSpecificationResponses];
 
-export type PostNispecV1DeleteSpecsData = {
+export type DeleteSpecificationsData = {
     /**
      * Parameters for deleting the specifications.
      */
@@ -734,7 +734,7 @@ export type PostNispecV1DeleteSpecsData = {
     url: '/nispec/v1/delete-specs';
 };
 
-export type PostNispecV1DeleteSpecsErrors = {
+export type DeleteSpecificationsErrors = {
     /**
      * Unauthorized
      */
@@ -745,9 +745,9 @@ export type PostNispecV1DeleteSpecsErrors = {
     default: BaseResponse;
 };
 
-export type PostNispecV1DeleteSpecsError = PostNispecV1DeleteSpecsErrors[keyof PostNispecV1DeleteSpecsErrors];
+export type DeleteSpecificationsError = DeleteSpecificationsErrors[keyof DeleteSpecificationsErrors];
 
-export type PostNispecV1DeleteSpecsResponses = {
+export type DeleteSpecificationsResponses = {
     /**
      * Delete Specifications Partial Success Response.
      */
@@ -758,36 +758,36 @@ export type PostNispecV1DeleteSpecsResponses = {
     204: void;
 };
 
-export type PostNispecV1DeleteSpecsResponse = PostNispecV1DeleteSpecsResponses[keyof PostNispecV1DeleteSpecsResponses];
+export type DeleteSpecificationsResponse = DeleteSpecificationsResponses[keyof DeleteSpecificationsResponses];
 
-export type GetNispecData = {
+export type RootEndPointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nispec';
 };
 
-export type GetNispecResponses = {
+export type RootEndPointResponses = {
     /**
      * OK
      */
     200: Versions;
 };
 
-export type GetNispecResponse = GetNispecResponses[keyof GetNispecResponses];
+export type RootEndPointResponse = RootEndPointResponses[keyof RootEndPointResponses];
 
-export type GetNispecV1Data = {
+export type V1OperationsRootEndPointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nispec/v1';
 };
 
-export type GetNispecV1Responses = {
+export type V1OperationsRootEndPointResponses = {
     /**
      * OK
      */
     200: V1Operations;
 };
 
-export type GetNispecV1Response = GetNispecV1Responses[keyof GetNispecV1Responses];
+export type V1OperationsRootEndPointResponse = V1OperationsRootEndPointResponses[keyof V1OperationsRootEndPointResponses];

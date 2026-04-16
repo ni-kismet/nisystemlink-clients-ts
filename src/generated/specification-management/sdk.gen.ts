@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetNispecData, GetNispecResponses, GetNispecV1Data, GetNispecV1Responses, GetNispecV1SpecsByIdData, GetNispecV1SpecsByIdErrors, GetNispecV1SpecsByIdResponses, PostNispecV1DeleteSpecsData, PostNispecV1DeleteSpecsErrors, PostNispecV1DeleteSpecsResponses, PostNispecV1QuerySpecsData, PostNispecV1QuerySpecsErrors, PostNispecV1QuerySpecsResponses, PostNispecV1SpecsData, PostNispecV1SpecsErrors, PostNispecV1SpecsResponses, PostNispecV1UpdateSpecsData, PostNispecV1UpdateSpecsErrors, PostNispecV1UpdateSpecsResponses } from './types.gen';
+import type { CreateSpecificationsData, CreateSpecificationsErrors, CreateSpecificationsResponses, DeleteSpecificationsData, DeleteSpecificationsErrors, DeleteSpecificationsResponses, GetSpecificationData, GetSpecificationErrors, GetSpecificationResponses, QuerySpecificationsData, QuerySpecificationsErrors, QuerySpecificationsResponses, RootEndPointData, RootEndPointResponses, UpdateSpecificationsData, UpdateSpecificationsErrors, UpdateSpecificationsResponses, V1OperationsRootEndPointData, V1OperationsRootEndPointResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -27,7 +27,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
  * When converted to their base SI units, values for limits and numeric conditions must be between `-7.9E+28` and `7.9E+28`.
  * Values outside this range will result in an error response.
  */
-export const postNispecV1Specs = <ThrowOnError extends boolean = false>(options?: Options<PostNispecV1SpecsData, ThrowOnError>) => (options?.client ?? client).post<PostNispecV1SpecsResponses, PostNispecV1SpecsErrors, ThrowOnError>({
+export const createSpecifications = <ThrowOnError extends boolean = false>(options?: Options<CreateSpecificationsData, ThrowOnError>) => (options?.client ?? client).post<CreateSpecificationsResponses, CreateSpecificationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nispec/v1/specs',
     ...options,
@@ -52,7 +52,7 @@ export const postNispecV1Specs = <ThrowOnError extends boolean = false>(options?
  * When converted to their base SI units, values for limits and numeric conditions must be between `-7.9E+28` and `7.9E+28`.
  * Values outside this range will result in an error response.
  */
-export const postNispecV1UpdateSpecs = <ThrowOnError extends boolean = false>(options?: Options<PostNispecV1UpdateSpecsData, ThrowOnError>) => (options?.client ?? client).post<PostNispecV1UpdateSpecsResponses, PostNispecV1UpdateSpecsErrors, ThrowOnError>({
+export const updateSpecifications = <ThrowOnError extends boolean = false>(options?: Options<UpdateSpecificationsData, ThrowOnError>) => (options?.client ?? client).post<UpdateSpecificationsResponses, UpdateSpecificationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nispec/v1/update-specs',
     ...options,
@@ -76,7 +76,7 @@ export const postNispecV1UpdateSpecs = <ThrowOnError extends boolean = false>(op
  *
  * Uses the `orderBy` and `orderByDescending` properties to sort the specifictions.
  */
-export const postNispecV1QuerySpecs = <ThrowOnError extends boolean = false>(options?: Options<PostNispecV1QuerySpecsData, ThrowOnError>) => (options?.client ?? client).post<PostNispecV1QuerySpecsResponses, PostNispecV1QuerySpecsErrors, ThrowOnError>({
+export const querySpecifications = <ThrowOnError extends boolean = false>(options?: Options<QuerySpecificationsData, ThrowOnError>) => (options?.client ?? client).post<QuerySpecificationsResponses, QuerySpecificationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nispec/v1/query-specs',
     ...options,
@@ -91,7 +91,7 @@ export const postNispecV1QuerySpecs = <ThrowOnError extends boolean = false>(opt
  *
  * Gets a specification with the provided `ID`.
  */
-export const getNispecV1SpecsById = <ThrowOnError extends boolean = false>(options: Options<GetNispecV1SpecsByIdData, ThrowOnError>) => (options.client ?? client).get<GetNispecV1SpecsByIdResponses, GetNispecV1SpecsByIdErrors, ThrowOnError>({
+export const getSpecification = <ThrowOnError extends boolean = false>(options: Options<GetSpecificationData, ThrowOnError>) => (options.client ?? client).get<GetSpecificationResponses, GetSpecificationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nispec/v1/specs/{id}',
     ...options
@@ -102,7 +102,7 @@ export const getNispecV1SpecsById = <ThrowOnError extends boolean = false>(optio
  *
  * Deletes the specifications with the IDs specified in the `Ids` list.
  */
-export const postNispecV1DeleteSpecs = <ThrowOnError extends boolean = false>(options?: Options<PostNispecV1DeleteSpecsData, ThrowOnError>) => (options?.client ?? client).post<PostNispecV1DeleteSpecsResponses, PostNispecV1DeleteSpecsErrors, ThrowOnError>({
+export const deleteSpecifications = <ThrowOnError extends boolean = false>(options?: Options<DeleteSpecificationsData, ThrowOnError>) => (options?.client ?? client).post<DeleteSpecificationsResponses, DeleteSpecificationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nispec/v1/delete-specs',
     ...options,
@@ -115,7 +115,7 @@ export const postNispecV1DeleteSpecs = <ThrowOnError extends boolean = false>(op
 /**
  * API Information
  */
-export const getNispec = <ThrowOnError extends boolean = false>(options?: Options<GetNispecData, ThrowOnError>) => (options?.client ?? client).get<GetNispecResponses, unknown, ThrowOnError>({
+export const rootEndPoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndPointData, ThrowOnError>) => (options?.client ?? client).get<RootEndPointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nispec',
     ...options
@@ -124,7 +124,7 @@ export const getNispec = <ThrowOnError extends boolean = false>(options?: Option
 /**
  * Information about API versions and available operations of version V1 of APIs
  */
-export const getNispecV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNispecV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNispecV1Responses, unknown, ThrowOnError>({
+export const v1OperationsRootEndPoint = <ThrowOnError extends boolean = false>(options?: Options<V1OperationsRootEndPointData, ThrowOnError>) => (options?.client ?? client).get<V1OperationsRootEndPointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nispec/v1',
     ...options

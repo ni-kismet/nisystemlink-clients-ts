@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { DeleteNiroutineV1RoutinesByIdData, DeleteNiroutineV1RoutinesByIdErrors, DeleteNiroutineV1RoutinesByIdResponses, GetNiroutineData, GetNiroutineResponses, GetNiroutineV1Data, GetNiroutineV1Responses, GetNiroutineV1RoutinesByIdData, GetNiroutineV1RoutinesByIdErrors, GetNiroutineV1RoutinesByIdExecutionData, GetNiroutineV1RoutinesByIdExecutionErrors, GetNiroutineV1RoutinesByIdExecutionResponses, GetNiroutineV1RoutinesByIdResponses, GetNiroutineV1RoutinesData, GetNiroutineV1RoutinesErrors, GetNiroutineV1RoutinesResponses, PatchNiroutineV1RoutinesByIdData, PatchNiroutineV1RoutinesByIdErrors, PatchNiroutineV1RoutinesByIdResponses, PostNiroutineV1RoutinesData, PostNiroutineV1RoutinesErrors, PostNiroutineV1RoutinesResponses } from './types.gen';
+import type { CreateRoutinesData, CreateRoutinesErrors, CreateRoutinesResponses, DeleteRoutineData, DeleteRoutineErrors, DeleteRoutineResponses, GetExecutionDefinitionByRoutineIdData, GetExecutionDefinitionByRoutineIdErrors, GetExecutionDefinitionByRoutineIdResponses, GetRoutineByIdData, GetRoutineByIdErrors, GetRoutineByIdResponses, GetV1Data, GetV1Responses, QueryRoutinesData, QueryRoutinesErrors, QueryRoutinesResponses, RootEndpointData, RootEndpointResponses, UpdateRoutineData, UpdateRoutineErrors, UpdateRoutineResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -21,7 +21,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Returns information about API versions and available operations.
  */
-export const getNiroutine = <ThrowOnError extends boolean = false>(options?: Options<GetNiroutineData, ThrowOnError>) => (options?.client ?? client).get<GetNiroutineResponses, unknown, ThrowOnError>({
+export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niroutine',
     ...options
@@ -36,7 +36,7 @@ export const getNiroutine = <ThrowOnError extends boolean = false>(options?: Opt
  *
  * @deprecated
  */
-export const getNiroutineV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNiroutineV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNiroutineV1Responses, unknown, ThrowOnError>({
+export const getV1 = <ThrowOnError extends boolean = false>(options?: Options<GetV1Data, ThrowOnError>) => (options?.client ?? client).get<GetV1Responses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niroutine/v1',
     ...options
@@ -51,7 +51,7 @@ export const getNiroutineV1 = <ThrowOnError extends boolean = false>(options?: O
  *
  * @deprecated
  */
-export const getNiroutineV1Routines = <ThrowOnError extends boolean = false>(options?: Options<GetNiroutineV1RoutinesData, ThrowOnError>) => (options?.client ?? client).get<GetNiroutineV1RoutinesResponses, GetNiroutineV1RoutinesErrors, ThrowOnError>({
+export const queryRoutines = <ThrowOnError extends boolean = false>(options?: Options<QueryRoutinesData, ThrowOnError>) => (options?.client ?? client).get<QueryRoutinesResponses, QueryRoutinesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niroutine/v1/routines',
     ...options
@@ -66,7 +66,7 @@ export const getNiroutineV1Routines = <ThrowOnError extends boolean = false>(opt
  *
  * @deprecated
  */
-export const postNiroutineV1Routines = <ThrowOnError extends boolean = false>(options?: Options<PostNiroutineV1RoutinesData, ThrowOnError>) => (options?.client ?? client).post<PostNiroutineV1RoutinesResponses, PostNiroutineV1RoutinesErrors, ThrowOnError>({
+export const createRoutines = <ThrowOnError extends boolean = false>(options?: Options<CreateRoutinesData, ThrowOnError>) => (options?.client ?? client).post<CreateRoutinesResponses, CreateRoutinesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niroutine/v1/routines',
     ...options,
@@ -85,7 +85,7 @@ export const postNiroutineV1Routines = <ThrowOnError extends boolean = false>(op
  *
  * @deprecated
  */
-export const deleteNiroutineV1RoutinesById = <ThrowOnError extends boolean = false>(options: Options<DeleteNiroutineV1RoutinesByIdData, ThrowOnError>) => (options.client ?? client).delete<DeleteNiroutineV1RoutinesByIdResponses, DeleteNiroutineV1RoutinesByIdErrors, ThrowOnError>({
+export const deleteRoutine = <ThrowOnError extends boolean = false>(options: Options<DeleteRoutineData, ThrowOnError>) => (options.client ?? client).delete<DeleteRoutineResponses, DeleteRoutineErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niroutine/v1/routines/{id}',
     ...options
@@ -100,7 +100,7 @@ export const deleteNiroutineV1RoutinesById = <ThrowOnError extends boolean = fal
  *
  * @deprecated
  */
-export const getNiroutineV1RoutinesById = <ThrowOnError extends boolean = false>(options: Options<GetNiroutineV1RoutinesByIdData, ThrowOnError>) => (options.client ?? client).get<GetNiroutineV1RoutinesByIdResponses, GetNiroutineV1RoutinesByIdErrors, ThrowOnError>({
+export const getRoutineById = <ThrowOnError extends boolean = false>(options: Options<GetRoutineByIdData, ThrowOnError>) => (options.client ?? client).get<GetRoutineByIdResponses, GetRoutineByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niroutine/v1/routines/{id}',
     ...options
@@ -115,7 +115,7 @@ export const getNiroutineV1RoutinesById = <ThrowOnError extends boolean = false>
  *
  * @deprecated
  */
-export const patchNiroutineV1RoutinesById = <ThrowOnError extends boolean = false>(options: Options<PatchNiroutineV1RoutinesByIdData, ThrowOnError>) => (options.client ?? client).patch<PatchNiroutineV1RoutinesByIdResponses, PatchNiroutineV1RoutinesByIdErrors, ThrowOnError>({
+export const updateRoutine = <ThrowOnError extends boolean = false>(options: Options<UpdateRoutineData, ThrowOnError>) => (options.client ?? client).patch<UpdateRoutineResponses, UpdateRoutineErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niroutine/v1/routines/{id}',
     ...options,
@@ -134,7 +134,7 @@ export const patchNiroutineV1RoutinesById = <ThrowOnError extends boolean = fals
  *
  * @deprecated
  */
-export const getNiroutineV1RoutinesByIdExecution = <ThrowOnError extends boolean = false>(options: Options<GetNiroutineV1RoutinesByIdExecutionData, ThrowOnError>) => (options.client ?? client).get<GetNiroutineV1RoutinesByIdExecutionResponses, GetNiroutineV1RoutinesByIdExecutionErrors, ThrowOnError>({
+export const getExecutionDefinitionByRoutineId = <ThrowOnError extends boolean = false>(options: Options<GetExecutionDefinitionByRoutineIdData, ThrowOnError>) => (options.client ?? client).get<GetExecutionDefinitionByRoutineIdResponses, GetExecutionDefinitionByRoutineIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niroutine/v1/routines/{id}/execution',
     ...options

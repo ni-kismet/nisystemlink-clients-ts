@@ -88,12 +88,12 @@ export function buildServiceBaseUrl(specDefaultBaseUrl: string): string {
   if (!userApiUrl) return specDefaultBaseUrl;
 
   try {
-    const specUrl = new URL(specDefaultBaseUrl);
     const userUrl = new URL(userApiUrl);
+    const specUrl = specDefaultBaseUrl ? new URL(specDefaultBaseUrl, userUrl) : userUrl;
     // Keep spec's path prefix but replace scheme+host with the user's server
     const path = specUrl.pathname === '/' ? '' : specUrl.pathname.replace(/\/$/, '');
     return `${userUrl.origin}${path}`;
   } catch {
-    return userApiUrl;
+    return userApiUrl.replace(/\/$/, '');
   }
 }

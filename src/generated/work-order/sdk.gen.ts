@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetNiworkorderData, GetNiworkorderResponses, GetNiworkorderV1Data, GetNiworkorderV1Responses, GetNiworkorderV1TestplansByTestPlanIdData, GetNiworkorderV1TestplansByTestPlanIdErrors, GetNiworkorderV1TestplansByTestPlanIdResponses, GetNiworkorderV1TestplansSummaryData, GetNiworkorderV1TestplansSummaryErrors, GetNiworkorderV1TestplansSummaryResponses, GetNiworkorderV1WorkflowsByWorkflowIdData, GetNiworkorderV1WorkflowsByWorkflowIdErrors, GetNiworkorderV1WorkflowsByWorkflowIdResponses, GetNiworkorderV1WorkordersByWorkOrderIdData, GetNiworkorderV1WorkordersByWorkOrderIdErrors, GetNiworkorderV1WorkordersByWorkOrderIdResponses, GetNiworkorderV1WorkordersSummaryData, GetNiworkorderV1WorkordersSummaryErrors, GetNiworkorderV1WorkordersSummaryResponses, PostNiworkorderV1DeleteTestplansData, PostNiworkorderV1DeleteTestplansErrors, PostNiworkorderV1DeleteTestplansResponses, PostNiworkorderV1DeleteTestplanTemplatesData, PostNiworkorderV1DeleteTestplanTemplatesErrors, PostNiworkorderV1DeleteTestplanTemplatesResponses, PostNiworkorderV1DeleteWorkflowsData, PostNiworkorderV1DeleteWorkflowsErrors, PostNiworkorderV1DeleteWorkflowsResponses, PostNiworkorderV1DeleteWorkordersData, PostNiworkorderV1DeleteWorkordersErrors, PostNiworkorderV1DeleteWorkordersResponses, PostNiworkorderV1QueryTestplansData, PostNiworkorderV1QueryTestplansErrors, PostNiworkorderV1QueryTestplansResponses, PostNiworkorderV1QueryTestplanTemplatesData, PostNiworkorderV1QueryTestplanTemplatesErrors, PostNiworkorderV1QueryTestplanTemplatesResponses, PostNiworkorderV1QueryWorkflowsData, PostNiworkorderV1QueryWorkflowsErrors, PostNiworkorderV1QueryWorkflowsResponses, PostNiworkorderV1QueryWorkordersData, PostNiworkorderV1QueryWorkordersErrors, PostNiworkorderV1QueryWorkordersResponses, PostNiworkorderV1ScheduleTestplansData, PostNiworkorderV1ScheduleTestplansErrors, PostNiworkorderV1ScheduleTestplansResponses, PostNiworkorderV1TestplansByTestPlanIdExecuteData, PostNiworkorderV1TestplansByTestPlanIdExecuteErrors, PostNiworkorderV1TestplansByTestPlanIdExecuteResponses, PostNiworkorderV1TestplansData, PostNiworkorderV1TestplansErrors, PostNiworkorderV1TestplansResponses, PostNiworkorderV1TestplanTemplatesData, PostNiworkorderV1TestplanTemplatesErrors, PostNiworkorderV1TestplanTemplatesResponses, PostNiworkorderV1UpdateTestplansData, PostNiworkorderV1UpdateTestplansErrors, PostNiworkorderV1UpdateTestplansResponses, PostNiworkorderV1UpdateTestplanTemplatesData, PostNiworkorderV1UpdateTestplanTemplatesErrors, PostNiworkorderV1UpdateTestplanTemplatesResponses, PostNiworkorderV1UpdateWorkordersData, PostNiworkorderV1UpdateWorkordersErrors, PostNiworkorderV1UpdateWorkordersResponses, PostNiworkorderV1WorkflowsData, PostNiworkorderV1WorkflowsErrors, PostNiworkorderV1WorkflowsResponses, PostNiworkorderV1WorkordersData, PostNiworkorderV1WorkordersErrors, PostNiworkorderV1WorkordersResponses, PutNiworkorderV1WorkflowsByWorkflowIdData, PutNiworkorderV1WorkflowsByWorkflowIdErrors, PutNiworkorderV1WorkflowsByWorkflowIdResponses } from './types.gen';
+import type { CreateTestPlansData, CreateTestPlansErrors, CreateTestPlansResponses, CreateTestPlanTemplatesData, CreateTestPlanTemplatesErrors, CreateTestPlanTemplatesResponses, CreateWorkflowData, CreateWorkflowErrors, CreateWorkflowResponses, CreateWorkOrdersData, CreateWorkOrdersErrors, CreateWorkOrdersResponses, DeleteTestPlansData, DeleteTestPlansErrors, DeleteTestPlansResponses, DeleteTestPlanTemplatesData, DeleteTestPlanTemplatesErrors, DeleteTestPlanTemplatesResponses, DeleteWorkflowsData, DeleteWorkflowsErrors, DeleteWorkflowsResponses, DeleteWorkOrdersData, DeleteWorkOrdersErrors, DeleteWorkOrdersResponses, ExecuteTestPlanData, ExecuteTestPlanErrors, ExecuteTestPlanResponses, GetTestPlanData, GetTestPlanErrors, GetTestPlanResponses, GetTestPlansSummaryData, GetTestPlansSummaryErrors, GetTestPlansSummaryResponses, GetWorkflowData, GetWorkflowErrors, GetWorkflowResponses, GetWorkOrderData, GetWorkOrderErrors, GetWorkOrderResponses, GetWorkOrdersSummaryData, GetWorkOrdersSummaryErrors, GetWorkOrdersSummaryResponses, QueryTestPlansData, QueryTestPlansErrors, QueryTestPlansResponses, QueryTestPlanTemplatesData, QueryTestPlanTemplatesErrors, QueryTestPlanTemplatesResponses, QueryWorkflowsData, QueryWorkflowsErrors, QueryWorkflowsResponses, QueryWorkOrdersData, QueryWorkOrdersErrors, QueryWorkOrdersResponses, RootEndPointData, RootEndPointResponses, ScheduleTestPlansData, ScheduleTestPlansErrors, ScheduleTestPlansResponses, UpdateTestPlansData, UpdateTestPlansErrors, UpdateTestPlansResponses, UpdateTestPlanTemplatesData, UpdateTestPlanTemplatesErrors, UpdateTestPlanTemplatesResponses, UpdateWorkflowData, UpdateWorkflowErrors, UpdateWorkflowResponses, UpdateWorkOrdersData, UpdateWorkOrdersErrors, UpdateWorkOrdersResponses, V1OperationsRootEndPointData, V1OperationsRootEndPointResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -37,7 +37,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
  *
  * @deprecated
  */
-export const postNiworkorderV1Testplans = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1TestplansData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1TestplansResponses, PostNiworkorderV1TestplansErrors, ThrowOnError>({
+export const createTestPlans = <ThrowOnError extends boolean = false>(options?: Options<CreateTestPlansData, ThrowOnError>) => (options?.client ?? client).post<CreateTestPlansResponses, CreateTestPlansErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/testplans',
     ...options,
@@ -77,7 +77,7 @@ export const postNiworkorderV1Testplans = <ThrowOnError extends boolean = false>
  *
  * @deprecated
  */
-export const postNiworkorderV1QueryTestplans = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1QueryTestplansData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1QueryTestplansResponses, PostNiworkorderV1QueryTestplansErrors, ThrowOnError>({
+export const queryTestPlans = <ThrowOnError extends boolean = false>(options?: Options<QueryTestPlansData, ThrowOnError>) => (options?.client ?? client).post<QueryTestPlansResponses, QueryTestPlansErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/query-testplans',
     ...options,
@@ -98,7 +98,7 @@ export const postNiworkorderV1QueryTestplans = <ThrowOnError extends boolean = f
  *
  * @deprecated
  */
-export const getNiworkorderV1TestplansSummary = <ThrowOnError extends boolean = false>(options?: Options<GetNiworkorderV1TestplansSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetNiworkorderV1TestplansSummaryResponses, GetNiworkorderV1TestplansSummaryErrors, ThrowOnError>({
+export const getTestPlansSummary = <ThrowOnError extends boolean = false>(options?: Options<GetTestPlansSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetTestPlansSummaryResponses, GetTestPlansSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/testplans-summary',
     ...options
@@ -119,7 +119,7 @@ export const getNiworkorderV1TestplansSummary = <ThrowOnError extends boolean = 
  *
  * @deprecated
  */
-export const getNiworkorderV1TestplansByTestPlanId = <ThrowOnError extends boolean = false>(options: Options<GetNiworkorderV1TestplansByTestPlanIdData, ThrowOnError>) => (options.client ?? client).get<GetNiworkorderV1TestplansByTestPlanIdResponses, GetNiworkorderV1TestplansByTestPlanIdErrors, ThrowOnError>({
+export const getTestPlan = <ThrowOnError extends boolean = false>(options: Options<GetTestPlanData, ThrowOnError>) => (options.client ?? client).get<GetTestPlanResponses, GetTestPlanErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/testplans/{testPlanId}',
     ...options
@@ -136,7 +136,7 @@ export const getNiworkorderV1TestplansByTestPlanId = <ThrowOnError extends boole
  *
  * @deprecated
  */
-export const postNiworkorderV1DeleteTestplans = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1DeleteTestplansData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1DeleteTestplansResponses, PostNiworkorderV1DeleteTestplansErrors, ThrowOnError>({
+export const deleteTestPlans = <ThrowOnError extends boolean = false>(options?: Options<DeleteTestPlansData, ThrowOnError>) => (options?.client ?? client).post<DeleteTestPlansResponses, DeleteTestPlansErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/delete-testplans',
     ...options,
@@ -165,7 +165,7 @@ export const postNiworkorderV1DeleteTestplans = <ThrowOnError extends boolean = 
  *
  * @deprecated
  */
-export const postNiworkorderV1UpdateTestplans = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1UpdateTestplansData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1UpdateTestplansResponses, PostNiworkorderV1UpdateTestplansErrors, ThrowOnError>({
+export const updateTestPlans = <ThrowOnError extends boolean = false>(options?: Options<UpdateTestPlansData, ThrowOnError>) => (options?.client ?? client).post<UpdateTestPlansResponses, UpdateTestPlansErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/update-testplans',
     ...options,
@@ -193,7 +193,7 @@ export const postNiworkorderV1UpdateTestplans = <ThrowOnError extends boolean = 
  *
  * @deprecated
  */
-export const postNiworkorderV1ScheduleTestplans = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1ScheduleTestplansData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1ScheduleTestplansResponses, PostNiworkorderV1ScheduleTestplansErrors, ThrowOnError>({
+export const scheduleTestPlans = <ThrowOnError extends boolean = false>(options?: Options<ScheduleTestPlansData, ThrowOnError>) => (options?.client ?? client).post<ScheduleTestPlansResponses, ScheduleTestPlansErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/schedule-testplans',
     ...options,
@@ -217,7 +217,7 @@ export const postNiworkorderV1ScheduleTestplans = <ThrowOnError extends boolean 
  *
  * @deprecated
  */
-export const postNiworkorderV1TestplansByTestPlanIdExecute = <ThrowOnError extends boolean = false>(options: Options<PostNiworkorderV1TestplansByTestPlanIdExecuteData, ThrowOnError>) => (options.client ?? client).post<PostNiworkorderV1TestplansByTestPlanIdExecuteResponses, PostNiworkorderV1TestplansByTestPlanIdExecuteErrors, ThrowOnError>({
+export const executeTestPlan = <ThrowOnError extends boolean = false>(options: Options<ExecuteTestPlanData, ThrowOnError>) => (options.client ?? client).post<ExecuteTestPlanResponses, ExecuteTestPlanErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/testplans/{testPlanId}/execute',
     ...options,
@@ -238,7 +238,7 @@ export const postNiworkorderV1TestplansByTestPlanIdExecute = <ThrowOnError exten
  *
  * @deprecated
  */
-export const postNiworkorderV1TestplanTemplates = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1TestplanTemplatesData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1TestplanTemplatesResponses, PostNiworkorderV1TestplanTemplatesErrors, ThrowOnError>({
+export const createTestPlanTemplates = <ThrowOnError extends boolean = false>(options?: Options<CreateTestPlanTemplatesData, ThrowOnError>) => (options?.client ?? client).post<CreateTestPlanTemplatesResponses, CreateTestPlanTemplatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/testplan-templates',
     ...options,
@@ -273,7 +273,7 @@ export const postNiworkorderV1TestplanTemplates = <ThrowOnError extends boolean 
  *
  * @deprecated
  */
-export const postNiworkorderV1QueryTestplanTemplates = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1QueryTestplanTemplatesData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1QueryTestplanTemplatesResponses, PostNiworkorderV1QueryTestplanTemplatesErrors, ThrowOnError>({
+export const queryTestPlanTemplates = <ThrowOnError extends boolean = false>(options?: Options<QueryTestPlanTemplatesData, ThrowOnError>) => (options?.client ?? client).post<QueryTestPlanTemplatesResponses, QueryTestPlanTemplatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/query-testplan-templates',
     ...options,
@@ -294,7 +294,7 @@ export const postNiworkorderV1QueryTestplanTemplates = <ThrowOnError extends boo
  *
  * @deprecated
  */
-export const postNiworkorderV1DeleteTestplanTemplates = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1DeleteTestplanTemplatesData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1DeleteTestplanTemplatesResponses, PostNiworkorderV1DeleteTestplanTemplatesErrors, ThrowOnError>({
+export const deleteTestPlanTemplates = <ThrowOnError extends boolean = false>(options?: Options<DeleteTestPlanTemplatesData, ThrowOnError>) => (options?.client ?? client).post<DeleteTestPlanTemplatesResponses, DeleteTestPlanTemplatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/delete-testplan-templates',
     ...options,
@@ -315,7 +315,7 @@ export const postNiworkorderV1DeleteTestplanTemplates = <ThrowOnError extends bo
  *
  * @deprecated
  */
-export const postNiworkorderV1UpdateTestplanTemplates = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1UpdateTestplanTemplatesData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1UpdateTestplanTemplatesResponses, PostNiworkorderV1UpdateTestplanTemplatesErrors, ThrowOnError>({
+export const updateTestPlanTemplates = <ThrowOnError extends boolean = false>(options?: Options<UpdateTestPlanTemplatesData, ThrowOnError>) => (options?.client ?? client).post<UpdateTestPlanTemplatesResponses, UpdateTestPlanTemplatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/update-testplan-templates',
     ...options,
@@ -330,7 +330,7 @@ export const postNiworkorderV1UpdateTestplanTemplates = <ThrowOnError extends bo
  *
  * Returns information about API and available operations.
  */
-export const getNiworkorder = <ThrowOnError extends boolean = false>(options?: Options<GetNiworkorderData, ThrowOnError>) => (options?.client ?? client).get<GetNiworkorderResponses, unknown, ThrowOnError>({
+export const rootEndPoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndPointData, ThrowOnError>) => (options?.client ?? client).get<RootEndPointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder',
     ...options
@@ -341,7 +341,7 @@ export const getNiworkorder = <ThrowOnError extends boolean = false>(options?: O
  *
  * Returns available operations for version V1 of the API.
  */
-export const getNiworkorderV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNiworkorderV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNiworkorderV1Responses, unknown, ThrowOnError>({
+export const v1OperationsRootEndPoint = <ThrowOnError extends boolean = false>(options?: Options<V1OperationsRootEndPointData, ThrowOnError>) => (options?.client ?? client).get<V1OperationsRootEndPointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1',
     ...options
@@ -358,7 +358,7 @@ export const getNiworkorderV1 = <ThrowOnError extends boolean = false>(options?:
  *
  * @deprecated
  */
-export const postNiworkorderV1Workflows = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1WorkflowsData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1WorkflowsResponses, PostNiworkorderV1WorkflowsErrors, ThrowOnError>({
+export const createWorkflow = <ThrowOnError extends boolean = false>(options?: Options<CreateWorkflowData, ThrowOnError>) => (options?.client ?? client).post<CreateWorkflowResponses, CreateWorkflowErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/workflows',
     ...options,
@@ -379,7 +379,7 @@ export const postNiworkorderV1Workflows = <ThrowOnError extends boolean = false>
  *
  * @deprecated
  */
-export const postNiworkorderV1QueryWorkflows = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1QueryWorkflowsData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1QueryWorkflowsResponses, PostNiworkorderV1QueryWorkflowsErrors, ThrowOnError>({
+export const queryWorkflows = <ThrowOnError extends boolean = false>(options?: Options<QueryWorkflowsData, ThrowOnError>) => (options?.client ?? client).post<QueryWorkflowsResponses, QueryWorkflowsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/query-workflows',
     ...options,
@@ -400,7 +400,7 @@ export const postNiworkorderV1QueryWorkflows = <ThrowOnError extends boolean = f
  *
  * @deprecated
  */
-export const getNiworkorderV1WorkflowsByWorkflowId = <ThrowOnError extends boolean = false>(options: Options<GetNiworkorderV1WorkflowsByWorkflowIdData, ThrowOnError>) => (options.client ?? client).get<GetNiworkorderV1WorkflowsByWorkflowIdResponses, GetNiworkorderV1WorkflowsByWorkflowIdErrors, ThrowOnError>({
+export const getWorkflow = <ThrowOnError extends boolean = false>(options: Options<GetWorkflowData, ThrowOnError>) => (options.client ?? client).get<GetWorkflowResponses, GetWorkflowErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/workflows/{workflowId}',
     ...options
@@ -417,7 +417,7 @@ export const getNiworkorderV1WorkflowsByWorkflowId = <ThrowOnError extends boole
  *
  * @deprecated
  */
-export const putNiworkorderV1WorkflowsByWorkflowId = <ThrowOnError extends boolean = false>(options: Options<PutNiworkorderV1WorkflowsByWorkflowIdData, ThrowOnError>) => (options.client ?? client).put<PutNiworkorderV1WorkflowsByWorkflowIdResponses, PutNiworkorderV1WorkflowsByWorkflowIdErrors, ThrowOnError>({
+export const updateWorkflow = <ThrowOnError extends boolean = false>(options: Options<UpdateWorkflowData, ThrowOnError>) => (options.client ?? client).put<UpdateWorkflowResponses, UpdateWorkflowErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/workflows/{workflowId}',
     ...options,
@@ -438,7 +438,7 @@ export const putNiworkorderV1WorkflowsByWorkflowId = <ThrowOnError extends boole
  *
  * @deprecated
  */
-export const postNiworkorderV1DeleteWorkflows = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1DeleteWorkflowsData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1DeleteWorkflowsResponses, PostNiworkorderV1DeleteWorkflowsErrors, ThrowOnError>({
+export const deleteWorkflows = <ThrowOnError extends boolean = false>(options?: Options<DeleteWorkflowsData, ThrowOnError>) => (options?.client ?? client).post<DeleteWorkflowsResponses, DeleteWorkflowsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/delete-workflows',
     ...options,
@@ -453,7 +453,7 @@ export const postNiworkorderV1DeleteWorkflows = <ThrowOnError extends boolean = 
  *
  * Creates one or more work orders with the provided data.
  */
-export const postNiworkorderV1Workorders = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1WorkordersData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1WorkordersResponses, PostNiworkorderV1WorkordersErrors, ThrowOnError>({
+export const createWorkOrders = <ThrowOnError extends boolean = false>(options?: Options<CreateWorkOrdersData, ThrowOnError>) => (options?.client ?? client).post<CreateWorkOrdersResponses, CreateWorkOrdersErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/workorders',
     ...options,
@@ -483,7 +483,7 @@ export const postNiworkorderV1Workorders = <ThrowOnError extends boolean = false
  *
  * Uses the `projection` to only include the specified fields in the response.
  */
-export const postNiworkorderV1QueryWorkorders = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1QueryWorkordersData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1QueryWorkordersResponses, PostNiworkorderV1QueryWorkordersErrors, ThrowOnError>({
+export const queryWorkOrders = <ThrowOnError extends boolean = false>(options?: Options<QueryWorkOrdersData, ThrowOnError>) => (options?.client ?? client).post<QueryWorkOrdersResponses, QueryWorkOrdersErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/query-workorders',
     ...options,
@@ -498,7 +498,7 @@ export const postNiworkorderV1QueryWorkorders = <ThrowOnError extends boolean = 
  *
  * Deletes one or more work orders identified by their IDs.
  */
-export const postNiworkorderV1DeleteWorkorders = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1DeleteWorkordersData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1DeleteWorkordersResponses, PostNiworkorderV1DeleteWorkordersErrors, ThrowOnError>({
+export const deleteWorkOrders = <ThrowOnError extends boolean = false>(options?: Options<DeleteWorkOrdersData, ThrowOnError>) => (options?.client ?? client).post<DeleteWorkOrdersResponses, DeleteWorkOrdersErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/delete-workorders',
     ...options,
@@ -513,7 +513,7 @@ export const postNiworkorderV1DeleteWorkorders = <ThrowOnError extends boolean =
  *
  * Get the work orders summary.
  */
-export const getNiworkorderV1WorkordersSummary = <ThrowOnError extends boolean = false>(options?: Options<GetNiworkorderV1WorkordersSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetNiworkorderV1WorkordersSummaryResponses, GetNiworkorderV1WorkordersSummaryErrors, ThrowOnError>({
+export const getWorkOrdersSummary = <ThrowOnError extends boolean = false>(options?: Options<GetWorkOrdersSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetWorkOrdersSummaryResponses, GetWorkOrdersSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/workorders-summary',
     ...options
@@ -524,7 +524,7 @@ export const getNiworkorderV1WorkordersSummary = <ThrowOnError extends boolean =
  *
  * Gets a work order with the provided ID.
  */
-export const getNiworkorderV1WorkordersByWorkOrderId = <ThrowOnError extends boolean = false>(options: Options<GetNiworkorderV1WorkordersByWorkOrderIdData, ThrowOnError>) => (options.client ?? client).get<GetNiworkorderV1WorkordersByWorkOrderIdResponses, GetNiworkorderV1WorkordersByWorkOrderIdErrors, ThrowOnError>({
+export const getWorkOrder = <ThrowOnError extends boolean = false>(options: Options<GetWorkOrderData, ThrowOnError>) => (options.client ?? client).get<GetWorkOrderResponses, GetWorkOrderErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/workorders/{workOrderId}',
     ...options
@@ -535,7 +535,7 @@ export const getNiworkorderV1WorkordersByWorkOrderId = <ThrowOnError extends boo
  *
  * Updates one or more work orders with the provided data.
  */
-export const postNiworkorderV1UpdateWorkorders = <ThrowOnError extends boolean = false>(options?: Options<PostNiworkorderV1UpdateWorkordersData, ThrowOnError>) => (options?.client ?? client).post<PostNiworkorderV1UpdateWorkordersResponses, PostNiworkorderV1UpdateWorkordersErrors, ThrowOnError>({
+export const updateWorkOrders = <ThrowOnError extends boolean = false>(options?: Options<UpdateWorkOrdersData, ThrowOnError>) => (options?.client ?? client).post<UpdateWorkOrdersResponses, UpdateWorkOrdersErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niworkorder/v1/update-workorders',
     ...options,

@@ -11,16 +11,17 @@
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
-  getNidynamicformfields,
-  getNidynamicformfieldsV1Configurations,
-  getNidynamicformfieldsV1Groups,
-  getNidynamicformfieldsV1Fields,
-  postNidynamicformfieldsV1QueryResolvedConfigurations,
-  postNidynamicformfieldsV1QueryTables,
+  rootEndPoint as getNidynamicformfields,
+  getDynamicFormConfigurations as getNidynamicformfieldsV1Configurations,
+  getDynamicFormGroups as getNidynamicformfieldsV1Groups,
+  getDynamicFormFields as getNidynamicformfieldsV1Fields,
+  queryResolvedDynamicFormConfiguration as postNidynamicformfieldsV1QueryResolvedConfigurations,
+  queryTables as postNidynamicformfieldsV1QueryTables,
 } from '../../src/generated/dynamic-form-fields';
 import { createClient, createConfig } from '../../src/generated/dynamic-form-fields/client';
+import { client as generatedClient } from '../../src/generated/dynamic-form-fields/client.gen';
 
 const configured = isConfigured();
 
@@ -28,9 +29,10 @@ describe.skipIf(!configured)('Dynamic Form Fields Service', () => {
   let client: ReturnType<typeof createClient>;
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

@@ -2144,7 +2144,7 @@ export type UpdateTemplateTimelineDefinitionValueNullOrUnsetWritable = {
     value?: UpdateTemplateTimelineDefinition;
 } | null;
 
-export type PostNiworkitemV1WorkflowsData = {
+export type CreateWorkflowData = {
     /**
      * The parameters for creating the workflow.
      */
@@ -2154,7 +2154,7 @@ export type PostNiworkitemV1WorkflowsData = {
     url: '/niworkitem/v1/workflows';
 };
 
-export type PostNiworkitemV1WorkflowsErrors = {
+export type CreateWorkflowErrors = {
     /**
      * Unauthorized.
      */
@@ -2165,18 +2165,18 @@ export type PostNiworkitemV1WorkflowsErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1WorkflowsError = PostNiworkitemV1WorkflowsErrors[keyof PostNiworkitemV1WorkflowsErrors];
+export type CreateWorkflowError = CreateWorkflowErrors[keyof CreateWorkflowErrors];
 
-export type PostNiworkitemV1WorkflowsResponses = {
+export type CreateWorkflowResponses = {
     /**
      * The workflow was created successfully.
      */
     201: CreateWorkflowResponse;
 };
 
-export type PostNiworkitemV1WorkflowsResponse = PostNiworkitemV1WorkflowsResponses[keyof PostNiworkitemV1WorkflowsResponses];
+export type CreateWorkflowResponse2 = CreateWorkflowResponses[keyof CreateWorkflowResponses];
 
-export type PostNiworkitemV1QueryWorkflowsData = {
+export type QueryWorkflowsData = {
     /**
      * The parameters for querying workflows.
      */
@@ -2186,7 +2186,7 @@ export type PostNiworkitemV1QueryWorkflowsData = {
     url: '/niworkitem/v1/query-workflows';
 };
 
-export type PostNiworkitemV1QueryWorkflowsErrors = {
+export type QueryWorkflowsErrors = {
     /**
      * Unauthorized.
      */
@@ -2197,18 +2197,18 @@ export type PostNiworkitemV1QueryWorkflowsErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1QueryWorkflowsError = PostNiworkitemV1QueryWorkflowsErrors[keyof PostNiworkitemV1QueryWorkflowsErrors];
+export type QueryWorkflowsError = QueryWorkflowsErrors[keyof QueryWorkflowsErrors];
 
-export type PostNiworkitemV1QueryWorkflowsResponses = {
+export type QueryWorkflowsResponses = {
     /**
      * The workflows were queried successfully.
      */
     200: QueryWorkflowsResponse;
 };
 
-export type PostNiworkitemV1QueryWorkflowsResponse = PostNiworkitemV1QueryWorkflowsResponses[keyof PostNiworkitemV1QueryWorkflowsResponses];
+export type QueryWorkflowsResponse2 = QueryWorkflowsResponses[keyof QueryWorkflowsResponses];
 
-export type GetNiworkitemV1WorkflowsByWorkflowIdData = {
+export type GetWorkflowData = {
     body?: never;
     path: {
         /**
@@ -2220,7 +2220,7 @@ export type GetNiworkitemV1WorkflowsByWorkflowIdData = {
     url: '/niworkitem/v1/workflows/{workflowId}';
 };
 
-export type GetNiworkitemV1WorkflowsByWorkflowIdErrors = {
+export type GetWorkflowErrors = {
     /**
      * Unauthorized.
      */
@@ -2231,18 +2231,18 @@ export type GetNiworkitemV1WorkflowsByWorkflowIdErrors = {
     default: BaseResponse;
 };
 
-export type GetNiworkitemV1WorkflowsByWorkflowIdError = GetNiworkitemV1WorkflowsByWorkflowIdErrors[keyof GetNiworkitemV1WorkflowsByWorkflowIdErrors];
+export type GetWorkflowError = GetWorkflowErrors[keyof GetWorkflowErrors];
 
-export type GetNiworkitemV1WorkflowsByWorkflowIdResponses = {
+export type GetWorkflowResponses = {
     /**
      * The workflow was retreived successfully.
      */
     200: GetWorkflowResponse;
 };
 
-export type GetNiworkitemV1WorkflowsByWorkflowIdResponse = GetNiworkitemV1WorkflowsByWorkflowIdResponses[keyof GetNiworkitemV1WorkflowsByWorkflowIdResponses];
+export type GetWorkflowResponse2 = GetWorkflowResponses[keyof GetWorkflowResponses];
 
-export type PutNiworkitemV1WorkflowsByWorkflowIdData = {
+export type UpdateWorkflowData = {
     /**
      * The parameters for updating the workflow.
      */
@@ -2257,7 +2257,7 @@ export type PutNiworkitemV1WorkflowsByWorkflowIdData = {
     url: '/niworkitem/v1/workflows/{workflowId}';
 };
 
-export type PutNiworkitemV1WorkflowsByWorkflowIdErrors = {
+export type UpdateWorkflowErrors = {
     /**
      * Unauthorized.
      */
@@ -2268,18 +2268,18 @@ export type PutNiworkitemV1WorkflowsByWorkflowIdErrors = {
     default: BaseResponse;
 };
 
-export type PutNiworkitemV1WorkflowsByWorkflowIdError = PutNiworkitemV1WorkflowsByWorkflowIdErrors[keyof PutNiworkitemV1WorkflowsByWorkflowIdErrors];
+export type UpdateWorkflowError = UpdateWorkflowErrors[keyof UpdateWorkflowErrors];
 
-export type PutNiworkitemV1WorkflowsByWorkflowIdResponses = {
+export type UpdateWorkflowResponses = {
     /**
      * The workflow was updated successfully.
      */
     200: UpdateWorkflowResponse;
 };
 
-export type PutNiworkitemV1WorkflowsByWorkflowIdResponse = PutNiworkitemV1WorkflowsByWorkflowIdResponses[keyof PutNiworkitemV1WorkflowsByWorkflowIdResponses];
+export type UpdateWorkflowResponse2 = UpdateWorkflowResponses[keyof UpdateWorkflowResponses];
 
-export type PostNiworkitemV1DeleteWorkflowsData = {
+export type DeleteWorkflowsData = {
     /**
      * The parameters for deleting workflows.
      */
@@ -2289,7 +2289,7 @@ export type PostNiworkitemV1DeleteWorkflowsData = {
     url: '/niworkitem/v1/delete-workflows';
 };
 
-export type PostNiworkitemV1DeleteWorkflowsErrors = {
+export type DeleteWorkflowsErrors = {
     /**
      * Unauthorized.
      */
@@ -2300,9 +2300,9 @@ export type PostNiworkitemV1DeleteWorkflowsErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1DeleteWorkflowsError = PostNiworkitemV1DeleteWorkflowsErrors[keyof PostNiworkitemV1DeleteWorkflowsErrors];
+export type DeleteWorkflowsError = DeleteWorkflowsErrors[keyof DeleteWorkflowsErrors];
 
-export type PostNiworkitemV1DeleteWorkflowsResponses = {
+export type DeleteWorkflowsResponses = {
     /**
      * The workflows were partially deleted.
      */
@@ -2313,9 +2313,9 @@ export type PostNiworkitemV1DeleteWorkflowsResponses = {
     204: void;
 };
 
-export type PostNiworkitemV1DeleteWorkflowsResponse = PostNiworkitemV1DeleteWorkflowsResponses[keyof PostNiworkitemV1DeleteWorkflowsResponses];
+export type DeleteWorkflowsResponse = DeleteWorkflowsResponses[keyof DeleteWorkflowsResponses];
 
-export type PostNiworkitemV1WorkitemsData = {
+export type CreateWorkItemsData = {
     /**
      * The parameters for creating work items.
      */
@@ -2325,7 +2325,7 @@ export type PostNiworkitemV1WorkitemsData = {
     url: '/niworkitem/v1/workitems';
 };
 
-export type PostNiworkitemV1WorkitemsErrors = {
+export type CreateWorkItemsErrors = {
     /**
      * Unauthorized.
      */
@@ -2336,9 +2336,9 @@ export type PostNiworkitemV1WorkitemsErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1WorkitemsError = PostNiworkitemV1WorkitemsErrors[keyof PostNiworkitemV1WorkitemsErrors];
+export type CreateWorkItemsError = CreateWorkItemsErrors[keyof CreateWorkItemsErrors];
 
-export type PostNiworkitemV1WorkitemsResponses = {
+export type CreateWorkItemsResponses = {
     /**
      * The work items were partially created.
      */
@@ -2349,9 +2349,9 @@ export type PostNiworkitemV1WorkitemsResponses = {
     201: CreateWorkItemsResponse;
 };
 
-export type PostNiworkitemV1WorkitemsResponse = PostNiworkitemV1WorkitemsResponses[keyof PostNiworkitemV1WorkitemsResponses];
+export type CreateWorkItemsResponse2 = CreateWorkItemsResponses[keyof CreateWorkItemsResponses];
 
-export type PostNiworkitemV1QueryWorkitemsData = {
+export type QueryWorkItemsData = {
     /**
      * The parameters for querying work items.
      */
@@ -2361,7 +2361,7 @@ export type PostNiworkitemV1QueryWorkitemsData = {
     url: '/niworkitem/v1/query-workitems';
 };
 
-export type PostNiworkitemV1QueryWorkitemsErrors = {
+export type QueryWorkItemsErrors = {
     /**
      * Unauthorized.
      */
@@ -2372,25 +2372,25 @@ export type PostNiworkitemV1QueryWorkitemsErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1QueryWorkitemsError = PostNiworkitemV1QueryWorkitemsErrors[keyof PostNiworkitemV1QueryWorkitemsErrors];
+export type QueryWorkItemsError = QueryWorkItemsErrors[keyof QueryWorkItemsErrors];
 
-export type PostNiworkitemV1QueryWorkitemsResponses = {
+export type QueryWorkItemsResponses = {
     /**
      * The work items were queried successfully.
      */
     200: QueryWorkItemsResponse;
 };
 
-export type PostNiworkitemV1QueryWorkitemsResponse = PostNiworkitemV1QueryWorkitemsResponses[keyof PostNiworkitemV1QueryWorkitemsResponses];
+export type QueryWorkItemsResponse2 = QueryWorkItemsResponses[keyof QueryWorkItemsResponses];
 
-export type GetNiworkitemV1WorkitemsSummaryData = {
+export type GetWorkItemsSummaryData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niworkitem/v1/workitems-summary';
 };
 
-export type GetNiworkitemV1WorkitemsSummaryErrors = {
+export type GetWorkItemsSummaryErrors = {
     /**
      * Unauthorized.
      */
@@ -2401,18 +2401,18 @@ export type GetNiworkitemV1WorkitemsSummaryErrors = {
     default: BaseResponse;
 };
 
-export type GetNiworkitemV1WorkitemsSummaryError = GetNiworkitemV1WorkitemsSummaryErrors[keyof GetNiworkitemV1WorkitemsSummaryErrors];
+export type GetWorkItemsSummaryError = GetWorkItemsSummaryErrors[keyof GetWorkItemsSummaryErrors];
 
-export type GetNiworkitemV1WorkitemsSummaryResponses = {
+export type GetWorkItemsSummaryResponses = {
     /**
      * The work items summary was queried successfully.
      */
     200: WorkItemSummaryResponse;
 };
 
-export type GetNiworkitemV1WorkitemsSummaryResponse = GetNiworkitemV1WorkitemsSummaryResponses[keyof GetNiworkitemV1WorkitemsSummaryResponses];
+export type GetWorkItemsSummaryResponse = GetWorkItemsSummaryResponses[keyof GetWorkItemsSummaryResponses];
 
-export type GetNiworkitemV1WorkitemsByWorkItemIdData = {
+export type GetWorkItemData = {
     body?: never;
     path: {
         /**
@@ -2433,7 +2433,7 @@ export type GetNiworkitemV1WorkitemsByWorkItemIdData = {
     url: '/niworkitem/v1/workitems/{workItemId}';
 };
 
-export type GetNiworkitemV1WorkitemsByWorkItemIdErrors = {
+export type GetWorkItemErrors = {
     /**
      * Unauthorized.
      */
@@ -2444,18 +2444,18 @@ export type GetNiworkitemV1WorkitemsByWorkItemIdErrors = {
     default: BaseResponse;
 };
 
-export type GetNiworkitemV1WorkitemsByWorkItemIdError = GetNiworkitemV1WorkitemsByWorkItemIdErrors[keyof GetNiworkitemV1WorkitemsByWorkItemIdErrors];
+export type GetWorkItemError = GetWorkItemErrors[keyof GetWorkItemErrors];
 
-export type GetNiworkitemV1WorkitemsByWorkItemIdResponses = {
+export type GetWorkItemResponses = {
     /**
      * The work items were queried successfully.
      */
     200: GetWorkItemResponse;
 };
 
-export type GetNiworkitemV1WorkitemsByWorkItemIdResponse = GetNiworkitemV1WorkitemsByWorkItemIdResponses[keyof GetNiworkitemV1WorkitemsByWorkItemIdResponses];
+export type GetWorkItemResponse2 = GetWorkItemResponses[keyof GetWorkItemResponses];
 
-export type PostNiworkitemV1DeleteWorkitemsData = {
+export type DeleteWorkItemsData = {
     /**
      * The parameters for deleting work items.
      */
@@ -2465,7 +2465,7 @@ export type PostNiworkitemV1DeleteWorkitemsData = {
     url: '/niworkitem/v1/delete-workitems';
 };
 
-export type PostNiworkitemV1DeleteWorkitemsErrors = {
+export type DeleteWorkItemsErrors = {
     /**
      * Unauthorized.
      */
@@ -2476,9 +2476,9 @@ export type PostNiworkitemV1DeleteWorkitemsErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1DeleteWorkitemsError = PostNiworkitemV1DeleteWorkitemsErrors[keyof PostNiworkitemV1DeleteWorkitemsErrors];
+export type DeleteWorkItemsError = DeleteWorkItemsErrors[keyof DeleteWorkItemsErrors];
 
-export type PostNiworkitemV1DeleteWorkitemsResponses = {
+export type DeleteWorkItemsResponses = {
     /**
      * The work items were partially deleted.
      */
@@ -2489,9 +2489,9 @@ export type PostNiworkitemV1DeleteWorkitemsResponses = {
     204: void;
 };
 
-export type PostNiworkitemV1DeleteWorkitemsResponse = PostNiworkitemV1DeleteWorkitemsResponses[keyof PostNiworkitemV1DeleteWorkitemsResponses];
+export type DeleteWorkItemsResponse = DeleteWorkItemsResponses[keyof DeleteWorkItemsResponses];
 
-export type PostNiworkitemV1UpdateWorkitemsData = {
+export type UpdateWorkItemsData = {
     /**
      * The parameters for updating work items.
      */
@@ -2501,7 +2501,7 @@ export type PostNiworkitemV1UpdateWorkitemsData = {
     url: '/niworkitem/v1/update-workitems';
 };
 
-export type PostNiworkitemV1UpdateWorkitemsErrors = {
+export type UpdateWorkItemsErrors = {
     /**
      * Unauthorized.
      */
@@ -2512,18 +2512,18 @@ export type PostNiworkitemV1UpdateWorkitemsErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1UpdateWorkitemsError = PostNiworkitemV1UpdateWorkitemsErrors[keyof PostNiworkitemV1UpdateWorkitemsErrors];
+export type UpdateWorkItemsError = UpdateWorkItemsErrors[keyof UpdateWorkItemsErrors];
 
-export type PostNiworkitemV1UpdateWorkitemsResponses = {
+export type UpdateWorkItemsResponses = {
     /**
      * The work items were partially updated.
      */
     200: UpdateWorkItemsPartialSuccessResponse;
 };
 
-export type PostNiworkitemV1UpdateWorkitemsResponse = PostNiworkitemV1UpdateWorkitemsResponses[keyof PostNiworkitemV1UpdateWorkitemsResponses];
+export type UpdateWorkItemsResponse = UpdateWorkItemsResponses[keyof UpdateWorkItemsResponses];
 
-export type PostNiworkitemV1ScheduleWorkitemsData = {
+export type ScheduleWorkItemsData = {
     /**
      * The parameters for scheduling work items.
      */
@@ -2533,7 +2533,7 @@ export type PostNiworkitemV1ScheduleWorkitemsData = {
     url: '/niworkitem/v1/schedule-workitems';
 };
 
-export type PostNiworkitemV1ScheduleWorkitemsErrors = {
+export type ScheduleWorkItemsErrors = {
     /**
      * Unauthorized.
      */
@@ -2544,18 +2544,18 @@ export type PostNiworkitemV1ScheduleWorkitemsErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1ScheduleWorkitemsError = PostNiworkitemV1ScheduleWorkitemsErrors[keyof PostNiworkitemV1ScheduleWorkitemsErrors];
+export type ScheduleWorkItemsError = ScheduleWorkItemsErrors[keyof ScheduleWorkItemsErrors];
 
-export type PostNiworkitemV1ScheduleWorkitemsResponses = {
+export type ScheduleWorkItemsResponses = {
     /**
      * The work items were partially scheduled.
      */
     200: ScheduleWorkItemsPartialSuccessResponse;
 };
 
-export type PostNiworkitemV1ScheduleWorkitemsResponse = PostNiworkitemV1ScheduleWorkitemsResponses[keyof PostNiworkitemV1ScheduleWorkitemsResponses];
+export type ScheduleWorkItemsResponse = ScheduleWorkItemsResponses[keyof ScheduleWorkItemsResponses];
 
-export type PostNiworkitemV1WorkitemsByWorkItemIdExecuteData = {
+export type ExecuteWorkItemData = {
     /**
      * The parameters for executing a work item action.
      */
@@ -2570,7 +2570,7 @@ export type PostNiworkitemV1WorkitemsByWorkItemIdExecuteData = {
     url: '/niworkitem/v1/workitems/{workItemId}/execute';
 };
 
-export type PostNiworkitemV1WorkitemsByWorkItemIdExecuteErrors = {
+export type ExecuteWorkItemErrors = {
     /**
      * Unauthorized.
      */
@@ -2593,9 +2593,9 @@ export type PostNiworkitemV1WorkitemsByWorkItemIdExecuteErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1WorkitemsByWorkItemIdExecuteError = PostNiworkitemV1WorkitemsByWorkItemIdExecuteErrors[keyof PostNiworkitemV1WorkitemsByWorkItemIdExecuteErrors];
+export type ExecuteWorkItemError = ExecuteWorkItemErrors[keyof ExecuteWorkItemErrors];
 
-export type PostNiworkitemV1WorkitemsByWorkItemIdExecuteResponses = {
+export type ExecuteWorkItemResponses = {
     /**
      * The action was completed successfully.
      */
@@ -2606,9 +2606,9 @@ export type PostNiworkitemV1WorkitemsByWorkItemIdExecuteResponses = {
     202: ExecuteWorkItemResponse;
 };
 
-export type PostNiworkitemV1WorkitemsByWorkItemIdExecuteResponse = PostNiworkitemV1WorkitemsByWorkItemIdExecuteResponses[keyof PostNiworkitemV1WorkitemsByWorkItemIdExecuteResponses];
+export type ExecuteWorkItemResponse2 = ExecuteWorkItemResponses[keyof ExecuteWorkItemResponses];
 
-export type PostNiworkitemV1WorkitemTemplatesData = {
+export type CreateWorkItemTemplatesData = {
     /**
      * The parameters for creating work item templates.
      */
@@ -2618,7 +2618,7 @@ export type PostNiworkitemV1WorkitemTemplatesData = {
     url: '/niworkitem/v1/workitem-templates';
 };
 
-export type PostNiworkitemV1WorkitemTemplatesErrors = {
+export type CreateWorkItemTemplatesErrors = {
     /**
      * Unauthorized.
      */
@@ -2629,9 +2629,9 @@ export type PostNiworkitemV1WorkitemTemplatesErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1WorkitemTemplatesError = PostNiworkitemV1WorkitemTemplatesErrors[keyof PostNiworkitemV1WorkitemTemplatesErrors];
+export type CreateWorkItemTemplatesError = CreateWorkItemTemplatesErrors[keyof CreateWorkItemTemplatesErrors];
 
-export type PostNiworkitemV1WorkitemTemplatesResponses = {
+export type CreateWorkItemTemplatesResponses = {
     /**
      * The work item templates were partially created.
      */
@@ -2642,9 +2642,9 @@ export type PostNiworkitemV1WorkitemTemplatesResponses = {
     201: CreateWorkItemTemplatesResponse;
 };
 
-export type PostNiworkitemV1WorkitemTemplatesResponse = PostNiworkitemV1WorkitemTemplatesResponses[keyof PostNiworkitemV1WorkitemTemplatesResponses];
+export type CreateWorkItemTemplatesResponse2 = CreateWorkItemTemplatesResponses[keyof CreateWorkItemTemplatesResponses];
 
-export type PostNiworkitemV1QueryWorkitemTemplatesData = {
+export type QueryWorkItemTemplatesData = {
     /**
      * The parameters for querying work item templates.
      */
@@ -2654,7 +2654,7 @@ export type PostNiworkitemV1QueryWorkitemTemplatesData = {
     url: '/niworkitem/v1/query-workitem-templates';
 };
 
-export type PostNiworkitemV1QueryWorkitemTemplatesErrors = {
+export type QueryWorkItemTemplatesErrors = {
     /**
      * Unauthorized.
      */
@@ -2665,18 +2665,18 @@ export type PostNiworkitemV1QueryWorkitemTemplatesErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1QueryWorkitemTemplatesError = PostNiworkitemV1QueryWorkitemTemplatesErrors[keyof PostNiworkitemV1QueryWorkitemTemplatesErrors];
+export type QueryWorkItemTemplatesError = QueryWorkItemTemplatesErrors[keyof QueryWorkItemTemplatesErrors];
 
-export type PostNiworkitemV1QueryWorkitemTemplatesResponses = {
+export type QueryWorkItemTemplatesResponses = {
     /**
      * The work item templates were queried successfully.
      */
     200: QueryWorkItemTemplatesResponse;
 };
 
-export type PostNiworkitemV1QueryWorkitemTemplatesResponse = PostNiworkitemV1QueryWorkitemTemplatesResponses[keyof PostNiworkitemV1QueryWorkitemTemplatesResponses];
+export type QueryWorkItemTemplatesResponse2 = QueryWorkItemTemplatesResponses[keyof QueryWorkItemTemplatesResponses];
 
-export type PostNiworkitemV1UpdateWorkitemTemplatesData = {
+export type UpdateWorkItemTemplatesData = {
     /**
      * The parameters for updating work item templates.
      */
@@ -2686,7 +2686,7 @@ export type PostNiworkitemV1UpdateWorkitemTemplatesData = {
     url: '/niworkitem/v1/update-workitem-templates';
 };
 
-export type PostNiworkitemV1UpdateWorkitemTemplatesErrors = {
+export type UpdateWorkItemTemplatesErrors = {
     /**
      * Unauthorized.
      */
@@ -2697,18 +2697,18 @@ export type PostNiworkitemV1UpdateWorkitemTemplatesErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1UpdateWorkitemTemplatesError = PostNiworkitemV1UpdateWorkitemTemplatesErrors[keyof PostNiworkitemV1UpdateWorkitemTemplatesErrors];
+export type UpdateWorkItemTemplatesError = UpdateWorkItemTemplatesErrors[keyof UpdateWorkItemTemplatesErrors];
 
-export type PostNiworkitemV1UpdateWorkitemTemplatesResponses = {
+export type UpdateWorkItemTemplatesResponses = {
     /**
      * The work item templates were partially updated.
      */
     200: UpdateWorkItemTemplatesPartialSuccessResponse;
 };
 
-export type PostNiworkitemV1UpdateWorkitemTemplatesResponse = PostNiworkitemV1UpdateWorkitemTemplatesResponses[keyof PostNiworkitemV1UpdateWorkitemTemplatesResponses];
+export type UpdateWorkItemTemplatesResponse = UpdateWorkItemTemplatesResponses[keyof UpdateWorkItemTemplatesResponses];
 
-export type PostNiworkitemV1DeleteWorkitemTemplatesData = {
+export type DeleteWorkItemTemplatesData = {
     /**
      * The parameters for deleting work item templates.
      */
@@ -2718,7 +2718,7 @@ export type PostNiworkitemV1DeleteWorkitemTemplatesData = {
     url: '/niworkitem/v1/delete-workitem-templates';
 };
 
-export type PostNiworkitemV1DeleteWorkitemTemplatesErrors = {
+export type DeleteWorkItemTemplatesErrors = {
     /**
      * Unauthorized.
      */
@@ -2729,9 +2729,9 @@ export type PostNiworkitemV1DeleteWorkitemTemplatesErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkitemV1DeleteWorkitemTemplatesError = PostNiworkitemV1DeleteWorkitemTemplatesErrors[keyof PostNiworkitemV1DeleteWorkitemTemplatesErrors];
+export type DeleteWorkItemTemplatesError = DeleteWorkItemTemplatesErrors[keyof DeleteWorkItemTemplatesErrors];
 
-export type PostNiworkitemV1DeleteWorkitemTemplatesResponses = {
+export type DeleteWorkItemTemplatesResponses = {
     /**
      * The work item templates were partially deleted.
      */
@@ -2742,16 +2742,16 @@ export type PostNiworkitemV1DeleteWorkitemTemplatesResponses = {
     204: void;
 };
 
-export type PostNiworkitemV1DeleteWorkitemTemplatesResponse = PostNiworkitemV1DeleteWorkitemTemplatesResponses[keyof PostNiworkitemV1DeleteWorkitemTemplatesResponses];
+export type DeleteWorkItemTemplatesResponse = DeleteWorkItemTemplatesResponses[keyof DeleteWorkItemTemplatesResponses];
 
-export type GetNiworkitemV1WorkitemtypesData = {
+export type GetWorkItemTypesData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niworkitem/v1/workitemtypes';
 };
 
-export type GetNiworkitemV1WorkitemtypesErrors = {
+export type GetWorkItemTypesErrors = {
     /**
      * Unauthorized
      */
@@ -2762,45 +2762,45 @@ export type GetNiworkitemV1WorkitemtypesErrors = {
     default: BaseResponse;
 };
 
-export type GetNiworkitemV1WorkitemtypesError = GetNiworkitemV1WorkitemtypesErrors[keyof GetNiworkitemV1WorkitemtypesErrors];
+export type GetWorkItemTypesError = GetWorkItemTypesErrors[keyof GetWorkItemTypesErrors];
 
-export type GetNiworkitemV1WorkitemtypesResponses = {
+export type GetWorkItemTypesResponses = {
     /**
      * The work item types are retrieved successfully.
      */
     200: GetWorkItemTypesResponse;
 };
 
-export type GetNiworkitemV1WorkitemtypesResponse = GetNiworkitemV1WorkitemtypesResponses[keyof GetNiworkitemV1WorkitemtypesResponses];
+export type GetWorkItemTypesResponse2 = GetWorkItemTypesResponses[keyof GetWorkItemTypesResponses];
 
-export type GetNiworkitemData = {
+export type RootEndPointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niworkitem';
 };
 
-export type GetNiworkitemResponses = {
+export type RootEndPointResponses = {
     /**
      * OK
      */
     200: WorkItemVersions;
 };
 
-export type GetNiworkitemResponse = GetNiworkitemResponses[keyof GetNiworkitemResponses];
+export type RootEndPointResponse = RootEndPointResponses[keyof RootEndPointResponses];
 
-export type GetNiworkitemV1Data = {
+export type WorkItemV1OperationsRootEndPointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niworkitem/v1';
 };
 
-export type GetNiworkitemV1Responses = {
+export type WorkItemV1OperationsRootEndPointResponses = {
     /**
      * OK
      */
     200: V1WorkItemOperations;
 };
 
-export type GetNiworkitemV1Response = GetNiworkitemV1Responses[keyof GetNiworkitemV1Responses];
+export type WorkItemV1OperationsRootEndPointResponse = WorkItemV1OperationsRootEndPointResponses[keyof WorkItemV1OperationsRootEndPointResponses];

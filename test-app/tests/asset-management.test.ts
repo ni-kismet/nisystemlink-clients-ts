@@ -10,17 +10,18 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
-  getNiapmV1Assets,
-  getNiapmV1AssetSummary,
-  postNiapmV1QueryAssets,
-  postNiapmV1MaterializedSearchAssets,
-  postNiapmV1DeleteAssets,
-  getNiapmV1AssetsByAssetId,
-  getNiapm,
+  getAssets as getNiapmV1Assets,
+  assetSummary as getNiapmV1AssetSummary,
+  queryAssets as postNiapmV1QueryAssets,
+  searchAssets as postNiapmV1MaterializedSearchAssets,
+  deleteAssets as postNiapmV1DeleteAssets,
+  getAsset as getNiapmV1AssetsByAssetId,
+  rootEndpoint as getNiapm,
 } from '../../src/generated/asset-management';
 import { createClient, createConfig } from '../../src/generated/asset-management/client';
+import { client as generatedClient } from '../../src/generated/asset-management/client.gen';
 
 const configured = isConfigured();
 
@@ -28,9 +29,10 @@ describe.skipIf(!configured)('Asset Management Service', () => {
   let client: ReturnType<typeof createClient>;
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

@@ -7,9 +7,10 @@
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
-import { isConfigured } from '../../src/client';
-import { getNifeedV1Feeds } from '../../src/generated/feeds';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
+import { queryFeeds as getNifeedV1Feeds } from '../../src/generated/feeds';
 import { createClient, createConfig } from '../../src/generated/feeds/client';
+import { client as generatedClient } from '../../src/generated/feeds/client.gen';
 
 const configured = isConfigured();
 
@@ -17,9 +18,10 @@ describe.skipIf(!configured)('Feeds Service', () => {
   let client: ReturnType<typeof createClient>;
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

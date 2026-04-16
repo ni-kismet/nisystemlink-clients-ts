@@ -9,18 +9,19 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
-  getNisystemsstate,
-  getNisystemsstateV1,
-  getNisystemsstateV1States,
-  postNisystemsstateV1States,
-  getNisystemsstateV1StatesByStateId,
-  patchNisystemsstateV1StatesByStateId,
-  postNisystemsstateV1DeleteStates,
-  getNisystemsstateV1StatesByStateIdHistory,
+  rootEndpoint as getNisystemsstate,
+  v1 as getNisystemsstateV1,
+  getStates as getNisystemsstateV1States,
+  createState as postNisystemsstateV1States,
+  getState as getNisystemsstateV1StatesByStateId,
+  updateState as patchNisystemsstateV1StatesByStateId,
+  deleteStates as postNisystemsstateV1DeleteStates,
+  getStateHistory as getNisystemsstateV1StatesByStateIdHistory,
 } from '../../src/generated/systems-state';
 import { createClient, createConfig } from '../../src/generated/systems-state/client';
+import { client as generatedClient } from '../../src/generated/systems-state/client.gen';
 
 const configured = isConfigured();
 
@@ -30,9 +31,10 @@ describe.skipIf(!configured)('Systems State Service', () => {
   const testName = `ts-sdk-e2e-${Date.now()}`;
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

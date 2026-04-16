@@ -5,6 +5,47 @@ export type ClientOptions = {
 };
 
 /**
+ * Model used to for representing the calibration forecast dataframe.
+ */
+export type AssetCalibrationForecastModel = {
+    /**
+     * Columns used for representing a data frame
+     */
+    columns?: Array<DataFrameColumnModel> | null;
+};
+
+/**
+ * Asset calibration forecast request model used to query the upcoming
+ * number of assets that require calibration.
+ */
+export type AssetCalibrationForecastRequest = {
+    /**
+     * A list of properties after which the backend will perform the `GroupBy` operation.
+     */
+    groupBy?: Array<'None' | 'DAY' | 'MONTH' | 'WEEK' | 'LOCATION' | 'MODEL' | 'WORKSPACE' | 'VENDOR_NAME' | 'BUS_TYPE' | 'ASSET_TYPE'> | null;
+    /**
+     * Start time used to calculate the calibration forecast.
+     */
+    startTime?: string;
+    /**
+     * End time used to calculate the calibration forecast.
+     */
+    endTime?: string;
+    filter?: string | null;
+    /**
+     * Default false. If true, the forecast will only include assets that have calibration due dates within the time range specified by the StartTime and EndTime properties.
+     */
+    includeOnlyDataInTimeRange?: boolean;
+};
+
+/**
+ * Response model used to represent asset calibration forecast values.
+ */
+export type AssetCalibrationForecastResponse = {
+    calibrationForecast?: AssetCalibrationForecastModel;
+};
+
+/**
  * Model for an object describing the properties for creating an asset.
  *
  * Unique Asset Identification is required to create an asset. See AssetIdentificationModel for details.
@@ -804,6 +845,38 @@ export type CreateAssetsRequest = {
 };
 
 /**
+ * DataFrame column descriptor model.
+ */
+export type DataFrameColumnDescriptorModel = {
+    /**
+     * Type of the column descriptor.
+     */
+    type?: 'TIME' | 'COUNT' | 'STRING_VALUE' | 'MINION_ID' | 'WORKSPACE_ID' | 'ASSET_TYPE' | 'BUS_TYPE';
+    /**
+     * Value of the column descriptor.
+     */
+    value?: string | null;
+};
+
+/**
+ * DataFrame column model.
+ */
+export type DataFrameColumnModel = {
+    /**
+     * Name of the column.
+     */
+    name?: string | null;
+    /**
+     * Column descriptor containing information about the column naming composition.
+     */
+    columnDescriptors?: Array<DataFrameColumnDescriptorModel> | null;
+    /**
+     * Column values.
+     */
+    values?: Array<unknown> | null;
+};
+
+/**
  * Model for request body containing IDs of the assets to delete all information for.
  */
 export type DeleteAssetsRequest = {
@@ -1508,7 +1581,73 @@ export type ReceiveFromCalibrationRequest = {
  */
 export type SearchAssetsRequest = {
     /**
-     * Gets or sets the filter criteria for assets.
+     * Gets or sets the filter criteria for assets. Consists of a Lucene-based query string. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
+     * Filter syntax: '[field]: "[value]" [operator] [field]: "[value]"'
+     *
+     * When no field is specified, the value is matched against the default fields: Name, ModelName, VendorName, SerialNumber, ScanCode, Keywords, Properties values and Location names.
+     *
+     * Operators:
+     * - Logical AND operator 'AND'. Example: 'Name: "name" AND ModelName: "model"'
+     * - Logical OR operator 'OR'. Example: 'Name: "name" OR ModelName: "model"'
+     * - Negation operator 'NOT'. Example: 'IsNIAsset: (NOT false)'
+     * - Wildcard operator '\*', used to match any sequence of characters. Example: 'ModelName: "NI-91\*"'
+     * - Exists operator '\_exists\_', used to match assets where a field has any value. Example: '\_exists\_: "Properties.property key"'
+     * - Range bracket syntax, used to match values between two bounds for numeric and date fields.
+     * Square brackets '[' and ']' denote inclusive bounds, curly braces '{' and '}' denote exclusive bounds, and '\*' denotes no bound (infinity).
+     * Examples:
+     * - 'ModelNumber: [100 TO 200]' matches values where 100 <= ModelNumber <= 200.
+     * - 'ModelNumber: {100 TO 200}' matches values where 100 < ModelNumber < 200.
+     * - 'ModelNumber: [100 TO 200}' matches values where 100 <= ModelNumber < 200.
+     * - 'ExternalCalibration.CalibrationDate: [\* TO "2024-01-01T00:00:00Z"]' matches assets calibrated on or before January 1st, 2024.
+     * - 'ExternalCalibration.CalibrationDate: ["2024-01-01T00:00:00Z" TO \*]' matches assets calibrated on or after January 1st, 2024.
+     *
+     * The filter is case insensitive for both field names and values.
+     *
+     * Valid asset properties that can be used in the filter:
+     * - Id: String representing the unique identifier of an asset.
+     * - SerialNumber: String representing the serial number of an asset.
+     * - ModelName: String representing the model name of an asset.
+     * - ModelNumber: Integer representing the model number of an asset.
+     * - VendorName: String representing the vendor name of an asset.
+     * - VendorNumber: Integer representing the vendor number of an asset.
+     * - DiscoveryType: String enumeration representing the discovery type of an asset. Possible values are: AUTOMATIC, MANUAL.
+     * - AssetType: String enumeration representing the asset type. Possible values are: GENERIC, DEVICE_UNDER_TEST, FIXTURE, SYSTEM.
+     * - BusType: String enumeration representing the bus type of an asset. Possible values are: BUILT_IN_SYSTEM, PCI_PXI, USB, GPIB, VXI, SERIAL, TCP_IP, CRIO, SCXI, CDAQ, SWITCH_BLOCK, SCC, FIRE_WIRE, ACCESSORY, CAN, SWITCH_BLOCK_DEVICE, SLSC.
+     * - PartNumber: String representing the part number of an asset.
+     * - Name: String representing the asset name.
+     * - FirmwareVersion: String representing the firmware version of an asset.
+     * - HardwareVersion: String representing the hardware version of an asset.
+     * - VisaResourceName: String representing the VISA resource name of an asset.
+     * - IsNIAsset: Boolean flag specifying whether the asset is an NI asset or a third-party asset.
+     * - IsSystemController: Boolean flag specifying whether the asset is a system controller, i.e. its AssetType is SYSTEM.
+     * - Keywords: String value representing an asset metadata keyword. Example: 'Keywords: "keyword1"'.
+     * - SupportsReset: Boolean flag specifying whether the asset supports reset.
+     * - SupportsSelfTest: Boolean flag specifying whether the asset supports self-test.
+     * - SupportsAnyCalibration: Boolean flag specifying whether the asset supports any calibration.
+     * - SupportsExternalCalibration: Boolean flag specifying whether the asset supports external calibration.
+     * - SupportsSelfCalibration: Boolean flag specifying whether the asset supports self-calibration.
+     * - SelfCalibration.CalibrationDate: ISO-8601 formatted timestamp string specifying the last date the asset was self-calibrated. Example: 'SelfCalibration.CalibrationDate: "2018-05-20T00:00:00Z"'
+     * - LastUpdatedDate: ISO-8601 formatted timestamp string specifying the date the asset was last updated. Example: 'LastUpdatedDate: "2018-05-20T00:00:00Z"'
+     * - Workspace: String representing the workspace identifier the asset belongs to.
+     * - Properties: Collection of key-value pairs representing asset metadata properties. Filtered using the syntax '"Properties.[key]": "[value]"'. Example: '"Properties.location": "rack-1"'.
+     * - ScanCode: String representing the scan code of an asset.
+     * - CalibrationStatus: String enumeration representing the calibration status of an asset. Possible values are: OK, APPROACHING_RECOMMENDED_DUE_DATE, PAST_RECOMMENDED_DUE_DATE, OUT_FOR_CALIBRATION.
+     * - ExternalCalibration.CalibrationDate: ISO-8601 formatted timestamp string specifying the last date the asset was externally calibrated. Example: 'ExternalCalibration.CalibrationDate: "2018-05-20T00:00:00Z"'
+     * - ExternalCalibration.ResolvedDueDate (also: ExternalCalibration.NextRecommendedDate): ISO-8601 formatted timestamp string specifying the recommended date for the next external calibration. Example: 'ExternalCalibration.NextRecommendedDate: "2018-05-20T00:00:00Z"'
+     * - ExternalCalibration.IsLimited: Boolean flag specifying whether the last external calibration was a limited calibration.
+     * - ExternalCalibration.RecommendedInterval: Integer representing the manufacturer-recommended calibration interval, in months.
+     * - ExternalCalibration.Comments: String representing any external calibration comments.
+     * - Location.MinionId: String representing the identifier of the system the asset is located in.
+     * - Location.SlotNumber: Integer representing the slot number the asset is located in.
+     * - Location.PhysicalLocation: String representing the physical location identifier of the asset.
+     * - Location.AssetState.SystemConnection: String enumeration representing the connection state of the system the asset is currently located in. Possible values are: DISCONNECTED, CONNECTED.
+     * - Location.AssetState.AssetPresence: String enumeration representing the presence status of an asset in a system. Possible values are: INITIALIZING, UNKNOWN, NOT_PRESENT, PRESENT.
+     * - Location.Enabled: Boolean flag specifying whether the location is enabled.
+     * - Location.Keywords: String value representing a location keyword.
+     * - Location.Type: String representing the type of location.
+     * - Location.Blank: Boolean flag specifying whether the asset has no location assigned. Example: '"Locations.Blank": "true"'
+     * - Location.Path.Id: String representing the identifier of a location in the asset's location path (e.g. get assets under a given location).
+     * - Location.Properties: Collection of key-value pairs representing location metadata properties. Filtered using the syntax '"Location.Properties.[key]": "[value]"'.
      */
     filter?: string | null;
     /**
@@ -1737,7 +1876,7 @@ export type ValidLocationMovementModel = {
     warning?: string | null;
 };
 
-export type GetNiapmV1AssetsData = {
+export type GetAssetsData = {
     body?: never;
     headers?: {
         'x-ni-api-key'?: string;
@@ -1773,116 +1912,116 @@ export type GetNiapmV1AssetsData = {
     url: '/niapm/v1/assets';
 };
 
-export type GetNiapmV1AssetsErrors = {
+export type GetAssetsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNiapmV1AssetsError = GetNiapmV1AssetsErrors[keyof GetNiapmV1AssetsErrors];
+export type GetAssetsError = GetAssetsErrors[keyof GetAssetsErrors];
 
-export type GetNiapmV1AssetsResponses = {
+export type GetAssetsResponses = {
     /**
      * OK
      */
     200: AssetsResponse;
 };
 
-export type GetNiapmV1AssetsResponse = GetNiapmV1AssetsResponses[keyof GetNiapmV1AssetsResponses];
+export type GetAssetsResponse = GetAssetsResponses[keyof GetAssetsResponses];
 
-export type PostNiapmV1AssetsData = {
+export type CreateAssetsData = {
     body?: CreateAssetsRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/assets';
 };
 
-export type PostNiapmV1AssetsErrors = {
+export type CreateAssetsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsError = PostNiapmV1AssetsErrors[keyof PostNiapmV1AssetsErrors];
+export type CreateAssetsError = CreateAssetsErrors[keyof CreateAssetsErrors];
 
-export type PostNiapmV1AssetsResponses = {
+export type CreateAssetsResponses = {
     /**
      * OK
      */
     200: CreateAssetsPartialSuccessResponse;
 };
 
-export type PostNiapmV1AssetsResponse = PostNiapmV1AssetsResponses[keyof PostNiapmV1AssetsResponses];
+export type CreateAssetsResponse = CreateAssetsResponses[keyof CreateAssetsResponses];
 
-export type GetNiapmV1AssetSummaryData = {
+export type AssetSummaryData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niapm/v1/asset-summary';
 };
 
-export type GetNiapmV1AssetSummaryErrors = {
+export type AssetSummaryErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNiapmV1AssetSummaryError = GetNiapmV1AssetSummaryErrors[keyof GetNiapmV1AssetSummaryErrors];
+export type AssetSummaryError = AssetSummaryErrors[keyof AssetSummaryErrors];
 
-export type GetNiapmV1AssetSummaryResponses = {
+export type AssetSummaryResponses = {
     /**
      * OK
      */
     200: AssetSummaryResponse;
 };
 
-export type GetNiapmV1AssetSummaryResponse = GetNiapmV1AssetSummaryResponses[keyof GetNiapmV1AssetSummaryResponses];
+export type AssetSummaryResponse2 = AssetSummaryResponses[keyof AssetSummaryResponses];
 
-export type PostNiapmV1QueryAssetsData = {
+export type QueryAssetsData = {
     body?: QueryAssetsRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/query-assets';
 };
 
-export type PostNiapmV1QueryAssetsErrors = {
+export type QueryAssetsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1QueryAssetsError = PostNiapmV1QueryAssetsErrors[keyof PostNiapmV1QueryAssetsErrors];
+export type QueryAssetsError = QueryAssetsErrors[keyof QueryAssetsErrors];
 
-export type PostNiapmV1QueryAssetsResponses = {
+export type QueryAssetsResponses = {
     /**
      * OK
      */
     200: AssetsResponse;
 };
 
-export type PostNiapmV1QueryAssetsResponse = PostNiapmV1QueryAssetsResponses[keyof PostNiapmV1QueryAssetsResponses];
+export type QueryAssetsResponse = QueryAssetsResponses[keyof QueryAssetsResponses];
 
-export type PostNiapmV1ExportAssetsData = {
+export type ExportAssetsData = {
     body?: ExportAssetsRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/export-assets';
 };
 
-export type PostNiapmV1ExportAssetsErrors = {
+export type ExportAssetsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1ExportAssetsError = PostNiapmV1ExportAssetsErrors[keyof PostNiapmV1ExportAssetsErrors];
+export type ExportAssetsError = ExportAssetsErrors[keyof ExportAssetsErrors];
 
-export type PostNiapmV1ExportAssetsResponses = {
+export type ExportAssetsResponses = {
     /**
      * OK
      */
@@ -1893,9 +2032,9 @@ export type PostNiapmV1ExportAssetsResponses = {
     201: ExportAssetsResponse;
 };
 
-export type PostNiapmV1ExportAssetsResponse = PostNiapmV1ExportAssetsResponses[keyof PostNiapmV1ExportAssetsResponses];
+export type ExportAssetsResponse2 = ExportAssetsResponses[keyof ExportAssetsResponses];
 
-export type PatchNiapmV1AssetsByAssetIdMetadataData = {
+export type UpdateMetadataData = {
     body?: UpdateMetadataRequest;
     path: {
         assetId: string;
@@ -1904,50 +2043,50 @@ export type PatchNiapmV1AssetsByAssetIdMetadataData = {
     url: '/niapm/v1/assets/{assetId}/metadata';
 };
 
-export type PatchNiapmV1AssetsByAssetIdMetadataErrors = {
+export type UpdateMetadataErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PatchNiapmV1AssetsByAssetIdMetadataError = PatchNiapmV1AssetsByAssetIdMetadataErrors[keyof PatchNiapmV1AssetsByAssetIdMetadataErrors];
+export type UpdateMetadataError = UpdateMetadataErrors[keyof UpdateMetadataErrors];
 
-export type PatchNiapmV1AssetsByAssetIdMetadataResponses = {
+export type UpdateMetadataResponses = {
     /**
      * OK
      */
     200: UpdateAssetsPartialSuccessResponse;
 };
 
-export type PatchNiapmV1AssetsByAssetIdMetadataResponse = PatchNiapmV1AssetsByAssetIdMetadataResponses[keyof PatchNiapmV1AssetsByAssetIdMetadataResponses];
+export type UpdateMetadataResponse = UpdateMetadataResponses[keyof UpdateMetadataResponses];
 
-export type PostNiapmV1UpdateAssetsData = {
+export type UpdateAssetsData = {
     body?: UpdateAssetsRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/update-assets';
 };
 
-export type PostNiapmV1UpdateAssetsErrors = {
+export type UpdateAssetsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1UpdateAssetsError = PostNiapmV1UpdateAssetsErrors[keyof PostNiapmV1UpdateAssetsErrors];
+export type UpdateAssetsError = UpdateAssetsErrors[keyof UpdateAssetsErrors];
 
-export type PostNiapmV1UpdateAssetsResponses = {
+export type UpdateAssetsResponses = {
     /**
      * OK
      */
     200: UpdateAssetsPartialSuccessResponse;
 };
 
-export type PostNiapmV1UpdateAssetsResponse = PostNiapmV1UpdateAssetsResponses[keyof PostNiapmV1UpdateAssetsResponses];
+export type UpdateAssetsResponse = UpdateAssetsResponses[keyof UpdateAssetsResponses];
 
-export type PostNiapmV1AssetsByAssetIdHistoryQueryLocationData = {
+export type PostAssetQueryConnectionHistoryData = {
     body?: QueryLocationHistoryRequest;
     headers?: {
         'x-ni-api-key'?: string;
@@ -1959,50 +2098,50 @@ export type PostNiapmV1AssetsByAssetIdHistoryQueryLocationData = {
     url: '/niapm/v1/assets/{assetId}/history/query-location';
 };
 
-export type PostNiapmV1AssetsByAssetIdHistoryQueryLocationErrors = {
+export type PostAssetQueryConnectionHistoryErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsByAssetIdHistoryQueryLocationError = PostNiapmV1AssetsByAssetIdHistoryQueryLocationErrors[keyof PostNiapmV1AssetsByAssetIdHistoryQueryLocationErrors];
+export type PostAssetQueryConnectionHistoryError = PostAssetQueryConnectionHistoryErrors[keyof PostAssetQueryConnectionHistoryErrors];
 
-export type PostNiapmV1AssetsByAssetIdHistoryQueryLocationResponses = {
+export type PostAssetQueryConnectionHistoryResponses = {
     /**
      * OK
      */
     200: ConnectionHistoryResponse;
 };
 
-export type PostNiapmV1AssetsByAssetIdHistoryQueryLocationResponse = PostNiapmV1AssetsByAssetIdHistoryQueryLocationResponses[keyof PostNiapmV1AssetsByAssetIdHistoryQueryLocationResponses];
+export type PostAssetQueryConnectionHistoryResponse = PostAssetQueryConnectionHistoryResponses[keyof PostAssetQueryConnectionHistoryResponses];
 
-export type PostNiapmV1DeleteAssetsData = {
+export type DeleteAssetsData = {
     body?: DeleteAssetsRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/delete-assets';
 };
 
-export type PostNiapmV1DeleteAssetsErrors = {
+export type DeleteAssetsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1DeleteAssetsError = PostNiapmV1DeleteAssetsErrors[keyof PostNiapmV1DeleteAssetsErrors];
+export type DeleteAssetsError = DeleteAssetsErrors[keyof DeleteAssetsErrors];
 
-export type PostNiapmV1DeleteAssetsResponses = {
+export type DeleteAssetsResponses = {
     /**
      * OK
      */
     200: DeleteAssetsResponse;
 };
 
-export type PostNiapmV1DeleteAssetsResponse = PostNiapmV1DeleteAssetsResponses[keyof PostNiapmV1DeleteAssetsResponses];
+export type DeleteAssetsResponse2 = DeleteAssetsResponses[keyof DeleteAssetsResponses];
 
-export type GetNiapmV1AssetsByAssetIdData = {
+export type GetAssetData = {
     body?: never;
     path: {
         assetId: string;
@@ -2011,25 +2150,25 @@ export type GetNiapmV1AssetsByAssetIdData = {
     url: '/niapm/v1/assets/{assetId}';
 };
 
-export type GetNiapmV1AssetsByAssetIdErrors = {
+export type GetAssetErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNiapmV1AssetsByAssetIdError = GetNiapmV1AssetsByAssetIdErrors[keyof GetNiapmV1AssetsByAssetIdErrors];
+export type GetAssetError = GetAssetErrors[keyof GetAssetErrors];
 
-export type GetNiapmV1AssetsByAssetIdResponses = {
+export type GetAssetResponses = {
     /**
      * OK
      */
     200: AssetModel;
 };
 
-export type GetNiapmV1AssetsByAssetIdResponse = GetNiapmV1AssetsByAssetIdResponses[keyof GetNiapmV1AssetsByAssetIdResponses];
+export type GetAssetResponse = GetAssetResponses[keyof GetAssetResponses];
 
-export type PostNiapmV1AssetsByAssetIdFileData = {
+export type LinkFilesData = {
     body?: LinkFilesRequest;
     path: {
         assetId: string;
@@ -2038,25 +2177,25 @@ export type PostNiapmV1AssetsByAssetIdFileData = {
     url: '/niapm/v1/assets/{assetId}/file';
 };
 
-export type PostNiapmV1AssetsByAssetIdFileErrors = {
+export type LinkFilesErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsByAssetIdFileError = PostNiapmV1AssetsByAssetIdFileErrors[keyof PostNiapmV1AssetsByAssetIdFileErrors];
+export type LinkFilesError = LinkFilesErrors[keyof LinkFilesErrors];
 
-export type PostNiapmV1AssetsByAssetIdFileResponses = {
+export type LinkFilesResponses = {
     /**
      * OK
      */
     200: LinkFilesPartialSuccessResponse;
 };
 
-export type PostNiapmV1AssetsByAssetIdFileResponse = PostNiapmV1AssetsByAssetIdFileResponses[keyof PostNiapmV1AssetsByAssetIdFileResponses];
+export type LinkFilesResponse = LinkFilesResponses[keyof LinkFilesResponses];
 
-export type DeleteNiapmV1AssetsByAssetIdFilesByFileIdData = {
+export type UnlinkFileFromAssetData = {
     body?: never;
     path: {
         assetId: string;
@@ -2066,25 +2205,25 @@ export type DeleteNiapmV1AssetsByAssetIdFilesByFileIdData = {
     url: '/niapm/v1/assets/{assetId}/files/{fileId}';
 };
 
-export type DeleteNiapmV1AssetsByAssetIdFilesByFileIdErrors = {
+export type UnlinkFileFromAssetErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type DeleteNiapmV1AssetsByAssetIdFilesByFileIdError = DeleteNiapmV1AssetsByAssetIdFilesByFileIdErrors[keyof DeleteNiapmV1AssetsByAssetIdFilesByFileIdErrors];
+export type UnlinkFileFromAssetError = UnlinkFileFromAssetErrors[keyof UnlinkFileFromAssetErrors];
 
-export type DeleteNiapmV1AssetsByAssetIdFilesByFileIdResponses = {
+export type UnlinkFileFromAssetResponses = {
     /**
      * No Content
      */
     204: NoContentResult;
 };
 
-export type DeleteNiapmV1AssetsByAssetIdFilesByFileIdResponse = DeleteNiapmV1AssetsByAssetIdFilesByFileIdResponses[keyof DeleteNiapmV1AssetsByAssetIdFilesByFileIdResponses];
+export type UnlinkFileFromAssetResponse = UnlinkFileFromAssetResponses[keyof UnlinkFileFromAssetResponses];
 
-export type PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsData = {
+export type DeleteCalibrationHistoryData = {
     body?: DeleteCalibrationHistoryRequest;
     path: {
         assetId: string;
@@ -2093,16 +2232,16 @@ export type PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsData = {
     url: '/niapm/v1/assets/{assetId}/history/delete-calibrations';
 };
 
-export type PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsErrors = {
+export type DeleteCalibrationHistoryErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsError = PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsErrors[keyof PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsErrors];
+export type DeleteCalibrationHistoryError = DeleteCalibrationHistoryErrors[keyof DeleteCalibrationHistoryErrors];
 
-export type PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsResponses = {
+export type DeleteCalibrationHistoryResponses = {
     /**
      * Partial success: one or more entries could not be deleted
      */
@@ -2113,9 +2252,9 @@ export type PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsResponses = {
     204: void;
 };
 
-export type PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsResponse = PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsResponses[keyof PostNiapmV1AssetsByAssetIdHistoryDeleteCalibrationsResponses];
+export type DeleteCalibrationHistoryResponse = DeleteCalibrationHistoryResponses[keyof DeleteCalibrationHistoryResponses];
 
-export type GetNiapmV1AssetsByAssetIdHistoryCalibrationData = {
+export type GetAssetCalibrationHistoryData = {
     body?: never;
     path: {
         assetId: string;
@@ -2131,25 +2270,25 @@ export type GetNiapmV1AssetsByAssetIdHistoryCalibrationData = {
     url: '/niapm/v1/assets/{assetId}/history/calibration';
 };
 
-export type GetNiapmV1AssetsByAssetIdHistoryCalibrationErrors = {
+export type GetAssetCalibrationHistoryErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type GetNiapmV1AssetsByAssetIdHistoryCalibrationError = GetNiapmV1AssetsByAssetIdHistoryCalibrationErrors[keyof GetNiapmV1AssetsByAssetIdHistoryCalibrationErrors];
+export type GetAssetCalibrationHistoryError = GetAssetCalibrationHistoryErrors[keyof GetAssetCalibrationHistoryErrors];
 
-export type GetNiapmV1AssetsByAssetIdHistoryCalibrationResponses = {
+export type GetAssetCalibrationHistoryResponses = {
     /**
      * OK
      */
     200: CalibrationHistoryResponse;
 };
 
-export type GetNiapmV1AssetsByAssetIdHistoryCalibrationResponse = GetNiapmV1AssetsByAssetIdHistoryCalibrationResponses[keyof GetNiapmV1AssetsByAssetIdHistoryCalibrationResponses];
+export type GetAssetCalibrationHistoryResponse = GetAssetCalibrationHistoryResponses[keyof GetAssetCalibrationHistoryResponses];
 
-export type PostNiapmV1AssetsByAssetIdHistoryExportCalibrationData = {
+export type ExportCalibrationHistoryData = {
     body?: ExportCalibrationHistoryRequest;
     path: {
         assetId: string;
@@ -2158,16 +2297,16 @@ export type PostNiapmV1AssetsByAssetIdHistoryExportCalibrationData = {
     url: '/niapm/v1/assets/{assetId}/history/export-calibration';
 };
 
-export type PostNiapmV1AssetsByAssetIdHistoryExportCalibrationErrors = {
+export type ExportCalibrationHistoryErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsByAssetIdHistoryExportCalibrationError = PostNiapmV1AssetsByAssetIdHistoryExportCalibrationErrors[keyof PostNiapmV1AssetsByAssetIdHistoryExportCalibrationErrors];
+export type ExportCalibrationHistoryError = ExportCalibrationHistoryErrors[keyof ExportCalibrationHistoryErrors];
 
-export type PostNiapmV1AssetsByAssetIdHistoryExportCalibrationResponses = {
+export type ExportCalibrationHistoryResponses = {
     /**
      * OK
      */
@@ -2178,9 +2317,37 @@ export type PostNiapmV1AssetsByAssetIdHistoryExportCalibrationResponses = {
     201: ExportCalibrationHistoryResponse;
 };
 
-export type PostNiapmV1AssetsByAssetIdHistoryExportCalibrationResponse = PostNiapmV1AssetsByAssetIdHistoryExportCalibrationResponses[keyof PostNiapmV1AssetsByAssetIdHistoryExportCalibrationResponses];
+export type ExportCalibrationHistoryResponse2 = ExportCalibrationHistoryResponses[keyof ExportCalibrationHistoryResponses];
 
-export type PostNiapmV1AssetsReceiveFromCalibrationDryRunData = {
+export type CalculateCalibrationForecastData = {
+    /**
+     * Model containing forecast query parameters.
+     */
+    body?: AssetCalibrationForecastRequest;
+    path?: never;
+    query?: never;
+    url: '/niapm/v1/assets/calibration-forecast';
+};
+
+export type CalculateCalibrationForecastErrors = {
+    /**
+     * Error
+     */
+    default: BaseResponse;
+};
+
+export type CalculateCalibrationForecastError = CalculateCalibrationForecastErrors[keyof CalculateCalibrationForecastErrors];
+
+export type CalculateCalibrationForecastResponses = {
+    /**
+     * OK
+     */
+    200: AssetCalibrationForecastResponse;
+};
+
+export type CalculateCalibrationForecastResponse = CalculateCalibrationForecastResponses[keyof CalculateCalibrationForecastResponses];
+
+export type ReceiveFromCalibrationDryRunData = {
     /**
      * Model containing information for asset update and location movement for assets returning from calibration.
      */
@@ -2190,25 +2357,25 @@ export type PostNiapmV1AssetsReceiveFromCalibrationDryRunData = {
     url: '/niapm/v1/assets/receive-from-calibration-dry-run';
 };
 
-export type PostNiapmV1AssetsReceiveFromCalibrationDryRunErrors = {
+export type ReceiveFromCalibrationDryRunErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsReceiveFromCalibrationDryRunError = PostNiapmV1AssetsReceiveFromCalibrationDryRunErrors[keyof PostNiapmV1AssetsReceiveFromCalibrationDryRunErrors];
+export type ReceiveFromCalibrationDryRunError = ReceiveFromCalibrationDryRunErrors[keyof ReceiveFromCalibrationDryRunErrors];
 
-export type PostNiapmV1AssetsReceiveFromCalibrationDryRunResponses = {
+export type ReceiveFromCalibrationDryRunResponses = {
     /**
      * OK
      */
     200: MoveAssetsLocationPartialSuccessResponse;
 };
 
-export type PostNiapmV1AssetsReceiveFromCalibrationDryRunResponse = PostNiapmV1AssetsReceiveFromCalibrationDryRunResponses[keyof PostNiapmV1AssetsReceiveFromCalibrationDryRunResponses];
+export type ReceiveFromCalibrationDryRunResponse = ReceiveFromCalibrationDryRunResponses[keyof ReceiveFromCalibrationDryRunResponses];
 
-export type PostNiapmV1AssetsReceiveFromCalibrationData = {
+export type ReceiveFromCalibrationData = {
     /**
      * Model containing forecast query parameters.
      */
@@ -2218,25 +2385,25 @@ export type PostNiapmV1AssetsReceiveFromCalibrationData = {
     url: '/niapm/v1/assets/receive-from-calibration';
 };
 
-export type PostNiapmV1AssetsReceiveFromCalibrationErrors = {
+export type ReceiveFromCalibrationErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsReceiveFromCalibrationError = PostNiapmV1AssetsReceiveFromCalibrationErrors[keyof PostNiapmV1AssetsReceiveFromCalibrationErrors];
+export type ReceiveFromCalibrationError = ReceiveFromCalibrationErrors[keyof ReceiveFromCalibrationErrors];
 
-export type PostNiapmV1AssetsReceiveFromCalibrationResponses = {
+export type ReceiveFromCalibrationResponses = {
     /**
      * OK
      */
     200: MoveAssetsLocationPartialSuccessResponse;
 };
 
-export type PostNiapmV1AssetsReceiveFromCalibrationResponse = PostNiapmV1AssetsReceiveFromCalibrationResponses[keyof PostNiapmV1AssetsReceiveFromCalibrationResponses];
+export type ReceiveFromCalibrationResponse = ReceiveFromCalibrationResponses[keyof ReceiveFromCalibrationResponses];
 
-export type PostNiapmV1AssetsSendForCalibrationDryRunData = {
+export type SendForCalibrationDryRunData = {
     /**
      * Model containing information for asset update and location movement for assets sent to calibration.
      */
@@ -2246,25 +2413,25 @@ export type PostNiapmV1AssetsSendForCalibrationDryRunData = {
     url: '/niapm/v1/assets/send-for-calibration-dry-run';
 };
 
-export type PostNiapmV1AssetsSendForCalibrationDryRunErrors = {
+export type SendForCalibrationDryRunErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsSendForCalibrationDryRunError = PostNiapmV1AssetsSendForCalibrationDryRunErrors[keyof PostNiapmV1AssetsSendForCalibrationDryRunErrors];
+export type SendForCalibrationDryRunError = SendForCalibrationDryRunErrors[keyof SendForCalibrationDryRunErrors];
 
-export type PostNiapmV1AssetsSendForCalibrationDryRunResponses = {
+export type SendForCalibrationDryRunResponses = {
     /**
      * OK
      */
     200: MoveAssetsLocationPartialSuccessResponse;
 };
 
-export type PostNiapmV1AssetsSendForCalibrationDryRunResponse = PostNiapmV1AssetsSendForCalibrationDryRunResponses[keyof PostNiapmV1AssetsSendForCalibrationDryRunResponses];
+export type SendForCalibrationDryRunResponse = SendForCalibrationDryRunResponses[keyof SendForCalibrationDryRunResponses];
 
-export type PostNiapmV1AssetsSendForCalibrationData = {
+export type SendForCalibrationData = {
     /**
      * Model containing information for asset update and location movement for assets sent to calibration.
      */
@@ -2274,169 +2441,169 @@ export type PostNiapmV1AssetsSendForCalibrationData = {
     url: '/niapm/v1/assets/send-for-calibration';
 };
 
-export type PostNiapmV1AssetsSendForCalibrationErrors = {
+export type SendForCalibrationErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsSendForCalibrationError = PostNiapmV1AssetsSendForCalibrationErrors[keyof PostNiapmV1AssetsSendForCalibrationErrors];
+export type SendForCalibrationError = SendForCalibrationErrors[keyof SendForCalibrationErrors];
 
-export type PostNiapmV1AssetsSendForCalibrationResponses = {
+export type SendForCalibrationResponses = {
     /**
      * OK
      */
     200: MoveAssetsLocationPartialSuccessResponse;
 };
 
-export type PostNiapmV1AssetsSendForCalibrationResponse = PostNiapmV1AssetsSendForCalibrationResponses[keyof PostNiapmV1AssetsSendForCalibrationResponses];
+export type SendForCalibrationResponse = SendForCalibrationResponses[keyof SendForCalibrationResponses];
 
-export type PostNiapmV1AssetsMoveLocationDryRunData = {
+export type MoveAssetsLocationDryRunData = {
     body?: MoveAssetsLocationRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/assets/move-location-dry-run';
 };
 
-export type PostNiapmV1AssetsMoveLocationDryRunErrors = {
+export type MoveAssetsLocationDryRunErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsMoveLocationDryRunError = PostNiapmV1AssetsMoveLocationDryRunErrors[keyof PostNiapmV1AssetsMoveLocationDryRunErrors];
+export type MoveAssetsLocationDryRunError = MoveAssetsLocationDryRunErrors[keyof MoveAssetsLocationDryRunErrors];
 
-export type PostNiapmV1AssetsMoveLocationDryRunResponses = {
+export type MoveAssetsLocationDryRunResponses = {
     /**
      * OK
      */
     200: MoveAssetsLocationPartialSuccessResponse;
 };
 
-export type PostNiapmV1AssetsMoveLocationDryRunResponse = PostNiapmV1AssetsMoveLocationDryRunResponses[keyof PostNiapmV1AssetsMoveLocationDryRunResponses];
+export type MoveAssetsLocationDryRunResponse = MoveAssetsLocationDryRunResponses[keyof MoveAssetsLocationDryRunResponses];
 
-export type PostNiapmV1AssetsMoveLocationData = {
+export type MoveAssetsLocationData = {
     body?: MoveAssetsLocationRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/assets/move-location';
 };
 
-export type PostNiapmV1AssetsMoveLocationErrors = {
+export type MoveAssetsLocationErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsMoveLocationError = PostNiapmV1AssetsMoveLocationErrors[keyof PostNiapmV1AssetsMoveLocationErrors];
+export type MoveAssetsLocationError = MoveAssetsLocationErrors[keyof MoveAssetsLocationErrors];
 
-export type PostNiapmV1AssetsMoveLocationResponses = {
+export type MoveAssetsLocationResponses = {
     /**
      * OK
      */
     200: MoveAssetsLocationPartialSuccessResponse;
 };
 
-export type PostNiapmV1AssetsMoveLocationResponse = PostNiapmV1AssetsMoveLocationResponses[keyof PostNiapmV1AssetsMoveLocationResponses];
+export type MoveAssetsLocationResponse = MoveAssetsLocationResponses[keyof MoveAssetsLocationResponses];
 
-export type PostNiapmV1AssetsQueryLocationMovesData = {
+export type QueryLocationMovesData = {
     body?: QueryLocationMovesRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/assets/query-location-moves';
 };
 
-export type PostNiapmV1AssetsQueryLocationMovesErrors = {
+export type QueryLocationMovesErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsQueryLocationMovesError = PostNiapmV1AssetsQueryLocationMovesErrors[keyof PostNiapmV1AssetsQueryLocationMovesErrors];
+export type QueryLocationMovesError = QueryLocationMovesErrors[keyof QueryLocationMovesErrors];
 
-export type PostNiapmV1AssetsQueryLocationMovesResponses = {
+export type QueryLocationMovesResponses = {
     /**
      * OK
      */
     200: QueryLocationMovesResponse;
 };
 
-export type PostNiapmV1AssetsQueryLocationMovesResponse = PostNiapmV1AssetsQueryLocationMovesResponses[keyof PostNiapmV1AssetsQueryLocationMovesResponses];
+export type QueryLocationMovesResponse2 = QueryLocationMovesResponses[keyof QueryLocationMovesResponses];
 
-export type GetNiapmData = {
+export type RootEndpointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niapm';
 };
 
-export type GetNiapmResponses = {
+export type RootEndpointResponses = {
     /**
      * OK
      */
     200: unknown;
 };
 
-export type GetNiapmV1Data = {
+export type V1Data = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niapm/v1';
 };
 
-export type GetNiapmV1Responses = {
+export type V1Responses = {
     /**
      * OK
      */
     200: unknown;
 };
 
-export type PostNiapmV1MaterializedSearchAssetsData = {
+export type SearchAssetsData = {
     body?: SearchAssetsRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/materialized/search-assets';
 };
 
-export type PostNiapmV1MaterializedSearchAssetsErrors = {
+export type SearchAssetsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1MaterializedSearchAssetsError = PostNiapmV1MaterializedSearchAssetsErrors[keyof PostNiapmV1MaterializedSearchAssetsErrors];
+export type SearchAssetsError = SearchAssetsErrors[keyof SearchAssetsErrors];
 
-export type PostNiapmV1MaterializedSearchAssetsResponses = {
+export type SearchAssetsResponses = {
     /**
      * OK
      */
     200: SearchAssetsResponse;
 };
 
-export type PostNiapmV1MaterializedSearchAssetsResponse = PostNiapmV1MaterializedSearchAssetsResponses[keyof PostNiapmV1MaterializedSearchAssetsResponses];
+export type SearchAssetsResponse2 = SearchAssetsResponses[keyof SearchAssetsResponses];
 
-export type PostNiapmV1MaterializedExportAssetsData = {
+export type ExportMaterializedAssetsData = {
     body?: ExportMaterializedAssetsRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/materialized/export-assets';
 };
 
-export type PostNiapmV1MaterializedExportAssetsErrors = {
+export type ExportMaterializedAssetsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1MaterializedExportAssetsError = PostNiapmV1MaterializedExportAssetsErrors[keyof PostNiapmV1MaterializedExportAssetsErrors];
+export type ExportMaterializedAssetsError = ExportMaterializedAssetsErrors[keyof ExportMaterializedAssetsErrors];
 
-export type PostNiapmV1MaterializedExportAssetsResponses = {
+export type ExportMaterializedAssetsResponses = {
     /**
      * OK
      */
@@ -2447,104 +2614,104 @@ export type PostNiapmV1MaterializedExportAssetsResponses = {
     201: ExportAssetsResponse;
 };
 
-export type PostNiapmV1MaterializedExportAssetsResponse = PostNiapmV1MaterializedExportAssetsResponses[keyof PostNiapmV1MaterializedExportAssetsResponses];
+export type ExportMaterializedAssetsResponse = ExportMaterializedAssetsResponses[keyof ExportMaterializedAssetsResponses];
 
-export type PostNiapmV1QueryAssetUtilizationHistoryData = {
+export type QueryAssetUtilizationHistoryData = {
     body?: QueryAssetUtilizationHistoryRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/query-asset-utilization-history';
 };
 
-export type PostNiapmV1QueryAssetUtilizationHistoryErrors = {
+export type QueryAssetUtilizationHistoryErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1QueryAssetUtilizationHistoryError = PostNiapmV1QueryAssetUtilizationHistoryErrors[keyof PostNiapmV1QueryAssetUtilizationHistoryErrors];
+export type QueryAssetUtilizationHistoryError = QueryAssetUtilizationHistoryErrors[keyof QueryAssetUtilizationHistoryErrors];
 
-export type PostNiapmV1QueryAssetUtilizationHistoryResponses = {
+export type QueryAssetUtilizationHistoryResponses = {
     /**
      * OK
      */
     200: AssetUtilizationHistoryResponse;
 };
 
-export type PostNiapmV1QueryAssetUtilizationHistoryResponse = PostNiapmV1QueryAssetUtilizationHistoryResponses[keyof PostNiapmV1QueryAssetUtilizationHistoryResponses];
+export type QueryAssetUtilizationHistoryResponse = QueryAssetUtilizationHistoryResponses[keyof QueryAssetUtilizationHistoryResponses];
 
-export type PostNiapmV1AssetsStartUtilizationData = {
+export type StartUtilizationData = {
     body?: StartUtilizationRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/assets/start-utilization';
 };
 
-export type PostNiapmV1AssetsStartUtilizationErrors = {
+export type StartUtilizationErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsStartUtilizationError = PostNiapmV1AssetsStartUtilizationErrors[keyof PostNiapmV1AssetsStartUtilizationErrors];
+export type StartUtilizationError = StartUtilizationErrors[keyof StartUtilizationErrors];
 
-export type PostNiapmV1AssetsStartUtilizationResponses = {
+export type StartUtilizationResponses = {
     /**
      * OK
      */
     200: StartUtilizationPartialSuccessResponse;
 };
 
-export type PostNiapmV1AssetsStartUtilizationResponse = PostNiapmV1AssetsStartUtilizationResponses[keyof PostNiapmV1AssetsStartUtilizationResponses];
+export type StartUtilizationResponse = StartUtilizationResponses[keyof StartUtilizationResponses];
 
-export type PostNiapmV1AssetsEndUtilizationData = {
+export type EndUtilizationData = {
     body?: EndUtilizationRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/assets/end-utilization';
 };
 
-export type PostNiapmV1AssetsEndUtilizationErrors = {
+export type EndUtilizationErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsEndUtilizationError = PostNiapmV1AssetsEndUtilizationErrors[keyof PostNiapmV1AssetsEndUtilizationErrors];
+export type EndUtilizationError = EndUtilizationErrors[keyof EndUtilizationErrors];
 
-export type PostNiapmV1AssetsEndUtilizationResponses = {
+export type EndUtilizationResponses = {
     /**
      * OK
      */
     200: UpdateUtilizationPartialSuccessResponse;
 };
 
-export type PostNiapmV1AssetsEndUtilizationResponse = PostNiapmV1AssetsEndUtilizationResponses[keyof PostNiapmV1AssetsEndUtilizationResponses];
+export type EndUtilizationResponse = EndUtilizationResponses[keyof EndUtilizationResponses];
 
-export type PostNiapmV1AssetsUtilizationHeartbeatData = {
+export type UtilizationHeartbeatData = {
     body?: UtilizationHeartbeatRequest;
     path?: never;
     query?: never;
     url: '/niapm/v1/assets/utilization-heartbeat';
 };
 
-export type PostNiapmV1AssetsUtilizationHeartbeatErrors = {
+export type UtilizationHeartbeatErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNiapmV1AssetsUtilizationHeartbeatError = PostNiapmV1AssetsUtilizationHeartbeatErrors[keyof PostNiapmV1AssetsUtilizationHeartbeatErrors];
+export type UtilizationHeartbeatError = UtilizationHeartbeatErrors[keyof UtilizationHeartbeatErrors];
 
-export type PostNiapmV1AssetsUtilizationHeartbeatResponses = {
+export type UtilizationHeartbeatResponses = {
     /**
      * OK
      */
     200: UpdateUtilizationPartialSuccessResponse;
 };
 
-export type PostNiapmV1AssetsUtilizationHeartbeatResponse = PostNiapmV1AssetsUtilizationHeartbeatResponses[keyof PostNiapmV1AssetsUtilizationHeartbeatResponses];
+export type UtilizationHeartbeatResponse = UtilizationHeartbeatResponses[keyof UtilizationHeartbeatResponses];

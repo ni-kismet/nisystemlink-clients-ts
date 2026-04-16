@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { DeleteNinotificationV1AddressGroupsByIdData, DeleteNinotificationV1AddressGroupsByIdErrors, DeleteNinotificationV1AddressGroupsByIdResponses, DeleteNinotificationV1MessageTemplatesByIdData, DeleteNinotificationV1MessageTemplatesByIdErrors, DeleteNinotificationV1MessageTemplatesByIdResponses, DeleteNinotificationV1NotificationStrategiesByIdData, DeleteNinotificationV1NotificationStrategiesByIdErrors, DeleteNinotificationV1NotificationStrategiesByIdResponses, GetNinotificationData, GetNinotificationResponses, GetNinotificationV1AddressGroupsByIdData, GetNinotificationV1AddressGroupsByIdErrors, GetNinotificationV1AddressGroupsByIdResponses, GetNinotificationV1AddressGroupsData, GetNinotificationV1AddressGroupsErrors, GetNinotificationV1AddressGroupsResponses, GetNinotificationV1Data, GetNinotificationV1MessageTemplatesByIdData, GetNinotificationV1MessageTemplatesByIdErrors, GetNinotificationV1MessageTemplatesByIdResponses, GetNinotificationV1MessageTemplatesData, GetNinotificationV1MessageTemplatesErrors, GetNinotificationV1MessageTemplatesResponses, GetNinotificationV1NotificationStrategiesByIdData, GetNinotificationV1NotificationStrategiesByIdErrors, GetNinotificationV1NotificationStrategiesByIdResponses, GetNinotificationV1NotificationStrategiesData, GetNinotificationV1NotificationStrategiesErrors, GetNinotificationV1NotificationStrategiesResponses, GetNinotificationV1Responses, PatchNinotificationV1AddressGroupsByIdData, PatchNinotificationV1AddressGroupsByIdErrors, PatchNinotificationV1AddressGroupsByIdResponses, PatchNinotificationV1MessageTemplatesByIdData, PatchNinotificationV1MessageTemplatesByIdErrors, PatchNinotificationV1MessageTemplatesByIdResponses, PatchNinotificationV1NotificationStrategiesByIdData, PatchNinotificationV1NotificationStrategiesByIdErrors, PatchNinotificationV1NotificationStrategiesByIdResponses, PostNinotificationV1AddressGroupsData, PostNinotificationV1AddressGroupsErrors, PostNinotificationV1AddressGroupsResponses, PostNinotificationV1ApplyDynamicStrategyData, PostNinotificationV1ApplyDynamicStrategyErrors, PostNinotificationV1ApplyDynamicStrategyResponses, PostNinotificationV1MessageTemplatesData, PostNinotificationV1MessageTemplatesErrors, PostNinotificationV1MessageTemplatesResponses, PostNinotificationV1NotificationStrategiesByIdApplyData, PostNinotificationV1NotificationStrategiesByIdApplyErrors, PostNinotificationV1NotificationStrategiesByIdApplyResponses, PostNinotificationV1NotificationStrategiesData, PostNinotificationV1NotificationStrategiesErrors, PostNinotificationV1NotificationStrategiesResponses } from './types.gen';
+import type { ApplyDynamicNotificationStrategyData, ApplyDynamicNotificationStrategyErrors, ApplyDynamicNotificationStrategyResponses, ApplyNotificationStrategyData, ApplyNotificationStrategyErrors, ApplyNotificationStrategyResponses, CreateAddressGroupData, CreateAddressGroupErrors, CreateAddressGroupResponses, CreateMessageTemplateData, CreateMessageTemplateErrors, CreateMessageTemplateResponses, CreateNotificationStrategyData, CreateNotificationStrategyErrors, CreateNotificationStrategyResponses, DeleteAddressGroupData, DeleteAddressGroupErrors, DeleteAddressGroupResponses, DeleteMessageTemplateData, DeleteMessageTemplateErrors, DeleteMessageTemplateResponses, DeleteNotificationStrategyData, DeleteNotificationStrategyErrors, DeleteNotificationStrategyResponses, GetAddressGroupData, GetAddressGroupErrors, GetAddressGroupResponses, GetAddressGroupsData, GetAddressGroupsErrors, GetAddressGroupsResponses, GetData, GetMessageTemplateData, GetMessageTemplateErrors, GetMessageTemplateResponses, GetMessageTemplatesData, GetMessageTemplatesErrors, GetMessageTemplatesResponses, GetNotificationStrategiesData, GetNotificationStrategiesErrors, GetNotificationStrategiesResponses, GetNotificationStrategyData, GetNotificationStrategyErrors, GetNotificationStrategyResponses, GetResponses, UpdateAddressGroupData, UpdateAddressGroupErrors, UpdateAddressGroupResponses, UpdateMessageTemplateData, UpdateMessageTemplateErrors, UpdateMessageTemplateResponses, UpdateNotificationStrategyData, UpdateNotificationStrategyErrors, UpdateNotificationStrategyResponses, V1EndpointData, V1EndpointResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -21,7 +21,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Gets all address groups
  */
-export const getNinotificationV1AddressGroups = <ThrowOnError extends boolean = false>(options?: Options<GetNinotificationV1AddressGroupsData, ThrowOnError>) => (options?.client ?? client).get<GetNinotificationV1AddressGroupsResponses, GetNinotificationV1AddressGroupsErrors, ThrowOnError>({
+export const getAddressGroups = <ThrowOnError extends boolean = false>(options?: Options<GetAddressGroupsData, ThrowOnError>) => (options?.client ?? client).get<GetAddressGroupsResponses, GetAddressGroupsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/address-groups',
     ...options
@@ -30,7 +30,7 @@ export const getNinotificationV1AddressGroups = <ThrowOnError extends boolean = 
 /**
  * Creates an address group
  */
-export const postNinotificationV1AddressGroups = <ThrowOnError extends boolean = false>(options?: Options<PostNinotificationV1AddressGroupsData, ThrowOnError>) => (options?.client ?? client).post<PostNinotificationV1AddressGroupsResponses, PostNinotificationV1AddressGroupsErrors, ThrowOnError>({
+export const createAddressGroup = <ThrowOnError extends boolean = false>(options?: Options<CreateAddressGroupData, ThrowOnError>) => (options?.client ?? client).post<CreateAddressGroupResponses, CreateAddressGroupErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/address-groups',
     ...options,
@@ -43,7 +43,7 @@ export const postNinotificationV1AddressGroups = <ThrowOnError extends boolean =
 /**
  * Delete an address group by its id
  */
-export const deleteNinotificationV1AddressGroupsById = <ThrowOnError extends boolean = false>(options: Options<DeleteNinotificationV1AddressGroupsByIdData, ThrowOnError>) => (options.client ?? client).delete<DeleteNinotificationV1AddressGroupsByIdResponses, DeleteNinotificationV1AddressGroupsByIdErrors, ThrowOnError>({
+export const deleteAddressGroup = <ThrowOnError extends boolean = false>(options: Options<DeleteAddressGroupData, ThrowOnError>) => (options.client ?? client).delete<DeleteAddressGroupResponses, DeleteAddressGroupErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/address-groups/{id}',
     ...options
@@ -52,7 +52,7 @@ export const deleteNinotificationV1AddressGroupsById = <ThrowOnError extends boo
 /**
  * Gets an address group by its id
  */
-export const getNinotificationV1AddressGroupsById = <ThrowOnError extends boolean = false>(options: Options<GetNinotificationV1AddressGroupsByIdData, ThrowOnError>) => (options.client ?? client).get<GetNinotificationV1AddressGroupsByIdResponses, GetNinotificationV1AddressGroupsByIdErrors, ThrowOnError>({
+export const getAddressGroup = <ThrowOnError extends boolean = false>(options: Options<GetAddressGroupData, ThrowOnError>) => (options.client ?? client).get<GetAddressGroupResponses, GetAddressGroupErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/address-groups/{id}',
     ...options
@@ -61,7 +61,7 @@ export const getNinotificationV1AddressGroupsById = <ThrowOnError extends boolea
 /**
  * Updates an address group by its id
  */
-export const patchNinotificationV1AddressGroupsById = <ThrowOnError extends boolean = false>(options: Options<PatchNinotificationV1AddressGroupsByIdData, ThrowOnError>) => (options.client ?? client).patch<PatchNinotificationV1AddressGroupsByIdResponses, PatchNinotificationV1AddressGroupsByIdErrors, ThrowOnError>({
+export const updateAddressGroup = <ThrowOnError extends boolean = false>(options: Options<UpdateAddressGroupData, ThrowOnError>) => (options.client ?? client).patch<UpdateAddressGroupResponses, UpdateAddressGroupErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/address-groups/{id}',
     ...options,
@@ -74,7 +74,7 @@ export const patchNinotificationV1AddressGroupsById = <ThrowOnError extends bool
 /**
  * Gets all message templates
  */
-export const getNinotificationV1MessageTemplates = <ThrowOnError extends boolean = false>(options?: Options<GetNinotificationV1MessageTemplatesData, ThrowOnError>) => (options?.client ?? client).get<GetNinotificationV1MessageTemplatesResponses, GetNinotificationV1MessageTemplatesErrors, ThrowOnError>({
+export const getMessageTemplates = <ThrowOnError extends boolean = false>(options?: Options<GetMessageTemplatesData, ThrowOnError>) => (options?.client ?? client).get<GetMessageTemplatesResponses, GetMessageTemplatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/message-templates',
     ...options
@@ -83,7 +83,7 @@ export const getNinotificationV1MessageTemplates = <ThrowOnError extends boolean
 /**
  * Creates a message template
  */
-export const postNinotificationV1MessageTemplates = <ThrowOnError extends boolean = false>(options?: Options<PostNinotificationV1MessageTemplatesData, ThrowOnError>) => (options?.client ?? client).post<PostNinotificationV1MessageTemplatesResponses, PostNinotificationV1MessageTemplatesErrors, ThrowOnError>({
+export const createMessageTemplate = <ThrowOnError extends boolean = false>(options?: Options<CreateMessageTemplateData, ThrowOnError>) => (options?.client ?? client).post<CreateMessageTemplateResponses, CreateMessageTemplateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/message-templates',
     ...options,
@@ -96,7 +96,7 @@ export const postNinotificationV1MessageTemplates = <ThrowOnError extends boolea
 /**
  * Delete an message template by its id
  */
-export const deleteNinotificationV1MessageTemplatesById = <ThrowOnError extends boolean = false>(options: Options<DeleteNinotificationV1MessageTemplatesByIdData, ThrowOnError>) => (options.client ?? client).delete<DeleteNinotificationV1MessageTemplatesByIdResponses, DeleteNinotificationV1MessageTemplatesByIdErrors, ThrowOnError>({
+export const deleteMessageTemplate = <ThrowOnError extends boolean = false>(options: Options<DeleteMessageTemplateData, ThrowOnError>) => (options.client ?? client).delete<DeleteMessageTemplateResponses, DeleteMessageTemplateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/message-templates/{id}',
     ...options
@@ -105,7 +105,7 @@ export const deleteNinotificationV1MessageTemplatesById = <ThrowOnError extends 
 /**
  * Gets an message template by its id
  */
-export const getNinotificationV1MessageTemplatesById = <ThrowOnError extends boolean = false>(options: Options<GetNinotificationV1MessageTemplatesByIdData, ThrowOnError>) => (options.client ?? client).get<GetNinotificationV1MessageTemplatesByIdResponses, GetNinotificationV1MessageTemplatesByIdErrors, ThrowOnError>({
+export const getMessageTemplate = <ThrowOnError extends boolean = false>(options: Options<GetMessageTemplateData, ThrowOnError>) => (options.client ?? client).get<GetMessageTemplateResponses, GetMessageTemplateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/message-templates/{id}',
     ...options
@@ -114,7 +114,7 @@ export const getNinotificationV1MessageTemplatesById = <ThrowOnError extends boo
 /**
  * Updates a message template by its id
  */
-export const patchNinotificationV1MessageTemplatesById = <ThrowOnError extends boolean = false>(options: Options<PatchNinotificationV1MessageTemplatesByIdData, ThrowOnError>) => (options.client ?? client).patch<PatchNinotificationV1MessageTemplatesByIdResponses, PatchNinotificationV1MessageTemplatesByIdErrors, ThrowOnError>({
+export const updateMessageTemplate = <ThrowOnError extends boolean = false>(options: Options<UpdateMessageTemplateData, ThrowOnError>) => (options.client ?? client).patch<UpdateMessageTemplateResponses, UpdateMessageTemplateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/message-templates/{id}',
     ...options,
@@ -127,7 +127,7 @@ export const patchNinotificationV1MessageTemplatesById = <ThrowOnError extends b
 /**
  * Applies the notification strategy for the given id
  */
-export const postNinotificationV1NotificationStrategiesByIdApply = <ThrowOnError extends boolean = false>(options: Options<PostNinotificationV1NotificationStrategiesByIdApplyData, ThrowOnError>) => (options.client ?? client).post<PostNinotificationV1NotificationStrategiesByIdApplyResponses, PostNinotificationV1NotificationStrategiesByIdApplyErrors, ThrowOnError>({
+export const applyNotificationStrategy = <ThrowOnError extends boolean = false>(options: Options<ApplyNotificationStrategyData, ThrowOnError>) => (options.client ?? client).post<ApplyNotificationStrategyResponses, ApplyNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/notification-strategies/{id}/apply',
     ...options,
@@ -140,7 +140,7 @@ export const postNinotificationV1NotificationStrategiesByIdApply = <ThrowOnError
 /**
  * Applies the notification strategy
  */
-export const postNinotificationV1ApplyDynamicStrategy = <ThrowOnError extends boolean = false>(options?: Options<PostNinotificationV1ApplyDynamicStrategyData, ThrowOnError>) => (options?.client ?? client).post<PostNinotificationV1ApplyDynamicStrategyResponses, PostNinotificationV1ApplyDynamicStrategyErrors, ThrowOnError>({
+export const applyDynamicNotificationStrategy = <ThrowOnError extends boolean = false>(options?: Options<ApplyDynamicNotificationStrategyData, ThrowOnError>) => (options?.client ?? client).post<ApplyDynamicNotificationStrategyResponses, ApplyDynamicNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/apply-dynamic-strategy',
     ...options,
@@ -153,7 +153,7 @@ export const postNinotificationV1ApplyDynamicStrategy = <ThrowOnError extends bo
 /**
  * Gets all notification strategies
  */
-export const getNinotificationV1NotificationStrategies = <ThrowOnError extends boolean = false>(options?: Options<GetNinotificationV1NotificationStrategiesData, ThrowOnError>) => (options?.client ?? client).get<GetNinotificationV1NotificationStrategiesResponses, GetNinotificationV1NotificationStrategiesErrors, ThrowOnError>({
+export const getNotificationStrategies = <ThrowOnError extends boolean = false>(options?: Options<GetNotificationStrategiesData, ThrowOnError>) => (options?.client ?? client).get<GetNotificationStrategiesResponses, GetNotificationStrategiesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/notification-strategies',
     ...options
@@ -162,7 +162,7 @@ export const getNinotificationV1NotificationStrategies = <ThrowOnError extends b
 /**
  * Creates an notification strategy
  */
-export const postNinotificationV1NotificationStrategies = <ThrowOnError extends boolean = false>(options?: Options<PostNinotificationV1NotificationStrategiesData, ThrowOnError>) => (options?.client ?? client).post<PostNinotificationV1NotificationStrategiesResponses, PostNinotificationV1NotificationStrategiesErrors, ThrowOnError>({
+export const createNotificationStrategy = <ThrowOnError extends boolean = false>(options?: Options<CreateNotificationStrategyData, ThrowOnError>) => (options?.client ?? client).post<CreateNotificationStrategyResponses, CreateNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/notification-strategies',
     ...options,
@@ -175,7 +175,7 @@ export const postNinotificationV1NotificationStrategies = <ThrowOnError extends 
 /**
  * Delete an notification strategy by its id
  */
-export const deleteNinotificationV1NotificationStrategiesById = <ThrowOnError extends boolean = false>(options: Options<DeleteNinotificationV1NotificationStrategiesByIdData, ThrowOnError>) => (options.client ?? client).delete<DeleteNinotificationV1NotificationStrategiesByIdResponses, DeleteNinotificationV1NotificationStrategiesByIdErrors, ThrowOnError>({
+export const deleteNotificationStrategy = <ThrowOnError extends boolean = false>(options: Options<DeleteNotificationStrategyData, ThrowOnError>) => (options.client ?? client).delete<DeleteNotificationStrategyResponses, DeleteNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/notification-strategies/{id}',
     ...options
@@ -184,7 +184,7 @@ export const deleteNinotificationV1NotificationStrategiesById = <ThrowOnError ex
 /**
  * Gets an notification strategy by its id
  */
-export const getNinotificationV1NotificationStrategiesById = <ThrowOnError extends boolean = false>(options: Options<GetNinotificationV1NotificationStrategiesByIdData, ThrowOnError>) => (options.client ?? client).get<GetNinotificationV1NotificationStrategiesByIdResponses, GetNinotificationV1NotificationStrategiesByIdErrors, ThrowOnError>({
+export const getNotificationStrategy = <ThrowOnError extends boolean = false>(options: Options<GetNotificationStrategyData, ThrowOnError>) => (options.client ?? client).get<GetNotificationStrategyResponses, GetNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/notification-strategies/{id}',
     ...options
@@ -193,7 +193,7 @@ export const getNinotificationV1NotificationStrategiesById = <ThrowOnError exten
 /**
  * Updates an notification strategy by its id
  */
-export const patchNinotificationV1NotificationStrategiesById = <ThrowOnError extends boolean = false>(options: Options<PatchNinotificationV1NotificationStrategiesByIdData, ThrowOnError>) => (options.client ?? client).patch<PatchNinotificationV1NotificationStrategiesByIdResponses, PatchNinotificationV1NotificationStrategiesByIdErrors, ThrowOnError>({
+export const updateNotificationStrategy = <ThrowOnError extends boolean = false>(options: Options<UpdateNotificationStrategyData, ThrowOnError>) => (options.client ?? client).patch<UpdateNotificationStrategyResponses, UpdateNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1/notification-strategies/{id}',
     ...options,
@@ -206,7 +206,7 @@ export const patchNinotificationV1NotificationStrategiesById = <ThrowOnError ext
 /**
  * Returns the root `ninotification` operations.
  */
-export const getNinotification = <ThrowOnError extends boolean = false>(options?: Options<GetNinotificationData, ThrowOnError>) => (options?.client ?? client).get<GetNinotificationResponses, unknown, ThrowOnError>({
+export const get = <ThrowOnError extends boolean = false>(options?: Options<GetData, ThrowOnError>) => (options?.client ?? client).get<GetResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification',
     ...options
@@ -215,7 +215,7 @@ export const getNinotification = <ThrowOnError extends boolean = false>(options?
 /**
  * Returns the `V1` operations.
  */
-export const getNinotificationV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNinotificationV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNinotificationV1Responses, unknown, ThrowOnError>({
+export const v1Endpoint = <ThrowOnError extends boolean = false>(options?: Options<V1EndpointData, ThrowOnError>) => (options?.client ?? client).get<V1EndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/ninotification/v1',
     ...options

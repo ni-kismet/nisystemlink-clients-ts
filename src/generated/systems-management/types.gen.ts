@@ -64,7 +64,6 @@ export type AdvancedGrains = {
     pythonpath?: Array<string> | null;
     cpu_flags?: Array<string> | null;
     init?: string | null;
-    path?: string | null;
     disks?: Array<string> | null;
     cwd?: string | null;
     mem_total?: number | null;
@@ -77,7 +76,7 @@ export type AdvancedGrains = {
     fqdn_ip4?: Array<string> | null;
     gid?: number | null;
     zfs_support?: boolean | null;
-    ip6_gw?: boolean | null;
+    ip6_gw?: string | null;
     minion_blackout_whitelist?: Array<string> | null;
     virtual?: string | null;
     resetsource?: string | null;
@@ -264,14 +263,19 @@ export type GrainsNetworkSettings = {
 
 export type GrainsNetworkSettingsInterface = {
     label?: string | null;
-    connectionId?: string | null;
-    hwAddr?: string | null;
+    connectionid?: string | null;
+    hwaddr?: string | null;
     up?: boolean | null;
     ipv4?: GrainsNetworkSettingsInterfaceIpv4;
     ipv6?: GrainsNetworkSettingsInterfaceIpv6;
-    supportedAdapterModes?: Array<string> | null;
-    adapterMode?: string | null;
+    ethercat?: GrainsNetworkSettingsInterfaceEthercat;
+    supported_adapter_modes?: Array<string> | null;
+    adapter_mode?: string | null;
     wireless?: boolean | null;
+};
+
+export type GrainsNetworkSettingsInterfaceEthercat = {
+    masterid?: string | null;
 };
 
 export type GrainsNetworkSettingsInterfaceIpv4 = {
@@ -279,8 +283,8 @@ export type GrainsNetworkSettingsInterfaceIpv4 = {
     netmask?: string | null;
     gateway?: string | null;
     dns?: Array<string> | null;
-    requestMode?: string | null;
-    supportedRequestModes?: Array<string> | null;
+    requestmode?: string | null;
+    supportedrequestmodes?: Array<string> | null;
 };
 
 export type GrainsNetworkSettingsInterfaceIpv6 = {
@@ -291,11 +295,11 @@ export type GrainsNetworkSettingsInterfaceIpv6 = {
 };
 
 export type GrainsStartupSettings = {
-    consoleOut?: string | null;
-    embeddedUI?: string | null;
-    labVIEWAccess?: string | null;
-    noApp?: string | null;
-    noFPGAApp?: string | null;
+    ConsoleOut?: string | null;
+    EmbeddedUI?: string | null;
+    LabVIEWAccess?: string | null;
+    NoApp?: string | null;
+    NoFPGAApp?: string | null;
 };
 
 /**
@@ -484,6 +488,7 @@ export type MaterializedSystemModel = {
     scanCode?: string | null;
     locationId?: string | null;
     connected?: string | null;
+    activated?: boolean | null;
     httpConnected?: boolean | null;
     properties?: {
         [key: string]: string | null;
@@ -718,7 +723,82 @@ export type ReportType = 'SOFTWARE' | 'HARDWARE';
 
 export type SearchSystemsRequest = {
     /**
-     * Gets or sets the filter criteria for systems.
+     * Gets or sets the filter criteria for systems. Consists of a Lucene-based query string. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
+     * Filter syntax: '[field]: "[value]" [operator] [field]: "[value]"'
+     *
+     * When no field is specified, the value is matched against the default fields:
+     * id, alias, scanCode, keywords, minionDetails.description, minionDetails.localhost, minionDetails.vendor, minionDetails.model,
+     * minionDetails.serialNumber, minionDetails.systemTag, advancedGrains.ipv4, advancedGrains.ipv6, minionDetails.version,
+     * minionDetails.osFamily, minionDetails.osRelease, minionDetails.osFullName, minionDetails.systemImageName, minionDetails.systemImageVersion,
+     * property values and location names.
+     *
+     * Operators:
+     * - Logical AND operator 'AND'. Example: 'alias: "name" AND connected: "CONNECTED"'
+     * - Logical OR operator 'OR'. Example: 'alias: "name" OR connected: "CONNECTED"'
+     * - Negation operator 'NOT'. Example: 'connected: (NOT "CONNECTED")'
+     * - Wildcard operator '\*', used to match any sequence of characters. Example: 'alias: "NI-91\*"'
+     * - Exists operator '\_exists\_', used to match assets where a field has any value. Example: '\_exists\_: "properties.property key"'
+     * - Range bracket syntax, used to match values between two bounds for numeric and date fields.
+     * Square brackets '[' and ']' denote inclusive bounds, curly braces '{' and '}' denote exclusive bounds, and '\*' denotes no bound (infinity).
+     * Examples:
+     * - 'minionDetails.systemStartTime: [\* TO "2024-01-01T00:00:00Z"]' matches systems that started on or before January 1st, 2024.
+     * - 'minionDetails.systemStartTime: ["2024-01-01T00:00:00Z" TO \*]' matches systems that started on or after January 1st, 2024.
+     *
+     * The filter is case insensitive for both field names and values.
+     *
+     * Valid system properties that can be used in the filter:
+     * - id: String representing the ID of the system.
+     * - alias: String representing the alias of the system.
+     * - workspace: String representing the workspace of the system.
+     * - scanCode: String representing the scan code of the system.
+     * - locationId: String representing the location ID of the system.
+     * - connected: String representing the connection state of the system.
+     * - httpConnected: Boolean representing the status of the HTTP connection to the master.
+     * - createdTimestamp: ISO-8601 formatted timestamp string specifying the date when the system was registered.
+     * - lastUpdatedTimestamp: ISO-8601 formatted timestamp string specifying the last date the system was updated.
+     * - keywords: String representing a keyword assigned to the system. Example: 'keywords:"test"'
+     * - properties.{key}: String value of a custom property. Example: 'properties.owner:"admin"'
+     * - minionDetails.osFamily (grain: os_family): String representing the operating system family.
+     * - minionDetails.serialNumber (grain: serialnumber): String representing the serial number of the system.
+     * - minionDetails.fqdn (grain: fqdn): String representing the fully qualified domain name.
+     * - minionDetails.description (grain: computer_desc): String representing the description of the system.
+     * - minionDetails.cpuArch (grain: cpuarch): String representing the CPU architecture.
+     * - minionDetails.version (grain: nisystemlink_version): String representing the installed NI SystemLink version.
+     * - minionDetails.systemImageName (grain: nilrt_system_image_name): String representing the NI Linux RT system image name.
+     * - minionDetails.systemImageVersion (grain: nilrt_system_image_version): String representing the NI Linux RT system image version.
+     * - minionDetails.osFullName (grain: osfullname): String representing the full name of the operating system.
+     * - minionDetails.localhost (grain: localhost): String representing the hostname of the system.
+     * - minionDetails.vendor (grain: manufacturer): String representing the vendor.
+     * - minionDetails.model (grain: productname): String representing the model.
+     * - minionDetails.locked (grain: minion_blackout): Boolean representing whether the system is locked.
+     * - minionDetails.osRelease (grain: osrelease): String representing the operating system release version.
+     * - minionDetails.secured (grain: is_superuser_password_set): Boolean representing whether a superuser password is set.
+     * - minionDetails.systemStartTime (grain: boottime): ISO-8601 formatted timestamp string specifying when the system last started.
+     * - minionDetails.systemTag (grain: system_tag): String representing the system tag.
+     * - minionDetails.startupSettings.consoleOut (grain: startup_settings.ConsoleOut): String representing the ConsoleOut startup setting.
+     * - minionDetails.startupSettings.embeddedUI (grain: startup_settings.EmbeddedUI): String representing the EmbeddedUI startup setting.
+     * - minionDetails.startupSettings.labVIEWAccess (grain: startup_settings.LabVIEWAccess): String representing the LabVIEWAccess startup setting.
+     * - minionDetails.startupSettings.noApp (grain: startup_settings.NoApp): String representing the NoApp startup setting.
+     * - minionDetails.startupSettings.noFPGAApp (grain: startup_settings.NoFPGAApp): String representing the NoFPGAApp startup setting.
+     * - advancedGrains.nodeName (grain: nodename): String representing the node name.
+     * - advancedGrains.deviceClass (grain: deviceclass): String representing the device class.
+     * - advancedGrains.host (grain: host): String representing the host name.
+     * - advancedGrains.cpuModel (grain: cpu_model): String representing the CPU model.
+     * - advancedGrains.fqdns (grain: fqdns): String representing a fully qualified domain name from the list of FQDNs.
+     * - advancedGrains.os (grain: os): String representing the operating system name.
+     * - advancedGrains.ipv4 (grain: ipv4): String representing an IPv4 address of the system.
+     * - advancedGrains.ipv6 (grain: ipv6): String representing an IPv6 address of the system.
+     * - advancedGrains.domain (grain: domain): String representing the network domain.
+     * - advancedGrains.timezone (grain: timezone): String representing the system timezone.
+     * - packages.name: String representing the name of an installed package. Example: 'packages.name:"ni-package-manager"'
+     * - packages.displayname: String representing the display name of an installed package.
+     * - packages.{name}.version: Version of a specific installed package, supports range queries. Example: 'packages.ni-package-manager.version:"1.2.3"'
+     * - location.enabled: Boolean representing whether the associated location is enabled.
+     * - location.keywords: String representing a keyword assigned to the associated location.
+     * - location.type: String representing the type of the associated location.
+     * - location.blank: Boolean representing whether the system has no location assigned. Example: 'location.blank:true'
+     * - location.properties.{key}: String value of a property on the associated location. Example: 'location.properties.region:"US"'
+     * - location.path.id: String representing the ID of a segment in the location path (e.g. get systems under a given location)
      */
     filter?: string | null;
     /**
@@ -726,19 +806,28 @@ export type SearchSystemsRequest = {
      */
     skip?: number;
     /**
-     * Gets or sets how many resources to return in the result, or -1 to use a default defined by the service. For example, a list of 100 resources with a take value of 25 will return entries 1 through 25.
+     * Gets or sets how many resources to return in the result. For example, a list of 100 resources with a take value of 25 will return entries 1 through 25.
      */
     take?: number | null;
-    /**
-     * Gets or sets the order in which data returns.
-     */
-    orderBy?: string | null;
+    orderBy?: SystemsOrderByField;
     /**
      * Whether to return the systems in the descending order. If OrderBy is not specified, this property is ignored. If OrderBy is specified, this property defaults to false.
      */
     descending?: boolean;
     /**
-     * Array of projected fields
+     * Gets or sets the list of fields to include in each returned system. If projection is not provided, all system data is returned except package data.
+     *
+     * Package projection syntax:
+     * - packages["{packageName}"] returns all fields for that package.
+     * - packages["{packageName}"].{field} returns a specific field for that package.
+     * - Multiple package entries and multiple fields can be combined in a single projection.
+     * - Package and package-field names are case-insensitive when resolving projections.
+     *
+     * Examples:
+     * - ["id", "alias"]
+     * - ["minionDetails", "advancedGrains.ipv4"]
+     * - ["packages[\\"ni-package-manager\\"].version", "id"]
+     * - ["packages[\\"ni-package-manager\\"]"]
      */
     projection?: Array<string> | null;
 };
@@ -804,6 +893,8 @@ export type SystemUpdateInformation = {
     systemId?: string | null;
     systemMetadata?: SystemMetadata;
 };
+
+export type SystemsOrderByField = 'ID' | 'LAST_UPDATED_TIMESTAMP' | 'CREATED_TIMESTAMP' | 'ALIAS';
 
 /**
  * Model for request containing the report type followed by a query filter that will be applied on systems.
@@ -953,7 +1044,7 @@ export type UpdateSystemsRequest = {
     systemsUpdateInformation?: Array<SystemUpdateInformation> | null;
 };
 
-export type GetNisysmgmtV1JobsData = {
+export type GetJobsData = {
     body?: never;
     path?: never;
     query?: {
@@ -985,7 +1076,7 @@ export type GetNisysmgmtV1JobsData = {
     url: '/nisysmgmt/v1/jobs';
 };
 
-export type GetNisysmgmtV1JobsErrors = {
+export type GetJobsErrors = {
     /**
      * If the request is invalid
      */
@@ -996,18 +1087,18 @@ export type GetNisysmgmtV1JobsErrors = {
     401: BaseResponse;
 };
 
-export type GetNisysmgmtV1JobsError = GetNisysmgmtV1JobsErrors[keyof GetNisysmgmtV1JobsErrors];
+export type GetJobsError = GetJobsErrors[keyof GetJobsErrors];
 
-export type GetNisysmgmtV1JobsResponses = {
+export type GetJobsResponses = {
     /**
      * The jobs that matched the criteria
      */
     200: Array<Job>;
 };
 
-export type GetNisysmgmtV1JobsResponse = GetNisysmgmtV1JobsResponses[keyof GetNisysmgmtV1JobsResponses];
+export type GetJobsResponse = GetJobsResponses[keyof GetJobsResponses];
 
-export type PostNisysmgmtV1JobsData = {
+export type CreateJobData = {
     /**
      * An instance of NationalInstruments.SystemsManagementService.Model.API.CreateJobRequest
      */
@@ -1017,7 +1108,7 @@ export type PostNisysmgmtV1JobsData = {
     url: '/nisysmgmt/v1/jobs';
 };
 
-export type PostNisysmgmtV1JobsErrors = {
+export type CreateJobErrors = {
     /**
      * If the request is invalid
      */
@@ -1028,43 +1119,43 @@ export type PostNisysmgmtV1JobsErrors = {
     401: BaseResponse;
 };
 
-export type PostNisysmgmtV1JobsError = PostNisysmgmtV1JobsErrors[keyof PostNisysmgmtV1JobsErrors];
+export type CreateJobError = CreateJobErrors[keyof CreateJobErrors];
 
-export type PostNisysmgmtV1JobsResponses = {
+export type CreateJobResponses = {
     /**
      * The job that was created
      */
     200: CreateJobResponse;
 };
 
-export type PostNisysmgmtV1JobsResponse = PostNisysmgmtV1JobsResponses[keyof PostNisysmgmtV1JobsResponses];
+export type CreateJobResponse2 = CreateJobResponses[keyof CreateJobResponses];
 
-export type GetNisysmgmtV1GetJobsSummaryData = {
+export type GetJobsSummaryData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nisysmgmt/v1/get-jobs-summary';
 };
 
-export type GetNisysmgmtV1GetJobsSummaryErrors = {
+export type GetJobsSummaryErrors = {
     /**
      * Unauthorized
      */
     401: BaseResponse;
 };
 
-export type GetNisysmgmtV1GetJobsSummaryError = GetNisysmgmtV1GetJobsSummaryErrors[keyof GetNisysmgmtV1GetJobsSummaryErrors];
+export type GetJobsSummaryError = GetJobsSummaryErrors[keyof GetJobsSummaryErrors];
 
-export type GetNisysmgmtV1GetJobsSummaryResponses = {
+export type GetJobsSummaryResponses = {
     /**
      * An instance of a NationalInstruments.SystemsManagementService.Model.API.JobsSummaryResponse
      */
     200: JobsSummaryResponse;
 };
 
-export type GetNisysmgmtV1GetJobsSummaryResponse = GetNisysmgmtV1GetJobsSummaryResponses[keyof GetNisysmgmtV1GetJobsSummaryResponses];
+export type GetJobsSummaryResponse = GetJobsSummaryResponses[keyof GetJobsSummaryResponses];
 
-export type PostNisysmgmtV1QueryJobsData = {
+export type QueryJobsData = {
     /**
      * An instance of NationalInstruments.SystemsManagementService.Model.API.QueryJobsRequest
      */
@@ -1074,7 +1165,7 @@ export type PostNisysmgmtV1QueryJobsData = {
     url: '/nisysmgmt/v1/query-jobs';
 };
 
-export type PostNisysmgmtV1QueryJobsErrors = {
+export type QueryJobsErrors = {
     /**
      * If the request is invalid
      */
@@ -1085,18 +1176,18 @@ export type PostNisysmgmtV1QueryJobsErrors = {
     401: BaseResponse;
 };
 
-export type PostNisysmgmtV1QueryJobsError = PostNisysmgmtV1QueryJobsErrors[keyof PostNisysmgmtV1QueryJobsErrors];
+export type QueryJobsError = QueryJobsErrors[keyof QueryJobsErrors];
 
-export type PostNisysmgmtV1QueryJobsResponses = {
+export type QueryJobsResponses = {
     /**
      * The list of jobs that match the query
      */
     200: QueryJobsResponse;
 };
 
-export type PostNisysmgmtV1QueryJobsResponse = PostNisysmgmtV1QueryJobsResponses[keyof PostNisysmgmtV1QueryJobsResponses];
+export type QueryJobsResponse2 = QueryJobsResponses[keyof QueryJobsResponses];
 
-export type PostNisysmgmtV1CancelJobsData = {
+export type CancelJobsData = {
     /**
      * A list of NationalInstruments.SystemsManagementService.Model.API.CancelJobRequest
      */
@@ -1106,7 +1197,7 @@ export type PostNisysmgmtV1CancelJobsData = {
     url: '/nisysmgmt/v1/cancel-jobs';
 };
 
-export type PostNisysmgmtV1CancelJobsErrors = {
+export type CancelJobsErrors = {
     /**
      * If the request is invalid
      */
@@ -1117,9 +1208,9 @@ export type PostNisysmgmtV1CancelJobsErrors = {
     401: BaseResponse;
 };
 
-export type PostNisysmgmtV1CancelJobsError = PostNisysmgmtV1CancelJobsErrors[keyof PostNisysmgmtV1CancelJobsErrors];
+export type CancelJobsError = CancelJobsErrors[keyof CancelJobsErrors];
 
-export type PostNisysmgmtV1CancelJobsResponses = {
+export type CancelJobsResponses = {
     /**
      * The errors that appear while attempting the operation
      */
@@ -1130,62 +1221,62 @@ export type PostNisysmgmtV1CancelJobsResponses = {
     204: void;
 };
 
-export type PostNisysmgmtV1CancelJobsResponse = PostNisysmgmtV1CancelJobsResponses[keyof PostNisysmgmtV1CancelJobsResponses];
+export type CancelJobsResponse = CancelJobsResponses[keyof CancelJobsResponses];
 
-export type GetNisysmgmtData = {
+export type RootEndpointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nisysmgmt';
 };
 
-export type GetNisysmgmtResponses = {
+export type RootEndpointResponses = {
     /**
      * OK
      */
     200: unknown;
 };
 
-export type GetNisysmgmtV1Data = {
+export type V1Data = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nisysmgmt/v1';
 };
 
-export type GetNisysmgmtV1Responses = {
+export type V1Responses = {
     /**
      * OK
      */
     200: unknown;
 };
 
-export type PostNisysmgmtV1MaterializedSearchSystemsData = {
+export type SearchSystemsData = {
     body?: SearchSystemsRequest;
     path?: never;
     query?: never;
     url: '/nisysmgmt/v1/materialized/search-systems';
 };
 
-export type PostNisysmgmtV1MaterializedSearchSystemsErrors = {
+export type SearchSystemsErrors = {
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostNisysmgmtV1MaterializedSearchSystemsError = PostNisysmgmtV1MaterializedSearchSystemsErrors[keyof PostNisysmgmtV1MaterializedSearchSystemsErrors];
+export type SearchSystemsError = SearchSystemsErrors[keyof SearchSystemsErrors];
 
-export type PostNisysmgmtV1MaterializedSearchSystemsResponses = {
+export type SearchSystemsResponses = {
     /**
      * OK
      */
     200: SearchSystemsResponse;
 };
 
-export type PostNisysmgmtV1MaterializedSearchSystemsResponse = PostNisysmgmtV1MaterializedSearchSystemsResponses[keyof PostNisysmgmtV1MaterializedSearchSystemsResponses];
+export type SearchSystemsResponse2 = SearchSystemsResponses[keyof SearchSystemsResponses];
 
-export type PostNisysmgmtV1QuerySystemsData = {
+export type QuerySystemsData = {
     /**
      * An instance of a NationalInstruments.SystemsManagementService.Model.API.QuerySystemsRequest
      */
@@ -1195,7 +1286,7 @@ export type PostNisysmgmtV1QuerySystemsData = {
     url: '/nisysmgmt/v1/query-systems';
 };
 
-export type PostNisysmgmtV1QuerySystemsErrors = {
+export type QuerySystemsErrors = {
     /**
      * Invalid request
      */
@@ -1206,18 +1297,18 @@ export type PostNisysmgmtV1QuerySystemsErrors = {
     401: BaseResponse;
 };
 
-export type PostNisysmgmtV1QuerySystemsError = PostNisysmgmtV1QuerySystemsErrors[keyof PostNisysmgmtV1QuerySystemsErrors];
+export type QuerySystemsError = QuerySystemsErrors[keyof QuerySystemsErrors];
 
-export type PostNisysmgmtV1QuerySystemsResponses = {
+export type QuerySystemsResponses = {
     /**
      * The list of systems matching the query
      */
     200: Array<SystemsResponse>;
 };
 
-export type PostNisysmgmtV1QuerySystemsResponse = PostNisysmgmtV1QuerySystemsResponses[keyof PostNisysmgmtV1QuerySystemsResponses];
+export type QuerySystemsResponse = QuerySystemsResponses[keyof QuerySystemsResponses];
 
-export type PostNisysmgmtV1GenerateSystemsReportData = {
+export type GenerateSystemsReportData = {
     /**
      * An instance of NationalInstruments.SystemsManagementService.Model.API.SystemsReportRequest
      */
@@ -1227,7 +1318,7 @@ export type PostNisysmgmtV1GenerateSystemsReportData = {
     url: '/nisysmgmt/v1/generate-systems-report';
 };
 
-export type PostNisysmgmtV1GenerateSystemsReportErrors = {
+export type GenerateSystemsReportErrors = {
     /**
      * Invalid request
      */
@@ -1238,100 +1329,100 @@ export type PostNisysmgmtV1GenerateSystemsReportErrors = {
     401: BaseResponse;
 };
 
-export type PostNisysmgmtV1GenerateSystemsReportError = PostNisysmgmtV1GenerateSystemsReportErrors[keyof PostNisysmgmtV1GenerateSystemsReportErrors];
+export type GenerateSystemsReportError = GenerateSystemsReportErrors[keyof GenerateSystemsReportErrors];
 
-export type PostNisysmgmtV1GenerateSystemsReportResponses = {
+export type GenerateSystemsReportResponses = {
     /**
      * The system report
      */
     200: Blob | File;
 };
 
-export type PostNisysmgmtV1GenerateSystemsReportResponse = PostNisysmgmtV1GenerateSystemsReportResponses[keyof PostNisysmgmtV1GenerateSystemsReportResponses];
+export type GenerateSystemsReportResponse = GenerateSystemsReportResponses[keyof GenerateSystemsReportResponses];
 
-export type GetNisysmgmtV1GetPendingSystemsSummaryData = {
+export type GetPendingSystemsSummaryData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nisysmgmt/v1/get-pending-systems-summary';
 };
 
-export type GetNisysmgmtV1GetPendingSystemsSummaryErrors = {
+export type GetPendingSystemsSummaryErrors = {
     /**
      * Unauthorized
      */
     401: BaseResponse;
 };
 
-export type GetNisysmgmtV1GetPendingSystemsSummaryError = GetNisysmgmtV1GetPendingSystemsSummaryErrors[keyof GetNisysmgmtV1GetPendingSystemsSummaryErrors];
+export type GetPendingSystemsSummaryError = GetPendingSystemsSummaryErrors[keyof GetPendingSystemsSummaryErrors];
 
-export type GetNisysmgmtV1GetPendingSystemsSummaryResponses = {
+export type GetPendingSystemsSummaryResponses = {
     /**
      * The pending system summary
      */
     200: GetPendingSystemsSummaryResponse;
 };
 
-export type GetNisysmgmtV1GetPendingSystemsSummaryResponse = GetNisysmgmtV1GetPendingSystemsSummaryResponses[keyof GetNisysmgmtV1GetPendingSystemsSummaryResponses];
+export type GetPendingSystemsSummaryResponse2 = GetPendingSystemsSummaryResponses[keyof GetPendingSystemsSummaryResponses];
 
-export type GetNisysmgmtV1GetSystemsSummaryData = {
+export type GetSystemsSummaryData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nisysmgmt/v1/get-systems-summary';
 };
 
-export type GetNisysmgmtV1GetSystemsSummaryErrors = {
+export type GetSystemsSummaryErrors = {
     /**
      * Unauthorized
      */
     401: BaseResponse;
 };
 
-export type GetNisysmgmtV1GetSystemsSummaryError = GetNisysmgmtV1GetSystemsSummaryErrors[keyof GetNisysmgmtV1GetSystemsSummaryErrors];
+export type GetSystemsSummaryError = GetSystemsSummaryErrors[keyof GetSystemsSummaryErrors];
 
-export type GetNisysmgmtV1GetSystemsSummaryResponses = {
+export type GetSystemsSummaryResponses = {
     /**
      * The system summary
      */
     200: SystemsSummaryResponse;
 };
 
-export type GetNisysmgmtV1GetSystemsSummaryResponse = GetNisysmgmtV1GetSystemsSummaryResponses[keyof GetNisysmgmtV1GetSystemsSummaryResponses];
+export type GetSystemsSummaryResponse = GetSystemsSummaryResponses[keyof GetSystemsSummaryResponses];
 
-export type GetNisysmgmtV1GetSystemsKeysData = {
+export type GetAllSystemsKeysData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/nisysmgmt/v1/get-systems-keys';
 };
 
-export type GetNisysmgmtV1GetSystemsKeysErrors = {
+export type GetAllSystemsKeysErrors = {
     /**
      * Unauthorized
      */
     401: BaseResponse;
 };
 
-export type GetNisysmgmtV1GetSystemsKeysError = GetNisysmgmtV1GetSystemsKeysErrors[keyof GetNisysmgmtV1GetSystemsKeysErrors];
+export type GetAllSystemsKeysError = GetAllSystemsKeysErrors[keyof GetAllSystemsKeysErrors];
 
-export type GetNisysmgmtV1GetSystemsKeysResponses = {
+export type GetAllSystemsKeysResponses = {
     /**
      * The system keys
      */
     200: GetSystemsKeysResponse;
 };
 
-export type GetNisysmgmtV1GetSystemsKeysResponse = GetNisysmgmtV1GetSystemsKeysResponses[keyof GetNisysmgmtV1GetSystemsKeysResponses];
+export type GetAllSystemsKeysResponse = GetAllSystemsKeysResponses[keyof GetAllSystemsKeysResponses];
 
-export type PostNisysmgmtV1GetSystemsKeysData = {
+export type GetSystemsKeysData = {
     body?: ListSystemsKeysRequest;
     path?: never;
     query?: never;
     url: '/nisysmgmt/v1/get-systems-keys';
 };
 
-export type PostNisysmgmtV1GetSystemsKeysErrors = {
+export type GetSystemsKeysErrors = {
     /**
      * Bad Request
      */
@@ -1342,18 +1433,18 @@ export type PostNisysmgmtV1GetSystemsKeysErrors = {
     401: BaseResponse;
 };
 
-export type PostNisysmgmtV1GetSystemsKeysError = PostNisysmgmtV1GetSystemsKeysErrors[keyof PostNisysmgmtV1GetSystemsKeysErrors];
+export type GetSystemsKeysError = GetSystemsKeysErrors[keyof GetSystemsKeysErrors];
 
-export type PostNisysmgmtV1GetSystemsKeysResponses = {
+export type GetSystemsKeysResponses = {
     /**
      * The system keys
      */
     200: GetSystemsKeysResponse;
 };
 
-export type PostNisysmgmtV1GetSystemsKeysResponse = PostNisysmgmtV1GetSystemsKeysResponses[keyof PostNisysmgmtV1GetSystemsKeysResponses];
+export type GetSystemsKeysResponse2 = GetSystemsKeysResponses[keyof GetSystemsKeysResponses];
 
-export type PostNisysmgmtV1ManageSystemsKeysData = {
+export type ManageSystemsKeysData = {
     /**
      * An instance of a NationalInstruments.SystemsManagementService.Model.API.ManageKeysRequest
      */
@@ -1363,7 +1454,7 @@ export type PostNisysmgmtV1ManageSystemsKeysData = {
     url: '/nisysmgmt/v1/manage-systems-keys';
 };
 
-export type PostNisysmgmtV1ManageSystemsKeysErrors = {
+export type ManageSystemsKeysErrors = {
     /**
      * Bad Request
      */
@@ -1374,9 +1465,9 @@ export type PostNisysmgmtV1ManageSystemsKeysErrors = {
     401: BaseResponse;
 };
 
-export type PostNisysmgmtV1ManageSystemsKeysError = PostNisysmgmtV1ManageSystemsKeysErrors[keyof PostNisysmgmtV1ManageSystemsKeysErrors];
+export type ManageSystemsKeysError = ManageSystemsKeysErrors[keyof ManageSystemsKeysErrors];
 
-export type PostNisysmgmtV1ManageSystemsKeysResponses = {
+export type ManageSystemsKeysResponses = {
     /**
      * The errors that appear while attempting the operation
      */
@@ -1387,9 +1478,9 @@ export type PostNisysmgmtV1ManageSystemsKeysResponses = {
     204: void;
 };
 
-export type PostNisysmgmtV1ManageSystemsKeysResponse = PostNisysmgmtV1ManageSystemsKeysResponses[keyof PostNisysmgmtV1ManageSystemsKeysResponses];
+export type ManageSystemsKeysResponse = ManageSystemsKeysResponses[keyof ManageSystemsKeysResponses];
 
-export type PostNisysmgmtV1VirtualData = {
+export type CreateVirtualSystemData = {
     /**
      * An instance of a NationalInstruments.SystemsManagementService.Model.API.CreateVirtualSystemRequest
      */
@@ -1399,7 +1490,7 @@ export type PostNisysmgmtV1VirtualData = {
     url: '/nisysmgmt/v1/virtual';
 };
 
-export type PostNisysmgmtV1VirtualErrors = {
+export type CreateVirtualSystemErrors = {
     /**
      * Bad Request
      */
@@ -1410,18 +1501,18 @@ export type PostNisysmgmtV1VirtualErrors = {
     401: BaseResponse;
 };
 
-export type PostNisysmgmtV1VirtualError = PostNisysmgmtV1VirtualErrors[keyof PostNisysmgmtV1VirtualErrors];
+export type CreateVirtualSystemError = CreateVirtualSystemErrors[keyof CreateVirtualSystemErrors];
 
-export type PostNisysmgmtV1VirtualResponses = {
+export type CreateVirtualSystemResponses = {
     /**
      * The minion ID of the created virtual system
      */
     201: CreateVirtualSystemResponse;
 };
 
-export type PostNisysmgmtV1VirtualResponse = PostNisysmgmtV1VirtualResponses[keyof PostNisysmgmtV1VirtualResponses];
+export type CreateVirtualSystemResponse2 = CreateVirtualSystemResponses[keyof CreateVirtualSystemResponses];
 
-export type PostNisysmgmtV1VirtualGenerateSystemApikeyData = {
+export type GenerateVirtualSystemApiKeyData = {
     /**
      * An instance of a NationalInstruments.SystemsManagementService.Model.API.GenerateSystemApiKeyRequest
      */
@@ -1431,7 +1522,7 @@ export type PostNisysmgmtV1VirtualGenerateSystemApikeyData = {
     url: '/nisysmgmt/v1/virtual/generate-system-apikey';
 };
 
-export type PostNisysmgmtV1VirtualGenerateSystemApikeyErrors = {
+export type GenerateVirtualSystemApiKeyErrors = {
     /**
      * Invalid request
      */
@@ -1446,18 +1537,18 @@ export type PostNisysmgmtV1VirtualGenerateSystemApikeyErrors = {
     404: BaseResponse;
 };
 
-export type PostNisysmgmtV1VirtualGenerateSystemApikeyError = PostNisysmgmtV1VirtualGenerateSystemApikeyErrors[keyof PostNisysmgmtV1VirtualGenerateSystemApikeyErrors];
+export type GenerateVirtualSystemApiKeyError = GenerateVirtualSystemApiKeyErrors[keyof GenerateVirtualSystemApiKeyErrors];
 
-export type PostNisysmgmtV1VirtualGenerateSystemApikeyResponses = {
+export type GenerateVirtualSystemApiKeyResponses = {
     /**
      * The generated API key
      */
     201: GenerateSystemApiKeyResponse;
 };
 
-export type PostNisysmgmtV1VirtualGenerateSystemApikeyResponse = PostNisysmgmtV1VirtualGenerateSystemApikeyResponses[keyof PostNisysmgmtV1VirtualGenerateSystemApikeyResponses];
+export type GenerateVirtualSystemApiKeyResponse = GenerateVirtualSystemApiKeyResponses[keyof GenerateVirtualSystemApiKeyResponses];
 
-export type GetNisysmgmtV1SystemsData = {
+export type GetSystemsData = {
     body?: never;
     path?: never;
     query?: {
@@ -1469,25 +1560,25 @@ export type GetNisysmgmtV1SystemsData = {
     url: '/nisysmgmt/v1/systems';
 };
 
-export type GetNisysmgmtV1SystemsErrors = {
+export type GetSystemsErrors = {
     /**
      * Unauthorized
      */
     401: BaseResponse;
 };
 
-export type GetNisysmgmtV1SystemsError = GetNisysmgmtV1SystemsErrors[keyof GetNisysmgmtV1SystemsErrors];
+export type GetSystemsError = GetSystemsErrors[keyof GetSystemsErrors];
 
-export type GetNisysmgmtV1SystemsResponses = {
+export type GetSystemsResponses = {
     /**
      * The metadata of the system that matches the ID
      */
     200: Array<unknown>;
 };
 
-export type GetNisysmgmtV1SystemsResponse = GetNisysmgmtV1SystemsResponses[keyof GetNisysmgmtV1SystemsResponses];
+export type GetSystemsResponse = GetSystemsResponses[keyof GetSystemsResponses];
 
-export type PostNisysmgmtV1RemoveSystemsData = {
+export type RemoveSystemsData = {
     /**
      * An instance of a NationalInstruments.SystemsManagementService.Model.API.RemoveSystemsRequest
      */
@@ -1497,7 +1588,7 @@ export type PostNisysmgmtV1RemoveSystemsData = {
     url: '/nisysmgmt/v1/remove-systems';
 };
 
-export type PostNisysmgmtV1RemoveSystemsErrors = {
+export type RemoveSystemsErrors = {
     /**
      * Bad Request
      */
@@ -1508,18 +1599,18 @@ export type PostNisysmgmtV1RemoveSystemsErrors = {
     401: BaseResponse;
 };
 
-export type PostNisysmgmtV1RemoveSystemsError = PostNisysmgmtV1RemoveSystemsErrors[keyof PostNisysmgmtV1RemoveSystemsErrors];
+export type RemoveSystemsError = RemoveSystemsErrors[keyof RemoveSystemsErrors];
 
-export type PostNisysmgmtV1RemoveSystemsResponses = {
+export type RemoveSystemsResponses = {
     /**
      * The job ID of the job to remove the systems and the IDs of the removed systems
      */
     200: RemoveSystemsResponse;
 };
 
-export type PostNisysmgmtV1RemoveSystemsResponse = PostNisysmgmtV1RemoveSystemsResponses[keyof PostNisysmgmtV1RemoveSystemsResponses];
+export type RemoveSystemsResponse2 = RemoveSystemsResponses[keyof RemoveSystemsResponses];
 
-export type PostNisysmgmtV1UpdateSystemsData = {
+export type UpdateSystemsMetadataData = {
     /**
      * An instance of a NationalInstruments.SystemsManagementService.Model.API.UpdateSystemsRequest
      */
@@ -1529,7 +1620,7 @@ export type PostNisysmgmtV1UpdateSystemsData = {
     url: '/nisysmgmt/v1/update-systems';
 };
 
-export type PostNisysmgmtV1UpdateSystemsErrors = {
+export type UpdateSystemsMetadataErrors = {
     /**
      * Bad Request
      */
@@ -1540,18 +1631,18 @@ export type PostNisysmgmtV1UpdateSystemsErrors = {
     401: BaseResponse;
 };
 
-export type PostNisysmgmtV1UpdateSystemsError = PostNisysmgmtV1UpdateSystemsErrors[keyof PostNisysmgmtV1UpdateSystemsErrors];
+export type UpdateSystemsMetadataError = UpdateSystemsMetadataErrors[keyof UpdateSystemsMetadataErrors];
 
-export type PostNisysmgmtV1UpdateSystemsResponses = {
+export type UpdateSystemsMetadataResponses = {
     /**
      * The errors that may have appeared while attempting the operation
      */
     200: BaseResponse;
 };
 
-export type PostNisysmgmtV1UpdateSystemsResponse = PostNisysmgmtV1UpdateSystemsResponses[keyof PostNisysmgmtV1UpdateSystemsResponses];
+export type UpdateSystemsMetadataResponse = UpdateSystemsMetadataResponses[keyof UpdateSystemsMetadataResponses];
 
-export type PatchNisysmgmtV1SystemsManagedByIdData = {
+export type UpdateSystemMetadataData = {
     /**
      * An instance of a NationalInstruments.SystemsManagementService.Model.API.SystemPatchRequest
      */
@@ -1566,7 +1657,7 @@ export type PatchNisysmgmtV1SystemsManagedByIdData = {
     url: '/nisysmgmt/v1/systems/managed/{id}';
 };
 
-export type PatchNisysmgmtV1SystemsManagedByIdErrors = {
+export type UpdateSystemMetadataErrors = {
     /**
      * Unauthorized
      */
@@ -1577,9 +1668,9 @@ export type PatchNisysmgmtV1SystemsManagedByIdErrors = {
     404: BaseResponse;
 };
 
-export type PatchNisysmgmtV1SystemsManagedByIdError = PatchNisysmgmtV1SystemsManagedByIdErrors[keyof PatchNisysmgmtV1SystemsManagedByIdErrors];
+export type UpdateSystemMetadataError = UpdateSystemMetadataErrors[keyof UpdateSystemMetadataErrors];
 
-export type PatchNisysmgmtV1SystemsManagedByIdResponses = {
+export type UpdateSystemMetadataResponses = {
     /**
      * The errors that appear while attempting the operation
      */
@@ -1590,4 +1681,4 @@ export type PatchNisysmgmtV1SystemsManagedByIdResponses = {
     204: void;
 };
 
-export type PatchNisysmgmtV1SystemsManagedByIdResponse = PatchNisysmgmtV1SystemsManagedByIdResponses[keyof PatchNisysmgmtV1SystemsManagedByIdResponses];
+export type UpdateSystemMetadataResponse = UpdateSystemMetadataResponses[keyof UpdateSystemMetadataResponses];

@@ -9,7 +9,7 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { isConfigured } from '../../src/client';
+import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
   rootEndpoint,
   queryRoutines,
@@ -19,6 +19,7 @@ import {
   deleteRoutine,
 } from '../../src/generated/routines-v2';
 import { createClient, createConfig } from '../../src/generated/routines-v2/client';
+import { client as generatedClient } from '../../src/generated/routines-v2/client.gen';
 
 const configured = isConfigured();
 
@@ -27,9 +28,10 @@ describe.skipIf(!configured)('Routines v2 Service (preferred)', () => {
   let createdRoutineId: string | undefined;
 
   beforeAll(() => {
+    const specBaseUrl = generatedClient.getConfig().baseUrl ?? '';
     client = createClient(
       createConfig({
-        baseUrl: process.env.SYSTEMLINK_API_URL!,
+        baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
       }),
     );

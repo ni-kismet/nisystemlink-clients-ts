@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetNilocationData, GetNilocationResponses, GetNilocationV1Data, GetNilocationV1LocationsByLocationIdData, GetNilocationV1LocationsByLocationIdErrors, GetNilocationV1LocationsByLocationIdResponses, GetNilocationV1LocationsData, GetNilocationV1LocationsErrors, GetNilocationV1LocationsResponses, GetNilocationV1Responses, PostNilocationV1LocationsData, PostNilocationV1LocationsDeleteManyData, PostNilocationV1LocationsDeleteManyErrors, PostNilocationV1LocationsDeleteManyResponses, PostNilocationV1LocationsErrors, PostNilocationV1LocationsResponses, PostNilocationV1LocationsUpdateManyData, PostNilocationV1LocationsUpdateManyErrors, PostNilocationV1LocationsUpdateManyResponses } from './types.gen';
+import type { CreateLocationData, CreateLocationErrors, CreateLocationResponses, DeleteLocationsData, DeleteLocationsErrors, DeleteLocationsResponses, GetLocationByIdData, GetLocationByIdErrors, GetLocationByIdResponses, GetLocationsData, GetLocationsErrors, GetLocationsResponses, RootEndpointData, RootEndpointResponses, UpdateLocationsData, UpdateLocationsErrors, UpdateLocationsResponses, V1Data, V1Responses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -21,7 +21,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Get all locations.
  */
-export const getNilocationV1Locations = <ThrowOnError extends boolean = false>(options?: Options<GetNilocationV1LocationsData, ThrowOnError>) => (options?.client ?? client).get<GetNilocationV1LocationsResponses, GetNilocationV1LocationsErrors, ThrowOnError>({
+export const getLocations = <ThrowOnError extends boolean = false>(options?: Options<GetLocationsData, ThrowOnError>) => (options?.client ?? client).get<GetLocationsResponses, GetLocationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nilocation/v1/locations',
     ...options
@@ -30,7 +30,7 @@ export const getNilocationV1Locations = <ThrowOnError extends boolean = false>(o
 /**
  * Create a new location.
  */
-export const postNilocationV1Locations = <ThrowOnError extends boolean = false>(options?: Options<PostNilocationV1LocationsData, ThrowOnError>) => (options?.client ?? client).post<PostNilocationV1LocationsResponses, PostNilocationV1LocationsErrors, ThrowOnError>({
+export const createLocation = <ThrowOnError extends boolean = false>(options?: Options<CreateLocationData, ThrowOnError>) => (options?.client ?? client).post<CreateLocationResponses, CreateLocationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nilocation/v1/locations',
     ...options,
@@ -43,7 +43,7 @@ export const postNilocationV1Locations = <ThrowOnError extends boolean = false>(
 /**
  * Get a location by its ID.
  */
-export const getNilocationV1LocationsByLocationId = <ThrowOnError extends boolean = false>(options: Options<GetNilocationV1LocationsByLocationIdData, ThrowOnError>) => (options.client ?? client).get<GetNilocationV1LocationsByLocationIdResponses, GetNilocationV1LocationsByLocationIdErrors, ThrowOnError>({
+export const getLocationById = <ThrowOnError extends boolean = false>(options: Options<GetLocationByIdData, ThrowOnError>) => (options.client ?? client).get<GetLocationByIdResponses, GetLocationByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nilocation/v1/locations/{locationId}',
     ...options
@@ -52,7 +52,7 @@ export const getNilocationV1LocationsByLocationId = <ThrowOnError extends boolea
 /**
  * Update multiple locations.
  */
-export const postNilocationV1LocationsUpdateMany = <ThrowOnError extends boolean = false>(options?: Options<PostNilocationV1LocationsUpdateManyData, ThrowOnError>) => (options?.client ?? client).post<PostNilocationV1LocationsUpdateManyResponses, PostNilocationV1LocationsUpdateManyErrors, ThrowOnError>({
+export const updateLocations = <ThrowOnError extends boolean = false>(options?: Options<UpdateLocationsData, ThrowOnError>) => (options?.client ?? client).post<UpdateLocationsResponses, UpdateLocationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nilocation/v1/locations:updateMany',
     ...options,
@@ -65,7 +65,7 @@ export const postNilocationV1LocationsUpdateMany = <ThrowOnError extends boolean
 /**
  * Delete a list of locations.
  */
-export const postNilocationV1LocationsDeleteMany = <ThrowOnError extends boolean = false>(options?: Options<PostNilocationV1LocationsDeleteManyData, ThrowOnError>) => (options?.client ?? client).post<PostNilocationV1LocationsDeleteManyResponses, PostNilocationV1LocationsDeleteManyErrors, ThrowOnError>({
+export const deleteLocations = <ThrowOnError extends boolean = false>(options?: Options<DeleteLocationsData, ThrowOnError>) => (options?.client ?? client).post<DeleteLocationsResponses, DeleteLocationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nilocation/v1/locations:deleteMany',
     ...options,
@@ -78,7 +78,7 @@ export const postNilocationV1LocationsDeleteMany = <ThrowOnError extends boolean
 /**
  * Returns information and available operations for all versions of the API.
  */
-export const getNilocation = <ThrowOnError extends boolean = false>(options?: Options<GetNilocationData, ThrowOnError>) => (options?.client ?? client).get<GetNilocationResponses, unknown, ThrowOnError>({
+export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nilocation',
     ...options
@@ -87,7 +87,7 @@ export const getNilocation = <ThrowOnError extends boolean = false>(options?: Op
 /**
  * Returns information and available operations for version 1 of the API
  */
-export const getNilocationV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNilocationV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNilocationV1Responses, unknown, ThrowOnError>({
+export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Data, ThrowOnError>) => (options?.client ?? client).get<V1Responses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nilocation/v1',
     ...options

@@ -2,7 +2,7 @@
 
 import { type Client, formDataBodySerializer, type Options as Options2, type TDataShape } from './client';
 import { client } from './client.gen';
-import type { DeleteNisystemsstateV1StatesByStateIdData, DeleteNisystemsstateV1StatesByStateIdErrors, DeleteNisystemsstateV1StatesByStateIdResponses, GetNisystemsstateData, GetNisystemsstateResponses, GetNisystemsstateV1Data, GetNisystemsstateV1Responses, GetNisystemsstateV1StatesByStateIdData, GetNisystemsstateV1StatesByStateIdErrors, GetNisystemsstateV1StatesByStateIdHistoryByVersionData, GetNisystemsstateV1StatesByStateIdHistoryByVersionErrors, GetNisystemsstateV1StatesByStateIdHistoryByVersionResponses, GetNisystemsstateV1StatesByStateIdHistoryData, GetNisystemsstateV1StatesByStateIdHistoryErrors, GetNisystemsstateV1StatesByStateIdHistoryResponses, GetNisystemsstateV1StatesByStateIdResponses, GetNisystemsstateV1StatesData, GetNisystemsstateV1StatesErrors, GetNisystemsstateV1StatesResponses, PatchNisystemsstateV1StatesByStateIdData, PatchNisystemsstateV1StatesByStateIdErrors, PatchNisystemsstateV1StatesByStateIdResponses, PostNisystemsstateV1DeleteStatesData, PostNisystemsstateV1DeleteStatesErrors, PostNisystemsstateV1DeleteStatesResponses, PostNisystemsstateV1ExportStateData, PostNisystemsstateV1ExportStateErrors, PostNisystemsstateV1ExportStateFromSystemData, PostNisystemsstateV1ExportStateFromSystemErrors, PostNisystemsstateV1ExportStateFromSystemResponses, PostNisystemsstateV1ExportStateResponses, PostNisystemsstateV1ImportStateData, PostNisystemsstateV1ImportStateErrors, PostNisystemsstateV1ImportStateResponses, PostNisystemsstateV1ReplaceStateContentData, PostNisystemsstateV1ReplaceStateContentErrors, PostNisystemsstateV1ReplaceStateContentResponses, PostNisystemsstateV1RevertStateVersionData, PostNisystemsstateV1RevertStateVersionErrors, PostNisystemsstateV1RevertStateVersionResponses, PostNisystemsstateV1StatesData, PostNisystemsstateV1StatesErrors, PostNisystemsstateV1StatesResponses } from './types.gen';
+import type { CreateStateData, CreateStateErrors, CreateStateResponses, DeleteStateData, DeleteStateErrors, DeleteStateResponses, DeleteStatesData, DeleteStatesErrors, DeleteStatesResponses, ExportStateData, ExportStateErrors, ExportStateFromSystemData, ExportStateFromSystemErrors, ExportStateFromSystemResponses, ExportStateResponses, GetStateData, GetStateErrors, GetStateHistoryData, GetStateHistoryErrors, GetStateHistoryResponses, GetStateResponses, GetStatesData, GetStatesErrors, GetStatesResponses, GetStateVersionData, GetStateVersionErrors, GetStateVersionResponses, ImportStateData, ImportStateErrors, ImportStateResponses, ReplaceStateContentData, ReplaceStateContentErrors, ReplaceStateContentResponses, RevertStateVersionData, RevertStateVersionErrors, RevertStateVersionResponses, RootEndpointData, RootEndpointResponses, UpdateStateData, UpdateStateErrors, UpdateStateResponses, V1Data, V1Responses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -21,7 +21,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Get state history
  */
-export const getNisystemsstateV1StatesByStateIdHistory = <ThrowOnError extends boolean = false>(options: Options<GetNisystemsstateV1StatesByStateIdHistoryData, ThrowOnError>) => (options.client ?? client).get<GetNisystemsstateV1StatesByStateIdHistoryResponses, GetNisystemsstateV1StatesByStateIdHistoryErrors, ThrowOnError>({
+export const getStateHistory = <ThrowOnError extends boolean = false>(options: Options<GetStateHistoryData, ThrowOnError>) => (options.client ?? client).get<GetStateHistoryResponses, GetStateHistoryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/states/{stateId}/history',
     ...options
@@ -30,7 +30,7 @@ export const getNisystemsstateV1StatesByStateIdHistory = <ThrowOnError extends b
 /**
  * Get state at a specific version
  */
-export const getNisystemsstateV1StatesByStateIdHistoryByVersion = <ThrowOnError extends boolean = false>(options: Options<GetNisystemsstateV1StatesByStateIdHistoryByVersionData, ThrowOnError>) => (options.client ?? client).get<GetNisystemsstateV1StatesByStateIdHistoryByVersionResponses, GetNisystemsstateV1StatesByStateIdHistoryByVersionErrors, ThrowOnError>({
+export const getStateVersion = <ThrowOnError extends boolean = false>(options: Options<GetStateVersionData, ThrowOnError>) => (options.client ?? client).get<GetStateVersionResponses, GetStateVersionErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/states/{stateId}/history/{version}',
     ...options
@@ -39,7 +39,7 @@ export const getNisystemsstateV1StatesByStateIdHistoryByVersion = <ThrowOnError 
 /**
  * Revert the state history version to the provided version.
  */
-export const postNisystemsstateV1RevertStateVersion = <ThrowOnError extends boolean = false>(options?: Options<PostNisystemsstateV1RevertStateVersionData, ThrowOnError>) => (options?.client ?? client).post<PostNisystemsstateV1RevertStateVersionResponses, PostNisystemsstateV1RevertStateVersionErrors, ThrowOnError>({
+export const revertStateVersion = <ThrowOnError extends boolean = false>(options?: Options<RevertStateVersionData, ThrowOnError>) => (options?.client ?? client).post<RevertStateVersionResponses, RevertStateVersionErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/revert-state-version',
     ...options,
@@ -52,7 +52,7 @@ export const postNisystemsstateV1RevertStateVersion = <ThrowOnError extends bool
 /**
  * API information
  */
-export const getNisystemsstate = <ThrowOnError extends boolean = false>(options?: Options<GetNisystemsstateData, ThrowOnError>) => (options?.client ?? client).get<GetNisystemsstateResponses, unknown, ThrowOnError>({
+export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate',
     ...options
@@ -61,7 +61,7 @@ export const getNisystemsstate = <ThrowOnError extends boolean = false>(options?
 /**
  * API version information
  */
-export const getNisystemsstateV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNisystemsstateV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNisystemsstateV1Responses, unknown, ThrowOnError>({
+export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Data, ThrowOnError>) => (options?.client ?? client).get<V1Responses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1',
     ...options
@@ -72,7 +72,7 @@ export const getNisystemsstateV1 = <ThrowOnError extends boolean = false>(option
  *
  * All the parameters are optional.
  */
-export const getNisystemsstateV1States = <ThrowOnError extends boolean = false>(options?: Options<GetNisystemsstateV1StatesData, ThrowOnError>) => (options?.client ?? client).get<GetNisystemsstateV1StatesResponses, GetNisystemsstateV1StatesErrors, ThrowOnError>({
+export const getStates = <ThrowOnError extends boolean = false>(options?: Options<GetStatesData, ThrowOnError>) => (options?.client ?? client).get<GetStatesResponses, GetStatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/states',
     ...options
@@ -81,7 +81,7 @@ export const getNisystemsstateV1States = <ThrowOnError extends boolean = false>(
 /**
  * Create state
  */
-export const postNisystemsstateV1States = <ThrowOnError extends boolean = false>(options?: Options<PostNisystemsstateV1StatesData, ThrowOnError>) => (options?.client ?? client).post<PostNisystemsstateV1StatesResponses, PostNisystemsstateV1StatesErrors, ThrowOnError>({
+export const createState = <ThrowOnError extends boolean = false>(options?: Options<CreateStateData, ThrowOnError>) => (options?.client ?? client).post<CreateStateResponses, CreateStateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/states',
     ...options,
@@ -94,7 +94,7 @@ export const postNisystemsstateV1States = <ThrowOnError extends boolean = false>
 /**
  * Generate state export
  */
-export const postNisystemsstateV1ExportState = <ThrowOnError extends boolean = false>(options?: Options<PostNisystemsstateV1ExportStateData, ThrowOnError>) => (options?.client ?? client).post<PostNisystemsstateV1ExportStateResponses, PostNisystemsstateV1ExportStateErrors, ThrowOnError>({
+export const exportState = <ThrowOnError extends boolean = false>(options?: Options<ExportStateData, ThrowOnError>) => (options?.client ?? client).post<ExportStateResponses, ExportStateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/export-state',
     ...options,
@@ -107,7 +107,7 @@ export const postNisystemsstateV1ExportState = <ThrowOnError extends boolean = f
 /**
  * Generate state export of a system
  */
-export const postNisystemsstateV1ExportStateFromSystem = <ThrowOnError extends boolean = false>(options?: Options<PostNisystemsstateV1ExportStateFromSystemData, ThrowOnError>) => (options?.client ?? client).post<PostNisystemsstateV1ExportStateFromSystemResponses, PostNisystemsstateV1ExportStateFromSystemErrors, ThrowOnError>({
+export const exportStateFromSystem = <ThrowOnError extends boolean = false>(options?: Options<ExportStateFromSystemData, ThrowOnError>) => (options?.client ?? client).post<ExportStateFromSystemResponses, ExportStateFromSystemErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/export-state-from-system',
     ...options,
@@ -123,7 +123,7 @@ export const postNisystemsstateV1ExportStateFromSystem = <ThrowOnError extends b
  * Sample request:
  * "64c42f2a7e5c68b2aaa71f5e"
  */
-export const deleteNisystemsstateV1StatesByStateId = <ThrowOnError extends boolean = false>(options: Options<DeleteNisystemsstateV1StatesByStateIdData, ThrowOnError>) => (options.client ?? client).delete<DeleteNisystemsstateV1StatesByStateIdResponses, DeleteNisystemsstateV1StatesByStateIdErrors, ThrowOnError>({
+export const deleteState = <ThrowOnError extends boolean = false>(options: Options<DeleteStateData, ThrowOnError>) => (options.client ?? client).delete<DeleteStateResponses, DeleteStateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/states/{stateId}',
     ...options
@@ -135,7 +135,7 @@ export const deleteNisystemsstateV1StatesByStateId = <ThrowOnError extends boole
  * Sample request:
  * "64c42f2a7e5c68b2aaa71f5e"
  */
-export const getNisystemsstateV1StatesByStateId = <ThrowOnError extends boolean = false>(options: Options<GetNisystemsstateV1StatesByStateIdData, ThrowOnError>) => (options.client ?? client).get<GetNisystemsstateV1StatesByStateIdResponses, GetNisystemsstateV1StatesByStateIdErrors, ThrowOnError>({
+export const getState = <ThrowOnError extends boolean = false>(options: Options<GetStateData, ThrowOnError>) => (options.client ?? client).get<GetStateResponses, GetStateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/states/{stateId}',
     ...options
@@ -157,7 +157,7 @@ export const getNisystemsstateV1StatesByStateId = <ThrowOnError extends boolean 
  * "workspace": "d725064a-b04a-49c1-a47d-49487df244e7"
  * }
  */
-export const patchNisystemsstateV1StatesByStateId = <ThrowOnError extends boolean = false>(options: Options<PatchNisystemsstateV1StatesByStateIdData, ThrowOnError>) => (options.client ?? client).patch<PatchNisystemsstateV1StatesByStateIdResponses, PatchNisystemsstateV1StatesByStateIdErrors, ThrowOnError>({
+export const updateState = <ThrowOnError extends boolean = false>(options: Options<UpdateStateData, ThrowOnError>) => (options.client ?? client).patch<UpdateStateResponses, UpdateStateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/states/{stateId}',
     ...options,
@@ -170,7 +170,7 @@ export const patchNisystemsstateV1StatesByStateId = <ThrowOnError extends boolea
 /**
  * Replace state content
  */
-export const postNisystemsstateV1ReplaceStateContent = <ThrowOnError extends boolean = false>(options?: Options<PostNisystemsstateV1ReplaceStateContentData, ThrowOnError>) => (options?.client ?? client).post<PostNisystemsstateV1ReplaceStateContentResponses, PostNisystemsstateV1ReplaceStateContentErrors, ThrowOnError>({
+export const replaceStateContent = <ThrowOnError extends boolean = false>(options?: Options<ReplaceStateContentData, ThrowOnError>) => (options?.client ?? client).post<ReplaceStateContentResponses, ReplaceStateContentErrors, ThrowOnError>({
     ...formDataBodySerializer,
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/replace-state-content',
@@ -184,7 +184,7 @@ export const postNisystemsstateV1ReplaceStateContent = <ThrowOnError extends boo
 /**
  * Import state
  */
-export const postNisystemsstateV1ImportState = <ThrowOnError extends boolean = false>(options?: Options<PostNisystemsstateV1ImportStateData, ThrowOnError>) => (options?.client ?? client).post<PostNisystemsstateV1ImportStateResponses, PostNisystemsstateV1ImportStateErrors, ThrowOnError>({
+export const importState = <ThrowOnError extends boolean = false>(options?: Options<ImportStateData, ThrowOnError>) => (options?.client ?? client).post<ImportStateResponses, ImportStateErrors, ThrowOnError>({
     ...formDataBodySerializer,
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/import-state',
@@ -203,7 +203,7 @@ export const postNisystemsstateV1ImportState = <ThrowOnError extends boolean = f
  * "64c42f2a7e5c68b2aaa71f5e"
  * ]
  */
-export const postNisystemsstateV1DeleteStates = <ThrowOnError extends boolean = false>(options?: Options<PostNisystemsstateV1DeleteStatesData, ThrowOnError>) => (options?.client ?? client).post<PostNisystemsstateV1DeleteStatesResponses, PostNisystemsstateV1DeleteStatesErrors, ThrowOnError>({
+export const deleteStates = <ThrowOnError extends boolean = false>(options?: Options<DeleteStatesData, ThrowOnError>) => (options?.client ?? client).post<DeleteStatesResponses, DeleteStatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nisystemsstate/v1/delete-states',
     ...options,

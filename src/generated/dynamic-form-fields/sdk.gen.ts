@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetNidynamicformfieldsData, GetNidynamicformfieldsResponses, GetNidynamicformfieldsUpData, GetNidynamicformfieldsUpResponses, GetNidynamicformfieldsV1ConfigurationsData, GetNidynamicformfieldsV1ConfigurationsErrors, GetNidynamicformfieldsV1ConfigurationsResponses, GetNidynamicformfieldsV1Data, GetNidynamicformfieldsV1FieldsData, GetNidynamicformfieldsV1FieldsErrors, GetNidynamicformfieldsV1FieldsResponses, GetNidynamicformfieldsV1GroupsData, GetNidynamicformfieldsV1GroupsErrors, GetNidynamicformfieldsV1GroupsResponses, GetNidynamicformfieldsV1ResolvedConfigurationData, GetNidynamicformfieldsV1ResolvedConfigurationErrors, GetNidynamicformfieldsV1ResolvedConfigurationResponses, GetNidynamicformfieldsV1Responses, GetNidynamicformfieldsV1TableData, GetNidynamicformfieldsV1TableErrors, GetNidynamicformfieldsV1TableResponses, PostNidynamicformfieldsV1ConfigurationsData, PostNidynamicformfieldsV1ConfigurationsErrors, PostNidynamicformfieldsV1ConfigurationsResponses, PostNidynamicformfieldsV1DeleteData, PostNidynamicformfieldsV1DeleteErrors, PostNidynamicformfieldsV1DeleteResponses, PostNidynamicformfieldsV1DeleteTablesData, PostNidynamicformfieldsV1DeleteTablesErrors, PostNidynamicformfieldsV1DeleteTablesResponses, PostNidynamicformfieldsV1QueryResolvedConfigurationsData, PostNidynamicformfieldsV1QueryResolvedConfigurationsErrors, PostNidynamicformfieldsV1QueryResolvedConfigurationsResponses, PostNidynamicformfieldsV1QueryTablesData, PostNidynamicformfieldsV1QueryTablesErrors, PostNidynamicformfieldsV1QueryTablesResponses, PostNidynamicformfieldsV1TablesData, PostNidynamicformfieldsV1TablesErrors, PostNidynamicformfieldsV1TablesResponses, PostNidynamicformfieldsV1UpdateConfigurationsData, PostNidynamicformfieldsV1UpdateConfigurationsErrors, PostNidynamicformfieldsV1UpdateConfigurationsResponses, PostNidynamicformfieldsV1UpdateTablesData, PostNidynamicformfieldsV1UpdateTablesErrors, PostNidynamicformfieldsV1UpdateTablesResponses } from './types.gen';
+import type { CreateDynamicFormConfigurationData, CreateDynamicFormConfigurationErrors, CreateDynamicFormConfigurationResponses, CreateTablesData, CreateTablesErrors, CreateTablesResponses, DeleteDynamicFormConfigurationData, DeleteDynamicFormConfigurationErrors, DeleteDynamicFormConfigurationResponses, DeleteTablePropertiesData, DeleteTablePropertiesErrors, DeleteTablePropertiesResponses, GetDynamicFormConfigurationByIdData, GetDynamicFormConfigurationByIdErrors, GetDynamicFormConfigurationByIdResponses, GetDynamicFormConfigurationsData, GetDynamicFormConfigurationsErrors, GetDynamicFormConfigurationsResponses, GetDynamicFormFieldsData, GetDynamicFormFieldsErrors, GetDynamicFormFieldsResponses, GetDynamicFormGroupsData, GetDynamicFormGroupsErrors, GetDynamicFormGroupsResponses, GetTablePropertyByIdData, GetTablePropertyByIdErrors, GetTablePropertyByIdResponses, QueryResolvedDynamicFormConfigurationData, QueryResolvedDynamicFormConfigurationErrors, QueryResolvedDynamicFormConfigurationResponses, QueryTablesData, QueryTablesErrors, QueryTablesResponses, RootEndPointData, RootEndPointResponses, UpData, UpdateDynamicFormConfigurationsData, UpdateDynamicFormConfigurationsErrors, UpdateDynamicFormConfigurationsResponses, UpdateTablePropertiesData, UpdateTablePropertiesErrors, UpdateTablePropertiesResponses, UpResponses, V1OperationsRootEndPointData, V1OperationsRootEndPointResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -29,7 +29,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
  * 'type == "testplan"' condition in their displayRule to ensure these configurations only display
  * for workitems where type is "testplan".
  */
-export const postNidynamicformfieldsV1QueryResolvedConfigurations = <ThrowOnError extends boolean = false>(options?: Options<PostNidynamicformfieldsV1QueryResolvedConfigurationsData, ThrowOnError>) => (options?.client ?? client).post<PostNidynamicformfieldsV1QueryResolvedConfigurationsResponses, PostNidynamicformfieldsV1QueryResolvedConfigurationsErrors, ThrowOnError>({
+export const queryResolvedDynamicFormConfiguration = <ThrowOnError extends boolean = false>(options?: Options<QueryResolvedDynamicFormConfigurationData, ThrowOnError>) => (options?.client ?? client).post<QueryResolvedDynamicFormConfigurationResponses, QueryResolvedDynamicFormConfigurationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/query-resolved-configurations',
     ...options,
@@ -42,7 +42,7 @@ export const postNidynamicformfieldsV1QueryResolvedConfigurations = <ThrowOnErro
 /**
  * Gets the resolved dynamic form fields configuration by ID.
  */
-export const getNidynamicformfieldsV1ResolvedConfiguration = <ThrowOnError extends boolean = false>(options?: Options<GetNidynamicformfieldsV1ResolvedConfigurationData, ThrowOnError>) => (options?.client ?? client).get<GetNidynamicformfieldsV1ResolvedConfigurationResponses, GetNidynamicformfieldsV1ResolvedConfigurationErrors, ThrowOnError>({
+export const getDynamicFormConfigurationById = <ThrowOnError extends boolean = false>(options?: Options<GetDynamicFormConfigurationByIdData, ThrowOnError>) => (options?.client ?? client).get<GetDynamicFormConfigurationByIdResponses, GetDynamicFormConfigurationByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/resolved-configuration',
     ...options
@@ -51,7 +51,7 @@ export const getNidynamicformfieldsV1ResolvedConfiguration = <ThrowOnError exten
 /**
  * Gets the list of accessible dynamic form fields configurations.
  */
-export const getNidynamicformfieldsV1Configurations = <ThrowOnError extends boolean = false>(options?: Options<GetNidynamicformfieldsV1ConfigurationsData, ThrowOnError>) => (options?.client ?? client).get<GetNidynamicformfieldsV1ConfigurationsResponses, GetNidynamicformfieldsV1ConfigurationsErrors, ThrowOnError>({
+export const getDynamicFormConfigurations = <ThrowOnError extends boolean = false>(options?: Options<GetDynamicFormConfigurationsData, ThrowOnError>) => (options?.client ?? client).get<GetDynamicFormConfigurationsResponses, GetDynamicFormConfigurationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/configurations',
     ...options
@@ -70,7 +70,7 @@ export const getNidynamicformfieldsV1Configurations = <ThrowOnError extends bool
  * - This full translation (both resourceType and displayRule) is provided specifically for PATools,
  * which is the primary consumer using the 'workorder:testplan' resourceType.
  */
-export const postNidynamicformfieldsV1Configurations = <ThrowOnError extends boolean = false>(options?: Options<PostNidynamicformfieldsV1ConfigurationsData, ThrowOnError>) => (options?.client ?? client).post<PostNidynamicformfieldsV1ConfigurationsResponses, PostNidynamicformfieldsV1ConfigurationsErrors, ThrowOnError>({
+export const createDynamicFormConfiguration = <ThrowOnError extends boolean = false>(options?: Options<CreateDynamicFormConfigurationData, ThrowOnError>) => (options?.client ?? client).post<CreateDynamicFormConfigurationResponses, CreateDynamicFormConfigurationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/configurations',
     ...options,
@@ -83,7 +83,7 @@ export const postNidynamicformfieldsV1Configurations = <ThrowOnError extends boo
 /**
  * Gets the list of accessible dynamic form fields groups.
  */
-export const getNidynamicformfieldsV1Groups = <ThrowOnError extends boolean = false>(options?: Options<GetNidynamicformfieldsV1GroupsData, ThrowOnError>) => (options?.client ?? client).get<GetNidynamicformfieldsV1GroupsResponses, GetNidynamicformfieldsV1GroupsErrors, ThrowOnError>({
+export const getDynamicFormGroups = <ThrowOnError extends boolean = false>(options?: Options<GetDynamicFormGroupsData, ThrowOnError>) => (options?.client ?? client).get<GetDynamicFormGroupsResponses, GetDynamicFormGroupsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/groups',
     ...options
@@ -92,7 +92,7 @@ export const getNidynamicformfieldsV1Groups = <ThrowOnError extends boolean = fa
 /**
  * Gets the list of accessible dynamic form fields.
  */
-export const getNidynamicformfieldsV1Fields = <ThrowOnError extends boolean = false>(options?: Options<GetNidynamicformfieldsV1FieldsData, ThrowOnError>) => (options?.client ?? client).get<GetNidynamicformfieldsV1FieldsResponses, GetNidynamicformfieldsV1FieldsErrors, ThrowOnError>({
+export const getDynamicFormFields = <ThrowOnError extends boolean = false>(options?: Options<GetDynamicFormFieldsData, ThrowOnError>) => (options?.client ?? client).get<GetDynamicFormFieldsResponses, GetDynamicFormFieldsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/fields',
     ...options
@@ -107,7 +107,7 @@ export const getNidynamicformfieldsV1Fields = <ThrowOnError extends boolean = fa
  * - DisplayRule updates are NOT automatically modified. Since resourceType is optional in update requests,
  * the API cannot determine whether to add or remove the 'type == "testplan"' condition in the displayRule property.
  */
-export const postNidynamicformfieldsV1UpdateConfigurations = <ThrowOnError extends boolean = false>(options?: Options<PostNidynamicformfieldsV1UpdateConfigurationsData, ThrowOnError>) => (options?.client ?? client).post<PostNidynamicformfieldsV1UpdateConfigurationsResponses, PostNidynamicformfieldsV1UpdateConfigurationsErrors, ThrowOnError>({
+export const updateDynamicFormConfigurations = <ThrowOnError extends boolean = false>(options?: Options<UpdateDynamicFormConfigurationsData, ThrowOnError>) => (options?.client ?? client).post<UpdateDynamicFormConfigurationsResponses, UpdateDynamicFormConfigurationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/update-configurations',
     ...options,
@@ -120,7 +120,7 @@ export const postNidynamicformfieldsV1UpdateConfigurations = <ThrowOnError exten
 /**
  * Deletes dynamic form fields configurations.
  */
-export const postNidynamicformfieldsV1Delete = <ThrowOnError extends boolean = false>(options?: Options<PostNidynamicformfieldsV1DeleteData, ThrowOnError>) => (options?.client ?? client).post<PostNidynamicformfieldsV1DeleteResponses, PostNidynamicformfieldsV1DeleteErrors, ThrowOnError>({
+export const deleteDynamicFormConfiguration = <ThrowOnError extends boolean = false>(options?: Options<DeleteDynamicFormConfigurationData, ThrowOnError>) => (options?.client ?? client).post<DeleteDynamicFormConfigurationResponses, DeleteDynamicFormConfigurationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/delete',
     ...options,
@@ -133,7 +133,7 @@ export const postNidynamicformfieldsV1Delete = <ThrowOnError extends boolean = f
 /**
  * Creates table properties.
  */
-export const postNidynamicformfieldsV1Tables = <ThrowOnError extends boolean = false>(options?: Options<PostNidynamicformfieldsV1TablesData, ThrowOnError>) => (options?.client ?? client).post<PostNidynamicformfieldsV1TablesResponses, PostNidynamicformfieldsV1TablesErrors, ThrowOnError>({
+export const createTables = <ThrowOnError extends boolean = false>(options?: Options<CreateTablesData, ThrowOnError>) => (options?.client ?? client).post<CreateTablesResponses, CreateTablesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/tables',
     ...options,
@@ -146,7 +146,7 @@ export const postNidynamicformfieldsV1Tables = <ThrowOnError extends boolean = f
 /**
  * Queries the table properties that match the request
  */
-export const postNidynamicformfieldsV1QueryTables = <ThrowOnError extends boolean = false>(options?: Options<PostNidynamicformfieldsV1QueryTablesData, ThrowOnError>) => (options?.client ?? client).post<PostNidynamicformfieldsV1QueryTablesResponses, PostNidynamicformfieldsV1QueryTablesErrors, ThrowOnError>({
+export const queryTables = <ThrowOnError extends boolean = false>(options?: Options<QueryTablesData, ThrowOnError>) => (options?.client ?? client).post<QueryTablesResponses, QueryTablesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/query-tables',
     ...options,
@@ -159,7 +159,7 @@ export const postNidynamicformfieldsV1QueryTables = <ThrowOnError extends boolea
 /**
  * Gets the table property by ID.
  */
-export const getNidynamicformfieldsV1Table = <ThrowOnError extends boolean = false>(options?: Options<GetNidynamicformfieldsV1TableData, ThrowOnError>) => (options?.client ?? client).get<GetNidynamicformfieldsV1TableResponses, GetNidynamicformfieldsV1TableErrors, ThrowOnError>({
+export const getTablePropertyById = <ThrowOnError extends boolean = false>(options?: Options<GetTablePropertyByIdData, ThrowOnError>) => (options?.client ?? client).get<GetTablePropertyByIdResponses, GetTablePropertyByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/table',
     ...options
@@ -168,7 +168,7 @@ export const getNidynamicformfieldsV1Table = <ThrowOnError extends boolean = fal
 /**
  * Deletes table properties.
  */
-export const postNidynamicformfieldsV1DeleteTables = <ThrowOnError extends boolean = false>(options?: Options<PostNidynamicformfieldsV1DeleteTablesData, ThrowOnError>) => (options?.client ?? client).post<PostNidynamicformfieldsV1DeleteTablesResponses, PostNidynamicformfieldsV1DeleteTablesErrors, ThrowOnError>({
+export const deleteTableProperties = <ThrowOnError extends boolean = false>(options?: Options<DeleteTablePropertiesData, ThrowOnError>) => (options?.client ?? client).post<DeleteTablePropertiesResponses, DeleteTablePropertiesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/delete-tables',
     ...options,
@@ -181,7 +181,7 @@ export const postNidynamicformfieldsV1DeleteTables = <ThrowOnError extends boole
 /**
  * Updates table properties.
  */
-export const postNidynamicformfieldsV1UpdateTables = <ThrowOnError extends boolean = false>(options?: Options<PostNidynamicformfieldsV1UpdateTablesData, ThrowOnError>) => (options?.client ?? client).post<PostNidynamicformfieldsV1UpdateTablesResponses, PostNidynamicformfieldsV1UpdateTablesErrors, ThrowOnError>({
+export const updateTableProperties = <ThrowOnError extends boolean = false>(options?: Options<UpdateTablePropertiesData, ThrowOnError>) => (options?.client ?? client).post<UpdateTablePropertiesResponses, UpdateTablePropertiesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1/update-tables',
     ...options,
@@ -196,7 +196,7 @@ export const postNidynamicformfieldsV1UpdateTables = <ThrowOnError extends boole
  *
  * @deprecated
  */
-export const getNidynamicformfieldsUp = <ThrowOnError extends boolean = false>(options?: Options<GetNidynamicformfieldsUpData, ThrowOnError>) => (options?.client ?? client).get<GetNidynamicformfieldsUpResponses, unknown, ThrowOnError>({
+export const up = <ThrowOnError extends boolean = false>(options?: Options<UpData, ThrowOnError>) => (options?.client ?? client).get<UpResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/up',
     ...options
@@ -207,7 +207,7 @@ export const getNidynamicformfieldsUp = <ThrowOnError extends boolean = false>(o
  *
  * Returns information about API and available operations.
  */
-export const getNidynamicformfields = <ThrowOnError extends boolean = false>(options?: Options<GetNidynamicformfieldsData, ThrowOnError>) => (options?.client ?? client).get<GetNidynamicformfieldsResponses, unknown, ThrowOnError>({
+export const rootEndPoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndPointData, ThrowOnError>) => (options?.client ?? client).get<RootEndPointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields',
     ...options
@@ -218,7 +218,7 @@ export const getNidynamicformfields = <ThrowOnError extends boolean = false>(opt
  *
  * Returns available operations for version V1 of the API.
  */
-export const getNidynamicformfieldsV1 = <ThrowOnError extends boolean = false>(options?: Options<GetNidynamicformfieldsV1Data, ThrowOnError>) => (options?.client ?? client).get<GetNidynamicformfieldsV1Responses, unknown, ThrowOnError>({
+export const v1OperationsRootEndPoint = <ThrowOnError extends boolean = false>(options?: Options<V1OperationsRootEndPointData, ThrowOnError>) => (options?.client ?? client).get<V1OperationsRootEndPointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nidynamicformfields/v1',
     ...options

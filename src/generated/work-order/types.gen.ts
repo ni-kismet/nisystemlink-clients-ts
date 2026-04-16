@@ -2212,7 +2212,7 @@ export type WorkflowTranslation = {
     displayText: string;
 };
 
-export type PostNiworkorderV1TestplansData = {
+export type CreateTestPlansData = {
     /**
      * The parameters for creating test plans.
      */
@@ -2222,7 +2222,7 @@ export type PostNiworkorderV1TestplansData = {
     url: '/niworkorder/v1/testplans';
 };
 
-export type PostNiworkorderV1TestplansErrors = {
+export type CreateTestPlansErrors = {
     /**
      * Unauthorized.
      */
@@ -2233,9 +2233,9 @@ export type PostNiworkorderV1TestplansErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1TestplansError = PostNiworkorderV1TestplansErrors[keyof PostNiworkorderV1TestplansErrors];
+export type CreateTestPlansError = CreateTestPlansErrors[keyof CreateTestPlansErrors];
 
-export type PostNiworkorderV1TestplansResponses = {
+export type CreateTestPlansResponses = {
     /**
      * The test plans were partially created.
      */
@@ -2246,9 +2246,9 @@ export type PostNiworkorderV1TestplansResponses = {
     201: CreateTestPlansResponse;
 };
 
-export type PostNiworkorderV1TestplansResponse = PostNiworkorderV1TestplansResponses[keyof PostNiworkorderV1TestplansResponses];
+export type CreateTestPlansResponse2 = CreateTestPlansResponses[keyof CreateTestPlansResponses];
 
-export type PostNiworkorderV1QueryTestplansData = {
+export type QueryTestPlansData = {
     /**
      * The parameters for querying test plans.
      */
@@ -2258,7 +2258,7 @@ export type PostNiworkorderV1QueryTestplansData = {
     url: '/niworkorder/v1/query-testplans';
 };
 
-export type PostNiworkorderV1QueryTestplansErrors = {
+export type QueryTestPlansErrors = {
     /**
      * Unauthorized.
      */
@@ -2269,25 +2269,25 @@ export type PostNiworkorderV1QueryTestplansErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1QueryTestplansError = PostNiworkorderV1QueryTestplansErrors[keyof PostNiworkorderV1QueryTestplansErrors];
+export type QueryTestPlansError = QueryTestPlansErrors[keyof QueryTestPlansErrors];
 
-export type PostNiworkorderV1QueryTestplansResponses = {
+export type QueryTestPlansResponses = {
     /**
      * The test plans were queried successfully.
      */
     200: QueryTestPlansResponse;
 };
 
-export type PostNiworkorderV1QueryTestplansResponse = PostNiworkorderV1QueryTestplansResponses[keyof PostNiworkorderV1QueryTestplansResponses];
+export type QueryTestPlansResponse2 = QueryTestPlansResponses[keyof QueryTestPlansResponses];
 
-export type GetNiworkorderV1TestplansSummaryData = {
+export type GetTestPlansSummaryData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niworkorder/v1/testplans-summary';
 };
 
-export type GetNiworkorderV1TestplansSummaryErrors = {
+export type GetTestPlansSummaryErrors = {
     /**
      * Unauthorized.
      */
@@ -2298,18 +2298,18 @@ export type GetNiworkorderV1TestplansSummaryErrors = {
     default: BaseResponse;
 };
 
-export type GetNiworkorderV1TestplansSummaryError = GetNiworkorderV1TestplansSummaryErrors[keyof GetNiworkorderV1TestplansSummaryErrors];
+export type GetTestPlansSummaryError = GetTestPlansSummaryErrors[keyof GetTestPlansSummaryErrors];
 
-export type GetNiworkorderV1TestplansSummaryResponses = {
+export type GetTestPlansSummaryResponses = {
     /**
      * The test plans summary was queried successfully.
      */
     200: TestPlanSummaryResponse;
 };
 
-export type GetNiworkorderV1TestplansSummaryResponse = GetNiworkorderV1TestplansSummaryResponses[keyof GetNiworkorderV1TestplansSummaryResponses];
+export type GetTestPlansSummaryResponse = GetTestPlansSummaryResponses[keyof GetTestPlansSummaryResponses];
 
-export type GetNiworkorderV1TestplansByTestPlanIdData = {
+export type GetTestPlanData = {
     body?: never;
     path: {
         /**
@@ -2330,7 +2330,7 @@ export type GetNiworkorderV1TestplansByTestPlanIdData = {
     url: '/niworkorder/v1/testplans/{testPlanId}';
 };
 
-export type GetNiworkorderV1TestplansByTestPlanIdErrors = {
+export type GetTestPlanErrors = {
     /**
      * Unauthorized.
      */
@@ -2341,18 +2341,18 @@ export type GetNiworkorderV1TestplansByTestPlanIdErrors = {
     default: BaseResponse;
 };
 
-export type GetNiworkorderV1TestplansByTestPlanIdError = GetNiworkorderV1TestplansByTestPlanIdErrors[keyof GetNiworkorderV1TestplansByTestPlanIdErrors];
+export type GetTestPlanError = GetTestPlanErrors[keyof GetTestPlanErrors];
 
-export type GetNiworkorderV1TestplansByTestPlanIdResponses = {
+export type GetTestPlanResponses = {
     /**
      * The test plan was queried successfully.
      */
     200: GetTestPlanResponse;
 };
 
-export type GetNiworkorderV1TestplansByTestPlanIdResponse = GetNiworkorderV1TestplansByTestPlanIdResponses[keyof GetNiworkorderV1TestplansByTestPlanIdResponses];
+export type GetTestPlanResponse2 = GetTestPlanResponses[keyof GetTestPlanResponses];
 
-export type PostNiworkorderV1DeleteTestplansData = {
+export type DeleteTestPlansData = {
     /**
      * The parameters for deleting test plans.
      */
@@ -2362,7 +2362,7 @@ export type PostNiworkorderV1DeleteTestplansData = {
     url: '/niworkorder/v1/delete-testplans';
 };
 
-export type PostNiworkorderV1DeleteTestplansErrors = {
+export type DeleteTestPlansErrors = {
     /**
      * Unauthorized.
      */
@@ -2373,9 +2373,9 @@ export type PostNiworkorderV1DeleteTestplansErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1DeleteTestplansError = PostNiworkorderV1DeleteTestplansErrors[keyof PostNiworkorderV1DeleteTestplansErrors];
+export type DeleteTestPlansError = DeleteTestPlansErrors[keyof DeleteTestPlansErrors];
 
-export type PostNiworkorderV1DeleteTestplansResponses = {
+export type DeleteTestPlansResponses = {
     /**
      * The test plans were partially deleted.
      */
@@ -2386,9 +2386,9 @@ export type PostNiworkorderV1DeleteTestplansResponses = {
     204: void;
 };
 
-export type PostNiworkorderV1DeleteTestplansResponse = PostNiworkorderV1DeleteTestplansResponses[keyof PostNiworkorderV1DeleteTestplansResponses];
+export type DeleteTestPlansResponse = DeleteTestPlansResponses[keyof DeleteTestPlansResponses];
 
-export type PostNiworkorderV1UpdateTestplansData = {
+export type UpdateTestPlansData = {
     /**
      * The parameters for updating test plans.
      */
@@ -2398,7 +2398,7 @@ export type PostNiworkorderV1UpdateTestplansData = {
     url: '/niworkorder/v1/update-testplans';
 };
 
-export type PostNiworkorderV1UpdateTestplansErrors = {
+export type UpdateTestPlansErrors = {
     /**
      * Unauthorized.
      */
@@ -2409,18 +2409,18 @@ export type PostNiworkorderV1UpdateTestplansErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1UpdateTestplansError = PostNiworkorderV1UpdateTestplansErrors[keyof PostNiworkorderV1UpdateTestplansErrors];
+export type UpdateTestPlansError = UpdateTestPlansErrors[keyof UpdateTestPlansErrors];
 
-export type PostNiworkorderV1UpdateTestplansResponses = {
+export type UpdateTestPlansResponses = {
     /**
      * The test plans were partially updated.
      */
     200: UpdateTestPlansPartialSuccessResponse;
 };
 
-export type PostNiworkorderV1UpdateTestplansResponse = PostNiworkorderV1UpdateTestplansResponses[keyof PostNiworkorderV1UpdateTestplansResponses];
+export type UpdateTestPlansResponse = UpdateTestPlansResponses[keyof UpdateTestPlansResponses];
 
-export type PostNiworkorderV1ScheduleTestplansData = {
+export type ScheduleTestPlansData = {
     /**
      * The parameters for scheduling test plans.
      */
@@ -2430,7 +2430,7 @@ export type PostNiworkorderV1ScheduleTestplansData = {
     url: '/niworkorder/v1/schedule-testplans';
 };
 
-export type PostNiworkorderV1ScheduleTestplansErrors = {
+export type ScheduleTestPlansErrors = {
     /**
      * Unauthorized.
      */
@@ -2441,18 +2441,18 @@ export type PostNiworkorderV1ScheduleTestplansErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1ScheduleTestplansError = PostNiworkorderV1ScheduleTestplansErrors[keyof PostNiworkorderV1ScheduleTestplansErrors];
+export type ScheduleTestPlansError = ScheduleTestPlansErrors[keyof ScheduleTestPlansErrors];
 
-export type PostNiworkorderV1ScheduleTestplansResponses = {
+export type ScheduleTestPlansResponses = {
     /**
      * The test plans were partially scheduled.
      */
     200: ScheduleTestPlansPartialSuccessResponse;
 };
 
-export type PostNiworkorderV1ScheduleTestplansResponse = PostNiworkorderV1ScheduleTestplansResponses[keyof PostNiworkorderV1ScheduleTestplansResponses];
+export type ScheduleTestPlansResponse = ScheduleTestPlansResponses[keyof ScheduleTestPlansResponses];
 
-export type PostNiworkorderV1TestplansByTestPlanIdExecuteData = {
+export type ExecuteTestPlanData = {
     /**
      * The parameters for executing a test plan action.
      */
@@ -2467,7 +2467,7 @@ export type PostNiworkorderV1TestplansByTestPlanIdExecuteData = {
     url: '/niworkorder/v1/testplans/{testPlanId}/execute';
 };
 
-export type PostNiworkorderV1TestplansByTestPlanIdExecuteErrors = {
+export type ExecuteTestPlanErrors = {
     /**
      * Unauthorized.
      */
@@ -2490,9 +2490,9 @@ export type PostNiworkorderV1TestplansByTestPlanIdExecuteErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1TestplansByTestPlanIdExecuteError = PostNiworkorderV1TestplansByTestPlanIdExecuteErrors[keyof PostNiworkorderV1TestplansByTestPlanIdExecuteErrors];
+export type ExecuteTestPlanError = ExecuteTestPlanErrors[keyof ExecuteTestPlanErrors];
 
-export type PostNiworkorderV1TestplansByTestPlanIdExecuteResponses = {
+export type ExecuteTestPlanResponses = {
     /**
      * The action was completed successfully.
      */
@@ -2503,9 +2503,9 @@ export type PostNiworkorderV1TestplansByTestPlanIdExecuteResponses = {
     202: ExecuteTestPlanResponse;
 };
 
-export type PostNiworkorderV1TestplansByTestPlanIdExecuteResponse = PostNiworkorderV1TestplansByTestPlanIdExecuteResponses[keyof PostNiworkorderV1TestplansByTestPlanIdExecuteResponses];
+export type ExecuteTestPlanResponse2 = ExecuteTestPlanResponses[keyof ExecuteTestPlanResponses];
 
-export type PostNiworkorderV1TestplanTemplatesData = {
+export type CreateTestPlanTemplatesData = {
     /**
      * The parameters for creating test plan templates.
      */
@@ -2515,7 +2515,7 @@ export type PostNiworkorderV1TestplanTemplatesData = {
     url: '/niworkorder/v1/testplan-templates';
 };
 
-export type PostNiworkorderV1TestplanTemplatesErrors = {
+export type CreateTestPlanTemplatesErrors = {
     /**
      * Unauthorized.
      */
@@ -2526,9 +2526,9 @@ export type PostNiworkorderV1TestplanTemplatesErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1TestplanTemplatesError = PostNiworkorderV1TestplanTemplatesErrors[keyof PostNiworkorderV1TestplanTemplatesErrors];
+export type CreateTestPlanTemplatesError = CreateTestPlanTemplatesErrors[keyof CreateTestPlanTemplatesErrors];
 
-export type PostNiworkorderV1TestplanTemplatesResponses = {
+export type CreateTestPlanTemplatesResponses = {
     /**
      * The test plan templates were partially created.
      */
@@ -2539,9 +2539,9 @@ export type PostNiworkorderV1TestplanTemplatesResponses = {
     201: CreateTestPlanTemplatesResponse;
 };
 
-export type PostNiworkorderV1TestplanTemplatesResponse = PostNiworkorderV1TestplanTemplatesResponses[keyof PostNiworkorderV1TestplanTemplatesResponses];
+export type CreateTestPlanTemplatesResponse2 = CreateTestPlanTemplatesResponses[keyof CreateTestPlanTemplatesResponses];
 
-export type PostNiworkorderV1QueryTestplanTemplatesData = {
+export type QueryTestPlanTemplatesData = {
     /**
      * The parameters for querying test plan templates.
      */
@@ -2551,7 +2551,7 @@ export type PostNiworkorderV1QueryTestplanTemplatesData = {
     url: '/niworkorder/v1/query-testplan-templates';
 };
 
-export type PostNiworkorderV1QueryTestplanTemplatesErrors = {
+export type QueryTestPlanTemplatesErrors = {
     /**
      * Unauthorized.
      */
@@ -2562,18 +2562,18 @@ export type PostNiworkorderV1QueryTestplanTemplatesErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1QueryTestplanTemplatesError = PostNiworkorderV1QueryTestplanTemplatesErrors[keyof PostNiworkorderV1QueryTestplanTemplatesErrors];
+export type QueryTestPlanTemplatesError = QueryTestPlanTemplatesErrors[keyof QueryTestPlanTemplatesErrors];
 
-export type PostNiworkorderV1QueryTestplanTemplatesResponses = {
+export type QueryTestPlanTemplatesResponses = {
     /**
      * The test plan templates were queried successfully.
      */
     200: QueryTestPlanTemplatesResponse;
 };
 
-export type PostNiworkorderV1QueryTestplanTemplatesResponse = PostNiworkorderV1QueryTestplanTemplatesResponses[keyof PostNiworkorderV1QueryTestplanTemplatesResponses];
+export type QueryTestPlanTemplatesResponse2 = QueryTestPlanTemplatesResponses[keyof QueryTestPlanTemplatesResponses];
 
-export type PostNiworkorderV1DeleteTestplanTemplatesData = {
+export type DeleteTestPlanTemplatesData = {
     /**
      * The parameters for deleting test plan templates.
      */
@@ -2583,7 +2583,7 @@ export type PostNiworkorderV1DeleteTestplanTemplatesData = {
     url: '/niworkorder/v1/delete-testplan-templates';
 };
 
-export type PostNiworkorderV1DeleteTestplanTemplatesErrors = {
+export type DeleteTestPlanTemplatesErrors = {
     /**
      * Unauthorized.
      */
@@ -2594,9 +2594,9 @@ export type PostNiworkorderV1DeleteTestplanTemplatesErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1DeleteTestplanTemplatesError = PostNiworkorderV1DeleteTestplanTemplatesErrors[keyof PostNiworkorderV1DeleteTestplanTemplatesErrors];
+export type DeleteTestPlanTemplatesError = DeleteTestPlanTemplatesErrors[keyof DeleteTestPlanTemplatesErrors];
 
-export type PostNiworkorderV1DeleteTestplanTemplatesResponses = {
+export type DeleteTestPlanTemplatesResponses = {
     /**
      * The test plan templates were partially deleted.
      */
@@ -2607,9 +2607,9 @@ export type PostNiworkorderV1DeleteTestplanTemplatesResponses = {
     204: void;
 };
 
-export type PostNiworkorderV1DeleteTestplanTemplatesResponse = PostNiworkorderV1DeleteTestplanTemplatesResponses[keyof PostNiworkorderV1DeleteTestplanTemplatesResponses];
+export type DeleteTestPlanTemplatesResponse = DeleteTestPlanTemplatesResponses[keyof DeleteTestPlanTemplatesResponses];
 
-export type PostNiworkorderV1UpdateTestplanTemplatesData = {
+export type UpdateTestPlanTemplatesData = {
     /**
      * The parameters for updating test plan templates.
      */
@@ -2619,7 +2619,7 @@ export type PostNiworkorderV1UpdateTestplanTemplatesData = {
     url: '/niworkorder/v1/update-testplan-templates';
 };
 
-export type PostNiworkorderV1UpdateTestplanTemplatesErrors = {
+export type UpdateTestPlanTemplatesErrors = {
     /**
      * Unauthorized.
      */
@@ -2630,50 +2630,50 @@ export type PostNiworkorderV1UpdateTestplanTemplatesErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1UpdateTestplanTemplatesError = PostNiworkorderV1UpdateTestplanTemplatesErrors[keyof PostNiworkorderV1UpdateTestplanTemplatesErrors];
+export type UpdateTestPlanTemplatesError = UpdateTestPlanTemplatesErrors[keyof UpdateTestPlanTemplatesErrors];
 
-export type PostNiworkorderV1UpdateTestplanTemplatesResponses = {
+export type UpdateTestPlanTemplatesResponses = {
     /**
      * The test plan templates were partially updated.
      */
     200: UpdateTestPlanTemplatesPartialSuccessResponse;
 };
 
-export type PostNiworkorderV1UpdateTestplanTemplatesResponse = PostNiworkorderV1UpdateTestplanTemplatesResponses[keyof PostNiworkorderV1UpdateTestplanTemplatesResponses];
+export type UpdateTestPlanTemplatesResponse = UpdateTestPlanTemplatesResponses[keyof UpdateTestPlanTemplatesResponses];
 
-export type GetNiworkorderData = {
+export type RootEndPointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niworkorder';
 };
 
-export type GetNiworkorderResponses = {
+export type RootEndPointResponses = {
     /**
      * OK
      */
     200: Versions;
 };
 
-export type GetNiworkorderResponse = GetNiworkorderResponses[keyof GetNiworkorderResponses];
+export type RootEndPointResponse = RootEndPointResponses[keyof RootEndPointResponses];
 
-export type GetNiworkorderV1Data = {
+export type V1OperationsRootEndPointData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niworkorder/v1';
 };
 
-export type GetNiworkorderV1Responses = {
+export type V1OperationsRootEndPointResponses = {
     /**
      * OK
      */
     200: V1Operations;
 };
 
-export type GetNiworkorderV1Response = GetNiworkorderV1Responses[keyof GetNiworkorderV1Responses];
+export type V1OperationsRootEndPointResponse = V1OperationsRootEndPointResponses[keyof V1OperationsRootEndPointResponses];
 
-export type PostNiworkorderV1WorkflowsData = {
+export type CreateWorkflowData = {
     /**
      * The parameters for creating the workflow.
      */
@@ -2683,7 +2683,7 @@ export type PostNiworkorderV1WorkflowsData = {
     url: '/niworkorder/v1/workflows';
 };
 
-export type PostNiworkorderV1WorkflowsErrors = {
+export type CreateWorkflowErrors = {
     /**
      * Unauthorized.
      */
@@ -2694,18 +2694,18 @@ export type PostNiworkorderV1WorkflowsErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1WorkflowsError = PostNiworkorderV1WorkflowsErrors[keyof PostNiworkorderV1WorkflowsErrors];
+export type CreateWorkflowError = CreateWorkflowErrors[keyof CreateWorkflowErrors];
 
-export type PostNiworkorderV1WorkflowsResponses = {
+export type CreateWorkflowResponses = {
     /**
      * The workflow was created successfully.
      */
     201: CreateWorkflowResponse;
 };
 
-export type PostNiworkorderV1WorkflowsResponse = PostNiworkorderV1WorkflowsResponses[keyof PostNiworkorderV1WorkflowsResponses];
+export type CreateWorkflowResponse2 = CreateWorkflowResponses[keyof CreateWorkflowResponses];
 
-export type PostNiworkorderV1QueryWorkflowsData = {
+export type QueryWorkflowsData = {
     /**
      * The parameters for querying workflows.
      */
@@ -2715,7 +2715,7 @@ export type PostNiworkorderV1QueryWorkflowsData = {
     url: '/niworkorder/v1/query-workflows';
 };
 
-export type PostNiworkorderV1QueryWorkflowsErrors = {
+export type QueryWorkflowsErrors = {
     /**
      * Unauthorized.
      */
@@ -2726,18 +2726,18 @@ export type PostNiworkorderV1QueryWorkflowsErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1QueryWorkflowsError = PostNiworkorderV1QueryWorkflowsErrors[keyof PostNiworkorderV1QueryWorkflowsErrors];
+export type QueryWorkflowsError = QueryWorkflowsErrors[keyof QueryWorkflowsErrors];
 
-export type PostNiworkorderV1QueryWorkflowsResponses = {
+export type QueryWorkflowsResponses = {
     /**
      * The workflows were queried successfully.
      */
     200: QueryWorkflowsResponse;
 };
 
-export type PostNiworkorderV1QueryWorkflowsResponse = PostNiworkorderV1QueryWorkflowsResponses[keyof PostNiworkorderV1QueryWorkflowsResponses];
+export type QueryWorkflowsResponse2 = QueryWorkflowsResponses[keyof QueryWorkflowsResponses];
 
-export type GetNiworkorderV1WorkflowsByWorkflowIdData = {
+export type GetWorkflowData = {
     body?: never;
     path: {
         /**
@@ -2749,7 +2749,7 @@ export type GetNiworkorderV1WorkflowsByWorkflowIdData = {
     url: '/niworkorder/v1/workflows/{workflowId}';
 };
 
-export type GetNiworkorderV1WorkflowsByWorkflowIdErrors = {
+export type GetWorkflowErrors = {
     /**
      * Unauthorized.
      */
@@ -2760,18 +2760,18 @@ export type GetNiworkorderV1WorkflowsByWorkflowIdErrors = {
     default: BaseResponse;
 };
 
-export type GetNiworkorderV1WorkflowsByWorkflowIdError = GetNiworkorderV1WorkflowsByWorkflowIdErrors[keyof GetNiworkorderV1WorkflowsByWorkflowIdErrors];
+export type GetWorkflowError = GetWorkflowErrors[keyof GetWorkflowErrors];
 
-export type GetNiworkorderV1WorkflowsByWorkflowIdResponses = {
+export type GetWorkflowResponses = {
     /**
      * The workflow was retreived successfully.
      */
     200: GetWorkflowResponse;
 };
 
-export type GetNiworkorderV1WorkflowsByWorkflowIdResponse = GetNiworkorderV1WorkflowsByWorkflowIdResponses[keyof GetNiworkorderV1WorkflowsByWorkflowIdResponses];
+export type GetWorkflowResponse2 = GetWorkflowResponses[keyof GetWorkflowResponses];
 
-export type PutNiworkorderV1WorkflowsByWorkflowIdData = {
+export type UpdateWorkflowData = {
     /**
      * The parameters for updating the workflow.
      */
@@ -2786,7 +2786,7 @@ export type PutNiworkorderV1WorkflowsByWorkflowIdData = {
     url: '/niworkorder/v1/workflows/{workflowId}';
 };
 
-export type PutNiworkorderV1WorkflowsByWorkflowIdErrors = {
+export type UpdateWorkflowErrors = {
     /**
      * Unauthorized.
      */
@@ -2797,18 +2797,18 @@ export type PutNiworkorderV1WorkflowsByWorkflowIdErrors = {
     default: BaseResponse;
 };
 
-export type PutNiworkorderV1WorkflowsByWorkflowIdError = PutNiworkorderV1WorkflowsByWorkflowIdErrors[keyof PutNiworkorderV1WorkflowsByWorkflowIdErrors];
+export type UpdateWorkflowError = UpdateWorkflowErrors[keyof UpdateWorkflowErrors];
 
-export type PutNiworkorderV1WorkflowsByWorkflowIdResponses = {
+export type UpdateWorkflowResponses = {
     /**
      * The workflow was updated successfully.
      */
     200: UpdateWorkflowResponse;
 };
 
-export type PutNiworkorderV1WorkflowsByWorkflowIdResponse = PutNiworkorderV1WorkflowsByWorkflowIdResponses[keyof PutNiworkorderV1WorkflowsByWorkflowIdResponses];
+export type UpdateWorkflowResponse2 = UpdateWorkflowResponses[keyof UpdateWorkflowResponses];
 
-export type PostNiworkorderV1DeleteWorkflowsData = {
+export type DeleteWorkflowsData = {
     /**
      * The parameters for deleting workflows.
      */
@@ -2818,7 +2818,7 @@ export type PostNiworkorderV1DeleteWorkflowsData = {
     url: '/niworkorder/v1/delete-workflows';
 };
 
-export type PostNiworkorderV1DeleteWorkflowsErrors = {
+export type DeleteWorkflowsErrors = {
     /**
      * Unauthorized.
      */
@@ -2829,9 +2829,9 @@ export type PostNiworkorderV1DeleteWorkflowsErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1DeleteWorkflowsError = PostNiworkorderV1DeleteWorkflowsErrors[keyof PostNiworkorderV1DeleteWorkflowsErrors];
+export type DeleteWorkflowsError = DeleteWorkflowsErrors[keyof DeleteWorkflowsErrors];
 
-export type PostNiworkorderV1DeleteWorkflowsResponses = {
+export type DeleteWorkflowsResponses = {
     /**
      * The workflows were partially deleted.
      */
@@ -2842,9 +2842,9 @@ export type PostNiworkorderV1DeleteWorkflowsResponses = {
     204: void;
 };
 
-export type PostNiworkorderV1DeleteWorkflowsResponse = PostNiworkorderV1DeleteWorkflowsResponses[keyof PostNiworkorderV1DeleteWorkflowsResponses];
+export type DeleteWorkflowsResponse = DeleteWorkflowsResponses[keyof DeleteWorkflowsResponses];
 
-export type PostNiworkorderV1WorkordersData = {
+export type CreateWorkOrdersData = {
     /**
      * The parameters for creating work orders.
      */
@@ -2854,7 +2854,7 @@ export type PostNiworkorderV1WorkordersData = {
     url: '/niworkorder/v1/workorders';
 };
 
-export type PostNiworkorderV1WorkordersErrors = {
+export type CreateWorkOrdersErrors = {
     /**
      * Unauthorized.
      */
@@ -2865,9 +2865,9 @@ export type PostNiworkorderV1WorkordersErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1WorkordersError = PostNiworkorderV1WorkordersErrors[keyof PostNiworkorderV1WorkordersErrors];
+export type CreateWorkOrdersError = CreateWorkOrdersErrors[keyof CreateWorkOrdersErrors];
 
-export type PostNiworkorderV1WorkordersResponses = {
+export type CreateWorkOrdersResponses = {
     /**
      * The work orders were partially created.
      */
@@ -2878,9 +2878,9 @@ export type PostNiworkorderV1WorkordersResponses = {
     201: CreateWorkOrdersResponse;
 };
 
-export type PostNiworkorderV1WorkordersResponse = PostNiworkorderV1WorkordersResponses[keyof PostNiworkorderV1WorkordersResponses];
+export type CreateWorkOrdersResponse2 = CreateWorkOrdersResponses[keyof CreateWorkOrdersResponses];
 
-export type PostNiworkorderV1QueryWorkordersData = {
+export type QueryWorkOrdersData = {
     /**
      * The parameters for querying work orders.
      */
@@ -2890,7 +2890,7 @@ export type PostNiworkorderV1QueryWorkordersData = {
     url: '/niworkorder/v1/query-workorders';
 };
 
-export type PostNiworkorderV1QueryWorkordersErrors = {
+export type QueryWorkOrdersErrors = {
     /**
      * Unauthorized.
      */
@@ -2901,18 +2901,18 @@ export type PostNiworkorderV1QueryWorkordersErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1QueryWorkordersError = PostNiworkorderV1QueryWorkordersErrors[keyof PostNiworkorderV1QueryWorkordersErrors];
+export type QueryWorkOrdersError = QueryWorkOrdersErrors[keyof QueryWorkOrdersErrors];
 
-export type PostNiworkorderV1QueryWorkordersResponses = {
+export type QueryWorkOrdersResponses = {
     /**
      * The work orders were queried successfully.
      */
     200: QueryWorkOrdersResponse;
 };
 
-export type PostNiworkorderV1QueryWorkordersResponse = PostNiworkorderV1QueryWorkordersResponses[keyof PostNiworkorderV1QueryWorkordersResponses];
+export type QueryWorkOrdersResponse2 = QueryWorkOrdersResponses[keyof QueryWorkOrdersResponses];
 
-export type PostNiworkorderV1DeleteWorkordersData = {
+export type DeleteWorkOrdersData = {
     /**
      * The parameters for deleting work orders.
      */
@@ -2922,7 +2922,7 @@ export type PostNiworkorderV1DeleteWorkordersData = {
     url: '/niworkorder/v1/delete-workorders';
 };
 
-export type PostNiworkorderV1DeleteWorkordersErrors = {
+export type DeleteWorkOrdersErrors = {
     /**
      * Unauthorized.
      */
@@ -2933,9 +2933,9 @@ export type PostNiworkorderV1DeleteWorkordersErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1DeleteWorkordersError = PostNiworkorderV1DeleteWorkordersErrors[keyof PostNiworkorderV1DeleteWorkordersErrors];
+export type DeleteWorkOrdersError = DeleteWorkOrdersErrors[keyof DeleteWorkOrdersErrors];
 
-export type PostNiworkorderV1DeleteWorkordersResponses = {
+export type DeleteWorkOrdersResponses = {
     /**
      * The work orders were partially deleted.
      */
@@ -2946,16 +2946,16 @@ export type PostNiworkorderV1DeleteWorkordersResponses = {
     204: void;
 };
 
-export type PostNiworkorderV1DeleteWorkordersResponse = PostNiworkorderV1DeleteWorkordersResponses[keyof PostNiworkorderV1DeleteWorkordersResponses];
+export type DeleteWorkOrdersResponse = DeleteWorkOrdersResponses[keyof DeleteWorkOrdersResponses];
 
-export type GetNiworkorderV1WorkordersSummaryData = {
+export type GetWorkOrdersSummaryData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/niworkorder/v1/workorders-summary';
 };
 
-export type GetNiworkorderV1WorkordersSummaryErrors = {
+export type GetWorkOrdersSummaryErrors = {
     /**
      * Unauthorized.
      */
@@ -2966,18 +2966,18 @@ export type GetNiworkorderV1WorkordersSummaryErrors = {
     default: BaseResponse;
 };
 
-export type GetNiworkorderV1WorkordersSummaryError = GetNiworkorderV1WorkordersSummaryErrors[keyof GetNiworkorderV1WorkordersSummaryErrors];
+export type GetWorkOrdersSummaryError = GetWorkOrdersSummaryErrors[keyof GetWorkOrdersSummaryErrors];
 
-export type GetNiworkorderV1WorkordersSummaryResponses = {
+export type GetWorkOrdersSummaryResponses = {
     /**
      * The work orders summary was queried successfully.
      */
     200: WorkOrdersSummaryResponse;
 };
 
-export type GetNiworkorderV1WorkordersSummaryResponse = GetNiworkorderV1WorkordersSummaryResponses[keyof GetNiworkorderV1WorkordersSummaryResponses];
+export type GetWorkOrdersSummaryResponse = GetWorkOrdersSummaryResponses[keyof GetWorkOrdersSummaryResponses];
 
-export type GetNiworkorderV1WorkordersByWorkOrderIdData = {
+export type GetWorkOrderData = {
     body?: never;
     path: {
         /**
@@ -2989,7 +2989,7 @@ export type GetNiworkorderV1WorkordersByWorkOrderIdData = {
     url: '/niworkorder/v1/workorders/{workOrderId}';
 };
 
-export type GetNiworkorderV1WorkordersByWorkOrderIdErrors = {
+export type GetWorkOrderErrors = {
     /**
      * Unauthorized.
      */
@@ -3000,18 +3000,18 @@ export type GetNiworkorderV1WorkordersByWorkOrderIdErrors = {
     default: BaseResponse;
 };
 
-export type GetNiworkorderV1WorkordersByWorkOrderIdError = GetNiworkorderV1WorkordersByWorkOrderIdErrors[keyof GetNiworkorderV1WorkordersByWorkOrderIdErrors];
+export type GetWorkOrderError = GetWorkOrderErrors[keyof GetWorkOrderErrors];
 
-export type GetNiworkorderV1WorkordersByWorkOrderIdResponses = {
+export type GetWorkOrderResponses = {
     /**
      * The work orders were queried successfully.
      */
     200: GetWorkOrderResponse;
 };
 
-export type GetNiworkorderV1WorkordersByWorkOrderIdResponse = GetNiworkorderV1WorkordersByWorkOrderIdResponses[keyof GetNiworkorderV1WorkordersByWorkOrderIdResponses];
+export type GetWorkOrderResponse2 = GetWorkOrderResponses[keyof GetWorkOrderResponses];
 
-export type PostNiworkorderV1UpdateWorkordersData = {
+export type UpdateWorkOrdersData = {
     /**
      * The parameters for updating work orders.
      */
@@ -3021,7 +3021,7 @@ export type PostNiworkorderV1UpdateWorkordersData = {
     url: '/niworkorder/v1/update-workorders';
 };
 
-export type PostNiworkorderV1UpdateWorkordersErrors = {
+export type UpdateWorkOrdersErrors = {
     /**
      * Unauthorized.
      */
@@ -3032,13 +3032,13 @@ export type PostNiworkorderV1UpdateWorkordersErrors = {
     default: BaseResponse;
 };
 
-export type PostNiworkorderV1UpdateWorkordersError = PostNiworkorderV1UpdateWorkordersErrors[keyof PostNiworkorderV1UpdateWorkordersErrors];
+export type UpdateWorkOrdersError = UpdateWorkOrdersErrors[keyof UpdateWorkOrdersErrors];
 
-export type PostNiworkorderV1UpdateWorkordersResponses = {
+export type UpdateWorkOrdersResponses = {
     /**
      * The work orders were partially updated.
      */
     200: UpdateWorkOrdersPartialSuccessResponse;
 };
 
-export type PostNiworkorderV1UpdateWorkordersResponse = PostNiworkorderV1UpdateWorkordersResponses[keyof PostNiworkorderV1UpdateWorkordersResponses];
+export type UpdateWorkOrdersResponse = UpdateWorkOrdersResponses[keyof UpdateWorkOrdersResponses];
