@@ -78,10 +78,6 @@ export const exportAssets = <ThrowOnError extends boolean = false>(options?: Opt
 /**
  * Update asset metadata
  *
- *
- *
- * **Deprecated:** Use `POST /niapm/v1/update-assets` for batch asset updates instead.
- *
  * @deprecated
  */
 export const updateMetadata = <ThrowOnError extends boolean = false>(options: Options<UpdateMetadataData, ThrowOnError>) => (options.client ?? client).patch<UpdateMetadataResponses, UpdateMetadataErrors, ThrowOnError>({

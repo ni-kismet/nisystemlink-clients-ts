@@ -1,6 +1,6 @@
 # OpenAPI Specification Status
 
-> Generated on 2026-04-16 using [vacuum v0.25.9](https://quobix.com/vacuum/) against specs
+> Generated on 2026-04-21 using [vacuum v0.25.9](https://quobix.com/vacuum/) against specs
 > fetched from `https://dev-api.lifecyclesolutions.ni.com`. Only **errors** are reported;
 > warnings and informational findings are omitted.
 
@@ -77,7 +77,5 @@ All specs except **dataframe** pass vacuum linting with zero errors.
 - **`operationId` coverage is now complete.** All 420 operations across the 27 fetched specs include an `operationId`, eliminating the largest source of generated SDK naming instability from the March snapshot.
 - **Legacy Swagger 2.0 specs have been upgraded upstream.** The services previously published as Swagger 2.0 now serve OpenAPI 3.0.0 documents, which removed the earlier integer response-key and undefined `securityDefinition` errors.
 - **The remaining blocking issue is isolated.** Only the dataframe spec still produces error-severity findings, both caused by invalid `minLength` constraints on object-typed schema properties.
-- **In-flight patches** are still applied by [`scripts/spec-patches.ts`](scripts/spec-patches.ts)
-  during code generation to work around known upstream bugs documented in
-  [`OPENAPI_BUG_REPORTS.md`](OPENAPI_BUG_REPORTS.md). These patches now target
-  semantic or behavioral issues rather than broad structural spec defects.
+- **Several semantic spec bugs were fixed upstream in the latest fetch.** Alarm now marks `POST /nialarm/v1/query-instances` deprecated and points to `query-instances-with-filter`; work-order legacy testplan/workflow operations now carry deprecation metadata; and asset metadata PATCH is now marked deprecated upstream.
+- **The active local patch set is smaller.** [`scripts/spec-patches.ts`](scripts/spec-patches.ts) now only patches unresolved file-ingestion and routines issues documented in [`OPENAPI_BUG_REPORTS.md`](OPENAPI_BUG_REPORTS.md).

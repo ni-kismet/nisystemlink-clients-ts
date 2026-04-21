@@ -108,14 +108,40 @@ export type GetUserDataItemsResponseModel = {
     totalCount?: number;
 };
 
+/**
+ * Error
+ *
+ * Contains error information.
+ */
 export type HttpError = {
-    name?: string | null;
+    /**
+     * String error code
+     */
+    name: string | null;
+    /**
+     * Numeric error code
+     */
     code?: number | null;
-    message?: string | null;
+    /**
+     * Complete error message
+     */
+    message: string | null;
+    /**
+     * Type of resource associated with the error
+     */
     resourceType?: string | null;
+    /**
+     * Identifier of the resource associated with the error
+     */
     resourceId?: string | null;
+    /**
+     * Positional argument values for the error code
+     */
     args?: Array<string> | null;
-    innerErrors?: Array<HttpError> | null;
+    /**
+     * Inner errors when the top-level error represents more than one error
+     */
+    innerErrors?: Array<unknown> | null;
 };
 
 /**
