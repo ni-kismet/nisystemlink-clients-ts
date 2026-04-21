@@ -733,7 +733,7 @@ export type QueryAvailableFilesData = {
         sizeMinQuery?: IntegerQuery;
         createdQuery?: DateQuery;
         /**
-         * An array of queries for file properties
+         * An array of queries for file properties Warning: queries on custom (un-indexed) properties are very likely to time out on the server for large file collections. For large datasets, use `POST /v1/service-groups/Default/query-files-linq` with indexed filter expressions.
          */
         propertiesQuery?: Array<PropertyQuery>;
     };

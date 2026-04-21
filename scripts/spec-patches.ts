@@ -23,52 +23,9 @@ const HTTP_METHODS = ['get', 'post', 'put', 'patch', 'delete', 'options', 'head'
  * Only services with known bugs need an entry here.
  */
 export const specPatches: Partial<Record<string, PatchFn>> = {
-  alarm: patchAlarm,
-  'asset-management': patchAssetManagement,
   'file-ingestion': patchFileIngestion,
   routines: patchRoutines,
-  'work-order': patchWorkOrder,
 };
-
-// ---------------------------------------------------------------------------
-// alarm
-// BUG-002: postNialarmV1QueryInstances — not marked deprecated in the spec.
-// BUG-008: No cross-reference to the replacement endpoint in the description.
-// Remove when: spec marks POST /nialarm/v1/query-instances as deprecated and
-//              adds a description pointing to query-instances-with-filter.
-// ---------------------------------------------------------------------------
-function patchAlarm(spec: Spec): Spec {
-  const op = spec.paths?.['/nialarm/v1/query-instances']?.post;
-  if (op) {
-    op.deprecated = true;
-    if (!String(op.description ?? '').includes('query-instances-with-filter')) {
-      op.description =
-        `${op.description ?? ''}` +
-        '\n\n**Deprecated:** Use `POST /nialarm/v1/query-instances-with-filter` instead.' +
-        ' That endpoint supports Dynamic LINQ `filter` expressions and supersedes this one.';
-    }
-  }
-  return spec;
-}
-
-// ---------------------------------------------------------------------------
-// asset-management
-// BUG-007: PATCH /niapm/v1/assets/{assetId}/metadata — not marked deprecated.
-//          The batch update endpoint (POST /niapm/v1/update-assets) supersedes it.
-// Remove when: spec marks the PATCH operation as deprecated.
-// ---------------------------------------------------------------------------
-function patchAssetManagement(spec: Spec): Spec {
-  const op = spec.paths?.['/niapm/v1/assets/{assetId}/metadata']?.patch;
-  if (op) {
-    op.deprecated = true;
-    if (!String(op.description ?? '').includes('update-assets')) {
-      op.description =
-        `${op.description ?? ''}` +
-        '\n\n**Deprecated:** Use `POST /niapm/v1/update-assets` for batch asset updates instead.';
-    }
-  }
-  return spec;
-}
 
 // ---------------------------------------------------------------------------
 // file-ingestion
@@ -100,8 +57,10 @@ function patchFileIngestion(spec: Spec): Spec {
     'with `GET /v1/service-groups/Default/files` and filtering client-side, or use ' +
     '`POST /v1/service-groups/Default/query-files-linq` with indexed filter expressions.';
   const queryFilesOp = spec.paths?.['/v1/service-groups/Default/query-files']?.post;
+  const requestBodySchema = queryFilesOp?.requestBody?.content?.['application/json']?.schema;
   const requestBodyParam = queryFilesOp?.parameters?.find((p: Spec) => p.in === 'body' && p.name === 'query');
-  const propertiesQueryField = requestBodyParam?.schema?.properties?.propertiesQuery;
+  const propertiesQueryField =
+    requestBodySchema?.properties?.propertiesQuery ?? requestBodyParam?.schema?.properties?.propertiesQuery;
   if (propertiesQueryField && !String(propertiesQueryField.description ?? '').includes('time out')) {
     propertiesQueryField.description = propertiesQueryField.description
       ? `${propertiesQueryField.description} ${timeoutWarning}`
@@ -129,39 +88,6 @@ function patchRoutines(spec: Spec): Spec {
             `${op.description ?? ''}` +
             '\n\n**Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead.' +
             ' The v1 API only supports scheduled notebook execution and is considered legacy.';
-        }
-      }
-    }
-  }
-  return spec;
-}
-
-// ---------------------------------------------------------------------------
-// work-order (testplans + workflows)
-// BUG-004: /niworkorder/v1/testplans* and /niworkorder/v1/workflows* operations
-//          are not marked deprecated despite being superseded by /niworkitem.
-// Remove when: spec marks these operations as deprecated.
-// ---------------------------------------------------------------------------
-function patchWorkOrder(spec: Spec): Spec {
-  const deprecatedPrefixes = [
-    '/niworkorder/v1/testplans',
-    '/niworkorder/v1/workflows',
-    '/niworkorder/v1/testplan-templates',
-    '/niworkorder/v1/query-testplan-templates',
-    '/niworkorder/v1/delete-testplan-templates',
-    '/niworkorder/v1/update-testplan-templates',
-  ];
-  for (const [path, pathItem] of Object.entries(spec.paths ?? {})) {
-    if (!deprecatedPrefixes.some((prefix) => path.startsWith(prefix))) continue;
-    for (const method of HTTP_METHODS) {
-      const op = (pathItem as Spec)?.[method];
-      if (op && !op.deprecated) {
-        op.deprecated = true;
-        if (!String(op.description ?? '').includes('niworkitem')) {
-          op.description =
-            `${op.description ?? ''}` +
-            '\n\n**Deprecated:** Use the equivalent `/niworkitem` endpoint instead.' +
-            ' The work-item service supersedes the work-order testplan/workflow endpoints.';
         }
       }
     }

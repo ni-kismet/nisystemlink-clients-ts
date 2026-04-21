@@ -1,0 +1,7 @@
+{
+  "type": "major",
+  "comment": "Revalidate generated clients against the latest upstream OpenAPI specs. This removes resolved local spec patches, keeps the remaining File Ingestion and Routines workarounds aligned with the current upstream schema shape, refreshes the OpenAPI bug tracking docs, and picks up upstream-generated type changes such as the User Data HttpError model.",
+  "packageName": "@ni/systemlink-clients-ts",
+  "email": "1458528+fredvisser@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
