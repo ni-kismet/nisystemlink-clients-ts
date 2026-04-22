@@ -40,9 +40,29 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Sync with latest published release
+        run: |
+          latest_tag="$(git tag --list '@ni/systemlink-clients-ts_v*' --sort=-v:refname | head -n 1)"
+
+          if [[ -z "$latest_tag" ]]; then
+            exit 0
+          fi
+
+          latest_tag_commit="$(git rev-list -n 1 "$latest_tag")"
+
+          if git merge-base --is-ancestor "$latest_tag_commit" HEAD; then
+            exit 0
+          fi
+
+          git cherry-pick "$latest_tag_commit"
+
       - name: Prepare Beachball base ref
         run: |
-          if [[ "${{ github.event_name }}" == 'push' ]]; then
+          latest_tag="$(git tag --list '@ni/systemlink-clients-ts_v*' --sort=-v:refname | head -n 1)"
+
+          if [[ -n "$latest_tag" ]]; then
+            git update-ref refs/remotes/origin/main "$(git rev-list -n 1 "$latest_tag")"
+          elif [[ "${{ github.event_name }}" == 'push' ]]; then
             git update-ref refs/remotes/origin/main "${{ github.event.before }}"
           else
             git update-ref refs/remotes/origin/main "$(git rev-list -n 1 "$(git describe --tags --abbrev=0 --match '@ni/systemlink-clients-ts_v*')")"
