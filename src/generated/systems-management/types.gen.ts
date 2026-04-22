@@ -866,7 +866,7 @@ export type SystemPatchRequest = {
         [key: string]: string | null;
     } | null;
     /**
-     * Gets or sets the new  alias of the system.
+     * Gets or sets the new alias of the system.
      */
     alias?: string | null;
     /**
@@ -924,7 +924,7 @@ export type SystemsResponse = {
          */
         id?: string;
         /**
-         * Alias of the systme
+         * Alias of the system
          */
         alias?: string;
         /**
@@ -966,7 +966,7 @@ export type SystemsResponse = {
             };
         };
         /**
-         * The status information of a systme
+         * The status information of a system
          */
         status?: {
             lastUpdatedTimestamp?: string;

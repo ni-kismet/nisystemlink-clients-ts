@@ -815,6 +815,22 @@ export type StringDecimationOptions = {
      * in addition to the maximum and minimum values for all the columns specified in `yColumns`.
      */
     method?: 'LOSSY' | 'MAX_MIN' | 'ENTRY_EXIT';
+    /**
+     * Specifies the method used to distribute data into intervals when `method` is `MAX_MIN`
+     * or `ENTRY_EXIT`. This property is not valid when `method` is `LOSSY`. Added in version
+     * 5 of the `readData` operation:
+     *
+     * - EQUAL_FREQUENCY: Each interval contains the same number of data points, maximizing the density of the
+     * decimated data. Best for data with discrete or clustered x-axis values where gaps in
+     * the x-axis should not produce empty intervals. Intervals will only be empty if there
+     * are more intervals than data points.
+     *
+     * - EQUAL_WIDTH: Each interval covers the same range of x-axis values, preserving the visual proportion
+     * of data across the x-axis. Recommended for most use cases, especially timeseries data
+     * or data that is unevenly distributed across the x-axis. Intervals may be empty if there
+     * are gaps in the x-axis values or if there are more intervals than data points.
+     */
+    distribution?: 'EQUAL_FREQUENCY' | 'EQUAL_WIDTH';
 };
 
 /**

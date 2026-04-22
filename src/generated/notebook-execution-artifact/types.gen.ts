@@ -8,9 +8,12 @@ export type BaseResponse = {
     error?: HttpError;
 };
 
+/**
+ * Response returned after successfully creating an artifact.
+ */
 export type CreateArtifactResponse = {
     /**
-     * The ID of the artifact
+     * The unique identifier assigned to the newly created artifact.
      */
     id?: string | null;
 };
@@ -51,17 +54,28 @@ export type HttpError = {
     innerErrors?: Array<HttpError> | null;
 };
 
+/**
+ * Request body for updating the time-to-live (TTL) of an artifact.
+ */
 export type UpdateArtifactRequest = {
     /**
-     * Expiry in days
+     * The number of days from now until the artifact expires and is automatically deleted.
+     * Must be a positive integer and cannot exceed the server-configured maximum (default 365).
+     * Set to 0 to mark the artifact for immediate deletion.
      */
     expiryInDays: number;
 };
 
 export type CreateArtifactData = {
     body?: {
-        workspace?: string;
-        artifact?: Blob | File;
+        /**
+         * The ID of the workspace the artifact belongs to. Must appear before the artifact field.
+         */
+        workspace: string;
+        /**
+         * The binary file content to upload.
+         */
+        artifact: Blob | File;
     };
     path?: never;
     query?: never;
@@ -69,6 +83,18 @@ export type CreateArtifactData = {
 };
 
 export type CreateArtifactErrors = {
+    /**
+     * The request is missing required multipart fields or the workspace field appears after the artifact field.
+     */
+    400: unknown;
+    /**
+     * The caller does not have the `notebookartifact:Create` privilege for the specified workspace.
+     */
+    401: unknown;
+    /**
+     * The request content type is not `multipart/form-data`.
+     */
+    415: unknown;
     /**
      * Error
      */
@@ -79,7 +105,7 @@ export type CreateArtifactError = CreateArtifactErrors[keyof CreateArtifactError
 
 export type CreateArtifactResponses = {
     /**
-     * OK
+     * The artifact was created successfully.
      */
     200: CreateArtifactResponse;
 };
@@ -90,7 +116,7 @@ export type DeleteArtifactData = {
     body?: never;
     path: {
         /**
-         * The ID of the artifact
+         * The unique identifier of the artifact to delete.
          */
         artifactId: string;
     };
@@ -99,6 +125,10 @@ export type DeleteArtifactData = {
 };
 
 export type DeleteArtifactErrors = {
+    /**
+     * The artifact does not exist, has expired, or the caller does not have access.
+     */
+    404: unknown;
     /**
      * Error
      */
@@ -109,7 +139,7 @@ export type DeleteArtifactError = DeleteArtifactErrors[keyof DeleteArtifactError
 
 export type DeleteArtifactResponses = {
     /**
-     * Delete acknowledged.
+     * The artifact was marked for deletion.
      */
     204: void;
 };
@@ -120,7 +150,7 @@ export type DownloadArtifactData = {
     body?: never;
     path: {
         /**
-         * The ID of the artifact
+         * The unique identifier of the artifact to download.
          */
         artifactId: string;
     };
@@ -129,6 +159,10 @@ export type DownloadArtifactData = {
 };
 
 export type DownloadArtifactErrors = {
+    /**
+     * The artifact does not exist, has expired, or the caller does not have access.
+     */
+    404: unknown;
     /**
      * Error
      */
@@ -139,7 +173,7 @@ export type DownloadArtifactError = DownloadArtifactErrors[keyof DownloadArtifac
 
 export type DownloadArtifactResponses = {
     /**
-     * OK
+     * The artifact content is returned as a binary stream.
      */
     200: Blob | File;
 };
@@ -148,12 +182,12 @@ export type DownloadArtifactResponse = DownloadArtifactResponses[keyof DownloadA
 
 export type UpdateArtifactTtlData = {
     /**
-     * The expiry in days value to be updated
+     * The new expiry value.
      */
     body?: UpdateArtifactRequest;
     path: {
         /**
-         * The ID of the artifact
+         * The unique identifier of the artifact to update.
          */
         artifactId: string;
     };
@@ -162,6 +196,14 @@ export type UpdateArtifactTtlData = {
 };
 
 export type UpdateArtifactTtlErrors = {
+    /**
+     * The `expiryInDays` value is negative or exceeds the server-configured maximum.
+     */
+    400: unknown;
+    /**
+     * The artifact does not exist, has expired, or the caller does not have access.
+     */
+    404: unknown;
     /**
      * Error
      */
@@ -172,7 +214,7 @@ export type UpdateArtifactTtlError = UpdateArtifactTtlErrors[keyof UpdateArtifac
 
 export type UpdateArtifactTtlResponses = {
     /**
-     * Update acknowledged.
+     * The artifact TTL was updated successfully.
      */
     204: void;
 };

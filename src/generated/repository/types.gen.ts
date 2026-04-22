@@ -9,11 +9,11 @@ export type ClientOptions = {
  */
 export type ArchitectureInformation = {
     /**
-     * Gets or sets the ID of this element.
+     * The identifier for this architecture entry.
      */
     id?: string | null;
     /**
-     * Gets or sets the architecture that this package can run on.
+     * The architecture that this package can run on.
      */
     value?: string | null;
 };
@@ -23,15 +23,15 @@ export type BaseResponse = {
 };
 
 /**
- * Feed name and its uri
+ * A named package feed and its download URL.
  */
 export type FeedNameAndUri = {
     /**
-     * Gets or sets the name of the feed. Feed names must begin with an alphabetical character and contain only alphanumeric characters, spaces, underscores, and hyphens.
+     * The name of the feed. Feed names must begin with an alphabetical character and contain only alphanumeric characters, spaces, underscores, and hyphens.
      */
     feedName?: string | null;
     /**
-     * Gets or sets the path to the feed.
+     * The URL of the feed.
      */
     uri?: string | null;
 };
@@ -47,145 +47,147 @@ export type HttpError = {
 };
 
 /**
- * Model for contains information about the supported locale of the product.
+ * Describes a supported locale for a store item installer.
  */
 export type LanguageInformation = {
     /**
-     * Gets or sets the ID of this element.
+     * The identifier for this language entry.
      */
     id?: string | null;
     /**
-     * Gets or sets the language the product supports.
+     * The language the product supports.
      */
     value?: string | null;
 };
 
+/**
+ * Represents a software package available from a configured feed.
+ */
 export type PackageResponse = {
     /**
-     * Gets or sets the architecture of the package.
+     * The architecture of the package.
      */
     arch?: string | null;
     /**
-     * Gets or sets an array containing information about other packages this package breaks.
+     * Packages that this package breaks.
      */
     breaks?: Array<string> | null;
     /**
-     * Gets or sets an array containing information about other packages this package conflicts with.
+     * Packages that this package conflicts with.
      */
     conflicts?: Array<string> | null;
     /**
-     * Gets or sets an array containing information about other packages this package depends on.
+     * Packages that this package depends on.
      */
     depends?: Array<string> | null;
     /**
-     * Gets or sets the description of the package.
+     * A human-readable description of the package.
      */
     description?: string | null;
     /**
-     * Gets or sets the display name of the package.
+     * The display name of the package.
      */
     displayName?: string | null;
     /**
-     * Gets or sets the display version of the package.
+     * The user-facing display version of the package.
      */
     displayVersion?: string | null;
     /**
-     * Gets or sets an array containing information about other packages this package enhances.
+     * Packages that this package enhances.
      */
     enhances?: Array<string> | null;
     /**
-     * Gets or sets whether the package is essential or not. If true then the package management system will refuse to remove the package (upgrading and replacing it is still possible).
+     * Whether the package is essential. If true, the package management system will refuse to remove it (upgrading and replacing it is still possible).
      */
     essential?: boolean | null;
     /**
-     * Gets or sets the location of the file, including the file extension.
-     * Depending on the platform you select, you will be able to use the following package extensions: .nipkg for windows feeds, .ipk and .deb for ni-linux-rt feeds.
+     * The file name of the package, including extension. Supported extensions are .nipkg for Windows feeds and .ipk and .deb for NI Linux RT feeds.
      */
     fileName?: string | null;
     /**
-     * Gets or sets when a package provides functionality for specific hardware product(s), it can list such products in this section.
+     * Hardware products that this package provides functionality for.
      */
     hardwareSupport?: Array<string> | null;
     /**
-     * Gets or sets the website of the maintainers for this package.
+     * The website of the package maintainer.
      */
     homepage?: string | null;
     /**
-     * Gets or sets the size of this package after install.
+     * The installed size of the package in bytes.
      */
     installedSize?: number | null;
     /**
-     * Gets or sets the maintainer of this package.
+     * The maintainer of the package.
      */
     maintainer?: string | null;
     /**
-     * Gets or sets the name of the package.
+     * The package name.
      */
     name?: string | null;
     /**
-     * Gets or sets agent that will be used to install the package.
+     * The agent plugin used to install the package.
      */
     plugin?: string | null;
     /**
-     * Gets or sets an array containing information about other packages this package predepends.
+     * Packages that must be installed before this package can be unpacked.
      */
     predepends?: Array<string> | null;
     /**
-     * Gets or sets the priority of the package.
+     * The priority of the package.
      */
     priority?: string | null;
     /**
-     * Gets or sets an array containing information about other packages this package provides.
+     * Virtual packages that this package provides.
      */
     provides?: Array<string> | null;
     /**
-     * Gets or sets an array containing information about other packages this package recommends.
+     * Packages that are recommended to be installed alongside this package.
      */
     recommends?: Array<string> | null;
     /**
-     * Gets or sets a page containing the release notes of the package.
+     * Release notes for the package.
      */
     releaseNotes?: string | null;
     /**
-     * Gets or sets an array containing information about other packages this package replaces.
+     * Packages that this package replaces.
      */
     replaces?: Array<string> | null;
     /**
-     * Gets or sets the section of the package.
+     * The section or category of the package.
      */
     section?: string | null;
     /**
-     * Gets or sets the size of the package in bytes.
+     * The download size of the package in bytes.
      */
     size?: number | null;
     /**
-     * Gets or sets the source of this package, if any.
+     * The source URL of the package, if any.
      */
     source?: string | null;
     /**
-     * Gets or sets whether the package represent a product in the store or not.
+     * Whether the package represents a product in the NI software store.
      */
     storeProduct?: boolean | null;
     /**
-     * Gets or sets an array containing information about other packages this package suggests.
+     * Packages that are suggested to be installed alongside this package.
      */
     suggests?: Array<string> | null;
     /**
-     * Gets or sets an array containing tags for the package.
+     * Tags associated with the package.
      */
     tags?: Array<string> | null;
     /**
-     * Gets or sets the installed packages with this attribute set to true are considered to be installed by a user, thus not installed to fulfill some dependency. This is needed input for the calculation of unneeded packages when removing a package.
+     * Whether the package was explicitly installed by a user (as opposed to being installed as a dependency). Used to calculate unneeded packages when removing a package.
      */
     uservisible?: boolean | null;
     /**
-     * Gets or sets the version of the package.
+     * The version of the package.
      */
     version?: string | null;
 };
 
 /**
- * Request for available packages for the systems configuration
+ * Request body for querying available packages across one or more system configurations.
  */
 export type QueryAvailablePackagesRequest = {
     /**
@@ -203,151 +205,169 @@ export type QueryAvailablePackagesRequest = {
 };
 
 /**
- * Model for contains information about a piece of software that a store item contains.
+ * Describes a software product contained within a store item suite, including its package name, version, and feed locations.
  */
 export type SoftwareInformation = {
     /**
-     * Gets or sets the ID of this element.
+     * The store item ID this software belongs to.
      */
     storeItemId?: string | null;
     /**
-     * Gets or sets the name of one the products contained in the software suite.
+     * The name of the product contained in the software suite.
      */
     productName?: string | null;
     /**
-     * Gets or sets a short description of the product.
+     * A short description of the product.
      */
     shortDescription?: string | null;
     /**
-     * Gets or sets the item version number.
+     * The version number of the download item.
      */
     downloadItemVersion?: string | null;
     /**
-     * Gets or sets the name of the package to install.
+     * The package name to install.
      */
     packageName?: string | null;
     /**
-     * Gets or sets the version of the package to install.
+     * The version of the package to install.
      */
     packageVersion?: string | null;
     /**
-     * Gets or sets the feeds where the suite contents are located at.
-     */
-    feeds?: Array<FeedNameAndUri> | null;
-};
-
-export type StoreDownloadItems = {
-    /**
-     * Gets or sets the version of the download item.
-     */
-    downloadItemVersion?: string | null;
-    /**
-     * Gets or sets the ID of the product. Not set on the query all route.
-     */
-    productVersionedId?: string | null;
-    storeItemInstallers?: Array<StoreItemInstaller> | null;
-};
-
-export type StoreItem = {
-    /**
-     * Gets or sets the ID of the store item.
-     */
-    id?: string | null;
-    /**
-     * Gets or sets the name of the store item.
-     */
-    storeItemName?: string | null;
-    /**
-     * Gets or sets the short description of the store item.
-     */
-    shortDescription?: string | null;
-    /**
-     * Gets or sets the long description of the store item. Not set on the query all route.
-     */
-    longDescription?: string | null;
-    /**
-     * Gets or sets the CompanyName (maintainer) of the store item.
-     */
-    companyName?: string | null;
-    /**
-     * Gets or sets the icon location of the store item.
-     */
-    iconUri?: string | null;
-    /**
-     * Gets or sets the Category of the store item.
-     */
-    category?: string | null;
-    /**
-     * Gets or sets whether this store item is a suite. Not returned on the query all route.
-     */
-    isSuite?: boolean | null;
-    /**
-     * The list of download items
-     */
-    downloadItems?: Array<StoreDownloadItems> | null;
-};
-
-export type StoreItemInstaller = {
-    /**
-     * Gets or sets the global unique identifier (GUID) of the store item.
-     */
-    guid?: string | null;
-    /**
-     * Gets or sets an array containing information about the possible architectures the software can run on.
-     */
-    bitnesses?: Array<ArchitectureInformation> | null;
-    /**
-     * Gets or sets an array containing objects that offer information about the supported locale of the product.
-     */
-    languages?: Array<LanguageInformation> | null;
-    /**
-     * Gets or sets array of descriptions about what this store item contains.
-     */
-    suiteContents?: Array<SoftwareInformation> | null;
-    /**
-     * Gets or sets the feeds where the suite contents are located at.
+     * The feeds where the suite contents are located.
      */
     feeds?: Array<FeedNameAndUri> | null;
 };
 
 /**
- * Model that contains a single StoreItem.
+ * Represents a versioned download entry for a store item, containing one or more installers.
+ */
+export type StoreDownloadItems = {
+    /**
+     * The version of the download item.
+     */
+    downloadItemVersion?: string | null;
+    /**
+     * The versioned product ID. Only included when retrieving a single store item.
+     */
+    productVersionedId?: string | null;
+    /**
+     * The list of installers available for this download item.
+     */
+    storeItemInstallers?: Array<StoreItemInstaller> | null;
+};
+
+/**
+ * Represents a product or suite available in the NI software store.
+ */
+export type StoreItem = {
+    /**
+     * The unique identifier of the store item.
+     */
+    id?: string | null;
+    /**
+     * The name of the store item.
+     */
+    storeItemName?: string | null;
+    /**
+     * A short description of the store item.
+     */
+    shortDescription?: string | null;
+    /**
+     * A detailed description of the store item. Only included when retrieving a single store item.
+     */
+    longDescription?: string | null;
+    /**
+     * The company name or maintainer of the store item.
+     */
+    companyName?: string | null;
+    /**
+     * URL of the store item icon image.
+     */
+    iconUri?: string | null;
+    /**
+     * The category of the store item.
+     */
+    category?: string | null;
+    /**
+     * Whether this store item is a suite. Only included when retrieving a single store item.
+     */
+    isSuite?: boolean | null;
+    /**
+     * The list of versioned download entries for this store item.
+     */
+    downloadItems?: Array<StoreDownloadItems> | null;
+};
+
+/**
+ * Represents an installer variant for a store download item, including architecture and language options.
+ */
+export type StoreItemInstaller = {
+    /**
+     * The unique identifier (GUID) of the store item.
+     */
+    guid?: string | null;
+    /**
+     * The architectures the software can run on.
+     */
+    bitnesses?: Array<ArchitectureInformation> | null;
+    /**
+     * The supported locales of the product.
+     */
+    languages?: Array<LanguageInformation> | null;
+    /**
+     * The software products included in this suite.
+     */
+    suiteContents?: Array<SoftwareInformation> | null;
+    /**
+     * The feeds where the suite contents are located.
+     */
+    feeds?: Array<FeedNameAndUri> | null;
+};
+
+/**
+ * Response containing a single store item with its full details, including download items, installers, and suite contents.
  */
 export type StoreItemResponse = {
     storeItem?: StoreItem;
 };
 
 /**
- * Model for contains a list of StoreItem elements together with the coresponding paging information.
+ * Paginated response containing a list of store items and the corresponding paging information.
  */
 export type StoreItemsExtendedResponse = {
     error?: HttpError;
+    /**
+     * The list of store items.
+     */
     items?: Array<StoreItem> | null;
     /**
-     * Gets or sets the number of the records contained by one page. Maximum is 1000.
+     * The number of records contained by one page. Maximum is 1000.
      */
     pageSize?: number | null;
     /**
-     * Gets or sets the number of the current page.
+     * The current page number.
      */
     pageNumber?: number | null;
     /**
-     * Gets or sets the total number of pages.
+     * The total number of pages.
      */
     totalPages?: number | null;
     /**
-     * Gets or sets the total number of items.
+     * The total number of items.
      */
     totalItems?: number | null;
 };
 
+/**
+ * Describes a system's feed and architecture configuration for querying available packages.
+ */
 export type SystemConfiguration = {
     /**
-     * Gets or sets an array of strings representing feed URIs a system(s) has configured.
+     * The feed URIs the system has configured.
      */
     feedUris?: Array<string> | null;
     /**
-     * Gets or sets an array of strings representing OS architectures supported by a system(s) in descending priority.
+     * The OS architectures supported by the system, in descending priority.
      */
     osArchitectures?: Array<string> | null;
     /**
@@ -358,7 +378,7 @@ export type SystemConfiguration = {
 
 export type ConfigureFeedsData = {
     /**
-     * The list of feedURLs to configure
+     * The list of feed URLs to configure. Each URL must point to a valid feed containing a Packages.gz index.
      */
     body?: Array<string>;
     path?: never;
@@ -368,7 +388,7 @@ export type ConfigureFeedsData = {
 
 export type ConfigureFeedsErrors = {
     /**
-     * Bad Request
+     * The request is invalid, for example when the feed count exceeds the configured limit.
      */
     400: HttpError;
 };
@@ -377,11 +397,11 @@ export type ConfigureFeedsError = ConfigureFeedsErrors[keyof ConfigureFeedsError
 
 export type ConfigureFeedsResponses = {
     /**
-     * Returns the list of failed feeds
+     * One or more feeds failed to configure. The response body contains an error with inner errors identifying each failed feed.
      */
     200: BaseResponse;
     /**
-     * Success
+     * All feeds were configured successfully.
      */
     204: void;
 };
@@ -390,7 +410,7 @@ export type ConfigureFeedsResponse = ConfigureFeedsResponses[keyof ConfigureFeed
 
 export type QueryAvailablePackagesData = {
     /**
-     * An instance of NationalInstruments.RepositoryService.Model.API.QueryAvailablePackagesRequest that contains the feeds from which the packages are retrieved
+     * The query specifying one or more system configurations (feed URLs and OS architectures) and optional field projections to limit the response.
      */
     body?: QueryAvailablePackagesRequest;
     path?: never;
@@ -400,7 +420,7 @@ export type QueryAvailablePackagesData = {
 
 export type QueryAvailablePackagesErrors = {
     /**
-     * Bad Request
+     * The request is invalid, for example when the feed count exceeds the configured limit.
      */
     400: HttpError;
 };
@@ -409,7 +429,7 @@ export type QueryAvailablePackagesError = QueryAvailablePackagesErrors[keyof Que
 
 export type QueryAvailablePackagesResponses = {
     /**
-     * List of available packages from feeds
+     * The list of packages available from the specified feeds, filtered by architecture and optional field projections.
      */
     200: Array<PackageResponse>;
 };
@@ -421,15 +441,15 @@ export type QueryStoreItemsData = {
     path?: never;
     query?: {
         /**
-         * The query used to filter the result; matches the name of store items
+         * A search string to filter store items by name. Omit to return all items.
          */
         query?: string;
         /**
-         * The number of store items to return
+         * The maximum number of store items to return per page (1–1000, default 10).
          */
         pageSize?: number;
         /**
-         * The page from which to fetch the store items. If it is more than the maximum number of pages, it returns store items from the last page
+         * The zero-indexed page number. If it exceeds the total number of pages, the last page is returned.
          */
         pageNumber?: number;
     };
@@ -438,14 +458,14 @@ export type QueryStoreItemsData = {
 
 export type QueryStoreItemsErrors = {
     /**
-     * Gateway Timeout
+     * The upstream NI software store API did not respond in time.
      */
     504: unknown;
 };
 
 export type QueryStoreItemsResponses = {
     /**
-     * List of store items from the cache
+     * A paginated list of store items matching the query.
      */
     200: StoreItemsExtendedResponse;
 };
@@ -456,7 +476,7 @@ export type GetStoreItemData = {
     body?: never;
     path: {
         /**
-         * The store item id
+         * The unique identifier of the store item to retrieve.
          */
         storeItemId: string;
     };
@@ -466,11 +486,11 @@ export type GetStoreItemData = {
 
 export type GetStoreItemErrors = {
     /**
-     * Bad Request
+     * No store item exists with the specified ID.
      */
     400: HttpError;
     /**
-     * Gateway Timeout
+     * The upstream NI software store API did not respond in time.
      */
     504: unknown;
 };
@@ -479,7 +499,7 @@ export type GetStoreItemError = GetStoreItemErrors[keyof GetStoreItemErrors];
 
 export type GetStoreItemResponses = {
     /**
-     * Store item with a matching storeItemId
+     * The store item with the specified ID, including download items, installers, and suite contents.
      */
     200: StoreItemResponse;
 };
