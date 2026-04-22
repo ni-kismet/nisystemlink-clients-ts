@@ -10,7 +10,7 @@ on:
       dry-run:
         description: 'Perform a dry-run publish (no actual publish)'
         required: false
-        default: 'false'
+        default: false
         type: boolean
 
 permissions:
@@ -40,6 +40,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Prepare Beachball base ref
+        run: |
+          if [[ "${{ github.event_name }}" == 'push' ]]; then
+            git update-ref refs/remotes/origin/main "${{ github.event.before }}"
+          else
+            git update-ref refs/remotes/origin/main "$(git rev-list -n 1 "$(git describe --tags --abbrev=0 --match '@ni/systemlink-clients-ts_v*')")"
+          fi
+
       - name: Install dependencies
         run: npm ci
 
@@ -47,11 +55,11 @@ jobs:
         run: npm run build
 
       - name: Publish (dry-run)
-        if: inputs.dry-run == 'true'
-        run: npx beachball publish --no-push --no-publish
+        if: inputs.dry-run
+        run: npx beachball publish --no-push --no-publish --yes
 
       - name: Get npm OIDC token
-        if: inputs.dry-run != 'true'
+        if: ${{ !inputs.dry-run }}
         run: |
           TOKEN=$(curl -fsSL \
             -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
@@ -60,7 +68,7 @@ jobs:
           echo "NODE_AUTH_TOKEN=${TOKEN}" >> "$GITHUB_ENV"
 
       - name: Publish
-        if: inputs.dry-run != 'true'
-        run: npx beachball publish
+        if: ${{ !inputs.dry-run }}
+        run: npx beachball publish --yes
         env:
           NPM_CONFIG_PROVENANCE: 'true'
