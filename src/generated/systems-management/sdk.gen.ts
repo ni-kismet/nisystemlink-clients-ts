@@ -160,7 +160,7 @@ export const getAllSystemsKeys = <ThrowOnError extends boolean = false>(options?
 });
 
 /**
- * Get keys for a set of systemes
+ * Get keys for a set of systems
  */
 export const getSystemsKeys = <ThrowOnError extends boolean = false>(options?: Options<GetSystemsKeysData, ThrowOnError>) => (options?.client ?? client).post<GetSystemsKeysResponses, GetSystemsKeysErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

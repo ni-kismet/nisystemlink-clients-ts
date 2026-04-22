@@ -19,7 +19,11 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Configure Systems Packages feeds
+ * Configure package feeds
+ *
+ * Registers the given feed URLs with the repository service. Each feed URL should point to a
+ * directory containing a Packages.gz index. The service downloads and parses the index from each
+ * feed so that subsequent calls to query-available-packages can return their contents.
  *
  * Sample request:
  *
@@ -38,7 +42,7 @@ export const configureFeeds = <ThrowOnError extends boolean = false>(options?: O
 });
 
 /**
- * Query the available packages from the configured feeds
+ * Query available packages from configured feeds
  */
 export const queryAvailablePackages = <ThrowOnError extends boolean = false>(options?: Options<QueryAvailablePackagesData, ThrowOnError>) => (options?.client ?? client).post<QueryAvailablePackagesResponses, QueryAvailablePackagesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -51,7 +55,7 @@ export const queryAvailablePackages = <ThrowOnError extends boolean = false>(opt
 });
 
 /**
- * Query store items from the cache
+ * Query NI software store items
  */
 export const queryStoreItems = <ThrowOnError extends boolean = false>(options?: Options<QueryStoreItemsData, ThrowOnError>) => (options?.client ?? client).get<QueryStoreItemsResponses, QueryStoreItemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -60,7 +64,7 @@ export const queryStoreItems = <ThrowOnError extends boolean = false>(options?: 
 });
 
 /**
- * Get a store item by id
+ * Get a store item by ID
  */
 export const getStoreItem = <ThrowOnError extends boolean = false>(options: Options<GetStoreItemData, ThrowOnError>) => (options.client ?? client).get<GetStoreItemResponses, GetStoreItemErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
