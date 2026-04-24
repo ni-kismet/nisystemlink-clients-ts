@@ -38,7 +38,10 @@ export type AcknowledgeByInstanceIdResponse = {
      * the caller was not authorized to acknowledge the instance.
      */
     failed: Array<string>;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -78,8 +81,17 @@ export type AlarmNote = {
  * - writeAlarmInstances: The ability to create and modify alarm instances.
  */
 export type AvailableV1Operations = {
+    /**
+     * The ability to delete alarm instances.
+     */
     deleteAlarmInstances: Operation;
+    /**
+     * The ability to query for alarm instances.
+     */
     readAlarmInstances: Operation;
+    /**
+     * The ability to create and modify alarm instances.
+     */
     writeAlarmInstances: Operation;
 };
 
@@ -165,6 +177,11 @@ export type CreateOrUpdateAlarmRequest = {
      * the `writeAlarmInstances` operation.
      */
     workspace?: string | null;
+    /**
+     * Create Alarm Transition
+     *
+     * The alarm transition to record.
+     */
     transition: CreateAlarmTransition;
     /**
      * The IDs of the notification strategies which should be triggered if this request
@@ -237,6 +254,11 @@ export type DeleteByInstanceIdPartialSuccess = {
      * delete the instance.
      */
     failed: Array<string>;
+    /**
+     * Error
+     *
+     * Contains error information.
+     */
     error: HttpError;
 };
 
@@ -258,6 +280,11 @@ export type DeleteByInstanceIdRequest = {
  * Contains error information.
  */
 export type ErrorResponse = {
+    /**
+     * Error
+     *
+     * Contains error information.
+     */
     error: HttpError;
 };
 
@@ -884,6 +911,11 @@ export type QueryWithFilterResponse = {
  * Version information
  */
 export type RootEndpointResponse = {
+    /**
+     * V1 Operations
+     *
+     * The operations available in the routes provided by the /v1 HTTP API.
+     */
     v1: V1Operations;
     /**
      * The implementation version of the web service.
@@ -897,6 +929,11 @@ export type RootEndpointResponse = {
  * The operations available in the routes provided by the `/v1` HTTP API.
  */
 export type V1Operations = {
+    /**
+     * Available V1 Operations
+     *
+     * Available operations in the v1 version of the API.
+     */
     operations: AvailableV1Operations;
 };
 
@@ -1114,7 +1151,9 @@ export type QueryWithFilterResponseWritable = {
 
 export type AcknowledgeByInstanceIdsData = {
     /**
-     * Information about the alarms to acknowledge.
+     * Acknowledge By Instance ID Request
+     *
+     * Contains information about the alarms to acknowledge.
      */
     body?: AcknowledgeByInstanceIdRequest;
     path?: never;
@@ -1144,8 +1183,10 @@ export type AcknowledgeByInstanceIdsResponse = AcknowledgeByInstanceIdsResponses
 
 export type CreateOrUpdateAlarmData = {
     /**
-     * Information about the alarm to create or update. If an alarm is being
-     * updated, only `alarmId`, `workspace`, and `transition`
+     * Create or Update Alarm Request
+     *
+     * Contains information about the alarm to create or update. If an alarm is
+     * being updated, only `alarmId`, `workspace`, and `transition`
      * are applied.
      */
     body?: CreateOrUpdateAlarmRequest;
@@ -1242,7 +1283,9 @@ export type GetAlarmResponse = GetAlarmResponses[keyof GetAlarmResponses];
 
 export type QueryAlarmsData = {
     /**
-     * Filter information for querying alarms.
+     * Query Request
+     *
+     * Contains filter information for querying alarms.
      */
     body?: QueryRequest;
     path?: never;
@@ -1270,7 +1313,9 @@ export type QueryAlarmsResponse = QueryAlarmsResponses[keyof QueryAlarmsResponse
 
 export type QueryAlarmsWithFilterData = {
     /**
-     * Filter information for querying alarms.
+     * Query With Filter Request
+     *
+     * Contains filter information for querying alarms.
      */
     body?: QueryWithFilterRequest;
     path?: never;
@@ -1298,7 +1343,9 @@ export type QueryAlarmsWithFilterResponse = QueryAlarmsWithFilterResponses[keyof
 
 export type DeleteAlarmsByInstanceIdData = {
     /**
-     * Information about the alarms to delete.
+     * Delete By Instance ID Request
+     *
+     * Contains information about the alarms to delete.
      */
     body?: DeleteByInstanceIdRequest;
     path?: never;

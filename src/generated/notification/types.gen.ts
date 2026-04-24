@@ -7,35 +7,35 @@ export type ClientOptions = {
 /**
  * Address Group
  *
- * This record defines the address group model for the v1 endpoint.
+ * Represents an address group that defines a set of recipients for notifications.
  */
 export type AddressGroupModel = {
     /**
-     * Gets or sets the ID for address group
+     * The unique identifier of the address group.
      */
     id?: string | null;
     /**
-     * Gets or sets the name of the interpretting service
+     * The name of the interpreting service used to send notifications (e.g., smtp).
      */
     interpretingServiceName?: string | null;
     /**
-     * Gets or sets the address group's display name
+     * The user-friendly display name of the address group.
      */
     displayName?: string | null;
     /**
-     * Gets or sets the address group's properties
+     * User-defined key-value properties associated with the address group.
      */
     properties?: {
         [key: string]: string;
     } | null;
     /**
-     * Gets or sets the address group's fields
+     * The address fields used by the interpreting service (e.g., toAddresses, ccAddresses).
      */
     fields?: {
         [key: string]: Array<string>;
     } | null;
     /**
-     * Gets or sets the address group's referencing notification strategies
+     * The IDs of notification strategies that reference this address group.
      */
     referencingNotificationStrategies?: Array<string> | null;
 };
@@ -45,12 +45,15 @@ export type AddressGroupModel = {
  */
 export type ApplyDynamicNotificationStrategyRequestModel = {
     /**
-     * Gets or sets the message template substitution fields
+     * Key-value pairs to substitute into the message template before sending.
      */
     messageTemplateSubstitutionFields?: {
         [key: string]: string;
     } | null;
-    notificationStrategy?: DynamicNotificationStrategyModel;
+    /**
+     * The dynamic notification strategy to apply.
+     */
+    notificationStrategy?: DynamicNotificationStrategyModel | null;
 };
 
 /**
@@ -58,7 +61,7 @@ export type ApplyDynamicNotificationStrategyRequestModel = {
  */
 export type ApplyNotificationStrategyRequestModel = {
     /**
-     * Gets or sets the message template substitution fields
+     * Key-value pairs to substitute into the message template before sending.
      */
     messageTemplateSubstitutionFields?: {
         [key: string]: string;
@@ -66,7 +69,7 @@ export type ApplyNotificationStrategyRequestModel = {
 };
 
 export type BaseResponse = {
-    error?: HttpError;
+    error?: HttpError | null;
 };
 
 /**
@@ -76,21 +79,21 @@ export type BaseResponse = {
  */
 export type CreateAddressGroupRequestModel = {
     /**
-     * Gets or sets the name of the interpretting service
+     * The name of the interpreting service used to send notifications (e.g., smtp).
      */
     interpretingServiceName: string;
     /**
-     * Gets or sets the address group's display name
+     * The user-friendly display name of the address group.
      */
     displayName?: string | null;
     /**
-     * Gets or sets the address group's properties
+     * User-defined key-value properties associated with the address group.
      */
     properties?: {
         [key: string]: string;
     } | null;
     /**
-     * Gets or sets the address group's fields
+     * The address fields used by the interpreting service (e.g., toAddresses, ccAddresses).
      */
     fields: {
         [key: string]: Array<string>;
@@ -104,21 +107,21 @@ export type CreateAddressGroupRequestModel = {
  */
 export type CreateMessageTemplateRequestModel = {
     /**
-     * Gets or sets the name of the interpretting service
+     * The name of the interpreting service used to send notifications (e.g., smtp).
      */
     interpretingServiceName: string;
     /**
-     * Gets or sets the message template's display name
+     * The user-friendly display name of the message template.
      */
     displayName?: string | null;
     /**
-     * Gets or sets the message template's properties
+     * User-defined key-value properties associated with the message template.
      */
     properties?: {
         [key: string]: string;
     } | null;
     /**
-     * Gets or sets the message template's fields
+     * The template fields used by the interpreting service (e.g., subjectTemplate, bodyTemplate).
      */
     fields: {
         [key: string]: string;
@@ -132,11 +135,11 @@ export type CreateMessageTemplateRequestModel = {
  */
 export type CreateNotificationConfigurationRequestModel = {
     /**
-     * Gets the address group ID
+     * The unique identifier of the address group.
      */
     addressGroupId?: string | null;
     /**
-     * Gets the message template ID
+     * The unique identifier of the message template.
      */
     messageTemplateId?: string | null;
 };
@@ -148,21 +151,21 @@ export type CreateNotificationConfigurationRequestModel = {
  */
 export type CreateNotificationStrategyRequestModel = {
     /**
-     * Gets or sets the notification strategy's display name
+     * The user-friendly display name of the notification strategy.
      */
     displayName?: string | null;
     /**
-     * Gets or sets the description of the notification strategy
+     * A human-readable description of the notification strategy.
      */
     description?: string | null;
     /**
-     * Gets or sets properties associated with the notification strategy
+     * User-defined key-value properties associated with the notification strategy.
      */
     properties?: {
         [key: string]: string;
     } | null;
     /**
-     * Gets the notification configurations associated with this strategy
+     * The notification configurations associated with this strategy.
      */
     notificationConfigurations: Array<CreateNotificationConfigurationRequestModel>;
 };
@@ -170,29 +173,35 @@ export type CreateNotificationStrategyRequestModel = {
 /**
  * Dynamic Notification Configuration
  *
- * This record defines the dynamic notification configuration model for the v1 endpoint.
+ * Represents a dynamic notification configuration with inline or referenced address groups and message templates.
  */
 export type DynamicNotificationConfigurationModel = {
     /**
-     * Gets the address group ID
+     * The unique identifier of the address group.
      */
     addressGroupId?: string | null;
     /**
-     * Gets the message template ID
+     * The unique identifier of the message template.
      */
     messageTemplateId?: string | null;
-    addressGroup?: AddressGroupModel;
-    messageTemplate?: MessageTemplateModel;
+    /**
+     * The address group details.
+     */
+    addressGroup?: AddressGroupModel | null;
+    /**
+     * The message template details.
+     */
+    messageTemplate?: MessageTemplateModel | null;
 };
 
 /**
  * Dynamic Notification Strategy
  *
- * This record defines the dynamic notification strategy model for the v1 endpoint.
+ * Represents a dynamic notification strategy with inline notification configurations.
  */
 export type DynamicNotificationStrategyModel = {
     /**
-     * Gets the notification configurations associated with this strategy
+     * The notification configurations associated with this strategy.
      */
     notificationConfigurations: Array<DynamicNotificationConfigurationModel>;
 };
@@ -210,35 +219,35 @@ export type HttpError = {
 /**
  * Message Template
  *
- * This record defines the message template model for the v1 endpoint.
+ * Represents a message template that defines the content of a notification.
  */
 export type MessageTemplateModel = {
     /**
-     * Gets or sets the ID for message template
+     * The unique identifier of the message template.
      */
     id?: string | null;
     /**
-     * Gets or sets the name of the interpretting service
+     * The name of the interpreting service used to send notifications (e.g., smtp).
      */
     interpretingServiceName?: string | null;
     /**
-     * Gets or sets the message template's display name
+     * The user-friendly display name of the message template.
      */
     displayName?: string | null;
     /**
-     * Gets or sets the message template's properties
+     * User-defined key-value properties associated with the message template.
      */
     properties?: {
         [key: string]: string;
     } | null;
     /**
-     * Gets or sets the message template's fields
+     * The template fields used by the interpreting service (e.g., subjectTemplate, bodyTemplate).
      */
     fields?: {
         [key: string]: string;
     } | null;
     /**
-     * Gets or sets the message template's referencing notification strategies
+     * The IDs of notification strategies that reference this message template.
      */
     referencingNotificationStrategies?: Array<string> | null;
 };
@@ -246,51 +255,57 @@ export type MessageTemplateModel = {
 /**
  * Notification Configuration
  *
- * This record defines the notification configuration model for the v1 endpoint.
+ * Represents a notification configuration that pairs an address group with a message template.
  */
 export type NotificationConfigurationModel = {
     /**
-     * Gets the address group ID
+     * The unique identifier of the address group.
      */
     addressGroupId: string;
     /**
-     * Gets the message template ID
+     * The unique identifier of the message template.
      */
     messageTemplateId: string;
     /**
-     * Gets whether the full address group and message template objects are populated or not
+     * Whether the full address group and message template objects are included in the response.
      */
     isExpanded?: boolean;
-    addressGroup?: AddressGroupModel;
-    messageTemplate?: MessageTemplateModel;
+    /**
+     * The expanded address group details, included when isExpanded is true.
+     */
+    addressGroup?: AddressGroupModel | null;
+    /**
+     * The expanded message template details, included when isExpanded is true.
+     */
+    messageTemplate?: MessageTemplateModel | null;
 };
 
 /**
  * Notification Strategy
  *
- * This record defines the notification strategy model for the v1 endpoint.
+ * Represents a notification strategy that pairs address groups with message templates.
  */
 export type NotificationStrategyModel = {
     /**
-     * Gets or sets the ID for notification strategy
+     * The unique identifier of the notification strategy.
      */
     id?: string | null;
     /**
-     * Gets or sets the notification strategy's display name
+     * The user-friendly display name of the notification strategy.
      */
     displayName?: string | null;
     /**
-     * Gets or sets the description of the notification strategy
+     * A human-readable description of the notification strategy.
      */
     description?: string | null;
     /**
-     * Gets or sets properties associated with the notification strategy
+     * User-defined key-value properties associated with the notification strategy.
      */
     properties?: {
         [key: string]: string;
     } | null;
     /**
-     * Gets the notification configurations associated with this strategy
+     * The notification configurations associated with this strategy.
      */
     notificationConfigurations: Array<NotificationConfigurationModel>;
 };
@@ -298,15 +313,15 @@ export type NotificationStrategyModel = {
 /**
  * Operation Availability
  *
- * This record struct defines the availability and version of a given operation.
+ * Describes the availability and version of an API operation.
  */
 export type OperationAvailability = {
     /**
-     * Gets whether the endpoint is available.
+     * Whether the endpoint is available.
      */
     available: boolean;
     /**
-     * Gets the supported API version for this endpoint.
+     * The supported API version for this endpoint.
      */
     version: number;
 };
@@ -314,10 +329,13 @@ export type OperationAvailability = {
 /**
  * Root Endpoint Response
  *
- * This record defines the response model for the root, niuserdata endpoint.
+ * The response model for the root endpoint.
  */
 export type RootEndpointResponseModel = {
-    v1?: V1OperationsModel;
+    /**
+     * The V1 API operations.
+     */
+    v1?: V1OperationsModel | null;
 };
 
 /**
@@ -327,17 +345,17 @@ export type RootEndpointResponseModel = {
  */
 export type UpdateAddressGroupRequestModel = {
     /**
-     * Gets or sets the address group's display name
+     * The updated display name of the address group.
      */
     displayName?: string | null;
     /**
-     * Gets or sets the address group's properties
+     * The updated key-value properties for the address group.
      */
     properties?: {
         [key: string]: string;
     } | null;
     /**
-     * Gets or sets the address group's fields
+     * The updated address fields for the address group.
      */
     fields?: {
         [key: string]: Array<string>;
@@ -351,17 +369,17 @@ export type UpdateAddressGroupRequestModel = {
  */
 export type UpdateMessageTemplateRequestModel = {
     /**
-     * Gets or sets the message template's display name
+     * The updated display name of the message template.
      */
     displayName?: string | null;
     /**
-     * Gets or sets the message template's properties
+     * The updated key-value properties for the message template.
      */
     properties?: {
         [key: string]: string;
     } | null;
     /**
-     * Gets or sets the message template's fields
+     * The updated template fields for the message template.
      */
     fields?: {
         [key: string]: string;
@@ -375,11 +393,11 @@ export type UpdateMessageTemplateRequestModel = {
  */
 export type UpdateNotificationConfigurationRequestModel = {
     /**
-     * Gets the address group ID
+     * The unique identifier of the address group.
      */
     addressGroupId?: string | null;
     /**
-     * Gets the message template ID
+     * The unique identifier of the message template.
      */
     messageTemplateId?: string | null;
 };
@@ -391,21 +409,21 @@ export type UpdateNotificationConfigurationRequestModel = {
  */
 export type UpdateNotificationStrategyRequestModel = {
     /**
-     * Gets or sets the notification strategy's display name
+     * The updated display name of the notification strategy.
      */
     displayName?: string | null;
     /**
-     * Gets or sets the description of the notification strategy
+     * The updated description of the notification strategy.
      */
     description?: string | null;
     /**
-     * Gets or sets properties associated with the notification strategy
+     * The updated key-value properties for the notification strategy.
      */
     properties?: {
         [key: string]: string;
     } | null;
     /**
-     * Gets the notification configurations associated with this strategy
+     * The updated notification configurations for the strategy.
      */
     notificationConfigurations?: Array<UpdateNotificationConfigurationRequestModel> | null;
 };
@@ -413,7 +431,7 @@ export type UpdateNotificationStrategyRequestModel = {
 /**
  * V1 Operations
  *
- * This record defines the operations model for the v1 endpoint.
+ * Lists the operations available in V1 of the Notification Service API.
  */
 export type V1OperationsModel = {
     /**
@@ -427,16 +445,16 @@ export type V1OperationsModel = {
 /**
  * Root Endpoint Response
  *
- * This record defines the response model for the root, niuserdata endpoint.
+ * The response model for the root endpoint.
  */
 export type RootEndpointResponseModelWritable = {
-    v1?: V1OperationsModelWritable;
+    [key: string]: never;
 };
 
 /**
  * V1 Operations
  *
- * This record defines the operations model for the v1 endpoint.
+ * Lists the operations available in V1 of the Notification Service API.
  */
 export type V1OperationsModelWritable = {
     [key: string]: never;
@@ -466,6 +484,11 @@ export type GetAddressGroupsResponses = {
 export type GetAddressGroupsResponse = GetAddressGroupsResponses[keyof GetAddressGroupsResponses];
 
 export type CreateAddressGroupData = {
+    /**
+     * Create Address Group Request
+     *
+     * Model to request to create an address group.
+     */
     body?: CreateAddressGroupRequestModel;
     path?: never;
     query?: never;
@@ -497,6 +520,9 @@ export type CreateAddressGroupResponse = CreateAddressGroupResponses[keyof Creat
 export type DeleteAddressGroupData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the address group.
+         */
         id: string;
     };
     query?: never;
@@ -536,6 +562,9 @@ export type DeleteAddressGroupResponse = DeleteAddressGroupResponses[keyof Delet
 export type GetAddressGroupData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the address group.
+         */
         id: string;
     };
     query?: never;
@@ -565,8 +594,16 @@ export type GetAddressGroupResponses = {
 export type GetAddressGroupResponse = GetAddressGroupResponses[keyof GetAddressGroupResponses];
 
 export type UpdateAddressGroupData = {
+    /**
+     * Update Address Group Request
+     *
+     * Model to request to update an address group.
+     */
     body?: UpdateAddressGroupRequestModel;
     path: {
+        /**
+         * The unique identifier of the address group.
+         */
         id: string;
     };
     query?: never;
@@ -627,6 +664,11 @@ export type GetMessageTemplatesResponses = {
 export type GetMessageTemplatesResponse = GetMessageTemplatesResponses[keyof GetMessageTemplatesResponses];
 
 export type CreateMessageTemplateData = {
+    /**
+     * Create Message Template Request
+     *
+     * Model to request to create a message template.
+     */
     body?: CreateMessageTemplateRequestModel;
     path?: never;
     query?: never;
@@ -658,6 +700,9 @@ export type CreateMessageTemplateResponse = CreateMessageTemplateResponses[keyof
 export type DeleteMessageTemplateData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the message template.
+         */
         id: string;
     };
     query?: never;
@@ -697,6 +742,9 @@ export type DeleteMessageTemplateResponse = DeleteMessageTemplateResponses[keyof
 export type GetMessageTemplateData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the message template.
+         */
         id: string;
     };
     query?: never;
@@ -726,8 +774,16 @@ export type GetMessageTemplateResponses = {
 export type GetMessageTemplateResponse = GetMessageTemplateResponses[keyof GetMessageTemplateResponses];
 
 export type UpdateMessageTemplateData = {
+    /**
+     * Update Message Template Request
+     *
+     * Model to request to update a message template.
+     */
     body?: UpdateMessageTemplateRequestModel;
     path: {
+        /**
+         * The unique identifier of the message template.
+         */
         id: string;
     };
     query?: never;
@@ -765,8 +821,14 @@ export type UpdateMessageTemplateResponses = {
 export type UpdateMessageTemplateResponse = UpdateMessageTemplateResponses[keyof UpdateMessageTemplateResponses];
 
 export type ApplyNotificationStrategyData = {
+    /**
+     * Model to request to apply a notification strategy.
+     */
     body?: ApplyNotificationStrategyRequestModel;
     path: {
+        /**
+         * The unique identifier of the notification strategy.
+         */
         id: string;
     };
     query?: never;
@@ -804,6 +866,9 @@ export type ApplyNotificationStrategyResponses = {
 export type ApplyNotificationStrategyResponse = ApplyNotificationStrategyResponses[keyof ApplyNotificationStrategyResponses];
 
 export type ApplyDynamicNotificationStrategyData = {
+    /**
+     * Model to request to apply a dynamic notification strategy.
+     */
     body?: ApplyDynamicNotificationStrategyRequestModel;
     path?: never;
     query?: never;
@@ -869,6 +934,11 @@ export type GetNotificationStrategiesResponses = {
 export type GetNotificationStrategiesResponse = GetNotificationStrategiesResponses[keyof GetNotificationStrategiesResponses];
 
 export type CreateNotificationStrategyData = {
+    /**
+     * Create Notification Strategy Request
+     *
+     * Model to request to create a notification strategy.
+     */
     body?: CreateNotificationStrategyRequestModel;
     path?: never;
     query?: never;
@@ -900,6 +970,9 @@ export type CreateNotificationStrategyResponse = CreateNotificationStrategyRespo
 export type DeleteNotificationStrategyData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the notification strategy.
+         */
         id: string;
     };
     query?: never;
@@ -939,6 +1012,9 @@ export type DeleteNotificationStrategyResponse = DeleteNotificationStrategyRespo
 export type GetNotificationStrategyData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the notification strategy.
+         */
         id: string;
     };
     query?: {
@@ -977,8 +1053,16 @@ export type GetNotificationStrategyResponses = {
 export type GetNotificationStrategyResponse = GetNotificationStrategyResponses[keyof GetNotificationStrategyResponses];
 
 export type UpdateNotificationStrategyData = {
+    /**
+     * Update Notification Strategy Request
+     *
+     * Model to request to update a notification strategy.
+     */
     body?: UpdateNotificationStrategyRequestModel;
     path: {
+        /**
+         * The unique identifier of the notification strategy.
+         */
         id: string;
     };
     query?: never;

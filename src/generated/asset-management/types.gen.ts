@@ -31,9 +31,31 @@ export type AssetCalibrationForecastRequest = {
      * End time used to calculate the calibration forecast.
      */
     endTime?: string;
+    /**
+     * The filter criteria for assets. Consists of a string of queries composed using
+     * AND/OR operators. String values and date strings need to be enclosed in double quotes.
+     * Parenthesis can be used around filters to better define the order of operations.
+     * Filter syntax: '[property name][operator][operand] and [property name][operator][operand]'
+     *
+     * Operators:
+     * - Equals operator '='. Example: 'x = y'
+     * - Not equal operator '!='. Example: 'x != y'
+     * - Logical AND operator 'and'. Example: 'x and y'
+     * - Logical OR operator 'or'. Example: 'x or y'
+     *
+     * Valid asset properties that can be used in the filter:
+     * - Workspace: String representing the identifier of the workspace to which the asset belongs.
+     * - Location.MinionId: String representing the identifier of the minion in which the asset is located in.
+     * - Location.PhysicalLocation: String representing the name of the phyisical location that the asset is located in.
+     * - ModelName: String representing the model name of an asset.
+     * - VendorName: String representing the vendor name of an asset.
+     * - AssetType: String enumeration representing the asset type. Possible values are: GENERIC, DEVICE_UNDER_TEST, FIXTURE, SYSTEM.
+     * - BusType: String enumeration representing the bus type of an asset. Possible values are: BUILT_IN_SYSTEM, PCI_PXI, USB, GPIB, VXI, SERIAL, TCP_IP, CRIO, SCXI, CDAQ, SWITCH_BLOCK, SCC, FIRE_WIRE, ACCESSORY, CAN, SWITCH_BLOCK_DEVICE, SLSC.
+     */
     filter?: string | null;
     /**
-     * Default false. If true, the forecast will only include assets that have calibration due dates within the time range specified by the StartTime and EndTime properties.
+     * Default false. If true, the forecast will only include assets that have calibration
+     * due dates within the time range specified by the StartTime and EndTime properties.
      */
     includeOnlyDataInTimeRange?: boolean;
 };
@@ -42,7 +64,10 @@ export type AssetCalibrationForecastRequest = {
  * Response model used to represent asset calibration forecast values.
  */
 export type AssetCalibrationForecastResponse = {
-    calibrationForecast?: AssetCalibrationForecastModel;
+    /**
+     * Computed calibration forecast.
+     */
+    calibrationForecast?: AssetCalibrationForecastModel | null;
 };
 
 /**
@@ -52,118 +77,129 @@ export type AssetCalibrationForecastResponse = {
  */
 export type AssetCreateModel = {
     /**
-     * Gets or sets model name of the asset.
+     * The model name of the asset.
      */
     modelName?: string | null;
     /**
-     * Gets or sets model number of the asset.
+     * The model number of the asset.
      */
     modelNumber?: number | null;
     /**
-     * Gets or sets serial number of the asset.
+     * The serial number of the asset.
      */
     serialNumber?: string | null;
     /**
-     * Gets or sets vendor name of the asset.
+     * The vendor name of the asset.
      */
     vendorName?: string | null;
     /**
-     * Gets or sets vendor number of the asset.
+     * The vendor number of the asset.
      */
     vendorNumber?: number | null;
     /**
-     * Gets or sets all supported bus types for an asset.
+     * The bus type of the asset.
      */
     busType?: 'BUILT_IN_SYSTEM' | 'PCI_PXI' | 'USB' | 'GPIB' | 'VXI' | 'SERIAL' | 'TCP_IP' | 'CRIO' | 'SCXI' | 'CDAQ' | 'SWITCH_BLOCK' | 'SCC' | 'FIRE_WIRE' | 'ACCESSORY' | 'CAN' | 'SWITCH_BLOCK_DEVICE' | 'SLSC';
     /**
-     * Gets or sets name of the asset.
+     * The name of the asset.
      */
     name?: string | null;
     /**
-     * Gets or sets all supported asset types.
+     * The asset type.
      */
     assetType?: 'GENERIC' | 'DEVICE_UNDER_TEST' | 'FIXTURE' | 'SYSTEM';
     /**
-     * Gets or sets firmware version of the asset.
+     * The firmware version of the asset.
      */
     firmwareVersion?: string | null;
     /**
-     * Gets or sets hardware version of the asset.
+     * The hardware version of the asset.
      */
     hardwareVersion?: string | null;
     /**
-     * Gets or sets VISA resource name of the asset.
+     * The VISA resource name of the asset.
      */
     visaResourceName?: string | null;
     /**
-     * Gets or sets an array of temperature sensor information.
+     * An array of temperature sensor information.
      * The maximum number of temperature sensors allowed per asset is 1000.
      */
     temperatureSensors?: Array<TemperatureSensorModel> | null;
     /**
-     * Gets or sets whether the asset supports self-calibration.
+     * Whether the asset supports self-calibration.
      */
     supportsSelfCalibration?: boolean | null;
     /**
-     * Gets or sets whether the asset supports external calibration.
+     * Whether the asset supports external calibration.
      */
     supportsExternalCalibration?: boolean | null;
     /**
-     * Gets or sets the interval represented in months used for computing calibration due date. If not set, the recommended calibration interval from the calibration model is used.
+     * The interval represented in months used for computing calibration due date. If not set,
+     * the recommended calibration interval from the calibration model is used.
      */
     customCalibrationInterval?: number | null;
-    selfCalibration?: SelfCalibrationModel;
     /**
-     * Gets or sets whether this asset is an NI asset (true) or a third-party asset (false).
+     * The self-calibration values.
+     */
+    selfCalibration?: SelfCalibrationModel | null;
+    /**
+     * Whether this asset is an NI asset (true) or a third-party asset (false).
      */
     isNIAsset?: boolean | null;
     /**
      * The ID of the workspace containing the asset.
      */
     workspace?: string | null;
-    location?: AssetLocationWithPresenceModel;
-    externalCalibration?: ExternalCalibrationWithChecksumModel;
     /**
-     * Gets or sets properties of the asset.
+     * The initial location of the asset.
+     */
+    location?: AssetLocationWithPresenceModel | null;
+    /**
+     * The external calibration data for the asset.
+     */
+    externalCalibration?: ExternalCalibrationWithChecksumModel | null;
+    /**
+     * The properties of the asset.
      * The maximum number of properties allowed per asset is 1000.
      */
     properties?: {
         [key: string]: string | null;
     } | null;
     /**
-     * Gets or sets keywords of the asset.
+     * The keywords associated with the asset.
      * The maximum number of keywords allowed per asset is 1000.
      */
     keywords?: Array<string> | null;
     /**
-     * Gets or sets the discovery type.
+     * The discovery type.
      */
     discoveryType?: 'AUTOMATIC' | 'MANUAL';
     /**
-     * Gets or sets the IDs of the files linked to the asset.
+     * The IDs of the files linked to the asset.
      * The maximum number of file IDs allowed per asset is 1000.
      */
     fileIds?: Array<string> | null;
     /**
-     * Gets or sets whether the asset supports self-test.
+     * Whether the asset supports self-test.
      */
     supportsSelfTest?: boolean | null;
     /**
-     * Gets or sets whether the asset supports reset.
+     * Whether the asset supports reset.
      */
     supportsReset?: boolean | null;
     /**
-     * Gets or sets part number of the asset.
+     * The part number of the asset.
      */
     partNumber?: string | null;
     /**
-     * Gets or sets the scan code of the asset.
+     * The scan code of the asset.
      */
     scanCode?: string | null;
 };
 
 /**
- * Model for object containing properties which identify an asset. An asset is uniquely identified by a combination of:
+ * Model for object containing properties which identify an asset. An asset is uniquely
+ * identified by a combination of:
  * - busType
  * - modelName or modelNumber
  * - vendorName or vendorNumber
@@ -171,57 +207,62 @@ export type AssetCreateModel = {
  */
 export type AssetIdentificationModel = {
     /**
-     * Gets or sets model name of the asset.
+     * The model name of the asset.
      */
     modelName?: string | null;
     /**
-     * Gets or sets model number of the asset.
+     * The model number of the asset.
      */
     modelNumber?: number | null;
     /**
-     * Gets or sets serial number of the asset.
+     * The serial number of the asset.
      */
     serialNumber?: string | null;
     /**
-     * Gets or sets vendor name of the asset.
+     * The vendor name of the asset.
      */
     vendorName?: string | null;
     /**
-     * Gets or sets vendor number of the asset.
+     * The vendor number of the asset.
      */
     vendorNumber?: number | null;
     /**
-     * Gets or sets all supported bus types for an asset.
+     * The bus type of the asset.
      */
     busType?: 'BUILT_IN_SYSTEM' | 'PCI_PXI' | 'USB' | 'GPIB' | 'VXI' | 'SERIAL' | 'TCP_IP' | 'CRIO' | 'SCXI' | 'CDAQ' | 'SWITCH_BLOCK' | 'SCC' | 'FIRE_WIRE' | 'ACCESSORY' | 'CAN' | 'SWITCH_BLOCK_DEVICE' | 'SLSC';
 };
 
 /**
- * Model for information about the asset location, presence and the connection status of the system in which it resides.
+ * Model for information about the asset location, presence and the connection status of
+ * the system in which it resides.
  */
 export type AssetLocationModel = {
     /**
-     * Gets or sets identifier of the minion where the asset is located.
+     * The identifier of the minion where the asset is located.
      */
     minionId?: string | null;
     /**
-     * Gets or sets the physical location of the asset. An asset can be either in a system, in which case it has a
+     * The physical location of the asset. An asset can be either in a system, in which case it has a
      * MinionID, or be in a physical location.
      */
     physicalLocation?: string | null;
     /**
-     * Gets or sets the parent of the asset.
+     * The parent of the asset.
      */
     parent?: string | null;
     /**
-     * Gets or sets identifier of a resource.
+     * The identifier of a resource.
      */
     resourceUri?: string | null;
     /**
-     * Gets or sets the number of the slot in which the asset is located.
+     * The number of the slot in which the asset is located.
      */
     slotNumber?: number | null;
-    state?: AssetPresenceWithSystemConnectionModel;
+    /**
+     * Indicates whether the Asset is present or not in the system or physical location.
+     * Also shows if the system is connected or disconnected.
+     */
+    state?: AssetPresenceWithSystemConnectionModel | null;
 };
 
 /**
@@ -229,27 +270,30 @@ export type AssetLocationModel = {
  */
 export type AssetLocationWithPresenceModel = {
     /**
-     * Gets or sets identifier of the minion where the asset is located.
+     * The identifier of the minion where the asset is located.
      */
     minionId?: string | null;
     /**
-     * Gets or sets the physical location of the asset. An asset can be either in a system, in which case it has a
+     * The physical location of the asset. An asset can be either in a system, in which case it has a
      * MinionID, or be in a physical location.
      */
     physicalLocation?: string | null;
     /**
-     * Gets or sets the parent of the asset.
+     * The parent of the asset.
      */
     parent?: string | null;
     /**
-     * Gets or sets identifier of a resource.
+     * The identifier of a resource.
      */
     resourceUri?: string | null;
     /**
-     * Gets or sets the number of the slot in which the asset is located.
+     * The number of the slot in which the asset is located.
      */
     slotNumber?: number | null;
-    state?: AssetPresenceModel;
+    /**
+     * The presence information of the asset.
+     */
+    state?: AssetPresenceModel | null;
 };
 
 /**
@@ -257,27 +301,30 @@ export type AssetLocationWithPresenceModel = {
  */
 export type AssetLocationWithPresenceUpdateModel = {
     /**
-     * Gets or sets identifier of the minion where the asset is located.
+     * The identifier of the minion where the asset is located.
      */
     minionId?: string | null;
     /**
-     * Gets or sets the physical location of the asset. An asset can be either in a system, in which case it has a
+     * The physical location of the asset. An asset can be either in a system, in which case it has a
      * MinionID, or be in a physical location.
      */
     physicalLocation?: string | null;
     /**
-     * Gets or sets the parent of the asset.
+     * The parent of the asset.
      */
     parent?: string | null;
     /**
-     * Gets or sets identifier of a resource.
+     * The identifier of a resource.
      */
     resourceUri?: string | null;
     /**
-     * Gets or sets the number of the slot in which the asset is located.
+     * The number of the slot in which the asset is located.
      */
     slotNumber?: number | null;
-    state?: AssetPresenceUpdateModel;
+    /**
+     * The presence information of the asset.
+     */
+    state?: AssetPresenceUpdateModel | null;
 };
 
 /**
@@ -285,128 +332,138 @@ export type AssetLocationWithPresenceUpdateModel = {
  */
 export type AssetModel = {
     /**
-     * Gets or sets model name of the asset.
+     * The model name of the asset.
      */
     modelName?: string | null;
     /**
-     * Gets or sets model number of the asset.
+     * The model number of the asset.
      */
     modelNumber?: number | null;
     /**
-     * Gets or sets serial number of the asset.
+     * The serial number of the asset.
      */
     serialNumber?: string | null;
     /**
-     * Gets or sets vendor name of the asset.
+     * The vendor name of the asset.
      */
     vendorName?: string | null;
     /**
-     * Gets or sets vendor number of the asset.
+     * The vendor number of the asset.
      */
     vendorNumber?: number | null;
     /**
-     * Gets or sets all supported bus types for an asset.
+     * The bus type of the asset.
      */
     busType?: 'BUILT_IN_SYSTEM' | 'PCI_PXI' | 'USB' | 'GPIB' | 'VXI' | 'SERIAL' | 'TCP_IP' | 'CRIO' | 'SCXI' | 'CDAQ' | 'SWITCH_BLOCK' | 'SCC' | 'FIRE_WIRE' | 'ACCESSORY' | 'CAN' | 'SWITCH_BLOCK_DEVICE' | 'SLSC';
     /**
-     * Gets or sets name of the asset.
+     * The name of the asset.
      */
     name?: string | null;
     /**
-     * Gets or sets all supported asset types.
+     * The asset type.
      */
     assetType?: 'GENERIC' | 'DEVICE_UNDER_TEST' | 'FIXTURE' | 'SYSTEM';
     /**
-     * Gets or sets the discovery type.
+     * The discovery type.
      */
     discoveryType?: 'AUTOMATIC' | 'MANUAL';
     /**
-     * Gets or sets firmware version of the asset.
+     * The firmware version of the asset.
      */
     firmwareVersion?: string | null;
     /**
-     * Gets or sets hardware version of the asset.
+     * The hardware version of the asset.
      */
     hardwareVersion?: string | null;
     /**
-     * Gets or sets VISA resource name of the asset.
+     * The VISA resource name of the asset.
      */
     visaResourceName?: string | null;
     /**
-     * Gets or sets an array of temperature sensor information.
+     * An array of temperature sensor information.
      */
     temperatureSensors?: Array<TemperatureSensorModel> | null;
     /**
-     * Gets or sets whether the asset supports self-calibration.
+     * Whether the asset supports self-calibration.
      */
     supportsSelfCalibration?: boolean | null;
     /**
-     * Gets or sets whether the asset supports external calibration.
+     * Whether the asset supports external calibration.
      */
     supportsExternalCalibration?: boolean | null;
     /**
-     * Gets or sets the interval represented in months used for computing calibration due date. If not set, the recommended calibration interval from the calibration model is used.
+     * The interval represented in months used for computing calibration due date. If not set,
+     * the recommended calibration interval from the calibration model is used.
      */
     customCalibrationInterval?: number | null;
-    selfCalibration?: SelfCalibrationProjectedModel;
     /**
-     * Gets or sets whether this asset is an NI asset (true) or a third-party asset (false).
+     * The self-calibration values.
+     */
+    selfCalibration?: SelfCalibrationProjectedModel | null;
+    /**
+     * Whether this asset is an NI asset (true) or a third-party asset (false).
      */
     isNIAsset?: boolean | null;
     /**
-     * Gets or sets unique identifier of the asset.
+     * The unique identifier of the asset.
      */
     id?: string | null;
-    location?: AssetLocationModel;
     /**
-     * Gets or sets the calibration category the asset belongs to based on the next due calibration date.
+     * The asset location.
+     */
+    location?: AssetLocationModel | null;
+    /**
+     * The calibration category the asset belongs to based on the next due calibration date.
      */
     calibrationStatus?: 'OK' | 'APPROACHING_RECOMMENDED_DUE_DATE' | 'PAST_RECOMMENDED_DUE_DATE' | 'OUT_FOR_CALIBRATION';
     /**
-     * Gets or sets whether this asset represents a System Controller.
+     * Whether this asset represents a System Controller.
      */
     isSystemController?: boolean | null;
-    externalCalibration?: ExternalCalibrationModel;
     /**
-     * Gets or sets the ID of the workspace.
+     * The external calibration values.
+     */
+    externalCalibration?: ExternalCalibrationModel | null;
+    /**
+     * The ID of the workspace.
      */
     workspace?: string | null;
     /**
-     * Gets or sets key-value-pair metadata associated with an asset.
+     * The properties of the asset.
      */
     properties?: {
         [key: string]: string | null;
     } | null;
     /**
-     * Gets or sets words or phrases associated with an asset.
+     * The keywords associated with the asset.
      */
     keywords?: Array<string> | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the last date that the asset has had a property update.
+     * ISO-8601 formatted timestamp specifying the last date that the asset has had a property update.
      */
     lastUpdatedTimestamp?: string | null;
     /**
-     * Gets or sets all files linked to the asset.
+     * The Ids of all files linked to the asset.
      */
     fileIds?: Array<string> | null;
     /**
-     * Gets or sets whether the asset supports self-test.
+     * Whether the asset supports self-test.
      */
     supportsSelfTest?: boolean | null;
     /**
-     * Gets or sets whether the asset supports reset.
+     * Whether the asset supports reset.
      */
     supportsReset?: boolean | null;
     /**
-     * Gets or sets part number of the asset.
+     * The part number of the asset.
      */
     partNumber?: string | null;
     /**
-     * Gets or sets whether the asset is out for calibration.
+     * Whether the asset is out for calibration.
      */
     outForCalibration?: boolean | null;
     /**
-     * Gets or sets the scan code of the asset.
+     * The scan code of the asset.
      */
     scanCode?: string | null;
 };
@@ -416,7 +473,7 @@ export type AssetModel = {
  */
 export type AssetPresenceModel = {
     /**
-     * Gets or sets the status of an asset's presence in a system.
+     * The status of an asset's presence in a system.
      */
     assetPresence?: 'NOT_PRESENT' | 'PRESENT' | 'INITIALIZING' | 'UNKNOWN';
 };
@@ -426,7 +483,7 @@ export type AssetPresenceModel = {
  */
 export type AssetPresenceUpdateModel = {
     /**
-     * Gets or sets the status of an asset's presence in a system.
+     * The status of an asset's presence in a system.
      */
     assetPresence?: 'NOT_PRESENT' | 'PRESENT' | 'REMOVED' | 'INITIALIZING' | 'UNKNOWN';
 };
@@ -436,58 +493,63 @@ export type AssetPresenceUpdateModel = {
  */
 export type AssetPresenceWithSystemConnectionModel = {
     /**
-     * Gets or sets the status of an asset's presence in a system.
+     * The status of an asset's presence in a system.
      */
     assetPresence?: 'NOT_PRESENT' | 'PRESENT' | 'INITIALIZING' | 'UNKNOWN';
     /**
-     * Gets or sets whether or not the minion is connected to the server and has updated the server with its data.
+     * Whether or not the system is connected to the server and has updated the server with its data.
      */
     systemConnection?: 'APPROVED' | 'DISCONNECTED' | 'CONNECTED_UPDATE_PENDING' | 'CONNECTED' | 'CONNECTED_UPDATE_FAILED' | 'UNSUPPORTED' | 'ACTIVATED' | 'CONNECTED_UPDATE_SUCCESSFUL';
 };
 
 /**
- * Model for asset summary response containing the total number of assets, the number of assets which are active, i.e. present in a connected system, and the number of assets which are not active.
+ * Model for asset summary response containing the total number of assets, the number of
+ * assets which are active, i.e. present in a connected system, and the number of assets
+ * which are not active.
  */
 export type AssetSummaryResponse = {
-    error?: HttpError;
     /**
-     * Gets or sets number of assets which are active, i.e. present in a connected system.
+     * Contains error information.
+     */
+    error?: HttpError | null;
+    /**
+     * Number of assets which are active, i.e. present in a connected system.
      */
     active?: number;
     /**
-     * Gets or sets number of assets which are not active.
+     * Number of assets which are not active.
      */
     notActive?: number;
     /**
-     * Gets or sets total number of managed assets.
+     * Total number of managed assets.
      */
     total?: number;
     /**
-     * Gets or sets total number of used assets.
+     * Total number of used assets.
      */
     inUse?: number | null;
     /**
-     * Gets or sets total number of unused assets.
+     * Total number of unused assets.
      */
     notInUse?: number | null;
     /**
-     * Gets or sets total number of assets with alarms
+     * Total number of assets with alarms
      */
     withAlarms?: number | null;
     /**
-     * Gets or sets number of assets approaching calibration date.
+     * Number of assets approaching calibration date.
      */
     approachingRecommendedDueDate?: number;
     /**
-     * Gets or sets number of assets past their calibration date.
+     * Number of assets past their calibration date.
      */
     pastRecommendedDueDate?: number;
     /**
-     * Gets or sets total number of assets supporting calibration.
+     * Total number of assets supporting calibration.
      */
     totalCalibrated?: number | null;
     /**
-     * Gets or sets total number of assets out of calibration.
+     * Total number of assets out of calibration.
      */
     outForCalibration?: number;
 };
@@ -495,174 +557,198 @@ export type AssetSummaryResponse = {
 /**
  * Model for an object describing the properties for updating an asset.
  *
- * Unique Asset Identification is required to create an asset. If the id property is not specified, a set of properties are required to identify an asset. See AssetIdentificationModel for details. If the id is specified on the model, the following properties will be ignored: busType, modelName, modelNumber, vendorName, vendorNumber and serialNumber.
+ * Unique Asset Identification is required to create an asset. If the id property is not
+ * specified, a set of properties are required to identify an asset. See
+ * AssetIdentificationModel for details. If the id is specified on the model, the following
+ * properties will be ignored: busType, modelName, modelNumber, vendorName, vendorNumber
+ * and serialNumber.
  */
 export type AssetUpdateModel = {
     /**
-     * Gets or sets model name of the asset.
+     * The model name of the asset.
      */
     modelName?: string | null;
     /**
-     * Gets or sets model number of the asset.
+     * The model number of the asset.
      */
     modelNumber?: number | null;
     /**
-     * Gets or sets serial number of the asset.
+     * The serial number of the asset.
      */
     serialNumber?: string | null;
     /**
-     * Gets or sets vendor name of the asset.
+     * The vendor name of the asset.
      */
     vendorName?: string | null;
     /**
-     * Gets or sets vendor number of the asset.
+     * The vendor number of the asset.
      */
     vendorNumber?: number | null;
     /**
-     * Gets or sets all supported bus types for an asset.
+     * The bus type of the asset.
      */
     busType?: 'BUILT_IN_SYSTEM' | 'PCI_PXI' | 'USB' | 'GPIB' | 'VXI' | 'SERIAL' | 'TCP_IP' | 'CRIO' | 'SCXI' | 'CDAQ' | 'SWITCH_BLOCK' | 'SCC' | 'FIRE_WIRE' | 'ACCESSORY' | 'CAN' | 'SWITCH_BLOCK_DEVICE' | 'SLSC';
     /**
-     * Gets or sets name of the asset.
+     * The name of the asset.
      */
     name?: string | null;
     /**
-     * Gets or sets all supported asset types.
+     * The asset type.
      */
     assetType?: 'GENERIC' | 'DEVICE_UNDER_TEST' | 'FIXTURE' | 'SYSTEM';
     /**
-     * Gets or sets firmware version of the asset.
+     * The firmware version of the asset.
      */
     firmwareVersion?: string | null;
     /**
-     * Gets or sets hardware version of the asset.
+     * The hardware version of the asset.
      */
     hardwareVersion?: string | null;
     /**
-     * Gets or sets VISA resource name of the asset.
+     * The VISA resource name of the asset.
      */
     visaResourceName?: string | null;
     /**
-     * Gets or sets an array of temperature sensor information.
+     * An array of temperature sensor information.
      * The maximum number of temperature sensors allowed per asset is 1000.
      */
     temperatureSensors?: Array<TemperatureSensorModel> | null;
     /**
-     * Gets or sets whether the asset supports self-calibration.
+     * Whether the asset supports self-calibration.
      */
     supportsSelfCalibration?: boolean | null;
     /**
-     * Gets or sets whether the asset supports external calibration.
-     * Note that when an asset is updated to no longer support external calibration, its calibration data and calibration history are deleted.
+     * Whether the asset supports external calibration.
+     * Note that when an asset is updated to no longer support external calibration, its
+     * calibration data and calibration history are deleted.
      */
     supportsExternalCalibration?: boolean | null;
     /**
-     * Gets or sets the interval represented in months used for computing calibration due date. If not set, the recommended calibration interval from the calibration model is used.
+     * The interval represented in months used for computing calibration due date. If not set,
+     * the recommended calibration interval from the calibration model is used.
      */
     customCalibrationInterval?: number | null;
-    selfCalibration?: SelfCalibrationModel;
     /**
-     * Gets or sets whether this asset is an NI asset (true) or a third-party asset (false).
+     * The self-calibration values.
+     */
+    selfCalibration?: SelfCalibrationModel | null;
+    /**
+     * Whether this asset is an NI asset (true) or a third-party asset (false).
      */
     isNIAsset?: boolean | null;
     /**
-     * Gets or sets unique identifier of the asset.
+     * The unique identifier of the asset.
      */
     id?: string | null;
-    location?: AssetLocationWithPresenceUpdateModel;
-    externalCalibration?: ExternalCalibrationWithChecksumModel;
+    /**
+     * The location to assign to the asset.
+     */
+    location?: AssetLocationWithPresenceUpdateModel | null;
+    /**
+     * The external calibration data for the asset.
+     */
+    externalCalibration?: ExternalCalibrationWithChecksumModel | null;
     /**
      * The ID of the workspace containing the asset.
      */
     workspace?: string | null;
     /**
-     * Gets or sets properties of the asset.
+     * The properties of the asset.
      * The maximum number of properties allowed per asset is 1000.
      */
     properties?: {
         [key: string]: string | null;
     } | null;
     /**
-     * Gets or sets keywords of the asset.
+     * The keywords associated with the asset.
      * The maximum number of keywords allowed per asset is 1000.
      */
     keywords?: Array<string> | null;
     /**
-     * Gets or sets the FileIds of the asset.
+     * The file IDs linked to the asset.
      * The maximum number of file IDs allowed per asset is 1000.
      */
     fileIds?: Array<string> | null;
     /**
-     * Gets or sets whether the asset supports self-test.
+     * Whether the asset supports self-test.
      */
     supportsSelfTest?: boolean | null;
     /**
-     * Gets or sets whether the asset supports reset.
+     * Whether the asset supports reset.
      */
     supportsReset?: boolean | null;
     /**
-     * Gets or sets part number of the asset.
+     * The part number of the asset.
      */
     partNumber?: string | null;
     /**
-     * Get or set whether the asset is out for calibration.
+     * Whether the asset is out for calibration.
      */
     outForCalibration?: boolean | null;
     /**
-     * Gets or sets the scan code of the asset.
+     * The scan code of the asset.
      */
     scanCode?: string | null;
 };
 
+/**
+ * Represents a single utilization history record for an asset.
+ */
 export type AssetUtilizationHistoryItem = {
     /**
-     * Gets or sets string representing the unique identifier of an asset utilization history record.
+     * The unique identifier of an asset utilization history record.
      */
     utilizationIdentifier?: string | null;
     /**
-     * Gets or sets string representing the unique identifier of an asset.
+     * The unique identifier of the asset.
      */
     assetIdentifier?: string | null;
     /**
-     * Gets or sets identifier of the minion where the asset is located.
+     * The identifier of the minion where the asset is located.
      */
     minionId?: string | null;
     /**
-     * Gets or sets string representing the utilization task category.
+     * The utilization task category.
      */
     category?: string | null;
     /**
-     * Gets or sets string representing the name of the task.
+     * The name of the task.
      */
     taskName?: string | null;
     /**
-     * Gets or sets string representing the name of the operator who utilized the asset.
+     * The name of the operator who utilized the asset.
      */
     userName?: string | null;
     /**
-     * Gets or sets a date time value which can be used to specify the start of an utilization.
+     * ISO-8601 formatted timestamp specifying the start of the utilization.
      * This parameter has the "ISO 8601" format in order to be considered valid.
      */
     startTimestamp?: string;
     /**
-     * Gets or sets a date time value which can be used to specify the end of an utilization.
+     * ISO-8601 formatted timestamp specifying the end of the utilization.
      * This parameter has the "ISO 8601" format in order to be considered valid.
      */
     endTimestamp?: string | null;
     /**
-     * Gets or sets a date time value which can be used to specify the heartbeat of an utilization.
+     * ISO-8601 formatted timestamp specifying the last heartbeat of the utilization.
      * This parameter has the "ISO 8601" format in order to be considered valid.
      */
     heartbeatTimestamp?: string | null;
 };
 
+/**
+ * Response containing asset utilization history records.
+ */
 export type AssetUtilizationHistoryResponse = {
     /**
-     * Gets or sets array of asset utilizations.
+     * Array of asset utilizations.
      */
     assetUtilizations?: Array<AssetUtilizationHistoryItem> | null;
     /**
-     * Gets or sets a token which allows the user to resume a query at the next item in the matching asset utilization history set. When querying for asset utilization history, a token will be returned if a query may be continued. To obtain the next page of asset utilization history records, pass the token to the service on a subsequent request.
+     * A token which allows the user to resume a query at the next item in the matching
+     * asset utilization history set. When querying for asset utilization history, a token
+     * will be returned if a query may be continued. To obtain the next page of asset
+     * utilization history records, pass the token to the service on a subsequent request.
      */
     continuationToken?: string | null;
 };
@@ -671,9 +757,12 @@ export type AssetUtilizationHistoryResponse = {
  * Model for assets Response containing the assets satisfying the query and the total count of matching assets.
  */
 export type AssetsResponse = {
-    error?: HttpError;
     /**
-     * Gets or sets array of assets.
+     * Contains error information.
+     */
+    error?: HttpError | null;
+    /**
+     * Array of assets.
      */
     assets?: Array<AssetModel> | null;
     /**
@@ -683,7 +772,10 @@ export type AssetsResponse = {
 };
 
 export type BaseResponse = {
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -691,56 +783,56 @@ export type BaseResponse = {
  */
 export type CalibrationHistoryModel = {
     /**
-     * Gets or sets an array of temperature sensor information.
+     * An array of temperature sensor information.
      */
     temperatureSensors?: Array<TemperatureSensorModel> | null;
     /**
-     * Gets or sets whether the last external calibration of the asset was a limited calibration.
+     * Whether the last external calibration of the asset was a limited calibration.
      */
     isLimited?: boolean | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the last date the asset was externally calibrated.
+     * ISO-8601 formatted timestamp specifying the last date the asset was externally calibrated.
      */
     date?: string;
     /**
-     * Gets or sets the manufacturer's recommended calibration interval in months.
+     * The manufacturer's recommended calibration interval in months.
      */
     recommendedInterval?: number | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the recommended date for the next external calibration.
+     * ISO-8601 formatted timestamp specifying the recommended date for the next external calibration.
      */
     nextRecommendedDate?: string | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the date for the next external calibration.
+     * ISO-8601 formatted timestamp specifying the date for the next external calibration.
      */
     nextCustomDueDate?: string | null;
     /**
-     * Gets ISO-8601 formatted timestamp specifying the resolved due date for external calibration. This
+     * ISO-8601 formatted timestamp specifying the resolved due date for external calibration. This
      * takes into account NextCustomDueDate, Asset.CustomCalibrationInterval and NextRecommendedDate.
      */
     resolvedDueDate?: string | null;
     /**
-     * Gets or sets calibration comments provided by an operator.
+     * Calibration comments provided by an operator.
      */
     comments?: string | null;
     /**
-     * Gets or sets whether SystemLink automatically discovered the calibration data for an asset or if it was manually entered.
+     * Whether SystemLink automatically discovered the calibration data for an asset or if it was manually entered.
      */
     entryType?: 'AUTOMATIC' | 'MANUAL';
     /**
-     * Gets or sets the calibration entry identifier.
+     * The calibration entry identifier.
      */
     id?: string | null;
     /**
-     * Gets or sets the type of calibration the asset received, such as self or external calibration.
+     * The type of calibration the asset received, such as self or external calibration.
      */
     calibrationType?: 'SELF_CALIBRATION' | 'EXTERNAL_CALIBRATION';
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the creation date of the entry.
+     * ISO-8601 formatted timestamp specifying the creation date of the entry.
      */
     timestamp?: string | null;
     /**
-     * Gets or sets the user id who created the calibration entry.
+     * The user ID who created the calibration entry.
      */
     updatedBy?: string | null;
 };
@@ -750,70 +842,89 @@ export type CalibrationHistoryModel = {
  */
 export type CalibrationHistoryResponse = {
     /**
-     * Gets or sets array of calibration history entries.
+     * Array of calibration history entries.
      */
     calibrationHistory?: Array<CalibrationHistoryModel> | null;
     /**
-     * The number of calibration history entries, if returnCount is true. This value is set to -1 if returnCount is false.
+     * The number of calibration history entries, if returnCount is true. This value is set
+     * to -1 if returnCount is false.
      */
     totalCount?: number;
 };
 
+/**
+ * Model for a connection history entry recording an asset's location and presence over time.
+ */
 export type ConnectionHistoryModel = {
     /**
-     * Gets or sets unique identifier of the connection history entry.
+     * The unique identifier of the connection history entry.
      */
     id?: string | null;
     /**
-     * Gets or sets identifier of the minion where the asset is located.
+     * The identifier of the minion where the asset is located.
      */
     minionId?: string | null;
     /**
-     * Gets or sets identifier of the physical location where the asset is located.
+     * The identifier of the physical location where the asset is located.
      */
     physicalLocation?: string | null;
     /**
-     * Gets or sets the parent of the asset.
+     * The parent of the asset.
      */
     parent?: string | null;
     /**
-     * Gets or sets identifier of a resource.
+     * The identifier of a resource.
      */
     resourceUri?: string | null;
     /**
-     * Gets or sets the number of the slot in which the asset is located.
+     * The number of the slot in which the asset is located.
      */
     slotNumber?: number;
     /**
-     * Gets or sets a date time value when the start event happened.
+     * The date and time when the start event happened.
      * This parameter has the "ISO 8601" format in order to be considered valid.
      */
     startTimestamp?: string;
     /**
-     * Gets or sets the system connection of the first event.
+     * The system connection of the first event.
      */
     startSystemConnection?: 'DISCONNECTED' | 'CONNECTED';
     /**
-     * Gets or sets the asset presence of the first event.
+     * The asset presence of the first event.
      */
     startAssetPresence?: 'NOT_PRESENT' | 'PRESENT' | 'INITIALIZING' | 'UNKNOWN';
     /**
-     * Gets or sets a date time value when the end event happened.
+     * The date and time when the end event happened.
      * This parameter has the "ISO 8601" format in order to be considered valid.
      */
     endTimestamp?: string | null;
+    /**
+     * The system connection of the end event.
+     */
     endSystemConnection?: 'APPROVED' | 'DISCONNECTED' | 'CONNECTED_UPDATE_PENDING' | 'CONNECTED' | 'CONNECTED_UPDATE_FAILED' | 'UNSUPPORTED' | 'ACTIVATED' | 'CONNECTED_UPDATE_SUCCESSFUL';
     /**
-     * Gets or sets the asset presence of the end event.
+     * The asset presence of the end event.
      */
     endAssetPresence?: 'NOT_PRESENT' | 'PRESENT' | 'INITIALIZING' | 'UNKNOWN';
 };
 
+/**
+ * Response containing asset location history records.
+ */
 export type ConnectionHistoryResponse = {
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
+    /**
+     * The location history records for the asset.
+     */
     historyItems?: Array<ConnectionHistoryModel> | null;
     /**
-     * Gets or sets a token which allows the user to resume a query at the next item in the matching asset location history set. When querying for asset location history, a token will be returned if a query may be continued. To obtain the next page of asset location history records, pass the token to the service on a subsequent request.
+     * A token which allows the user to resume a query at the next item in the matching
+     * asset location history set. When querying for asset location history, a token will be
+     * returned if a query may be continued. To obtain the next page of asset location history
+     * records, pass the token to the service on a subsequent request.
      */
     continuationToken?: string | null;
 };
@@ -822,13 +933,16 @@ export type ConnectionHistoryResponse = {
  * Model for create Assets Partial Success Response.
  */
 export type CreateAssetsPartialSuccessResponse = {
-    error?: HttpError;
     /**
-     * Gets or sets array of created assets.
+     * Contains error information.
+     */
+    error?: HttpError | null;
+    /**
+     * Array of created assets.
      */
     assets?: Array<AssetModel> | null;
     /**
-     * Gets or sets array of assets create requests that failed.
+     * Array of asset create requests that failed.
      */
     failed?: Array<AssetCreateModel> | null;
 };
@@ -838,7 +952,7 @@ export type CreateAssetsPartialSuccessResponse = {
  */
 export type CreateAssetsRequest = {
     /**
-     * Gets or sets multiple assets that should be created.
+     * The assets to create.
      * The maximum number of assets allowed per request is 1000.
      */
     assets?: Array<AssetCreateModel> | null;
@@ -881,30 +995,37 @@ export type DataFrameColumnModel = {
  */
 export type DeleteAssetsRequest = {
     /**
-     * Gets or sets multiple asset IDs for which to delete all data.
+     * The asset IDs for which to delete all data.
      * The maximum number of asset IDs allowed per request is 1000.
      */
     ids?: Array<string> | null;
 };
 
 /**
- * Model for delete Assets Response containing the ids of the assets which were deleted, the ids of the assets which failed to be deleted and any errors encountered.
+ * Model for delete Assets Response containing the ids of the assets which were deleted,
+ * the ids of the assets which failed to be deleted and any errors encountered.
  */
 export type DeleteAssetsResponse = {
-    error?: HttpError;
     /**
-     * Gets or sets array of asset identifiers which were deleted.
+     * Contains error information.
+     */
+    error?: HttpError | null;
+    /**
+     * Array of asset identifiers which were deleted.
      */
     ids?: Array<string> | null;
     /**
-     * Gets or sets array of asset identifiers that failed to delete.
+     * Array of asset identifiers that failed to delete.
      */
     failed?: Array<string> | null;
 };
 
+/**
+ * Request to delete one or more calibration history entries.
+ */
 export type DeleteCalibrationHistoryRequest = {
     /**
-     * Gets or sets IDs of the calibration entries to delete.
+     * The IDs of the calibration entries to delete.
      * The maximum number of calibration IDs allowed per request is 1000.
      */
     calibrationIds?: Array<string> | null;
@@ -914,32 +1035,43 @@ export type DeleteCalibrationHistoryRequest = {
  * Model for delete Calibrations Partial Success Response.
  */
 export type DeleteCalibrationsPartialSuccessResponse = {
-    error?: HttpError;
     /**
-     * Gets or sets array of calibration entry identifiers that were deleted.
+     * Contains error information.
+     */
+    error?: HttpError | null;
+    /**
+     * Array of calibration entry identifiers that were deleted.
      */
     calibrationIds?: Array<string> | null;
     /**
-     * Gets or sets array of calibration entry identifiers that failed to delete.
+     * Array of calibration entry identifiers that failed to delete.
      */
     failed?: Array<string> | null;
 };
 
+/**
+ * Request to end utilization tracking for one or more assets.
+ */
 export type EndUtilizationRequest = {
     /**
-     * Gets or sets array representing the unique identifier of an asset utilization history record.
+     * Array of unique identifiers of asset utilization history records.
      */
     utilizationIdentifiers?: Array<string> | null;
     /**
-     * Gets or sets a date time value which can be used to specify the end of an asset utilization.
+     * ISO-8601 formatted timestamp specifying the end of the asset utilization.
      * This parameter must have the "ISO 8601" format in order to be considered valid.
      */
     utilizationTimestamp?: string;
 };
 
+/**
+ * Request to export an assets report.
+ */
 export type ExportAssetsRequest = {
     /**
-     * Gets or sets the filter criteria for assets. Consists of a string of queries composed using AND/OR operators. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
+     * The filter criteria for assets. Consists of a string of queries composed using
+     * AND/OR operators. String values and date strings need to be enclosed in double quotes.
+     * Parenthesis can be used around filters to better define the order of operations.
      * Filter syntax: '[property name][operator][operand] and [property name][operator][operand]'
      *
      * Operators:
@@ -987,22 +1119,28 @@ export type ExportAssetsRequest = {
      */
     filter?: string | null;
     /**
-     * Gets or sets the return type. Valid option is "CSV".
+     * The return type. Valid option is "CSV".
      */
     responseFormat?: 'CSV';
     /**
-     * Gets or sets the destination of the request. "DOWNLOAD" returns the list of resources as the body of the response and indicates to the client that it should be downloaded as a file. "FILE_SERVICE" sends the list of resources to the file ingestion service and returns the ID of the file to the client in a JSON object.
+     * The destination of the request. "DOWNLOAD" returns the list of resources as the body
+     * of the response and indicates to the client that it should be downloaded as a file.
+     * "FILE_SERVICE" sends the list of resources to the file ingestion service and returns
+     * the ID of the file to the client in a JSON object.
      */
     destination?: 'DOWNLOAD' | 'FILE_SERVICE';
     /**
-     * Gets or sets the ID of the workspace to put the file into, if the destination is "FILE_SERVICE".
+     * The ID of the workspace to put the file into, if the destination is "FILE_SERVICE".
      */
     fileIngestionWorkspace?: string | null;
 };
 
+/**
+ * Response containing the file identifier for an exported assets report.
+ */
 export type ExportAssetsResponse = {
     /**
-     * Gets or sets file identifier in the file ingestion service.
+     * The file identifier in the file ingestion service.
      */
     fileId?: string | null;
 };
@@ -1012,22 +1150,25 @@ export type ExportAssetsResponse = {
  */
 export type ExportCalibrationHistoryRequest = {
     /**
-     * Gets or sets the return type.
+     * The return type.
      */
     responseFormat?: 'CSV';
     /**
-     * Gets or sets the destination of the request.
+     * The destination of the request.
      */
     destination?: 'DOWNLOAD' | 'FILE_SERVICE';
     /**
-     * Gets or sets the ID of the workspace to put the file into, if the destination is "FILE_SERVICE".
+     * The ID of the workspace to put the file into, if the destination is "FILE_SERVICE".
      */
     fileIngestionWorkspace?: string | null;
 };
 
+/**
+ * Response containing the file identifier for an exported calibration history report.
+ */
 export type ExportCalibrationHistoryResponse = {
     /**
-     * Gets or sets file identifier in the file ingestion service.
+     * The file identifier in the file ingestion service.
      */
     fileId?: string | null;
 };
@@ -1037,59 +1178,65 @@ export type ExportCalibrationHistoryResponse = {
  */
 export type ExportMaterializedAssetsRequest = {
     /**
-     * Gets or sets the filter criteria for assets.
+     * The filter criteria for assets.
      */
     filter?: string | null;
     /**
-     * Gets or sets the return type. Valid option is "CSV".
+     * The return type. Valid option is "CSV".
      */
     responseFormat?: 'CSV';
     /**
-     * Gets or sets the destination of the request. "DOWNLOAD" returns the list of resources as the body of the response and indicates to the client that it should be downloaded as a file. "FILE_SERVICE" sends the list of resources to the file ingestion service and returns the ID of the file to the client in a JSON object.
+     * The destination of the request. "DOWNLOAD" returns the list of resources as the body
+     * of the response and indicates to the client that it should be downloaded as a file.
+     * "FILE_SERVICE" sends the list of resources to the file ingestion service and returns
+     * the ID of the file to the client in a JSON object.
      */
     destination?: 'DOWNLOAD' | 'FILE_SERVICE';
     /**
-     * Gets or sets the ID of the workspace to put the file into, if the destination is "FILE_SERVICE".
+     * The ID of the workspace to put the file into, if the destination is "FILE_SERVICE".
      */
     fileIngestionWorkspace?: string | null;
 };
 
+/**
+ * External calibration data for an asset.
+ */
 export type ExternalCalibrationModel = {
     /**
-     * Gets or sets an array of temperature sensor information.
+     * An array of temperature sensor information.
      */
     temperatureSensors?: Array<TemperatureSensorModel> | null;
     /**
-     * Gets or sets whether the last external calibration of the asset was a limited calibration.
+     * Whether the last external calibration of the asset was a limited calibration.
      */
     isLimited?: boolean | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the last date the asset was externally calibrated.
+     * ISO-8601 formatted timestamp specifying the last date the asset was externally calibrated.
      */
     date?: string | null;
     /**
-     * Gets or sets the manufacturer's recommended calibration interval in months.
+     * The manufacturer's recommended calibration interval in months.
      */
     recommendedInterval?: number | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the recommended date for the next external calibration.
+     * ISO-8601 formatted timestamp specifying the recommended date for the next external calibration.
      */
     nextRecommendedDate?: string | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the date for the next external calibration.
+     * ISO-8601 formatted timestamp specifying the date for the next external calibration.
      */
     nextCustomDueDate?: string | null;
     /**
-     * Gets ISO-8601 formatted timestamp specifying the resolved due date for external calibration. This
+     * ISO-8601 formatted timestamp specifying the resolved due date for external calibration. This
      * takes into account NextCustomDueDate, Asset.CustomCalibrationInterval and NextRecommendedDate.
      */
     resolvedDueDate?: string | null;
     /**
-     * Gets or sets calibration comments provided by an operator.
+     * Calibration comments provided by an operator.
      */
     comments?: string | null;
     /**
-     * Gets or sets whether SystemLink automatically discovered the calibration data for an asset or if it was manually entered.
+     * Whether SystemLink automatically discovered the calibration data for an asset or if it was manually entered.
      */
     entryType?: 'AUTOMATIC' | 'MANUAL';
 };
@@ -1099,41 +1246,41 @@ export type ExternalCalibrationModel = {
  */
 export type ExternalCalibrationWithChecksumModel = {
     /**
-     * Gets or sets an array of temperature sensor information.
+     * An array of temperature sensor information.
      * The maximum number of temperature sensors allowed per external calibration is 1000.
      */
     temperatureSensors?: Array<TemperatureSensorModel> | null;
     /**
-     * Gets or sets whether the last external calibration of the asset was a limited calibration.
+     * Whether the last external calibration of the asset was a limited calibration.
      */
     isLimited?: boolean | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the last date the asset was externally calibrated.
+     * ISO-8601 formatted timestamp specifying the last date the asset was externally calibrated.
      * A date newer the the current calibration date will set the out for calibration flag to false.
      */
     date?: string;
     /**
-     * Gets or sets the manufacturer's recommended calibration interval in months.
+     * The manufacturer's recommended calibration interval in months.
      */
     recommendedInterval?: number;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the recommended date for the next external calibration.
+     * ISO-8601 formatted timestamp specifying the recommended date for the next external calibration.
      */
     nextRecommendedDate?: string;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the date for the next external calibration.
+     * ISO-8601 formatted timestamp specifying the date for the next external calibration.
      */
     nextCustomDueDate?: string | null;
     /**
-     * Gets or sets calibration comments provided by an operator.
+     * Calibration comments provided by an operator.
      */
     comments?: string | null;
     /**
-     * Gets or sets whether SystemLink automatically discovered the calibration data for an asset or if it was manually entered.
+     * Whether SystemLink automatically discovered the calibration data for an asset or if it was manually entered.
      */
     entryType?: 'AUTOMATIC' | 'MANUAL';
     /**
-     * Gets or sets checksum for the external calibration.
+     * Checksum for the external calibration.
      */
     checksum?: string | null;
 };
@@ -1178,7 +1325,10 @@ export type HttpError = {
  * Model for link files Partial Success Response.
  */
 export type LinkFilesPartialSuccessResponse = {
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
     /**
      * The file ids which were successfully linked.
      */
@@ -1194,40 +1344,58 @@ export type LinkFilesPartialSuccessResponse = {
  */
 export type LinkFilesRequest = {
     /**
-     * Gets or sets file IDs associated with an asset.
+     * File IDs associated with an asset.
      * The maximum number of file IDs allowed per request is 1000.
      */
     fileIds?: Array<string> | null;
 };
 
+/**
+ * Describes the status of an asset location move operation.
+ */
 export type MoveAssetLocationModel = {
+    /**
+     * The unique identifier of the asset being moved.
+     */
     assetId?: string | null;
+    /**
+     * The error code if the move operation failed.
+     */
     errorCode?: number | null;
+    /**
+     * The identifier of the current move job.
+     */
     currentJobId?: string | null;
     /**
-     * Status of MoveAssetLocation operation
+     * The current status of the move operation.
      */
     status?: 'QUEUED' | 'IN_PROGRESS' | 'CANCELING' | 'FAILED';
+    /**
+     * The current progress of the move operation.
+     */
     progress?: 'NOT_STARTED' | 'REMOVE_JOB_CREATED' | 'REMOVE_JOB_COMPLETED' | 'ADD_JOB_CREATED' | 'ADD_JOB_COMPLETED';
 };
 
+/**
+ * Operation to move an asset to a new location.
+ */
 export type MoveAssetLocationOperation = {
     /**
-     * Gets or sets identifier of the asset being moved.
+     * The identifier of the asset being moved.
      */
     assetId?: string | null;
     /**
-     * Gets or sets identifier of the system to which the asset is being moved.
+     * The identifier of the system to which the asset is being moved.
      * Either this, or PhysicalLocation are mandatory
      */
     systemId?: string | null;
     /**
-     * Gets or sets physical location to which the asset is being moved.
+     * The physical location to which the asset is being moved.
      * Either this, or SystemId are mandatory
      */
     physicalLocation?: string | null;
     /**
-     * Gets or sets the parent within the target location to which the asset is being moved.
+     * The parent within the target location to which the asset is being moved.
      */
     parent?: string | null;
 };
@@ -1236,31 +1404,36 @@ export type MoveAssetLocationOperation = {
  * Model which represents a success response for moving assets.
  */
 export type MoveAssetsLocationPartialSuccessResponse = {
-    error?: HttpError;
     /**
-     * Gets or sets array of move operations that can be performed successfully.
+     * Contains error information.
+     */
+    error?: HttpError | null;
+    /**
+     * Array of move operations that can be performed successfully.
      */
     validLocationMovements?: Array<ValidLocationMovementModel> | null;
 };
 
+/**
+ * Request to move one or more assets to new locations.
+ */
 export type MoveAssetsLocationRequest = {
     /**
-     * Gets or sets a list of operations that will move an asset from one location to another.
+     * A list of operations that will move an asset from one location to another.
      * The maximum number of move operations allowed per request is 1000.
      */
     assetLocationMoveOperations?: Array<MoveAssetLocationOperation> | null;
 };
 
-export type NoContentResult = {
-    statusCode?: number;
-};
-
 /**
- * Model for object containing filters for asset utilization and assets. When continuation token is used, the orderBy parameter needs to be provided as well.
+ * Model for object containing filters for asset utilization and assets. When continuation
+ * token is used, the orderBy parameter needs to be provided as well.
  */
 export type QueryAssetUtilizationHistoryRequest = {
     /**
-     * Gets or sets the filter criteria for asset utilization. Consists of a string of queries composed using AND/OR operators. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
+     * The filter criteria for asset utilization. Consists of a string of queries composed
+     * using AND/OR operators. String values and date strings need to be enclosed in double
+     * quotes. Parenthesis can be used around filters to better define the order of operations.
      * Filter syntax: '[property name][operator][operand] and [property name][operator][operand]'
      * Operators:
      * - Equals operator '='. Example: 'x = y'
@@ -1297,7 +1470,9 @@ export type QueryAssetUtilizationHistoryRequest = {
      */
     utilizationFilter?: string | null;
     /**
-     * Gets or sets the filter criteria for assets. Consists of a string of queries composed using AND/OR operators. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
+     * The filter criteria for assets. Consists of a string of queries composed using
+     * AND/OR operators. String values and date strings need to be enclosed in double quotes.
+     * Parenthesis can be used around filters to better define the order of operations.
      * Filter syntax: '[property name][operator][operand] and [property name][operator][operand]'
      *
      * Operators:
@@ -1343,19 +1518,23 @@ export type QueryAssetUtilizationHistoryRequest = {
      */
     assetFilter?: string | null;
     /**
-     * Gets or sets a token which allows the user to resume a query at the next item in the matching asset utilization history set. When querying for asset utilization history, a token will be returned if a query may be continued. To obtain the next page of asset utilization history records, pass the token to the service on a subsequent request.
+     * A token which allows the user to resume a query at the next item in the matching
+     * asset utilization history set. When querying for asset utilization history, a token
+     * will be returned if a query may be continued. To obtain the next page of asset
+     * utilization history records, pass the token to the service on a subsequent request.
      */
     continuationToken?: string | null;
     /**
-     * Gets or sets the maximum number of asset utilization history records to return.
+     * The maximum number of asset utilization history records to return.
      */
     take?: number;
     /**
-     * Gets or sets an enumeration of all fields in an Asset Utilization History record. If not provided, default ordering is applied.
+     * An enumeration of all fields in an Asset Utilization History record. If not provided,
+     * default ordering is applied.
      */
     orderBy?: 'START_TIMESTAMP';
     /**
-     * Gets or sets whether to return the asset utilization history records in descending order.
+     * Whether to return the asset utilization history records in descending order.
      */
     orderByDescending?: boolean;
     /**
@@ -1369,11 +1548,13 @@ export type QueryAssetUtilizationHistoryRequest = {
 };
 
 /**
- * Model for object containing filters to apply when retrieving assets. If no assets match the filter and the destination is "DOWNLOAD" or "FILE_SERVICE", an empty report will be generated.
+ * Model for object containing filters to apply when retrieving assets. If no assets match
+ * the filter and the destination is "DOWNLOAD" or "FILE_SERVICE", an empty report will be
+ * generated.
  */
 export type QueryAssetsRequest = {
     /**
-     * Gets or sets identifiers of the assets to be retrieved.
+     * The identifiers of the assets to be retrieved.
      *
      * @deprecated
      */
@@ -1383,41 +1564,50 @@ export type QueryAssetsRequest = {
      */
     projection?: string | null;
     /**
-     * Gets or sets the return type. Valid options are "JSON" and "CSV".
+     * The return type. Valid options are "JSON" and "CSV".
      *
      * @deprecated
      */
     responseFormat?: 'JSON' | 'CSV';
     /**
-     * Gets or sets the destination of the request. "INLINE" (default) returns the list of resources as the body of the response. "DOWNLOAD" returns the list of resources as the body of the response and indicates to the client that it should be downloaded as a file. "FILE_SERVICE" sends the list of resources to the file ingestion service and returns the ID of the file to the client in a JSON object.
+     * The destination of the request. "INLINE" (default) returns the list of resources as
+     * the body of the response. "DOWNLOAD" returns the list of resources as the body of the
+     * response and indicates to the client that it should be downloaded as a file.
+     * "FILE_SERVICE" sends the list of resources to the file ingestion service and returns
+     * the ID of the file to the client in a JSON object.
      *
      * @deprecated
      */
     destination?: 'INLINE' | 'DOWNLOAD' | 'FILE_SERVICE';
     /**
-     * Gets or sets the ID of the workspace to put the file into, if the destination is "FILE_SERVICE".
+     * The ID of the workspace to put the file into, if the destination is "FILE_SERVICE".
      *
      * @deprecated
      */
     fileIngestionWorkspace?: string | null;
     /**
-     * Gets or sets the number of resources to skip in the result when paging. For example, a list of 100 resources with a skip value of 50 will return entries 51 through 100.
+     * The number of resources to skip in the result when paging. For example, a list of
+     * 100 resources with a skip value of 50 will return entries 51 through 100.
      */
     skip?: number;
     /**
-     * Gets or sets how many resources to return in the result, or -1 to use a default defined by the service. The maximum value for Take is 1000. For example, a list of 100 resources with a take value of 25 will return entries 1 through 25.
+     * How many resources to return in the result, or -1 to use a default defined by the
+     * service. The maximum value for Take is 1000. For example, a list of 100 resources with
+     * a take value of 25 will return entries 1 through 25.
      */
     take?: number;
     /**
-     * Field by which assets can be ordered/sorted. If OrderBy is not specified, no sorting will applied. OrderBy is supported only for the `INLINE` destination option.
+     * Field by which assets can be ordered/sorted. If OrderBy is not specified, no sorting
+     * will applied. OrderBy is supported only for the `INLINE` destination option.
      */
     orderBy?: 'LAST_UPDATED_TIMESTAMP' | 'ID';
     /**
-     * Whether to return the assets in the descending order. If OrderBy is not specified, this property is ignored. If OrderBy is specified, this property defaults to false.
+     * Whether to return the assets in the descending order. If OrderBy is not specified,
+     * this property is ignored. If OrderBy is specified, this property defaults to false.
      */
     descending?: boolean;
     /**
-     * Gets or sets whether to generate a report with calibrated asset specific columns.
+     * Whether to generate a report with calibrated asset specific columns.
      * When the destination is "DOWNLOAD or "FILE_SERVICE" this property is used as follows:
      * - It determines the type of the report. When true, the file will be a calibration report. If this is false, the file will be an asset report.
      * - If asset ids are in the request, this property will not be used for filtering. If no asset ids are in the request, setting this property to true will generate a report only for the calibrated assets.
@@ -1428,7 +1618,9 @@ export type QueryAssetsRequest = {
      */
     returnCount?: boolean | null;
     /**
-     * Gets or sets the filter criteria for assets. Consists of a string of queries composed using AND/OR operators. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
+     * The filter criteria for assets. Consists of a string of queries composed using
+     * AND/OR operators. String values and date strings need to be enclosed in double quotes.
+     * Parenthesis can be used around filters to better define the order of operations.
      * Filter syntax: '[property name][operator][operand] and [property name][operator][operand]'
      *
      * Operators:
@@ -1481,25 +1673,37 @@ export type QueryAssetsRequest = {
  * Model for object containing options for querying history.
  */
 export type QueryLocationHistoryRequest = {
+    /**
+     * The maximum number of history records to return.
+     */
     take?: number | null;
     /**
-     * Gets or sets a token which allows the user to resume a query at the next item in the matching asset location history set. When querying for asset location history, a token will be returned if a query may be continued. To obtain the next page of asset location history records, pass the token to the service on a subsequent request.
+     * A token which allows the user to resume a query at the next item in the matching
+     * asset location history set. When querying for asset location history, a token will be
+     * returned if a query may be continued. To obtain the next page of asset location history
+     * records, pass the token to the service on a subsequent request.
      */
     continuationToken?: string | null;
     /**
-     * Gets or sets the return type. Valid options are "JSON" and "CSV".
+     * The return type. Valid options are "JSON" and "CSV".
      */
     responseFormat?: 'JSON' | 'CSV';
     /**
-     * Gets or sets the destination of the request. "INLINE" (default) returns the list of resources as the body of the response. "DOWNLOAD" returns the list of resources as the body of the response and indicates to the client that it should be downloaded as a file. "FILE_SERVICE" sends the list of resources to the file ingestion service and returns the ID of the file to the client in a JSON object.
+     * The destination of the request. "INLINE" (default) returns the list of resources as
+     * the body of the response. "DOWNLOAD" returns the list of resources as the body of the
+     * response and indicates to the client that it should be downloaded as a file.
+     * "FILE_SERVICE" sends the list of resources to the file ingestion service and returns
+     * the ID of the file to the client in a JSON object.
      */
     destination?: 'INLINE' | 'DOWNLOAD' | 'FILE_SERVICE';
     /**
-     * Gets or sets the ID of the workspace to put the file into, if the destination is "FILE_SERVICE".
+     * The ID of the workspace to put the file into, if the destination is "FILE_SERVICE".
      */
     fileIngestionWorkspace?: string | null;
     /**
-     * Gets or sets the filter criteria for location. Consists of a string of queries composed using AND/OR operators. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
+     * The filter criteria for location. Consists of a string of queries composed using
+     * AND/OR operators. String values and date strings need to be enclosed in double quotes.
+     * Parenthesis can be used around filters to better define the order of operations.
      * Filter syntax: '[property name][operator][operand] and [property name][operator][operand]'
      *
      * Operators:
@@ -1521,7 +1725,13 @@ export type QueryLocationHistoryRequest = {
      * - SlotNumber: Integer representing the slot number of the location of an asset.
      */
     locationFilter?: string | null;
+    /**
+     * ISO-8601 formatted start time for the query range. Defaults to 90 days ago.
+     */
     startTime?: string | null;
+    /**
+     * ISO-8601 formatted end time for the query range. Defaults to now.
+     */
     endTime?: string | null;
 };
 
@@ -1530,7 +1740,7 @@ export type QueryLocationHistoryRequest = {
  */
 export type QueryLocationMovesRequest = {
     /**
-     * Gets or sets an array of asset IDs that the client requests.
+     * An array of asset IDs that the client requests.
      * The maximum number of asset IDs allowed per request is 1000.
      */
     assetIds?: Array<string> | null;
@@ -1541,36 +1751,45 @@ export type QueryLocationMovesRequest = {
  */
 export type QueryLocationMovesResponse = {
     /**
-     * Gets or sets an array of assets that are moving.
+     * An array of assets that are moving.
      */
     moveAssets?: Array<MoveAssetLocationModel> | null;
 };
 
+/**
+ * Operation to receive an asset returning from calibration, including calibration data and location move.
+ */
 export type ReceiveFromCalibrationOperations = {
     /**
-     * Gets or sets identifier of the asset being moved.
+     * The identifier of the asset being moved.
      */
     assetId?: string | null;
     /**
-     * Gets or sets identifier of the system to which the asset is being moved.
+     * The identifier of the system to which the asset is being moved.
      * Either this, or PhysicalLocation are mandatory
      */
     systemId?: string | null;
     /**
-     * Gets or sets physical location to which the asset is being moved.
+     * The physical location to which the asset is being moved.
      * Either this, or SystemId are mandatory
      */
     physicalLocation?: string | null;
     /**
-     * Gets or sets the parent within the target location to which the asset is being moved.
+     * The parent within the target location to which the asset is being moved.
      */
     parent?: string | null;
-    calibrationData?: ExternalCalibrationWithChecksumModel;
+    /**
+     * The calibration data to record for the asset.
+     */
+    calibrationData?: ExternalCalibrationWithChecksumModel | null;
 };
 
+/**
+ * Request to receive one or more assets from a calibration lab.
+ */
 export type ReceiveFromCalibrationRequest = {
     /**
-     * Gets or sets a list of operations that will update the asset calibration and  move an asset from one location to another.
+     * A list of operations that will update the asset calibration and  move an asset from one location to another.
      * The maximum number of operations allowed per request is 1000.
      */
     receiveFromCalibrationOperations?: Array<ReceiveFromCalibrationOperations> | null;
@@ -1581,7 +1800,9 @@ export type ReceiveFromCalibrationRequest = {
  */
 export type SearchAssetsRequest = {
     /**
-     * Gets or sets the filter criteria for assets. Consists of a Lucene-based query string. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
+     * The filter criteria for assets. Consists of a Lucene-based query string. String values
+     * and date strings need to be enclosed in double quotes. Parenthesis can be used around
+     * filters to better define the order of operations.
      * Filter syntax: '[field]: "[value]" [operator] [field]: "[value]"'
      *
      * When no field is specified, the value is matched against the default fields: Name, ModelName, VendorName, SerialNumber, ScanCode, Keywords, Properties values and Location names.
@@ -1651,20 +1872,25 @@ export type SearchAssetsRequest = {
      */
     filter?: string | null;
     /**
-     * Gets or sets the number of resources to skip in the result when paging. For example, a list of 100 resources with a skip value of 50 will return entries 51 through 100.
+     * The number of resources to skip in the result when paging. For example, a list of
+     * 100 resources with a skip value of 50 will return entries 51 through 100.
      */
     skip?: number;
     /**
-     * Gets or sets how many resources to return in the result, or -1 to use a default defined by the service. For example, a list of 100 resources with a take value of 25 will return entries 1 through 25.
+     * How many resources to return in the result, or -1 to use a default defined by the
+     * service. For example, a list of 100 resources with a take value of 25 will return
+     * entries 1 through 25.
      */
     take?: number | null;
     /**
-     * Field by which assets can be ordered/sorted. If Filter is set but OrderBy is not specified, no sorting will applied.
-     * If neiter Filter, not OrderBy is specified, the assets will be sorted based on their workspace and location.
+     * Field by which assets can be ordered/sorted. If Filter is set but OrderBy is not
+     * specified, no sorting will applied.
+     * If neither Filter nor OrderBy is specified, the assets will be sorted based on their workspace and location.
      */
     orderBy?: 'LAST_UPDATED_TIMESTAMP' | 'ID';
     /**
-     * Whether to return the assets in the descending order. If OrderBy is not specified, this property is ignored. If OrderBy is specified, this property defaults to false.
+     * Whether to return the assets in the descending order. If OrderBy is not specified,
+     * this property is ignored. If OrderBy is specified, this property defaults to false.
      */
     descending?: boolean;
     /**
@@ -1678,23 +1904,26 @@ export type SearchAssetsRequest = {
  */
 export type SearchAssetsResponse = {
     /**
-     * Gets or sets array of assets.
+     * Array of assets.
      */
     assets?: Array<AssetModel> | null;
 };
 
+/**
+ * Self-calibration data for an asset.
+ */
 export type SelfCalibrationModel = {
     /**
-     * Gets or sets an array of temperature sensor information.
+     * An array of temperature sensor information.
      * The maximum number of temperature sensors allowed per self calibration is 1000.
      */
     temperatureSensors?: Array<TemperatureSensorModel> | null;
     /**
-     * Gets or sets whether the last self-calibration of the asset was a limited calibration.
+     * Whether the last self-calibration of the asset was a limited calibration.
      */
     isLimited?: boolean | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the last date the asset was self-calibrated.
+     * ISO-8601 formatted timestamp specifying the last date the asset was self-calibrated.
      */
     date?: string;
 };
@@ -1704,95 +1933,112 @@ export type SelfCalibrationModel = {
  */
 export type SelfCalibrationProjectedModel = {
     /**
-     * Gets or sets an array of temperature sensor information.
+     * An array of temperature sensor information.
      * The maximum number of temperature sensors allowed per self calibration is 1000.
      */
     temperatureSensors?: Array<TemperatureSensorModel> | null;
     /**
-     * Gets or sets whether the last self-calibration of the asset was a limited calibration.
+     * Whether the last self-calibration of the asset was a limited calibration.
      */
     isLimited?: boolean | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the last date the asset was self-calibrated.
+     * ISO-8601 formatted timestamp specifying the last date the asset was self-calibrated.
      */
     date?: string | null;
 };
 
+/**
+ * Operation to send an asset to a calibration lab.
+ */
 export type SendForCalibrationOperation = {
     /**
-     * Gets or sets identifier of the asset being moved.
+     * The identifier of the asset being moved.
      */
     assetId?: string | null;
     /**
-     * Gets or sets physical location to which the asset is being moved.
+     * The physical location to which the asset is being moved.
      */
     physicalLocation?: string | null;
     /**
-     * Gets or sets the parent within the target location to which the asset is being moved.
+     * The parent within the target location to which the asset is being moved.
      */
     parent?: string | null;
 };
 
+/**
+ * Request to send one or more assets for calibration.
+ */
 export type SendForCalibrationRequest = {
     /**
-     * Gets or sets a list of operations that will be performed.
+     * A list of operations that will be performed.
      * The maximum number of operations allowed per request is 1000.
      */
     sendForCalibrationOperations?: Array<SendForCalibrationOperation> | null;
 };
 
+/**
+ * Response for a start utilization request that may partially succeed.
+ */
 export type StartUtilizationPartialSuccessResponse = {
-    error?: HttpError;
     /**
-     * Gets or sets array containing the asset identification data for the assets that started being utilized.
+     * Contains error information.
+     */
+    error?: HttpError | null;
+    /**
+     * Array containing the asset identification data for the assets that started being utilized.
      */
     assetsWithStartedUtilization?: Array<AssetIdentificationModel> | null;
     /**
-     * Gets or sets array containing the asset identification data for the assets that failed to start being utilized.
+     * Array containing the asset identification data for the assets that failed to start being utilized.
      */
     failed?: Array<AssetIdentificationModel> | null;
 };
 
+/**
+ * Request to start utilization tracking for one or more assets.
+ */
 export type StartUtilizationRequest = {
     /**
-     * Gets or sets string representing the unique identifier of an asset utilization history record.
+     * The unique identifier of an asset utilization history record.
      */
     utilizationIdentifier?: string | null;
     /**
-     * Gets or sets identifier of the minion where the utilized assets are located.
+     * The identifier of the minion where the utilized assets are located.
      */
     minionId?: string | null;
     /**
-     * Gets or sets array of the identification information for the assets which are utilized.
+     * Array of the identification information for the assets which are utilized.
      * The maximum number of asset identifications allowed per request is 100.
      */
     assetIdentifications?: Array<AssetIdentificationModel> | null;
     /**
-     * Gets or sets string representing the utilization category.
+     * The utilization category.
      */
     utilizationCategory?: string | null;
     /**
-     * Gets or sets string representing the name of the task.
+     * The name of the task.
      */
     taskName?: string | null;
     /**
-     * Gets or sets string representing the name of the operator who utilized the asset.
+     * The name of the operator who utilized the asset.
      */
     userName?: string | null;
     /**
-     * Gets or sets a date time value which can be used to specify the start of an utilization.
-     * This parameter must have the "ISO 8601" format in order to be considered valid.
+     * ISO-8601 formatted timestamp specifying the start of the utilization.
      */
     utilizationTimestamp?: string;
 };
 
+/**
+ * Temperature sensor reading for an asset.
+ */
 export type TemperatureSensorModel = {
     /**
-     * Gets or sets sensor name.
+     * The sensor name.
      */
     name?: string | null;
     /**
-     * Gets or sets sensor reading.
+     * The sensor reading.
      */
     reading?: number | null;
 };
@@ -1801,13 +2047,16 @@ export type TemperatureSensorModel = {
  * Model for update Assets Partial Success Response.
  */
 export type UpdateAssetsPartialSuccessResponse = {
-    error?: HttpError;
     /**
-     * Gets or sets array of updated assets.
+     * Contains error information.
+     */
+    error?: HttpError | null;
+    /**
+     * Array of updated assets.
      */
     assets?: Array<AssetModel> | null;
     /**
-     * Gets or sets array of assets update requests that failed.
+     * Array of asset update requests that failed.
      */
     failed?: Array<AssetUpdateModel> | null;
 };
@@ -1817,7 +2066,7 @@ export type UpdateAssetsPartialSuccessResponse = {
  */
 export type UpdateAssetsRequest = {
     /**
-     * Gets or sets multiple assets that should be updated.
+     * The assets to update.
      * The maximum number of assets allowed per request is 1000.
      */
     assets?: Array<AssetUpdateModel> | null;
@@ -1828,12 +2077,12 @@ export type UpdateAssetsRequest = {
  */
 export type UpdateMetadataRequest = {
     /**
-     * Gets or sets keywords associated with an asset.
+     * Keywords associated with an asset.
      * The maximum number of keywords allowed per request is 1000.
      */
     keywords?: Array<string> | null;
     /**
-     * Gets or sets properties associated with an asset.
+     * Properties associated with an asset.
      * The maximum number of properties allowed per request is 1000.
      */
     properties?: {
@@ -1841,14 +2090,20 @@ export type UpdateMetadataRequest = {
     } | null;
 };
 
+/**
+ * Response for a utilization update request that may partially succeed.
+ */
 export type UpdateUtilizationPartialSuccessResponse = {
-    error?: HttpError;
     /**
-     * Gets or sets array of utilization identifiers for the entries that were updated.
+     * Contains error information.
+     */
+    error?: HttpError | null;
+    /**
+     * Array of utilization identifiers for the entries that were updated.
      */
     updatedUtilizationIds?: Array<string> | null;
     /**
-     * Gets or sets array of utilization identifiers for the entries that failed to update.
+     * Array of utilization identifiers for the entries that failed to update.
      */
     failed?: Array<string> | null;
 };
@@ -1858,11 +2113,11 @@ export type UpdateUtilizationPartialSuccessResponse = {
  */
 export type UtilizationHeartbeatRequest = {
     /**
-     * Gets or sets array representing the unique identifier of an asset utilization history record.
+     * Array of unique identifiers of asset utilization history records.
      */
     utilizationIdentifiers?: Array<string> | null;
     /**
-     * Gets or sets a date time value which can be used to specify the end of an asset utilization.
+     * ISO-8601 formatted timestamp specifying the end of the asset utilization.
      * This parameter must have the "ISO 8601" format in order to be considered valid.
      */
     utilizationTimestamp?: string;
@@ -1872,38 +2127,60 @@ export type UtilizationHeartbeatRequest = {
  * Model which represents the validation result of a single asset move location operation
  */
 export type ValidLocationMovementModel = {
+    /**
+     * The unique identifier of the asset.
+     */
     assetId?: string | null;
+    /**
+     * A warning message, if any, related to the location move validation.
+     */
     warning?: string | null;
 };
 
 export type GetAssetsData = {
     body?: never;
     headers?: {
+        /**
+         * The API key for authentication.
+         */
         'x-ni-api-key'?: string;
     };
     path?: never;
     query?: {
+        /**
+         * The number of assets to skip for pagination.
+         */
         Skip?: number;
+        /**
+         * The maximum number of assets to return.
+         */
         Take?: number;
+        /**
+         * Whether to return only assets that support calibration.
+         */
         CalibratableOnly?: boolean;
         /**
          * Whether to return the total number of assets which match the provided filter, disregarding the take value.
          */
         ReturnCount?: boolean;
         /**
-         * Gets or sets the return type. Valid options are "JSON" and "CSV".
+         * The return type. Valid options are "JSON" and "CSV".
          *
          * @deprecated
          */
         ResponseFormat?: 'JSON' | 'CSV';
         /**
-         * Gets or sets the destination of the request. "INLINE" (default) returns the list of resources as the body of the response. "DOWNLOAD" returns the list of resources as the body of the response and indicates to the client that it should be downloaded as a file. "FILE_SERVICE" sends the list of resources to the file ingestion service and returns the ID of the file to the client in a JSON object.
+         * The destination of the request. "INLINE" (default) returns the list of resources as
+         * the body of the response. "DOWNLOAD" returns the list of resources as the body of the
+         * response and indicates to the client that it should be downloaded as a file.
+         * "FILE_SERVICE" sends the list of resources to the file ingestion service and returns
+         * the ID of the file to the client in a JSON object.
          *
          * @deprecated
          */
         Destination?: 'INLINE' | 'DOWNLOAD' | 'FILE_SERVICE';
         /**
-         * Gets or sets the ID of the workspace to put the file into, if the destination is "FILE_SERVICE".
+         * The ID of the workspace to put the file into, if the destination is "FILE_SERVICE".
          *
          * @deprecated
          */
@@ -1931,6 +2208,9 @@ export type GetAssetsResponses = {
 export type GetAssetsResponse = GetAssetsResponses[keyof GetAssetsResponses];
 
 export type CreateAssetsData = {
+    /**
+     * Model for request body containing an array of assets that should be created.
+     */
     body?: CreateAssetsRequest;
     path?: never;
     query?: never;
@@ -1981,6 +2261,11 @@ export type AssetSummaryResponses = {
 export type AssetSummaryResponse2 = AssetSummaryResponses[keyof AssetSummaryResponses];
 
 export type QueryAssetsData = {
+    /**
+     * Model for object containing filters to apply when retrieving assets. If no assets match
+     * the filter and the destination is "DOWNLOAD" or "FILE_SERVICE", an empty report will be
+     * generated.
+     */
     body?: QueryAssetsRequest;
     path?: never;
     query?: never;
@@ -2006,6 +2291,9 @@ export type QueryAssetsResponses = {
 export type QueryAssetsResponse = QueryAssetsResponses[keyof QueryAssetsResponses];
 
 export type ExportAssetsData = {
+    /**
+     * Request to export an assets report.
+     */
     body?: ExportAssetsRequest;
     path?: never;
     query?: never;
@@ -2035,8 +2323,14 @@ export type ExportAssetsResponses = {
 export type ExportAssetsResponse2 = ExportAssetsResponses[keyof ExportAssetsResponses];
 
 export type UpdateMetadataData = {
+    /**
+     * Model for the asset metadata information to be updated.
+     */
     body?: UpdateMetadataRequest;
     path: {
+        /**
+         * The unique identifier of the asset.
+         */
         assetId: string;
     };
     query?: never;
@@ -2062,6 +2356,9 @@ export type UpdateMetadataResponses = {
 export type UpdateMetadataResponse = UpdateMetadataResponses[keyof UpdateMetadataResponses];
 
 export type UpdateAssetsData = {
+    /**
+     * Model for request body containing an array of assets to update.
+     */
     body?: UpdateAssetsRequest;
     path?: never;
     query?: never;
@@ -2087,11 +2384,20 @@ export type UpdateAssetsResponses = {
 export type UpdateAssetsResponse = UpdateAssetsResponses[keyof UpdateAssetsResponses];
 
 export type PostAssetQueryConnectionHistoryData = {
+    /**
+     * Model for object containing options for querying history.
+     */
     body?: QueryLocationHistoryRequest;
     headers?: {
+        /**
+         * The API key for authentication.
+         */
         'x-ni-api-key'?: string;
     };
     path: {
+        /**
+         * The unique identifier of the asset.
+         */
         assetId: string;
     };
     query?: never;
@@ -2117,6 +2423,9 @@ export type PostAssetQueryConnectionHistoryResponses = {
 export type PostAssetQueryConnectionHistoryResponse = PostAssetQueryConnectionHistoryResponses[keyof PostAssetQueryConnectionHistoryResponses];
 
 export type DeleteAssetsData = {
+    /**
+     * Model for request body containing IDs of the assets to delete all information for.
+     */
     body?: DeleteAssetsRequest;
     path?: never;
     query?: never;
@@ -2144,6 +2453,9 @@ export type DeleteAssetsResponse2 = DeleteAssetsResponses[keyof DeleteAssetsResp
 export type GetAssetData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the asset.
+         */
         assetId: string;
     };
     query?: never;
@@ -2169,8 +2481,14 @@ export type GetAssetResponses = {
 export type GetAssetResponse = GetAssetResponses[keyof GetAssetResponses];
 
 export type LinkFilesData = {
+    /**
+     * Model for the asset link files request.
+     */
     body?: LinkFilesRequest;
     path: {
+        /**
+         * The unique identifier of the asset.
+         */
         assetId: string;
     };
     query?: never;
@@ -2198,7 +2516,13 @@ export type LinkFilesResponse = LinkFilesResponses[keyof LinkFilesResponses];
 export type UnlinkFileFromAssetData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the asset.
+         */
         assetId: string;
+        /**
+         * The unique identifier of the file to unlink.
+         */
         fileId: string;
     };
     query?: never;
@@ -2218,14 +2542,20 @@ export type UnlinkFileFromAssetResponses = {
     /**
      * No Content
      */
-    204: NoContentResult;
+    204: void;
 };
 
 export type UnlinkFileFromAssetResponse = UnlinkFileFromAssetResponses[keyof UnlinkFileFromAssetResponses];
 
 export type DeleteCalibrationHistoryData = {
+    /**
+     * Request to delete one or more calibration history entries.
+     */
     body?: DeleteCalibrationHistoryRequest;
     path: {
+        /**
+         * The unique identifier of the asset.
+         */
         assetId: string;
     };
     query?: never;
@@ -2257,10 +2587,19 @@ export type DeleteCalibrationHistoryResponse = DeleteCalibrationHistoryResponses
 export type GetAssetCalibrationHistoryData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the asset.
+         */
         assetId: string;
     };
     query?: {
+        /**
+         * The number of entries to skip for pagination.
+         */
         Skip?: number;
+        /**
+         * The maximum number of entries to return.
+         */
         Take?: number;
         /**
          * Whether to return the total number of calibration history entries, disregarding the take value.
@@ -2289,8 +2628,14 @@ export type GetAssetCalibrationHistoryResponses = {
 export type GetAssetCalibrationHistoryResponse = GetAssetCalibrationHistoryResponses[keyof GetAssetCalibrationHistoryResponses];
 
 export type ExportCalibrationHistoryData = {
+    /**
+     * Model for object containing options for exporting history.
+     */
     body?: ExportCalibrationHistoryRequest;
     path: {
+        /**
+         * The unique identifier of the asset.
+         */
         assetId: string;
     };
     query?: never;
@@ -2321,7 +2666,8 @@ export type ExportCalibrationHistoryResponse2 = ExportCalibrationHistoryResponse
 
 export type CalculateCalibrationForecastData = {
     /**
-     * Model containing forecast query parameters.
+     * Asset calibration forecast request model used to query the upcoming
+     * number of assets that require calibration.
      */
     body?: AssetCalibrationForecastRequest;
     path?: never;
@@ -2349,7 +2695,7 @@ export type CalculateCalibrationForecastResponse = CalculateCalibrationForecastR
 
 export type ReceiveFromCalibrationDryRunData = {
     /**
-     * Model containing information for asset update and location movement for assets returning from calibration.
+     * Request to receive one or more assets from a calibration lab.
      */
     body?: ReceiveFromCalibrationRequest;
     path?: never;
@@ -2377,7 +2723,7 @@ export type ReceiveFromCalibrationDryRunResponse = ReceiveFromCalibrationDryRunR
 
 export type ReceiveFromCalibrationData = {
     /**
-     * Model containing forecast query parameters.
+     * Request to receive one or more assets from a calibration lab.
      */
     body?: ReceiveFromCalibrationRequest;
     path?: never;
@@ -2405,7 +2751,7 @@ export type ReceiveFromCalibrationResponse = ReceiveFromCalibrationResponses[key
 
 export type SendForCalibrationDryRunData = {
     /**
-     * Model containing information for asset update and location movement for assets sent to calibration.
+     * Request to send one or more assets for calibration.
      */
     body?: SendForCalibrationRequest;
     path?: never;
@@ -2433,7 +2779,7 @@ export type SendForCalibrationDryRunResponse = SendForCalibrationDryRunResponses
 
 export type SendForCalibrationData = {
     /**
-     * Model containing information for asset update and location movement for assets sent to calibration.
+     * Request to send one or more assets for calibration.
      */
     body?: SendForCalibrationRequest;
     path?: never;
@@ -2460,6 +2806,9 @@ export type SendForCalibrationResponses = {
 export type SendForCalibrationResponse = SendForCalibrationResponses[keyof SendForCalibrationResponses];
 
 export type MoveAssetsLocationDryRunData = {
+    /**
+     * Request to move one or more assets to new locations.
+     */
     body?: MoveAssetsLocationRequest;
     path?: never;
     query?: never;
@@ -2485,6 +2834,9 @@ export type MoveAssetsLocationDryRunResponses = {
 export type MoveAssetsLocationDryRunResponse = MoveAssetsLocationDryRunResponses[keyof MoveAssetsLocationDryRunResponses];
 
 export type MoveAssetsLocationData = {
+    /**
+     * Request to move one or more assets to new locations.
+     */
     body?: MoveAssetsLocationRequest;
     path?: never;
     query?: never;
@@ -2510,6 +2862,9 @@ export type MoveAssetsLocationResponses = {
 export type MoveAssetsLocationResponse = MoveAssetsLocationResponses[keyof MoveAssetsLocationResponses];
 
 export type QueryLocationMovesData = {
+    /**
+     * Model which represents which assets the clients requests
+     */
     body?: QueryLocationMovesRequest;
     path?: never;
     query?: never;
@@ -2563,6 +2918,9 @@ export type V1Responses = {
 };
 
 export type SearchAssetsData = {
+    /**
+     * Model for object containing filters to apply when searching assets.
+     */
     body?: SearchAssetsRequest;
     path?: never;
     query?: never;
@@ -2588,6 +2946,9 @@ export type SearchAssetsResponses = {
 export type SearchAssetsResponse2 = SearchAssetsResponses[keyof SearchAssetsResponses];
 
 export type ExportMaterializedAssetsData = {
+    /**
+     * Model for exporting materialized assets.
+     */
     body?: ExportMaterializedAssetsRequest;
     path?: never;
     query?: never;
@@ -2617,6 +2978,10 @@ export type ExportMaterializedAssetsResponses = {
 export type ExportMaterializedAssetsResponse = ExportMaterializedAssetsResponses[keyof ExportMaterializedAssetsResponses];
 
 export type QueryAssetUtilizationHistoryData = {
+    /**
+     * Model for object containing filters for asset utilization and assets. When continuation
+     * token is used, the orderBy parameter needs to be provided as well.
+     */
     body?: QueryAssetUtilizationHistoryRequest;
     path?: never;
     query?: never;
@@ -2642,6 +3007,9 @@ export type QueryAssetUtilizationHistoryResponses = {
 export type QueryAssetUtilizationHistoryResponse = QueryAssetUtilizationHistoryResponses[keyof QueryAssetUtilizationHistoryResponses];
 
 export type StartUtilizationData = {
+    /**
+     * Request to start utilization tracking for one or more assets.
+     */
     body?: StartUtilizationRequest;
     path?: never;
     query?: never;
@@ -2667,6 +3035,9 @@ export type StartUtilizationResponses = {
 export type StartUtilizationResponse = StartUtilizationResponses[keyof StartUtilizationResponses];
 
 export type EndUtilizationData = {
+    /**
+     * Request to end utilization tracking for one or more assets.
+     */
     body?: EndUtilizationRequest;
     path?: never;
     query?: never;
@@ -2692,6 +3063,9 @@ export type EndUtilizationResponses = {
 export type EndUtilizationResponse = EndUtilizationResponses[keyof EndUtilizationResponses];
 
 export type UtilizationHeartbeatData = {
+    /**
+     * Model for object containing a collection of utilization identifiers with a timestamp.
+     */
     body?: UtilizationHeartbeatRequest;
     path?: never;
     query?: never;

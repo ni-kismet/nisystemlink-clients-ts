@@ -11,7 +11,10 @@ export type ClientOptions = {
  * required unless `endOfData` is true.
  */
 export type AppendTableDataRequest = {
-    frame?: DataFrame;
+    /**
+     * Data frame containing the rows to be appended to the table.
+     */
+    frame?: DataFrame | null;
     /**
      * Whether the table should expect any additional rows to be appended in future requests.
      */
@@ -42,11 +45,29 @@ export type AppendTableDataRequest = {
  * - writeData: The ability to append rows of data to tables.
  */
 export type AvailableV1Operations = {
+    /**
+     * The ability to create new DataFrame tables.
+     */
     createTables: Operation;
+    /**
+     * The ability to delete tables and all of their data.
+     */
     deleteTables: Operation;
+    /**
+     * The ability to modify metadata for tables.
+     */
     modifyMetadata: Operation;
+    /**
+     * The ability to locate and read metadata for tables.
+     */
     listTables: Operation;
+    /**
+     * The ability to query and read data from tables.
+     */
     readData: Operation;
+    /**
+     * The ability to append rows of data to tables.
+     */
     writeData: Operation;
 };
 
@@ -222,6 +243,11 @@ export type DataFrame = {
  * Contains the result of a query for rows of data.
  */
 export type DataFrameQueryResponse = {
+    /**
+     * Data Frame
+     *
+     * The `DataFrame` with the data to return in the query response.
+     */
     frame: DataFrame;
     /**
      * The total number of rows matched by the query across all pages of results.
@@ -243,6 +269,11 @@ export type DataFrameQueryResponse = {
  * Contains the result of a query for rows of decimated data.
  */
 export type DecimatedDataFrameQueryResponse = {
+    /**
+     * Data Frame
+     *
+     * The `DataFrame` with the decimated data to return in the query response.
+     */
     frame: DataFrame;
 };
 
@@ -261,6 +292,9 @@ export type DeleteTablesPartialSuccessResponse = {
      * The IDs of the tables that could not be deleted.
      */
     failedTableIds: Array<string>;
+    /**
+     * An error describing why tables could not be deleted.
+     */
     error: HttpError;
 };
 
@@ -282,6 +316,9 @@ export type DeleteTablesRequest = {
  * Contains error information.
  */
 export type ErrorResponse = {
+    /**
+     * The error information.
+     */
     error: HttpError;
 };
 
@@ -516,6 +553,9 @@ export type ModifyTablesPartialSuccessResponse = {
      * The requested modifications that could not be applied.
      */
     failedModifications: Array<TableMetadataModification>;
+    /**
+     * An error describing why tables could not be modified.
+     */
     error: HttpError;
 };
 
@@ -548,15 +588,6 @@ export type Operation = {
      * The version of the available operation.
      */
     version: number;
-};
-
-export type ProblemDetails = {
-    type?: string | null;
-    title?: string | null;
-    status?: number | null;
-    detail?: string | null;
-    instance?: string | null;
-    [key: string]: unknown;
 };
 
 /**
@@ -703,6 +734,11 @@ export type QueryTablesRequest = {
  * Version information
  */
 export type RootEndpointResponse = {
+    /**
+     * V1 Operations
+     *
+     * The operations available in the routes provided by the /v1 HTTP API.
+     */
     v1: V1Operations;
     /**
      * The implementation version of the web service.
@@ -775,7 +811,11 @@ export type StringDecimatedDataQueryRequest = {
      * These filters are applied before data is decimated.
      */
     filters?: Array<StringColumnFilter> | null;
-    decimation?: StringDecimationOptions;
+    /**
+     * Contains the parameters to use for decimation.
+     * The default values for each of the properties are used if this property is excluded.
+     */
+    decimation?: StringDecimationOptions | null;
 };
 
 /**
@@ -952,6 +992,11 @@ export type TableMetadataModification = {
  * The operations available in the routes provided by the `/v1` HTTP API.
  */
 export type V1Operations = {
+    /**
+     * Available V1 Operations
+     *
+     * Available operations in the v1 version of the API.
+     */
     operations: AvailableV1Operations;
 };
 
@@ -1019,7 +1064,10 @@ export type GetTableDataResponse = GetTableDataResponses[keyof GetTableDataRespo
 
 export type PostTableDataData = {
     /**
-     * Request body.
+     * Append Table Data Request
+     *
+     * Contains the rows to append and optional flags. The `frame` property is
+     * required unless `endOfData` is true.
      */
     body?: AppendTableDataRequest;
     path: {
@@ -1047,7 +1095,7 @@ export type PostTableDataErrors = {
     /**
      * The service is processing too many requests.
      */
-    429: ProblemDetails;
+    429: ErrorResponse;
     /**
      * Error
      */
@@ -1067,7 +1115,9 @@ export type PostTableDataResponse = PostTableDataResponses[keyof PostTableDataRe
 
 export type QueryTableDataData = {
     /**
-     * Request body.
+     * Query Table Data Request
+     *
+     * Specifies the ordering and filtering query.
      */
     body?: StringQueryTableDataRequest;
     path: {
@@ -1100,7 +1150,9 @@ export type QueryTableDataResponse = QueryTableDataResponses[keyof QueryTableDat
 
 export type ExportTableDataData = {
     /**
-     * Request body.
+     * Export Table Data Request
+     *
+     * Specifies the parameters for a data export with ordering and filtering.
      */
     body?: StringExportTableDataRequest;
     path: {
@@ -1135,7 +1187,9 @@ export type ExportTableDataResponses = {
 
 export type QueryDecimatedTableDataData = {
     /**
-     * Request body.
+     * Decimated DataFrame Query Request
+     *
+     * Specifies the columns, filters and decimation parameters for a query.
      */
     body?: StringDecimatedDataQueryRequest;
     path: {
@@ -1233,7 +1287,9 @@ export type GetTablesResponse = GetTablesResponses[keyof GetTablesResponses];
 
 export type CreateTableData = {
     /**
-     * Request body.
+     * Create Table Request
+     *
+     * The tables's column definitions and metadata. Exactly one column must have a `columnType` of `INDEX`.
      */
     body?: CreateTableRequest;
     path?: never;
@@ -1261,6 +1317,8 @@ export type CreateTableResponse = CreateTableResponses[keyof CreateTableResponse
 
 export type QueryTablesData = {
     /**
+     * Query Tables Request
+     *
      * The parameters for querying the tables.
      */
     body?: QueryTablesRequest;
@@ -1349,6 +1407,8 @@ export type GetTableResponse = GetTableResponses[keyof GetTableResponses];
 
 export type ModifyTableData = {
     /**
+     * Modify Table Request
+     *
      * Contains the metadata properties to modify. Values not included in the request body will remain unchanged.
      */
     body?: ModifyTableRequest;
@@ -1382,7 +1442,9 @@ export type ModifyTableResponse = ModifyTableResponses[keyof ModifyTableResponse
 
 export type DeleteTablesData = {
     /**
-     * The parameters for deleting tables.
+     * Delete Tables Request
+     *
+     * Identifies the tables to delete.
      */
     body?: DeleteTablesRequest;
     path?: never;
@@ -1414,7 +1476,9 @@ export type DeleteTablesResponse = DeleteTablesResponses[keyof DeleteTablesRespo
 
 export type ModifyTablesData = {
     /**
-     * Contains the table modifications to apply.
+     * Modify Tables Request
+     *
+     * Contains one or more table modifications to apply.
      */
     body?: ModifyTablesRequest;
     path?: never;
