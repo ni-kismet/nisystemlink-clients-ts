@@ -19,7 +19,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Gets all address groups
+ * Get all address groups
  */
 export const getAddressGroups = <ThrowOnError extends boolean = false>(options?: Options<GetAddressGroupsData, ThrowOnError>) => (options?.client ?? client).get<GetAddressGroupsResponses, GetAddressGroupsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -28,7 +28,7 @@ export const getAddressGroups = <ThrowOnError extends boolean = false>(options?:
 });
 
 /**
- * Creates an address group
+ * Create an address group
  */
 export const createAddressGroup = <ThrowOnError extends boolean = false>(options?: Options<CreateAddressGroupData, ThrowOnError>) => (options?.client ?? client).post<CreateAddressGroupResponses, CreateAddressGroupErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -41,7 +41,7 @@ export const createAddressGroup = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Delete an address group by its id
+ * Delete an address group by its ID
  */
 export const deleteAddressGroup = <ThrowOnError extends boolean = false>(options: Options<DeleteAddressGroupData, ThrowOnError>) => (options.client ?? client).delete<DeleteAddressGroupResponses, DeleteAddressGroupErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -50,7 +50,7 @@ export const deleteAddressGroup = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Gets an address group by its id
+ * Get an address group by its ID
  */
 export const getAddressGroup = <ThrowOnError extends boolean = false>(options: Options<GetAddressGroupData, ThrowOnError>) => (options.client ?? client).get<GetAddressGroupResponses, GetAddressGroupErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -59,7 +59,7 @@ export const getAddressGroup = <ThrowOnError extends boolean = false>(options: O
 });
 
 /**
- * Updates an address group by its id
+ * Update an address group by its ID
  */
 export const updateAddressGroup = <ThrowOnError extends boolean = false>(options: Options<UpdateAddressGroupData, ThrowOnError>) => (options.client ?? client).patch<UpdateAddressGroupResponses, UpdateAddressGroupErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -72,7 +72,7 @@ export const updateAddressGroup = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Gets all message templates
+ * Get all message templates
  */
 export const getMessageTemplates = <ThrowOnError extends boolean = false>(options?: Options<GetMessageTemplatesData, ThrowOnError>) => (options?.client ?? client).get<GetMessageTemplatesResponses, GetMessageTemplatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -81,7 +81,7 @@ export const getMessageTemplates = <ThrowOnError extends boolean = false>(option
 });
 
 /**
- * Creates a message template
+ * Create a message template
  */
 export const createMessageTemplate = <ThrowOnError extends boolean = false>(options?: Options<CreateMessageTemplateData, ThrowOnError>) => (options?.client ?? client).post<CreateMessageTemplateResponses, CreateMessageTemplateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -94,7 +94,7 @@ export const createMessageTemplate = <ThrowOnError extends boolean = false>(opti
 });
 
 /**
- * Delete an message template by its id
+ * Delete a message template by its ID
  */
 export const deleteMessageTemplate = <ThrowOnError extends boolean = false>(options: Options<DeleteMessageTemplateData, ThrowOnError>) => (options.client ?? client).delete<DeleteMessageTemplateResponses, DeleteMessageTemplateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -103,7 +103,7 @@ export const deleteMessageTemplate = <ThrowOnError extends boolean = false>(opti
 });
 
 /**
- * Gets an message template by its id
+ * Get a message template by its ID
  */
 export const getMessageTemplate = <ThrowOnError extends boolean = false>(options: Options<GetMessageTemplateData, ThrowOnError>) => (options.client ?? client).get<GetMessageTemplateResponses, GetMessageTemplateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -112,7 +112,7 @@ export const getMessageTemplate = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Updates a message template by its id
+ * Update a message template by its ID
  */
 export const updateMessageTemplate = <ThrowOnError extends boolean = false>(options: Options<UpdateMessageTemplateData, ThrowOnError>) => (options.client ?? client).patch<UpdateMessageTemplateResponses, UpdateMessageTemplateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -125,7 +125,7 @@ export const updateMessageTemplate = <ThrowOnError extends boolean = false>(opti
 });
 
 /**
- * Applies the notification strategy for the given id
+ * Apply a notification strategy by its ID
  */
 export const applyNotificationStrategy = <ThrowOnError extends boolean = false>(options: Options<ApplyNotificationStrategyData, ThrowOnError>) => (options.client ?? client).post<ApplyNotificationStrategyResponses, ApplyNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -138,7 +138,7 @@ export const applyNotificationStrategy = <ThrowOnError extends boolean = false>(
 });
 
 /**
- * Applies the notification strategy
+ * Apply a dynamic notification strategy
  */
 export const applyDynamicNotificationStrategy = <ThrowOnError extends boolean = false>(options?: Options<ApplyDynamicNotificationStrategyData, ThrowOnError>) => (options?.client ?? client).post<ApplyDynamicNotificationStrategyResponses, ApplyDynamicNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -151,7 +151,7 @@ export const applyDynamicNotificationStrategy = <ThrowOnError extends boolean = 
 });
 
 /**
- * Gets all notification strategies
+ * Get all notification strategies
  */
 export const getNotificationStrategies = <ThrowOnError extends boolean = false>(options?: Options<GetNotificationStrategiesData, ThrowOnError>) => (options?.client ?? client).get<GetNotificationStrategiesResponses, GetNotificationStrategiesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -160,7 +160,7 @@ export const getNotificationStrategies = <ThrowOnError extends boolean = false>(
 });
 
 /**
- * Creates an notification strategy
+ * Create a notification strategy
  */
 export const createNotificationStrategy = <ThrowOnError extends boolean = false>(options?: Options<CreateNotificationStrategyData, ThrowOnError>) => (options?.client ?? client).post<CreateNotificationStrategyResponses, CreateNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -173,7 +173,7 @@ export const createNotificationStrategy = <ThrowOnError extends boolean = false>
 });
 
 /**
- * Delete an notification strategy by its id
+ * Delete a notification strategy by its ID
  */
 export const deleteNotificationStrategy = <ThrowOnError extends boolean = false>(options: Options<DeleteNotificationStrategyData, ThrowOnError>) => (options.client ?? client).delete<DeleteNotificationStrategyResponses, DeleteNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -182,7 +182,7 @@ export const deleteNotificationStrategy = <ThrowOnError extends boolean = false>
 });
 
 /**
- * Gets an notification strategy by its id
+ * Get a notification strategy by its ID
  */
 export const getNotificationStrategy = <ThrowOnError extends boolean = false>(options: Options<GetNotificationStrategyData, ThrowOnError>) => (options.client ?? client).get<GetNotificationStrategyResponses, GetNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -191,7 +191,7 @@ export const getNotificationStrategy = <ThrowOnError extends boolean = false>(op
 });
 
 /**
- * Updates an notification strategy by its id
+ * Update a notification strategy by its ID
  */
 export const updateNotificationStrategy = <ThrowOnError extends boolean = false>(options: Options<UpdateNotificationStrategyData, ThrowOnError>) => (options.client ?? client).patch<UpdateNotificationStrategyResponses, UpdateNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

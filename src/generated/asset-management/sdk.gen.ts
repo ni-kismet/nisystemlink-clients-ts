@@ -41,7 +41,7 @@ export const createAssets = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * Get asset summary
+ * Get an asset summary
  */
 export const assetSummary = <ThrowOnError extends boolean = false>(options?: Options<AssetSummaryData, ThrowOnError>) => (options?.client ?? client).get<AssetSummaryResponses, AssetSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -63,7 +63,7 @@ export const queryAssets = <ThrowOnError extends boolean = false>(options?: Opti
 });
 
 /**
- * Export assets report
+ * Export an assets report
  */
 export const exportAssets = <ThrowOnError extends boolean = false>(options?: Options<ExportAssetsData, ThrowOnError>) => (options?.client ?? client).post<ExportAssetsResponses, ExportAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -130,7 +130,7 @@ export const deleteAssets = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * Get asset
+ * Get an asset
  */
 export const getAsset = <ThrowOnError extends boolean = false>(options: Options<GetAssetData, ThrowOnError>) => (options.client ?? client).get<GetAssetResponses, GetAssetErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -139,7 +139,7 @@ export const getAsset = <ThrowOnError extends boolean = false>(options: Options<
 });
 
 /**
- * Link files to asset
+ * Link files to an asset
  */
 export const linkFiles = <ThrowOnError extends boolean = false>(options: Options<LinkFilesData, ThrowOnError>) => (options.client ?? client).post<LinkFilesResponses, LinkFilesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -152,7 +152,7 @@ export const linkFiles = <ThrowOnError extends boolean = false>(options: Options
 });
 
 /**
- * Unlink file from asset
+ * Unlink a file from an asset
  */
 export const unlinkFileFromAsset = <ThrowOnError extends boolean = false>(options: Options<UnlinkFileFromAssetData, ThrowOnError>) => (options.client ?? client).delete<UnlinkFileFromAssetResponses, UnlinkFileFromAssetErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -196,7 +196,7 @@ export const exportCalibrationHistory = <ThrowOnError extends boolean = false>(o
 });
 
 /**
- * Calculates the asset calibration forecast for a configured timeframe.
+ * Calculate the asset calibration forecast for a configured timeframe
  */
 export const calculateCalibrationForecast = <ThrowOnError extends boolean = false>(options?: Options<CalculateCalibrationForecastData, ThrowOnError>) => (options?.client ?? client).post<CalculateCalibrationForecastResponses, CalculateCalibrationForecastErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -209,7 +209,9 @@ export const calculateCalibrationForecast = <ThrowOnError extends boolean = fals
 });
 
 /**
- * Simulate receiving an asset from calibration lab, the purpose of doing a dry run is to offer the UI a list of
+ * Simulate receiving an asset from a calibration lab
+ *
+ * The purpose of doing a dry run is to offer the UI a list of
  * validation errors and warnings that the UI can't know otherwise.
  */
 export const receiveFromCalibrationDryRun = <ThrowOnError extends boolean = false>(options?: Options<ReceiveFromCalibrationDryRunData, ThrowOnError>) => (options?.client ?? client).post<ReceiveFromCalibrationDryRunResponses, ReceiveFromCalibrationDryRunErrors, ThrowOnError>({
@@ -223,7 +225,7 @@ export const receiveFromCalibrationDryRun = <ThrowOnError extends boolean = fals
 });
 
 /**
- * Move assets from calibration to locations.
+ * Move assets from calibration back to locations
  */
 export const receiveFromCalibration = <ThrowOnError extends boolean = false>(options?: Options<ReceiveFromCalibrationData, ThrowOnError>) => (options?.client ?? client).post<ReceiveFromCalibrationResponses, ReceiveFromCalibrationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -236,7 +238,9 @@ export const receiveFromCalibration = <ThrowOnError extends boolean = false>(opt
 });
 
 /**
- * Simulate sending an asset to calibration lab, the purpose of doing a dry run is to offer the UI a list of
+ * Simulate sending an asset to a calibration lab
+ *
+ * The purpose of doing a dry run is to offer the UI a list of
  * validation errors and warnings that the UI can't know otherwise.
  */
 export const sendForCalibrationDryRun = <ThrowOnError extends boolean = false>(options?: Options<SendForCalibrationDryRunData, ThrowOnError>) => (options?.client ?? client).post<SendForCalibrationDryRunResponses, SendForCalibrationDryRunErrors, ThrowOnError>({
@@ -250,7 +254,7 @@ export const sendForCalibrationDryRun = <ThrowOnError extends boolean = false>(o
 });
 
 /**
- * Send an asset to calibration lab
+ * Send an asset to a calibration lab
  */
 export const sendForCalibration = <ThrowOnError extends boolean = false>(options?: Options<SendForCalibrationData, ThrowOnError>) => (options?.client ?? client).post<SendForCalibrationResponses, SendForCalibrationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -263,7 +267,9 @@ export const sendForCalibration = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Simulate moving an assets location, the purpose of doing a dry run is to offer the UI a list of
+ * Simulate moving an asset's location
+ *
+ * The purpose of doing a dry run is to offer the UI a list of
  * validation errors and warnings that the UI can't know otherwise.
  */
 export const moveAssetsLocationDryRun = <ThrowOnError extends boolean = false>(options?: Options<MoveAssetsLocationDryRunData, ThrowOnError>) => (options?.client ?? client).post<MoveAssetsLocationDryRunResponses, MoveAssetsLocationDryRunErrors, ThrowOnError>({
@@ -277,7 +283,7 @@ export const moveAssetsLocationDryRun = <ThrowOnError extends boolean = false>(o
 });
 
 /**
- * Moving an asset to a new location
+ * Move an asset to a new location
  */
 export const moveAssetsLocation = <ThrowOnError extends boolean = false>(options?: Options<MoveAssetsLocationData, ThrowOnError>) => (options?.client ?? client).post<MoveAssetsLocationResponses, MoveAssetsLocationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -290,7 +296,7 @@ export const moveAssetsLocation = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Query the ids of assets that are in progress of moving.
+ * Query the IDs of assets with moves in progress
  */
 export const queryLocationMoves = <ThrowOnError extends boolean = false>(options?: Options<QueryLocationMovesData, ThrowOnError>) => (options?.client ?? client).post<QueryLocationMovesResponses, QueryLocationMovesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -321,7 +327,7 @@ export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Dat
 });
 
 /**
- * Advanced asset search.
+ * Search assets with advanced filters
  */
 export const searchAssets = <ThrowOnError extends boolean = false>(options?: Options<SearchAssetsData, ThrowOnError>) => (options?.client ?? client).post<SearchAssetsResponses, SearchAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -334,7 +340,7 @@ export const searchAssets = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * Export materialized assets report
+ * Export a materialized assets report
  */
 export const exportMaterializedAssets = <ThrowOnError extends boolean = false>(options?: Options<ExportMaterializedAssetsData, ThrowOnError>) => (options?.client ?? client).post<ExportMaterializedAssetsResponses, ExportMaterializedAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -360,7 +366,7 @@ export const queryAssetUtilizationHistory = <ThrowOnError extends boolean = fals
 });
 
 /**
- * Start utilization
+ * Start asset utilization
  */
 export const startUtilization = <ThrowOnError extends boolean = false>(options?: Options<StartUtilizationData, ThrowOnError>) => (options?.client ?? client).post<StartUtilizationResponses, StartUtilizationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -373,7 +379,7 @@ export const startUtilization = <ThrowOnError extends boolean = false>(options?:
 });
 
 /**
- * End utilization
+ * End asset utilization
  */
 export const endUtilization = <ThrowOnError extends boolean = false>(options?: Options<EndUtilizationData, ThrowOnError>) => (options?.client ?? client).post<EndUtilizationResponses, EndUtilizationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -386,7 +392,7 @@ export const endUtilization = <ThrowOnError extends boolean = false>(options?: O
 });
 
 /**
- * Utilization heartbeat
+ * Send a utilization heartbeat
  */
 export const utilizationHeartbeat = <ThrowOnError extends boolean = false>(options?: Options<UtilizationHeartbeatData, ThrowOnError>) => (options?.client ?? client).post<UtilizationHeartbeatResponses, UtilizationHeartbeatErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
