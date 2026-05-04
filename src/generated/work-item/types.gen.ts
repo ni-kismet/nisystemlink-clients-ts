@@ -5,7 +5,10 @@ export type ClientOptions = {
 };
 
 export type BaseResponse = {
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -16,6 +19,11 @@ export type CreateUpdateWorkflowRequestBase = {
      * Name of the workflow.
      */
     name: string;
+    /**
+     * The work item type associated with this workflow. The value is case-sensitive and must be a
+     * supported work item type. If not specified or null, the workflow applies to all work item types.
+     */
+    type?: string | null;
     /**
      * ID of the workspace where the workflow belongs. The workflow will be
      * put in the default workspace if a value is not specified.
@@ -79,7 +87,13 @@ export type CreateWorkItemRequest = {
      * ID of the workspace where the work item is stored.
      */
     workspace?: string | null;
+    /**
+     * Timeline properties for the work item.
+     */
     timeline?: TimelineDefinition;
+    /**
+     * Resources reserved to carry out the work item.
+     */
     resources?: ResourcesDefinition;
     /**
      * Defines the executions that will be used for work item actions.
@@ -95,6 +109,9 @@ export type CreateWorkItemRequest = {
     properties?: {
         [key: string]: string;
     } | null;
+    /**
+     * Reference to the dashboard associated with the work item.
+     */
     dashboard?: DashboardReferenceDefinition;
     /**
      * ID of the workflow associated with the work item.
@@ -143,8 +160,14 @@ export type CreateWorkItemTemplateRequest = {
      * Name of the test program to be executed as part of the work item created from this template.
      */
     testProgram?: string | null;
-    timeline?: TemplateTimelineDefinition;
-    resources?: TemplateResourcesDefinition;
+    /**
+     * Timeline properties for the work item created from this template.
+     */
+    timeline?: TemplateTimelineDefinition | null;
+    /**
+     * Resources selection criteria for the work item created from this template.
+     */
+    resources?: TemplateResourcesDefinition | null;
     /**
      * Defines the executions that will be used for work item actions created from this template.
      */
@@ -163,6 +186,9 @@ export type CreateWorkItemTemplateRequest = {
     properties?: {
         [key: string]: string;
     } | null;
+    /**
+     * Reference to the dashboard associated with the work item created from this template.
+     */
     dashboard?: DashboardReferenceDefinition;
     /**
      * ID of the workflow associated with the work item created from this template.
@@ -187,7 +213,10 @@ export type CreateWorkItemTemplatesPartialSuccessResponse = {
      * List of work item template requests that failed during creation.
      */
     failedWorkItemTemplates?: Array<CreateWorkItemTemplateRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -222,7 +251,10 @@ export type CreateWorkItemsPartialSuccessResponse = {
      * List of work item requests that failed during creation.
      */
     failedWorkItems?: Array<CreateWorkItemRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -294,7 +326,10 @@ export type DeleteWorkItemTemplatesPartialSuccessResponse = {
      * The IDs of the work item templates that could not be deleted.
      */
     failedWorkItemTemplateIds?: Array<string> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -319,7 +354,10 @@ export type DeleteWorkItemsPartialSuccessResponse = {
      * The IDs of the work items that could not be deleted.
      */
     failedWorkItemIds?: Array<string> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -344,7 +382,10 @@ export type DeleteWorkflowsPartialSuccessResponse = {
      * The IDs of the workflows that could not be deleted.
      */
     failedWorkflowIds?: Array<string> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -371,7 +412,10 @@ export type ExecuteWorkItemRequest = {
  * Execute work item response.
  */
 export type ExecuteWorkItemResponse = {
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
     /**
      * Result of the work item execution.
      */
@@ -428,14 +472,20 @@ export type ExecutionEventBase = {
      * The substate of the work item resulting from execution.
      */
     newSubstate?: string | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
  * Defines the result of executing a work item action.
  */
 export type ExecutionResultBase = {
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
     /**
      * The type of execution implementation.
      */
@@ -936,6 +986,12 @@ export type QueryWorkflowResponse = WorkflowMetadata;
  */
 export type QueryWorkflowsRequest = {
     /**
+     * When specified, returns workflows of this type and workflows with a null type.
+     * The value is case-sensitive and must be a supported work item type.
+     * When null, no type filtering is applied.
+     */
+    type?: string | null;
+    /**
      * The maximum number of workflows to return.
      */
     take?: number | null;
@@ -967,6 +1023,9 @@ export type QueryWorkflowsResponse = {
  * Resource reserved to carry out the work item.
  */
 export type ResourceDefinition = {
+    /**
+     * Resource selections for the work item.
+     */
     selections?: Array<ResourceSelectionDefinition> | null;
     /**
      * LINQ query string specifying the filter criteria for selecting the resources that can be used to carry out the work item.
@@ -982,7 +1041,10 @@ export type ResourceDefinitionValueNullOrUnset = {
      * Gets whether the instance has a value (which may be `null`).
      */
     readonly isSet?: boolean;
-    value?: ResourceDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: ResourceDefinition | null;
 } | null;
 
 /**
@@ -1025,9 +1087,21 @@ export type ResourceSelectionDefinitionIListValueNullOrUnset = {
  * Resources reserved to carry out the work item.
  */
 export type ResourcesDefinition = {
+    /**
+     * Asset reservations for the work item.
+     */
     assets?: ResourceDefinition;
+    /**
+     * DUT reservations for the work item.
+     */
     duts?: ResourceDefinition;
+    /**
+     * Fixture reservations for the work item.
+     */
     fixtures?: ResourceDefinition;
+    /**
+     * System reservations for the work item.
+     */
     systems?: SystemResourceDefinition;
 };
 
@@ -1039,7 +1113,10 @@ export type ResourcesDefinitionValueNullOrUnset = {
      * Gets whether the instance has a value (which may be `null`).
      */
     readonly isSet?: boolean;
-    value?: ResourcesDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: ResourcesDefinition | null;
 } | null;
 
 /**
@@ -1068,13 +1145,19 @@ export type ScheduleDefinitionValueNullOrUnset = {
      * Gets whether the instance has a value (which may be `null`).
      */
     readonly isSet?: boolean;
-    value?: ScheduleDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: ScheduleDefinition | null;
 } | null;
 
 /**
  * Resource reserved to carry out the work item.
  */
 export type ScheduleResourceDefinition = {
+    /**
+     * Resource selections for the work item.
+     */
     selections?: Array<ResourceSelectionDefinition> | null;
 };
 
@@ -1086,16 +1169,31 @@ export type ScheduleResourceDefinitionValueNullOrUnset = {
      * Gets whether the instance has a value (which may be `null`).
      */
     readonly isSet?: boolean;
-    value?: ScheduleResourceDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: ScheduleResourceDefinition | null;
 } | null;
 
 /**
  * Resources reserved to carry out the work item.
  */
 export type ScheduleResourcesDefinition = {
+    /**
+     * Asset reservations for the work item.
+     */
     assets?: ScheduleResourceDefinition;
+    /**
+     * DUT reservations for the work item.
+     */
     duts?: ScheduleResourceDefinition;
+    /**
+     * Fixture reservations for the work item.
+     */
     fixtures?: ScheduleResourceDefinition;
+    /**
+     * System reservations for the work item.
+     */
     systems?: ScheduleSystemResourceDefinition;
 };
 
@@ -1107,13 +1205,19 @@ export type ScheduleResourcesDefinitionValueNullOrUnset = {
      * Gets whether the instance has a value (which may be `null`).
      */
     readonly isSet?: boolean;
-    value?: ScheduleResourcesDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: ScheduleResourcesDefinition | null;
 } | null;
 
 /**
  * System resource reserved to carry out the work item.
  */
 export type ScheduleSystemResourceDefinition = {
+    /**
+     * System resource selections for the work item.
+     */
     selections?: Array<SystemResourceSelectionDefinition> | null;
 };
 
@@ -1125,7 +1229,10 @@ export type ScheduleSystemResourceDefinitionValueNullOrUnset = {
      * Gets whether the instance has a value (which may be `null`).
      */
     readonly isSet?: boolean;
-    value?: ScheduleSystemResourceDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: ScheduleSystemResourceDefinition | null;
 } | null;
 
 /**
@@ -1140,7 +1247,13 @@ export type ScheduleWorkItemRequest = {
      * ID of the user to whom the work item is curently assigned.
      */
     assignedTo?: string | null;
+    /**
+     * Scheduling properties for the work item.
+     */
     schedule?: ScheduleDefinition;
+    /**
+     * Resources reserved to carry out the work item.
+     */
     resources?: ScheduleResourcesDefinition;
 };
 
@@ -1161,7 +1274,10 @@ export type ScheduleWorkItemsPartialSuccessResponse = {
      * List of work item requests that failed during scheduling.
      */
     failedWorkItems?: Array<ScheduleWorkItemRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -1183,6 +1299,9 @@ export type ScheduleWorkItemsRequest = {
  * System resource reserved to carry out the work item.
  */
 export type SystemResourceDefinition = {
+    /**
+     * System resource selections for the work item.
+     */
     selections?: Array<SystemResourceSelectionDefinition> | null;
     /**
      * LINQ query string specifying the filter criteria for selecting the systems that can be used to carry out the work item.
@@ -1198,7 +1317,10 @@ export type SystemResourceDefinitionValueNullOrUnset = {
      * Gets whether the instance has a value (which may be `null`).
      */
     readonly isSet?: boolean;
-    value?: SystemResourceDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: SystemResourceDefinition | null;
 } | null;
 
 /**
@@ -1243,10 +1365,22 @@ export type TemplateResourceDefinition = {
  * Resources selection criteria for the work item created from this template.
  */
 export type TemplateResourcesDefinition = {
-    assets?: TemplateResourceDefinition;
-    duts?: TemplateResourceDefinition;
-    fixtures?: TemplateResourceDefinition;
-    systems?: TemplateResourceDefinition;
+    /**
+     * Asset reservations for the work item.
+     */
+    assets?: TemplateResourceDefinition | null;
+    /**
+     * DUT reservations for the work item.
+     */
+    duts?: TemplateResourceDefinition | null;
+    /**
+     * Fixture reservations for the work item.
+     */
+    fixtures?: TemplateResourceDefinition | null;
+    /**
+     * System reservation for the work item.
+     */
+    systems?: TemplateResourceDefinition | null;
 };
 
 /**
@@ -1285,7 +1419,10 @@ export type TimelineDefinitionValueNullOrUnset = {
      * Gets whether the instance has a value (which may be `null`).
      */
     readonly isSet?: boolean;
-    value?: TimelineDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: TimelineDefinition | null;
 } | null;
 
 /**
@@ -1306,16 +1443,31 @@ export type UpdateTemplateResourceDefinitionValueNullOrUnset = {
      * Gets whether the instance has a value (which may be `null`).
      */
     readonly isSet?: boolean;
-    value?: UpdateTemplateResourceDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: UpdateTemplateResourceDefinition | null;
 } | null;
 
 /**
  * Resources selection criteria for the work item created from this template.
  */
 export type UpdateTemplateResourcesDefinition = {
+    /**
+     * Asset reservations for the work item.
+     */
     assets?: UpdateTemplateResourceDefinition;
+    /**
+     * DUT reservations for the work item.
+     */
     duts?: UpdateTemplateResourceDefinition;
+    /**
+     * Fixture reservations for the work item.
+     */
     fixtures?: UpdateTemplateResourceDefinition;
+    /**
+     * System reservation for the work item.
+     */
     systems?: UpdateTemplateResourceDefinition;
 };
 
@@ -1327,7 +1479,10 @@ export type UpdateTemplateResourcesDefinitionValueNullOrUnset = {
      * Gets whether the instance has a value (which may be `null`).
      */
     readonly isSet?: boolean;
-    value?: UpdateTemplateResourcesDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: UpdateTemplateResourcesDefinition | null;
 } | null;
 
 /**
@@ -1348,7 +1503,10 @@ export type UpdateTemplateTimelineDefinitionValueNullOrUnset = {
      * Gets whether the instance has a value (which may be `null`).
      */
     readonly isSet?: boolean;
-    value?: UpdateTemplateTimelineDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: UpdateTemplateTimelineDefinition | null;
 } | null;
 
 /**
@@ -1397,7 +1555,13 @@ export type UpdateWorkItemRequest = {
      * Name of the test program to be executed as part of the work item.
      */
     testProgram?: string | null;
+    /**
+     * Timeline properties for the work item.
+     */
     timeline?: TimelineDefinition;
+    /**
+     * Resources required to carry out the work item.
+     */
     resources?: ResourcesDefinition;
     /**
      * Defines the executions that will be used for work item actions.
@@ -1413,6 +1577,9 @@ export type UpdateWorkItemRequest = {
     properties?: {
         [key: string]: string;
     } | null;
+    /**
+     * Definition for the dashboard reference associated with the work item.
+     */
     dashboard?: DashboardReferenceDefinition;
 };
 
@@ -1457,7 +1624,13 @@ export type UpdateWorkItemTemplateRequest = {
      * Name of the test program to be executed as part of the work item created from this template.
      */
     testProgram?: string | null;
+    /**
+     * Timeline properties for the work item created from this template.
+     */
     timeline?: UpdateTemplateTimelineDefinition;
+    /**
+     * Resources selection criteria for the work item created from this template.
+     */
     resources?: UpdateTemplateResourcesDefinition;
     /**
      * Defines the executions that will be used for work item actions.
@@ -1479,6 +1652,9 @@ export type UpdateWorkItemTemplateRequest = {
     properties?: {
         [key: string]: string;
     } | null;
+    /**
+     * Reference to the dashboard associated with the work item created from this template.
+     */
     dashboard?: DashboardReferenceDefinition;
     /**
      * ID of the workflow associated with the work item created from this template.
@@ -1503,7 +1679,10 @@ export type UpdateWorkItemTemplatesPartialSuccessResponse = {
      * List of work item template requests that failed during update.
      */
     failedWorkItemTemplates?: Array<UpdateWorkItemTemplateRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -1533,7 +1712,10 @@ export type UpdateWorkItemsPartialSuccessResponse = {
      * List of work item requests that failed during update.
      */
     failedWorkItems?: Array<UpdateWorkItemRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -1565,23 +1747,77 @@ export type UpdateWorkflowResponse = WorkflowResponseBase;
  * Information about the v1 version of WorkItem operations in the API.
  */
 export type V1WorkItemOperations = {
+    /**
+     * Create one or more WorkItems.
+     */
     createWorkItems: Operation;
+    /**
+     * Query WorkItems.
+     */
     queryWorkItems: Operation;
+    /**
+     * Get WorkItems Summary.
+     */
     getWorkItemsSummary: Operation;
+    /**
+     * Get a WorkItem.
+     */
     getWorkItem: Operation;
+    /**
+     * Delete one or more WorkItems.
+     */
     deleteWorkItems: Operation;
+    /**
+     * Update one or more WorkItems.
+     */
     updateWorkItems: Operation;
+    /**
+     * Schedule one or more WorkItems.
+     */
     scheduleWorkItems: Operation;
+    /**
+     * Execute a WorkItem.
+     */
     executeWorkItem: Operation;
+    /**
+     * Create one or more work item templates .
+     */
     createWorkItemTemplates: Operation;
+    /**
+     * Query work item templates .
+     */
     queryWorkItemTemplates: Operation;
+    /**
+     * Update one or more work item templates .
+     */
     updateWorkItemTemplates: Operation;
+    /**
+     * Delete one or more work item templates .
+     */
     deleteWorkItemTemplates: Operation;
+    /**
+     * Create one or more Workflows.
+     */
     createWorkflows: Operation;
+    /**
+     * Query Workflows.
+     */
     queryWorkflows: Operation;
+    /**
+     * Update one or more Workflows.
+     */
     updateWorkflows: Operation;
+    /**
+     * Get a Workflow.
+     */
     getWorkflow: Operation;
+    /**
+     * Delete one or more Workflows.
+     */
     deleteWorkflows: Operation;
+    /**
+     * Get WorkItem Types.
+     */
     getWorkItemTypes: Operation;
 };
 
@@ -1659,9 +1895,18 @@ export type WorkItemResponseBase = {
      * ID of the workspace where the work item is stored.
      */
     workspace?: string | null;
-    timeline?: TimelineDefinition;
+    /**
+     * Timeline properties for the work item.
+     */
+    timeline?: TimelineDefinition | null;
+    /**
+     * Scheduling properties for the work item.
+     */
     schedule?: ScheduleDefinition;
-    resources?: ResourcesDefinition;
+    /**
+     * Resources required to carry out the work item.
+     */
+    resources?: ResourcesDefinition | null;
     /**
      * Array of file IDs from the template linked to the work item.
      */
@@ -1672,7 +1917,10 @@ export type WorkItemResponseBase = {
     properties?: {
         [key: string]: string;
     } | null;
-    dashboard?: DashboardUrl;
+    /**
+     * Reference to the dashboard associated with the work item.
+     */
+    dashboard?: DashboardUrl | null;
     /**
      * ID of the user who created the work item.
      */
@@ -1715,7 +1963,10 @@ export type WorkItemResponseWithExecutionsBase = WorkItemResponseBase & {
      * Defines the executions that will be used for work item actions.
      */
     executionActions?: Array<NoneExecutionDefinition | ManualExecutionDefinition | NotebookExecutionDefinition | JobExecutionDefinition> | null;
-    workflowSnapshot?: InlineWorkflow;
+    /**
+     * Snapshot of the provided WorkflowId (if any).
+     */
+    workflowSnapshot?: InlineWorkflow | null;
 };
 
 /**
@@ -1788,8 +2039,14 @@ export type WorkItemTemplateResponseBase = {
      * Type of work item created from this template.
      */
     type?: string | null;
-    timeline?: TemplateTimelineDefinition;
-    resources?: TemplateResourcesDefinition;
+    /**
+     * Timeline properties for the work item created from this template.
+     */
+    timeline?: TemplateTimelineDefinition | null;
+    /**
+     * Resources selection criteria for the work item created from this template.
+     */
+    resources?: TemplateResourcesDefinition | null;
     /**
      * ID of the workspace where the work item template is stored.
      */
@@ -1824,6 +2081,9 @@ export type WorkItemTemplateResponseBase = {
     properties?: {
         [key: string]: string;
     } | null;
+    /**
+     * Reference to the dashboard associated with the work item created from this template.
+     */
     dashboard?: DashboardReferenceDefinition;
     /**
      * ID of the workflow associated with the work item created from this template.
@@ -1879,7 +2139,10 @@ export type WorkItemTypeValidationRuleConfig = {
  * Version Information
  */
 export type WorkItemVersions = {
-    v1?: V1WorkItemOperations;
+    /**
+     * Api versions and available operations of v1 version.
+     */
+    v1?: V1WorkItemOperations | null;
     /**
      * The version of the web service.
      */
@@ -1952,6 +2215,11 @@ export type WorkflowMetadata = {
      * Name of the workflow.
      */
     name?: string | null;
+    /**
+     * The work item type associated with this workflow. The value is case-sensitive and must be a
+     * supported work item type. If not specified or null, the workflow applies to all work item types.
+     */
+    type?: string | null;
     /**
      * ID of the workspace where the workflow belongs.
      */
@@ -2051,7 +2319,10 @@ export type WorkflowTranslation = {
  * Represents a tristate value that may have a value, be set to `null`, or be unset.
  */
 export type ResourceDefinitionValueNullOrUnsetWritable = {
-    value?: ResourceDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: ResourceDefinition | null;
 } | null;
 
 /**
@@ -2068,42 +2339,60 @@ export type ResourceSelectionDefinitionIListValueNullOrUnsetWritable = {
  * Represents a tristate value that may have a value, be set to `null`, or be unset.
  */
 export type ResourcesDefinitionValueNullOrUnsetWritable = {
-    value?: ResourcesDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: ResourcesDefinition | null;
 } | null;
 
 /**
  * Represents a tristate value that may have a value, be set to `null`, or be unset.
  */
 export type ScheduleDefinitionValueNullOrUnsetWritable = {
-    value?: ScheduleDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: ScheduleDefinition | null;
 } | null;
 
 /**
  * Represents a tristate value that may have a value, be set to `null`, or be unset.
  */
 export type ScheduleResourceDefinitionValueNullOrUnsetWritable = {
-    value?: ScheduleResourceDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: ScheduleResourceDefinition | null;
 } | null;
 
 /**
  * Represents a tristate value that may have a value, be set to `null`, or be unset.
  */
 export type ScheduleResourcesDefinitionValueNullOrUnsetWritable = {
-    value?: ScheduleResourcesDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: ScheduleResourcesDefinition | null;
 } | null;
 
 /**
  * Represents a tristate value that may have a value, be set to `null`, or be unset.
  */
 export type ScheduleSystemResourceDefinitionValueNullOrUnsetWritable = {
-    value?: ScheduleSystemResourceDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: ScheduleSystemResourceDefinition | null;
 } | null;
 
 /**
  * Represents a tristate value that may have a value, be set to `null`, or be unset.
  */
 export type SystemResourceDefinitionValueNullOrUnsetWritable = {
-    value?: SystemResourceDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: SystemResourceDefinition | null;
 } | null;
 
 /**
@@ -2120,33 +2409,45 @@ export type SystemResourceSelectionDefinitionIListValueNullOrUnsetWritable = {
  * Represents a tristate value that may have a value, be set to `null`, or be unset.
  */
 export type TimelineDefinitionValueNullOrUnsetWritable = {
-    value?: TimelineDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: TimelineDefinition | null;
 } | null;
 
 /**
  * Represents a tristate value that may have a value, be set to `null`, or be unset.
  */
 export type UpdateTemplateResourceDefinitionValueNullOrUnsetWritable = {
-    value?: UpdateTemplateResourceDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: UpdateTemplateResourceDefinition | null;
 } | null;
 
 /**
  * Represents a tristate value that may have a value, be set to `null`, or be unset.
  */
 export type UpdateTemplateResourcesDefinitionValueNullOrUnsetWritable = {
-    value?: UpdateTemplateResourcesDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: UpdateTemplateResourcesDefinition | null;
 } | null;
 
 /**
  * Represents a tristate value that may have a value, be set to `null`, or be unset.
  */
 export type UpdateTemplateTimelineDefinitionValueNullOrUnsetWritable = {
-    value?: UpdateTemplateTimelineDefinition;
+    /**
+     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     */
+    value?: UpdateTemplateTimelineDefinition | null;
 } | null;
 
 export type CreateWorkflowData = {
     /**
-     * The parameters for creating the workflow.
+     * Workflow model for the create workflow API.
      */
     body?: CreateWorkflowRequest;
     path?: never;
@@ -2178,7 +2479,7 @@ export type CreateWorkflowResponse2 = CreateWorkflowResponses[keyof CreateWorkfl
 
 export type QueryWorkflowsData = {
     /**
-     * The parameters for querying workflows.
+     * Request information for the query workflows API
      */
     body?: QueryWorkflowsRequest;
     path?: never;
@@ -2244,7 +2545,7 @@ export type GetWorkflowResponse2 = GetWorkflowResponses[keyof GetWorkflowRespons
 
 export type UpdateWorkflowData = {
     /**
-     * The parameters for updating the workflow.
+     * Workflow model for the update workflow API.
      */
     body?: UpdateWorkflowRequest;
     path: {
@@ -2281,7 +2582,7 @@ export type UpdateWorkflowResponse2 = UpdateWorkflowResponses[keyof UpdateWorkfl
 
 export type DeleteWorkflowsData = {
     /**
-     * The parameters for deleting workflows.
+     * Request information for the delete workflows API.
      */
     body?: DeleteWorkflowsRequest;
     path?: never;
@@ -2317,7 +2618,7 @@ export type DeleteWorkflowsResponse = DeleteWorkflowsResponses[keyof DeleteWorkf
 
 export type CreateWorkItemsData = {
     /**
-     * The parameters for creating work items.
+     * Request information for the create work items API.
      */
     body?: CreateWorkItemsRequest;
     path?: never;
@@ -2353,7 +2654,7 @@ export type CreateWorkItemsResponse2 = CreateWorkItemsResponses[keyof CreateWork
 
 export type QueryWorkItemsData = {
     /**
-     * The parameters for querying work items.
+     * Request information for the query work items API.
      */
     body?: QueryWorkItemsRequest;
     path?: never;
@@ -2457,7 +2758,7 @@ export type GetWorkItemResponse2 = GetWorkItemResponses[keyof GetWorkItemRespons
 
 export type DeleteWorkItemsData = {
     /**
-     * The parameters for deleting work items.
+     * Request information for the delete work items API.
      */
     body?: DeleteWorkItemsRequest;
     path?: never;
@@ -2493,7 +2794,7 @@ export type DeleteWorkItemsResponse = DeleteWorkItemsResponses[keyof DeleteWorkI
 
 export type UpdateWorkItemsData = {
     /**
-     * The parameters for updating work items.
+     * Request information for the update work items API.
      */
     body?: UpdateWorkItemsRequest;
     path?: never;
@@ -2525,7 +2826,7 @@ export type UpdateWorkItemsResponse = UpdateWorkItemsResponses[keyof UpdateWorkI
 
 export type ScheduleWorkItemsData = {
     /**
-     * The parameters for scheduling work items.
+     * Request information for the schedule work items API.
      */
     body?: ScheduleWorkItemsRequest;
     path?: never;
@@ -2557,7 +2858,7 @@ export type ScheduleWorkItemsResponse = ScheduleWorkItemsResponses[keyof Schedul
 
 export type ExecuteWorkItemData = {
     /**
-     * The parameters for executing a work item action.
+     * Request information for the execute work item API.
      */
     body?: ExecuteWorkItemRequest;
     path: {
@@ -2610,7 +2911,7 @@ export type ExecuteWorkItemResponse2 = ExecuteWorkItemResponses[keyof ExecuteWor
 
 export type CreateWorkItemTemplatesData = {
     /**
-     * The parameters for creating work item templates.
+     * Request information for the create work item templates API.
      */
     body?: CreateWorkItemTemplatesRequest;
     path?: never;
@@ -2646,7 +2947,7 @@ export type CreateWorkItemTemplatesResponse2 = CreateWorkItemTemplatesResponses[
 
 export type QueryWorkItemTemplatesData = {
     /**
-     * The parameters for querying work item templates.
+     * Request information for the query work item templates API.
      */
     body?: QueryWorkItemTemplatesRequest;
     path?: never;
@@ -2678,7 +2979,7 @@ export type QueryWorkItemTemplatesResponse2 = QueryWorkItemTemplatesResponses[ke
 
 export type UpdateWorkItemTemplatesData = {
     /**
-     * The parameters for updating work item templates.
+     * Request information for the update work item templates API.
      */
     body?: UpdateWorkItemTemplatesRequest;
     path?: never;
@@ -2710,7 +3011,7 @@ export type UpdateWorkItemTemplatesResponse = UpdateWorkItemTemplatesResponses[k
 
 export type DeleteWorkItemTemplatesData = {
     /**
-     * The parameters for deleting work item templates.
+     * Request information for the delete work item templates API.
      */
     body?: DeleteWorkItemTemplatesRequest;
     path?: never;

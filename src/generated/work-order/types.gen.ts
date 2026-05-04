@@ -46,7 +46,10 @@ export type ActionTransitionDefinition = {
 };
 
 export type BaseResponse = {
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -123,6 +126,9 @@ export type CreateTestPlanRequest = {
     properties?: {
         [key: string]: string;
     } | null;
+    /**
+     * Reference to the dashboard associated with this test plan.
+     */
     dashboard?: DashboardReferenceDefinition;
     /**
      * The workflow ID for this test plan.
@@ -197,6 +203,9 @@ export type CreateTestPlanTemplateRequest = {
     properties?: {
         [key: string]: string;
     } | null;
+    /**
+     * Reference to the dashboard associated with this test plan.
+     */
     dashboard?: DashboardReferenceDefinition;
     /**
      * The workflow ID for this test plan.
@@ -221,7 +230,10 @@ export type CreateTestPlanTemplatesPartialSuccessResponse = {
      * List of test plan template requests that failed during creation.
      */
     failedTestPlanTemplates?: Array<CreateTestPlanTemplateRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -256,7 +268,10 @@ export type CreateTestPlansPartialSuccessResponse = {
      * List of test plan requests that are failed during creation.
      */
     failedTestPlans?: Array<CreateTestPlanRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -287,6 +302,11 @@ export type CreateUpdateWorkflowRequestBase = {
      * Name of the workflow.
      */
     name: string;
+    /**
+     * The work item type associated with this workflow. The value is case-sensitive and must be a
+     * supported work item type. If not specified or null, the workflow applies to all work item types.
+     */
+    type?: string | null;
     /**
      * ID of the workspace where the workflow belongs. The workflow will be
      * put in the default workspace if a value is not specified.
@@ -367,7 +387,10 @@ export type CreateWorkOrdersPartialSuccessResponse = {
      * List of work order requests that failed during creation.
      */
     failedWorkOrders?: Array<CreateWorkOrderRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -439,7 +462,10 @@ export type DeleteTestPlanTemplatesPartialSuccessResponse = {
      * The IDs of the test plan templates that could not be deleted.
      */
     failedTestPlanTemplateIds?: Array<string> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -464,7 +490,10 @@ export type DeleteTestPlansPartialSuccessResponse = {
      * The IDs of the test plans that could not be deleted.
      */
     failedTestPlanIds?: Array<string> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -489,7 +518,10 @@ export type DeleteWorkOrdersPartialSuccessResponse = {
      * The IDs of the work orders that could not be deleted.
      */
     failedWorkOrderIds?: Array<string> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -514,7 +546,10 @@ export type DeleteWorkflowsPartialSuccessResponse = {
      * The IDs of the workflows that could not be deleted.
      */
     failedWorkflowIds?: Array<string> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -541,7 +576,10 @@ export type ExecuteTestPlanRequest = {
  * Execute test plan response.
  */
 export type ExecuteTestPlanResponse = {
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
     /**
      * Result of the test plan execution.
      */
@@ -598,14 +636,20 @@ export type ExecutionEventBase = {
      * The substate of the work item resulting from execution.
      */
     newSubstate?: string | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
  * Defines the result of executing a work item action.
  */
 export type ExecutionResultBase = {
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
     /**
      * The type of execution implementation.
      */
@@ -1182,6 +1226,12 @@ export type QueryWorkflowResponse = WorkflowMetadata;
  */
 export type QueryWorkflowsRequest = {
     /**
+     * When specified, returns workflows of this type and workflows with a null type.
+     * The value is case-sensitive and must be a supported work item type.
+     * When null, no type filtering is applied.
+     */
+    type?: string | null;
+    /**
      * The maximum number of workflows to return.
      */
     take?: number | null;
@@ -1269,7 +1319,10 @@ export type ScheduleTestPlansPartialSuccessResponse = {
      * List of test plan requests that are failed during scheduling.
      */
     failedTestPlans?: Array<ScheduleTestPlanRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -1438,7 +1491,10 @@ export type TestPlanResponseBase = {
      * The array of file IDs from the template linked to the test plan.
      */
     fileIdsFromTemplate?: Array<string> | null;
-    dashboard?: DashboardUrl;
+    /**
+     * The URL of the dashboard associated with this test plan.
+     */
+    dashboard?: DashboardUrl | null;
     /**
      * The workflow ID for this test plan.
      */
@@ -1465,8 +1521,14 @@ export type TestPlanResponseWithExecutionsBase = TestPlanResponseBase & {
      * Defines the executions that will be used for test plan actions.
      */
     executionActions?: Array<NoneExecutionDefinition | ManualExecutionDefinition | NotebookExecutionDefinition | JobExecutionDefinition> | null;
-    workflow?: WorkflowDefinition;
-    workflowSnapshot?: InlineWorkflow;
+    /**
+     * [Deprecated] The workflow definition associated with this test plan. This has been replace by `workflowSnapshot`.
+     */
+    workflow?: WorkflowDefinition | null;
+    /**
+     * Snapshot of the provided WorkflowId (if any).
+     */
+    workflowSnapshot?: InlineWorkflow | null;
 };
 
 /**
@@ -1581,6 +1643,9 @@ export type TestPlanTemplateResponseBase = {
     properties?: {
         [key: string]: string;
     } | null;
+    /**
+     * Reference to the dashboard associated with this test plan.
+     */
     dashboard?: DashboardReferenceDefinition;
     /**
      * The workflow ID for this test plan.
@@ -1664,6 +1729,9 @@ export type UpdateTestPlanRequest = {
     properties?: {
         [key: string]: string;
     } | null;
+    /**
+     * Definition for the dashboard reference associated with this test plan.
+     */
     dashboard?: DashboardReferenceDefinition;
 };
 
@@ -1740,6 +1808,9 @@ export type UpdateTestPlanTemplateRequest = {
     properties?: {
         [key: string]: string;
     } | null;
+    /**
+     * Reference to the dashboard associated with this test plan.
+     */
     dashboard?: DashboardReferenceDefinition;
     /**
      * The workflow ID for this test plan.
@@ -1764,7 +1835,10 @@ export type UpdateTestPlanTemplatesPartialSuccessResponse = {
      * List of test plan template requests that failed during update.
      */
     failedTestPlanTemplates?: Array<UpdateTestPlanTemplateRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -1794,7 +1868,10 @@ export type UpdateTestPlansPartialSuccessResponse = {
      * List of test plan requests that failed during update.
      */
     failedTestPlans?: Array<UpdateTestPlanRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -1878,7 +1955,10 @@ export type UpdateWorkOrdersPartialSuccessResponse = {
      * List of work order requests that failed during update.
      */
     failedWorkOrders?: Array<UpdateWorkOrderRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -1909,22 +1989,73 @@ export type UpdateWorkflowResponse = WorkflowResponseBase;
  * Information about the v1 version of the API.
  */
 export type V1Operations = {
+    /**
+     * Create one or more WorkOrders.
+     */
     createWorkOrders: Operation;
+    /**
+     * Query WorkOrders.
+     */
     queryWorkOrders: Operation;
+    /**
+     * Get WorkOrders Summary.
+     */
     getWorkOrdersSummary: Operation;
+    /**
+     * Get a WorkOrder.
+     */
     getWorkOrder: Operation;
+    /**
+     * Delete one or more WorkOrders.
+     */
     deleteWorkOrders: Operation;
+    /**
+     * Update one or more WorkOrders.
+     */
     updateWorkOrders: Operation;
+    /**
+     * Create one or more TestPlans.
+     */
     createTestPlans: Operation;
+    /**
+     * Query TestPlans.
+     */
     queryTestPlans: Operation;
+    /**
+     * Get TestPlan Summary.
+     */
     getTestPlanSummary: Operation;
+    /**
+     * Get a TestPlan.
+     */
     getTestPlan: Operation;
+    /**
+     * Delete one or more TestPlans.
+     */
     deleteTestPlans: Operation;
+    /**
+     * Update one or more TestPlans.
+     */
     updateTestPlans: Operation;
+    /**
+     * Schedule one or more TestPlans.
+     */
     scheduleTestPlans: Operation;
+    /**
+     * Create one or more TestPlanTemplates.
+     */
     createTestPlanTemplates: Operation;
+    /**
+     * Query TestPlanTemplates.
+     */
     queryTestPlanTemplates: Operation;
+    /**
+     * Delete one or more TestPlanTemplates.
+     */
     deleteTestPlanTemplates: Operation;
+    /**
+     * Updates one or more TestPlanTemplates.
+     */
     updateTestPlanTemplates: Operation;
 };
 
@@ -1932,7 +2063,10 @@ export type V1Operations = {
  * Version Information
  */
 export type Versions = {
-    v1?: V1Operations;
+    /**
+     * Api versions and available operations of v1 version.
+     */
+    v1?: V1Operations | null;
     /**
      * The version of the web service.
      */
@@ -2118,6 +2252,11 @@ export type WorkflowMetadata = {
      */
     name?: string | null;
     /**
+     * The work item type associated with this workflow. The value is case-sensitive and must be a
+     * supported work item type. If not specified or null, the workflow applies to all work item types.
+     */
+    type?: string | null;
+    /**
      * ID of the workspace where the workflow belongs.
      */
     workspace?: string | null;
@@ -2212,9 +2351,124 @@ export type WorkflowTranslation = {
     displayText: string;
 };
 
+/**
+ * Created test plan.
+ */
+export type CreateTestPlanResponseWritable = TestPlanResponseWithExecutionsBaseWritable;
+
+/**
+ * Response information for the create test plans API.
+ */
+export type CreateTestPlansPartialSuccessResponseWritable = {
+    /**
+     * List of created test plans.
+     */
+    createdTestPlans?: Array<CreateTestPlanResponseWritable> | null;
+    /**
+     * List of test plan requests that are failed during creation.
+     */
+    failedTestPlans?: Array<CreateTestPlanRequest> | null;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
+};
+
+/**
+ * Response information for the create test plans API.
+ */
+export type CreateTestPlansResponseWritable = {
+    /**
+     * List of created test plans.
+     */
+    createdTestPlans?: Array<CreateTestPlanResponseWritable> | null;
+};
+
+/**
+ * Get test plan response model
+ */
+export type GetTestPlanResponseWritable = TestPlanResponseWithExecutionHistoryBaseWritable & {
+    /**
+     * Name of the work order to which the test plan is linked.
+     */
+    workOrderName?: string | null;
+};
+
+/**
+ * Schedule test plan response.
+ */
+export type ScheduleTestPlanResponseWritable = TestPlanResponseWithExecutionsBaseWritable;
+
+/**
+ * Response information for the schedule test plans API.
+ */
+export type ScheduleTestPlansPartialSuccessResponseWritable = {
+    /**
+     * List of scheduled test plans.
+     */
+    scheduledTestPlans?: Array<ScheduleTestPlanResponseWritable> | null;
+    /**
+     * List of test plan requests that are failed during scheduling.
+     */
+    failedTestPlans?: Array<ScheduleTestPlanRequest> | null;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
+};
+
+/**
+ * Test plan base response model with execution history.
+ */
+export type TestPlanResponseWithExecutionHistoryBaseWritable = TestPlanResponseWithExecutionsBaseWritable & {
+    /**
+     * List of executions that have been triggered for the test plan sorted in the order they
+     * were triggered. The history is limited to the last 1000 executions. When the limit is exceeded,
+     * the oldest events will be removed.
+     */
+    executionHistory?: Array<ManualExecutionEvent | NotebookExecutionEvent | JobExecutionEvent> | null;
+};
+
+/**
+ * Test plan base response model with execution history.
+ */
+export type TestPlanResponseWithExecutionsBaseWritable = TestPlanResponseBase & {
+    /**
+     * Defines the executions that will be used for test plan actions.
+     */
+    executionActions?: Array<NoneExecutionDefinition | ManualExecutionDefinition | NotebookExecutionDefinition | JobExecutionDefinition> | null;
+    /**
+     * [Deprecated] The workflow definition associated with this test plan. This has been replace by `workflowSnapshot`.
+     */
+    workflow?: WorkflowDefinition | null;
+};
+
+/**
+ * Updated test plan.
+ */
+export type UpdateTestPlanResponseWritable = TestPlanResponseWithExecutionsBaseWritable;
+
+/**
+ * Update test plans API partial success response.
+ */
+export type UpdateTestPlansPartialSuccessResponseWritable = {
+    /**
+     * List of updated test plans.
+     */
+    updatedTestPlans?: Array<UpdateTestPlanResponseWritable> | null;
+    /**
+     * List of test plan requests that failed during update.
+     */
+    failedTestPlans?: Array<UpdateTestPlanRequest> | null;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
+};
+
 export type CreateTestPlansData = {
     /**
-     * The parameters for creating test plans.
+     * Request information for the create test plans API.
      */
     body?: CreateTestPlansRequest;
     path?: never;
@@ -2250,7 +2504,7 @@ export type CreateTestPlansResponse2 = CreateTestPlansResponses[keyof CreateTest
 
 export type QueryTestPlansData = {
     /**
-     * The parameters for querying test plans.
+     * Request information for the query test plans API.
      */
     body?: QueryTestPlansRequest;
     path?: never;
@@ -2354,7 +2608,7 @@ export type GetTestPlanResponse2 = GetTestPlanResponses[keyof GetTestPlanRespons
 
 export type DeleteTestPlansData = {
     /**
-     * The parameters for deleting test plans.
+     * Request information for the delete test plans API.
      */
     body?: DeleteTestPlansRequest;
     path?: never;
@@ -2390,7 +2644,7 @@ export type DeleteTestPlansResponse = DeleteTestPlansResponses[keyof DeleteTestP
 
 export type UpdateTestPlansData = {
     /**
-     * The parameters for updating test plans.
+     * Request information for the update test plans API.
      */
     body?: UpdateTestPlansRequest;
     path?: never;
@@ -2422,7 +2676,7 @@ export type UpdateTestPlansResponse = UpdateTestPlansResponses[keyof UpdateTestP
 
 export type ScheduleTestPlansData = {
     /**
-     * The parameters for scheduling test plans.
+     * Request information for the schedule test plans API.
      */
     body?: ScheduleTestPlansRequest;
     path?: never;
@@ -2454,7 +2708,7 @@ export type ScheduleTestPlansResponse = ScheduleTestPlansResponses[keyof Schedul
 
 export type ExecuteTestPlanData = {
     /**
-     * The parameters for executing a test plan action.
+     * Request information for the execute test plan API.
      */
     body?: ExecuteTestPlanRequest;
     path: {
@@ -2507,7 +2761,7 @@ export type ExecuteTestPlanResponse2 = ExecuteTestPlanResponses[keyof ExecuteTes
 
 export type CreateTestPlanTemplatesData = {
     /**
-     * The parameters for creating test plan templates.
+     * Request information for the create test plan templates API.
      */
     body?: CreateTestPlanTemplatesRequest;
     path?: never;
@@ -2543,7 +2797,7 @@ export type CreateTestPlanTemplatesResponse2 = CreateTestPlanTemplatesResponses[
 
 export type QueryTestPlanTemplatesData = {
     /**
-     * The parameters for querying test plan templates.
+     * Request information for the query test plan templates API.
      */
     body?: QueryTestPlanTemplatesRequest;
     path?: never;
@@ -2575,7 +2829,7 @@ export type QueryTestPlanTemplatesResponse2 = QueryTestPlanTemplatesResponses[ke
 
 export type DeleteTestPlanTemplatesData = {
     /**
-     * The parameters for deleting test plan templates.
+     * Request information for the delete test plan templates API.
      */
     body?: DeleteTestPlanTemplatesRequest;
     path?: never;
@@ -2611,7 +2865,7 @@ export type DeleteTestPlanTemplatesResponse = DeleteTestPlanTemplatesResponses[k
 
 export type UpdateTestPlanTemplatesData = {
     /**
-     * The parameters for updating test plan templates.
+     * Request information for the update test plan templates API.
      */
     body?: UpdateTestPlanTemplatesRequest;
     path?: never;
@@ -2675,7 +2929,7 @@ export type V1OperationsRootEndPointResponse = V1OperationsRootEndPointResponses
 
 export type CreateWorkflowData = {
     /**
-     * The parameters for creating the workflow.
+     * Workflow model for the create workflow API.
      */
     body?: CreateWorkflowRequest;
     path?: never;
@@ -2707,7 +2961,7 @@ export type CreateWorkflowResponse2 = CreateWorkflowResponses[keyof CreateWorkfl
 
 export type QueryWorkflowsData = {
     /**
-     * The parameters for querying workflows.
+     * Request information for the query workflows API
      */
     body?: QueryWorkflowsRequest;
     path?: never;
@@ -2773,7 +3027,7 @@ export type GetWorkflowResponse2 = GetWorkflowResponses[keyof GetWorkflowRespons
 
 export type UpdateWorkflowData = {
     /**
-     * The parameters for updating the workflow.
+     * Workflow model for the update workflow API.
      */
     body?: UpdateWorkflowRequest;
     path: {
@@ -2810,7 +3064,7 @@ export type UpdateWorkflowResponse2 = UpdateWorkflowResponses[keyof UpdateWorkfl
 
 export type DeleteWorkflowsData = {
     /**
-     * The parameters for deleting workflows.
+     * Request information for the delete workflows API.
      */
     body?: DeleteWorkflowsRequest;
     path?: never;
@@ -2846,7 +3100,7 @@ export type DeleteWorkflowsResponse = DeleteWorkflowsResponses[keyof DeleteWorkf
 
 export type CreateWorkOrdersData = {
     /**
-     * The parameters for creating work orders.
+     * Request information for the create work orders API.
      */
     body?: CreateWorkOrdersRequest;
     path?: never;
@@ -2882,7 +3136,7 @@ export type CreateWorkOrdersResponse2 = CreateWorkOrdersResponses[keyof CreateWo
 
 export type QueryWorkOrdersData = {
     /**
-     * The parameters for querying work orders.
+     * Request information for the query work orders API
      */
     body?: QueryWorkOrdersRequest;
     path?: never;
@@ -2914,7 +3168,7 @@ export type QueryWorkOrdersResponse2 = QueryWorkOrdersResponses[keyof QueryWorkO
 
 export type DeleteWorkOrdersData = {
     /**
-     * The parameters for deleting work orders.
+     * Request information for the delete work orders API.
      */
     body?: DeleteWorkOrdersRequest;
     path?: never;
@@ -3013,7 +3267,7 @@ export type GetWorkOrderResponse2 = GetWorkOrderResponses[keyof GetWorkOrderResp
 
 export type UpdateWorkOrdersData = {
     /**
-     * The parameters for updating work orders.
+     * Request information for the update work orders API.
      */
     body?: UpdateWorkOrdersRequest;
     path?: never;

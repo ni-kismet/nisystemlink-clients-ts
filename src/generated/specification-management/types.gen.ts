@@ -10,7 +10,10 @@ export type ClientOptions = {
  * Response with error information.
  */
 export type BaseResponse = {
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -111,7 +114,10 @@ export type CreateSpecificationsPartialSuccessResponse = {
      * List of specification requests that failed during creation.
      */
     failedSpecs?: Array<CreateSpecificationRequestObject> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -146,7 +152,10 @@ export type DeleteSpecificationsPartialSuccessResponse = {
      * IDs of the specifications that could not be deleted.
      */
     failedSpecIds?: Array<string> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -379,7 +388,10 @@ export type SpecificationBase = {
      * Block name of the specification.
      */
     block?: string | null;
-    limit?: SpecificationLimit;
+    /**
+     * Limits of the specification.
+     */
+    limit?: SpecificationLimit | null;
     /**
      * Unit of the specification.
      */
@@ -555,7 +567,10 @@ export type UpdateSpecificationsPartialSuccessResponse = {
      * Information about each of the specification request(s) that failed during the update.
      */
     failedSpecs?: Array<UpdateSpecificationRequestObject> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -572,10 +587,25 @@ export type UpdateSpecificationsRequest = {
  * Information about the v1 version of the API.
  */
 export type V1Operations = {
+    /**
+     * Create one or more Specifications
+     */
     createSpecifications: Operation;
+    /**
+     * Query Specifications
+     */
     querySpecifications: Operation;
+    /**
+     * Update on or more Specifications
+     */
     updateSpecifications: Operation;
+    /**
+     * Delete one or more Specifications
+     */
     deleteSpecifications: Operation;
+    /**
+     * Get a Specification
+     */
     getSpecification: Operation;
 };
 
@@ -583,7 +613,10 @@ export type V1Operations = {
  * Version Information
  */
 export type Versions = {
-    v1?: V1Operations;
+    /**
+     * Api versions and available operations of v1 version
+     */
+    v1?: V1Operations | null;
     /**
      * The version of the web service
      */
@@ -592,7 +625,7 @@ export type Versions = {
 
 export type CreateSpecificationsData = {
     /**
-     * Information to create specifications
+     * Specification(s) to be created.
      */
     body?: CreateSpecificationsRequest;
     path?: never;
@@ -628,7 +661,7 @@ export type CreateSpecificationsResponse2 = CreateSpecificationsResponses[keyof 
 
 export type UpdateSpecificationsData = {
     /**
-     * Information to update specifications
+     * Specification(s) to be updated.
      */
     body?: UpdateSpecificationsRequest;
     path?: never;
@@ -726,7 +759,7 @@ export type GetSpecificationResponse = GetSpecificationResponses[keyof GetSpecif
 
 export type DeleteSpecificationsData = {
     /**
-     * Parameters for deleting the specifications.
+     * Details of the specifications to delete.
      */
     body?: DeleteSpecificationsRequest;
     path?: never;

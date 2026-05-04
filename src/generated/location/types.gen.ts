@@ -11,6 +11,9 @@ export type BaseResponse = {
     error?: HttpError;
 };
 
+/**
+ * Contains the properties for creating a new location.
+ */
 export type CreateLocationRequest = {
     /**
      * The name of the location.
@@ -52,6 +55,9 @@ export type CreateLocationRequest = {
     keywords?: Array<string> | null;
 };
 
+/**
+ * Contains the IDs of the locations to delete.
+ */
 export type DeleteLocationsRequest = {
     /**
      * The IDs of the locations to delete.
@@ -109,6 +115,9 @@ export type HttpError = {
     innerErrors?: Array<HttpError> | null;
 };
 
+/**
+ * Represents a physical or logical location.
+ */
 export type Location = {
     /**
      * Id of the location.
@@ -186,6 +195,9 @@ export type Location = {
     keywords?: Array<string> | null;
 };
 
+/**
+ * Contains the ID and metadata updates for a single location.
+ */
 export type LocationUpdateInformation = {
     /**
      * ID of the location to update.
@@ -194,6 +206,9 @@ export type LocationUpdateInformation = {
     [key: string]: unknown;
 };
 
+/**
+ * Contains a list of locations to update.
+ */
 export type UpdateLocationsRequest = {
     /**
      * List of location update information.
@@ -283,6 +298,9 @@ export type CreateLocationResponse = CreateLocationResponses[keyof CreateLocatio
 export type GetLocationByIdData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the location.
+         */
         locationId: string;
     };
     query?: never;
