@@ -4,88 +4,332 @@ export type ClientOptions = {
     baseUrl: 'https://dev-api.lifecyclesolutions.ni.com' | (string & {});
 };
 
+/**
+ * Represents the advanced grains (system facts and attributes) collected from managed systems via Salt.
+ * Grains include hardware, operating system, network, and NI-specific details about managed devices.
+ */
 export type AdvancedGrains = {
+    /**
+     * The timestamp when the NI Linux Real-Time system image was installed.
+     */
     nilrt_system_image_installed_time?: string | null;
+    /**
+     * The version of the Salt agent running on the managed system.
+     */
     saltversion?: string | null;
+    /**
+     * The OS fingerprint string identifying the operating system and version.
+     */
     osfinger?: string | null;
+    /**
+     * The retention type for health monitoring data.
+     */
     health_monitoring_retention_type?: string | null;
+    /**
+     * Whether the NI System API is enabled on the managed system.
+     */
     nisysapi_enabled?: boolean | null;
+    /**
+     * The LSB (Linux Standard Base) distribution description.
+     */
     lsb_distrib_description?: string | null;
+    /**
+     * Whether asset health monitoring is enabled.
+     */
     asset_health_monitoring_enabled?: boolean | null;
+    /**
+     * The kernel name of the operating system.
+     */
     kernel?: string | null;
+    /**
+     * The kernel version string.
+     */
     kernelversion?: string | null;
+    /**
+     * The LSB distribution identifier.
+     */
     lsb_distrib_id?: string | null;
+    /**
+     * The SystemLink workspace associated with the managed system.
+     */
     systemlink_workspace?: string | null;
+    /**
+     * The network node name (hostname) of the managed system.
+     */
     nodename?: string | null;
+    /**
+     * The NI device class of the managed system.
+     */
     deviceclass?: string | null;
+    /**
+     * The polling interval, in seconds, for asset health monitoring.
+     */
     asset_health_monitoring_interval?: number | null;
+    /**
+     * The hostname of the managed system.
+     */
     host?: string | null;
+    /**
+     * Whether an IPv4 default gateway is configured.
+     */
     ip_gw?: boolean | null;
+    /**
+     * The BIOS release date.
+     */
     biosreleasedate?: string | null;
+    /**
+     * The LSB distribution codename.
+     */
     lsb_distrib_codename?: string | null;
+    /**
+     * The LSB distribution release version.
+     */
     lsb_distrib_release?: string | null;
+    /**
+     * The BIOS firmware version.
+     */
     biosversion?: string | null;
+    /**
+     * The number of days to retain health monitoring data.
+     */
     health_monitoring_retention_duration_days?: number | null;
+    /**
+     * The identifier of the NI Linux Real-Time system image.
+     */
     nilrt_system_image_id?: string | null;
+    /**
+     * The universally unique identifier of the managed system.
+     */
     uuid?: string | null;
+    /**
+     * The Salt server (master) identifier.
+     */
     server_id?: number | null;
+    /**
+     * The CPU model name.
+     */
     cpu_model?: string | null;
+    /**
+     * The polling interval, in seconds, for health monitoring.
+     */
     health_monitoring_interval?: number | null;
+    /**
+     * The path to the Python executable used by Salt.
+     */
     pythonexecutable?: string | null;
+    /**
+     * The operating system release codename.
+     */
     oscodename?: string | null;
+    /**
+     * The operating system name.
+     */
     os?: string | null;
+    /**
+     * The full kernel release string.
+     */
     kernelrelease?: string | null;
+    /**
+     * The default shell path on the managed system.
+     */
     shell?: string | null;
+    /**
+     * The DNS domain name of the managed system.
+     */
     domain?: string | null;
+    /**
+     * The NI product code of the managed device.
+     */
     productcode?: string | null;
+    /**
+     * The maximum number of health monitoring history records to retain.
+     */
     health_monitoring_retention_max_history_count?: number | null;
+    /**
+     * Whether health monitoring is enabled.
+     */
     health_monitoring_enabled?: boolean | null;
+    /**
+     * The major version number of the operating system release.
+     */
     osmajorrelease?: number | null;
+    /**
+     * The description of the NI Linux Real-Time system image.
+     */
     nilrt_system_image_description?: string | null;
+    /**
+     * The list of IPv4 addresses assigned to the managed system.
+     */
     ipv4?: Array<string> | null;
+    /**
+     * The ZeroMQ library version used by Salt for messaging.
+     */
     zmqversion?: string | null;
+    /**
+     * The Salt minion identifier of the managed system.
+     */
     id?: string | null;
+    /**
+     * The operating system service pack level (Windows).
+     */
     osservicepack?: string | null;
+    /**
+     * The full operating system version string.
+     */
     osversion?: string | null;
+    /**
+     * Whether to publish NI System API assets to SystemLink.
+     */
     systemlink_publish_sysapi_assets?: boolean | null;
-    motherboard?: GrainsMotherboard;
+    /**
+     * The motherboard hardware information.
+     */
+    motherboard?: GrainsMotherboard | null;
+    /**
+     * The operating system manufacturer (Windows).
+     */
     osmanufacturer?: string | null;
+    /**
+     * The number of GPUs detected on the managed system.
+     */
     num_gpus?: number | null;
+    /**
+     * The number of CPU cores available on the managed system.
+     */
     num_cpus?: number | null;
+    /**
+     * The list of fully qualified domain names for the managed system.
+     */
     fqdns?: Array<string> | null;
+    /**
+     * A dictionary mapping network interface names to their associated IP addresses.
+     */
     ip_interfaces?: {
         [key: string]: Array<string> | null;
     } | null;
+    /**
+     * The Salt version as a list of numeric components.
+     */
     saltversioninfo?: Array<number> | null;
+    /**
+     * The total swap space in megabytes.
+     */
     swap_total?: number | null;
+    /**
+     * The file system path to the Salt installation.
+     */
     saltpath?: string | null;
+    /**
+     * The user ID of the Salt process.
+     */
     uid?: number | null;
+    /**
+     * The list of solid-state drive device names.
+     */
     SSDs?: Array<string> | null;
+    /**
+     * The Python module search paths used by Salt.
+     */
     pythonpath?: Array<string> | null;
+    /**
+     * The list of CPU feature flags.
+     */
     cpu_flags?: Array<string> | null;
+    /**
+     * The init system used by the operating system (e.g., systemd).
+     */
     init?: string | null;
+    /**
+     * The list of disk device names.
+     */
     disks?: Array<string> | null;
+    /**
+     * The current working directory of the Salt process.
+     */
     cwd?: string | null;
+    /**
+     * The total physical memory in megabytes.
+     */
     mem_total?: number | null;
+    /**
+     * The username under which the Salt process is running.
+     */
     username?: string | null;
+    /**
+     * The command used to list running processes on the managed system.
+     */
     ps?: string | null;
+    /**
+     * The OS release version as a list of numeric components.
+     */
     osrelease_info?: Array<number> | null;
+    /**
+     * The unique machine identifier.
+     */
     machine_id?: string | null;
+    /**
+     * The Python version components used by Salt.
+     */
     pythonversion?: Array<string> | null;
+    /**
+     * The list of IPv6 addresses resolved from the system's FQDN.
+     */
     fqdn_ip6?: Array<string> | null;
+    /**
+     * The list of IPv4 addresses resolved from the system's FQDN.
+     */
     fqdn_ip4?: Array<string> | null;
+    /**
+     * The group ID of the Salt process.
+     */
     gid?: number | null;
+    /**
+     * Whether ZFS filesystem support is available.
+     */
     zfs_support?: boolean | null;
+    /**
+     * The IPv6 default gateway address.
+     */
     ip6_gw?: string | null;
+    /**
+     * The list of Salt functions allowed during minion blackout mode.
+     */
     minion_blackout_whitelist?: Array<string> | null;
+    /**
+     * The virtualization type (e.g., physical, VirtualBox, VMware).
+     */
     virtual?: string | null;
+    /**
+     * The source of the last system reset.
+     */
     resetsource?: string | null;
+    /**
+     * The group name under which the Salt process is running.
+     */
     groupname?: string | null;
+    /**
+     * The configured timezone of the managed system.
+     */
     timezone?: string | null;
+    /**
+     * The list of IPv6 addresses assigned to the managed system.
+     */
     ipv6?: Array<string> | null;
+    /**
+     * The process ID of the Salt minion.
+     */
     pid?: number | null;
+    /**
+     * The Windows domain the managed system belongs to.
+     */
     windowsdomain?: string | null;
+    /**
+     * The type of Windows domain membership.
+     */
     windowsdomaintype?: string | null;
+    /**
+     * The IPv4 default gateway address.
+     */
     ip4_gw?: string | null;
 };
 
@@ -93,20 +337,29 @@ export type AdvancedGrains = {
  * Represents a basic response object containing an optional error.
  */
 export type BaseResponse = {
-    error?: HttpError;
+    /**
+     * Gets or sets an error to include in the response.
+     */
+    error?: HttpError | null;
 };
 
+/**
+ * Represents a request to cancel a running job on a target system.
+ */
 export type CancelJobRequest = {
     /**
-     * Gets or sets the job ID of the job to cancel.
+     * The job ID of the job to cancel.
      */
     jid?: string | null;
     /**
-     * Gets or sets the system ID that the job to cancel targets.
+     * The system ID that the job to cancel targets.
      */
     systemId?: string | null;
 };
 
+/**
+ * Represents a request to create a new job that executes functions on target systems.
+ */
 export type CreateJobRequest = {
     /**
      * List of arguments to the functions specified in the "fun" property.
@@ -128,32 +381,41 @@ export type CreateJobRequest = {
     } | null;
 };
 
+/**
+ * Represents the response returned after creating a new job.
+ */
 export type CreateJobResponse = {
-    error?: HttpError;
     /**
-     * Gets or sets the ID of the job.
+     * Gets or sets an error to include in the response.
+     */
+    error?: HttpError | null;
+    /**
+     * The ID of the job.
      */
     jid?: string | null;
     /**
-     * Gets or sets the metadata of the job.
+     * The metadata of the job.
      */
     metadata?: {
         [key: string]: unknown;
     } | null;
     /**
-     * Gets or sets the arguments of the salt functions contained in the job.
+     * The arguments of the salt functions contained in the job.
      */
     arg?: Array<Array<unknown>> | null;
     /**
-     * Gets or sets the target systems of the job.
+     * The target systems of the job.
      */
     tgt?: Array<string> | null;
     /**
-     * Gets or sets the salt functions of the job.
+     * The salt functions of the job.
      */
     fun?: Array<string> | null;
 };
 
+/**
+ * Represents a request to create a new virtual system.
+ */
 export type CreateVirtualSystemRequest = {
     /**
      * Alias of the virtual system
@@ -169,6 +431,9 @@ export type CreateVirtualSystemRequest = {
     locationId?: string | null;
 };
 
+/**
+ * Represents the response returned after creating a virtual system.
+ */
 export type CreateVirtualSystemResponse = {
     /**
      * Id of the virtual system
@@ -176,12 +441,18 @@ export type CreateVirtualSystemResponse = {
     minionId?: string | null;
 };
 
+/**
+ * Represents a failed attempt to unregister a managed system.
+ */
 export type FailedUnregisterRequest = {
     /**
-     * Gets or sets the ID of the system on which unregister operation failed.
+     * The ID of the system on which unregister operation failed.
      */
     id?: string | null;
-    error?: HttpError;
+    /**
+     * Represents the standard error structure.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -189,7 +460,7 @@ export type FailedUnregisterRequest = {
  */
 export type GenerateSystemApiKeyRequest = {
     /**
-     * Gets or sets a string representing the system ID for which to generated the API key.
+     * A string representing the system ID for which to generated the API key.
      */
     systemId?: string | null;
 };
@@ -198,7 +469,10 @@ export type GenerateSystemApiKeyRequest = {
  * Model for permanent api key response for SystemLink Client to use when communicating with salt master.
  */
 export type GenerateSystemApiKeyResponse = {
-    error?: HttpError;
+    /**
+     * Gets or sets an error to include in the response.
+     */
+    error?: HttpError | null;
     /**
      * Permanent api key
      */
@@ -210,7 +484,7 @@ export type GenerateSystemApiKeyResponse = {
  */
 export type GetPendingSystemsSummaryResponse = {
     /**
-     * Gets or sets number of systems pending approval to connect to the server.
+     * The number of systems pending approval to connect to the server.
      */
     pendingCount?: number;
 };
@@ -220,85 +494,208 @@ export type GetPendingSystemsSummaryResponse = {
  */
 export type GetSystemsKeysResponse = {
     /**
-     * Gets or sets an object of system ID to key pairs that are pending approval or rejection. Keys may be pending when they are not pre-seeded via the automated registration process and attempt to connect to the master.
+     * An object of system ID to key pairs that are pending approval or rejection. Keys may be pending when they are not pre-seeded via the automated registration process and attempt to connect to the master.
      */
     systemsPending?: {
         [key: string]: string | null;
     } | null;
     /**
-     * Gets or sets an object of system ID to key pairs that have been denied. A key is denied when a system is trying to connect the master with a different key than the one that is accepted. This can occur if two systems have the same ID or if a key is removed from a system.
+     * An object of system ID to key pairs that have been denied. A key is denied when a system is trying to connect the master with a different key than the one that is accepted. This can occur if two systems have the same ID or if a key is removed from a system.
      */
     systemsDenied?: {
         [key: string]: string | null;
     } | null;
     /**
-     * Gets or sets an object of system ID to key pairs that have been approved. These could have been approved explicitly by the user or pre-seeded via the automated registration process.
+     * An object of system ID to key pairs that have been approved. These could have been approved explicitly by the user or pre-seeded via the automated registration process.
      */
     systemsApproved?: {
         [key: string]: string | null;
     } | null;
     /**
-     * Gets or sets an object of system ID to key pairs that have been rejected. Keys are rejected explicitly by the user.
+     * An object of system ID to key pairs that have been rejected. Keys are rejected explicitly by the user.
      */
     systemsRejected?: {
         [key: string]: string | null;
     } | null;
 };
 
+/**
+ * Represents the locale and regional settings collected from a managed system.
+ */
 export type GrainsLocaleInfo = {
+    /**
+     * The default character encoding configured on the system.
+     */
     defaultEncoding?: string | null;
+    /**
+     * The default language configured on the system.
+     */
     defaultLanguage?: string | null;
+    /**
+     * The character encoding detected on the system.
+     */
     detectedEncoding?: string | null;
+    /**
+     * The timezone configured on the system.
+     */
     timezone?: string | null;
 };
 
+/**
+ * Represents motherboard information collected from a managed system.
+ */
 export type GrainsMotherboard = {
+    /**
+     * The product name of the motherboard.
+     */
     productname?: string | null;
+    /**
+     * The serial number of the motherboard.
+     */
     serialnumber?: string | null;
 };
 
+/**
+ * Represents network configuration settings collected from a managed system.
+ */
 export type GrainsNetworkSettings = {
+    /**
+     * The collection of network interfaces configured on the system.
+     */
     interfaces?: Array<GrainsNetworkSettingsInterface> | null;
 };
 
+/**
+ * Represents a network interface and its configuration on a managed system.
+ */
 export type GrainsNetworkSettingsInterface = {
+    /**
+     * The display label of the network interface.
+     */
     label?: string | null;
+    /**
+     * The connection identifier for the network interface.
+     */
     connectionid?: string | null;
+    /**
+     * The hardware (MAC) address of the network interface.
+     */
     hwaddr?: string | null;
+    /**
+     * Whether the network interface is up.
+     */
     up?: boolean | null;
-    ipv4?: GrainsNetworkSettingsInterfaceIpv4;
-    ipv6?: GrainsNetworkSettingsInterfaceIpv6;
-    ethercat?: GrainsNetworkSettingsInterfaceEthercat;
+    /**
+     * The IPv4 configuration for the network interface.
+     */
+    ipv4?: GrainsNetworkSettingsInterfaceIpv4 | null;
+    /**
+     * The IPv6 configuration for the network interface.
+     */
+    ipv6?: GrainsNetworkSettingsInterfaceIpv6 | null;
+    /**
+     * The EtherCAT configuration for the network interface.
+     */
+    ethercat?: GrainsNetworkSettingsInterfaceEthercat | null;
+    /**
+     * The adapter modes supported by the network interface.
+     */
     supported_adapter_modes?: Array<string> | null;
+    /**
+     * The current adapter mode of the network interface.
+     */
     adapter_mode?: string | null;
+    /**
+     * Whether the network interface is wireless.
+     */
     wireless?: boolean | null;
 };
 
+/**
+ * Represents EtherCAT protocol settings for a network interface on a managed system.
+ */
 export type GrainsNetworkSettingsInterfaceEthercat = {
+    /**
+     * The EtherCAT master identifier for the interface.
+     */
     masterid?: string | null;
 };
 
+/**
+ * Represents the IPv4 configuration of a network interface on a managed system.
+ */
 export type GrainsNetworkSettingsInterfaceIpv4 = {
+    /**
+     * The IPv4 address assigned to the interface.
+     */
     address?: string | null;
+    /**
+     * The subnet mask for the IPv4 address.
+     */
     netmask?: string | null;
+    /**
+     * The default gateway for IPv4 traffic.
+     */
     gateway?: string | null;
+    /**
+     * The list of DNS server addresses for IPv4.
+     */
     dns?: Array<string> | null;
+    /**
+     * The address request mode (e.g., DHCP or static).
+     */
     requestmode?: string | null;
+    /**
+     * The address request modes supported by the interface.
+     */
     supportedrequestmodes?: Array<string> | null;
 };
 
+/**
+ * Represents the IPv6 configuration of a network interface on a managed system.
+ */
 export type GrainsNetworkSettingsInterfaceIpv6 = {
+    /**
+     * The IPv6 address assigned to the interface.
+     */
     address?: string | null;
+    /**
+     * The subnet mask for the IPv6 address.
+     */
     netmask?: string | null;
+    /**
+     * The default gateway for IPv6 traffic.
+     */
     gateway?: string | null;
+    /**
+     * The list of DNS server addresses for IPv6.
+     */
     dns?: Array<string> | null;
 };
 
+/**
+ * Represents the startup configuration settings collected from a managed NI Real-Time system.
+ */
 export type GrainsStartupSettings = {
+    /**
+     * The console output mode at startup.
+     */
     ConsoleOut?: string | null;
+    /**
+     * The embedded UI mode at startup.
+     */
     EmbeddedUI?: string | null;
+    /**
+     * The LabVIEW remote access setting at startup.
+     */
     LabVIEWAccess?: string | null;
+    /**
+     * Whether the RT application is disabled at startup.
+     */
     NoApp?: string | null;
+    /**
+     * Whether the FPGA application is disabled at startup.
+     */
     NoFPGAApp?: string | null;
 };
 
@@ -342,6 +739,9 @@ export type HttpError = {
     innerErrors?: Array<HttpError> | null;
 };
 
+/**
+ * Represents a system management job with its current state, configuration, and result.
+ */
 export type Job = {
     /**
      * The job ID.
@@ -363,17 +763,29 @@ export type Job = {
      * The timestamp representing when the job was dispatched.
      */
     dispatchedTimestamp?: string | null;
-    state?: JobState;
+    /**
+     * The state of the job: CANCELED, FAILED, SUCCEDED, OUTOFQUEUE, INQUEUE, INPROGRESS
+     */
+    state?: JobState | null;
     /**
      * Metadata of the job.
      */
     metadata?: {
         [key: string]: unknown;
     } | null;
-    config?: JobConfig;
-    result?: JobResult;
+    /**
+     * Configuration information of the job.
+     */
+    config?: JobConfig | null;
+    /**
+     * Result of the job.
+     */
+    result?: JobResult | null;
 };
 
+/**
+ * Contains the configuration for a system management job.
+ */
 export type JobConfig = {
     /**
      * The user who created the job.
@@ -393,6 +805,9 @@ export type JobConfig = {
     arg?: Array<unknown> | null;
 };
 
+/**
+ * Contains the result of a job execution.
+ */
 export type JobResult = {
     /**
      * The job ID.
@@ -418,17 +833,20 @@ export type JobResult = {
 
 export type JobState = 'SUCCEEDED' | 'OUTOFQUEUE' | 'INQUEUE' | 'INPROGRESS' | 'CANCELED' | 'FAILED';
 
+/**
+ * Represents a summary of job counts grouped by status.
+ */
 export type JobsSummaryResponse = {
     /**
-     * Gets or sets number of active jobs.
+     * The number of active jobs.
      */
     activeCount?: number;
     /**
-     * Gets or sets number of failed jobs.
+     * The number of failed jobs.
      */
     failedCount?: number;
     /**
-     * Gets or sets number of succeeded jobs.
+     * The number of succeeded jobs.
      */
     succeededCount?: number;
 };
@@ -446,20 +864,29 @@ export type KeyAction = 'ACCEPT' | 'REJECT' | 'DELETE';
  */
 export type KeyRequest = {
     /**
-     * Gets or sets a string representing the system ID.
+     * A string representing the system ID.
      */
     id?: string | null;
+    /**
+     * The action to be performed.
+     * * ACCEPT: Accept the associated key.
+     * * REJECT: Reject the associated key.
+     * * DELETE: Delete the associated key.
+     */
     action?: KeyAction;
     /**
-     * Gets or sets a string representing the public authorization key. If this field is specified, verification that the system ID is associated with this auth key will happen before the desired action is executed.
+     * A string representing the public authorization key. If this field is specified, verification that the system ID is associated with this auth key will happen before the desired action is executed.
      */
     key?: string | null;
     /**
-     * Gets or sets the ID of the workspace.
+     * The ID of the workspace.
      */
     workspace?: string | null;
 };
 
+/**
+ * Represents a request to retrieve the keys for one or more systems.
+ */
 export type ListSystemsKeysRequest = {
     /**
      * The list of system ids for which to return keys.
@@ -476,86 +903,235 @@ export type ManageKeysRequest = {
      */
     isAsync?: boolean;
     /**
-     * Gets or sets the list of NationalInstruments.SystemsManagementService.Model.API.KeyRequest
+     * The list of key actions to perform.
      */
     keyActions?: Array<KeyRequest> | null;
 };
 
+/**
+ * Represents a materialized (denormalized) view of a managed system for search and query operations.
+ * Contains flattened system identity, connection state, metadata, minion agent details,
+ * hardware/OS grains, and installed package information.
+ */
 export type MaterializedSystemModel = {
+    /**
+     * The unique identifier of the system.
+     */
     id?: string | null;
+    /**
+     * The user-friendly display name (alias) of the system.
+     */
     alias?: string | null;
+    /**
+     * The identifier of the workspace the system belongs to.
+     */
     workspace?: string | null;
+    /**
+     * The scan code used to identify the system during discovery.
+     */
     scanCode?: string | null;
+    /**
+     * The identifier of the physical or logical location associated with the system.
+     */
     locationId?: string | null;
+    /**
+     * The connection state of the system (e.g., connected, disconnected).
+     */
     connected?: string | null;
+    /**
+     * Whether the system has been activated.
+     */
     activated?: boolean | null;
+    /**
+     * Whether the system is connected over HTTP.
+     */
     httpConnected?: boolean | null;
+    /**
+     * A dictionary of user-defined properties associated with the system.
+     */
     properties?: {
         [key: string]: string | null;
     } | null;
+    /**
+     * A collection of keywords used for tagging and searching the system.
+     */
     keywords?: Array<string> | null;
+    /**
+     * The timestamp indicating when the system was first registered.
+     */
     createdTimestamp?: string | null;
+    /**
+     * The timestamp indicating when the system was last updated.
+     */
     lastUpdatedTimestamp?: string | null;
+    /**
+     * Whether the system has been removed (soft-deleted).
+     */
     removed?: boolean | null;
-    minionDetails?: MinionDetails;
-    advancedGrains?: AdvancedGrains;
+    /**
+     * The minion agent details, including the agent's identity and connection metadata.
+     */
+    minionDetails?: MinionDetails | null;
+    /**
+     * The advanced grains containing hardware and operating system facts reported by the system.
+     */
+    advancedGrains?: AdvancedGrains | null;
+    /**
+     * The dictionary of installed packages on the system, keyed by package name.
+     */
     packages?: {
         [key: string]: PackageInfo;
     } | null;
 };
 
+/**
+ * Describes the details of a Salt minion (agent) running on a managed system.
+ */
 export type MinionDetails = {
+    /**
+     * The hostname of the managed system as reported by the minion.
+     */
     localhost?: string | null;
+    /**
+     * A mapping of network interface names to their IPv4 addresses.
+     */
     ip4Interfaces?: {
         [key: string]: Array<string> | null;
     } | null;
+    /**
+     * A mapping of network interface names to their IPv6 addresses.
+     */
     ip6Interfaces?: {
         [key: string]: Array<string> | null;
     } | null;
+    /**
+     * A mapping of network interface names to their MAC (hardware) addresses.
+     */
     hwaddrInterfaces?: {
         [key: string]: string | null;
     } | null;
+    /**
+     * The hardware vendor of the managed system.
+     */
     vendor?: string | null;
+    /**
+     * The hardware model of the managed system.
+     */
     model?: string | null;
+    /**
+     * The operating system family (e.g., Windows, Linux).
+     */
     osFamily?: string | null;
+    /**
+     * The CPU architecture of the managed system (e.g., x86_64, ARM).
+     */
     cpuArch?: string | null;
+    /**
+     * The operating system release version string.
+     */
     osRelease?: string | null;
+    /**
+     * The full display name of the operating system.
+     */
     osFullName?: string | null;
+    /**
+     * The OS architectures supported by the managed system.
+     */
     osArchitectures?: Array<string> | null;
+    /**
+     * The serial number of the managed system hardware.
+     */
     serialNumber?: string | null;
+    /**
+     * The address of the Salt master server that this minion reports to.
+     */
     master?: string | null;
+    /**
+     * A user-defined tag assigned to the managed system.
+     */
     systemTag?: string | null;
+    /**
+     * The date and time when the managed system was last started.
+     */
     systemStartTime?: string | null;
+    /**
+     * A human-readable description of the managed system.
+     */
     description?: string | null;
+    /**
+     * Indicates whether the managed system is in a locked state.
+     */
     locked?: boolean | null;
+    /**
+     * Indicates whether the managed system is in a secured state.
+     */
     secured?: boolean | null;
+    /**
+     * The version of the Salt minion agent installed on the managed system.
+     */
     version?: string | null;
-    startupSettings?: GrainsStartupSettings;
-    networkSettings?: GrainsNetworkSettings;
+    /**
+     * The startup settings configured for the minion agent.
+     */
+    startupSettings?: GrainsStartupSettings | null;
+    /**
+     * The network settings configured on the managed system.
+     */
+    networkSettings?: GrainsNetworkSettings | null;
+    /**
+     * The fully qualified domain name (FQDN) of the managed system.
+     */
     fqdn?: string | null;
-    locale?: GrainsLocaleInfo;
+    /**
+     * The locale information for the managed system.
+     */
+    locale?: GrainsLocaleInfo | null;
+    /**
+     * The name of the system image installed on the managed system.
+     */
     systemImageName?: string | null;
+    /**
+     * The version of the system image installed on the managed system.
+     */
     systemImageVersion?: string | null;
 };
 
+/**
+ * Represents information about a software package installed on a managed system.
+ */
 export type PackageInfo = {
+    /**
+     * The user-friendly display name of the package.
+     */
     displayName?: string | null;
+    /**
+     * The user-friendly display version of the package.
+     */
     displayVersion?: string | null;
+    /**
+     * The combined display name and version string.
+     */
     displayNameAndVersion?: string | null;
+    /**
+     * The package version.
+     */
     version?: string | null;
 };
 
+/**
+ * Represents a request to query jobs with filtering, projection, sorting, and paging options.
+ */
 export type QueryJobsRequest = {
     /**
-     * Gets or sets the number of resources to skip.
+     * The number of resources to skip.
      */
     skip?: number;
     /**
-     * Gets or sets the number of resources to return. The maximum value is 1000.
+     * The number of resources to return. The maximum value is 1000.
      */
     take?: number | null;
     /**
-     * Gets or sets the filter criteria for jobs or systems. Consists of a string of queries composed using AND/OR operators. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
+     * The filter criteria for jobs or systems. Consists of a string of queries composed using AND/OR operators. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
      * Filter syntax: '[property name][operator][operand] and [property name][operator][operand]'
      *
      * Operators:
@@ -591,7 +1167,7 @@ export type QueryJobsRequest = {
      */
     filter?: string | null;
     /**
-     * Gets or sets specifies the projection for resources. Use this field to receive specific properties of the model.
+     * Specifies the projection for resources. Use this field to receive specific properties of the model.
      * Examples:
      * - 'new(id,jid,state)'
      * - 'new(id,jid,config.user as user)'
@@ -599,7 +1175,7 @@ export type QueryJobsRequest = {
      */
     projection?: string | null;
     /**
-     * Gets or sets the order in which data returns.
+     * The order in which data returns.
      */
     orderBy?: string | null;
 };
@@ -609,26 +1185,29 @@ export type QueryJobsRequest = {
  */
 export type QueryJobsResponse = {
     /**
-     * Gets or sets the data returned by query.
+     * The data returned by query.
      */
     data?: Array<unknown> | null;
     /**
-     * Gets or sets the total number of resources that matched the query.
+     * The total number of resources that matched the query.
      */
     count?: number;
 };
 
+/**
+ * Represents a request to query systems with filtering, projection, sorting, and paging options.
+ */
 export type QuerySystemsRequest = {
     /**
-     * Gets or sets the number of resources to skip.
+     * The number of resources to skip.
      */
     skip?: number;
     /**
-     * Gets or sets the number of resources to return. The maximum value is 1000.
+     * The number of resources to return. The maximum value is 1000.
      */
     take?: number;
     /**
-     * Gets or sets the filter criteria for jobs or systems. Consists of a string of queries composed using AND/OR operators. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
+     * The filter criteria for jobs or systems. Consists of a string of queries composed using AND/OR operators. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
      * Filter syntax: '[property name][operator][operand] and [property name][operator][operand]'
      *
      * Operators:
@@ -668,7 +1247,7 @@ export type QuerySystemsRequest = {
      */
     filter?: string | null;
     /**
-     * Gets or sets specifies the projection for resources. Use this field to receive specific properties of the model.
+     * Specifies the projection for resources. Use this field to receive specific properties of the model.
      * Examples:
      * - 'new(id,connected)'
      * - 'new(id,alias,grains.data.host as host)'
@@ -676,7 +1255,7 @@ export type QuerySystemsRequest = {
      */
     projection?: string | null;
     /**
-     * Gets or sets the order in which data returns.
+     * The order in which data returns.
      */
     orderBy?: string | null;
 };
@@ -686,11 +1265,11 @@ export type QuerySystemsRequest = {
  */
 export type RemoveSystemsRequest = {
     /**
-     * Gets or sets array of strings representing the IDs of systems to remove from SystemLink.
+     * Array of strings representing the IDs of systems to remove from SystemLink.
      */
     tgt?: Array<string> | null;
     /**
-     * Gets or sets a Boolean which specifies whether to remove systems from the database immediately (True) or wait until the unregister job returns from systems (False). If True, unregister job failures are not cached.
+     * A Boolean which specifies whether to remove systems from the database immediately (True) or wait until the unregister job returns from systems (False). If True, unregister job failures are not cached.
      */
     force?: boolean;
 };
@@ -699,17 +1278,20 @@ export type RemoveSystemsRequest = {
  * Model for response of the request to unregister systems.
  */
 export type RemoveSystemsResponse = {
-    error?: HttpError;
     /**
-     * Gets or sets the job ID of the unregistration job sent to connected systems.
+     * Gets or sets an error to include in the response.
+     */
+    error?: HttpError | null;
+    /**
+     * The job ID of the unregistration job sent to connected systems.
      */
     jid?: string | null;
     /**
-     * Gets or sets an array of system IDs removed from the database immediately.
+     * An array of system IDs removed from the database immediately.
      */
     removedIds?: Array<string> | null;
     /**
-     * Gets or sets an array of objects defining failed unregister operations.
+     * An array of objects defining failed unregister operations.
      */
     failedIds?: Array<FailedUnregisterRequest> | null;
 };
@@ -721,9 +1303,12 @@ export type RemoveSystemsResponse = {
  */
 export type ReportType = 'SOFTWARE' | 'HARDWARE';
 
+/**
+ * Represents a request to search for systems using Lucene-based query syntax.
+ */
 export type SearchSystemsRequest = {
     /**
-     * Gets or sets the filter criteria for systems. Consists of a Lucene-based query string. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
+     * The filter criteria for systems. Consists of a Lucene-based query string. String values and date strings need to be enclosed in double quotes. Parenthesis can be used around filters to better define the order of operations.
      * Filter syntax: '[field]: "[value]" [operator] [field]: "[value]"'
      *
      * When no field is specified, the value is matched against the default fields:
@@ -802,20 +1387,23 @@ export type SearchSystemsRequest = {
      */
     filter?: string | null;
     /**
-     * Gets or sets the number of resources to skip in the result when paging. For example, a list of 100 resources with a skip value of 50 will return entries 51 through 100.
+     * The number of resources to skip in the result when paging. For example, a list of 100 resources with a skip value of 50 will return entries 51 through 100.
      */
     skip?: number;
     /**
-     * Gets or sets how many resources to return in the result. For example, a list of 100 resources with a take value of 25 will return entries 1 through 25.
+     * How many resources to return in the result. For example, a list of 100 resources with a take value of 25 will return entries 1 through 25.
      */
     take?: number | null;
-    orderBy?: SystemsOrderByField;
+    /**
+     * The order in which data returns.
+     */
+    orderBy?: SystemsOrderByField | null;
     /**
      * Whether to return the systems in the descending order. If OrderBy is not specified, this property is ignored. If OrderBy is specified, this property defaults to false.
      */
     descending?: boolean;
     /**
-     * Gets or sets the list of fields to include in each returned system. If projection is not provided, all system data is returned except package data.
+     * The list of fields to include in each returned system. If projection is not provided, all system data is returned except package data.
      *
      * Package projection syntax:
      * - packages["{packageName}"] returns all fields for that package.
@@ -832,53 +1420,68 @@ export type SearchSystemsRequest = {
     projection?: Array<string> | null;
 };
 
+/**
+ * Represents the response returned when searching for managed systems.
+ */
 export type SearchSystemsResponse = {
-    error?: HttpError;
+    /**
+     * Gets or sets an error to include in the response.
+     */
+    error?: HttpError | null;
+    /**
+     * The collection of systems matching the search criteria.
+     */
     systems?: Array<MaterializedSystemModel> | null;
 };
 
+/**
+ * Contains metadata associated with a managed system, including workspace, location, and custom properties.
+ */
 export type SystemMetadata = {
     /**
-     * Gets or sets the ID of the workspace.
+     * The ID of the workspace.
      */
     workspace?: string | null;
     /**
-     * Gets or sets the location id of the system.
+     * The location id of the system.
      */
     locationId?: string | null;
     /**
-     * Gets or sets the properties (key, value).
+     * The properties (key, value).
      */
     properties?: {
         [key: string]: string | null;
     } | null;
 };
 
+/**
+ * Represents a request to update properties of a managed system.
+ */
 export type SystemPatchRequest = {
     /**
-     * Gets or sets the new keywords assigned to the system.
+     * The new keywords assigned to the system.
      */
     keywords?: Array<string> | null;
     /**
-     * Gets or sets the new properties assigned to the system.
+     * The new properties assigned to the system.
      */
     properties?: {
         [key: string]: string | null;
     } | null;
     /**
-     * Gets or sets the new alias of the system.
+     * The new alias of the system.
      */
     alias?: string | null;
     /**
-     * Gets or sets the ID of the workspace.
+     * The ID of the workspace.
      */
     workspace?: string | null;
     /**
-     * Gets or sets the scan code of the system.
+     * The scan code of the system.
      */
     scanCode?: string | null;
     /**
-     * Gets or sets the location id of the system.
+     * The location id of the system.
      */
     locationId?: string | null;
 };
@@ -888,10 +1491,13 @@ export type SystemPatchRequest = {
  */
 export type SystemUpdateInformation = {
     /**
-     * Gets or sets the system id.
+     * The system id.
      */
     systemId?: string | null;
-    systemMetadata?: SystemMetadata;
+    /**
+     * The system metadata.
+     */
+    systemMetadata?: SystemMetadata | null;
 };
 
 export type SystemsOrderByField = 'ID' | 'LAST_UPDATED_TIMESTAMP' | 'CREATED_TIMESTAMP' | 'ALIAS';
@@ -900,9 +1506,14 @@ export type SystemsOrderByField = 'ID' | 'LAST_UPDATED_TIMESTAMP' | 'CREATED_TIM
  * Model for request containing the report type followed by a query filter that will be applied on systems.
  */
 export type SystemsReportRequest = {
+    /**
+     * The type of the report to be created.
+     * * SOFTWARE: The report will contain the installed software packages.
+     * * HARDWARE: The report will contain information about the hardware configuration of the system.
+     */
     type?: ReportType;
     /**
-     * Gets or sets specifies the filter criteria for systems.
+     * Specifies the filter criteria for systems.
      */
     filter?: string | null;
 };
@@ -912,7 +1523,7 @@ export type SystemsReportRequest = {
  */
 export type SystemsResponse = {
     /**
-     * Gets or sets the total number of resources that matched the query.
+     * The total number of resources that matched the query.
      */
     count?: number;
     /**
@@ -1024,19 +1635,22 @@ export type SystemsResponse = {
  */
 export type SystemsSummaryResponse = {
     /**
-     * Gets or sets number of systems connected to the server.
+     * The number of systems connected to the server.
      */
     connectedCount?: number;
     /**
-     * Gets or sets number of systems disconnected from the server.
+     * The number of systems disconnected from the server.
      */
     disconnectedCount?: number;
     /**
-     * Gets or sets number of virtual systems that have no connection to the server.
+     * The number of virtual systems that have no connection to the server.
      */
     virtualCount?: number;
 };
 
+/**
+ * Represents a request to update information for one or more managed systems.
+ */
 export type UpdateSystemsRequest = {
     /**
      * Data with which to update the information of one or more systems.
@@ -1100,7 +1714,7 @@ export type GetJobsResponse = GetJobsResponses[keyof GetJobsResponses];
 
 export type CreateJobData = {
     /**
-     * An instance of NationalInstruments.SystemsManagementService.Model.API.CreateJobRequest
+     * Represents a request to create a new job that executes functions on target systems.
      */
     body?: CreateJobRequest;
     path?: never;
@@ -1157,7 +1771,7 @@ export type GetJobsSummaryResponse = GetJobsSummaryResponses[keyof GetJobsSummar
 
 export type QueryJobsData = {
     /**
-     * An instance of NationalInstruments.SystemsManagementService.Model.API.QueryJobsRequest
+     * Represents a request to query jobs with filtering, projection, sorting, and paging options.
      */
     body?: QueryJobsRequest;
     path?: never;
@@ -1252,6 +1866,9 @@ export type V1Responses = {
 };
 
 export type SearchSystemsData = {
+    /**
+     * Represents a request to search for systems using Lucene-based query syntax.
+     */
     body?: SearchSystemsRequest;
     path?: never;
     query?: never;
@@ -1278,7 +1895,7 @@ export type SearchSystemsResponse2 = SearchSystemsResponses[keyof SearchSystemsR
 
 export type QuerySystemsData = {
     /**
-     * An instance of a NationalInstruments.SystemsManagementService.Model.API.QuerySystemsRequest
+     * Represents a request to query systems with filtering, projection, sorting, and paging options.
      */
     body?: QuerySystemsRequest;
     path?: never;
@@ -1310,7 +1927,7 @@ export type QuerySystemsResponse = QuerySystemsResponses[keyof QuerySystemsRespo
 
 export type GenerateSystemsReportData = {
     /**
-     * An instance of NationalInstruments.SystemsManagementService.Model.API.SystemsReportRequest
+     * Model for request containing the report type followed by a query filter that will be applied on systems.
      */
     body?: SystemsReportRequest;
     path?: never;
@@ -1416,6 +2033,9 @@ export type GetAllSystemsKeysResponses = {
 export type GetAllSystemsKeysResponse = GetAllSystemsKeysResponses[keyof GetAllSystemsKeysResponses];
 
 export type GetSystemsKeysData = {
+    /**
+     * Represents a request to retrieve the keys for one or more systems.
+     */
     body?: ListSystemsKeysRequest;
     path?: never;
     query?: never;
@@ -1446,7 +2066,7 @@ export type GetSystemsKeysResponse2 = GetSystemsKeysResponses[keyof GetSystemsKe
 
 export type ManageSystemsKeysData = {
     /**
-     * An instance of a NationalInstruments.SystemsManagementService.Model.API.ManageKeysRequest
+     * Model for request to perform specific acceptance actions to system keys.
      */
     body?: ManageKeysRequest;
     path?: never;
@@ -1482,7 +2102,7 @@ export type ManageSystemsKeysResponse = ManageSystemsKeysResponses[keyof ManageS
 
 export type CreateVirtualSystemData = {
     /**
-     * An instance of a NationalInstruments.SystemsManagementService.Model.API.CreateVirtualSystemRequest
+     * Represents a request to create a new virtual system.
      */
     body?: CreateVirtualSystemRequest;
     path?: never;
@@ -1514,7 +2134,7 @@ export type CreateVirtualSystemResponse2 = CreateVirtualSystemResponses[keyof Cr
 
 export type GenerateVirtualSystemApiKeyData = {
     /**
-     * An instance of a NationalInstruments.SystemsManagementService.Model.API.GenerateSystemApiKeyRequest
+     * Model for request for permanent api key to be used by SystemLink Client.
      */
     body?: GenerateSystemApiKeyRequest;
     path?: never;
@@ -1580,7 +2200,7 @@ export type GetSystemsResponse = GetSystemsResponses[keyof GetSystemsResponses];
 
 export type RemoveSystemsData = {
     /**
-     * An instance of a NationalInstruments.SystemsManagementService.Model.API.RemoveSystemsRequest
+     * Model for request to unregister systems from the server.
      */
     body?: RemoveSystemsRequest;
     path?: never;
@@ -1612,7 +2232,7 @@ export type RemoveSystemsResponse2 = RemoveSystemsResponses[keyof RemoveSystemsR
 
 export type UpdateSystemsMetadataData = {
     /**
-     * An instance of a NationalInstruments.SystemsManagementService.Model.API.UpdateSystemsRequest
+     * Represents a request to update information for one or more managed systems.
      */
     body?: UpdateSystemsRequest;
     path?: never;
@@ -1644,7 +2264,7 @@ export type UpdateSystemsMetadataResponse = UpdateSystemsMetadataResponses[keyof
 
 export type UpdateSystemMetadataData = {
     /**
-     * An instance of a NationalInstruments.SystemsManagementService.Model.API.SystemPatchRequest
+     * Represents a request to update properties of a managed system.
      */
     body?: SystemPatchRequest;
     path: {

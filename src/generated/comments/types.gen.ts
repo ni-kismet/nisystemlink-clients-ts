@@ -108,7 +108,10 @@ export type CreateCommentsPartialSuccessResponse = {
      * List of comment requests that are failed during creation.
      */
     failedComments?: Array<CreateCommentRequest> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -149,7 +152,10 @@ export type DeleteCommentsPartialSuccessResponse = {
      * The ids of the comments that could not be deleted.
      */
     failedCommentIds?: Array<string> | null;
-    error?: HttpError;
+    /**
+     * Contains error information.
+     */
+    error?: HttpError | null;
 };
 
 /**
@@ -311,9 +317,21 @@ export type UpdateCommentRequest = {
  * Information about the v1 version of the API.
  */
 export type V1Operations = {
+    /**
+     * Create one or more comments.
+     */
     createComments: Operation;
+    /**
+     * List comments.
+     */
     listComments: Operation;
+    /**
+     * Update comment.
+     */
     updateComment: Operation;
+    /**
+     * Delete one or more comments.
+     */
     deleteComments: Operation;
 };
 
@@ -321,7 +339,10 @@ export type V1Operations = {
  * Version information.
  */
 export type Versions = {
-    v1?: V1Operations;
+    /**
+     * Api versions and available operations of v1 version.
+     */
+    v1?: V1Operations | null;
     /**
      * The version of the web service.
      */
@@ -371,6 +392,11 @@ export type ListCommentsResponses = {
 export type ListCommentsResponse2 = ListCommentsResponses[keyof ListCommentsResponses];
 
 export type CreateCommentsData = {
+    /**
+     * Create Comments Request
+     *
+     * Request information for create comments API.
+     */
     body?: CreateCommentsRequest;
     path?: never;
     query?: never;
@@ -405,7 +431,9 @@ export type CreateCommentsResponse2 = CreateCommentsResponses[keyof CreateCommen
 
 export type UpdateCommentData = {
     /**
-     * The request parameter for updating the comment.
+     * Update Comment Request
+     *
+     * Request information for the update comment API.
      */
     body?: UpdateCommentRequest;
     path: {
@@ -441,6 +469,11 @@ export type UpdateCommentResponses = {
 export type UpdateCommentResponse = UpdateCommentResponses[keyof UpdateCommentResponses];
 
 export type DeleteCommentsData = {
+    /**
+     * Delete Comments Request
+     *
+     * Request information for delete comments API.
+     */
     body?: DeleteCommentsRequest;
     path?: never;
     query?: never;
