@@ -166,7 +166,7 @@ describe.skipIf(!configured)('Asset Management Service', () => {
       expect(data).toBeDefined();
     });
 
-    it('accepts query parameters for filtering location history', async () => {
+    it('accepts request-body criteria for filtering location history', async () => {
       // Get an asset first
       const { data: assets } = await getNiapmV1Assets({ client, query: { Take: 1 } });
       if (!assets?.assets?.[0]?.id) {
