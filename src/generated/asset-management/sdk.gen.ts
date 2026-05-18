@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { AssetSummaryData, AssetSummaryErrors, AssetSummaryResponses, CalculateCalibrationForecastData, CalculateCalibrationForecastErrors, CalculateCalibrationForecastResponses, CreateAssetsData, CreateAssetsErrors, CreateAssetsResponses, DeleteAssetsData, DeleteAssetsErrors, DeleteAssetsResponses, DeleteCalibrationHistoryData, DeleteCalibrationHistoryErrors, DeleteCalibrationHistoryResponses, EndUtilizationData, EndUtilizationErrors, EndUtilizationResponses, ExportAssetsData, ExportAssetsErrors, ExportAssetsResponses, ExportCalibrationHistoryData, ExportCalibrationHistoryErrors, ExportCalibrationHistoryResponses, ExportMaterializedAssetsData, ExportMaterializedAssetsErrors, ExportMaterializedAssetsResponses, GetAssetCalibrationHistoryData, GetAssetCalibrationHistoryErrors, GetAssetCalibrationHistoryResponses, GetAssetData, GetAssetErrors, GetAssetResponses, GetAssetsData, GetAssetsErrors, GetAssetsResponses, LinkFilesData, LinkFilesErrors, LinkFilesResponses, MoveAssetsLocationData, MoveAssetsLocationDryRunData, MoveAssetsLocationDryRunErrors, MoveAssetsLocationDryRunResponses, MoveAssetsLocationErrors, MoveAssetsLocationResponses, PostAssetQueryConnectionHistoryData, PostAssetQueryConnectionHistoryErrors, PostAssetQueryConnectionHistoryResponses, QueryAssetsData, QueryAssetsErrors, QueryAssetsResponses, QueryAssetUtilizationHistoryData, QueryAssetUtilizationHistoryErrors, QueryAssetUtilizationHistoryResponses, QueryLocationMovesData, QueryLocationMovesErrors, QueryLocationMovesResponses, ReceiveFromCalibrationData, ReceiveFromCalibrationDryRunData, ReceiveFromCalibrationDryRunErrors, ReceiveFromCalibrationDryRunResponses, ReceiveFromCalibrationErrors, ReceiveFromCalibrationResponses, RootEndpointData, RootEndpointResponses, SearchAssetsData, SearchAssetsErrors, SearchAssetsResponses, SendForCalibrationData, SendForCalibrationDryRunData, SendForCalibrationDryRunErrors, SendForCalibrationDryRunResponses, SendForCalibrationErrors, SendForCalibrationResponses, StartUtilizationData, StartUtilizationErrors, StartUtilizationResponses, UnlinkFileFromAssetData, UnlinkFileFromAssetErrors, UnlinkFileFromAssetResponses, UpdateAssetsData, UpdateAssetsErrors, UpdateAssetsResponses, UpdateMetadataData, UpdateMetadataErrors, UpdateMetadataResponses, UtilizationHeartbeatData, UtilizationHeartbeatErrors, UtilizationHeartbeatResponses, V1Data, V1Responses } from './types.gen';
+import type { AssetSummaryData, AssetSummaryErrors, AssetSummaryResponses, CalculateCalibrationForecastData, CalculateCalibrationForecastErrors, CalculateCalibrationForecastResponses, CreateAssetsData, CreateAssetsErrors, CreateAssetsResponses, DeleteAssetsData, DeleteAssetsErrors, DeleteAssetsResponses, DeleteCalibrationHistoryData, DeleteCalibrationHistoryErrors, DeleteCalibrationHistoryResponses, EndUtilizationData, EndUtilizationErrors, EndUtilizationResponses, ExportAssetsData, ExportAssetsErrors, ExportAssetsResponses, ExportCalibrationHistoryData, ExportCalibrationHistoryErrors, ExportCalibrationHistoryResponses, ExportMaterializedAssetsData, ExportMaterializedAssetsErrors, ExportMaterializedAssetsResponses, GetAssetCalibrationHistoryData, GetAssetCalibrationHistoryErrors, GetAssetCalibrationHistoryResponses, GetAssetData, GetAssetErrors, GetAssetResponses, GetAssetsData, GetAssetsErrors, GetAssetsResponses, LinkFilesData, LinkFilesErrors, LinkFilesResponses, MoveAssetsLocationData, MoveAssetsLocationDryRunData, MoveAssetsLocationDryRunErrors, MoveAssetsLocationDryRunResponses, MoveAssetsLocationErrors, MoveAssetsLocationResponses, PostAssetQueryConnectionHistoryData, PostAssetQueryConnectionHistoryErrors, PostAssetQueryConnectionHistoryResponses, QueryAssetsData, QueryAssetsErrors, QueryAssetsResponses, QueryAssetLocationHistoryData, QueryAssetLocationHistoryErrors, QueryAssetLocationHistoryResponses, QueryAssetUtilizationHistoryData, QueryAssetUtilizationHistoryErrors, QueryAssetUtilizationHistoryResponses, QueryLocationMovesData, QueryLocationMovesErrors, QueryLocationMovesResponses, ReceiveFromCalibrationData, ReceiveFromCalibrationDryRunData, ReceiveFromCalibrationDryRunErrors, ReceiveFromCalibrationDryRunResponses, ReceiveFromCalibrationErrors, ReceiveFromCalibrationResponses, RootEndpointData, RootEndpointResponses, SearchAssetsData, SearchAssetsErrors, SearchAssetsResponses, SendForCalibrationData, SendForCalibrationDryRunData, SendForCalibrationDryRunErrors, SendForCalibrationDryRunResponses, SendForCalibrationErrors, SendForCalibrationResponses, StartUtilizationData, StartUtilizationErrors, StartUtilizationResponses, UnlinkFileFromAssetData, UnlinkFileFromAssetErrors, UnlinkFileFromAssetResponses, UpdateAssetsData, UpdateAssetsErrors, UpdateAssetsResponses, UpdateMetadataData, UpdateMetadataErrors, UpdateMetadataResponses, UtilizationHeartbeatData, UtilizationHeartbeatErrors, UtilizationHeartbeatResponses, V1Data, V1Responses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -301,6 +301,42 @@ export const moveAssetsLocation = <ThrowOnError extends boolean = false>(options
 export const queryLocationMoves = <ThrowOnError extends boolean = false>(options?: Options<QueryLocationMovesData, ThrowOnError>) => (options?.client ?? client).post<QueryLocationMovesResponses, QueryLocationMovesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/query-location-moves',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options?.headers
+    }
+});
+
+/**
+ * Query location history for a specific asset.
+ *
+ * This function queries the per-asset location history endpoint, which is more
+ * reliable than the bulk `queryLocationMoves()` endpoint for individual assets.
+ *
+ * @param assetId - The ID of the asset to query
+ * @param options - Optional request configuration (query criteria, client override, etc.)
+ * @returns Location history records for the asset
+ *
+ * @example
+ * ```typescript
+ * // Query location history for an asset with a date range filter
+ * const { data, response } = await queryAssetLocationHistory('asset-123', {
+ *   body: {
+ *     take: 100,
+ *     startTime: '2026-01-01T00:00:00Z',
+ *     endTime: '2026-05-18T00:00:00Z'
+ *   },
+ *   client
+ * });
+ * ```
+ */
+export const queryAssetLocationHistory = <ThrowOnError extends boolean = false>(
+    assetId: string,
+    options?: Options<QueryAssetLocationHistoryData, ThrowOnError>
+) => (options?.client ?? client).post<QueryAssetLocationHistoryResponses, QueryAssetLocationHistoryErrors, ThrowOnError>({
+    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
+    url: `/niapm/v1/assets/${encodeURIComponent(assetId)}/history/query-location`,
     ...options,
     headers: {
         'Content-Type': 'application/json',

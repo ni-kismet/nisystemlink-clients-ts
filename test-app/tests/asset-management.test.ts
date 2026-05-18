@@ -19,6 +19,7 @@ import {
   deleteAssets as postNiapmV1DeleteAssets,
   getAsset as getNiapmV1AssetsByAssetId,
   rootEndpoint as getNiapm,
+  queryAssetLocationHistory,
 } from '../../src/generated/asset-management';
 import { createClient, createConfig } from '../../src/generated/asset-management/client';
 import { client as generatedClient } from '../../src/generated/asset-management/client.gen';
@@ -143,6 +144,47 @@ describe.skipIf(!configured)('Asset Management Service', () => {
       });
       expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toHaveProperty('id', firstId);
+    });
+  });
+
+  describe('queryAssetLocationHistory (per-asset endpoint)', () => {
+    it('returns location history for a specific asset', async () => {
+      // Get an asset first
+      const { data: assets } = await getNiapmV1Assets({ client, query: { Take: 1 } });
+      if (!assets?.assets?.[0]?.id) {
+        // Skip if no assets available
+        return;
+      }
+
+      const assetId = assets.assets[0].id;
+      const { data, error, response } = await queryAssetLocationHistory(assetId, {
+        client,
+        body: { take: 10 },
+      });
+
+      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBeLessThan(400);
+      expect(data).toBeDefined();
+    });
+
+    it('accepts request-body criteria for filtering location history', async () => {
+      // Get an asset first
+      const { data: assets } = await getNiapmV1Assets({ client, query: { Take: 1 } });
+      if (!assets?.assets?.[0]?.id) {
+        // Skip if no assets available
+        return;
+      }
+
+      const assetId = assets.assets[0].id;
+      const { response } = await queryAssetLocationHistory(assetId, {
+        client,
+        body: {
+          take: 5,
+          // Query location history from 30 days ago
+          startTime: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+        },
+      });
+
+      expect(response.status).toBeLessThan(400);
     });
   });
 });

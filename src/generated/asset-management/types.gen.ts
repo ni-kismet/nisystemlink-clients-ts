@@ -1757,6 +1757,53 @@ export type QueryLocationMovesResponse = {
 };
 
 /**
+ * Request for querying location history of a specific asset.
+ * Uses QueryLocationHistoryRequest for the request body.
+ */
+export type QueryAssetLocationHistoryData = {
+    /**
+     * Criteria for querying asset location history
+     */
+    body?: QueryLocationHistoryRequest;
+    /**
+     * The asset ID to query location history for (provided as function parameter)
+     */
+    path?: { assetId?: string };
+    query?: never;
+    url: '/niapm/v1/assets/{assetId}/history/query-location';
+};
+
+/**
+ * Response containing location history records for a specific asset.
+ * The response format depends on the requested destination and responseFormat.
+ */
+export type QueryAssetLocationHistoryResponse = {
+    /**
+     * The list of location history records or file reference,
+     * depending on the destination and responseFormat in the request.
+     */
+    [key: string]: unknown;
+};
+
+export type QueryAssetLocationHistoryErrors = {
+    /**
+     * Error response
+     */
+    default: BaseResponse;
+};
+
+export type QueryAssetLocationHistoryError = QueryAssetLocationHistoryErrors[keyof QueryAssetLocationHistoryErrors];
+
+export type QueryAssetLocationHistoryResponses = {
+    /**
+     * OK - Location history records returned
+     */
+    200: QueryAssetLocationHistoryResponse;
+};
+
+export type QueryAssetLocationHistoryResponse2 = QueryAssetLocationHistoryResponses[keyof QueryAssetLocationHistoryResponses];
+
+/**
  * Operation to receive an asset returning from calibration, including calibration data and location move.
  */
 export type ReceiveFromCalibrationOperations = {
