@@ -37,7 +37,7 @@ export type CreateDynamicFormConfigurationResponse = {
     readonly workspace?: string | null;
     /**
      * The resource type that the configuration belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     readonly resourceType?: string | null;
     /**
@@ -324,7 +324,7 @@ export type CreateTablePropertyRequest = {
     workspace: string;
     /**
      * The type of the resource that the table property belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType: string;
     /**
@@ -353,7 +353,7 @@ export type CreateTablePropertyResponse = {
     workspace?: string | null;
     /**
      * The type of the resource that the table property belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType?: string | null;
     /**
@@ -524,7 +524,7 @@ export type DynamicFormConfiguration = {
     workspace: string;
     /**
      * The resource type that the configuration belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType: string;
     /**
@@ -1042,7 +1042,7 @@ export type GetTablePropertyByIdResponse = {
     workspace?: string | null;
     /**
      * The type of the resource that the table property belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType?: string | null;
     /**
@@ -1097,7 +1097,7 @@ export type ListDynamicFormConfigurationResponse = {
     readonly workspace?: string | null;
     /**
      * The resource type that the configuration belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     readonly resourceType?: string | null;
     /**
@@ -1377,7 +1377,7 @@ export type QueryDynamicFormConfigurationResponse = {
     readonly workspace?: string | null;
     /**
      * The resource type that the configuration belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     readonly resourceType?: string | null;
     /**
@@ -1576,7 +1576,7 @@ export type QueryTablePropertiesRequest = {
     workspace: string;
     /**
      * The type of the resource that the table properties belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType: string;
     /**
@@ -1641,7 +1641,7 @@ export type QueryTablePropertyResponse = {
     workspace?: string | null;
     /**
      * The type of the resource that the table property belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType?: string | null;
     /**
@@ -1744,7 +1744,7 @@ export type UpdateDynamicFormConfigurationRequest = {
     id: string;
     /**
      * The resource type that the configuration belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType?: string | null;
     /**
@@ -1783,7 +1783,7 @@ export type UpdateDynamicFormConfigurationResponse = {
     readonly workspace?: string | null;
     /**
      * The resource type that the configuration belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     readonly resourceType?: string | null;
     /**
@@ -2167,7 +2167,7 @@ export type UpdateTablePropertyResponse = {
     workspace?: string | null;
     /**
      * The type of the resource that the table property belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType?: string | null;
     /**
@@ -2398,7 +2398,7 @@ export type CreateTablePropertyResponseWritable = {
     workspace?: string | null;
     /**
      * The type of the resource that the table property belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType?: string | null;
     /**
@@ -2503,7 +2503,7 @@ export type GetTablePropertyByIdResponseWritable = {
     workspace?: string | null;
     /**
      * The type of the resource that the table property belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType?: string | null;
     /**
@@ -2800,7 +2800,7 @@ export type QueryTablePropertyResponseWritable = {
     workspace?: string | null;
     /**
      * The type of the resource that the table property belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType?: string | null;
     /**
@@ -2825,7 +2825,7 @@ export type UpdateDynamicFormConfigurationRequestWritable = {
     id: string;
     /**
      * The resource type that the configuration belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType?: string | null;
     /**
@@ -3001,7 +3001,7 @@ export type UpdateTablePropertyResponseWritable = {
     workspace?: string | null;
     /**
      * The type of the resource that the table property belongs to.
-     * Supported values: workorder:workorder, workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
+     * Supported values: workitem:workitem, asset:asset, system:system, location:location, file:file, testmonitor:result or testmonitor:product.
      */
     resourceType?: string | null;
     /**
@@ -3025,6 +3025,14 @@ export type QueryResolvedDynamicFormConfigurationData = {
 
 export type QueryResolvedDynamicFormConfigurationErrors = {
     /**
+     * Bad Request
+     */
+    400: HttpError;
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
      * Error
      */
     default: HttpError;
@@ -3045,12 +3053,23 @@ export type GetDynamicFormConfigurationByIdData = {
     body?: never;
     path?: never;
     query?: {
+        /**
+         * The unique identifier of the configuration.
+         */
         configurationId?: string;
     };
     url: '/nidynamicformfields/v1/resolved-configuration';
 };
 
 export type GetDynamicFormConfigurationByIdErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
+     * Not Found
+     */
+    404: HttpError;
     /**
      * Error
      */
@@ -3094,6 +3113,14 @@ export type GetDynamicFormConfigurationsData = {
 
 export type GetDynamicFormConfigurationsErrors = {
     /**
+     * Bad Request
+     */
+    400: HttpError;
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
      * Error
      */
     default: HttpError;
@@ -3118,6 +3145,14 @@ export type CreateDynamicFormConfigurationData = {
 };
 
 export type CreateDynamicFormConfigurationErrors = {
+    /**
+     * Bad Request
+     */
+    400: HttpError;
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
     /**
      * Error
      */
@@ -3165,6 +3200,14 @@ export type GetDynamicFormGroupsData = {
 
 export type GetDynamicFormGroupsErrors = {
     /**
+     * Bad Request
+     */
+    400: HttpError;
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
      * Error
      */
     default: HttpError;
@@ -3207,6 +3250,14 @@ export type GetDynamicFormFieldsData = {
 
 export type GetDynamicFormFieldsErrors = {
     /**
+     * Bad Request
+     */
+    400: HttpError;
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
      * Error
      */
     default: HttpError;
@@ -3232,6 +3283,18 @@ export type UpdateDynamicFormConfigurationsData = {
 
 export type UpdateDynamicFormConfigurationsErrors = {
     /**
+     * Bad Request
+     */
+    400: HttpError;
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
+     * Not Found
+     */
+    404: HttpError;
+    /**
      * Error
      */
     default: HttpError;
@@ -3256,6 +3319,14 @@ export type DeleteDynamicFormConfigurationData = {
 };
 
 export type DeleteDynamicFormConfigurationErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
+     * Not Found
+     */
+    404: HttpError;
     /**
      * Error
      */
@@ -3286,6 +3357,14 @@ export type CreateTablesData = {
 
 export type CreateTablesErrors = {
     /**
+     * Bad Request
+     */
+    400: HttpError;
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
      * Error
      */
     default: HttpError;
@@ -3315,6 +3394,14 @@ export type QueryTablesData = {
 
 export type QueryTablesErrors = {
     /**
+     * Bad Request
+     */
+    400: HttpError;
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
      * Error
      */
     default: HttpError;
@@ -3335,12 +3422,23 @@ export type GetTablePropertyByIdData = {
     body?: never;
     path?: never;
     query?: {
+        /**
+         * The unique identifier of the table property.
+         */
         tablePropertyId?: string;
     };
     url: '/nidynamicformfields/v1/table';
 };
 
 export type GetTablePropertyByIdErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
+     * Not Found
+     */
+    404: HttpError;
     /**
      * Error
      */
@@ -3366,6 +3464,14 @@ export type DeleteTablePropertiesData = {
 };
 
 export type DeleteTablePropertiesErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
+     * Not Found
+     */
+    404: HttpError;
     /**
      * Error
      */
@@ -3395,6 +3501,18 @@ export type UpdateTablePropertiesData = {
 };
 
 export type UpdateTablePropertiesErrors = {
+    /**
+     * Bad Request
+     */
+    400: HttpError;
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
+     * Not Found
+     */
+    404: HttpError;
     /**
      * Error
      */

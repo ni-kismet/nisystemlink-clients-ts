@@ -5,6 +5,8 @@ export type ClientOptions = {
 };
 
 /**
+ * Link
+ *
  * A hyperlink for a resource or action on a resource
  */
 export type Link = {
@@ -15,6 +17,8 @@ export type Link = {
 };
 
 /**
+ * Error
+ *
  * Contains error information
  */
 export type Error = {
@@ -46,6 +50,8 @@ export type Error = {
 };
 
 /**
+ * Bad Request Error
+ *
  * Describes a bad request error
  */
 export type BadRequestError = {
@@ -64,6 +70,8 @@ export type BadRequestError = {
 };
 
 /**
+ * File Metadata
+ *
  * File metadata
  */
 export type FileMetadata = {
@@ -123,7 +131,9 @@ export type FileMetadata = {
 };
 
 /**
- * File metadata
+ * Linq File Metadata
+ *
+ * File metadata returned by the linq query endpoint
  */
 export type LinqFileMetadata = {
     /**
@@ -162,6 +172,11 @@ export type LinqFileMetadata = {
     workspace?: string;
 };
 
+/**
+ * Service Group
+ *
+ * A named collection of files within the file service
+ */
 export type ServiceGroup = {
     /**
      * The service group's name
@@ -172,7 +187,7 @@ export type ServiceGroup = {
      * - deleteFiles: Link to delete multiple files from the service group using POST
      * - files: Link to retrieve a list of files in the service group using GET
      * - query: Link to query for available files in the service group using POST
-     * - searchFiles: Link to retrieve a filtered list of files in the service group using GET
+     * - searchFiles: Link to search for files in the service group using a Lucene-based POST search request
      * - self: Link to the current service group
      * - upload: Link to upload files to the service group using POST
      */
@@ -183,6 +198,8 @@ export type ServiceGroup = {
 };
 
 /**
+ * Date Query
+ *
  * A query for a date and time field
  */
 export type DateQuery = {
@@ -197,6 +214,8 @@ export type DateQuery = {
 };
 
 /**
+ * Integer Query
+ *
  * A query for an integer field
  */
 export type IntegerQuery = {
@@ -211,6 +230,8 @@ export type IntegerQuery = {
 };
 
 /**
+ * Property Query
+ *
  * A query for a file property
  */
 export type PropertyQuery = {
@@ -229,6 +250,8 @@ export type PropertyQuery = {
 };
 
 /**
+ * IDs Query
+ *
  * A query for a list of ids
  */
 export type IdsQuery = {
@@ -243,6 +266,8 @@ export type IdsQuery = {
 };
 
 /**
+ * String Query
+ *
  * A query for a string field
  */
 export type StringQuery = {
@@ -257,6 +282,8 @@ export type StringQuery = {
 };
 
 /**
+ * Operation
+ *
  * An operation provided by the API
  */
 export type Operation = {
@@ -320,6 +347,55 @@ export type LinqFileQuery = {
 };
 
 /**
+ * Search Files Query
+ *
+ * Model for object containing filters to apply when searching files.
+ */
+export type SearchFilesQuery = {
+    /**
+     * The filter criteria for files using Lucene query syntax. The default search field is the file name. All searches are case-insensitive.
+     *
+     * Filter syntax: '[field]: [value] AND [field]: [value]'
+     *
+     * Operators:
+     * - Logical AND operator 'AND'. Example: 'Name: "name" AND Extension: "json"'
+     * - Logical OR operator 'OR'. Example: 'Name: "name" OR Extension: "json"'
+     * - Negation operator 'NOT'. Example: 'Name: (NOT MyFile)'
+     * - Wildcard operator '\*', used to match any sequence of characters. Example: 'Name: "file*"'
+     * - Exists operator '_exists_', used to match files where a field has any value. Example: '_exists_: "Properties.property key"'
+     * - Range bracket syntax, used to match values between two bounds for numeric and date fields. Square brackets '[' and ']' denote inclusive bounds, curly braces '{' and '}' denote exclusive bounds, and '*' denotes no bound (infinity). 'size: [100 TO 200]' matches values where 100 <= Size <= 200. 'size: {100 TO 200}' matches values where 100 < Size < 200. 'size: [100 TO 200}' matches values where 100 <= Size < 200. 'createdTimestamp: [* TO "2024-01-01T00:00:00Z"]' matches files created on or before January 1st, 2024. 'createdTimestamp: ["2024-01-01T00:00:00Z" TO *]' matches files created on or after January 1st, 2024.
+     *
+     * Valid file properties that can be used in the filter:
+     * - created: String representing the ISO representation of the time and date the file was created, example: 2018-05-15T18:54:27.519Z.
+     * - extension: String representing the file extension, example: png, txt, pdf.
+     * - id: String representing the file's Id within the service group, example: 5afb2ce3741fe11d88838cc9.
+     * - name: String representing the name of the file within the service group.
+     * - properties: Collection of key-value pairs representing file metadata properties. Filtered using the syntax '"properties.[key]": "[value]"'. Example: '"properties.owner": "admin"'.
+     * - size: Integer(int32) representing the size of the file expressed in bytes, example: 32.
+     * - workspace: String representing the workspace the file belongs to, example: MyWorkspace.
+     */
+    filter?: string;
+    /**
+     * The file value property to order results by. When not specified, results are ordered by relevance score.
+     */
+    orderBy?: 'name' | 'created' | 'id' | 'size' | 'updated';
+    /**
+     * A Boolean that determines whether to return the files in descending order.
+     */
+    orderByDescending?: boolean;
+    /**
+     * How many files to skip in the result when paging. For example, a list of 100 files with a skip value of 50 will return entries starting from the 51st file.
+     */
+    skip?: number;
+    /**
+     * Maximum number of files to return.
+     */
+    take?: number;
+};
+
+/**
+ * V1 Operations
+ *
  * V1 operations
  */
 export type V1Operations = {
@@ -331,6 +407,10 @@ export type V1Operations = {
      * - queryFiles: The ability to query available files and service groups
      * - updateMetadata: The ability to update file metadata properties
      * - uploadFiles: The ability to upload files
+     * - searchFiles: The ability to search files
+     * - uploadSessionStart: The ability to start a chunked upload session
+     * - uploadSessionAppend: The ability to append chunks to an upload session
+     * - uploadSessionFinish: The ability to finish an upload session and make the file visible
      */
     operations?: {
         deleteFiles?: Operation;
@@ -339,7 +419,53 @@ export type V1Operations = {
         queryFiles?: Operation;
         updateMetadata?: Operation;
         uploadFiles?: Operation;
+        searchFiles?: Operation;
+        uploadSessionStart?: Operation;
+        uploadSessionAppend?: Operation;
+        uploadSessionFinish?: Operation;
     };
+};
+
+/**
+ * Search File Metadata
+ *
+ * Metadata for a file returned by the search-files endpoint
+ */
+export type SearchFileMetadata = {
+    /**
+     * The file's unique identifier
+     */
+    id?: string;
+    /**
+     * The date and time the file was created in the file service
+     */
+    created?: string;
+    /**
+     * The date and time the file was last updated in the file service
+     */
+    updated?: string;
+    /**
+     * The file's metadata properties as key-value pairs
+     */
+    properties?: {
+        [key: string]: string;
+    };
+    /**
+     * The service group that owns the file
+     */
+    serviceGroup?: string;
+    /**
+     * The 32-bit file size in bytes. If the value is larger than a 32-bit integer, this value is -1 and the size64 field contains the correct value.
+     */
+    size?: number;
+    /**
+     * The 64-bit file size in bytes
+     */
+    size64?: number;
+    /**
+     * The workspace the file belongs to
+     */
+    workspace?: string;
 };
 
 /**
@@ -356,7 +482,7 @@ export type RootEndpointData = {
 
 export type RootEndpointResponses = {
     /**
-     * RootEndpointResponse
+     * Root Endpoint Response
      *
      * Version information
      */
@@ -413,11 +539,21 @@ export type ListServiceGroupsErrors = {
      * Not authorized
      */
     401: unknown;
+    /**
+     * Error Response
+     *
+     * Error response
+     */
+    default: {
+        error?: Error;
+    };
 };
+
+export type ListServiceGroupsError = ListServiceGroupsErrors[keyof ListServiceGroupsErrors];
 
 export type ListServiceGroupsResponses = {
     /**
-     * ListServiceGroupsResponse
+     * List Service Groups Response
      *
      * Service group information
      */
@@ -438,7 +574,7 @@ export type ListServiceGroupsResponses = {
 
 export type ListServiceGroupsResponse = ListServiceGroupsResponses[keyof ListServiceGroupsResponses];
 
-export type ListAvailableFilesGetData = {
+export type ListAvailableFilesData = {
     body?: never;
     path?: never;
     query?: {
@@ -455,7 +591,7 @@ export type ListAvailableFilesGetData = {
          */
         orderBy?: 'created' | 'id' | 'size';
         /**
-         * Whether to sort descending instead of ascending. The elements in the list are sorted ascending by default. If the orderByDescending parameter is specified, the elements in the list are sorted based on it's value. The orderByDescending value must be a boolean string. The elements in the list are sorted ascending if false and descending if true.
+         * Whether to sort descending instead of ascending. The elements in the list are sorted ascending by default. If the orderByDescending parameter is specified, the elements in the list are sorted based on its value. The orderByDescending value must be a boolean string. The elements in the list are sorted ascending if false and descending if true.
          */
         orderByDescending?: boolean;
         /**
@@ -466,13 +602,13 @@ export type ListAvailableFilesGetData = {
     url: '/v1/service-groups/Default/files';
 };
 
-export type ListAvailableFilesGetErrors = {
+export type ListAvailableFilesErrors = {
     /**
      * Not authorized
      */
     401: unknown;
     /**
-     * ErrorResponse
+     * Error Response
      *
      * Error response
      */
@@ -481,11 +617,11 @@ export type ListAvailableFilesGetErrors = {
     };
 };
 
-export type ListAvailableFilesGetError = ListAvailableFilesGetErrors[keyof ListAvailableFilesGetErrors];
+export type ListAvailableFilesError = ListAvailableFilesErrors[keyof ListAvailableFilesErrors];
 
-export type ListAvailableFilesGetResponses = {
+export type ListAvailableFilesResponses = {
     /**
-     * QueryResponse
+     * Query Response
      *
      * The result of a file query
      */
@@ -495,6 +631,7 @@ export type ListAvailableFilesGetResponses = {
          * - deleteFiles: Link to delete multiple files from the service group using a POST
          * - query: Link to query for available files in the service group using a POST
          * - search: Link to retrieve a filtered list of files in the service group using a GET
+         * - searchFiles: Link to search for files in the service group using a Lucene-based POST search request.
          * - self: Link to the current service group
          * - upload: Link to upload files to the service group using a POST
          */
@@ -513,7 +650,7 @@ export type ListAvailableFilesGetResponses = {
     };
 };
 
-export type ListAvailableFilesGetResponse = ListAvailableFilesGetResponses[keyof ListAvailableFilesGetResponses];
+export type ListAvailableFilesResponse = ListAvailableFilesResponses[keyof ListAvailableFilesResponses];
 
 export type DeleteData = {
     body?: never;
@@ -538,7 +675,7 @@ export type DeleteErrors = {
      */
     401: unknown;
     /**
-     * ErrorResponse
+     * Error Response
      *
      * Error response
      */
@@ -581,7 +718,7 @@ export type ReceiveFileErrors = {
      */
     401: unknown;
     /**
-     * ErrorResponse
+     * Error Response
      *
      * Error response
      */
@@ -603,7 +740,7 @@ export type ReceiveFileResponse = ReceiveFileResponses[keyof ReceiveFileResponse
 
 export type UpdateMetadataData = {
     /**
-     * UpdateMetadataRequest
+     * Update Metadata Request
      *
      * The file's metadata and options for updating it
      */
@@ -643,7 +780,7 @@ export type UpdateMetadataErrors = {
      */
     401: unknown;
     /**
-     * ErrorResponse
+     * Error Response
      *
      * Error response
      */
@@ -665,7 +802,7 @@ export type UpdateMetadataResponse = UpdateMetadataResponses[keyof UpdateMetadat
 
 export type DeleteMultipleData = {
     /**
-     * DeleteMultipleRequest
+     * Delete Multiple Request
      *
      * The description of files to delete
      */
@@ -691,7 +828,7 @@ export type DeleteMultipleErrors = {
      */
     401: unknown;
     /**
-     * ErrorResponse
+     * Error Response
      *
      * Error response
      */
@@ -704,7 +841,7 @@ export type DeleteMultipleError = DeleteMultipleErrors[keyof DeleteMultipleError
 
 export type DeleteMultipleResponses = {
     /**
-     * PartialSuccessResponse
+     * Partial Success Response
      *
      * Partial success response containing error information.
      */
@@ -721,7 +858,7 @@ export type DeleteMultipleResponse = DeleteMultipleResponses[keyof DeleteMultipl
 
 export type QueryAvailableFilesData = {
     /**
-     * QueryAvailableFilesRequest
+     * Query Available Files Request
      *
      * The queries used to filter the results
      */
@@ -761,7 +898,7 @@ export type QueryAvailableFilesErrors = {
      */
     401: unknown;
     /**
-     * ErrorResponse
+     * Error Response
      *
      * Error response
      */
@@ -774,7 +911,7 @@ export type QueryAvailableFilesError = QueryAvailableFilesErrors[keyof QueryAvai
 
 export type QueryAvailableFilesResponses = {
     /**
-     * QueryResponse
+     * Query Response
      *
      * The result of a file query
      */
@@ -784,6 +921,7 @@ export type QueryAvailableFilesResponses = {
          * - deleteFiles: Link to delete multiple files from the service group using a POST
          * - query: Link to query for available files in the service group using a POST
          * - search: Link to retrieve a filtered list of files in the service group using a GET
+         * - searchFiles: Link to search for files in the service group using a Lucene-based POST search request.
          * - self: Link to the current service group
          * - upload: Link to upload files to the service group using a POST
          */
@@ -824,7 +962,7 @@ export type QueryFilesLinqErrors = {
      */
     401: unknown;
     /**
-     * ErrorResponse
+     * Error Response
      *
      * Error response
      */
@@ -837,7 +975,7 @@ export type QueryFilesLinqError = QueryFilesLinqErrors[keyof QueryFilesLinqError
 
 export type QueryFilesLinqResponses = {
     /**
-     * LinqQueryResponse
+     * Linq Query Response
      *
      * The result of a file query
      */
@@ -847,18 +985,18 @@ export type QueryFilesLinqResponses = {
          */
         availableFiles?: Array<LinqFileMetadata>;
         /**
-         * The total number of files that match the query regardless of skip and take values
+         * A count value and relation describing how many files matched the query. When relation is "eq", value is the exact number of matching files. When relation is "gte", the take limit was reached and there are more results; value equals take - 1.
          */
         totalCount?: {
             /**
-             * Describes the relation the returned total count value has with respect to the total number of files matched by the query.
+             * Indicates whether value is an exact count or a lower bound.
              * Possible values:
-             * "eq" -> equals, meaning that the returned items are all the items that matched the filter
-             * "gte" -> greater or equal, meaning that there the `take` limit has been hit, but there are further items that match the query in the database
+             * "eq" -> equals, meaning that value is the exact number of files that matched the filter
+             * "gte" -> greater or equal, meaning that the take limit was hit and additional matching files exist in the database
              */
             relation?: string;
             /**
-             * Describes the number of files that were returned as a result of the query in the database
+             * The number of files returned in this response when relation is "eq", or take - 1 when relation is "gte" (indicating more results exist beyond the current page).
              */
             value?: number;
         };
@@ -866,6 +1004,69 @@ export type QueryFilesLinqResponses = {
 };
 
 export type QueryFilesLinqResponse = QueryFilesLinqResponses[keyof QueryFilesLinqResponses];
+
+export type SearchFilesData = {
+    /**
+     * The search parameters including filter, sorting, and pagination.
+     */
+    body?: SearchFilesQuery;
+    path?: never;
+    query?: never;
+    url: '/v1/service-groups/Default/search-files';
+};
+
+export type SearchFilesErrors = {
+    /**
+     * Bad Request
+     */
+    400: BadRequestError;
+    /**
+     * Not authorized
+     */
+    401: unknown;
+    /**
+     * Error Response
+     *
+     * Error response
+     */
+    default: {
+        error?: Error;
+    };
+};
+
+export type SearchFilesError = SearchFilesErrors[keyof SearchFilesErrors];
+
+export type SearchFilesResponses = {
+    /**
+     * Search Files Response
+     *
+     * The result of a file search
+     */
+    200: {
+        /**
+         * The list of files returned by the search
+         */
+        availableFiles?: Array<SearchFileMetadata>;
+        /**
+         * The total number of files that match the search regardless of skip and take values
+         */
+        totalCount?: {
+            /**
+             * Describes the relation the returned total count value has with respect to the total number of files matched by the search.
+             * Possible values:
+             * "eq" -> equals, meaning that the returned items are all the items that matched the filter
+             * "gte" -> greater or equal, meaning that the `take` limit has been hit, but there are further items that match the search in the database
+             */
+            relation?: string;
+            /**
+             * The total number of files matched by the search
+             */
+            value?: number;
+        };
+    };
+};
+
+export type SearchFilesResponse = SearchFilesResponses[keyof SearchFilesResponses];
 
 export type UploadData = {
     body: {
@@ -898,7 +1099,7 @@ export type UploadErrors = {
      */
     401: unknown;
     /**
-     * ErrorResponse
+     * Error Response
      *
      * Error response
      */
@@ -911,7 +1112,7 @@ export type UploadError = UploadErrors[keyof UploadErrors];
 
 export type UploadResponses = {
     /**
-     * UploadResponse
+     * Upload Response
      *
      * Uploaded file information
      */
@@ -943,7 +1144,7 @@ export type UploadSessionStartErrors = {
      */
     401: unknown;
     /**
-     * ErrorResponse
+     * Error Response
      *
      * Error response
      */
@@ -956,7 +1157,7 @@ export type UploadSessionStartError = UploadSessionStartErrors[keyof UploadSessi
 
 export type UploadSessionStartResponses = {
     /**
-     * UploadSessionStartResponse
+     * Upload Session Start Response
      *
      * Upload Session information
      */
@@ -1005,7 +1206,7 @@ export type UploadSessionAppendErrors = {
      */
     401: unknown;
     /**
-     * ErrorResponse
+     * Error Response
      *
      * Error response
      */
@@ -1018,7 +1219,7 @@ export type UploadSessionAppendError = UploadSessionAppendErrors[keyof UploadSes
 
 export type UploadSessionAppendResponses = {
     /**
-     * Created
+     * No Content
      */
     204: void;
 };
@@ -1027,7 +1228,7 @@ export type UploadSessionAppendResponse = UploadSessionAppendResponses[keyof Upl
 
 export type UploadSessionFinishData = {
     /**
-     * UploadSessionFinishRequest
+     * Upload Session Finish Request
      *
      * The metadata for the final file.
      */
@@ -1059,7 +1260,7 @@ export type UploadSessionFinishErrors = {
      */
     401: unknown;
     /**
-     * ErrorResponse
+     * Error Response
      *
      * Error response
      */
@@ -1072,7 +1273,7 @@ export type UploadSessionFinishError = UploadSessionFinishErrors[keyof UploadSes
 
 export type UploadSessionFinishResponses = {
     /**
-     * UploadResponse
+     * Upload Response
      *
      * Uploaded file information
      */

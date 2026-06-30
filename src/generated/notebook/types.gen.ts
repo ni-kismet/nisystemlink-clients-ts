@@ -5,51 +5,51 @@ export type ClientOptions = {
 };
 
 /**
- * notebook Metadata
+ * Notebook Metadata
  */
 export type Notebook = {
     /**
-     * The notebook Id
+     * The unique identifier of the notebook.
      */
     id?: string;
     /**
-     * The notebook name
+     * The notebook file name.
      */
     name?: string;
     /**
-     * The Id of the workspace containing the notebook
+     * The ID of the workspace containing the notebook.
      */
     workspace?: string;
     /**
-     * The Id of the user that created the notebook
+     * The ID of the user that created the notebook.
      */
     createdBy?: string;
     /**
-     * The Id of the user that created the notebook
+     * The ID of the user that last updated the notebook.
      */
     updatedBy?: string;
     /**
-     * The created timestamp (ISO8601 format)
+     * The timestamp when the notebook was created.
      */
     createdAt?: string;
     /**
-     * The last updated timestamp (ISO8601 format)
+     * The timestamp when the notebook was last updated.
      */
     updatedAt?: string;
     /**
-     * A map of key value properties associated with the notebook
+     * A map of key-value properties associated with the notebook.
      */
     properties?: {
         [key: string]: unknown;
     };
     /**
-     * The metadata of the notebook
+     * The parsed metadata of the notebook including input/output parameter definitions.
      */
     metadata?: {
         [key: string]: unknown;
     };
     /**
-     * The parameters of the notebook
+     * The default values of the notebook's input parameters.
      */
     parameters?: {
         [key: string]: unknown;
@@ -57,26 +57,26 @@ export type Notebook = {
 };
 
 /**
- * notebook Content
+ * Notebook Content
  *
- * The notebook binary content.
+ * The notebook file content in Jupyter .ipynb JSON format.
  */
 export type NotebookContent = Blob | File;
 
 /**
- * The metadata of the notebook. Refer to schemas section below for more details.
+ * The metadata to set on the notebook.
  */
 export type NotebookRequestMetadata = {
     /**
-     * The notebook's name
+     * The notebook file name.
      */
     name: string;
     /**
-     * The workspace Id for the notebook. If this is not specified, the notebook will remain in its existing workspace.
+     * The ID of the workspace for the notebook. If not specified on update, the notebook remains in its existing workspace.
      */
     workspace?: string;
     /**
-     * A map of key value properties associated with the notebook
+     * A map of key-value properties associated with the notebook.
      */
     properties?: {
         [key: string]: string;
@@ -88,7 +88,7 @@ export type NotebookRequestMetadata = {
  */
 export type NotebookQueryRequest = {
     /**
-     * The filter criteria for notebook, consisting of a string of queries composed using AND/OR operators. String values need to be enclosed in double quotes. Parenthesis can be used within the filter to better define the order of operations.
+     * The notebook query filter in [Dynamic LINQ](https://github.com/ni/systemlink-OpenAPI-documents/wiki/Dynamic-Linq-Query-Language) format. String values must be enclosed in double quotes. Parentheses can be used to define the order of operations.
      * Filter syntax: '[property name][operator][operand] and [property name][operator][operand]'
      * Operators:
      * - Equals operator '='. Example: 'x = y'
@@ -112,11 +112,11 @@ export type NotebookQueryRequest = {
      */
     filter?: string;
     /**
-     * The maximum number of notebooks to return
+     * The maximum number of notebooks to return.
      */
     take?: number;
     /**
-     * The continuation token can be used to paginate through the notebook query results. Provide this token in the next query notebook call.
+     * A token to retrieve the next page of results. Pass this value in the next query request to continue pagination.
      */
     continuationToken?: string;
 };
@@ -145,7 +145,7 @@ export type Error = {
 };
 
 /**
- * The notebook identifier
+ * The unique identifier of the notebook.
  */
 export type NotebookId = string;
 
@@ -153,7 +153,7 @@ export type DeleteNotebookData = {
     body?: never;
     path: {
         /**
-         * The notebook identifier
+         * The unique identifier of the notebook.
          */
         id: string;
     };
@@ -163,15 +163,15 @@ export type DeleteNotebookData = {
 
 export type DeleteNotebookErrors = {
     /**
-     * API Key is missing or invalid
+     * Unauthorized.
      */
     401: unknown;
     /**
-     * The resource was not found.
+     * The notebook was not found.
      */
     404: unknown;
     /**
-     * Error
+     * An error occurred.
      */
     default: Error;
 };
@@ -180,7 +180,7 @@ export type DeleteNotebookError = DeleteNotebookErrors[keyof DeleteNotebookError
 
 export type DeleteNotebookResponses = {
     /**
-     * Success
+     * The notebook was deleted.
      */
     204: void;
 };
@@ -191,7 +191,7 @@ export type GetNotebookData = {
     body?: never;
     path: {
         /**
-         * The notebook identifier
+         * The unique identifier of the notebook.
          */
         id: string;
     };
@@ -201,15 +201,15 @@ export type GetNotebookData = {
 
 export type GetNotebookErrors = {
     /**
-     * API Key is missing or invalid
+     * Unauthorized.
      */
     401: unknown;
     /**
-     * The resource was not found.
+     * The notebook was not found.
      */
     404: unknown;
     /**
-     * Error
+     * An error occurred.
      */
     default: Error;
 };
@@ -218,7 +218,7 @@ export type GetNotebookError = GetNotebookErrors[keyof GetNotebookErrors];
 
 export type GetNotebookResponses = {
     /**
-     * Get Notebook Response
+     * The notebook metadata was returned.
      */
     200: Notebook;
 };
@@ -232,7 +232,7 @@ export type UpdateNotebookData = {
     };
     path: {
         /**
-         * The notebook identifier
+         * The unique identifier of the notebook.
          */
         id: string;
     };
@@ -242,19 +242,19 @@ export type UpdateNotebookData = {
 
 export type UpdateNotebookErrors = {
     /**
-     * Invalid input data
+     * The request body contains invalid data.
      */
     400: unknown;
     /**
-     * API Key is missing or invalid
+     * Unauthorized.
      */
     401: unknown;
     /**
-     * The resource was not found.
+     * The notebook was not found.
      */
     404: unknown;
     /**
-     * Error
+     * An error occurred.
      */
     default: Error;
 };
@@ -263,7 +263,7 @@ export type UpdateNotebookError = UpdateNotebookErrors[keyof UpdateNotebookError
 
 export type UpdateNotebookResponses = {
     /**
-     * Update Notebook Response
+     * The notebook was updated.
      */
     200: Notebook;
 };
@@ -282,11 +282,11 @@ export type CreateNotebookData = {
 
 export type CreateNotebookErrors = {
     /**
-     * API Key is missing or invalid
+     * Unauthorized.
      */
     401: unknown;
     /**
-     * Error
+     * An error occurred.
      */
     default: Error;
 };
@@ -295,7 +295,7 @@ export type CreateNotebookError = CreateNotebookErrors[keyof CreateNotebookError
 
 export type CreateNotebookResponses = {
     /**
-     * Create Notebook Response
+     * The notebook was created.
      */
     200: Notebook;
 };
@@ -314,15 +314,15 @@ export type QueryData = {
 
 export type QueryErrors = {
     /**
-     * Invalid input data
+     * The request body contains invalid data.
      */
     400: unknown;
     /**
-     * API Key is missing or invalid
+     * Unauthorized.
      */
     401: unknown;
     /**
-     * Error
+     * An error occurred.
      */
     default: Error;
 };
@@ -333,7 +333,7 @@ export type QueryResponses = {
     /**
      * Query Notebook Response
      *
-     * Query Notebook Response
+     * The matching notebooks were returned.
      */
     200: {
         /**
@@ -341,7 +341,7 @@ export type QueryResponses = {
          */
         notebooks?: Array<Notebook>;
         /**
-         * The continuation token can be used to paginate through the notebooks query results. Provide this token in the next query notebooks call.
+         * A token to retrieve the next page of results. Pass this value in the next query request to continue pagination.
          */
         continuationToken?: string;
     };
@@ -353,7 +353,7 @@ export type GetContentData = {
     body?: never;
     path: {
         /**
-         * The notebook identifier
+         * The unique identifier of the notebook.
          */
         id: string;
     };
@@ -363,15 +363,15 @@ export type GetContentData = {
 
 export type GetContentErrors = {
     /**
-     * API Key is missing or invalid
+     * Unauthorized.
      */
     401: unknown;
     /**
-     * The resource was not found.
+     * The notebook was not found.
      */
     404: unknown;
     /**
-     * Error
+     * An error occurred.
      */
     default: Error;
 };
@@ -380,9 +380,51 @@ export type GetContentError = GetContentErrors[keyof GetContentErrors];
 
 export type GetContentResponses = {
     /**
-     * OK
+     * A Jupyter .ipynb notebook document.
      */
-    200: NotebookContent;
+    200: {
+        /**
+         * The major version of the notebook format.
+         */
+        nbformat?: number;
+        /**
+         * The minor version of the notebook format.
+         */
+        nbformat_minor?: number;
+        /**
+         * Notebook-level metadata including kernel and language information.
+         */
+        metadata?: {
+            kernelspec?: {
+                display_name?: string;
+                language?: string;
+                name?: string;
+            };
+            language_info?: {
+                name?: string;
+                version?: string;
+            };
+        };
+        /**
+         * The ordered list of cells in the notebook.
+         */
+        cells?: Array<{
+            cell_type?: 'code' | 'markdown' | 'raw';
+            /**
+             * The cell content as an array of lines.
+             */
+            source?: Array<string>;
+            metadata?: {
+                [key: string]: unknown;
+            };
+            /**
+             * Cell execution outputs. Present only for code cells.
+             */
+            outputs?: Array<{
+                [key: string]: unknown;
+            }>;
+        }>;
+    };
 };
 
 export type GetContentResponse = GetContentResponses[keyof GetContentResponses];

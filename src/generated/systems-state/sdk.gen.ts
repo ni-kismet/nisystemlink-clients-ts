@@ -20,6 +20,10 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 
 /**
  * Get state history
+ *
+ * Returns a paginated list of version entries for a state. Each entry includes the
+ * version identifier, a description of the change, the timestamp, and the user who
+ * made the change. Use skip and take to page through the history.
  */
 export const getStateHistory = <ThrowOnError extends boolean = false>(options: Options<GetStateHistoryData, ThrowOnError>) => (options.client ?? client).get<GetStateHistoryResponses, GetStateHistoryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -29,6 +33,9 @@ export const getStateHistory = <ThrowOnError extends boolean = false>(options: O
 
 /**
  * Get state at a specific version
+ *
+ * Returns the full state resource as it existed at the specified version. Use this to
+ * inspect the feeds, packages, and metadata a state contained at a previous point in time.
  */
 export const getStateVersion = <ThrowOnError extends boolean = false>(options: Options<GetStateVersionData, ThrowOnError>) => (options.client ?? client).get<GetStateVersionResponses, GetStateVersionErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -37,7 +44,11 @@ export const getStateVersion = <ThrowOnError extends boolean = false>(options: O
 });
 
 /**
- * Revert the state history version to the provided version.
+ * Revert the state history version to the provided version
+ *
+ * Restores a state's content to a previously recorded version. The reverted content
+ * becomes the new current version in the state's history. Use this to undo unwanted
+ * changes or roll back to a known-good configuration.
  */
 export const revertStateVersion = <ThrowOnError extends boolean = false>(options?: Options<RevertStateVersionData, ThrowOnError>) => (options?.client ?? client).post<RevertStateVersionResponses, RevertStateVersionErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -50,27 +61,11 @@ export const revertStateVersion = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * API information
- */
-export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
-    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
-    url: '/nisystemsstate',
-    ...options
-});
-
-/**
- * API version information
- */
-export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Data, ThrowOnError>) => (options?.client ?? client).get<V1Responses, unknown, ThrowOnError>({
-    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
-    url: '/nisystemsstate/v1',
-    ...options
-});
-
-/**
  * List states
  *
- * All the parameters are optional.
+ * Returns metadata for all states the caller has access to. Use the optional query
+ * parameters to filter by workspace, distribution, or architecture and to page through
+ * results with skip and take.
  */
 export const getStates = <ThrowOnError extends boolean = false>(options?: Options<GetStatesData, ThrowOnError>) => (options?.client ?? client).get<GetStatesResponses, GetStatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -80,6 +75,10 @@ export const getStates = <ThrowOnError extends boolean = false>(options?: Option
 
 /**
  * Create state
+ *
+ * Creates a new state with the specified name, distribution, architecture, and optional
+ * feeds, packages, and system image. The state is assigned to the specified workspace or
+ * the caller's default workspace. State names must be unique within a workspace.
  */
 export const createState = <ThrowOnError extends boolean = false>(options?: Options<CreateStateData, ThrowOnError>) => (options?.client ?? client).post<CreateStateResponses, CreateStateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -93,6 +92,11 @@ export const createState = <ThrowOnError extends boolean = false>(options?: Opti
 
 /**
  * Generate state export
+ *
+ * Exports the specified state (and optionally a specific version) as a Salt state file
+ * (.sls). The response is a YAML file download containing the feeds, packages, and system
+ * image defined in the state. Use this to back up a state or to apply it outside of
+ * SystemLink.
  */
 export const exportState = <ThrowOnError extends boolean = false>(options?: Options<ExportStateData, ThrowOnError>) => (options?.client ?? client).post<ExportStateResponses, ExportStateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -106,6 +110,11 @@ export const exportState = <ThrowOnError extends boolean = false>(options?: Opti
 
 /**
  * Generate state export of a system
+ *
+ * Queries the Systems Management service for the current feeds, packages, and system image
+ * installed on the specified managed system, then returns the result as a Salt state file
+ * (.sls) download. Use this to capture a system's current software configuration as a
+ * reusable state.
  */
 export const exportStateFromSystem = <ThrowOnError extends boolean = false>(options?: Options<ExportStateFromSystemData, ThrowOnError>) => (options?.client ?? client).post<ExportStateFromSystemResponses, ExportStateFromSystemErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -120,8 +129,8 @@ export const exportStateFromSystem = <ThrowOnError extends boolean = false>(opti
 /**
  * Delete state
  *
- * Sample request:
- * "64c42f2a7e5c68b2aaa71f5e"
+ * Permanently removes a state and all of its version history. This operation cannot be
+ * undone.
  */
 export const deleteState = <ThrowOnError extends boolean = false>(options: Options<DeleteStateData, ThrowOnError>) => (options.client ?? client).delete<DeleteStateResponses, DeleteStateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -132,8 +141,8 @@ export const deleteState = <ThrowOnError extends boolean = false>(options: Optio
 /**
  * Get state
  *
- * Sample request:
- * "64c42f2a7e5c68b2aaa71f5e"
+ * Returns the full state resource including its feeds, packages, system image, and metadata
+ * such as distribution, architecture, and workspace.
  */
 export const getState = <ThrowOnError extends boolean = false>(options: Options<GetStateData, ThrowOnError>) => (options.client ?? client).get<GetStateResponses, GetStateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -144,18 +153,10 @@ export const getState = <ThrowOnError extends boolean = false>(options: Options<
 /**
  * Update state
  *
- * Sample request:
- *
- * {
- * "name": "A nice state",
- * "feeds": {
- * "name": "ni-package-builder-released",
- * "url": "https://download.ni.com/support/nipkg/products/ni-p/ni-package-builder/19.0/released",
- * "enabled": false
- * "compressed": false
- * },
- * "workspace": "d725064a-b04a-49c1-a47d-49487df244e7"
- * }
+ * Partially updates a state's metadata or content. Supply a JSON object with only the
+ * fields to change — for example name, description, feeds, packages, distribution, or
+ * workspace. Fields not included in the request body are left unchanged. Each successful
+ * update creates a new version in the state's history.
  */
 export const updateState = <ThrowOnError extends boolean = false>(options: Options<UpdateStateData, ThrowOnError>) => (options.client ?? client).patch<UpdateStateResponses, UpdateStateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -169,6 +170,11 @@ export const updateState = <ThrowOnError extends boolean = false>(options: Optio
 
 /**
  * Replace state content
+ *
+ * Replaces the entire content of a state by uploading a new Salt state file (.sls). The
+ * uploaded file defines the new set of feeds, packages, and system image for the state.
+ * An optional change description records why the content was replaced. A new version is
+ * created in the state's history.
  */
 export const replaceStateContent = <ThrowOnError extends boolean = false>(options?: Options<ReplaceStateContentData, ThrowOnError>) => (options?.client ?? client).post<ReplaceStateContentResponses, ReplaceStateContentErrors, ThrowOnError>({
     ...formDataBodySerializer,
@@ -183,6 +189,10 @@ export const replaceStateContent = <ThrowOnError extends boolean = false>(option
 
 /**
  * Import state
+ *
+ * Creates a new state by uploading a Salt state file (.sls) along with metadata such as
+ * name, distribution, architecture, and workspace. Use this to restore a previously
+ * exported state or to create a state from an externally authored .sls file.
  */
 export const importState = <ThrowOnError extends boolean = false>(options?: Options<ImportStateData, ThrowOnError>) => (options?.client ?? client).post<ImportStateResponses, ImportStateErrors, ThrowOnError>({
     ...formDataBodySerializer,
@@ -198,10 +208,10 @@ export const importState = <ThrowOnError extends boolean = false>(options?: Opti
 /**
  * Delete states
  *
- * Sample request:
- * [
- * "64c42f2a7e5c68b2aaa71f5e"
- * ]
+ * Deletes multiple states in a single request. States that cannot be found or that the
+ * caller lacks permission to delete are reported as inner errors in a partial-success
+ * response. Successfully deleted states are removed permanently along with their version
+ * history.
  */
 export const deleteStates = <ThrowOnError extends boolean = false>(options?: Options<DeleteStatesData, ThrowOnError>) => (options?.client ?? client).post<DeleteStatesResponses, DeleteStatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -211,4 +221,26 @@ export const deleteStates = <ThrowOnError extends boolean = false>(options?: Opt
         'Content-Type': 'application/json',
         ...options?.headers
     }
+});
+
+/**
+ * API information
+ *
+ * Returns information about API versions and available operations.
+ */
+export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
+    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
+    url: '/nisystemsstate',
+    ...options
+});
+
+/**
+ * API version information
+ *
+ * Returns available operations for a single version of the API.
+ */
+export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Data, ThrowOnError>) => (options?.client ?? client).get<V1Responses, unknown, ThrowOnError>({
+    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
+    url: '/nisystemsstate/v1',
+    ...options
 });

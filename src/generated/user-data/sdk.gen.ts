@@ -19,7 +19,13 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Queries the user data items.
+ * Query user data items
+ *
+ * Returns user data items matching the specified filter criteria. Unlike `GET /niuserdata/v1/items`, this endpoint can return items from other users in the same organization when those items have `visibleToOthers` set to true and the caller includes the item IDs in the request body. This enables sharing specific records without exposing a discoverable library of other users' data.
+ *
+ * Supports filtering by ID, application, category, name, value, visibility, revision, and timestamps. Each filter field accepts an array of values to match against. Combine multiple filters to narrow results.
+ *
+ * Use the `sortBy` field in the request body to order results by any item field. Use `projection` to return only specific fields, reducing response size when only certain metadata is needed.
  */
 export const queryItemsEndPoint = <ThrowOnError extends boolean = false>(options?: Options<QueryItemsEndPointData, ThrowOnError>) => (options?.client ?? client).post<QueryItemsEndPointResponses, QueryItemsEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -32,7 +38,11 @@ export const queryItemsEndPoint = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Updates one or more user data items.
+ * Update one or more user data items
+ *
+ * Updates the value and visibility of existing user data items identified by their IDs. Only the fields provided in each update request are modified.
+ *
+ * Supply `expectedRevision` on each item to enable optimistic concurrency control. If the stored revision does not match, that item's update is rejected and reported in the `failed` array.
  */
 export const updateItemsEndPoint = <ThrowOnError extends boolean = false>(options?: Options<UpdateItemsEndPointData, ThrowOnError>) => (options?.client ?? client).post<UpdateItemsEndPointResponses, UpdateItemsEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -45,7 +55,9 @@ export const updateItemsEndPoint = <ThrowOnError extends boolean = false>(option
 });
 
 /**
- * Deletes multiple user data items in a single API call.
+ * Delete multiple user data items
+ *
+ * Permanently removes multiple user data items by their IDs in a single request. Items that do not exist or belong to another user are reported in the `failed` array.
  */
 export const deleteItemsEndPoint = <ThrowOnError extends boolean = false>(options?: Options<DeleteItemsEndPointData, ThrowOnError>) => (options?.client ?? client).post<DeleteItemsEndPointResponses, DeleteItemsEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -58,12 +70,13 @@ export const deleteItemsEndPoint = <ThrowOnError extends boolean = false>(option
 });
 
 /**
- * Get all the visible the user data items.
+ * Get all visible user data items
  *
- * The user only has access to its own items at this end point. For read-only access to items marked as visisble to others
- * in the same organization then use the `query-items` end-point.
- * Use the skip and take parameters to return paged responses.
- * The orderBy and orderByDescending fields can be used to manage sorting the list by specific fields.
+ * Returns user data items owned by the authenticated user. Each item stores a named value scoped to an application and category, such as a UI preference or saved filter.
+ *
+ * Only items belonging to the current user are returned. To read items that other users have marked as visible to the organization, use the `POST /niuserdata/v1/query-items` endpoint instead.
+ *
+ * Use the `skip` and `take` parameters to page through large result sets. Use `sortBy` and `orderByDescending` to control the ordering of results.
  */
 export const getAllUserDataItemsEndPoint = <ThrowOnError extends boolean = false>(options?: Options<GetAllUserDataItemsEndPointData, ThrowOnError>) => (options?.client ?? client).get<GetAllUserDataItemsEndPointResponses, GetAllUserDataItemsEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -72,7 +85,11 @@ export const getAllUserDataItemsEndPoint = <ThrowOnError extends boolean = false
 });
 
 /**
- * Creates or updates one or more user data items.
+ * Create or update one or more user data items
+ *
+ * Creates new user data items or updates existing ones in a single request. Items are uniquely identified by the combination of application, category, and name for the authenticated user. If a matching item already exists, its value and visibility are updated and its revision is incremented; otherwise a new item is created with revision 1.
+ *
+ * Supply `expectedRevision` to enable optimistic concurrency control. If the stored revision does not match, the update is rejected with a 409 Conflict error.
  */
 export const createOrUpdateUserDataItemsEndPoint = <ThrowOnError extends boolean = false>(options?: Options<CreateOrUpdateUserDataItemsEndPointData, ThrowOnError>) => (options?.client ?? client).post<CreateOrUpdateUserDataItemsEndPointResponses, CreateOrUpdateUserDataItemsEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -85,7 +102,9 @@ export const createOrUpdateUserDataItemsEndPoint = <ThrowOnError extends boolean
 });
 
 /**
- * Deletes the specified user data item.
+ * Delete a user data item by ID
+ *
+ * Permanently removes the user data item with the specified ID. Once deleted, the item cannot be recovered. If the item does not exist or belongs to another user, the request fails with an error.
  */
 export const deleteUserDataItemEndPoint = <ThrowOnError extends boolean = false>(options: Options<DeleteUserDataItemEndPointData, ThrowOnError>) => (options.client ?? client).delete<DeleteUserDataItemEndPointResponses, DeleteUserDataItemEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -94,7 +113,9 @@ export const deleteUserDataItemEndPoint = <ThrowOnError extends boolean = false>
 });
 
 /**
- * Get information about the specified user data item.
+ * Get a user data item by ID
+ *
+ * Returns the metadata and value for a single user data item. Use this to retrieve a specific item when its ID is known, for example after creating an item or receiving an ID from another endpoint.
  */
 export const getUserDataItemEndPoint = <ThrowOnError extends boolean = false>(options: Options<GetUserDataItemEndPointData, ThrowOnError>) => (options.client ?? client).get<GetUserDataItemEndPointResponses, GetUserDataItemEndPointErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -103,7 +124,9 @@ export const getUserDataItemEndPoint = <ThrowOnError extends boolean = false>(op
 });
 
 /**
- * Returns the root `niuserdata` operations.
+ * API information
+ *
+ * Returns information about API versions and available operations.
  */
 export const get = <ThrowOnError extends boolean = false>(options?: Options<GetData, ThrowOnError>) => (options?.client ?? client).get<GetResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -112,7 +135,9 @@ export const get = <ThrowOnError extends boolean = false>(options?: Options<GetD
 });
 
 /**
- * Returns the `V1` operations.
+ * API version information
+ *
+ * Returns available operations for a single version of the API.
  */
 export const v1Endpoint = <ThrowOnError extends boolean = false>(options?: Options<V1EndpointData, ThrowOnError>) => (options?.client ?? client).get<V1EndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

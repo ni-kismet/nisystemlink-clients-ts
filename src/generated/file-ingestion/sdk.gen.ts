@@ -2,7 +2,7 @@
 
 import { type Client, formDataBodySerializer, type Options as Options2, type TDataShape } from './client';
 import { client } from './client.gen';
-import type { DeleteData, DeleteErrors, DeleteMultipleData, DeleteMultipleErrors, DeleteMultipleResponses, DeleteResponses, ListAvailableFilesGetData, ListAvailableFilesGetErrors, ListAvailableFilesGetResponses, ListServiceGroupsData, ListServiceGroupsErrors, ListServiceGroupsResponses, PingData, PingResponses, QueryAvailableFilesData, QueryAvailableFilesErrors, QueryAvailableFilesResponses, QueryFilesLinqData, QueryFilesLinqErrors, QueryFilesLinqResponses, ReceiveFileData, ReceiveFileErrors, ReceiveFileResponses, RootEndpointData, RootEndpointResponses, RootEndpointWithVersionData, RootEndpointWithVersionErrors, RootEndpointWithVersionResponses, UpdateMetadataData, UpdateMetadataErrors, UpdateMetadataResponses, UploadData, UploadErrors, UploadResponses, UploadSessionAppendData, UploadSessionAppendErrors, UploadSessionAppendResponses, UploadSessionFinishData, UploadSessionFinishErrors, UploadSessionFinishResponses, UploadSessionStartData, UploadSessionStartErrors, UploadSessionStartResponses } from './types.gen';
+import type { DeleteData, DeleteErrors, DeleteMultipleData, DeleteMultipleErrors, DeleteMultipleResponses, DeleteResponses, ListAvailableFilesData, ListAvailableFilesErrors, ListAvailableFilesResponses, ListServiceGroupsData, ListServiceGroupsErrors, ListServiceGroupsResponses, PingData, PingResponses, QueryAvailableFilesData, QueryAvailableFilesErrors, QueryAvailableFilesResponses, QueryFilesLinqData, QueryFilesLinqErrors, QueryFilesLinqResponses, ReceiveFileData, ReceiveFileErrors, ReceiveFileResponses, RootEndpointData, RootEndpointResponses, RootEndpointWithVersionData, RootEndpointWithVersionErrors, RootEndpointWithVersionResponses, SearchFilesData, SearchFilesErrors, SearchFilesResponses, UpdateMetadataData, UpdateMetadataErrors, UpdateMetadataResponses, UploadData, UploadErrors, UploadResponses, UploadSessionAppendData, UploadSessionAppendErrors, UploadSessionAppendResponses, UploadSessionFinishData, UploadSessionFinishErrors, UploadSessionFinishResponses, UploadSessionStartData, UploadSessionStartErrors, UploadSessionStartResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -44,22 +44,20 @@ export const listServiceGroups = <ThrowOnError extends boolean = false>(options?
 });
 
 /**
- * List available files
+ * List files
  *
- * Lists available files on the SystemLink File service.
- * Use the skip and take parameters to return paged responses.
- * The orderBy and orderByDescending fields can be used to manage sorting the list by metadata objects.
+ * Lists available files on the File service with basic paging and sorting. Use skip and take to page through results. Use orderBy to sort by created date, file ID, or size. Use orderByDescending to reverse the sort direction. Use the id parameter to retrieve a specific set of files by their IDs. For richer filtering by metadata properties or file attributes, prefer POST /v1/service-groups/Default/query-files-linq or POST /v1/service-groups/Default/search-files.
  */
-export const listAvailableFilesGet = <ThrowOnError extends boolean = false>(options?: Options<ListAvailableFilesGetData, ThrowOnError>) => (options?.client ?? client).get<ListAvailableFilesGetResponses, ListAvailableFilesGetErrors, ThrowOnError>({
+export const listAvailableFiles = <ThrowOnError extends boolean = false>(options?: Options<ListAvailableFilesData, ThrowOnError>) => (options?.client ?? client).get<ListAvailableFilesResponses, ListAvailableFilesErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
     url: '/v1/service-groups/Default/files',
     ...options
 });
 
 /**
- * Delete file
+ * Delete a file
  *
- * Deletes the file indicated by the resource ID.
+ * Deletes the file indicated by the resource ID. By default the deletion may be blocked by the service if the file is in use or has dependent records. Set force to true to override these protections and delete the file unconditionally.
  */
 export const delete_ = <ThrowOnError extends boolean = false>(options: Options<DeleteData, ThrowOnError>) => (options.client ?? client).delete<DeleteResponses, DeleteErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -68,9 +66,9 @@ export const delete_ = <ThrowOnError extends boolean = false>(options: Options<D
 });
 
 /**
- * Download file
+ * Download a file
  *
- * Downloads a file from the SystemLink File service in a single HTTP response.
+ * Downloads a file from the File service in a single HTTP response.
  * Use the inline parameter in the query string to control the download behavior.
  */
 export const receiveFile = <ThrowOnError extends boolean = false>(options: Options<ReceiveFileData, ThrowOnError>) => (options.client ?? client).get<ReceiveFileResponses, ReceiveFileErrors, ThrowOnError>({
@@ -80,10 +78,9 @@ export const receiveFile = <ThrowOnError extends boolean = false>(options: Optio
 });
 
 /**
- * Update file metadata properties
+ * Update a file's metadata properties
  *
- * Updates an existing file's metadata with the specified metadata properties.
- * Use the replaceExisting element to determine the replace or merge behavior.
+ * Updates an existing file's metadata properties. Properties are key-value string pairs that make the file discoverable and filterable across applications. The reserved property key Name renames the file when specified. Set replaceExisting to true to overwrite all existing properties with the provided set, or false to merge the provided properties into the existing ones. Use expectedRevision to perform an optimistic concurrency check — the update is rejected if the file's current revision does not match. Omit expectedRevision to update unconditionally. Set workspace to move the file to a different workspace.
  */
 export const updateMetadata = <ThrowOnError extends boolean = false>(options: Options<UpdateMetadataData, ThrowOnError>) => (options.client ?? client).post<UpdateMetadataResponses, UpdateMetadataErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -98,7 +95,7 @@ export const updateMetadata = <ThrowOnError extends boolean = false>(options: Op
 /**
  * Delete multiple files
  *
- * Deletes multiple files in a single API call. The request body contains an array of file ids to delete.
+ * Deletes up to 100 files in a single request. If some files cannot be deleted, the service returns a 200 Partial Success response containing error details for the failed items alongside any successfully deleted files. A 204 response indicates all files were deleted successfully. Set force to true to bypass deletion protections for all files in the request.
  */
 export const deleteMultiple = <ThrowOnError extends boolean = false>(options: Options<DeleteMultipleData, ThrowOnError>) => (options.client ?? client).post<DeleteMultipleResponses, DeleteMultipleErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -113,14 +110,9 @@ export const deleteMultiple = <ThrowOnError extends boolean = false>(options: Op
 /**
  * Query files
  *
- * Queries the SystemLink File service for a list of files that match specified metadata properties.
- * Query elements:
- * - idQuery: a JSON query object with a string value.
- * - sizeMaxQuery: a JSON query object with an integer value.
- * - sizeMinQuery: a JSON query object with an integer value.
- * - createdQuery: a JSON query object with an ISO8601 date string value.
- * - propertiesQuery: a JSON array of query objects with string values.
- * Note: Due to the performance of queries on un-indexed properties, filters that include custom properties are very likely to time out.
+ * Queries for files that match structured filter criteria applied to indexed fields such as ID, extension, size, and creation date, as well as custom metadata properties. Each filter field accepts a query object with an operation and a value. Multiple filters are combined with AND logic. Use the workspace query parameter to scope results to a specific workspace.
+ *
+ * Warning: Queries that filter on custom (un-indexed) metadata properties via propertiesQuery are very likely to time out on large file collections. For large datasets, use POST /v1/service-groups/Default/query-files-linq instead.
  */
 export const queryAvailableFiles = <ThrowOnError extends boolean = false>(options?: Options<QueryAvailableFilesData, ThrowOnError>) => (options?.client ?? client).post<QueryAvailableFilesResponses, QueryAvailableFilesErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -133,10 +125,11 @@ export const queryAvailableFiles = <ThrowOnError extends boolean = false>(option
 });
 
 /**
- * Query files linq
+ * Query files with LINQ
  *
- * Queries the SystemLink File service for a list of files that match specified metadata properties.
- * Note: Due to the performance of queries on un-indexed properties, filters that include custom properties are very likely to time out.
+ * Queries for files using a LINQ-style filter expression string against indexed file fields. This is the preferred query endpoint for large file collections because all supported filter properties are indexed. Use the filter field to combine conditions with AND/OR operators. Use orderBy, skip, and take to control sort order and paging.
+ *
+ * Warning: Filters on custom metadata properties via properties['key'] are un-indexed and very likely to time out on large collections.
  */
 export const queryFilesLinq = <ThrowOnError extends boolean = false>(options?: Options<QueryFilesLinqData, ThrowOnError>) => (options?.client ?? client).post<QueryFilesLinqResponses, QueryFilesLinqErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -149,9 +142,24 @@ export const queryFilesLinq = <ThrowOnError extends boolean = false>(options?: O
 });
 
 /**
- * Upload file
+ * Search files
  *
- * Uploads a file using multipart/form-data headers to send the file payload in the HTTP body.
+ * Searches for files using Elasticsearch with Lucene query syntax. Supports full-text search on file name by default, as well as field-specific filters, wildcard matching, range queries on numeric and date fields, and negation. Results can be ordered by relevance score (default when no orderBy is specified) or by a specific field. Use this endpoint when fuzzy or keyword-based matching is needed rather than exact field comparisons.
+ */
+export const searchFiles = <ThrowOnError extends boolean = false>(options?: Options<SearchFilesData, ThrowOnError>) => (options?.client ?? client).post<SearchFilesResponses, SearchFilesErrors, ThrowOnError>({
+    security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
+    url: '/v1/service-groups/Default/search-files',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options?.headers
+    }
+});
+
+/**
+ * Upload a file
+ *
+ * Uploads a file in a single multipart/form-data request. The file is immediately visible after upload and triggers file activity events, such as Routines. Use the workspace query parameter to assign the file to a specific workspace. Use the metadata form field to attach initial key-value properties as a JSON object. Use the id form field to assign a specific 24-character hex ID to the file; omit it to have the service generate one automatically.
  */
 export const upload = <ThrowOnError extends boolean = false>(options: Options<UploadData, ThrowOnError>) => (options.client ?? client).post<UploadResponses, UploadErrors, ThrowOnError>({
     ...formDataBodySerializer,
@@ -167,7 +175,7 @@ export const upload = <ThrowOnError extends boolean = false>(options: Options<Up
 /**
  * Start an upload session
  *
- * Starts an upload session which you can use to upload a file in chunks.
+ * Starts a chunked upload session and returns a session ID. Use this workflow for large files or unreliable network conditions instead of a single-request upload. The full workflow is: (1) call this endpoint to obtain a session ID, (2) call append one or more times to upload 10 MB chunks using that session ID, (3) call finish to assemble the chunks and make the file visible. Use the workspace query parameter to assign the resulting file to a specific workspace.
  */
 export const uploadSessionStart = <ThrowOnError extends boolean = false>(options?: Options<UploadSessionStartData, ThrowOnError>) => (options?.client ?? client).post<UploadSessionStartResponses, UploadSessionStartErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -176,9 +184,9 @@ export const uploadSessionStart = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Append to an upload session.
+ * Append to an upload session
  *
- * Add a chunk to your upload session.
+ * Adds a chunk to an upload session.
  * The chunk needs to be 10485760 bytes, unless the close parameter is true, which means that it is the last chunk of the file content.
  * The chunks can be uploaded concurrently, as long as the finish request is called after all the chunk uploads are completed.
  */
@@ -194,10 +202,13 @@ export const uploadSessionAppend = <ThrowOnError extends boolean = false>(option
 });
 
 /**
- * Finish an upload session.
+ * Finish an upload session
  *
- * Finish an upload session and make the file visible in SystemLink.
- * This will trigger file events, such as routines.
+ * Finishes an upload session, assembles all uploaded chunks into the final file,
+ * and makes it visible in the service. Call this only after all chunk uploads via
+ * the append endpoint have completed successfully. Finishing the session triggers
+ * file activity events such as Routines. Provide the file name and any initial
+ * metadata properties in the request body.
  */
 export const uploadSessionFinish = <ThrowOnError extends boolean = false>(options: Options<UploadSessionFinishData, ThrowOnError>) => (options.client ?? client).post<UploadSessionFinishResponses, UploadSessionFinishErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],

@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { ConfigureFeedsData, ConfigureFeedsErrors, ConfigureFeedsResponses, GetStoreItemData, GetStoreItemErrors, GetStoreItemResponses, QueryAvailablePackagesData, QueryAvailablePackagesErrors, QueryAvailablePackagesResponses, QueryStoreItemsData, QueryStoreItemsErrors, QueryStoreItemsResponses } from './types.gen';
+import type { ConfigureFeedsData, ConfigureFeedsErrors, ConfigureFeedsResponses, GetStoreItemData, GetStoreItemErrors, GetStoreItemResponses, QueryAvailablePackagesData, QueryAvailablePackagesErrors, QueryAvailablePackagesResponses, QueryStoreItemsData, QueryStoreItemsErrors, QueryStoreItemsResponses, RootEndpointData, RootEndpointResponses, V1Data, V1Responses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -19,17 +19,15 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Configure package feeds
+ * Configure feeds
  *
- * Registers the given feed URLs with the repository service. Each feed URL should point to a
- * directory containing a Packages.gz index. The service downloads and parses the index from each
- * feed so that subsequent calls to query-available-packages can return their contents.
+ * Registers one or more external feed URLs so that their packages can be queried.
+ * Each feed URL must point to a directory containing a Packages.gz index (the standard
+ * NI package feed format). The service downloads and caches the index from each feed
+ * so that subsequent calls to query-available-packages can resolve available software.
  *
- * Sample request:
- *
- * [
- * "https://download.ni.com/support/nipkg/products/ni-package-manager/released"
- * ]
+ * This is typically called when preparing a system state or when a managed system
+ * needs to determine which packages are available for installation from external sources.
  */
 export const configureFeeds = <ThrowOnError extends boolean = false>(options?: Options<ConfigureFeedsData, ThrowOnError>) => (options?.client ?? client).post<ConfigureFeedsResponses, ConfigureFeedsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -42,7 +40,17 @@ export const configureFeeds = <ThrowOnError extends boolean = false>(options?: O
 });
 
 /**
- * Query available packages from configured feeds
+ * Query available packages
+ *
+ * Returns the packages available from one or more feeds, filtered by the system's OS
+ * architecture (e.g., windows_x64 or NI Linux RT). Each package entry includes metadata
+ * such as name, version, dependencies, and install size.
+ *
+ * Use this endpoint to determine which software can be installed on a managed system
+ * given its configured feeds and architecture. The optional fields projection limits
+ * which package properties are returned to reduce response size.
+ *
+ * Feeds must be registered via the configure-feeds endpoint before they can be queried.
  */
 export const queryAvailablePackages = <ThrowOnError extends boolean = false>(options?: Options<QueryAvailablePackagesData, ThrowOnError>) => (options?.client ?? client).post<QueryAvailablePackagesResponses, QueryAvailablePackagesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -55,7 +63,14 @@ export const queryAvailablePackages = <ThrowOnError extends boolean = false>(opt
 });
 
 /**
- * Query NI software store items
+ * Query store items
+ *
+ * Returns a paginated list of products and suites available from NI. Use this
+ * endpoint to browse the NI software catalog when replicating feeds from NI
+ * downloads or when discovering available software for provisioning test systems.
+ *
+ * Results are cached and refreshed periodically. Use the query parameter to
+ * search by product name (e.g., "LabVIEW", "DAQmx", "TestStand").
  */
 export const queryStoreItems = <ThrowOnError extends boolean = false>(options?: Options<QueryStoreItemsData, ThrowOnError>) => (options?.client ?? client).get<QueryStoreItemsResponses, QueryStoreItemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -64,10 +79,40 @@ export const queryStoreItems = <ThrowOnError extends boolean = false>(options?: 
 });
 
 /**
- * Get a store item by ID
+ * Get a store item
+ *
+ * Returns the full details of a single product or suite, including available versions,
+ * installers for each supported architecture and language, and the feed URLs needed
+ * to install the software. For suites, the response includes the individual products
+ * contained in the suite with their package names and feed locations.
+ *
+ * Use this endpoint to discover the feed URLs required to replicate NI software
+ * into a locally hosted feed or to configure a system state for deployment.
  */
 export const getStoreItem = <ThrowOnError extends boolean = false>(options: Options<GetStoreItemData, ThrowOnError>) => (options.client ?? client).get<GetStoreItemResponses, GetStoreItemErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/nirepo/v1/store/items/{storeItemId}',
+    ...options
+});
+
+/**
+ * API information
+ *
+ * Returns information about API versions and available operations.
+ */
+export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
+    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
+    url: '/nirepo',
+    ...options
+});
+
+/**
+ * API version information
+ *
+ * Returns available operations for a single version of the API.
+ */
+export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Data, ThrowOnError>) => (options?.client ?? client).get<V1Responses, unknown, ThrowOnError>({
+    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
+    url: '/nirepo/v1',
     ...options
 });

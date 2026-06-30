@@ -1757,53 +1757,6 @@ export type QueryLocationMovesResponse = {
 };
 
 /**
- * Request for querying location history of a specific asset.
- * Uses QueryLocationHistoryRequest for the request body.
- */
-export type QueryAssetLocationHistoryData = {
-    /**
-     * Criteria for querying asset location history
-     */
-    body?: QueryLocationHistoryRequest;
-    /**
-     * The asset ID to query location history for (provided as function parameter)
-     */
-    path?: { assetId?: string };
-    query?: never;
-    url: '/niapm/v1/assets/{assetId}/history/query-location';
-};
-
-/**
- * Response containing location history records for a specific asset.
- * The response format depends on the requested destination and responseFormat.
- */
-export type QueryAssetLocationHistoryResponse = {
-    /**
-     * The list of location history records or file reference,
-     * depending on the destination and responseFormat in the request.
-     */
-    [key: string]: unknown;
-};
-
-export type QueryAssetLocationHistoryErrors = {
-    /**
-     * Error response
-     */
-    default: BaseResponse;
-};
-
-export type QueryAssetLocationHistoryError = QueryAssetLocationHistoryErrors[keyof QueryAssetLocationHistoryErrors];
-
-export type QueryAssetLocationHistoryResponses = {
-    /**
-     * OK - Location history records returned
-     */
-    200: QueryAssetLocationHistoryResponse;
-};
-
-export type QueryAssetLocationHistoryResponse2 = QueryAssetLocationHistoryResponses[keyof QueryAssetLocationHistoryResponses];
-
-/**
  * Operation to receive an asset returning from calibration, including calibration data and location move.
  */
 export type ReceiveFromCalibrationOperations = {
@@ -2186,12 +2139,6 @@ export type ValidLocationMovementModel = {
 
 export type GetAssetsData = {
     body?: never;
-    headers?: {
-        /**
-         * The API key for authentication.
-         */
-        'x-ni-api-key'?: string;
-    };
     path?: never;
     query?: {
         /**
@@ -2238,6 +2185,14 @@ export type GetAssetsData = {
 
 export type GetAssetsErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -2266,6 +2221,14 @@ export type CreateAssetsData = {
 
 export type CreateAssetsErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -2290,6 +2253,14 @@ export type AssetSummaryData = {
 };
 
 export type AssetSummaryErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
     /**
      * Error
      */
@@ -2321,6 +2292,14 @@ export type QueryAssetsData = {
 
 export type QueryAssetsErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -2348,6 +2327,14 @@ export type ExportAssetsData = {
 };
 
 export type ExportAssetsErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
     /**
      * Error
      */
@@ -2386,6 +2373,18 @@ export type UpdateMetadataData = {
 
 export type UpdateMetadataErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -2414,6 +2413,14 @@ export type UpdateAssetsData = {
 
 export type UpdateAssetsErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -2430,17 +2437,11 @@ export type UpdateAssetsResponses = {
 
 export type UpdateAssetsResponse = UpdateAssetsResponses[keyof UpdateAssetsResponses];
 
-export type PostAssetQueryConnectionHistoryData = {
+export type QueryAssetLocationHistoryData = {
     /**
      * Model for object containing options for querying history.
      */
     body?: QueryLocationHistoryRequest;
-    headers?: {
-        /**
-         * The API key for authentication.
-         */
-        'x-ni-api-key'?: string;
-    };
     path: {
         /**
          * The unique identifier of the asset.
@@ -2451,23 +2452,35 @@ export type PostAssetQueryConnectionHistoryData = {
     url: '/niapm/v1/assets/{assetId}/history/query-location';
 };
 
-export type PostAssetQueryConnectionHistoryErrors = {
+export type QueryAssetLocationHistoryErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type PostAssetQueryConnectionHistoryError = PostAssetQueryConnectionHistoryErrors[keyof PostAssetQueryConnectionHistoryErrors];
+export type QueryAssetLocationHistoryError = QueryAssetLocationHistoryErrors[keyof QueryAssetLocationHistoryErrors];
 
-export type PostAssetQueryConnectionHistoryResponses = {
+export type QueryAssetLocationHistoryResponses = {
     /**
      * OK
      */
     200: ConnectionHistoryResponse;
 };
 
-export type PostAssetQueryConnectionHistoryResponse = PostAssetQueryConnectionHistoryResponses[keyof PostAssetQueryConnectionHistoryResponses];
+export type QueryAssetLocationHistoryResponse = QueryAssetLocationHistoryResponses[keyof QueryAssetLocationHistoryResponses];
 
 export type DeleteAssetsData = {
     /**
@@ -2480,6 +2493,14 @@ export type DeleteAssetsData = {
 };
 
 export type DeleteAssetsErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
     /**
      * Error
      */
@@ -2510,6 +2531,18 @@ export type GetAssetData = {
 };
 
 export type GetAssetErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
@@ -2543,6 +2576,18 @@ export type LinkFilesData = {
 };
 
 export type LinkFilesErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
@@ -2578,6 +2623,18 @@ export type UnlinkFileFromAssetData = {
 
 export type UnlinkFileFromAssetErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -2610,6 +2667,18 @@ export type DeleteCalibrationHistoryData = {
 };
 
 export type DeleteCalibrationHistoryErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
@@ -2658,6 +2727,18 @@ export type GetAssetCalibrationHistoryData = {
 
 export type GetAssetCalibrationHistoryErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -2690,6 +2771,18 @@ export type ExportCalibrationHistoryData = {
 };
 
 export type ExportCalibrationHistoryErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
@@ -2724,6 +2817,14 @@ export type CalculateCalibrationForecastData = {
 
 export type CalculateCalibrationForecastErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -2751,6 +2852,14 @@ export type ReceiveFromCalibrationDryRunData = {
 };
 
 export type ReceiveFromCalibrationDryRunErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
     /**
      * Error
      */
@@ -2780,6 +2889,14 @@ export type ReceiveFromCalibrationData = {
 
 export type ReceiveFromCalibrationErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -2807,6 +2924,14 @@ export type SendForCalibrationDryRunData = {
 };
 
 export type SendForCalibrationDryRunErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
     /**
      * Error
      */
@@ -2836,6 +2961,14 @@ export type SendForCalibrationData = {
 
 export type SendForCalibrationErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -2863,6 +2996,14 @@ export type MoveAssetsLocationDryRunData = {
 };
 
 export type MoveAssetsLocationDryRunErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
     /**
      * Error
      */
@@ -2892,6 +3033,14 @@ export type MoveAssetsLocationData = {
 
 export type MoveAssetsLocationErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -2920,6 +3069,14 @@ export type QueryLocationMovesData = {
 
 export type QueryLocationMovesErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -2936,34 +3093,6 @@ export type QueryLocationMovesResponses = {
 
 export type QueryLocationMovesResponse2 = QueryLocationMovesResponses[keyof QueryLocationMovesResponses];
 
-export type RootEndpointData = {
-    body?: never;
-    path?: never;
-    query?: never;
-    url: '/niapm';
-};
-
-export type RootEndpointResponses = {
-    /**
-     * OK
-     */
-    200: unknown;
-};
-
-export type V1Data = {
-    body?: never;
-    path?: never;
-    query?: never;
-    url: '/niapm/v1';
-};
-
-export type V1Responses = {
-    /**
-     * OK
-     */
-    200: unknown;
-};
-
 export type SearchAssetsData = {
     /**
      * Model for object containing filters to apply when searching assets.
@@ -2975,6 +3104,14 @@ export type SearchAssetsData = {
 };
 
 export type SearchAssetsErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
     /**
      * Error
      */
@@ -3003,6 +3140,14 @@ export type ExportMaterializedAssetsData = {
 };
 
 export type ExportMaterializedAssetsErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
     /**
      * Error
      */
@@ -3037,6 +3182,14 @@ export type QueryAssetUtilizationHistoryData = {
 
 export type QueryAssetUtilizationHistoryErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -3064,6 +3217,14 @@ export type StartUtilizationData = {
 };
 
 export type StartUtilizationErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
     /**
      * Error
      */
@@ -3093,6 +3254,14 @@ export type EndUtilizationData = {
 
 export type EndUtilizationErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -3121,6 +3290,14 @@ export type UtilizationHeartbeatData = {
 
 export type UtilizationHeartbeatErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -3136,3 +3313,49 @@ export type UtilizationHeartbeatResponses = {
 };
 
 export type UtilizationHeartbeatResponse = UtilizationHeartbeatResponses[keyof UtilizationHeartbeatResponses];
+
+export type RootEndpointData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/niapm';
+};
+
+export type RootEndpointErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+};
+
+export type RootEndpointError = RootEndpointErrors[keyof RootEndpointErrors];
+
+export type RootEndpointResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
+
+export type V1Data = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/niapm/v1';
+};
+
+export type V1Errors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+};
+
+export type V1Error = V1Errors[keyof V1Errors];
+
+export type V1Responses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};

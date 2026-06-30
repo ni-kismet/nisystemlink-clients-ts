@@ -19,9 +19,12 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Authenticates API Keys
+ * Authenticate an API key
  *
- * Authenticates the given x-ni-api-key and returns information about the caller
+ * Validates the provided `x-ni-api-key` and returns information about the
+ * authenticated caller, including their user account details, organization,
+ * accessible workspaces, and resolved authorization policies.
+ *
  */
 export const auth = <ThrowOnError extends boolean = false>(options?: Options<AuthData, ThrowOnError>) => (options?.client ?? client).get<AuthResponses, AuthErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -30,9 +33,11 @@ export const auth = <ThrowOnError extends boolean = false>(options?: Options<Aut
 });
 
 /**
- * Lists all API Keys
+ * List API keys
  *
- * Returns the list of permanent api keys
+ * Returns a paginated list of permanent API keys. Use the query parameters
+ * to filter by name or user, and to control pagination and sort order.
+ *
  */
 export const getKeys = <ThrowOnError extends boolean = false>(options?: Options<GetKeysData, ThrowOnError>) => (options?.client ?? client).get<GetKeysResponses, GetKeysErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -41,9 +46,12 @@ export const getKeys = <ThrowOnError extends boolean = false>(options?: Options<
 });
 
 /**
- * Creates a new API Key
+ * Create an API key
  *
- * Create a permanent API Key
+ * Create a new permanent API key. The key is returned in the response and
+ * can be used immediately for authentication. Associate the key with
+ * policies to control the permissions it grants.
+ *
  */
 export const createKey = <ThrowOnError extends boolean = false>(options?: Options<CreateKeyData, ThrowOnError>) => (options?.client ?? client).post<CreateKeyResponses, CreateKeyErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -56,9 +64,13 @@ export const createKey = <ThrowOnError extends boolean = false>(options?: Option
 });
 
 /**
- * Deletes an API Key. Note that it may take several minutes to flush the key from all caches after this call returns, in which time some operations may succeed using this key.
+ * Delete an API key
  *
- * Deletes the API Key with the given Id
+ * Permanently delete the API key with the given ID. Note that it may take
+ * several minutes for the key to be flushed from all caches after this call
+ * returns. During that time, some operations may still succeed using the
+ * deleted key.
+ *
  */
 export const deleteKey = <ThrowOnError extends boolean = false>(options: Options<DeleteKeyData, ThrowOnError>) => (options.client ?? client).delete<DeleteKeyResponses, DeleteKeyErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -67,9 +79,9 @@ export const deleteKey = <ThrowOnError extends boolean = false>(options: Options
 });
 
 /**
- * Gets an API Key by the given Id
+ * Get an API key by ID
  *
- * Returns the API Key for the given Id
+ * Returns the full API key record for the specified key ID.
  */
 export const getKey = <ThrowOnError extends boolean = false>(options: Options<GetKeyData, ThrowOnError>) => (options.client ?? client).get<GetKeyResponses, GetKeyErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -78,9 +90,11 @@ export const getKey = <ThrowOnError extends boolean = false>(options: Options<Ge
 });
 
 /**
- * Updates an API Key
+ * Update an API key
  *
- * Updates the API Key with the given Id
+ * Update the name, policies, default workspace, properties, or enabled
+ * state of an existing API key.
+ *
  */
 export const updateKey = <ThrowOnError extends boolean = false>(options: Options<UpdateKeyData, ThrowOnError>) => (options.client ?? client).put<UpdateKeyResponses, UpdateKeyErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -93,9 +107,11 @@ export const updateKey = <ThrowOnError extends boolean = false>(options: Options
 });
 
 /**
- * Lists all policies
+ * List policies
  *
- * Returns the list of policies
+ * Returns a paginated list of authorization policies. Use the query
+ * parameters to filter by name, type, built-in status, or ID.
+ *
  */
 export const getPolicies = <ThrowOnError extends boolean = false>(options?: Options<GetPoliciesData, ThrowOnError>) => (options?.client ?? client).get<GetPoliciesResponses, GetPoliciesErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -104,9 +120,16 @@ export const getPolicies = <ThrowOnError extends boolean = false>(options?: Opti
 });
 
 /**
- * Creates a new policy
+ * Create a policy
  *
- * Creates a new policy
+ * Create a new authorization policy. A policy can either contain inline
+ * statements or reference a policy template via `templateId`. When using a
+ * template, the `statements` field is ignored and the policy automatically
+ * synchronizes with the template's statements.
+ *
+ * This operation is idempotent. If a policy with a matching name and body
+ * already exists, the request returns success without creating a duplicate.
+ *
  */
 export const createPolicy = <ThrowOnError extends boolean = false>(options?: Options<CreatePolicyData, ThrowOnError>) => (options?.client ?? client).post<CreatePolicyResponses, CreatePolicyErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -119,9 +142,11 @@ export const createPolicy = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * Deletes a policy
+ * Delete a policy
  *
- * Deletes the policy with the given Id
+ * Permanently delete the policy with the given ID. Users and keys
+ * referencing this policy will lose the associated permissions.
+ *
  */
 export const deletePolicy = <ThrowOnError extends boolean = false>(options: Options<DeletePolicyData, ThrowOnError>) => (options.client ?? client).delete<DeletePolicyResponses, DeletePolicyErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -130,9 +155,9 @@ export const deletePolicy = <ThrowOnError extends boolean = false>(options: Opti
 });
 
 /**
- * Gets a policy by the given Id
+ * Get a policy by ID
  *
- * Returns the policy for the given Id
+ * Returns the full policy record for the specified policy ID.
  */
 export const getPolicy = <ThrowOnError extends boolean = false>(options: Options<GetPolicyData, ThrowOnError>) => (options.client ?? client).get<GetPolicyResponses, GetPolicyErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -141,9 +166,11 @@ export const getPolicy = <ThrowOnError extends boolean = false>(options: Options
 });
 
 /**
- * Updates a policy
+ * Update a policy
  *
- * Updates the policy with the given Id
+ * Update the name, type, statements, or properties of an existing policy.
+ * For template-based policies, update the template directly instead.
+ *
  */
 export const updatePolicy = <ThrowOnError extends boolean = false>(options: Options<UpdatePolicyData, ThrowOnError>) => (options.client ?? client).put<UpdatePolicyResponses, UpdatePolicyErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -156,9 +183,11 @@ export const updatePolicy = <ThrowOnError extends boolean = false>(options: Opti
 });
 
 /**
- * Lists all policy-templates
+ * List policy templates
  *
- * Returns the list of policy-templates
+ * Returns a paginated list of policy templates. Use the query parameters
+ * to filter by name, type, built-in status, or ID.
+ *
  */
 export const getPolicyTemplates = <ThrowOnError extends boolean = false>(options?: Options<GetPolicyTemplatesData, ThrowOnError>) => (options?.client ?? client).get<GetPolicyTemplatesResponses, GetPolicyTemplatesErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -167,9 +196,12 @@ export const getPolicyTemplates = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Creates a new policy-template
+ * Create a policy template
  *
- * Creates a new policy-template
+ * Create a new policy template. Policy templates define reusable sets of
+ * permission statements that are not bound to a specific workspace. They
+ * can be referenced by policies to apply permissions in a workspace context.
+ *
  */
 export const createPolicyTemplate = <ThrowOnError extends boolean = false>(options?: Options<CreatePolicyTemplateData, ThrowOnError>) => (options?.client ?? client).post<CreatePolicyTemplateResponses, CreatePolicyTemplateErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -182,9 +214,14 @@ export const createPolicyTemplate = <ThrowOnError extends boolean = false>(optio
 });
 
 /**
- * Deletes a policy-template
+ * Delete a policy template
  *
- * Deletes the policy-template with the given Id
+ * Permanently delete the policy template with the given ID. Policies
+ * referencing this template will lose their permissions since statements
+ * are resolved from the template at read time. Before deleting a
+ * template, delete or update any auth-mappings and policies that
+ * reference it.
+ *
  */
 export const deletePolicyTemplate = <ThrowOnError extends boolean = false>(options: Options<DeletePolicyTemplateData, ThrowOnError>) => (options.client ?? client).delete<DeletePolicyTemplateResponses, DeletePolicyTemplateErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -193,9 +230,9 @@ export const deletePolicyTemplate = <ThrowOnError extends boolean = false>(optio
 });
 
 /**
- * Gets a policy-template by the given Id
+ * Get a policy template by ID
  *
- * Returns the policy-template for the given Id
+ * Returns the full policy template record for the specified template ID.
  */
 export const getPolicyTemplate = <ThrowOnError extends boolean = false>(options: Options<GetPolicyTemplateData, ThrowOnError>) => (options.client ?? client).get<GetPolicyTemplateResponses, GetPolicyTemplateErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -204,9 +241,12 @@ export const getPolicyTemplate = <ThrowOnError extends boolean = false>(options:
 });
 
 /**
- * Updates a policy-template
+ * Update a policy template
  *
- * Updates the policy-template with the given Id
+ * Update the name, type, statements, or properties of an existing policy
+ * template. All policies referencing this template will automatically
+ * reflect the updated statements.
+ *
  */
 export const updatePolicyTemplate = <ThrowOnError extends boolean = false>(options: Options<UpdatePolicyTemplateData, ThrowOnError>) => (options.client ?? client).put<UpdatePolicyTemplateResponses, UpdatePolicyTemplateErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -219,9 +259,13 @@ export const updatePolicyTemplate = <ThrowOnError extends boolean = false>(optio
 });
 
 /**
- * Creates temporary API Keys
+ * Create a session key
  *
- * Create a temporary session key which is valid for 1 hour. The caller needs a whitelisted API key to issue session keys.
+ * Create a temporary session key that is valid for a configurable duration
+ * (default 1 hour, maximum 24 hours). Requires a whitelisted API key.
+ * Session keys are typically issued by authentication services on behalf
+ * of users after they sign in.
+ *
  */
 export const createSessionKey = <ThrowOnError extends boolean = false>(options?: Options<CreateSessionKeyData, ThrowOnError>) => (options?.client ?? client).post<CreateSessionKeyResponses, CreateSessionKeyErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -234,9 +278,13 @@ export const createSessionKey = <ThrowOnError extends boolean = false>(options?:
 });
 
 /**
- * Invalidate an active session key
+ * Invalidate the current session key
  *
- * Invalidates the session key used to authorize this call. Note that it may take several minutes to flush the key from all caches after this call returns, in which time some operations may succeed using this key.
+ * Invalidates the session key used to authorize this call. Note that it may
+ * take several minutes for the key to be flushed from all caches after this
+ * call returns. During that time, some operations may still succeed using
+ * the invalidated key. Returns 403 if the provided key is not a session key.
+ *
  */
 export const deleteSessionKeySelf = <ThrowOnError extends boolean = false>(options?: Options<DeleteSessionKeySelfData, ThrowOnError>) => (options?.client ?? client).delete<DeleteSessionKeySelfResponses, DeleteSessionKeySelfErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -245,9 +293,13 @@ export const deleteSessionKeySelf = <ThrowOnError extends boolean = false>(optio
 });
 
 /**
- * Authenticates API Keys
+ * Get the current user's identity and permissions
  *
- * Authenticates the given x-ni-api-key and returns information about the caller
+ * Authenticates the provided `x-ni-api-key` and returns the caller's user
+ * details, organization, workspaces, and resolved policies including policy
+ * template references. Similar to `/auth` but includes additional policy
+ * template information.
+ *
  */
 export const user = <ThrowOnError extends boolean = false>(options?: Options<UserData, ThrowOnError>) => (options?.client ?? client).get<UserResponses, UserErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],

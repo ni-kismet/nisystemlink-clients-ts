@@ -19,9 +19,9 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Delete notebook by Id
+ * Delete a notebook
  *
- * Delete existing notebook metadata and content
+ * Permanently deletes a notebook and its content.
  */
 export const deleteNotebook = <ThrowOnError extends boolean = false>(options: Options<DeleteNotebookData, ThrowOnError>) => (options.client ?? client).delete<DeleteNotebookResponses, DeleteNotebookErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -30,9 +30,9 @@ export const deleteNotebook = <ThrowOnError extends boolean = false>(options: Op
 });
 
 /**
- * Get notebook metadata by Id
+ * Get notebook metadata
  *
- * Get notebook metadata by Id
+ * Returns the metadata for a notebook including its name, workspace, properties, parsed parameters, and timestamps.
  */
 export const getNotebook = <ThrowOnError extends boolean = false>(options: Options<GetNotebookData, ThrowOnError>) => (options.client ?? client).get<GetNotebookResponses, GetNotebookErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -41,9 +41,9 @@ export const getNotebook = <ThrowOnError extends boolean = false>(options: Optio
 });
 
 /**
- * Update notebook by Id
+ * Update a notebook
  *
- * Update existing notebook
+ * Updates the metadata, content, or both for an existing notebook. At least one of metadata or content must be provided.
  */
 export const updateNotebook = <ThrowOnError extends boolean = false>(options: Options<UpdateNotebookData, ThrowOnError>) => (options.client ?? client).put<UpdateNotebookResponses, UpdateNotebookErrors, ThrowOnError>({
     ...formDataBodySerializer,
@@ -57,9 +57,9 @@ export const updateNotebook = <ThrowOnError extends boolean = false>(options: Op
 });
 
 /**
- * Create a new notebook
+ * Create a notebook
  *
- * Create a new notebook
+ * Creates a new notebook by uploading metadata and content. The metadata must include a name and the content must be a valid Jupyter .ipynb file.
  */
 export const createNotebook = <ThrowOnError extends boolean = false>(options: Options<CreateNotebookData, ThrowOnError>) => (options.client ?? client).post<CreateNotebookResponses, CreateNotebookErrors, ThrowOnError>({
     ...formDataBodySerializer,
@@ -75,7 +75,7 @@ export const createNotebook = <ThrowOnError extends boolean = false>(options: Op
 /**
  * Query notebooks
  *
- * Use the Dynamic Linq query language to specify filters for notebooks. An empty request body queries all notebooks.
+ * Returns notebooks matching the specified filter criteria using the Dynamic LINQ query language. An empty request body returns all notebooks the caller has access to.
  *
  */
 export const query = <ThrowOnError extends boolean = false>(options?: Options<QueryData, ThrowOnError>) => (options?.client ?? client).post<QueryResponses, QueryErrors, ThrowOnError>({
@@ -91,7 +91,7 @@ export const query = <ThrowOnError extends boolean = false>(options?: Options<Qu
 /**
  * Get notebook content
  *
- * Get the content of a notebook.
+ * Downloads the notebook file content in Jupyter .ipynb JSON format.
  */
 export const getContent = <ThrowOnError extends boolean = false>(options: Options<GetContentData, ThrowOnError>) => (options.client ?? client).get<GetContentResponses, GetContentErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],

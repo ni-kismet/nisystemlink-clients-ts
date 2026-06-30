@@ -328,7 +328,13 @@ export const updateTestPlanTemplates = <ThrowOnError extends boolean = false>(op
 /**
  * API Information
  *
+ * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ *
+ * ---
+ *
  * Returns information about API and available operations.
+ *
+ * @deprecated
  */
 export const rootEndPoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndPointData, ThrowOnError>) => (options?.client ?? client).get<RootEndPointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -339,7 +345,13 @@ export const rootEndPoint = <ThrowOnError extends boolean = false>(options?: Opt
 /**
  * Information about API versions and available operations of version V1 of APIs
  *
+ * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ *
+ * ---
+ *
  * Returns available operations for version V1 of the API.
+ *
+ * @deprecated
  */
 export const v1OperationsRootEndPoint = <ThrowOnError extends boolean = false>(options?: Options<V1OperationsRootEndPointData, ThrowOnError>) => (options?.client ?? client).get<V1OperationsRootEndPointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -451,7 +463,13 @@ export const deleteWorkflows = <ThrowOnError extends boolean = false>(options?: 
 /**
  * Creates work orders
  *
+ * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ *
+ * ---
+ *
  * Creates one or more work orders with the provided data.
+ *
+ * @deprecated
  */
 export const createWorkOrders = <ThrowOnError extends boolean = false>(options?: Options<CreateWorkOrdersData, ThrowOnError>) => (options?.client ?? client).post<CreateWorkOrdersResponses, CreateWorkOrdersErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -465,6 +483,10 @@ export const createWorkOrders = <ThrowOnError extends boolean = false>(options?:
 
 /**
  * Queries work orders
+ *
+ * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ *
+ * ---
  *
  * Queries work orders with the provided parameters.
  *
@@ -482,6 +504,8 @@ export const createWorkOrders = <ThrowOnError extends boolean = false>(options?:
  *
  *
  * Uses the `projection` to only include the specified fields in the response.
+ *
+ * @deprecated
  */
 export const queryWorkOrders = <ThrowOnError extends boolean = false>(options?: Options<QueryWorkOrdersData, ThrowOnError>) => (options?.client ?? client).post<QueryWorkOrdersResponses, QueryWorkOrdersErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -496,7 +520,13 @@ export const queryWorkOrders = <ThrowOnError extends boolean = false>(options?: 
 /**
  * Deletes work orders
  *
+ * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ *
+ * ---
+ *
  * Deletes one or more work orders identified by their IDs.
+ *
+ * @deprecated
  */
 export const deleteWorkOrders = <ThrowOnError extends boolean = false>(options?: Options<DeleteWorkOrdersData, ThrowOnError>) => (options?.client ?? client).post<DeleteWorkOrdersResponses, DeleteWorkOrdersErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -511,7 +541,13 @@ export const deleteWorkOrders = <ThrowOnError extends boolean = false>(options?:
 /**
  * Get work orders summary
  *
+ * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ *
+ * ---
+ *
  * Get the work orders summary.
+ *
+ * @deprecated
  */
 export const getWorkOrdersSummary = <ThrowOnError extends boolean = false>(options?: Options<GetWorkOrdersSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetWorkOrdersSummaryResponses, GetWorkOrdersSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -522,7 +558,13 @@ export const getWorkOrdersSummary = <ThrowOnError extends boolean = false>(optio
 /**
  * Gets a work order
  *
+ * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ *
+ * ---
+ *
  * Gets a work order with the provided ID.
+ *
+ * @deprecated
  */
 export const getWorkOrder = <ThrowOnError extends boolean = false>(options: Options<GetWorkOrderData, ThrowOnError>) => (options.client ?? client).get<GetWorkOrderResponses, GetWorkOrderErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -533,7 +575,13 @@ export const getWorkOrder = <ThrowOnError extends boolean = false>(options: Opti
 /**
  * Updates work orders
  *
+ * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ *
+ * ---
+ *
  * Updates one or more work orders with the provided data.
+ *
+ * @deprecated
  */
 export const updateWorkOrders = <ThrowOnError extends boolean = false>(options?: Options<UpdateWorkOrdersData, ThrowOnError>) => (options?.client ?? client).post<UpdateWorkOrdersResponses, UpdateWorkOrdersErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

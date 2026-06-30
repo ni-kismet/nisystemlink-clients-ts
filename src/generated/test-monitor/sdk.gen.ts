@@ -98,7 +98,7 @@ export const getProductV2 = <ThrowOnError extends boolean = false>(options: Opti
 /**
  * Queries values for a product field
  *
- * Queries known values for an indexed, scalar product field. Supported fields are `ID`, `PART_NUMBER`, `NAME`, `FAMILY`, and `UPDATED_AT`.
+ * Queries distinct values for a product field. Returns at most 1000 values per request. Supported fields are `ID`, `PART_NUMBER`, `NAME`, `FAMILY`, and `UPDATED_AT`.
  */
 export const queryProductValuesV2 = <ThrowOnError extends boolean = false>(options: Options<QueryProductValuesV2Data, ThrowOnError>) => (options.client ?? client).post<QueryProductValuesV2Responses, QueryProductValuesV2Errors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -206,7 +206,7 @@ export const getResultV2 = <ThrowOnError extends boolean = false>(options: Optio
 /**
  * Queries values for a result field
  *
- * Queries known values for an indexed, scalar result field. Supported fields are `ID`, `STARTED_AT`, `UPDATED_AT`, `PROGRAM_NAME`, `SYSTEM_ID`, `HOST_NAME`, `OPERATOR`, `SERIAL_NUMBER`, `PART_NUMBER`, and `TOTAL_TIME_IN_SECONDS`.
+ * Queries distinct values for a result field. Returns at most 1000 values per request. Supported fields are `ID`, `STARTED_AT`, `UPDATED_AT`, `PROGRAM_NAME`, `SYSTEM_ID`, `HOST_NAME`, `OPERATOR`, `SERIAL_NUMBER`, `PART_NUMBER`, and `TOTAL_TIME_IN_SECONDS`.
  */
 export const queryResultValuesV2 = <ThrowOnError extends boolean = false>(options: Options<QueryResultValuesV2Data, ThrowOnError>) => (options.client ?? client).post<QueryResultValuesV2Responses, QueryResultValuesV2Errors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -314,7 +314,7 @@ export const getStepV2 = <ThrowOnError extends boolean = false>(options: Options
 /**
  * Queries values for a step field
  *
- * Queries known values for an indexed, scalar step field. Supported fields are `NAME`, `STEP_TYPE`, `STEP_ID`, `PARENT_ID`, `RESULT_ID`, `PATH`, `TOTAL_TIME_IN_SECONDS`, `STARTED_AT`, `UPDATED_AT`, and `DATA_MODEL`.
+ * Queries distinct values for a step field. Returns at most 1000 values per request. Supported fields are `NAME`, `STEP_TYPE`, `STEP_ID`, `PARENT_ID`, `RESULT_ID`, `PATH`, `TOTAL_TIME_IN_SECONDS`, `STARTED_AT`, `UPDATED_AT`, and `DATA_MODEL`.
  */
 export const queryStepValuesV2 = <ThrowOnError extends boolean = false>(options: Options<QueryStepValuesV2Data, ThrowOnError>) => (options.client ?? client).post<QueryStepValuesV2Responses, QueryStepValuesV2Errors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],

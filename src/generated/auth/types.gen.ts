@@ -43,7 +43,7 @@ export type AuthPolicy = {
  */
 export type PolicyTemplate = {
     /**
-     * The unique id
+     * The server-generated identifier for this policy template
      */
     id?: string;
     /**
@@ -117,7 +117,7 @@ export type Statement = {
  */
 export type Policy = {
     /**
-     * The unique id
+     * The server-generated identifier for this policy
      */
     id?: string;
     /**
@@ -175,7 +175,7 @@ export type Policy = {
  */
 export type Key = {
     /**
-     * The unique id
+     * The server-generated identifier for this API key
      */
     id?: string;
     /**
@@ -195,7 +195,7 @@ export type Key = {
      */
     updated?: string;
     /**
-     * The time when the key expires (epoch in milliseconds)
+     * The time when the key expires as an ISO 8601 timestamp
      */
     expiry?: string;
     /**
@@ -225,11 +225,11 @@ export type Key = {
 /**
  * User
  *
- * The user details
+ * The user account details
  */
 export type User = {
     /**
-     * The unique id
+     * The server-generated identifier for this user account
      */
     id?: string;
     /**
@@ -291,7 +291,7 @@ export type User = {
      */
     status?: 'pending' | 'active';
     /**
-     * (deprecated) Features to which the user is entitled within the application.
+     * Licensing entitlements granted to the user, populated from the user's license status during authentication. Describes the features and products the user is entitled to use.
      */
     entitlements?: {
         [key: string]: unknown;
@@ -305,7 +305,7 @@ export type User = {
  */
 export type Org = {
     /**
-     * The unique id
+     * The server-generated identifier for this organization
      */
     id?: string;
     /**
@@ -325,7 +325,7 @@ export type Org = {
  */
 export type Workspace = {
     /**
-     * The unique id
+     * The server-generated identifier for this workspace
      */
     id?: string;
     /**

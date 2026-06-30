@@ -423,7 +423,7 @@ export type QueryItemsEndPointErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
 };
 
 export type QueryItemsEndPointError = QueryItemsEndPointErrors[keyof QueryItemsEndPointErrors];
@@ -452,7 +452,7 @@ export type UpdateItemsEndPointErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
     /**
      * Conflict
      */
@@ -489,7 +489,7 @@ export type DeleteItemsEndPointErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
 };
 
 export type DeleteItemsEndPointError = DeleteItemsEndPointErrors[keyof DeleteItemsEndPointErrors];
@@ -542,7 +542,7 @@ export type GetAllUserDataItemsEndPointErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
 };
 
 export type GetAllUserDataItemsEndPointError = GetAllUserDataItemsEndPointErrors[keyof GetAllUserDataItemsEndPointErrors];
@@ -571,7 +571,7 @@ export type CreateOrUpdateUserDataItemsEndPointErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
     /**
      * Conflict
      */
@@ -596,6 +596,9 @@ export type CreateOrUpdateUserDataItemsEndPointResponse = CreateOrUpdateUserData
 export type DeleteUserDataItemEndPointData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the user data item to delete.
+         */
         id: string;
     };
     query?: never;
@@ -610,7 +613,11 @@ export type DeleteUserDataItemEndPointErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
 };
 
 export type DeleteUserDataItemEndPointError = DeleteUserDataItemEndPointErrors[keyof DeleteUserDataItemEndPointErrors];
@@ -627,6 +634,9 @@ export type DeleteUserDataItemEndPointResponse = DeleteUserDataItemEndPointRespo
 export type GetUserDataItemEndPointData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the user data item.
+         */
         id: string;
     };
     query?: never;
@@ -641,7 +651,11 @@ export type GetUserDataItemEndPointErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
 };
 
 export type GetUserDataItemEndPointError = GetUserDataItemEndPointErrors[keyof GetUserDataItemEndPointErrors];
@@ -664,7 +678,7 @@ export type GetData = {
 
 export type GetResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: RootEndpointResponseModel;
 };
@@ -680,7 +694,7 @@ export type V1EndpointData = {
 
 export type V1EndpointResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: V1OperationsModel;
 };

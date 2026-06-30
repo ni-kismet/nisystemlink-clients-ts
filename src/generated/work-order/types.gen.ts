@@ -61,7 +61,7 @@ export type CreateTestPlanRequest = {
      */
     name?: string | null;
     /**
-     * State of the test plan.
+     * State of the work order.
      */
     state?: string | null;
     /**
@@ -1666,7 +1666,7 @@ export type UpdateTestPlanRequest = {
      */
     name?: string | null;
     /**
-     * State of the test plan.
+     * State of the work order.
      */
     state?: string | null;
     /**

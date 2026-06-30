@@ -19,9 +19,16 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Query the users
+ * Query user accounts
  *
- * Use the Dynamic Linq query language to specify filters for users. An empty request body queries all users.
+ * Query user accounts using the Dynamic LINQ query language to specify
+ * filters, for example to look up accounts before assigning them to
+ * workspaces via auth-mappings, to populate user selection lists in
+ * administration UIs, or to audit which accounts exist in the
+ * organization. An empty request body returns all user accounts. Results
+ * are paginated; use the `continuationToken` from the response to
+ * retrieve subsequent pages.
+ *
  */
 export const queryUsers = <ThrowOnError extends boolean = false>(options?: Options<QueryUsersData, ThrowOnError>) => (options?.client ?? client).post<QueryUsersResponses, QueryUsersErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -34,9 +41,18 @@ export const queryUsers = <ThrowOnError extends boolean = false>(options?: Optio
 });
 
 /**
- * Creates a new user
+ * Create a user account
  *
- * Create a user
+ * Create a new user account in the caller's organization to pre-provision
+ * policies or metadata before a person first signs in, or to create a
+ * service account for machine-to-machine integrations such as automated
+ * test execution or data ingestion pipelines. The account type defaults to
+ * 'user' if not specified. Service accounts (type 'service') cannot have
+ * email, phone, niuaId, or login fields set. In most deployments, human
+ * user accounts are created automatically on first sign-in via an identity
+ * provider, so explicit creation is typically reserved for service
+ * accounts or advance provisioning.
+ *
  */
 export const createUser = <ThrowOnError extends boolean = false>(options?: Options<CreateUserData, ThrowOnError>) => (options?.client ?? client).post<CreateUserResponses, CreateUserErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -49,9 +65,18 @@ export const createUser = <ThrowOnError extends boolean = false>(options?: Optio
 });
 
 /**
- * Delete user
+ * Delete a user account
  *
- * Delete a user by user id
+ * Delete a user account by ID. The user's API keys will be invalidated
+ * but are not automatically cleaned up, and auth-mappings referencing the
+ * user are not removed.
+ *
+ * Deleting a user orphans any records in this or other services that store
+ * the user's ID. Orphaned records will no longer be able to resolve the
+ * user's display name, so historical data will lose attribution. In most
+ * cases, it is preferable to revoke policies or auth-mappings to restrict
+ * access rather than deleting the account.
+ *
  */
 export const deleteUser = <ThrowOnError extends boolean = false>(options: Options<DeleteUserData, ThrowOnError>) => (options.client ?? client).delete<DeleteUserResponses, DeleteUserErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -60,9 +85,13 @@ export const deleteUser = <ThrowOnError extends boolean = false>(options: Option
 });
 
 /**
- * Get user
+ * Get a user account by ID
  *
- * Lookup a user by user id
+ * Returns the full user account record for the specified user ID,
+ * including profile details, directly assigned policies, and account
+ * status. Useful for displaying account information in a UI or verifying
+ * the account's current state before performing an administrative action.
+ *
  */
 export const getUser = <ThrowOnError extends boolean = false>(options: Options<GetUserData, ThrowOnError>) => (options.client ?? client).get<GetUserResponses, GetUserErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -71,9 +100,18 @@ export const getUser = <ThrowOnError extends boolean = false>(options: Options<G
 });
 
 /**
- * Update user
+ * Update a user account
  *
- * Update the user record
+ * Update one or more fields on an existing user account to correct profile
+ * information, assign or revoke org-level policies, or add keywords and
+ * properties for organizational tagging. Only the fields included in the
+ * request body are modified; omitted fields remain unchanged.
+ *
+ * Note: For accounts with `type == "user"`, the `firstName`, `lastName`,
+ * `email`, and `login` fields are automatically managed by the application
+ * and will be overwritten with values from the identity provider the next
+ * time the user logs in.
+ *
  */
 export const updateUser = <ThrowOnError extends boolean = false>(options: Options<UpdateUserData, ThrowOnError>) => (options.client ?? client).put<UpdateUserResponses, UpdateUserErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -88,7 +126,14 @@ export const updateUser = <ThrowOnError extends boolean = false>(options: Option
 /**
  * List workspaces
  *
- * List the workspaces of an organization. Only workspaces for which the caller has the workspace:Read permission will be returned. This may differ from the behavior of the /niauth/v1/auth route, which returns all workspaces for which the user has any defined permissions.
+ * List the workspaces of an organization for administrative operations
+ * such as verifying a workspace exists before creating auth-mappings or
+ * managing workspace configuration. Only workspaces for which the caller
+ * has the `workspace:Read` permission are returned. Few users are granted
+ * this permission; to list workspaces accessible to the current user for
+ * non-administrative purposes, use the Auth Service's `/niauth/v1/auth`
+ * route instead.
+ *
  */
 export const getWorkspaces = <ThrowOnError extends boolean = false>(options?: Options<GetWorkspacesData, ThrowOnError>) => (options?.client ?? client).get<GetWorkspacesResponses, GetWorkspacesErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -97,9 +142,14 @@ export const getWorkspaces = <ThrowOnError extends boolean = false>(options?: Op
 });
 
 /**
- * Creates a new workspace
- *
  * Create a workspace
+ *
+ * Create a new workspace within the caller's organization to isolate a set
+ * of resources (test results, systems, files, etc.) for a specific team,
+ * project, or production line. Workspace names must be unique within the
+ * organization. After creating the workspace, create auth-mappings to
+ * grant access to users.
+ *
  */
 export const createWorkspace = <ThrowOnError extends boolean = false>(options?: Options<CreateWorkspaceData, ThrowOnError>) => (options?.client ?? client).post<CreateWorkspaceResponses, CreateWorkspaceErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -112,9 +162,14 @@ export const createWorkspace = <ThrowOnError extends boolean = false>(options?: 
 });
 
 /**
- * Update workspace
+ * Update a workspace
  *
- * Update the workspace
+ * Update the name or enabled state of an existing workspace. Rename a
+ * workspace when a project name changes, or disable a workspace that
+ * should no longer accept new data while preserving its existing resources
+ * for historical reference. Disabling a workspace prevents creation of new
+ * resources in it but does not hide existing resources from queries.
+ *
  */
 export const updateWorkspace = <ThrowOnError extends boolean = false>(options: Options<UpdateWorkspaceData, ThrowOnError>) => (options.client ?? client).put<UpdateWorkspaceResponses, UpdateWorkspaceErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -129,7 +184,12 @@ export const updateWorkspace = <ThrowOnError extends boolean = false>(options: O
 /**
  * List auth-mappings
  *
- * List the auth-mappings of an organization
+ * List the authorization mappings configured for the caller's organization
+ * to audit which permissions are configured for a given workspace, display
+ * the current access configuration in an administration UI, or
+ * troubleshoot why a user has or lacks specific permissions. Filter by
+ * `workspace` or `type` to narrow results.
+ *
  */
 export const getAuthMappings = <ThrowOnError extends boolean = false>(options?: Options<GetAuthMappingsData, ThrowOnError>) => (options?.client ?? client).get<GetAuthMappingsResponses, GetAuthMappingsErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -138,9 +198,17 @@ export const getAuthMappings = <ThrowOnError extends boolean = false>(options?: 
 });
 
 /**
- * Creates a new auth-mapping
+ * Create an auth-mapping
  *
- * Create a auth-mapping
+ * Create a new authorization mapping that assigns a policy (or policy
+ * template bound to a workspace) to users matching a selector criteria.
+ * The most common pattern is to specify a `policyTemplateId` (a role like
+ * "Collaborator" or "Data Maintainer") together with a `workspace` ID so
+ * that the system creates a workspace-scoped policy from the template.
+ * Use `type: "user-id"` for individual assignments, or
+ * `type: "oidc-claim"` to provision groups of users based on identity
+ * provider claims.
+ *
  */
 export const createAuthMapping = <ThrowOnError extends boolean = false>(options?: Options<CreateAuthMappingData, ThrowOnError>) => (options?.client ?? client).post<CreateAuthMappingResponses, CreateAuthMappingErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -153,9 +221,13 @@ export const createAuthMapping = <ThrowOnError extends boolean = false>(options?
 });
 
 /**
- * Deletes an auth-mapping
+ * Delete an auth-mapping
  *
- * Deletes the auth-mapping with the given Id
+ * Permanently delete an authorization mapping to revoke a user's or
+ * group's access to a workspace, or to clean up obsolete mappings after
+ * decommissioning a workspace. Users previously matched by this mapping
+ * will lose the associated policy on their next authentication.
+ *
  */
 export const deleteAuthMapping = <ThrowOnError extends boolean = false>(options: Options<DeleteAuthMappingData, ThrowOnError>) => (options.client ?? client).delete<DeleteAuthMappingResponses, DeleteAuthMappingErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -164,9 +236,13 @@ export const deleteAuthMapping = <ThrowOnError extends boolean = false>(options:
 });
 
 /**
- * Update auth-mapping
+ * Update an auth-mapping
  *
- * Update the auth-mapping
+ * Update the type, policy, or selector of an existing authorization
+ * mapping to change a user's role in a workspace, re-target a mapping to
+ * a different group after an organizational restructure, or correct a
+ * selector value.
+ *
  */
 export const updateAuthMapping = <ThrowOnError extends boolean = false>(options: Options<UpdateAuthMappingData, ThrowOnError>) => (options.client ?? client).put<UpdateAuthMappingResponses, UpdateAuthMappingErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -179,9 +255,13 @@ export const updateAuthMapping = <ThrowOnError extends boolean = false>(options:
 });
 
 /**
- * Get organization
+ * Get an organization
  *
- * Returns the organization with the given name. The caller needs a whitelisted API key to read organizations.
+ * Returns the organization with the given name, including its ID, list of
+ * workspaces, and owner account. Requires a whitelisted API key because
+ * this endpoint is used by internal services during system bootstrap or
+ * cross-service coordination and is not available to regular API keys.
+ *
  */
 export const getOrg = <ThrowOnError extends boolean = false>(options: Options<GetOrgData, ThrowOnError>) => (options.client ?? client).get<GetOrgResponses, GetOrgErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -192,7 +272,15 @@ export const getOrg = <ThrowOnError extends boolean = false>(options: Options<Ge
 /**
  * Open a WebSocket session
  *
- * Opens a persistent connection to the web server that allows two-way communication using a JSON protocol. After you open a connection, you can subscribe to workspace creation notifications. Refer to the *Models* section to access the schema for these actions.
+ * Opens a persistent WebSocket connection for receiving real-time
+ * notifications when new workspaces are created, allowing UIs to refresh
+ * workspace lists or services to automatically provision default resources.
+ * After opening the connection, send a
+ * `UserAsyncWorkspacesSubscribeRequest` message to subscribe to workspace
+ * creation events. The server sends `UserWorkspacesCreatedRoutedMessage`
+ * messages when new workspaces are created. Refer to the *Models* section
+ * for message schemas.
+ *
  */
 export const openWebSocketSession = <ThrowOnError extends boolean = false>(options: Options<OpenWebSocketSessionData, ThrowOnError>) => (options.client ?? client).get<OpenWebSocketSessionResponses, OpenWebSocketSessionErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],

@@ -1163,6 +1163,10 @@ export type AcknowledgeByInstanceIdsData = {
 
 export type AcknowledgeByInstanceIdsErrors = {
     /**
+     * Unauthorized
+     */
+    401: ErrorResponse;
+    /**
      * Error
      */
     default: ErrorResponse;
@@ -1172,9 +1176,7 @@ export type AcknowledgeByInstanceIdsError = AcknowledgeByInstanceIdsErrors[keyof
 
 export type AcknowledgeByInstanceIdsResponses = {
     /**
-     * Success - Indicates the request to acknowledge was processed successfully. If any
-     * alarms failed to be acknowledged, the included `error` object will contain an
-     * entry in the `innerErrors` array for each failed alarm.
+     * OK
      */
     200: AcknowledgeByInstanceIdResponse;
 };
@@ -1197,11 +1199,11 @@ export type CreateOrUpdateAlarmData = {
 
 export type CreateOrUpdateAlarmErrors = {
     /**
-     * For requests which would result in an update to an existing alarm, this
-     * is returned when the request does not represent a valid transition for
-     * the existing alarm. This can occur when attempting to clear an alarm
-     * which is already clear, or when attempting to set an alarm which is
-     * already set at the given severity level.
+     * Unauthorized
+     */
+    401: ErrorResponse;
+    /**
+     * Conflict
      */
     409: ErrorResponse;
     /**
@@ -1235,6 +1237,10 @@ export type DeleteAlarmData = {
 
 export type DeleteAlarmErrors = {
     /**
+     * Unauthorized
+     */
+    401: ErrorResponse;
+    /**
      * Error
      */
     default: ErrorResponse;
@@ -1264,6 +1270,10 @@ export type GetAlarmData = {
 };
 
 export type GetAlarmErrors = {
+    /**
+     * Unauthorized
+     */
+    401: ErrorResponse;
     /**
      * Error
      */
@@ -1295,6 +1305,10 @@ export type QueryAlarmsData = {
 
 export type QueryAlarmsErrors = {
     /**
+     * Unauthorized
+     */
+    401: ErrorResponse;
+    /**
      * Error
      */
     default: ErrorResponse;
@@ -1324,6 +1338,10 @@ export type QueryAlarmsWithFilterData = {
 };
 
 export type QueryAlarmsWithFilterErrors = {
+    /**
+     * Unauthorized
+     */
+    401: ErrorResponse;
     /**
      * Error
      */
@@ -1355,6 +1373,10 @@ export type DeleteAlarmsByInstanceIdData = {
 
 export type DeleteAlarmsByInstanceIdErrors = {
     /**
+     * Unauthorized
+     */
+    401: ErrorResponse;
+    /**
      * Error
      */
     default: ErrorResponse;
@@ -1364,13 +1386,11 @@ export type DeleteAlarmsByInstanceIdError = DeleteAlarmsByInstanceIdErrors[keyof
 
 export type DeleteAlarmsByInstanceIdResponses = {
     /**
-     * Partial Success - Indicates the request to delete was processed successfully,
-     * but one or more instances failed to delete. The included error object will
-     * contain an entry in the `innerErrors` array for each failed instance.
+     * OK
      */
     200: DeleteByInstanceIdPartialSuccess;
     /**
-     * Success - Indicates all requested instances were deleted successfully.
+     * No Content
      */
     204: void;
 };

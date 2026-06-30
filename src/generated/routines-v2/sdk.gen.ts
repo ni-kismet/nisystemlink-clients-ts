@@ -19,9 +19,11 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Query routines based on a filter
+ * Query routines
  *
- * Queries routines based on the provided parameters of event type and enabled status.
+ * Lists routines visible to the caller, with optional filtering by event type and enabled state, to support
+ * routine management views, identify candidate automations to enable or disable, and audit active automation
+ * coverage within a workspace.
  */
 export const queryRoutines = <ThrowOnError extends boolean = false>(options?: Options<QueryRoutinesData, ThrowOnError>) => (options?.client ?? client).get<QueryRoutinesResponses, QueryRoutinesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -30,9 +32,12 @@ export const queryRoutines = <ThrowOnError extends boolean = false>(options?: Op
 });
 
 /**
- * Create a new routine
+ * Create a routine
  *
- * Creates a new routine with the specified configuration, including an event trigger and actions to execute when the event occurs.
+ * Creates a routine that links a monitored event to one or more automated actions, such as raising alarms from
+ * tag thresholds, reacting to file updates, or starting notebook-driven analysis when a business event occurs.
+ * The routine is created in a workspace context and can then be enabled to process events, with visibility and
+ * enablement behavior governed by the caller's privileges.
  */
 export const createRoutine = <ThrowOnError extends boolean = false>(options?: Options<CreateRoutineData, ThrowOnError>) => (options?.client ?? client).post<CreateRoutineResponses, CreateRoutineErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -45,9 +50,11 @@ export const createRoutine = <ThrowOnError extends boolean = false>(options?: Op
 });
 
 /**
- * Delete a routine by id
+ * Delete a routine
  *
- * Deletes the routine with the specified ID. This operation will remove the routine and its associated configuration from the system.
+ * Permanently removes a routine and its automation configuration when an automation is obsolete, duplicated, or
+ * replaced by a newer workflow; once deleted, the routine no longer responds to events or generates follow-on
+ * actions.
  */
 export const deleteRoutine = <ThrowOnError extends boolean = false>(options: Options<DeleteRoutineData, ThrowOnError>) => (options.client ?? client).delete<DeleteRoutineResponses, DeleteRoutineErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -56,9 +63,11 @@ export const deleteRoutine = <ThrowOnError extends boolean = false>(options: Opt
 });
 
 /**
- * Get a routine by ID
+ * Get a routine
  *
- * Retrieves the routine with the specified ID, including its configuration and status.
+ * Returns the full routine definition, including trigger configuration, actions, current enabled state,
+ * workspace assignment, and audit metadata, and is commonly used to inspect, troubleshoot, or validate an
+ * automation before enabling it in production workflows.
  */
 export const getRoutine = <ThrowOnError extends boolean = false>(options: Options<GetRoutineData, ThrowOnError>) => (options.client ?? client).get<GetRoutineResponses, GetRoutineErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -67,9 +76,11 @@ export const getRoutine = <ThrowOnError extends boolean = false>(options: Option
 });
 
 /**
- * Update the routine with the given id.
+ * Update a routine
  *
- * Updates the routine with the specified ID using the provided configuration. This operation allows modification of the routine's event trigger and actions.
+ * Applies partial updates to an existing routine configuration to tune event conditions, adjust action behavior,
+ * move workspace ownership, or change operational state as requirements evolve; for enabled routines, privilege
+ * checks help ensure updates remain safe and intentional in shared environments.
  */
 export const updateRoutine = <ThrowOnError extends boolean = false>(options: Options<UpdateRoutineData, ThrowOnError>) => (options.client ?? client).patch<UpdateRoutineResponses, UpdateRoutineErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -84,7 +95,8 @@ export const updateRoutine = <ThrowOnError extends boolean = false>(options: Opt
 /**
  * API information
  *
- * Returns information about API versions and available operations.
+ * Returns high-level API metadata and the set of versioned capability groups exposed by the service, and is
+ * primarily used for endpoint discovery and service-availability validation before routine operations are called.
  */
 export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -93,9 +105,10 @@ export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * V2 API information
+ * API version information
  *
- * Returns available operations for the V2 API.
+ * Returns operation-availability metadata for the v2 surface to confirm version-specific capabilities in
+ * environments where rollout state or compatibility constraints matter.
  */
 export const rootEndpointV2 = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointV2Data, ThrowOnError>) => (options?.client ?? client).get<RootEndpointV2Responses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

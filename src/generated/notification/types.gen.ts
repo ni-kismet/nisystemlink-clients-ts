@@ -13,7 +13,7 @@ export type AddressGroupModel = {
     /**
      * The unique identifier of the address group.
      */
-    id?: string | null;
+    readonly id?: string | null;
     /**
      * The name of the interpreting service used to send notifications (e.g., smtp).
      */
@@ -37,7 +37,7 @@ export type AddressGroupModel = {
     /**
      * The IDs of notification strategies that reference this address group.
      */
-    referencingNotificationStrategies?: Array<string> | null;
+    readonly referencingNotificationStrategies?: Array<string> | null;
 };
 
 /**
@@ -225,7 +225,7 @@ export type MessageTemplateModel = {
     /**
      * The unique identifier of the message template.
      */
-    id?: string | null;
+    readonly id?: string | null;
     /**
      * The name of the interpreting service used to send notifications (e.g., smtp).
      */
@@ -249,7 +249,7 @@ export type MessageTemplateModel = {
     /**
      * The IDs of notification strategies that reference this message template.
      */
-    referencingNotificationStrategies?: Array<string> | null;
+    readonly referencingNotificationStrategies?: Array<string> | null;
 };
 
 /**
@@ -289,7 +289,7 @@ export type NotificationStrategyModel = {
     /**
      * The unique identifier of the notification strategy.
      */
-    id?: string | null;
+    readonly id?: string | null;
     /**
      * The user-friendly display name of the notification strategy.
      */
@@ -389,7 +389,7 @@ export type UpdateMessageTemplateRequestModel = {
 /**
  * Update Notification Configuration Request
  *
- * Model to request to create a notification configuration.
+ * Model to request to update a notification configuration.
  */
 export type UpdateNotificationConfigurationRequestModel = {
     /**
@@ -443,6 +443,168 @@ export type V1OperationsModel = {
 };
 
 /**
+ * Address Group
+ *
+ * Represents an address group that defines a set of recipients for notifications.
+ */
+export type AddressGroupModelWritable = {
+    /**
+     * The name of the interpreting service used to send notifications (e.g., smtp).
+     */
+    interpretingServiceName?: string | null;
+    /**
+     * The user-friendly display name of the address group.
+     */
+    displayName?: string | null;
+    /**
+     * User-defined key-value properties associated with the address group.
+     */
+    properties?: {
+        [key: string]: string;
+    } | null;
+    /**
+     * The address fields used by the interpreting service (e.g., toAddresses, ccAddresses).
+     */
+    fields?: {
+        [key: string]: Array<string>;
+    } | null;
+};
+
+/**
+ * Model to request to apply a dynamic notification strategy.
+ */
+export type ApplyDynamicNotificationStrategyRequestModelWritable = {
+    /**
+     * Key-value pairs to substitute into the message template before sending.
+     */
+    messageTemplateSubstitutionFields?: {
+        [key: string]: string;
+    } | null;
+    /**
+     * The dynamic notification strategy to apply.
+     */
+    notificationStrategy?: DynamicNotificationStrategyModelWritable | null;
+};
+
+/**
+ * Dynamic Notification Configuration
+ *
+ * Represents a dynamic notification configuration with inline or referenced address groups and message templates.
+ */
+export type DynamicNotificationConfigurationModelWritable = {
+    /**
+     * The unique identifier of the address group.
+     */
+    addressGroupId?: string | null;
+    /**
+     * The unique identifier of the message template.
+     */
+    messageTemplateId?: string | null;
+    /**
+     * The address group details.
+     */
+    addressGroup?: AddressGroupModelWritable | null;
+    /**
+     * The message template details.
+     */
+    messageTemplate?: MessageTemplateModelWritable | null;
+};
+
+/**
+ * Dynamic Notification Strategy
+ *
+ * Represents a dynamic notification strategy with inline notification configurations.
+ */
+export type DynamicNotificationStrategyModelWritable = {
+    /**
+     * The notification configurations associated with this strategy.
+     */
+    notificationConfigurations: Array<DynamicNotificationConfigurationModelWritable>;
+};
+
+/**
+ * Message Template
+ *
+ * Represents a message template that defines the content of a notification.
+ */
+export type MessageTemplateModelWritable = {
+    /**
+     * The name of the interpreting service used to send notifications (e.g., smtp).
+     */
+    interpretingServiceName?: string | null;
+    /**
+     * The user-friendly display name of the message template.
+     */
+    displayName?: string | null;
+    /**
+     * User-defined key-value properties associated with the message template.
+     */
+    properties?: {
+        [key: string]: string;
+    } | null;
+    /**
+     * The template fields used by the interpreting service (e.g., subjectTemplate, bodyTemplate).
+     */
+    fields?: {
+        [key: string]: string;
+    } | null;
+};
+
+/**
+ * Notification Configuration
+ *
+ * Represents a notification configuration that pairs an address group with a message template.
+ */
+export type NotificationConfigurationModelWritable = {
+    /**
+     * The unique identifier of the address group.
+     */
+    addressGroupId: string;
+    /**
+     * The unique identifier of the message template.
+     */
+    messageTemplateId: string;
+    /**
+     * Whether the full address group and message template objects are included in the response.
+     */
+    isExpanded?: boolean;
+    /**
+     * The expanded address group details, included when isExpanded is true.
+     */
+    addressGroup?: AddressGroupModelWritable | null;
+    /**
+     * The expanded message template details, included when isExpanded is true.
+     */
+    messageTemplate?: MessageTemplateModelWritable | null;
+};
+
+/**
+ * Notification Strategy
+ *
+ * Represents a notification strategy that pairs address groups with message templates.
+ */
+export type NotificationStrategyModelWritable = {
+    /**
+     * The user-friendly display name of the notification strategy.
+     */
+    displayName?: string | null;
+    /**
+     * A human-readable description of the notification strategy.
+     */
+    description?: string | null;
+    /**
+     * User-defined key-value properties associated with the notification strategy.
+     */
+    properties?: {
+        [key: string]: string;
+    } | null;
+    /**
+     * The notification configurations associated with this strategy.
+     */
+    notificationConfigurations: Array<NotificationConfigurationModelWritable>;
+};
+
+/**
  * Root Endpoint Response
  *
  * The response model for the root endpoint.
@@ -471,12 +633,14 @@ export type GetAddressGroupsErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
 };
+
+export type GetAddressGroupsError = GetAddressGroupsErrors[keyof GetAddressGroupsErrors];
 
 export type GetAddressGroupsResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: Array<AddressGroupModel>;
 };
@@ -503,14 +667,14 @@ export type CreateAddressGroupErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
 };
 
 export type CreateAddressGroupError = CreateAddressGroupErrors[keyof CreateAddressGroupErrors];
 
 export type CreateAddressGroupResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: AddressGroupModel;
 };
@@ -531,28 +695,24 @@ export type DeleteAddressGroupData = {
 
 export type DeleteAddressGroupErrors = {
     /**
-     * Bad Request
+     * Bad request
      */
     400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
     /**
-     * Address group not found.
+     * Not found
      */
-    404: unknown;
+    404: BaseResponse;
 };
 
 export type DeleteAddressGroupError = DeleteAddressGroupErrors[keyof DeleteAddressGroupErrors];
 
 export type DeleteAddressGroupResponses = {
     /**
-     * Returns success
-     */
-    200: unknown;
-    /**
-     * No content.
+     * No content
      */
     204: void;
 };
@@ -579,14 +739,14 @@ export type GetAddressGroupErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
 };
 
 export type GetAddressGroupError = GetAddressGroupErrors[keyof GetAddressGroupErrors];
 
 export type GetAddressGroupResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: AddressGroupModel;
 };
@@ -612,21 +772,21 @@ export type UpdateAddressGroupData = {
 
 export type UpdateAddressGroupErrors = {
     /**
-     * BadRequest
+     * Bad request
      */
     400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
     /**
-     * NotFound
+     * Not found
      */
-    404: unknown;
+    404: BaseResponse;
     /**
      * Conflict
      */
-    409: unknown;
+    409: BaseResponse;
 };
 
 export type UpdateAddressGroupError = UpdateAddressGroupErrors[keyof UpdateAddressGroupErrors];
@@ -651,12 +811,14 @@ export type GetMessageTemplatesErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
 };
+
+export type GetMessageTemplatesError = GetMessageTemplatesErrors[keyof GetMessageTemplatesErrors];
 
 export type GetMessageTemplatesResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: Array<MessageTemplateModel>;
 };
@@ -683,14 +845,14 @@ export type CreateMessageTemplateErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
 };
 
 export type CreateMessageTemplateError = CreateMessageTemplateErrors[keyof CreateMessageTemplateErrors];
 
 export type CreateMessageTemplateResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: MessageTemplateModel;
 };
@@ -711,28 +873,24 @@ export type DeleteMessageTemplateData = {
 
 export type DeleteMessageTemplateErrors = {
     /**
-     * Bad Request
+     * Bad request
      */
     400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
     /**
-     * Message template not found.
+     * Not found
      */
-    404: unknown;
+    404: BaseResponse;
 };
 
 export type DeleteMessageTemplateError = DeleteMessageTemplateErrors[keyof DeleteMessageTemplateErrors];
 
 export type DeleteMessageTemplateResponses = {
     /**
-     * Returns success
-     */
-    200: unknown;
-    /**
-     * No content.
+     * No content
      */
     204: void;
 };
@@ -759,14 +917,14 @@ export type GetMessageTemplateErrors = {
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
 };
 
 export type GetMessageTemplateError = GetMessageTemplateErrors[keyof GetMessageTemplateErrors];
 
 export type GetMessageTemplateResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: MessageTemplateModel;
 };
@@ -792,21 +950,21 @@ export type UpdateMessageTemplateData = {
 
 export type UpdateMessageTemplateErrors = {
     /**
-     * BadRequest
+     * Bad request
      */
     400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
     /**
-     * NotFound
+     * Not found
      */
-    404: unknown;
+    404: BaseResponse;
     /**
      * Conflict
      */
-    409: unknown;
+    409: BaseResponse;
 };
 
 export type UpdateMessageTemplateError = UpdateMessageTemplateErrors[keyof UpdateMessageTemplateErrors];
@@ -837,15 +995,15 @@ export type ApplyNotificationStrategyData = {
 
 export type ApplyNotificationStrategyErrors = {
     /**
-     * BadRequest
+     * Bad request
      */
     400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
     /**
-     * NotFound
+     * Not found
      */
     404: BaseResponse;
 };
@@ -854,11 +1012,7 @@ export type ApplyNotificationStrategyError = ApplyNotificationStrategyErrors[key
 
 export type ApplyNotificationStrategyResponses = {
     /**
-     * Returns success
-     */
-    200: unknown;
-    /**
-     * NoContent
+     * No content
      */
     204: void;
 };
@@ -869,7 +1023,7 @@ export type ApplyDynamicNotificationStrategyData = {
     /**
      * Model to request to apply a dynamic notification strategy.
      */
-    body?: ApplyDynamicNotificationStrategyRequestModel;
+    body?: ApplyDynamicNotificationStrategyRequestModelWritable;
     path?: never;
     query?: never;
     url: '/ninotification/v1/apply-dynamic-strategy';
@@ -877,24 +1031,20 @@ export type ApplyDynamicNotificationStrategyData = {
 
 export type ApplyDynamicNotificationStrategyErrors = {
     /**
-     * BadRequest
+     * Bad request
      */
     400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
 };
 
 export type ApplyDynamicNotificationStrategyError = ApplyDynamicNotificationStrategyErrors[keyof ApplyDynamicNotificationStrategyErrors];
 
 export type ApplyDynamicNotificationStrategyResponses = {
     /**
-     * Returns success
-     */
-    200: unknown;
-    /**
-     * NoContent
+     * No content
      */
     204: void;
 };
@@ -915,18 +1065,20 @@ export type GetNotificationStrategiesData = {
 
 export type GetNotificationStrategiesErrors = {
     /**
-     * BadRequest
+     * Bad request
      */
-    400: unknown;
+    400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
 };
+
+export type GetNotificationStrategiesError = GetNotificationStrategiesErrors[keyof GetNotificationStrategiesErrors];
 
 export type GetNotificationStrategiesResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: Array<NotificationStrategyModel>;
 };
@@ -947,20 +1099,20 @@ export type CreateNotificationStrategyData = {
 
 export type CreateNotificationStrategyErrors = {
     /**
-     * BadRequest
+     * Bad request
      */
     400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
 };
 
 export type CreateNotificationStrategyError = CreateNotificationStrategyErrors[keyof CreateNotificationStrategyErrors];
 
 export type CreateNotificationStrategyResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: NotificationStrategyModel;
 };
@@ -981,15 +1133,15 @@ export type DeleteNotificationStrategyData = {
 
 export type DeleteNotificationStrategyErrors = {
     /**
-     * BadRequest
+     * Bad request
      */
     400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
     /**
-     * Notification strategy not found.
+     * Not found
      */
     404: BaseResponse;
 };
@@ -998,11 +1150,7 @@ export type DeleteNotificationStrategyError = DeleteNotificationStrategyErrors[k
 
 export type DeleteNotificationStrategyResponses = {
     /**
-     * Returns success
-     */
-    200: unknown;
-    /**
-     * No content.
+     * No content
      */
     204: void;
 };
@@ -1028,15 +1176,15 @@ export type GetNotificationStrategyData = {
 
 export type GetNotificationStrategyErrors = {
     /**
-     * BadRequest
+     * Bad request
      */
     400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
     /**
-     * Notification strategy not found.
+     * Not found
      */
     404: BaseResponse;
 };
@@ -1045,7 +1193,7 @@ export type GetNotificationStrategyError = GetNotificationStrategyErrors[keyof G
 
 export type GetNotificationStrategyResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: NotificationStrategyModel;
 };
@@ -1071,15 +1219,15 @@ export type UpdateNotificationStrategyData = {
 
 export type UpdateNotificationStrategyErrors = {
     /**
-     * BadRequest
+     * Bad request
      */
     400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
     /**
-     * Notification strategy not found.
+     * Not found
      */
     404: BaseResponse;
 };
@@ -1104,7 +1252,7 @@ export type GetData = {
 
 export type GetResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: RootEndpointResponseModel;
 };
@@ -1120,7 +1268,7 @@ export type V1EndpointData = {
 
 export type V1EndpointResponses = {
     /**
-     * Returns success
+     * OK
      */
     200: V1OperationsModel;
 };

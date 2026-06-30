@@ -157,8 +157,9 @@ describe.skipIf(!configured)('Asset Management Service', () => {
       }
 
       const assetId = assets.assets[0].id;
-      const { data, error, response } = await queryAssetLocationHistory(assetId, {
+      const { data, error, response } = await queryAssetLocationHistory({
         client,
+        path: { assetId },
         body: { take: 10 },
       });
 
@@ -175,8 +176,9 @@ describe.skipIf(!configured)('Asset Management Service', () => {
       }
 
       const assetId = assets.assets[0].id;
-      const { response } = await queryAssetLocationHistory(assetId, {
+      const { response } = await queryAssetLocationHistory({
         client,
+        path: { assetId },
         body: {
           take: 5,
           // Query location history from 30 days ago

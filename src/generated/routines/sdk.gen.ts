@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { CreateRoutinesData, CreateRoutinesErrors, CreateRoutinesResponses, DeleteRoutineData, DeleteRoutineErrors, DeleteRoutineResponses, GetExecutionDefinitionByRoutineIdData, GetExecutionDefinitionByRoutineIdErrors, GetExecutionDefinitionByRoutineIdResponses, GetRoutineByIdData, GetRoutineByIdErrors, GetRoutineByIdResponses, GetV1Data, GetV1Responses, QueryRoutinesData, QueryRoutinesErrors, QueryRoutinesResponses, RootEndpointData, RootEndpointResponses, UpdateRoutineData, UpdateRoutineErrors, UpdateRoutineResponses } from './types.gen';
+import type { CreateRoutineData, CreateRoutineErrors, CreateRoutineResponses, DeleteRoutineData, DeleteRoutineErrors, DeleteRoutineResponses, GetExecutionDefinitionByRoutineIdData, GetExecutionDefinitionByRoutineIdErrors, GetExecutionDefinitionByRoutineIdResponses, GetRoutineByIdData, GetRoutineByIdErrors, GetRoutineByIdResponses, GetV1Data, GetV1Responses, QueryRoutinesData, QueryRoutinesErrors, QueryRoutinesResponses, RootEndpointData, RootEndpointResponses, UpdateRoutineData, UpdateRoutineErrors, UpdateRoutineResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -19,6 +19,8 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
+ * API information
+ *
  * Returns information about API versions and available operations.
  */
 export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
@@ -28,9 +30,9 @@ export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * Returns information and available operations for version 1 of the API.
+ * API version information
  *
- *
+ * Returns available operations for a single version of the API.
  *
  * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
  *
@@ -43,9 +45,11 @@ export const getV1 = <ThrowOnError extends boolean = false>(options?: Options<Ge
 });
 
 /**
- * Query routines that trigger Jupyter notebook executions
+ * List routines
  *
- *
+ * Returns all routines the caller has permission to view. Results can be filtered by the
+ * enabled state or routine type using query parameters. Only routines in workspaces the
+ * caller has access to are returned.
  *
  * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
  *
@@ -58,15 +62,25 @@ export const queryRoutines = <ThrowOnError extends boolean = false>(options?: Op
 });
 
 /**
- * Creates a new routine that triggers a Jupyter notebook execution
+ * Create a routine
  *
+ * Creates a new routine in the specified workspace. If no workspace is provided, the caller's
+ * default workspace is used.
  *
+ * The routine type must be either "Scheduled" or "Triggered" and determines which fields are
+ * required. Scheduled routines must include a schedule with a start time and repeat interval.
+ * Triggered routines must include a trigger with a source, event types, and an optional filter.
+ *
+ * The execution field is required and must specify a notebook to run. Routines are created in a
+ * disabled state by default. Creating an enabled routine requires the enable privilege.
+ *
+ * Returns 409 Conflict if a routine with the same name already exists in the workspace.
  *
  * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
  *
  * @deprecated
  */
-export const createRoutines = <ThrowOnError extends boolean = false>(options?: Options<CreateRoutinesData, ThrowOnError>) => (options?.client ?? client).post<CreateRoutinesResponses, CreateRoutinesErrors, ThrowOnError>({
+export const createRoutine = <ThrowOnError extends boolean = false>(options?: Options<CreateRoutineData, ThrowOnError>) => (options?.client ?? client).post<CreateRoutineResponses, CreateRoutineErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niroutine/v1/routines',
     ...options,
@@ -77,9 +91,11 @@ export const createRoutines = <ThrowOnError extends boolean = false>(options?: O
 });
 
 /**
- * Delete a routine by id
+ * Delete a routine by ID
  *
- *
+ * Permanently deletes a routine. If the routine is currently enabled, it will no longer
+ * trigger notebook executions after deletion. Returns 404 if the routine does not exist
+ * or the caller does not have permission to access it.
  *
  * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
  *
@@ -92,9 +108,11 @@ export const deleteRoutine = <ThrowOnError extends boolean = false>(options: Opt
 });
 
 /**
- * Query routines by id that trigger Jupyter notebook executions
+ * Get a routine by ID
  *
- *
+ * Returns the full routine configuration including its trigger or schedule, execution
+ * definition, enabled state, and metadata. Returns 404 if the routine does not exist or
+ * the caller does not have permission to access it.
  *
  * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
  *
@@ -107,9 +125,18 @@ export const getRoutineById = <ThrowOnError extends boolean = false>(options: Op
 });
 
 /**
- * Updates a routine that triggers a Jupyter notebook execution
+ * Update a routine
  *
+ * Applies a partial update to an existing routine. Only fields included in the request body
+ * are modified; omitted fields remain unchanged.
  *
+ * Changing the enabled state requires specific privileges. Enabling a routine requires the
+ * enable privilege, and disabling requires the disable privilege. Updating other fields on an
+ * enabled routine requires both the update and disable/enable privileges because the routine
+ * is temporarily disabled during the update.
+ *
+ * Returns 403 if the caller lacks the required privilege for the requested state transition.
+ * Returns 409 Conflict if the updated name collides with an existing routine in the same workspace.
  *
  * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
  *
@@ -126,9 +153,11 @@ export const updateRoutine = <ThrowOnError extends boolean = false>(options: Opt
 });
 
 /**
- * Get execution definition by the routine id
+ * Get the execution definition for a routine
  *
- *
+ * Returns a subset of routine fields needed to execute the notebook: the routine ID, creator,
+ * workspace, and execution definition. This endpoint is used by the execution engine to
+ * determine which notebook to run without fetching the full routine configuration.
  *
  * **Deprecated:** Use the Routines v2 API (`/niroutine/v2`) instead. The v1 API only supports scheduled notebook execution and is considered legacy.
  *

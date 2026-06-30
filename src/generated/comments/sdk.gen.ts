@@ -19,10 +19,12 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * List comments.
+ * List comments
  *
- * List comments that belongs to the given `ResourceType` and `ResourceId`. The API will return the latest 1000
- * comments based on the `CreatedAt` field.
+ * Returns comments for the specified resource, identified by `ResourceType` and
+ * `ResourceId`. Results are ordered by creation time and capped at the 1000 most recent
+ * comments. Use this to display the comment history on a resource detail page or to retrieve
+ * comments for downstream processing.
  */
 export const listComments = <ThrowOnError extends boolean = false>(options: Options<ListCommentsData, ThrowOnError>) => (options.client ?? client).get<ListCommentsResponses, ListCommentsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -31,38 +33,19 @@ export const listComments = <ThrowOnError extends boolean = false>(options: Opti
 });
 
 /**
- * Creates comments.
+ * Create comments
  *
- * Creates one or more comments.
- * </br>
- * The required parameters are `resourceType`, `resourceId`, `message` and `workspace`.
- * </br>
- * `resourceType` contains the type of the resource for which comment is created.
- * All the resources will have a unique value. Since a service can hold
- * multiple resources, the resource type is represented in the format of `<service>:<resource>`.
- * To create a comment in a `Result` of `Test Insights`, the value of the `resourceType` must be
- * `testmonitor:Result`. This value will be evaluated with the user permissions for authorization.
- * </br><u>Supported ResourceTypes:</u>
- * </br><ol><li>`testmonitor:Result` - Test Monitor results</li><li>`niapm:Asset` - Assets</li><li>`nisysmgmt:System` - Systems</li><li>`workorder:workorder` - Work Orders</li><li>`workitem:workitem` - Work Items</li><li>`DataSpace` - Data Spaces</li></ol>
- * </br>
- * `resourceId` contains the id of the resource for which the comment is created.
- * </br>
- * `message` contains the comment message in the markdown format.
- * </br>
- * `workspace` contains the workspace id under which the comment gets created. This id is expected to be
- * the workspace id of the resource. With this configuration, all the comments will be created under the
- * same workspace of the resource.
- * </br>
- * `resourceName` contains the name of the resource for which the comment is created. ResourceName
- * will be added in the notification email to the mentioned users.
- * </br>
- * `resourceTypeName` contains the user-friendly name of the type of the resource for which the comment is created.
- * ResourceTypeName will be added in the notification email to the mentioned users.
- * </br>
- * `commentUrl` contains the relative URL in the application to which the user will be navigated to, from the email.
- * CommentUrl will be added in the notification email to the mentioned users.
- * </br>
- * `mentionedUsers` contains the list of ids of the users mentioned in the comment.
+ * Creates one or more comments on a resource. The `resourceType` field identifies the kind of
+ * resource being commented on and controls authorization. It follows the format
+ * `service:resource` for most types. Supported values are `testmonitor:Result` for test
+ * results, `niapm:Asset` for assets, `nisysmgmt:System` for systems, `workitem:workitem`
+ * for work items, and `DataSpace` for data spaces.
+ * The `workspace` field must match the workspace of the target resource.
+ * When users are mentioned in the `message` using the at-sign syntax,
+ * they receive an email notification. Supply `resourceName`, `resourceTypeName`, and
+ * `commentUrl` to include context in those notification emails. When one or more comments in
+ * the batch fail to be created, the response returns 200 and includes the failed requests along
+ * with error details in the `error.innerErrors` array.
  */
 export const createComments = <ThrowOnError extends boolean = false>(options?: Options<CreateCommentsData, ThrowOnError>) => (options?.client ?? client).post<CreateCommentsResponses, CreateCommentsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -75,10 +58,12 @@ export const createComments = <ThrowOnError extends boolean = false>(options?: O
 });
 
 /**
- * Update comment.
+ * Update a comment
  *
- * Updates the comment identified by the id. The user can update the comment message only for their own comments.
- * The user can add or remove a user mention while updating the comment.
+ * Updates the message of an existing comment. Users can only update comments they created.
+ * The update may also add or remove user mentions; mentioned users receive an email notification
+ * when added. Supply `resourceName`, `resourceTypeName`, and `commentUrl` to
+ * include context in those notification emails.
  */
 export const updateComment = <ThrowOnError extends boolean = false>(options: Options<UpdateCommentData, ThrowOnError>) => (options.client ?? client).patch<UpdateCommentResponses, UpdateCommentErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -91,11 +76,14 @@ export const updateComment = <ThrowOnError extends boolean = false>(options: Opt
 });
 
 /**
- * Deletes comments.
+ * Delete comments
  *
- * Deletes one or more comments identified by their ids. Users can typically delete their own comments.
- * Users must have elevated permissions in order to delete others' comments. This API supports deletion of at
- * most 1000 comments per request.
+ * Deletes one or more comments in a single batch request. Users can delete their own comments.
+ * Deleting comments created by other users requires elevated permissions. This operation supports
+ * a maximum of 1000 comment ids per request. Returns 204 No Content when all comments are
+ * deleted successfully. When one or more comments fail to delete, returns 200 with a partial
+ * success body listing the successfully deleted and failed ids, with details for each failure
+ * in the `error.innerErrors` array.
  */
 export const deleteComments = <ThrowOnError extends boolean = false>(options?: Options<DeleteCommentsData, ThrowOnError>) => (options?.client ?? client).post<DeleteCommentsResponses, DeleteCommentsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -108,9 +96,9 @@ export const deleteComments = <ThrowOnError extends boolean = false>(options?: O
 });
 
 /**
- * API Information.
+ * API information
  *
- * Returns information about API and available operations.
+ * Returns information about API versions and available operations.
  */
 export const getApiInfo = <ThrowOnError extends boolean = false>(options?: Options<GetApiInfoData, ThrowOnError>) => (options?.client ?? client).get<GetApiInfoResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -119,7 +107,7 @@ export const getApiInfo = <ThrowOnError extends boolean = false>(options?: Optio
 });
 
 /**
- * Information about API versions and available operations of version V1 of APIs.
+ * API version information
  *
  * Returns available operations for version V1 of the API.
  */

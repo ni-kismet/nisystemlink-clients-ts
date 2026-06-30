@@ -801,6 +801,8 @@ export type StringDecimatedDataQueryRequest = {
      * The names of columns to include in the response.
      * The response will include the columns in the same order specified in this parameter.
      * All columns are included in the order specified at table creation if this property is excluded.
+     * When `distribution` is `EQUAL_WIDTH`, a configurable maximum number of columns applies
+     * (default: 20).
      */
     columns?: Array<string> | null;
     /**
@@ -834,10 +836,13 @@ export type StringDecimationOptions = {
      * A list of columns to decimate by.
      * This property is only needed when the specified `method` is `MAX_MIN` or `ENTRY_EXIT`.
      * Only numeric columns are supported. i.e. `INT32`, `INT64`, `FLOAT32`, `FLOAT64` and `TIMESTAMP`.
+     * When `distribution` is `EQUAL_WIDTH`, a configurable maximum number of columns applies
+     * (default: 10).
      */
     yColumns?: Array<string> | null;
     /**
-     * Number of intervals to use for decimation.
+     * Number of intervals to use for decimation. When `distribution` is `EQUAL_WIDTH`, a
+     * configurable maximum applies (default: 5000).
      */
     intervals?: number;
     /**

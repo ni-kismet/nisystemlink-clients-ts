@@ -19,7 +19,10 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Get all address groups
+ * List address groups
+ *
+ * Returns all address groups for the current organization. Each address group includes the IDs
+ * of notification strategies that reference it.
  */
 export const getAddressGroups = <ThrowOnError extends boolean = false>(options?: Options<GetAddressGroupsData, ThrowOnError>) => (options?.client ?? client).get<GetAddressGroupsResponses, GetAddressGroupsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -29,6 +32,10 @@ export const getAddressGroups = <ThrowOnError extends boolean = false>(options?:
 
 /**
  * Create an address group
+ *
+ * Creates a new address group that defines a set of recipients for a given interpreting service.
+ * The interpreting service name and fields are required. The fields dictionary keys depend on the
+ * interpreting service (e.g., toAddresses, ccAddresses, bccAddresses for smtp).
  */
 export const createAddressGroup = <ThrowOnError extends boolean = false>(options?: Options<CreateAddressGroupData, ThrowOnError>) => (options?.client ?? client).post<CreateAddressGroupResponses, CreateAddressGroupErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -41,7 +48,10 @@ export const createAddressGroup = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Delete an address group by its ID
+ * Delete an address group
+ *
+ * Permanently deletes the specified address group. If the address group is referenced by any
+ * notification strategies, those references will become invalid.
  */
 export const deleteAddressGroup = <ThrowOnError extends boolean = false>(options: Options<DeleteAddressGroupData, ThrowOnError>) => (options.client ?? client).delete<DeleteAddressGroupResponses, DeleteAddressGroupErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -50,7 +60,10 @@ export const deleteAddressGroup = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Get an address group by its ID
+ * Get an address group
+ *
+ * Returns the full address group including its fields and the IDs of any notification strategies
+ * that reference it.
  */
 export const getAddressGroup = <ThrowOnError extends boolean = false>(options: Options<GetAddressGroupData, ThrowOnError>) => (options.client ?? client).get<GetAddressGroupResponses, GetAddressGroupErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -59,7 +72,10 @@ export const getAddressGroup = <ThrowOnError extends boolean = false>(options: O
 });
 
 /**
- * Update an address group by its ID
+ * Update an address group
+ *
+ * Partially updates an address group. Only the fields provided in the request body are updated;
+ * omitted fields remain unchanged.
  */
 export const updateAddressGroup = <ThrowOnError extends boolean = false>(options: Options<UpdateAddressGroupData, ThrowOnError>) => (options.client ?? client).patch<UpdateAddressGroupResponses, UpdateAddressGroupErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -72,7 +88,10 @@ export const updateAddressGroup = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Get all message templates
+ * List message templates
+ *
+ * Returns all message templates for the current organization. Each message template includes
+ * the IDs of notification strategies that reference it.
  */
 export const getMessageTemplates = <ThrowOnError extends boolean = false>(options?: Options<GetMessageTemplatesData, ThrowOnError>) => (options?.client ?? client).get<GetMessageTemplatesResponses, GetMessageTemplatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -82,6 +101,11 @@ export const getMessageTemplates = <ThrowOnError extends boolean = false>(option
 
 /**
  * Create a message template
+ *
+ * Creates a new message template for a given interpreting service. The fields dictionary keys
+ * depend on the interpreting service (e.g., subjectTemplate and bodyTemplate for smtp).
+ * Template fields may contain substitution placeholders that are replaced when a notification
+ * strategy is applied.
  */
 export const createMessageTemplate = <ThrowOnError extends boolean = false>(options?: Options<CreateMessageTemplateData, ThrowOnError>) => (options?.client ?? client).post<CreateMessageTemplateResponses, CreateMessageTemplateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -94,7 +118,10 @@ export const createMessageTemplate = <ThrowOnError extends boolean = false>(opti
 });
 
 /**
- * Delete a message template by its ID
+ * Delete a message template
+ *
+ * Permanently deletes the specified message template. If the message template is referenced by
+ * any notification strategies, those references will become invalid.
  */
 export const deleteMessageTemplate = <ThrowOnError extends boolean = false>(options: Options<DeleteMessageTemplateData, ThrowOnError>) => (options.client ?? client).delete<DeleteMessageTemplateResponses, DeleteMessageTemplateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -103,7 +130,10 @@ export const deleteMessageTemplate = <ThrowOnError extends boolean = false>(opti
 });
 
 /**
- * Get a message template by its ID
+ * Get a message template
+ *
+ * Returns the full message template including its fields and the IDs of any notification
+ * strategies that reference it.
  */
 export const getMessageTemplate = <ThrowOnError extends boolean = false>(options: Options<GetMessageTemplateData, ThrowOnError>) => (options.client ?? client).get<GetMessageTemplateResponses, GetMessageTemplateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -112,7 +142,10 @@ export const getMessageTemplate = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Update a message template by its ID
+ * Update a message template
+ *
+ * Partially updates a message template. Only the fields provided in the request body are
+ * updated; omitted fields remain unchanged.
  */
 export const updateMessageTemplate = <ThrowOnError extends boolean = false>(options: Options<UpdateMessageTemplateData, ThrowOnError>) => (options.client ?? client).patch<UpdateMessageTemplateResponses, UpdateMessageTemplateErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -125,7 +158,11 @@ export const updateMessageTemplate = <ThrowOnError extends boolean = false>(opti
 });
 
 /**
- * Apply a notification strategy by its ID
+ * Apply a notification strategy
+ *
+ * Triggers the notification strategy, sending notifications to all configured address groups
+ * using the associated message templates. Substitution fields in the request body are used to
+ * replace placeholders in message templates before sending.
  */
 export const applyNotificationStrategy = <ThrowOnError extends boolean = false>(options: Options<ApplyNotificationStrategyData, ThrowOnError>) => (options.client ?? client).post<ApplyNotificationStrategyResponses, ApplyNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -139,6 +176,10 @@ export const applyNotificationStrategy = <ThrowOnError extends boolean = false>(
 
 /**
  * Apply a dynamic notification strategy
+ *
+ * Sends notifications using an inline notification strategy definition without persisting it.
+ * The request body contains the full strategy configuration including address groups and
+ * message templates (by ID or inline), along with any template substitution fields.
  */
 export const applyDynamicNotificationStrategy = <ThrowOnError extends boolean = false>(options?: Options<ApplyDynamicNotificationStrategyData, ThrowOnError>) => (options?.client ?? client).post<ApplyDynamicNotificationStrategyResponses, ApplyDynamicNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -151,7 +192,11 @@ export const applyDynamicNotificationStrategy = <ThrowOnError extends boolean = 
 });
 
 /**
- * Get all notification strategies
+ * List notification strategies
+ *
+ * Returns all notification strategies for the current organization. When
+ * ExpandNotificationConfigurations is true, the full address group and message template objects
+ * are included inline; otherwise only their IDs are returned.
  */
 export const getNotificationStrategies = <ThrowOnError extends boolean = false>(options?: Options<GetNotificationStrategiesData, ThrowOnError>) => (options?.client ?? client).get<GetNotificationStrategiesResponses, GetNotificationStrategiesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -161,6 +206,11 @@ export const getNotificationStrategies = <ThrowOnError extends boolean = false>(
 
 /**
  * Create a notification strategy
+ *
+ * Creates a new notification strategy that pairs one or more address groups with message
+ * templates. Each notification configuration within the strategy specifies an address group ID
+ * and a message template ID. The referenced address groups and message templates must already
+ * exist.
  */
 export const createNotificationStrategy = <ThrowOnError extends boolean = false>(options?: Options<CreateNotificationStrategyData, ThrowOnError>) => (options?.client ?? client).post<CreateNotificationStrategyResponses, CreateNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -173,7 +223,10 @@ export const createNotificationStrategy = <ThrowOnError extends boolean = false>
 });
 
 /**
- * Delete a notification strategy by its ID
+ * Delete a notification strategy
+ *
+ * Permanently deletes the specified notification strategy. The address groups and message
+ * templates referenced by this strategy are not deleted.
  */
 export const deleteNotificationStrategy = <ThrowOnError extends boolean = false>(options: Options<DeleteNotificationStrategyData, ThrowOnError>) => (options.client ?? client).delete<DeleteNotificationStrategyResponses, DeleteNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -182,7 +235,11 @@ export const deleteNotificationStrategy = <ThrowOnError extends boolean = false>
 });
 
 /**
- * Get a notification strategy by its ID
+ * Get a notification strategy
+ *
+ * Returns the notification strategy. When ExpandNotificationConfigurations is true, the full
+ * address group and message template objects are included inline; otherwise only their IDs are
+ * returned.
  */
 export const getNotificationStrategy = <ThrowOnError extends boolean = false>(options: Options<GetNotificationStrategyData, ThrowOnError>) => (options.client ?? client).get<GetNotificationStrategyResponses, GetNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -191,7 +248,11 @@ export const getNotificationStrategy = <ThrowOnError extends boolean = false>(op
 });
 
 /**
- * Update a notification strategy by its ID
+ * Update a notification strategy
+ *
+ * Partially updates a notification strategy. Only the fields provided in the request body are
+ * updated; omitted fields remain unchanged. The notification configurations array, if provided,
+ * replaces the existing configurations entirely.
  */
 export const updateNotificationStrategy = <ThrowOnError extends boolean = false>(options: Options<UpdateNotificationStrategyData, ThrowOnError>) => (options.client ?? client).patch<UpdateNotificationStrategyResponses, UpdateNotificationStrategyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -204,7 +265,9 @@ export const updateNotificationStrategy = <ThrowOnError extends boolean = false>
 });
 
 /**
- * Returns the root `ninotification` operations.
+ * API information
+ *
+ * Returns information about API versions and available operations.
  */
 export const get = <ThrowOnError extends boolean = false>(options?: Options<GetData, ThrowOnError>) => (options?.client ?? client).get<GetResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -213,7 +276,9 @@ export const get = <ThrowOnError extends boolean = false>(options?: Options<GetD
 });
 
 /**
- * Returns the `V1` operations.
+ * API version information
+ *
+ * Returns available operations for a single version of the API.
  */
 export const v1Endpoint = <ThrowOnError extends boolean = false>(options?: Options<V1EndpointData, ThrowOnError>) => (options?.client ?? client).get<V1EndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

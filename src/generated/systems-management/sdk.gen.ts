@@ -20,6 +20,13 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 
 /**
  * Get jobs
+ *
+ * Returns jobs matching the specified criteria. Use the query parameters to filter
+ * by system, job ID, state, or function name. Supports paging with skip and take.
+ *
+ * Jobs represent remote operations (refresh, restart, password change, software
+ * deployment, etc.) executed on managed systems. Jobs queued for offline systems
+ * remain in-queue until the system reconnects.
  */
 export const getJobs = <ThrowOnError extends boolean = false>(options?: Options<GetJobsData, ThrowOnError>) => (options?.client ?? client).get<GetJobsResponses, GetJobsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -29,6 +36,15 @@ export const getJobs = <ThrowOnError extends boolean = false>(options?: Options<
 
 /**
  * Create job
+ *
+ * Creates a new job that executes a Salt function on one or more target systems.
+ * The job is queued for execution and its progress can be monitored using the
+ * query jobs endpoint.
+ *
+ * Jobs can target connected or disconnected systems. When a target system is
+ * offline, the job remains queued and executes automatically when the system
+ * reconnects. Common operations include system refresh, password changes,
+ * system restarts, software installation, and configuration updates.
  */
 export const createJob = <ThrowOnError extends boolean = false>(options?: Options<CreateJobData, ThrowOnError>) => (options?.client ?? client).post<CreateJobResponses, CreateJobErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -42,6 +58,8 @@ export const createJob = <ThrowOnError extends boolean = false>(options?: Option
 
 /**
  * Get jobs summary
+ *
+ * Returns aggregate counts of active, failed, and succeeded jobs.
  */
 export const getJobsSummary = <ThrowOnError extends boolean = false>(options?: Options<GetJobsSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetJobsSummaryResponses, GetJobsSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -51,6 +69,9 @@ export const getJobsSummary = <ThrowOnError extends boolean = false>(options?: O
 
 /**
  * Query jobs
+ *
+ * Returns jobs matching the specified filter with support for projection,
+ * sorting, and paging.
  */
 export const queryJobs = <ThrowOnError extends boolean = false>(options?: Options<QueryJobsData, ThrowOnError>) => (options?.client ?? client).post<QueryJobsResponses, QueryJobsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -64,6 +85,14 @@ export const queryJobs = <ThrowOnError extends boolean = false>(options?: Option
 
 /**
  * Cancel jobs
+ *
+ * Cancels one or more running or queued jobs. Each request identifies a job by
+ * its ID and the target system. Returns 204 on full success or error details if
+ * some cancellations fail.
+ *
+ * Use this to abort jobs that are no longer needed. For example, if a system was
+ * locked to prevent disrupting a running test, or if a queued offline job is no
+ * longer relevant.
  */
 export const cancelJobs = <ThrowOnError extends boolean = false>(options?: Options<CancelJobsData, ThrowOnError>) => (options?.client ?? client).post<CancelJobsResponses, CancelJobsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -76,25 +105,15 @@ export const cancelJobs = <ThrowOnError extends boolean = false>(options?: Optio
 });
 
 /**
- * API information
- */
-export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
-    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
-    url: '/nisysmgmt',
-    ...options
-});
-
-/**
- * API version information
- */
-export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Data, ThrowOnError>) => (options?.client ?? client).get<V1Responses, unknown, ThrowOnError>({
-    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
-    url: '/nisysmgmt/v1',
-    ...options
-});
-
-/**
- * Advanced system search.
+ * Advanced system search
+ *
+ * Searches for systems using Lucene-based query syntax with support for
+ * full-text matching, projection, sorting, and paging. This endpoint provides
+ * richer search capabilities than the standard query-systems endpoint.
+ *
+ * Use this to locate systems by partial hostname, installed package name,
+ * keyword, or any other indexed field. Ideal for building search-as-you-type
+ * experiences in system management dashboards.
  */
 export const searchSystems = <ThrowOnError extends boolean = false>(options?: Options<SearchSystemsData, ThrowOnError>) => (options?.client ?? client).post<SearchSystemsResponses, SearchSystemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -108,6 +127,15 @@ export const searchSystems = <ThrowOnError extends boolean = false>(options?: Op
 
 /**
  * Query systems
+ *
+ * Returns systems matching the specified filter, with support for projection,
+ * sorting, and paging. If no filter is provided, returns all systems the caller
+ * has access to.
+ *
+ * Each system includes connection state, hardware grains (OS, hostname, CPU
+ * architecture), installed software packages, configured feeds, custom keywords,
+ * and properties. Use this endpoint to build system inventory views, monitor
+ * fleet health, or locate systems by metadata.
  */
 export const querySystems = <ThrowOnError extends boolean = false>(options?: Options<QuerySystemsData, ThrowOnError>) => (options?.client ?? client).post<QuerySystemsResponses, QuerySystemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -121,6 +149,13 @@ export const querySystems = <ThrowOnError extends boolean = false>(options?: Opt
 
 /**
  * Generate systems report
+ *
+ * Generates a CSV report of hardware or software information for systems matching
+ * the specified filter. The report is returned as a downloadable file.
+ *
+ * Use the hardware report to audit connected assets and peripherals. Use the
+ * software report to inventory installed packages and their versions across your
+ * managed systems for compliance or update planning.
  */
 export const generateSystemsReport = <ThrowOnError extends boolean = false>(options?: Options<GenerateSystemsReportData, ThrowOnError>) => (options?.client ?? client).post<GenerateSystemsReportResponses, GenerateSystemsReportErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -134,6 +169,8 @@ export const generateSystemsReport = <ThrowOnError extends boolean = false>(opti
 
 /**
  * Get pending systems summary
+ *
+ * Returns the count of systems awaiting approval (pending key acceptance).
  */
 export const getPendingSystemsSummary = <ThrowOnError extends boolean = false>(options?: Options<GetPendingSystemsSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetPendingSystemsSummaryResponses, GetPendingSystemsSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -143,6 +180,8 @@ export const getPendingSystemsSummary = <ThrowOnError extends boolean = false>(o
 
 /**
  * Get systems summary
+ *
+ * Returns aggregate counts of connected, disconnected, and virtual systems.
  */
 export const getSystemsSummary = <ThrowOnError extends boolean = false>(options?: Options<GetSystemsSummaryData, ThrowOnError>) => (options?.client ?? client).get<GetSystemsSummaryResponses, GetSystemsSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -152,6 +191,13 @@ export const getSystemsSummary = <ThrowOnError extends boolean = false>(options?
 
 /**
  * Get systems keys for all systems
+ *
+ * Returns the acceptance state of all system keys. Use this to see which systems
+ * are pending approval, accepted, or rejected.
+ *
+ * When a new client connects, its key appears as pending. An
+ * administrator must accept the key before the system can be managed. Rejected
+ * or deleted keys prevent the system from connecting.
  */
 export const getAllSystemsKeys = <ThrowOnError extends boolean = false>(options?: Options<GetAllSystemsKeysData, ThrowOnError>) => (options?.client ?? client).get<GetAllSystemsKeysResponses, GetAllSystemsKeysErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -161,6 +207,8 @@ export const getAllSystemsKeys = <ThrowOnError extends boolean = false>(options?
 
 /**
  * Get keys for a set of systems
+ *
+ * Returns the acceptance state of system keys for the specified system IDs.
  */
 export const getSystemsKeys = <ThrowOnError extends boolean = false>(options?: Options<GetSystemsKeysData, ThrowOnError>) => (options?.client ?? client).post<GetSystemsKeysResponses, GetSystemsKeysErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -174,6 +222,13 @@ export const getSystemsKeys = <ThrowOnError extends boolean = false>(options?: O
 
 /**
  * Manage systems keys
+ *
+ * Accepts, rejects, or deletes system keys. Use this to approve pending systems
+ * or remove systems from the server.
+ *
+ * Accepting a key adds the system to the specified workspace, making it a managed
+ * client. All data the system produces is stored in that workspace. Rejecting or
+ * deleting a key disconnects the system.
  */
 export const manageSystemsKeys = <ThrowOnError extends boolean = false>(options?: Options<ManageSystemsKeysData, ThrowOnError>) => (options?.client ?? client).post<ManageSystemsKeysResponses, ManageSystemsKeysErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -187,6 +242,12 @@ export const manageSystemsKeys = <ThrowOnError extends boolean = false>(options?
 
 /**
  * Create virtual system
+ *
+ * Registers a new virtual system that can report data to the server without
+ * a physical Salt minion connection. Returns the system's minion ID.
+ *
+ * Virtual systems are useful for cloud-connected devices or edge gateways that
+ * publish telemetry data via the API without running the full client stack.
  */
 export const createVirtualSystem = <ThrowOnError extends boolean = false>(options?: Options<CreateVirtualSystemData, ThrowOnError>) => (options?.client ?? client).post<CreateVirtualSystemResponses, CreateVirtualSystemErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -200,6 +261,9 @@ export const createVirtualSystem = <ThrowOnError extends boolean = false>(option
 
 /**
  * Generate API key for a virtual system
+ *
+ * Generates a permanent API key for an existing virtual system. The key is used
+ * by the client to authenticate data uploads from the virtual system.
  */
 export const generateVirtualSystemApiKey = <ThrowOnError extends boolean = false>(options?: Options<GenerateVirtualSystemApiKeyData, ThrowOnError>) => (options?.client ?? client).post<GenerateVirtualSystemApiKeyResponses, GenerateVirtualSystemApiKeyErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -213,6 +277,14 @@ export const generateVirtualSystemApiKey = <ThrowOnError extends boolean = false
 
 /**
  * Get systems
+ *
+ * Returns system metadata. Optionally filter by a single system ID. Returns the
+ * full system object including connection state, grains, packages, feeds, keywords,
+ * and custom properties.
+ *
+ * Systems report their hardware grains (OS, hostname, CPU architecture, device
+ * class), connection heartbeats, installed NI packages with versions, configured
+ * package feeds, and operator-assigned keywords and properties.
  */
 export const getSystems = <ThrowOnError extends boolean = false>(options?: Options<GetSystemsData, ThrowOnError>) => (options?.client ?? client).get<GetSystemsResponses, GetSystemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -222,6 +294,15 @@ export const getSystems = <ThrowOnError extends boolean = false>(options?: Optio
 
 /**
  * Remove systems
+ *
+ * Unregisters one or more systems from the server. Optionally use force to remove
+ * systems even if they are currently connected. Returns the IDs of successfully
+ * removed systems and any failures.
+ *
+ * Removed systems lose their managed status and must re-register and be
+ * re-approved through the key acceptance workflow to reconnect. Any custom
+ * properties, keywords, and metadata associated with the system will be
+ * permanently lost.
  */
 export const removeSystems = <ThrowOnError extends boolean = false>(options?: Options<RemoveSystemsData, ThrowOnError>) => (options?.client ?? client).post<RemoveSystemsResponses, RemoveSystemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -235,6 +316,14 @@ export const removeSystems = <ThrowOnError extends boolean = false>(options?: Op
 
 /**
  * Update systems metadata
+ *
+ * Updates metadata (alias, workspace, keywords, properties, location) for one or
+ * more systems in a single request. Returns errors for any systems that could not
+ * be updated.
+ *
+ * Use this to assign human-readable aliases, organize systems into workspaces,
+ * apply keywords and key-value properties for filtering, or assign physical
+ * locations for asset tracking.
  */
 export const updateSystemsMetadata = <ThrowOnError extends boolean = false>(options?: Options<UpdateSystemsMetadataData, ThrowOnError>) => (options?.client ?? client).post<UpdateSystemsMetadataResponses, UpdateSystemsMetadataErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -248,6 +337,10 @@ export const updateSystemsMetadata = <ThrowOnError extends boolean = false>(opti
 
 /**
  * Update system metadata
+ *
+ * Partially updates the metadata of a single managed system identified by its ID.
+ * Only the fields included in the request body are changed; other fields remain
+ * unchanged.
  */
 export const updateSystemMetadata = <ThrowOnError extends boolean = false>(options: Options<UpdateSystemMetadataData, ThrowOnError>) => (options.client ?? client).patch<UpdateSystemMetadataResponses, UpdateSystemMetadataErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -257,4 +350,26 @@ export const updateSystemMetadata = <ThrowOnError extends boolean = false>(optio
         'Content-Type': 'application/json',
         ...options.headers
     }
+});
+
+/**
+ * API information
+ *
+ * Returns information about API versions and available operations.
+ */
+export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
+    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
+    url: '/nisysmgmt',
+    ...options
+});
+
+/**
+ * API version information
+ *
+ * Returns available operations for version 1 of the API.
+ */
+export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Data, ThrowOnError>) => (options?.client ?? client).get<V1Responses, unknown, ThrowOnError>({
+    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
+    url: '/nisysmgmt/v1',
+    ...options
 });

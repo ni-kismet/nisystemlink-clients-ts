@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { AssetSummaryData, AssetSummaryErrors, AssetSummaryResponses, CalculateCalibrationForecastData, CalculateCalibrationForecastErrors, CalculateCalibrationForecastResponses, CreateAssetsData, CreateAssetsErrors, CreateAssetsResponses, DeleteAssetsData, DeleteAssetsErrors, DeleteAssetsResponses, DeleteCalibrationHistoryData, DeleteCalibrationHistoryErrors, DeleteCalibrationHistoryResponses, EndUtilizationData, EndUtilizationErrors, EndUtilizationResponses, ExportAssetsData, ExportAssetsErrors, ExportAssetsResponses, ExportCalibrationHistoryData, ExportCalibrationHistoryErrors, ExportCalibrationHistoryResponses, ExportMaterializedAssetsData, ExportMaterializedAssetsErrors, ExportMaterializedAssetsResponses, GetAssetCalibrationHistoryData, GetAssetCalibrationHistoryErrors, GetAssetCalibrationHistoryResponses, GetAssetData, GetAssetErrors, GetAssetResponses, GetAssetsData, GetAssetsErrors, GetAssetsResponses, LinkFilesData, LinkFilesErrors, LinkFilesResponses, MoveAssetsLocationData, MoveAssetsLocationDryRunData, MoveAssetsLocationDryRunErrors, MoveAssetsLocationDryRunResponses, MoveAssetsLocationErrors, MoveAssetsLocationResponses, PostAssetQueryConnectionHistoryData, PostAssetQueryConnectionHistoryErrors, PostAssetQueryConnectionHistoryResponses, QueryAssetsData, QueryAssetsErrors, QueryAssetsResponses, QueryAssetLocationHistoryData, QueryAssetLocationHistoryErrors, QueryAssetLocationHistoryResponses, QueryAssetUtilizationHistoryData, QueryAssetUtilizationHistoryErrors, QueryAssetUtilizationHistoryResponses, QueryLocationMovesData, QueryLocationMovesErrors, QueryLocationMovesResponses, ReceiveFromCalibrationData, ReceiveFromCalibrationDryRunData, ReceiveFromCalibrationDryRunErrors, ReceiveFromCalibrationDryRunResponses, ReceiveFromCalibrationErrors, ReceiveFromCalibrationResponses, RootEndpointData, RootEndpointResponses, SearchAssetsData, SearchAssetsErrors, SearchAssetsResponses, SendForCalibrationData, SendForCalibrationDryRunData, SendForCalibrationDryRunErrors, SendForCalibrationDryRunResponses, SendForCalibrationErrors, SendForCalibrationResponses, StartUtilizationData, StartUtilizationErrors, StartUtilizationResponses, UnlinkFileFromAssetData, UnlinkFileFromAssetErrors, UnlinkFileFromAssetResponses, UpdateAssetsData, UpdateAssetsErrors, UpdateAssetsResponses, UpdateMetadataData, UpdateMetadataErrors, UpdateMetadataResponses, UtilizationHeartbeatData, UtilizationHeartbeatErrors, UtilizationHeartbeatResponses, V1Data, V1Responses } from './types.gen';
+import type { AssetSummaryData, AssetSummaryErrors, AssetSummaryResponses, CalculateCalibrationForecastData, CalculateCalibrationForecastErrors, CalculateCalibrationForecastResponses, CreateAssetsData, CreateAssetsErrors, CreateAssetsResponses, DeleteAssetsData, DeleteAssetsErrors, DeleteAssetsResponses, DeleteCalibrationHistoryData, DeleteCalibrationHistoryErrors, DeleteCalibrationHistoryResponses, EndUtilizationData, EndUtilizationErrors, EndUtilizationResponses, ExportAssetsData, ExportAssetsErrors, ExportAssetsResponses, ExportCalibrationHistoryData, ExportCalibrationHistoryErrors, ExportCalibrationHistoryResponses, ExportMaterializedAssetsData, ExportMaterializedAssetsErrors, ExportMaterializedAssetsResponses, GetAssetCalibrationHistoryData, GetAssetCalibrationHistoryErrors, GetAssetCalibrationHistoryResponses, GetAssetData, GetAssetErrors, GetAssetResponses, GetAssetsData, GetAssetsErrors, GetAssetsResponses, LinkFilesData, LinkFilesErrors, LinkFilesResponses, MoveAssetsLocationData, MoveAssetsLocationDryRunData, MoveAssetsLocationDryRunErrors, MoveAssetsLocationDryRunResponses, MoveAssetsLocationErrors, MoveAssetsLocationResponses, QueryAssetLocationHistoryData, QueryAssetLocationHistoryErrors, QueryAssetLocationHistoryResponses, QueryAssetsData, QueryAssetsErrors, QueryAssetsResponses, QueryAssetUtilizationHistoryData, QueryAssetUtilizationHistoryErrors, QueryAssetUtilizationHistoryResponses, QueryLocationMovesData, QueryLocationMovesErrors, QueryLocationMovesResponses, ReceiveFromCalibrationData, ReceiveFromCalibrationDryRunData, ReceiveFromCalibrationDryRunErrors, ReceiveFromCalibrationDryRunResponses, ReceiveFromCalibrationErrors, ReceiveFromCalibrationResponses, RootEndpointData, RootEndpointErrors, RootEndpointResponses, SearchAssetsData, SearchAssetsErrors, SearchAssetsResponses, SendForCalibrationData, SendForCalibrationDryRunData, SendForCalibrationDryRunErrors, SendForCalibrationDryRunResponses, SendForCalibrationErrors, SendForCalibrationResponses, StartUtilizationData, StartUtilizationErrors, StartUtilizationResponses, UnlinkFileFromAssetData, UnlinkFileFromAssetErrors, UnlinkFileFromAssetResponses, UpdateAssetsData, UpdateAssetsErrors, UpdateAssetsResponses, UpdateMetadataData, UpdateMetadataErrors, UpdateMetadataResponses, UtilizationHeartbeatData, UtilizationHeartbeatErrors, UtilizationHeartbeatResponses, V1Data, V1Errors, V1Responses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -20,6 +20,14 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 
 /**
  * Get assets
+ *
+ * Returns a page of assets for the workspaces the caller can access. Use the query string to
+ * control paging with `Skip` and `Take`, to request a total count with `ReturnCount`, and to limit
+ * the results to calibratable assets with `CalibratableOnly`. Set `ResponseFormat` to JSON to
+ * receive the assets inline, or to CSV to generate a report that is either returned as a
+ * downloadable file or uploaded to the file service depending on the `Destination` value. This
+ * route is best suited to simple listing scenarios; use query-assets when you need filtering,
+ * ordering, or projection.
  */
 export const getAssets = <ThrowOnError extends boolean = false>(options?: Options<GetAssetsData, ThrowOnError>) => (options?.client ?? client).get<GetAssetsResponses, GetAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -29,6 +37,13 @@ export const getAssets = <ThrowOnError extends boolean = false>(options?: Option
 
 /**
  * Create assets
+ *
+ * Creates one or more assets in a single request, each with its identifying information and
+ * optional metadata. Use this route to register hardware from NI or another vendor that the
+ * service has not discovered automatically. The operation is processed per asset and returns a
+ * partial success response that lists the created assets alongside the assets that failed, grouped
+ * by reason such as an asset that already exists, an invalid identifier, invalid properties, or
+ * insufficient authorization.
  */
 export const createAssets = <ThrowOnError extends boolean = false>(options?: Options<CreateAssetsData, ThrowOnError>) => (options?.client ?? client).post<CreateAssetsResponses, CreateAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -42,6 +57,10 @@ export const createAssets = <ThrowOnError extends boolean = false>(options?: Opt
 
 /**
  * Get an asset summary
+ *
+ * Returns aggregate counts of the assets the caller can access, such as the total number of
+ * assets. This route takes no parameters and is intended for dashboards and overview displays
+ * that need a quick summary rather than the individual asset records.
  */
 export const assetSummary = <ThrowOnError extends boolean = false>(options?: Options<AssetSummaryData, ThrowOnError>) => (options?.client ?? client).get<AssetSummaryResponses, AssetSummaryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -51,6 +70,14 @@ export const assetSummary = <ThrowOnError extends boolean = false>(options?: Opt
 
 /**
  * Query assets
+ *
+ * Returns assets that match the criteria in the request body. Use `filter` to express a query,
+ * `skip` and `take` for paging, `orderBy` and `descending` for sorting, and `projection` to limit
+ * the returned fields. Set `returnCount` to include the total number of matching assets. When
+ * `destination` is set the route produces a CSV report instead of an inline response, either as a
+ * downloadable file or uploaded to the file service; ordering is not applied to report requests.
+ * The deprecated fields `ids` and `calibratableOnly` are only applicable when generating CSV
+ * reports.
  */
 export const queryAssets = <ThrowOnError extends boolean = false>(options?: Options<QueryAssetsData, ThrowOnError>) => (options?.client ?? client).post<QueryAssetsResponses, QueryAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -64,6 +91,11 @@ export const queryAssets = <ThrowOnError extends boolean = false>(options?: Opti
 
 /**
  * Export an assets report
+ *
+ * Generates a CSV report of the assets that match the `filter` in the request body. When
+ * `destination` is the file service the report is uploaded and its file identifier is returned;
+ * otherwise the report is returned directly as a downloadable CSV file. Use `fileIngestionWorkspace`
+ * to control which workspace the uploaded file is stored in.
  */
 export const exportAssets = <ThrowOnError extends boolean = false>(options?: Options<ExportAssetsData, ThrowOnError>) => (options?.client ?? client).post<ExportAssetsResponses, ExportAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -77,6 +109,11 @@ export const exportAssets = <ThrowOnError extends boolean = false>(options?: Opt
 
 /**
  * Update asset metadata
+ *
+ * Updates the `keywords` and `properties` of a single asset identified by assetId. This route is
+ * deprecated; use update-assets instead, which supports bulk updates and a wider set of fields.
+ * Properties that fail validation are reported in a partial success response while the remaining
+ * properties are applied.
  *
  * @deprecated
  */
@@ -92,6 +129,13 @@ export const updateMetadata = <ThrowOnError extends boolean = false>(options: Op
 
 /**
  * Update assets
+ *
+ * Updates one or more assets in a single request. Each asset in the request is identified by an
+ * ID that combines `serialNumber`, `model`, and `vendor`, and can change metadata, keywords,
+ * properties, and location. The operation is processed per asset and returns a partial
+ * success response that lists the assets that were updated alongside
+ * the assets that failed, grouped by reason such as missing identifier, not found, or insufficient
+ * authorization. Assets that succeed are committed even when other assets in the same request fail.
  */
 export const updateAssets = <ThrowOnError extends boolean = false>(options?: Options<UpdateAssetsData, ThrowOnError>) => (options?.client ?? client).post<UpdateAssetsResponses, UpdateAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -105,8 +149,15 @@ export const updateAssets = <ThrowOnError extends boolean = false>(options?: Opt
 
 /**
  * Query asset location history
+ *
+ * Returns the history of locations that the asset identified by assetId has occupied over time.
+ * Use `startTime` and `endTime` to bound the time window, which defaults to the last 90 days when
+ * not supplied, and `locationFilter` to narrow the results to specific locations. Results are paged
+ * with a `continuationToken`; pass the token returned by a previous call to retrieve the next page.
+ * When the request specifies a report destination the history is returned as a CSV report instead
+ * of an inline response.
  */
-export const postAssetQueryConnectionHistory = <ThrowOnError extends boolean = false>(options: Options<PostAssetQueryConnectionHistoryData, ThrowOnError>) => (options.client ?? client).post<PostAssetQueryConnectionHistoryResponses, PostAssetQueryConnectionHistoryErrors, ThrowOnError>({
+export const queryAssetLocationHistory = <ThrowOnError extends boolean = false>(options: Options<QueryAssetLocationHistoryData, ThrowOnError>) => (options.client ?? client).post<QueryAssetLocationHistoryResponses, QueryAssetLocationHistoryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
     url: '/niapm/v1/assets/{assetId}/history/query-location',
     ...options,
@@ -118,6 +169,11 @@ export const postAssetQueryConnectionHistory = <ThrowOnError extends boolean = f
 
 /**
  * Delete assets
+ *
+ * Deletes one or more assets identified by the `ids` in the request body. The operation is
+ * processed per asset and returns the identifiers that were deleted along with the identifiers that
+ * could not be deleted, such as identifiers that do not exist or are invalid. Deleting an asset
+ * removes its record, including its location, utilization, and calibration history.
  */
 export const deleteAssets = <ThrowOnError extends boolean = false>(options?: Options<DeleteAssetsData, ThrowOnError>) => (options?.client ?? client).post<DeleteAssetsResponses, DeleteAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -131,6 +187,10 @@ export const deleteAssets = <ThrowOnError extends boolean = false>(options?: Opt
 
 /**
  * Get an asset
+ *
+ * Returns the single asset identified by assetId, including its identifying information, metadata,
+ * location, and calibration details. Use this route when you already know the asset identifier and
+ * need its full record rather than a filtered list.
  */
 export const getAsset = <ThrowOnError extends boolean = false>(options: Options<GetAssetData, ThrowOnError>) => (options.client ?? client).get<GetAssetResponses, GetAssetErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -140,6 +200,12 @@ export const getAsset = <ThrowOnError extends boolean = false>(options: Options<
 
 /**
  * Link files to an asset
+ *
+ * Associates one or more file identifiers from `fileIds` with the asset identified by assetId,
+ * adding them to any files already linked. The files are typically stored in the file service and
+ * may include datasheets, calibration certificates, or other supporting documents. File
+ * identifiers that fail validation are reported in a partial success response while the valid
+ * identifiers are linked.
  */
 export const linkFiles = <ThrowOnError extends boolean = false>(options: Options<LinkFilesData, ThrowOnError>) => (options.client ?? client).post<LinkFilesResponses, LinkFilesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -153,6 +219,10 @@ export const linkFiles = <ThrowOnError extends boolean = false>(options: Options
 
 /**
  * Unlink a file from an asset
+ *
+ * Removes the association between the file identified by fileId and the asset identified by
+ * assetId. The file itself is not deleted; only the link to the asset is removed. Both the asset
+ * and the file must exist and be linked for the operation to succeed.
  */
 export const unlinkFileFromAsset = <ThrowOnError extends boolean = false>(options: Options<UnlinkFileFromAssetData, ThrowOnError>) => (options.client ?? client).delete<UnlinkFileFromAssetResponses, UnlinkFileFromAssetErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -162,6 +232,10 @@ export const unlinkFileFromAsset = <ThrowOnError extends boolean = false>(option
 
 /**
  * Delete one or more calibration history entries for an asset
+ *
+ * Deletes the calibration history entries identified by `calibrationIds` from the asset identified
+ * by assetId. The operation is processed per entry and returns the identifiers that were deleted
+ * along with the identifiers that could not be found, so you can reconcile which entries remain.
  */
 export const deleteCalibrationHistory = <ThrowOnError extends boolean = false>(options: Options<DeleteCalibrationHistoryData, ThrowOnError>) => (options.client ?? client).post<DeleteCalibrationHistoryResponses, DeleteCalibrationHistoryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -175,6 +249,13 @@ export const deleteCalibrationHistory = <ThrowOnError extends boolean = false>(o
 
 /**
  * Get asset calibration history
+ *
+ * Returns a page of calibration history entries for the asset identified by assetId, ordered from
+ * most recent. Each entry records a past calibration event, such as when the asset was calibrated
+ * and the resulting due date. Use `Skip` and `Take` to page through the history and `ReturnCount`
+ * to include the total number of entries. Entries are sorted by date descending, with external
+ * calibrations returned before self-calibrations within the same date. Use this history to review
+ * an asset's calibration record and make maintenance decisions.
  */
 export const getAssetCalibrationHistory = <ThrowOnError extends boolean = false>(options: Options<GetAssetCalibrationHistoryData, ThrowOnError>) => (options.client ?? client).get<GetAssetCalibrationHistoryResponses, GetAssetCalibrationHistoryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -184,6 +265,11 @@ export const getAssetCalibrationHistory = <ThrowOnError extends boolean = false>
 
 /**
  * Export calibration history
+ *
+ * Generates a CSV report of the full calibration history for the asset identified by assetId. When
+ * `destination` is the file service the report is uploaded and its file identifier is returned;
+ * otherwise the report is returned directly as a downloadable CSV file. Use `fileIngestionWorkspace`
+ * to control which workspace the uploaded file is stored in.
  */
 export const exportCalibrationHistory = <ThrowOnError extends boolean = false>(options: Options<ExportCalibrationHistoryData, ThrowOnError>) => (options.client ?? client).post<ExportCalibrationHistoryResponses, ExportCalibrationHistoryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -197,6 +283,11 @@ export const exportCalibrationHistory = <ThrowOnError extends boolean = false>(o
 
 /**
  * Calculate the asset calibration forecast for a configured timeframe
+ *
+ * Calculates how many assets are due for calibration within the time range given by `startTime` and
+ * `endTime`, which are interpreted in UTC. Use this route to drive a calibration forecast dashboard
+ * and plan upcoming calibration work. This route is available only when the calibration forecast
+ * feature is enabled for the service.
  */
 export const calculateCalibrationForecast = <ThrowOnError extends boolean = false>(options?: Options<CalculateCalibrationForecastData, ThrowOnError>) => (options?.client ?? client).post<CalculateCalibrationForecastResponses, CalculateCalibrationForecastErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -211,8 +302,11 @@ export const calculateCalibrationForecast = <ThrowOnError extends boolean = fals
 /**
  * Simulate receiving an asset from a calibration lab
  *
- * The purpose of doing a dry run is to offer the UI a list of
- * validation errors and warnings that the UI can't know otherwise.
+ * Validates a receive-from-calibration request without changing any data. The request describes
+ * the assets returning from a calibration lab and the locations they should move back to. The
+ * response reports the validation errors and warnings for each operation along with the assets
+ * that are valid to move and the assets that require no operation, so a client can present
+ * actionable feedback before calling receive-from-calibration to commit the changes.
  */
 export const receiveFromCalibrationDryRun = <ThrowOnError extends boolean = false>(options?: Options<ReceiveFromCalibrationDryRunData, ThrowOnError>) => (options?.client ?? client).post<ReceiveFromCalibrationDryRunResponses, ReceiveFromCalibrationDryRunErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -226,6 +320,11 @@ export const receiveFromCalibrationDryRun = <ThrowOnError extends boolean = fals
 
 /**
  * Move assets from calibration back to locations
+ *
+ * Records the assets identified in the request as returned from a calibration lab and moves them
+ * back to their target locations, updating their calibration data in the process. The response
+ * contains the assets that were successfully moved and does not include assets that required no
+ * operation. Use receive-from-calibration-dry-run first to validate the request.
  */
 export const receiveFromCalibration = <ThrowOnError extends boolean = false>(options?: Options<ReceiveFromCalibrationData, ThrowOnError>) => (options?.client ?? client).post<ReceiveFromCalibrationResponses, ReceiveFromCalibrationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -240,8 +339,11 @@ export const receiveFromCalibration = <ThrowOnError extends boolean = false>(opt
 /**
  * Simulate sending an asset to a calibration lab
  *
- * The purpose of doing a dry run is to offer the UI a list of
- * validation errors and warnings that the UI can't know otherwise.
+ * Validates a send-for-calibration request without changing any data. The request describes the
+ * assets to send and the calibration location they should move to. The response reports the
+ * validation errors and warnings for each operation along with the assets that are valid to move
+ * and the assets that require no operation, so a client can present actionable feedback before
+ * calling send-for-calibration to commit the changes.
  */
 export const sendForCalibrationDryRun = <ThrowOnError extends boolean = false>(options?: Options<SendForCalibrationDryRunData, ThrowOnError>) => (options?.client ?? client).post<SendForCalibrationDryRunResponses, SendForCalibrationDryRunErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -255,6 +357,11 @@ export const sendForCalibrationDryRun = <ThrowOnError extends boolean = false>(o
 
 /**
  * Send an asset to a calibration lab
+ *
+ * Records the assets identified in the request as sent to a calibration lab and moves them to the
+ * calibration location. The response contains the assets that were successfully moved and does not
+ * include assets that required no operation. Use send-for-calibration-dry-run first to validate
+ * the request.
  */
 export const sendForCalibration = <ThrowOnError extends boolean = false>(options?: Options<SendForCalibrationData, ThrowOnError>) => (options?.client ?? client).post<SendForCalibrationResponses, SendForCalibrationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -269,8 +376,11 @@ export const sendForCalibration = <ThrowOnError extends boolean = false>(options
 /**
  * Simulate moving an asset's location
  *
- * The purpose of doing a dry run is to offer the UI a list of
- * validation errors and warnings that the UI can't know otherwise.
+ * Validates a set of location move operations without changing any data. Each operation describes
+ * an asset and the location it should move to. The response reports the validation errors and
+ * warnings for each operation along with the assets that are valid to move and the assets that
+ * require no operation, so a client can present actionable feedback before calling move-location
+ * to commit the changes.
  */
 export const moveAssetsLocationDryRun = <ThrowOnError extends boolean = false>(options?: Options<MoveAssetsLocationDryRunData, ThrowOnError>) => (options?.client ?? client).post<MoveAssetsLocationDryRunResponses, MoveAssetsLocationDryRunErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -284,6 +394,11 @@ export const moveAssetsLocationDryRun = <ThrowOnError extends boolean = false>(o
 
 /**
  * Move an asset to a new location
+ *
+ * Moves one or more assets to new locations, where each operation in the request pairs an asset
+ * with its target location. The service performs an internal validation pass and then commits only
+ * the operations that pass. The response contains the assets that were successfully moved. Use
+ * move-location-dry-run beforehand to preview the outcome.
  */
 export const moveAssetsLocation = <ThrowOnError extends boolean = false>(options?: Options<MoveAssetsLocationData, ThrowOnError>) => (options?.client ?? client).post<MoveAssetsLocationResponses, MoveAssetsLocationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -297,6 +412,10 @@ export const moveAssetsLocation = <ThrowOnError extends boolean = false>(options
 
 /**
  * Query the IDs of assets with moves in progress
+ *
+ * Returns the identifiers of the assets that currently have a location move in progress. Use this
+ * route to determine which assets are mid-move, for example to disable further actions on them in
+ * a client until their move completes.
  */
 export const queryLocationMoves = <ThrowOnError extends boolean = false>(options?: Options<QueryLocationMovesData, ThrowOnError>) => (options?.client ?? client).post<QueryLocationMovesResponses, QueryLocationMovesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -309,61 +428,13 @@ export const queryLocationMoves = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Query location history for a specific asset.
- *
- * This function queries the per-asset location history endpoint, which is more
- * reliable than the bulk `queryLocationMoves()` endpoint for individual assets.
- *
- * @param assetId - The ID of the asset to query
- * @param options - Optional request configuration (query criteria, client override, etc.)
- * @returns Location history records for the asset
- *
- * @example
- * ```typescript
- * // Query location history for an asset with a date range filter
- * const { data, response } = await queryAssetLocationHistory('asset-123', {
- *   body: {
- *     take: 100,
- *     startTime: '2026-01-01T00:00:00Z',
- *     endTime: '2026-05-18T00:00:00Z'
- *   },
- *   client
- * });
- * ```
- */
-export const queryAssetLocationHistory = <ThrowOnError extends boolean = false>(
-    assetId: string,
-    options?: Options<QueryAssetLocationHistoryData, ThrowOnError>
-) => (options?.client ?? client).post<QueryAssetLocationHistoryResponses, QueryAssetLocationHistoryErrors, ThrowOnError>({
-    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
-    url: `/niapm/v1/assets/${encodeURIComponent(assetId)}/history/query-location`,
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options?.headers
-    }
-});
-
-/**
- * Get information about the service API
- */
-export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
-    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
-    url: '/niapm',
-    ...options
-});
-
-/**
- * Get information about the service V1 API
- */
-export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Data, ThrowOnError>) => (options?.client ?? client).get<V1Responses, unknown, ThrowOnError>({
-    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
-    url: '/niapm/v1',
-    ...options
-});
-
-/**
  * Search assets with advanced filters
+ *
+ * Searches a materialized index of assets that supports richer filtering than the standard asset
+ * query. Use `filter` to express the search, `skip` and `take` for paging, `orderBy` and
+ * `descending` for sorting, and `projection` to limit the returned fields. The page size is capped
+ * by the service's configured maximum. This route is available only when advanced asset search is
+ * enabled for the service.
  */
 export const searchAssets = <ThrowOnError extends boolean = false>(options?: Options<SearchAssetsData, ThrowOnError>) => (options?.client ?? client).post<SearchAssetsResponses, SearchAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -377,6 +448,11 @@ export const searchAssets = <ThrowOnError extends boolean = false>(options?: Opt
 
 /**
  * Export a materialized assets report
+ *
+ * Generates a CSV report of the assets in the materialized index that match the `filter` in the
+ * request body. When `destination` is the file service the report is uploaded and its file
+ * identifier is returned; otherwise the report is returned directly as a downloadable CSV file.
+ * This route is available only when advanced asset search is enabled for the service.
  */
 export const exportMaterializedAssets = <ThrowOnError extends boolean = false>(options?: Options<ExportMaterializedAssetsData, ThrowOnError>) => (options?.client ?? client).post<ExportMaterializedAssetsResponses, ExportMaterializedAssetsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -390,6 +466,12 @@ export const exportMaterializedAssets = <ThrowOnError extends boolean = false>(o
 
 /**
  * Query asset utilization history
+ *
+ * Returns historical utilization sessions for assets. Use `assetFilter` and `utilizationFilter` to
+ * narrow the results, `startTime` and `endTime` to bound the time window, which defaults to the
+ * last 90 days when not supplied, and `orderBy` with `orderByDescending` to sort. Results are paged
+ * with a `continuationToken`; pass the token returned by a previous call to retrieve the next page.
+ * Use this history to analyze how much assets are used over time.
  */
 export const queryAssetUtilizationHistory = <ThrowOnError extends boolean = false>(options?: Options<QueryAssetUtilizationHistoryData, ThrowOnError>) => (options?.client ?? client).post<QueryAssetUtilizationHistoryResponses, QueryAssetUtilizationHistoryErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -403,6 +485,12 @@ export const queryAssetUtilizationHistory = <ThrowOnError extends boolean = fals
 
 /**
  * Start asset utilization
+ *
+ * Records the start of a utilization session for one or more assets identified in the request,
+ * marking them as actively in use. The operation is processed per asset and returns a partial
+ * success response that lists the assets whose utilization started alongside the asset
+ * identifications that failed. After starting utilization, send periodic heartbeats to keep the
+ * session active and call end-utilization when the work is complete.
  */
 export const startUtilization = <ThrowOnError extends boolean = false>(options?: Options<StartUtilizationData, ThrowOnError>) => (options?.client ?? client).post<StartUtilizationResponses, StartUtilizationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -416,6 +504,11 @@ export const startUtilization = <ThrowOnError extends boolean = false>(options?:
 
 /**
  * End asset utilization
+ *
+ * Records the end of active utilization sessions for the assets identified in the request, closing
+ * the sessions that were previously started. The operation is processed per asset and returns a
+ * partial success response that lists the updated utilization identifiers alongside the asset
+ * identifications that failed.
  */
 export const endUtilization = <ThrowOnError extends boolean = false>(options?: Options<EndUtilizationData, ThrowOnError>) => (options?.client ?? client).post<EndUtilizationResponses, EndUtilizationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -429,6 +522,12 @@ export const endUtilization = <ThrowOnError extends boolean = false>(options?: O
 
 /**
  * Send a utilization heartbeat
+ *
+ * Refreshes active utilization sessions for the assets identified in the request so they are not
+ * closed automatically due to inactivity. Send heartbeats periodically for the duration of a
+ * session that was started with start-utilization. The operation is processed per asset and
+ * returns a partial success response that lists the updated utilization identifiers alongside the
+ * asset identifications that failed.
  */
 export const utilizationHeartbeat = <ThrowOnError extends boolean = false>(options?: Options<UtilizationHeartbeatData, ThrowOnError>) => (options?.client ?? client).post<UtilizationHeartbeatResponses, UtilizationHeartbeatErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -438,4 +537,26 @@ export const utilizationHeartbeat = <ThrowOnError extends boolean = false>(optio
         'Content-Type': 'application/json',
         ...options?.headers
     }
+});
+
+/**
+ * API information
+ *
+ * Returns information about API versions and available operations.
+ */
+export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, RootEndpointErrors, ThrowOnError>({
+    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
+    url: '/niapm',
+    ...options
+});
+
+/**
+ * API version information
+ *
+ * Returns available operations for a single version of the API.
+ */
+export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Data, ThrowOnError>) => (options?.client ?? client).get<V1Responses, V1Errors, ThrowOnError>({
+    security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
+    url: '/niapm/v1',
+    ...options
 });
