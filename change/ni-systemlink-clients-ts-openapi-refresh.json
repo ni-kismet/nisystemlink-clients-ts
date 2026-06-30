@@ -3,5 +3,5 @@
   "email": "1458528+fredvisser@users.noreply.github.com",
   "dependentChangeType": "patch",
   "type": "major",
-  "comment": "Update generated API clients to the latest OpenAPI definitions and align integration tests with the regenerated SDK surface."
+  "comment": "Regenerate the SystemLink API clients from the latest OpenAPI definitions. Breaking SDK changes include renaming `routines.createRoutines` to `createRoutine`, renaming `file-ingestion.listAvailableFilesGet` to `listAvailableFiles`, and changing `asset-management.queryAssetLocationHistory` to accept a single options object with `path.assetId` instead of a positional `assetId` argument. The refresh also adds newly generated repository root/version exports and updates request and response types across the regenerated services."
 }
