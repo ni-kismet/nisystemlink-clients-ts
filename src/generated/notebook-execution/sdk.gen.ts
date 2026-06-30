@@ -19,7 +19,13 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Create one or more executions of Jupyter notebooks.
+ * Create one or more Jupyter notebook executions
+ *
+ * Submits one or more Jupyter notebooks for execution with the specified input parameters.
+ * Each execution is queued and processed asynchronously. The response includes execution IDs
+ * that can be used to poll status or retrieve results. If result caching is enabled and a
+ * matching prior result exists within the cache period, the cached result is returned
+ * without re-running the notebook.
  */
 export const createExecutions = <ThrowOnError extends boolean = false>(options?: Options<CreateExecutionsData, ThrowOnError>) => (options?.client ?? client).post<CreateExecutionsResponses, CreateExecutionsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -32,7 +38,11 @@ export const createExecutions = <ThrowOnError extends boolean = false>(options?:
 });
 
 /**
- * Create new executions based on already existing succeeded executions.
+ * Create new executions based on existing succeeded executions
+ *
+ * Creates new executions by cloning the configuration of previously succeeded executions.
+ * The new executions use the same notebook, parameters, and settings as the originals.
+ * This is useful for re-running analyses after source data has changed.
  */
 export const createExecutionsFromExisting = <ThrowOnError extends boolean = false>(options?: Options<CreateExecutionsFromExistingData, ThrowOnError>) => (options?.client ?? client).post<CreateExecutionsFromExistingResponses, CreateExecutionsFromExistingErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -45,7 +55,10 @@ export const createExecutionsFromExisting = <ThrowOnError extends boolean = fals
 });
 
 /**
- * Get information about the specified execution of a Jupyter notebook.
+ * Get information about a specified Jupyter notebook execution
+ *
+ * Returns detailed information about a single execution including its current status,
+ * input parameters, output parameters, timing information, and any errors encountered.
  */
 export const getExecution = <ThrowOnError extends boolean = false>(options: Options<GetExecutionData, ThrowOnError>) => (options.client ?? client).get<GetExecutionResponses, GetExecutionErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -54,7 +67,10 @@ export const getExecution = <ThrowOnError extends boolean = false>(options: Opti
 });
 
 /**
- * Query executions of Jupyter notebooks.
+ * Query Jupyter notebook executions
+ *
+ * Returns executions matching the specified filter criteria. Supports Dynamic LINQ
+ * filter expressions, sorting, and field projection.
  */
 export const queryExecutions = <ThrowOnError extends boolean = false>(options?: Options<QueryExecutionsData, ThrowOnError>) => (options?.client ?? client).post<QueryExecutionsResponses, QueryExecutionsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -67,7 +83,11 @@ export const queryExecutions = <ThrowOnError extends boolean = false>(options?: 
 });
 
 /**
- * Cancel queued and in progress executions.
+ * Cancel queued and in-progress executions
+ *
+ * Cancels one or more executions that are currently queued or in progress.
+ * Already completed, failed, or timed-out executions cannot be canceled.
+ * Returns 204 on full success or 200 with partial errors if some executions could not be canceled.
  */
 export const cancelExecutions = <ThrowOnError extends boolean = false>(options?: Options<CancelExecutionsData, ThrowOnError>) => (options?.client ?? client).post<CancelExecutionsResponses, CancelExecutionsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -80,7 +100,11 @@ export const cancelExecutions = <ThrowOnError extends boolean = false>(options?:
 });
 
 /**
- * Retries existing executions based on failed, canceled or timed-out executions.
+ * Retry failed, canceled, or timed-out executions
+ *
+ * Creates new executions by re-running previously failed, canceled, or timed-out executions.
+ * The new executions use the same notebook, parameters, and settings as the originals.
+ * Returns 204 on full success or 200 with partial errors if some executions could not be retried.
  */
 export const retryExecutions = <ThrowOnError extends boolean = false>(options?: Options<RetryExecutionsData, ThrowOnError>) => (options?.client ?? client).post<RetryExecutionsResponses, RetryExecutionsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -104,9 +128,9 @@ export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * API version 3 information
+ * API version 1 information
  *
- * Returns information and available operations for version 3 of the API.
+ * Returns information and available operations for version 1 of the API.
  */
 export const getV1 = <ThrowOnError extends boolean = false>(options?: Options<GetV1Data, ThrowOnError>) => (options?.client ?? client).get<GetV1Responses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

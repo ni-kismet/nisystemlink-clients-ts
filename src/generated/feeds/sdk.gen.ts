@@ -19,7 +19,13 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Query feeds.
+ * List feeds
+ *
+ * Feeds centralize software package hosting for managed test systems. Each feed contains a manifest of package information and satisfies installation dependencies for its platform.
+ *
+ * Use the `platform` query parameter to filter by target platform (WINDOWS or NI_LINUX_RT) when preparing deployments for a specific operating system.
+ *
+ * Use the `workspace` query parameter to restrict results to a single workspace.
  */
 export const queryFeeds = <ThrowOnError extends boolean = false>(options?: Options<QueryFeedsData, ThrowOnError>) => (options?.client ?? client).get<QueryFeedsResponses, QueryFeedsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -28,7 +34,13 @@ export const queryFeeds = <ThrowOnError extends boolean = false>(options?: Optio
 });
 
 /**
- * Create a new feed.
+ * Create a feed
+ *
+ * Creates an empty feed that can then be populated with software packages for distribution to managed systems. The feed name must be unique within the workspace.
+ *
+ * If `workspace` is not specified, the feed is created in the default workspace of the authenticated identity.
+ *
+ * After creation, add packages by uploading them with `POST /v1/feeds/{feedId}/packages` or by replicating from an external repository with `POST /v1/replicate-feed`. Once populated, managed systems can subscribe to the feed URL to install its packages.
  */
 export const createFeed = <ThrowOnError extends boolean = false>(options?: Options<CreateFeedData, ThrowOnError>) => (options?.client ?? client).post<CreateFeedResponses, CreateFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -41,7 +53,9 @@ export const createFeed = <ThrowOnError extends boolean = false>(options?: Optio
 });
 
 /**
- * Delete feed and its packages.
+ * Delete a feed and its packages
+ *
+ * Schedules a feed and all its packages for deletion. The removal is performed asynchronously by a background job. Once deleted, managed systems subscribed to this feed will no longer receive packages from it and any system states referencing it will be incomplete.
  */
 export const deleteFeed = <ThrowOnError extends boolean = false>(options: Options<DeleteFeedData, ThrowOnError>) => (options.client ?? client).delete<DeleteFeedResponses, DeleteFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -50,7 +64,9 @@ export const deleteFeed = <ThrowOnError extends boolean = false>(options: Option
 });
 
 /**
- * Query feed by ID.
+ * Get a feed by ID
+ *
+ * Returns the metadata for a single feed, including its name, platform, workspace, description, and source URLs. Use this to retrieve details about a specific feed before performing operations on it such as uploading packages or checking for updates.
  */
 export const getFeedById = <ThrowOnError extends boolean = false>(options: Options<GetFeedByIdData, ThrowOnError>) => (options.client ?? client).get<GetFeedByIdResponses, GetFeedByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -59,7 +75,11 @@ export const getFeedById = <ThrowOnError extends boolean = false>(options: Optio
 });
 
 /**
- * Update feed metadata.
+ * Update feed metadata
+ *
+ * Only the fields provided in the request body are modified; omitted fields remain unchanged.
+ *
+ * Use this to rename a feed, change its description, or move it to a different workspace to adjust access control. Moving a feed to another workspace requires delete permission in the source workspace and create permission in the target workspace.
  */
 export const updateFeedMetadata = <ThrowOnError extends boolean = false>(options: Options<UpdateFeedMetadataData, ThrowOnError>) => (options.client ?? client).patch<UpdateFeedMetadataResponses, UpdateFeedMetadataErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -72,7 +92,11 @@ export const updateFeedMetadata = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Delete multiple feeds and their packages.
+ * Delete multiple feeds and their packages
+ *
+ * Schedules multiple feeds for deletion in a single request. Each feed is validated independently. Feeds that cannot be found or accessed are reported as inner errors in the response, while valid feeds are still scheduled for deletion.
+ *
+ * Use this when decommissioning several feeds at once, for example when retiring a group of packages that are no longer deployed to any test systems.
  */
 export const deleteFeeds = <ThrowOnError extends boolean = false>(options?: Options<DeleteFeedsData, ThrowOnError>) => (options?.client ?? client).post<DeleteFeedsResponses, DeleteFeedsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -85,7 +109,13 @@ export const deleteFeeds = <ThrowOnError extends boolean = false>(options?: Opti
 });
 
 /**
- * Replicate a feed.
+ * Replicate a feed
+ *
+ * Creates a new feed by importing all packages from one or more external package repository URLs. Use this when managed systems do not have direct access to an external network but the server does. Replication mirrors the remote repository locally so that systems can install packages through the local feed.
+ *
+ * The source URLs must point to valid package repositories containing a `Packages` or `Packages.gz` index. Repositories hosted on ni.com/downloads are supported.
+ *
+ * Use the `ignoreImportErrors` query parameter to control error handling. When false (default), the operation aborts and rolls back if any package import fails. When true, the operation imports as many packages as possible and reports failures in the response.
  */
 export const replicateFeed = <ThrowOnError extends boolean = false>(options?: Options<ReplicateFeedData, ThrowOnError>) => (options?.client ?? client).post<ReplicateFeedResponses, ReplicateFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -98,7 +128,13 @@ export const replicateFeed = <ThrowOnError extends boolean = false>(options?: Op
 });
 
 /**
- * Replicate multiple feeds.
+ * Replicate multiple feeds
+ *
+ * Creates multiple feeds from external sources in a single request. Use this when mirroring several remote repositories at once, for example when setting up a complete software suite that spans multiple feeds (such as individual LabVIEW, NI DAQmx, and TestStand feeds from a bundle).
+ *
+ * Each feed is validated and replicated independently. Failures on one feed do not prevent others from succeeding. Failed feeds are reported as inner errors in the response.
+ *
+ * Use the `ignoreImportErrors` query parameter to control per-feed error handling during package import.
  */
 export const replicateFeeds = <ThrowOnError extends boolean = false>(options?: Options<ReplicateFeedsData, ThrowOnError>) => (options?.client ?? client).post<ReplicateFeedsResponses, ReplicateFeedsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -111,7 +147,14 @@ export const replicateFeeds = <ThrowOnError extends boolean = false>(options?: O
 });
 
 /**
- * Asynchronously checks for updates to a feed.
+ * Asynchronously check for updates to a feed
+ *
+ * For replicated feeds, this checks the original package source for newer versions. Enqueues a background job that compares the feed's current packages against its source URLs and identifies available updates. This is the first step of the update workflow:
+ *
+ * 1. Call this endpoint to start the check. The response contains a job ID.
+ * 2. Poll `GET /v1/jobs/{jobId}` until the job completes. The job result contains an `updateDescriptorListId`.
+ * 3. Retrieve the available updates with `GET /v1/feed-updates/{updateDescriptorListId}`.
+ * 4. Apply selected updates with `POST /v1/feeds/{feedId}/apply-updates`.
  */
 export const checkFeedForUpdates = <ThrowOnError extends boolean = false>(options: Options<CheckFeedForUpdatesData, ThrowOnError>) => (options.client ?? client).post<CheckFeedForUpdatesResponses, CheckFeedForUpdatesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -120,7 +163,13 @@ export const checkFeedForUpdates = <ThrowOnError extends boolean = false>(option
 });
 
 /**
- * Asynchronously apply updates for a feed.
+ * Asynchronously apply updates for a feed
+ *
+ * Downloads and imports the specified package updates into a replicated feed, bringing it in sync with its remote source. This is typically called after reviewing available updates from `GET /v1/feed-updates/{updateDescriptorListId}` and selecting which packages to upgrade.
+ *
+ * Use the `ignoreImportErrors` query parameter to control whether the job aborts on the first package failure or continues importing remaining packages.
+ *
+ * Poll `GET /v1/jobs/{jobId}` to monitor progress.
  */
 export const applyUpdatesForFeed = <ThrowOnError extends boolean = false>(options: Options<ApplyUpdatesForFeedData, ThrowOnError>) => (options.client ?? client).post<ApplyUpdatesForFeedResponses, ApplyUpdatesForFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -133,7 +182,11 @@ export const applyUpdatesForFeed = <ThrowOnError extends boolean = false>(option
 });
 
 /**
- * Get update descriptor list by ID
+ * Get an update descriptor list by ID
+ *
+ * Retrieves the list of available package updates produced by a completed check-for-updates job. Each update descriptor identifies a package that has a newer version available at the remote source, allowing review before importing.
+ *
+ * The `updateDescriptorListId` is obtained from the job result after a `POST /v1/feeds/{feedId}/check-for-updates` operation completes. Pass selected descriptors to `POST /v1/feeds/{feedId}/apply-updates` to import them.
  */
 export const getUpdateDescriptors = <ThrowOnError extends boolean = false>(options: Options<GetUpdateDescriptorsData, ThrowOnError>) => (options.client ?? client).get<GetUpdateDescriptorsResponses, GetUpdateDescriptorsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -142,7 +195,11 @@ export const getUpdateDescriptors = <ThrowOnError extends boolean = false>(optio
 });
 
 /**
- * Enqueues a job for package cleanup
+ * Enqueue a job for package cleanup
+ *
+ * Reduces the storage footprint of a feed by removing unreferenced package files and retaining only the newest version of each package with a unique name. Use this to reclaim storage after failed uploads, incomplete deletions, or when older package versions are no longer needed by any system state.
+ *
+ * Poll `GET /v1/jobs/{jobId}` to monitor progress.
  */
 export const cleanFeed = <ThrowOnError extends boolean = false>(options: Options<CleanFeedData, ThrowOnError>) => (options.client ?? client).post<CleanFeedResponses, CleanFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -151,7 +208,11 @@ export const cleanFeed = <ThrowOnError extends boolean = false>(options: Options
 });
 
 /**
- * Download Packages.gz.
+ * Download Packages.gz
+ *
+ * Downloads the compressed package index file for the specified feed. Package managers on managed systems use this index to resolve available packages and their dependencies before installing software.
+ *
+ * This endpoint does not require authentication. It is intended for use by package managers running on managed systems.
  */
 export const downloadFeedContentGz = <ThrowOnError extends boolean = false>(options: Options<DownloadFeedContentGzData, ThrowOnError>) => (options.client ?? client).get<DownloadFeedContentGzResponses, DownloadFeedContentGzErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -160,7 +221,11 @@ export const downloadFeedContentGz = <ThrowOnError extends boolean = false>(opti
 });
 
 /**
- * HEAD request for Feed content.
+ * HEAD request for feed content
+ *
+ * Returns HTTP response headers for the compressed package index without transferring the file body. Use this to check the availability or size of the Packages.gz index.
+ *
+ * This endpoint does not require authentication. It is intended for use by package managers running on managed systems.
  */
 export const headFeedContentGz = <ThrowOnError extends boolean = false>(options: Options<HeadFeedContentGzData, ThrowOnError>) => (options.client ?? client).head<HeadFeedContentGzResponses, HeadFeedContentGzErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -169,7 +234,11 @@ export const headFeedContentGz = <ThrowOnError extends boolean = false>(options:
 });
 
 /**
- * Download Package file.
+ * Download Package file
+ *
+ * Downloads the uncompressed package index file for the specified feed. This serves the same purpose as the Packages.gz endpoint but without gzip compression, for package managers that do not support compressed indexes.
+ *
+ * This endpoint does not require authentication. It is intended for use by package managers running on managed systems.
  */
 export const downloadFeedContent = <ThrowOnError extends boolean = false>(options: Options<DownloadFeedContentData, ThrowOnError>) => (options.client ?? client).get<DownloadFeedContentResponses, DownloadFeedContentErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -178,7 +247,11 @@ export const downloadFeedContent = <ThrowOnError extends boolean = false>(option
 });
 
 /**
- * HEAD request for Feed content.
+ * HEAD request for feed content
+ *
+ * Returns HTTP response headers for the uncompressed package index without transferring the file body. Use this to check the availability or size of the Packages index.
+ *
+ * This endpoint does not require authentication. It is intended for use by package managers running on managed systems.
  */
 export const headFeedContent = <ThrowOnError extends boolean = false>(options: Options<HeadFeedContentData, ThrowOnError>) => (options.client ?? client).head<HeadFeedContentResponses, HeadFeedContentErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -187,7 +260,9 @@ export const headFeedContent = <ThrowOnError extends boolean = false>(options: O
 });
 
 /**
- * Query jobs for a feed id.
+ * List jobs for a feed
+ *
+ * Returns all jobs associated with the specified feed, including replication, deletion, check-for-updates, apply-updates, and cleanup operations. Use this to review the history of operations performed on a feed or to find a specific job for status polling.
  */
 export const queryJobsForFeed = <ThrowOnError extends boolean = false>(options: Options<QueryJobsForFeedData, ThrowOnError>) => (options.client ?? client).get<QueryJobsForFeedResponses, QueryJobsForFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -196,7 +271,9 @@ export const queryJobsForFeed = <ThrowOnError extends boolean = false>(options: 
 });
 
 /**
- * Query jobs for a job id.
+ * Get a job by ID
+ *
+ * Poll this endpoint to monitor the progress of long-running feed operations such as replication, deletion, check-for-updates, apply-updates, or cleanup. Network conditions and package sizes can slow these operations significantly. When the job completes, its `result` field contains operation-specific output such as resource IDs or error details.
  */
 export const getJob = <ThrowOnError extends boolean = false>(options: Options<GetJobData, ThrowOnError>) => (options.client ?? client).get<GetJobResponses, GetJobErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -205,7 +282,9 @@ export const getJob = <ThrowOnError extends boolean = false>(options: Options<Ge
 });
 
 /**
- * Query packages for a feed.
+ * List packages for a feed
+ *
+ * A package is a single compressed file that contains software to install on a target machine. This endpoint returns all packages in the specified feed, including metadata such as name, version, architecture, and dependencies. Use this to review the contents of a feed before deploying it to managed systems through a system state.
  */
 export const queryPackagesForFeed = <ThrowOnError extends boolean = false>(options: Options<QueryPackagesForFeedData, ThrowOnError>) => (options.client ?? client).get<QueryPackagesForFeedResponses, QueryPackagesForFeedErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -214,7 +293,15 @@ export const queryPackagesForFeed = <ThrowOnError extends boolean = false>(optio
 });
 
 /**
- * Upload a package to a feed.
+ * Upload a package to a feed
+ *
+ * Uploads a software package to the specified feed for distribution to managed systems. The request must use `multipart/form-data` encoding with a single field named `package` containing the binary file.
+ *
+ * Supported file extensions are `.nipkg` for Windows feeds and `.ipk` or `.deb` for NI Linux RT feeds. The file extension must match the feed's platform. Packages can be created with NI Package Manager, NI Package Builder, or LabVIEW Application Builder.
+ *
+ * Use the `shouldOverwrite` query parameter to replace an existing package with the same file name. When false (default), uploading a duplicate file name is rejected.
+ *
+ * Maximum file size is 10 GB. Uploading the same package to multiple feeds creates independent copies in storage.
  */
 export const uploadPackageToFeedAsync = <ThrowOnError extends boolean = false>(options: Options<UploadPackageToFeedAsyncData, ThrowOnError>) => (options.client ?? client).post<UploadPackageToFeedAsyncResponses, UploadPackageToFeedAsyncErrors, ThrowOnError>({
     ...formDataBodySerializer,
@@ -228,7 +315,9 @@ export const uploadPackageToFeedAsync = <ThrowOnError extends boolean = false>(o
 });
 
 /**
- * Delete a package.
+ * Delete a package
+ *
+ * Removes a single package from its feed and deletes the associated file from storage. Once deleted, managed systems subscribed to the feed will no longer be able to install this package. If the package is referenced by a system state, deployments using that state may fail.
  */
 export const deletePackageById = <ThrowOnError extends boolean = false>(options: Options<DeletePackageByIdData, ThrowOnError>) => (options.client ?? client).delete<DeletePackageByIdResponses, DeletePackageByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -237,7 +326,9 @@ export const deletePackageById = <ThrowOnError extends boolean = false>(options:
 });
 
 /**
- * Get package by ID.
+ * Get a package by ID
+ *
+ * Returns the metadata for a single package, including its name, version, architecture, file name, and the feed it belongs to. Use this to look up details about a specific package when its ID is known, for example from a system state or an update descriptor.
  */
 export const getPackageById = <ThrowOnError extends boolean = false>(options: Options<GetPackageByIdData, ThrowOnError>) => (options.client ?? client).get<GetPackageByIdResponses, GetPackageByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -246,7 +337,11 @@ export const getPackageById = <ThrowOnError extends boolean = false>(options: Op
 });
 
 /**
- * Delete multiple packages.
+ * Delete multiple packages
+ *
+ * Deletes multiple packages by their IDs in a single request. Packages may span different feeds and workspaces. Packages in workspaces where the identity lacks sufficient permissions are silently skipped.
+ *
+ * Use this when removing a batch of obsolete packages, for example after upgrading managed systems to newer software versions.
  */
 export const deletePackages = <ThrowOnError extends boolean = false>(options?: Options<DeletePackagesData, ThrowOnError>) => (options?.client ?? client).post<DeletePackagesResponses, DeletePackagesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -259,7 +354,11 @@ export const deletePackages = <ThrowOnError extends boolean = false>(options?: O
 });
 
 /**
- * Download a package from a feed.
+ * Download a package from a feed
+ *
+ * Streams the binary package file content by file name. Managed systems use this endpoint to download and install software packages when subscribed to the feed URL.
+ *
+ * This endpoint does not require authentication. It is intended for use by package managers (such as `ni-pkg` or `opkg`) running on managed systems.
  */
 export const downloadPackage = <ThrowOnError extends boolean = false>(options: Options<DownloadPackageData, ThrowOnError>) => (options.client ?? client).get<DownloadPackageResponses, DownloadPackageErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -268,7 +367,11 @@ export const downloadPackage = <ThrowOnError extends boolean = false>(options: O
 });
 
 /**
- * Returns headers for downloading a package from a feed.
+ * Return headers for downloading a package from a feed
+ *
+ * Returns HTTP response headers (including `Content-Length` and `Content-Type`) without transferring the file body. Use this to check a package's file size or existence before initiating a full download.
+ *
+ * This endpoint does not require authentication. It is intended for use by package managers (such as `ni-pkg` or `opkg`) running on managed systems that subscribe to the feed URL.
  */
 export const downloadPackageHead = <ThrowOnError extends boolean = false>(options: Options<DownloadPackageHeadData, ThrowOnError>) => (options.client ?? client).head<DownloadPackageHeadResponses, DownloadPackageHeadErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -277,6 +380,8 @@ export const downloadPackageHead = <ThrowOnError extends boolean = false>(option
 });
 
 /**
+ * API information
+ *
  * Returns information about API versions and available operations.
  */
 export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
@@ -286,7 +391,9 @@ export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * Returns information and available operations for version 1 of the API.
+ * API version information
+ *
+ * Returns available operations for a single version of the API.
  */
 export const getV1 = <ThrowOnError extends boolean = false>(options?: Options<GetV1Data, ThrowOnError>) => (options?.client ?? client).get<GetV1Responses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

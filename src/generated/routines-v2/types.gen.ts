@@ -197,6 +197,14 @@ export type QueryRoutinesData = {
 
 export type QueryRoutinesErrors = {
     /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -224,6 +232,18 @@ export type CreateRoutineData = {
 };
 
 export type CreateRoutineErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Conflict
+     */
+    409: BaseResponse;
     /**
      * Error
      */
@@ -255,6 +275,14 @@ export type DeleteRoutineData = {
 
 export type DeleteRoutineErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -284,6 +312,14 @@ export type GetRoutineData = {
 };
 
 export type GetRoutineErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
@@ -317,6 +353,22 @@ export type UpdateRoutineData = {
 };
 
 export type UpdateRoutineErrors = {
+    /**
+     * Bad Request
+     */
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Forbidden
+     */
+    403: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */

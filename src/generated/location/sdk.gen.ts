@@ -19,7 +19,10 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Get all locations.
+ * List locations
+ *
+ * Returns all locations the caller has access to. Use the optional query parameters
+ * to filter by enabled state, type, or scan code.
  */
 export const getLocations = <ThrowOnError extends boolean = false>(options?: Options<GetLocationsData, ThrowOnError>) => (options?.client ?? client).get<GetLocationsResponses, GetLocationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -28,7 +31,12 @@ export const getLocations = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * Create a new location.
+ * Create a location
+ *
+ * Creates a location with the specified name, type, and optional parent. If a workspace
+ * is not provided, the caller's default workspace is used. The location is enabled by
+ * default and can optionally include a scan code, description, custom properties, and
+ * keywords.
  */
 export const createLocation = <ThrowOnError extends boolean = false>(options?: Options<CreateLocationData, ThrowOnError>) => (options?.client ?? client).post<CreateLocationResponses, CreateLocationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -41,7 +49,10 @@ export const createLocation = <ThrowOnError extends boolean = false>(options?: O
 });
 
 /**
- * Get a location by its ID.
+ * Get a location
+ *
+ * Returns the full location resource including its metadata, hierarchy path, custom
+ * properties, and keywords.
  */
 export const getLocationById = <ThrowOnError extends boolean = false>(options: Options<GetLocationByIdData, ThrowOnError>) => (options.client ?? client).get<GetLocationByIdResponses, GetLocationByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -50,7 +61,12 @@ export const getLocationById = <ThrowOnError extends boolean = false>(options: O
 });
 
 /**
- * Update multiple locations.
+ * Update multiple locations
+ *
+ * Updates one or more locations in a single request. Each entry in the request
+ * identifies a location by ID and provides the fields to change. Fields not included
+ * in the update are left unchanged. Returns 204 on full success or 200 with error
+ * details if some updates fail.
  */
 export const updateLocations = <ThrowOnError extends boolean = false>(options?: Options<UpdateLocationsData, ThrowOnError>) => (options?.client ?? client).post<UpdateLocationsResponses, UpdateLocationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -63,7 +79,11 @@ export const updateLocations = <ThrowOnError extends boolean = false>(options?: 
 });
 
 /**
- * Delete a list of locations.
+ * Delete multiple locations
+ *
+ * Permanently removes the specified locations. This operation cannot be undone. Returns
+ * 204 on full success or 200 with error details if some deletions fail (for example,
+ * if a location is not found or the caller lacks permission).
  */
 export const deleteLocations = <ThrowOnError extends boolean = false>(options?: Options<DeleteLocationsData, ThrowOnError>) => (options?.client ?? client).post<DeleteLocationsResponses, DeleteLocationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -76,7 +96,9 @@ export const deleteLocations = <ThrowOnError extends boolean = false>(options?: 
 });
 
 /**
- * Returns information and available operations for all versions of the API.
+ * API information
+ *
+ * Returns information about API versions and available operations.
  */
 export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndpointData, ThrowOnError>) => (options?.client ?? client).get<RootEndpointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -85,7 +107,9 @@ export const rootEndpoint = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * Returns information and available operations for version 1 of the API
+ * API version information
+ *
+ * Returns available operations for a single version of the API.
  */
 export const v1 = <ThrowOnError extends boolean = false>(options?: Options<V1Data, ThrowOnError>) => (options?.client ?? client).get<V1Responses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

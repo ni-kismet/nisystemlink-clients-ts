@@ -8,7 +8,7 @@
  * CRUD lifecycle: upload → list → download metadata → update metadata → delete.
  * The ping endpoint is deprecated; use listServiceGroups for health checks.
  *
- * BUG: listAvailableFilesGet orderBy: 'lastUpdatedTimestamp' returns HTTP 400
+ * BUG: listAvailableFiles orderBy: 'lastUpdatedTimestamp' returns HTTP 400
  * ("The orderBy field is invalid") — valid values are 'created', 'id', 'size'.
  */
 
@@ -17,7 +17,7 @@ import { isConfigured, buildServiceBaseUrl } from '../../src/client';
 import {
   rootEndpoint,
   listServiceGroups,
-  listAvailableFilesGet,
+  listAvailableFiles,
   queryFilesLinq,
   queryAvailableFiles,
   upload,
@@ -65,9 +65,9 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
     });
   });
 
-  describe('listAvailableFilesGet (GET list)', () => {
+  describe('listAvailableFiles (GET list)', () => {
     it.skip('lists files (GET list times out on dev server — use queryFilesLinq instead)', async () => {
-      const { data, error, response } = await listAvailableFilesGet({
+      const { data, error, response } = await listAvailableFiles({
         client,
         query: { take: 10 },
       });
@@ -76,7 +76,7 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
     });
 
     it.skip('respects take limit (GET list times out on dev server — use queryFilesLinq instead)', async () => {
-      const { data } = await listAvailableFilesGet({ client, query: { take: 2 } });
+      const { data } = await listAvailableFiles({ client, query: { take: 2 } });
       const files = (data as any)?.availableFiles ?? (data as any)?.files ?? [];
       expect(files.length).toBeLessThanOrEqual(2);
     });
@@ -84,7 +84,7 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
     it('BUG: orderBy lastUpdatedTimestamp — expect 400 (invalid field)', async () => {
       // This documents the known spec bug: lastUpdatedTimestamp is in the type
       // union but the server rejects it. Valid values: created, id, size.
-      const { response } = await listAvailableFilesGet({
+      const { response } = await listAvailableFiles({
         client,
         query: { take: 1, orderBy: 'lastUpdatedTimestamp' as any },
       });
@@ -92,7 +92,7 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
       // OpenAPI spec declares it as valid.
       expect([200, 400]).toContain(response.status);
       if (response.status === 400) {
-        console.warn('[BUG] listAvailableFilesGet: orderBy=lastUpdatedTimestamp returns 400 — spec is incorrect');
+        console.warn('[BUG] listAvailableFiles: orderBy=lastUpdatedTimestamp returns 400 — spec is incorrect');
       }
     });
   });

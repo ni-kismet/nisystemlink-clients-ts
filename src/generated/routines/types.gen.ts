@@ -116,15 +116,6 @@ export type Operations = {
     editRoutine?: Operation;
 };
 
-export type ProblemDetails = {
-    type?: string | null;
-    title?: string | null;
-    status?: number | null;
-    detail?: string | null;
-    instance?: string | null;
-    [key: string]: unknown;
-};
-
 /**
  * Model of a routine that triggers the execution of Jupyter notebooks
  */
@@ -332,6 +323,10 @@ export type QueryRoutinesData = {
 
 export type QueryRoutinesErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -348,34 +343,45 @@ export type QueryRoutinesResponses = {
 
 export type QueryRoutinesResponse = QueryRoutinesResponses[keyof QueryRoutinesResponses];
 
-export type CreateRoutinesData = {
+export type CreateRoutineData = {
     body?: CreateRoutineRequest;
     path?: never;
     query?: never;
     url: '/niroutine/v1/routines';
 };
 
-export type CreateRoutinesErrors = {
+export type CreateRoutineErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Conflict
+     */
+    409: BaseResponse;
     /**
      * Error
      */
     default: BaseResponse;
 };
 
-export type CreateRoutinesError = CreateRoutinesErrors[keyof CreateRoutinesErrors];
+export type CreateRoutineError = CreateRoutineErrors[keyof CreateRoutineErrors];
 
-export type CreateRoutinesResponses = {
+export type CreateRoutineResponses = {
     /**
      * Created
      */
     201: Routine;
 };
 
-export type CreateRoutinesResponse = CreateRoutinesResponses[keyof CreateRoutinesResponses];
+export type CreateRoutineResponse = CreateRoutineResponses[keyof CreateRoutineResponses];
 
 export type DeleteRoutineData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the routine.
+         */
         id: string;
     };
     query?: never;
@@ -383,6 +389,14 @@ export type DeleteRoutineData = {
 };
 
 export type DeleteRoutineErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
@@ -403,6 +417,9 @@ export type DeleteRoutineResponse = DeleteRoutineResponses[keyof DeleteRoutineRe
 export type GetRoutineByIdData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the routine.
+         */
         id: string;
     };
     query?: never;
@@ -410,6 +427,14 @@ export type GetRoutineByIdData = {
 };
 
 export type GetRoutineByIdErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
@@ -430,6 +455,9 @@ export type GetRoutineByIdResponse = GetRoutineByIdResponses[keyof GetRoutineByI
 export type UpdateRoutineData = {
     body?: UpdateRoutineRequest;
     path: {
+        /**
+         * The unique identifier of the routine.
+         */
         id: string;
     };
     query?: never;
@@ -440,19 +468,19 @@ export type UpdateRoutineErrors = {
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
     /**
      * Forbidden
      */
-    403: ProblemDetails;
+    403: BaseResponse;
     /**
      * Not Found
      */
-    404: ProblemDetails;
+    404: BaseResponse;
     /**
      * Conflict
      */
-    409: ProblemDetails;
+    409: BaseResponse;
     /**
      * Error
      */
@@ -471,6 +499,9 @@ export type UpdateRoutineResponses = {
 export type GetExecutionDefinitionByRoutineIdData = {
     body?: never;
     path: {
+        /**
+         * The unique identifier of the routine.
+         */
         id: string;
     };
     query?: never;
@@ -478,6 +509,14 @@ export type GetExecutionDefinitionByRoutineIdData = {
 };
 
 export type GetExecutionDefinitionByRoutineIdErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */

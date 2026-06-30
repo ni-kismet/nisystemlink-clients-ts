@@ -4,6 +4,9 @@ export type ClientOptions = {
     baseUrl: 'https://dev-api.lifecyclesolutions.ni.com' | (string & {});
 };
 
+/**
+ * Request to apply update descriptors to a feed.
+ */
 export type ApplyFeedUpdatesRequest = {
     /**
      * Gets or sets an array of update descriptors.
@@ -11,6 +14,9 @@ export type ApplyFeedUpdatesRequest = {
     applyUpdateDescriptors?: Array<ApplyUpdateDescriptor> | null;
 };
 
+/**
+ * Describes a package update to apply to a feed.
+ */
 export type ApplyUpdateDescriptor = {
     /**
      * Package URL that is going to update.
@@ -18,10 +24,16 @@ export type ApplyUpdateDescriptor = {
     packageUri?: string | null;
 };
 
+/**
+ * A response containing an optional error.
+ */
 export type BaseResponse = {
     error?: HttpError;
 };
 
+/**
+ * Request to create a new feed.
+ */
 export type CreateFeedRequest = {
     /**
      * The name of the feed.
@@ -42,6 +54,9 @@ export type CreateFeedRequest = {
     workspace?: string | null;
 };
 
+/**
+ * Result of scheduling a feed for deletion.
+ */
 export type DeleteFeedResult = {
     /**
      * The id of the feed that is to be deleted.
@@ -53,6 +68,9 @@ export type DeleteFeedResult = {
     jobId?: string | null;
 };
 
+/**
+ * Request to delete one or more feeds.
+ */
 export type DeleteFeedsRequest = {
     /**
      * Collection of Feed Ids for the feeds that are going to be deleted
@@ -60,6 +78,9 @@ export type DeleteFeedsRequest = {
     ids?: Array<string> | null;
 };
 
+/**
+ * Response containing the results of a bulk feed deletion request.
+ */
 export type DeleteFeedsResponse = {
     error?: HttpError;
     /**
@@ -68,6 +89,9 @@ export type DeleteFeedsResponse = {
     feeds?: Array<DeleteFeedResult> | null;
 };
 
+/**
+ * Request to delete one or more packages from a feed.
+ */
 export type DeletePackagesRequest = {
     /**
      * Package IDs to delete from the feed.
@@ -75,6 +99,9 @@ export type DeletePackagesRequest = {
     packageIds?: Array<string> | null;
 };
 
+/**
+ * Represents a package feed.
+ */
 export type Feed = {
     /**
      * The auto-generated ID of the feed.
@@ -164,6 +191,9 @@ export type HttpError = {
     innerErrors?: Array<HttpError> | null;
 };
 
+/**
+ * Represents an asynchronous feed operation job.
+ */
 export type Job = {
     /**
      * The auto-generated ID of the job.
@@ -178,7 +208,7 @@ export type Job = {
      */
     status?: 'QUEUED' | 'PROCESSING' | 'SUCCESS' | 'ERROR' | 'COMPLETED_WITH_ERROR' | 'CLEANUP';
     /**
-     * The ID of the resouce associated with the job.
+     * The ID of the resource associated with the job.
      */
     resourceId?: string | null;
     /**
@@ -223,9 +253,15 @@ export type JobError = {
  * The response used to return a Job ID.
  */
 export type JobIdResponse = {
+    /**
+     * The ID of the created job.
+     */
     jobId?: string | null;
 };
 
+/**
+ * Contains the results of a completed job.
+ */
 export type JobResult = {
     /**
      * The results associated with the job.
@@ -233,6 +269,9 @@ export type JobResult = {
     resourceIds?: Array<string> | null;
 };
 
+/**
+ * Response containing a list of feeds.
+ */
 export type ListFeedsResponse = {
     /**
      * A collection of feeds
@@ -240,11 +279,23 @@ export type ListFeedsResponse = {
     feeds?: Array<Feed> | null;
 };
 
+/**
+ * Response containing a list of jobs.
+ */
 export type ListJobsResponse = {
+    /**
+     * The list of jobs matching the query.
+     */
     jobs?: Array<Job> | null;
 };
 
+/**
+ * Response containing a list of packages.
+ */
 export type ListPackagesResponse = {
+    /**
+     * The list of packages matching the query.
+     */
     packages?: Array<Package> | null;
 };
 
@@ -279,6 +330,9 @@ export type Operations = {
     downloadPackage?: Operation;
 };
 
+/**
+ * Represents a package in a feed.
+ */
 export type Package = {
     /**
      * Gets or sets the ID of this package. This is used to reference this package in the service.
@@ -308,6 +362,9 @@ export type Package = {
     metadata?: PackageMetadata;
 };
 
+/**
+ * Metadata properties extracted from a package file.
+ */
 export type PackageMetadata = {
     /**
      * The name of the package.
@@ -414,6 +471,9 @@ export type PackageMetadata = {
     } | null;
 };
 
+/**
+ * Request to replicate a feed from one or more source URLs.
+ */
 export type ReplicateFeedRequest = {
     /**
      * The name of the feed.
@@ -438,6 +498,9 @@ export type ReplicateFeedRequest = {
     urls: Array<string>;
 };
 
+/**
+ * Result of replicating a single feed, including the created feed and its job ID.
+ */
 export type ReplicateFeedResult = {
     /**
      * The auto-generated ID of the feed.
@@ -481,6 +544,9 @@ export type ReplicateFeedResult = {
     jobId?: string | null;
 };
 
+/**
+ * Request to replicate multiple feeds.
+ */
 export type ReplicateFeedsRequest = {
     /**
      * Collection of Feeds that are going to be replicated
@@ -488,6 +554,9 @@ export type ReplicateFeedsRequest = {
     feeds?: Array<ReplicateFeedRequest> | null;
 };
 
+/**
+ * Response containing the results of a bulk feed replication request.
+ */
 export type ReplicateFeedsResult = {
     error?: HttpError;
     /**
@@ -496,6 +565,9 @@ export type ReplicateFeedsResult = {
     feeds?: Array<ReplicateFeedResult> | null;
 };
 
+/**
+ * Describes an available package update.
+ */
 export type UpdateDescriptor = {
     /**
      * The name of the package.
@@ -511,6 +583,9 @@ export type UpdateDescriptor = {
     packageUri?: string | null;
 };
 
+/**
+ * Request to update the metadata of an existing feed.
+ */
 export type UpdateFeedMetadataRequest = {
     /**
      * The name of the feed.
@@ -563,6 +638,14 @@ export type QueryFeedsData = {
 
 export type QueryFeedsErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Forbidden
+     */
+    403: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -580,6 +663,9 @@ export type QueryFeedsResponses = {
 export type QueryFeedsResponse = QueryFeedsResponses[keyof QueryFeedsResponses];
 
 export type CreateFeedData = {
+    /**
+     * The feed to create.
+     */
     body?: CreateFeedRequest;
     path?: never;
     query?: never;
@@ -587,6 +673,18 @@ export type CreateFeedData = {
 };
 
 export type CreateFeedErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Forbidden
+     */
+    403: BaseResponse;
+    /**
+     * Conflict
+     */
+    409: BaseResponse;
     /**
      * Error
      */
@@ -618,6 +716,18 @@ export type DeleteFeedData = {
 
 export type DeleteFeedErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Forbidden
+     */
+    403: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -648,6 +758,14 @@ export type GetFeedByIdData = {
 
 export type GetFeedByIdErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -665,6 +783,9 @@ export type GetFeedByIdResponses = {
 export type GetFeedByIdResponse = GetFeedByIdResponses[keyof GetFeedByIdResponses];
 
 export type UpdateFeedMetadataData = {
+    /**
+     * The feed metadata fields to update.
+     */
     body?: UpdateFeedMetadataRequest;
     path: {
         /**
@@ -677,6 +798,22 @@ export type UpdateFeedMetadataData = {
 };
 
 export type UpdateFeedMetadataErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Forbidden
+     */
+    403: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
+     * Conflict
+     */
+    409: BaseResponse;
     /**
      * Error
      */
@@ -706,6 +843,18 @@ export type DeleteFeedsData = {
 
 export type DeleteFeedsErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Forbidden
+     */
+    403: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -715,14 +864,21 @@ export type DeleteFeedsError = DeleteFeedsErrors[keyof DeleteFeedsErrors];
 
 export type DeleteFeedsResponses = {
     /**
+     * OK
+     */
+    200: DeleteFeedsResponse;
+    /**
      * No content
      */
-    201: DeleteFeedsResponse;
+    201: unknown;
 };
 
 export type DeleteFeedsResponse2 = DeleteFeedsResponses[keyof DeleteFeedsResponses];
 
 export type ReplicateFeedData = {
+    /**
+     * The feed to create and the source URLs to replicate packages from.
+     */
     body?: ReplicateFeedRequest;
     path?: never;
     query?: {
@@ -735,6 +891,18 @@ export type ReplicateFeedData = {
 };
 
 export type ReplicateFeedErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Forbidden
+     */
+    403: BaseResponse;
+    /**
+     * Conflict
+     */
+    409: BaseResponse;
     /**
      * Error
      */
@@ -753,6 +921,9 @@ export type ReplicateFeedResponses = {
 export type ReplicateFeedResponse = ReplicateFeedResponses[keyof ReplicateFeedResponses];
 
 export type ReplicateFeedsData = {
+    /**
+     * The collection of feeds to create and replicate packages into.
+     */
     body?: ReplicateFeedsRequest;
     path?: never;
     query?: {
@@ -765,6 +936,18 @@ export type ReplicateFeedsData = {
 };
 
 export type ReplicateFeedsErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Forbidden
+     */
+    403: BaseResponse;
+    /**
+     * Conflict
+     */
+    409: BaseResponse;
     /**
      * Error
      */
@@ -800,6 +983,14 @@ export type CheckFeedForUpdatesData = {
 
 export type CheckFeedForUpdatesErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -817,6 +1008,9 @@ export type CheckFeedForUpdatesResponses = {
 export type CheckFeedForUpdatesResponse = CheckFeedForUpdatesResponses[keyof CheckFeedForUpdatesResponses];
 
 export type ApplyUpdatesForFeedData = {
+    /**
+     * The update descriptors specifying which packages to update.
+     */
     body?: ApplyFeedUpdatesRequest;
     path: {
         /**
@@ -834,6 +1028,14 @@ export type ApplyUpdatesForFeedData = {
 };
 
 export type ApplyUpdatesForFeedErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
@@ -865,6 +1067,14 @@ export type GetUpdateDescriptorsData = {
 
 export type GetUpdateDescriptorsErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -894,6 +1104,18 @@ export type CleanFeedData = {
 };
 
 export type CleanFeedErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Forbidden
+     */
+    403: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
@@ -1045,6 +1267,14 @@ export type QueryJobsForFeedData = {
 
 export type QueryJobsForFeedErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -1075,6 +1305,14 @@ export type GetJobData = {
 
 export type GetJobErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -1104,6 +1342,14 @@ export type QueryPackagesForFeedData = {
 };
 
 export type QueryPackagesForFeedErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
@@ -1142,6 +1388,18 @@ export type UploadPackageToFeedAsyncData = {
 
 export type UploadPackageToFeedAsyncErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
+     * Conflict
+     */
+    409: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -1171,6 +1429,18 @@ export type DeletePackageByIdData = {
 };
 
 export type DeletePackageByIdErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Forbidden
+     */
+    403: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
@@ -1202,6 +1472,14 @@ export type GetPackageByIdData = {
 
 export type GetPackageByIdErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -1219,6 +1497,9 @@ export type GetPackageByIdResponses = {
 export type GetPackageByIdResponse = GetPackageByIdResponses[keyof GetPackageByIdResponses];
 
 export type DeletePackagesData = {
+    /**
+     * The IDs of the packages to delete.
+     */
     body?: DeletePackagesRequest;
     path?: never;
     query?: never;
@@ -1226,6 +1507,18 @@ export type DeletePackagesData = {
 };
 
 export type DeletePackagesErrors = {
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
+     * Forbidden
+     */
+    403: BaseResponse;
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */
@@ -1261,6 +1554,10 @@ export type DownloadPackageData = {
 
 export type DownloadPackageErrors = {
     /**
+     * Not Found
+     */
+    404: BaseResponse;
+    /**
      * Error
      */
     default: BaseResponse;
@@ -1294,6 +1591,10 @@ export type DownloadPackageHeadData = {
 };
 
 export type DownloadPackageHeadErrors = {
+    /**
+     * Not Found
+     */
+    404: BaseResponse;
     /**
      * Error
      */

@@ -74,7 +74,7 @@ export const updateSpecifications = <ThrowOnError extends boolean = false>(optio
  * Uses the `take` and `continuationToken` properties to give paged responses.
  *
  *
- * Uses the `orderBy` and `orderByDescending` properties to sort the specifictions.
+ * Uses the `orderBy` and `orderByDescending` properties to sort the specifications.
  */
 export const querySpecifications = <ThrowOnError extends boolean = false>(options?: Options<QuerySpecificationsData, ThrowOnError>) => (options?.client ?? client).post<QuerySpecificationsResponses, QuerySpecificationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

@@ -19,16 +19,13 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Create an artifact.
+ * Create an artifact
  *
  * Uploads a binary artifact (e.g. a notebook execution result, analysis table, or data file)
- * and stores it in bulk storage. The request must be a `multipart/form-data` request
- * containing two parts:
- * <list type="bullet">
- * <item><term>workspace</term><description>The workspace ID the artifact belongs to. Must appear before the artifact part.</description></item>
- * <item><term>artifact</term><description>The binary file content to upload.</description></item>
- * </list>
- * The artifact is assigned a default TTL based on the server's `daysToPersistExecutions` setting.
+ * and stores it in bulk storage. The request must be a <b>multipart/form-data</b> request
+ * containing two parts: a <b>workspace</b> field with the workspace ID the artifact belongs
+ * to (must appear first), and an <b>artifact</b> field with the binary file content.
+ * The artifact is assigned a default TTL based on the server's <b>daysToPersistExecutions</b> setting.
  * Use the PATCH endpoint to extend or shorten the TTL after creation.
  */
 export const createArtifact = <ThrowOnError extends boolean = false>(options?: Options<CreateArtifactData, ThrowOnError>) => (options?.client ?? client).post<CreateArtifactResponses, CreateArtifactErrors, ThrowOnError>({
@@ -43,7 +40,7 @@ export const createArtifact = <ThrowOnError extends boolean = false>(options?: O
 });
 
 /**
- * Deletes an artifact.
+ * Deletes an artifact
  *
  * Marks the artifact for asynchronous deletion by setting its TTL to 0.
  * A background cleanup service removes the artifact data from bulk storage.
@@ -56,9 +53,9 @@ export const deleteArtifact = <ThrowOnError extends boolean = false>(options: Op
 });
 
 /**
- * Download an artifact.
+ * Download an artifact
  *
- * Returns the binary content of a previously uploaded artifact as an `application/octet-stream`.
+ * Returns the binary content of a previously uploaded artifact as an <b>application/octet-stream</b>.
  * Returns 404 if the artifact does not exist, has expired, or the caller lacks access.
  */
 export const downloadArtifact = <ThrowOnError extends boolean = false>(options: Options<DownloadArtifactData, ThrowOnError>) => (options.client ?? client).get<DownloadArtifactResponses, DownloadArtifactErrors, ThrowOnError>({
@@ -68,11 +65,11 @@ export const downloadArtifact = <ThrowOnError extends boolean = false>(options: 
 });
 
 /**
- * Updates the TTL of an artifact.
+ * Updates the TTL of an artifact
  *
- * Sets a new expiration for the artifact. The `expiryInDays` value is relative to now
+ * Sets a new expiration for the artifact. The <b>expiryInDays</b> value is relative to now
  * and must be between 0 and the server-configured maximum (default 365 days).
- * Setting `expiryInDays` to 0 is equivalent to deleting the artifact.
+ * Setting <b>expiryInDays</b> to 0 is equivalent to deleting the artifact.
  */
 export const updateArtifactTtl = <ThrowOnError extends boolean = false>(options: Options<UpdateArtifactTtlData, ThrowOnError>) => (options.client ?? client).patch<UpdateArtifactTtlResponses, UpdateArtifactTtlErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

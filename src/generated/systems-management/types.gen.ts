@@ -5,6 +5,16 @@ export type ClientOptions = {
 };
 
 /**
+ * Model for request to activate systems by checking out a license seat for each one.
+ */
+export type ActivateSystemsRequest = {
+    /**
+     * Array of strings representing the IDs of the systems to activate.
+     */
+    systemIds?: Array<string> | null;
+};
+
+/**
  * Represents the advanced grains (system facts and attributes) collected from managed systems via Salt.
  * Grains include hardware, operating system, network, and NI-specific details about managed devices.
  */
@@ -435,6 +445,10 @@ export type CreateVirtualSystemRequest = {
  * Represents the response returned after creating a virtual system.
  */
 export type CreateVirtualSystemResponse = {
+    /**
+     * Gets or sets an error to include in the response.
+     */
+    error?: HttpError | null;
     /**
      * Id of the virtual system
      */
@@ -1762,7 +1776,7 @@ export type GetJobsSummaryError = GetJobsSummaryErrors[keyof GetJobsSummaryError
 
 export type GetJobsSummaryResponses = {
     /**
-     * An instance of a NationalInstruments.SystemsManagementService.Model.API.JobsSummaryResponse
+     * The jobs summary with counts by state
      */
     200: JobsSummaryResponse;
 };
@@ -1803,7 +1817,7 @@ export type QueryJobsResponse2 = QueryJobsResponses[keyof QueryJobsResponses];
 
 export type CancelJobsData = {
     /**
-     * A list of NationalInstruments.SystemsManagementService.Model.API.CancelJobRequest
+     * The jobs to cancel, identified by job ID and system ID.
      */
     body?: Array<CancelJobRequest>;
     path?: never;
@@ -1836,34 +1850,6 @@ export type CancelJobsResponses = {
 };
 
 export type CancelJobsResponse = CancelJobsResponses[keyof CancelJobsResponses];
-
-export type RootEndpointData = {
-    body?: never;
-    path?: never;
-    query?: never;
-    url: '/nisysmgmt';
-};
-
-export type RootEndpointResponses = {
-    /**
-     * OK
-     */
-    200: unknown;
-};
-
-export type V1Data = {
-    body?: never;
-    path?: never;
-    query?: never;
-    url: '/nisysmgmt/v1';
-};
-
-export type V1Responses = {
-    /**
-     * OK
-     */
-    200: unknown;
-};
 
 export type SearchSystemsData = {
     /**
@@ -2119,11 +2105,19 @@ export type CreateVirtualSystemErrors = {
      * Unauthorized
      */
     401: BaseResponse;
+    /**
+     * A license seat could not be checked out for the system
+     */
+    403: BaseResponse;
 };
 
 export type CreateVirtualSystemError = CreateVirtualSystemErrors[keyof CreateVirtualSystemErrors];
 
 export type CreateVirtualSystemResponses = {
+    /**
+     * The system was created but a permanent license could not be checked out, so it was marked as not activated
+     */
+    200: CreateVirtualSystemResponse;
     /**
      * The minion ID of the created virtual system
      */
@@ -2151,6 +2145,10 @@ export type GenerateVirtualSystemApiKeyErrors = {
      * Unauthorized
      */
     401: BaseResponse;
+    /**
+     * Forbidden
+     */
+    403: BaseResponse;
     /**
      * System not found
      */
@@ -2283,6 +2281,10 @@ export type UpdateSystemMetadataErrors = {
      */
     401: BaseResponse;
     /**
+     * Forbidden
+     */
+    403: BaseResponse;
+    /**
      * Not Found
      */
     404: BaseResponse;
@@ -2302,3 +2304,31 @@ export type UpdateSystemMetadataResponses = {
 };
 
 export type UpdateSystemMetadataResponse = UpdateSystemMetadataResponses[keyof UpdateSystemMetadataResponses];
+
+export type RootEndpointData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/nisysmgmt';
+};
+
+export type RootEndpointResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
+
+export type V1Data = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/nisysmgmt/v1';
+};
+
+export type V1Responses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};

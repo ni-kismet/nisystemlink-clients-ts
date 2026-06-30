@@ -8,20 +8,26 @@ export type BaseResponse = {
     error?: HttpError;
 };
 
+/**
+ * Request containing the system id from which to export the state
+ */
 export type ExportStateFromSystemRequest = {
     /**
-     * Gets or sets whether to return the state data inline or as an attachment. When the inline is true, the Content-Disposition header is set to 'inline'. When the inline is not specified or is false, the state contents are handled as a download. The Content-Disposition header is set to 'attachment' and the MIME type is set to text/x-yaml; charset=UTF-8.
+     * Whether to return the state data inline or as an attachment. When the inline is true, the Content-Disposition header is set to 'inline'. When the inline is not specified or is false, the state contents are handled as a download. The Content-Disposition header is set to 'attachment' and the MIME type is set to text/x-yaml; charset=UTF-8.
      */
     inline?: boolean | null;
     /**
-     * Gets or sets system ID.
+     * System ID.
      */
     systemID?: string | null;
 };
 
+/**
+ * Request containing identifying information on the state to export
+ */
 export type ExportStateRequest = {
     /**
-     * Gets or sets whether to return the state data inline or as an attachment. When the inline is true, the Content-Disposition header is set to 'inline'. When the inline is not specified or is false, the state contents are handled as a download. The Content-Disposition header is set to 'attachment' and the MIME type is set to text/x-yaml; charset=UTF-8.
+     * Whether to return the state data inline or as an attachment. When the inline is true, the Content-Disposition header is set to 'inline'. When the inline is not specified or is false, the state contents are handled as a download. The Content-Disposition header is set to 'attachment' and the MIME type is set to text/x-yaml; charset=UTF-8.
      */
     inline?: boolean | null;
     state?: StateIdVersionPair;
@@ -32,19 +38,19 @@ export type ExportStateRequest = {
  */
 export type Feed = {
     /**
-     * Gets or sets name of the feed.
+     * Name of the feed.
      */
     name?: string | null;
     /**
-     * Gets or sets the url for the repository.
+     * The url for the repository.
      */
     url?: string | null;
     /**
-     * Gets or sets whether the feed is enabled or not.
+     * Whether the feed is enabled or not.
      */
     enabled?: boolean;
     /**
-     * Gets or sets whether the feed is compressed or not.
+     * Whether the feed is compressed or not.
      */
     compressed?: boolean;
 };
@@ -64,35 +70,29 @@ export type HttpError = {
  */
 export type Package = {
     /**
-     * Gets or sets name of the package.
+     * Name of the package.
      */
     name?: string | null;
     /**
-     * Gets or sets version of the package.
+     * Version of the package.
      */
     version?: string | null;
     /**
-     * Gets or sets a boolean variable whose value controls the installation of the recommended packages. This property is available starting with version 2 of the getStates and createOrUpdateStates operations.
+     * A boolean variable whose value controls the installation of the recommended packages. This property is available starting with version 2 of the getStates and createOrUpdateStates operations.
      */
     installRecommends?: boolean;
 };
 
-export type ProblemDetails = {
-    type?: string | null;
-    title?: string | null;
-    status?: number | null;
-    detail?: string | null;
-    instance?: string | null;
-    [key: string]: unknown;
-};
-
+/**
+ * Request containing the state id and version to revert to
+ */
 export type RevertStateRequest = {
     /**
-     * Gets or sets the ID of the state.
+     * The ID of the state.
      */
     id?: string | null;
     /**
-     * Gets or sets the version of the state.
+     * The version of the state.
      */
     version?: string | null;
 };
@@ -102,7 +102,7 @@ export type RevertStateRequest = {
  */
 export type StateDescriptionListResponse = {
     /**
-     * Gets or sets total count of states.
+     * Total count of states.
      */
     totalCount?: number;
     states?: Array<StateMetadata> | null;
@@ -113,19 +113,22 @@ export type StateDescriptionListResponse = {
  */
 export type StateHistoryResponse = {
     /**
-     * Gets or sets total number of versions of a state.
+     * Total number of versions of a state.
      */
     totalCount?: number;
     versions?: Array<StateVersion> | null;
 };
 
+/**
+ * A state identifier and optional version pair
+ */
 export type StateIdVersionPair = {
     /**
-     * Gets or sets the ID of the state.
+     * The ID of the state.
      */
     stateID?: string | null;
     /**
-     * Gets or sets the version of the state. The latest package/feed set of the state will be used if the version is not specified.
+     * The version of the state. The latest package/feed set of the state will be used if the version is not specified.
      */
     stateVersion?: string | null;
 };
@@ -135,41 +138,41 @@ export type StateIdVersionPair = {
  */
 export type StateMetadata = {
     /**
-     * Gets or sets the ID of the state.
+     * The ID of the state.
      */
     id?: string | null;
     /**
-     * Gets or sets the name of the state.
+     * The name of the state.
      */
     name?: string | null;
     /**
-     * Gets or sets the description of the state.
+     * The description of the state.
      */
     description?: string | null;
     /**
-     * Gets or sets supported distribution by a state.
+     * Supported distribution by a state.
      */
     distribution?: 'NI_LINUXRT' | 'NI_LINUXRT_NXG' | 'WINDOWS' | 'ANY';
     /**
-     * Gets or sets supported architecture by a state.
+     * Supported architecture by a state.
      */
     architecture?: 'ARM' | 'X64' | 'X86' | 'ANY';
     /**
-     * Gets or sets the custom properties for a state.
+     * The custom properties for a state.
      */
     properties?: {
         [key: string]: string | null;
     } | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the state creation date.
+     * ISO-8601 formatted timestamp specifying the state creation date.
      */
     createdTimestamp?: string;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the last date that the state was updated.
+     * ISO-8601 formatted timestamp specifying the last date that the state was updated.
      */
     lastUpdatedTimestamp?: string;
     /**
-     * Gets or sets the ID of the workspace. This property is available starting with version 3 of the getStates operation.
+     * The ID of the workspace. This property is available starting with version 3 of the getStates operation.
      */
     workspace?: string | null;
 };
@@ -179,23 +182,23 @@ export type StateMetadata = {
  */
 export type StateRequest = {
     /**
-     * Gets or sets the name of the state.
+     * The name of the state.
      */
     name?: string | null;
     /**
-     * Gets or sets the description of the state.
+     * The description of the state.
      */
     description?: string | null;
     /**
-     * Gets or sets the distribution supported by a state.
+     * The distribution supported by a state.
      */
     distribution?: 'NI_LINUXRT' | 'NI_LINUXRT_NXG' | 'WINDOWS' | 'ANY';
     /**
-     * Gets or sets the architecture supported by a state.
+     * The architecture supported by a state.
      */
     architecture?: 'ARM' | 'X64' | 'X86' | 'ANY';
     /**
-     * Gets or sets the custom properties for a state.
+     * The custom properties for a state.
      */
     properties?: {
         [key: string]: string | null;
@@ -204,7 +207,7 @@ export type StateRequest = {
     systemImage?: SystemImage;
     packages?: Array<Package> | null;
     /**
-     * Gets or sets the ID of the workspace. This property is available starting with version 3 of the createOrUpdateStates operation.
+     * The ID of the workspace. This property is available starting with version 3 of the createOrUpdateStates operation.
      */
     workspace?: string | null;
 };
@@ -214,48 +217,48 @@ export type StateRequest = {
  */
 export type StateResponse = {
     /**
-     * Gets or sets the ID of the state.
+     * The ID of the state.
      */
     id?: string | null;
     /**
-     * Gets or sets the name of the state.
+     * The name of the state.
      */
     name?: string | null;
     /**
-     * Gets or sets the description of the state.
+     * The description of the state.
      */
     description?: string | null;
     /**
-     * Gets or sets supported distribution by a state.
+     * Supported distribution by a state.
      */
     distribution?: 'NI_LINUXRT' | 'NI_LINUXRT_NXG' | 'WINDOWS' | 'ANY';
     /**
-     * Gets or sets supported architecture by a state.
+     * Supported architecture by a state.
      */
     architecture?: 'ARM' | 'X64' | 'X86' | 'ANY';
     /**
-     * Gets or sets the custom properties for a state.
+     * The custom properties for a state.
      */
     properties?: {
         [key: string]: string | null;
     } | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the state creation date.
+     * ISO-8601 formatted timestamp specifying the state creation date.
      */
     createdTimestamp?: string;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the last date that the state has been updated.
+     * ISO-8601 formatted timestamp specifying the last date that the state has been updated.
      */
     lastUpdatedTimestamp?: string;
     feeds?: Array<Feed> | null;
     systemImage?: SystemImage;
     packages?: Array<Package> | null;
     /**
-     * Gets or sets whether the state contains extra operations in addition to feeds and packages.
+     * Whether the state contains extra operations in addition to feeds and packages.
      */
     containsExtraOperations?: boolean;
     /**
-     * Gets or sets the ID of the workspace. This property is available starting with version 3 of the getStates operation.
+     * The ID of the workspace. This property is available starting with version 3 of the getStates operation.
      */
     workspace?: string | null;
 };
@@ -265,19 +268,19 @@ export type StateResponse = {
  */
 export type StateVersion = {
     /**
-     * Gets or sets the version of the state
+     * The version of the state
      */
     version?: string | null;
     /**
-     * Gets or sets the description of this specific change.
+     * The description of this specific change.
      */
     description?: string | null;
     /**
-     * Gets or sets ISO-8601 formatted timestamp specifying the state version creation date.
+     * ISO-8601 formatted timestamp specifying the state version creation date.
      */
     createdTimestamp?: string;
     /**
-     * Gets or sets the user Id of the user who created the state version
+     * The user Id of the user who created the state version
      */
     userId?: string | null;
 };
@@ -287,11 +290,11 @@ export type StateVersion = {
  */
 export type SystemImage = {
     /**
-     * Gets or sets name of the system image.
+     * Name of the system image.
      */
     name?: string | null;
     /**
-     * Gets or sets version of the system image.
+     * Version of the system image.
      */
     version?: string | null;
 };
@@ -321,7 +324,7 @@ export type GetStateHistoryErrors = {
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
     /**
      * Not Found
      */
@@ -359,7 +362,7 @@ export type GetStateVersionErrors = {
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
     /**
      * Not Found
      */
@@ -379,7 +382,7 @@ export type GetStateVersionResponse = GetStateVersionResponses[keyof GetStateVer
 
 export type RevertStateVersionData = {
     /**
-     * Instance of NationalInstruments.SystemsStateService.Model.API.RevertStateRequest which contains the id of the state to be reverted and the specific version to revert to.
+     * The id of the state to be reverted and the specific version to revert to.
      */
     body?: RevertStateRequest;
     path?: never;
@@ -395,7 +398,7 @@ export type RevertStateVersionErrors = {
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
     /**
      * Not Found
      */
@@ -416,34 +419,6 @@ export type RevertStateVersionResponses = {
 };
 
 export type RevertStateVersionResponse = RevertStateVersionResponses[keyof RevertStateVersionResponses];
-
-export type RootEndpointData = {
-    body?: never;
-    path?: never;
-    query?: never;
-    url: '/nisystemsstate';
-};
-
-export type RootEndpointResponses = {
-    /**
-     * OK
-     */
-    200: unknown;
-};
-
-export type V1Data = {
-    body?: never;
-    path?: never;
-    query?: never;
-    url: '/nisystemsstate/v1';
-};
-
-export type V1Responses = {
-    /**
-     * OK
-     */
-    200: unknown;
-};
 
 export type GetStatesData = {
     body?: never;
@@ -483,7 +458,7 @@ export type GetStatesErrors = {
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
 };
 
 export type GetStatesError = GetStatesErrors[keyof GetStatesErrors];
@@ -499,7 +474,7 @@ export type GetStatesResponse = GetStatesResponses[keyof GetStatesResponses];
 
 export type CreateStateData = {
     /**
-     * An instance of NationalInstruments.SystemsStateService.Model.API.StateRequest which contains information about the state to be created.
+     * Information about the state to be created.
      */
     body?: StateRequest;
     path?: never;
@@ -515,7 +490,7 @@ export type CreateStateErrors = {
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
     /**
      * Not Found
      */
@@ -539,7 +514,7 @@ export type CreateStateResponse = CreateStateResponses[keyof CreateStateResponse
 
 export type ExportStateData = {
     /**
-     * An instance of NationalInstruments.SystemsStateService.Model.API.ExportStateRequest which contains identifying information on the state to export.
+     * Identifying information on the state to export.
      */
     body?: ExportStateRequest;
     path?: never;
@@ -555,7 +530,7 @@ export type ExportStateErrors = {
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
     /**
      * Not Found
      */
@@ -575,7 +550,7 @@ export type ExportStateResponse = ExportStateResponses[keyof ExportStateResponse
 
 export type ExportStateFromSystemData = {
     /**
-     * An instance of NationalInstruments.SystemsStateService.Model.API.ExportStateFromSystemRequest which contains the system id from which to export the state.
+     * The system id from which to export the state.
      */
     body?: ExportStateFromSystemRequest;
     path?: never;
@@ -591,7 +566,7 @@ export type ExportStateFromSystemErrors = {
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
     /**
      * Not Found
      */
@@ -629,7 +604,7 @@ export type DeleteStateErrors = {
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
     /**
      * Not Found
      */
@@ -667,7 +642,7 @@ export type GetStateErrors = {
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
     /**
      * Not Found
      */
@@ -710,7 +685,7 @@ export type UpdateStateErrors = {
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
     /**
      * Not Found
      */
@@ -735,15 +710,15 @@ export type UpdateStateResponse = UpdateStateResponses[keyof UpdateStateResponse
 export type ReplaceStateContentData = {
     body?: {
         /**
-         * Gets or sets the id of the state that is to have its content replaced.
+         * The id of the state that is to have its content replaced.
          */
         Id?: string;
         /**
-         * Gets or sets the description for this change.
+         * The description for this change.
          */
         ChangeDescription?: string;
         /**
-         * Gets or sets the state file (.sls).
+         * The state file (.sls).
          */
         File?: Blob | File;
     };
@@ -754,13 +729,13 @@ export type ReplaceStateContentData = {
 
 export type ReplaceStateContentErrors = {
     /**
-     * Errors durring execution.
+     * Errors during execution.
      */
     400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
     /**
      * Not Found
      */
@@ -789,32 +764,32 @@ export type ReplaceStateContentResponse = ReplaceStateContentResponses[keyof Rep
 export type ImportStateData = {
     body?: {
         /**
-         * Gets or sets the name of the state. Required.
+         * The name of the state. Required.
          */
         Name?: string;
         /**
-         * Gets or sets the description of the state.
+         * The description of the state.
          */
         Description?: string;
         /**
-         * Gets or sets the distribution supported by the state. Required.
+         * The distribution supported by the state. Required.
          */
         Distribution?: string;
         /**
-         * Gets or sets the architecture supported by the state. Required.
+         * The architecture supported by the state. Required.
          */
         Architecture?: string;
         /**
-         * Gets or sets the custom properties for a state.
+         * The custom properties for a state.
          * This should be serialized in a json string.
          */
         Properties?: string;
         /**
-         * Gets or sets the ID of the workspace. This property is available starting with version 3 of the createOrUpdateStates operation.
+         * The ID of the workspace. This property is available starting with version 3 of the createOrUpdateStates operation.
          */
         Workspace?: string;
         /**
-         * Gets or sets the state file (.sls).
+         * The state file (.sls).
          */
         File?: Blob | File;
     };
@@ -825,13 +800,13 @@ export type ImportStateData = {
 
 export type ImportStateErrors = {
     /**
-     * Errors durring execution.
+     * Errors during execution.
      */
     400: BaseResponse;
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
     /**
      * Not Found
      */
@@ -871,7 +846,7 @@ export type DeleteStatesErrors = {
     /**
      * Unauthorized
      */
-    401: ProblemDetails;
+    401: BaseResponse;
 };
 
 export type DeleteStatesError = DeleteStatesErrors[keyof DeleteStatesErrors];
@@ -888,3 +863,31 @@ export type DeleteStatesResponses = {
 };
 
 export type DeleteStatesResponse = DeleteStatesResponses[keyof DeleteStatesResponses];
+
+export type RootEndpointData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/nisystemsstate';
+};
+
+export type RootEndpointResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
+
+export type V1Data = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/nisystemsstate/v1';
+};
+
+export type V1Responses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};

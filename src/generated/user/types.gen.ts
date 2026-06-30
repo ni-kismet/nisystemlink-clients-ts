@@ -7,11 +7,11 @@ export type ClientOptions = {
 /**
  * User
  *
- * The user details
+ * The user account details
  */
 export type User = {
     /**
-     * The unique id
+     * The identifier for this user account
      */
     id?: string;
     /**
@@ -77,7 +77,7 @@ export type User = {
      */
     status?: 'pending' | 'active';
     /**
-     * (deprecated) Features to which the user is entitled within the application.
+     * Licensing entitlements granted to the user, populated from the user's license status during authentication. Describes the features and products the user is entitled to use.
      */
     entitlements?: {
         [key: string]: unknown;
@@ -91,7 +91,7 @@ export type User = {
  */
 export type Org = {
     /**
-     * The unique id
+     * The identifier for this organization
      */
     id?: string;
     /**
@@ -112,7 +112,7 @@ export type Org = {
  */
 export type Workspace = {
     /**
-     * The unique id
+     * The identifier for this workspace
      */
     id?: string;
     /**
@@ -136,7 +136,7 @@ export type Workspace = {
  */
 export type AuthMapping = {
     /**
-     * The unique id
+     * The identifier for this auth mapping
      */
     id?: string;
     /**
@@ -239,7 +239,7 @@ export type WebSocketWorkspaceCreatedMessage = {
 };
 
 /**
- * The identifier of a user
+ * The identifier of a user account
  */
 export type UserId = string;
 
@@ -257,7 +257,7 @@ export type QueryUsersData = {
     /**
      * Query Users Request
      *
-     * Filters to query for users
+     * Filters to query for user accounts
      */
     body?: {
         /**
@@ -290,7 +290,7 @@ export type QueryUsersData = {
          */
         filter?: string;
         /**
-         * The maximum number of users to return
+         * The maximum number of user accounts to return
          */
         take?: number;
         /**
@@ -342,17 +342,17 @@ export type QueryUsersError = QueryUsersErrors[keyof QueryUsersErrors];
 
 export type QueryUsersResponses = {
     /**
-     * Query Users Response
+     * Query User Accounts Response
      *
-     * Query Users Response
+     * Query User Accounts Response
      */
     200: {
         /**
-         * The continuation token can be used to paginate through the user list results. Provide this token in the next list users call.
+         * The continuation token can be used to paginate through the user account list results. Provide this token in the next query call.
          */
         continuationToken?: string;
         /**
-         * List of users
+         * List of user accounts
          */
         users?: Array<User>;
     };
@@ -364,11 +364,11 @@ export type CreateUserData = {
     /**
      * Create User Request
      *
-     * Creates a new user in the callers' organization
+     * Creates a new user account in the callers' organization
      */
     body?: {
         /**
-         * Describes the type of user to create. Defaults to 'user' if not specified.
+         * Describes the type of account to create. Defaults to 'user' if not specified.
          */
         type?: 'user' | 'service';
         /**
@@ -446,7 +446,7 @@ export type CreateUserError = CreateUserErrors[keyof CreateUserErrors];
 
 export type CreateUserResponses = {
     /**
-     * Create User Response
+     * Create User Account Response
      */
     200: User;
 };
@@ -546,7 +546,7 @@ export type GetUserError = GetUserErrors[keyof GetUserErrors];
 
 export type GetUserResponses = {
     /**
-     * Get User Response
+     * Get User Account Response
      */
     200: User;
 };
@@ -557,7 +557,7 @@ export type UpdateUserData = {
     /**
      * Update User Request
      *
-     * Updates an existing user
+     * Updates an existing user account
      */
     body?: {
         /**
@@ -597,7 +597,7 @@ export type UpdateUserData = {
     };
     path: {
         /**
-         * The identifier of a user
+         * The identifier of a user account
          */
         id: string;
     };
@@ -644,7 +644,7 @@ export type UpdateUserError = UpdateUserErrors[keyof UpdateUserErrors];
 
 export type UpdateUserResponses = {
     /**
-     * Update User Response
+     * Update User Account Response
      */
     200: User;
 };
@@ -1119,7 +1119,7 @@ export type GetOrgData = {
     body?: never;
     path: {
         /**
-         * The org name, e.g. 'SystemLink Server'
+         * The org name
          */
         name: string;
     };

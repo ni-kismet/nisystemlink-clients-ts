@@ -54,6 +54,15 @@ export type HttpError = {
     innerErrors?: Array<HttpError> | null;
 };
 
+export type ProblemDetails = {
+    type?: string | null;
+    title?: string | null;
+    status?: number | null;
+    detail?: string | null;
+    instance?: string | null;
+    [key: string]: unknown;
+};
+
 /**
  * Request body for updating the time-to-live (TTL) of an artifact.
  */
@@ -86,13 +95,17 @@ export type CreateArtifactErrors = {
     /**
      * The request is missing required multipart fields or the workspace field appears after the artifact field.
      */
-    400: unknown;
+    400: BaseResponse;
     /**
-     * The caller does not have the `notebookartifact:Create` privilege for the specified workspace.
+     * Unauthorized
      */
-    401: unknown;
+    401: BaseResponse;
     /**
-     * The request content type is not `multipart/form-data`.
+     * The request body exceeds the maximum allowed size of 10 GB.
+     */
+    413: ProblemDetails;
+    /**
+     * The request content type is not <b>multipart/form-data</b>.
      */
     415: unknown;
     /**
@@ -126,9 +139,13 @@ export type DeleteArtifactData = {
 
 export type DeleteArtifactErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * The artifact does not exist, has expired, or the caller does not have access.
      */
-    404: unknown;
+    404: BaseResponse;
     /**
      * Error
      */
@@ -160,9 +177,13 @@ export type DownloadArtifactData = {
 
 export type DownloadArtifactErrors = {
     /**
+     * Unauthorized
+     */
+    401: BaseResponse;
+    /**
      * The artifact does not exist, has expired, or the caller does not have access.
      */
-    404: unknown;
+    404: BaseResponse;
     /**
      * Error
      */
@@ -197,13 +218,17 @@ export type UpdateArtifactTtlData = {
 
 export type UpdateArtifactTtlErrors = {
     /**
-     * The `expiryInDays` value is negative or exceeds the server-configured maximum.
+     * The <b>expiryInDays</b> value is negative or exceeds the server-configured maximum.
      */
-    400: unknown;
+    400: BaseResponse;
+    /**
+     * Unauthorized
+     */
+    401: BaseResponse;
     /**
      * The artifact does not exist, has expired, or the caller does not have access.
      */
-    404: unknown;
+    404: BaseResponse;
     /**
      * Error
      */

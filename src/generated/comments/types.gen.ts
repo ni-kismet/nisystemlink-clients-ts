@@ -367,13 +367,13 @@ export type ListCommentsData = {
 
 export type ListCommentsErrors = {
     /**
-     * Bad Request.
+     * Bad Request
      */
     400: unknown;
     /**
-     * Unauthorized.
+     * Unauthorized
      */
-    401: unknown;
+    401: HttpError;
     /**
      * Error
      */
@@ -384,7 +384,7 @@ export type ListCommentsError = ListCommentsErrors[keyof ListCommentsErrors];
 
 export type ListCommentsResponses = {
     /**
-     * Response information for List Comments API.
+     * OK
      */
     200: ListCommentsResponse;
 };
@@ -405,9 +405,9 @@ export type CreateCommentsData = {
 
 export type CreateCommentsErrors = {
     /**
-     * Unauthorized.
+     * Unauthorized
      */
-    401: unknown;
+    401: HttpError;
     /**
      * Error
      */
@@ -418,11 +418,11 @@ export type CreateCommentsError = CreateCommentsErrors[keyof CreateCommentsError
 
 export type CreateCommentsResponses = {
     /**
-     * The resources were partially created.
+     * OK
      */
     200: CreateCommentsPartialSuccessResponse;
     /**
-     * The resources were created successfully.
+     * Created
      */
     201: CreateCommentsResponse;
 };
@@ -438,7 +438,7 @@ export type UpdateCommentData = {
     body?: UpdateCommentRequest;
     path: {
         /**
-         * Id of the comment.
+         * Id of the comment to update.
          */
         id: string;
     };
@@ -448,9 +448,9 @@ export type UpdateCommentData = {
 
 export type UpdateCommentErrors = {
     /**
-     * Unauthorized.
+     * Unauthorized
      */
-    401: unknown;
+    401: HttpError;
     /**
      * Error
      */
@@ -461,7 +461,7 @@ export type UpdateCommentError = UpdateCommentErrors[keyof UpdateCommentErrors];
 
 export type UpdateCommentResponses = {
     /**
-     * The resource is updated successfully.
+     * No Content
      */
     204: void;
 };
@@ -482,9 +482,9 @@ export type DeleteCommentsData = {
 
 export type DeleteCommentsErrors = {
     /**
-     * Unauthorized.
+     * Unauthorized
      */
-    401: unknown;
+    401: HttpError;
     /**
      * Error
      */
@@ -495,11 +495,11 @@ export type DeleteCommentsError = DeleteCommentsErrors[keyof DeleteCommentsError
 
 export type DeleteCommentsResponses = {
     /**
-     * The resources were partially deleted.
+     * OK
      */
     200: DeleteCommentsPartialSuccessResponse;
     /**
-     * The resources were deleted successfully.
+     * No Content
      */
     204: void;
 };

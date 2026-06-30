@@ -61,6 +61,20 @@ export type LanguageInformation = {
 };
 
 /**
+ * Describes an available API operation.
+ */
+export type OperationInfo = {
+    /**
+     * Whether the operation is available.
+     */
+    available?: boolean;
+    /**
+     * The version of the operation.
+     */
+    version?: number;
+};
+
+/**
  * Represents a software package available from a configured feed.
  */
 export type PackageResponse = {
@@ -376,6 +390,18 @@ export type SystemConfiguration = {
     userVisible?: boolean | null;
 };
 
+/**
+ * Describes a single API version and its available operations.
+ */
+export type VersionInfo = {
+    /**
+     * The operations available in this API version.
+     */
+    operations?: {
+        [key: string]: OperationInfo;
+    } | null;
+};
+
 export type ConfigureFeedsData = {
     /**
      * The list of feed URLs to configure. Each URL must point to a valid feed containing a Packages.gz index.
@@ -388,20 +414,24 @@ export type ConfigureFeedsData = {
 
 export type ConfigureFeedsErrors = {
     /**
-     * The request is invalid, for example when the feed count exceeds the configured limit.
+     * Bad Request
      */
     400: HttpError;
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
 };
 
 export type ConfigureFeedsError = ConfigureFeedsErrors[keyof ConfigureFeedsErrors];
 
 export type ConfigureFeedsResponses = {
     /**
-     * One or more feeds failed to configure. The response body contains an error with inner errors identifying each failed feed.
+     * OK
      */
     200: BaseResponse;
     /**
-     * All feeds were configured successfully.
+     * No Content
      */
     204: void;
 };
@@ -420,16 +450,20 @@ export type QueryAvailablePackagesData = {
 
 export type QueryAvailablePackagesErrors = {
     /**
-     * The request is invalid, for example when the feed count exceeds the configured limit.
+     * Bad Request
      */
     400: HttpError;
+    /**
+     * Unauthorized
+     */
+    401: HttpError;
 };
 
 export type QueryAvailablePackagesError = QueryAvailablePackagesErrors[keyof QueryAvailablePackagesErrors];
 
 export type QueryAvailablePackagesResponses = {
     /**
-     * The list of packages available from the specified feeds, filtered by architecture and optional field projections.
+     * OK
      */
     200: Array<PackageResponse>;
 };
@@ -445,7 +479,7 @@ export type QueryStoreItemsData = {
          */
         query?: string;
         /**
-         * The maximum number of store items to return per page (1–1000, default 10).
+         * The maximum number of store items to return per page (1 to 1000, default 10).
          */
         pageSize?: number;
         /**
@@ -458,14 +492,20 @@ export type QueryStoreItemsData = {
 
 export type QueryStoreItemsErrors = {
     /**
-     * The upstream NI software store API did not respond in time.
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
+     * Gateway Timeout
      */
     504: unknown;
 };
 
+export type QueryStoreItemsError = QueryStoreItemsErrors[keyof QueryStoreItemsErrors];
+
 export type QueryStoreItemsResponses = {
     /**
-     * A paginated list of store items matching the query.
+     * OK
      */
     200: StoreItemsExtendedResponse;
 };
@@ -486,11 +526,15 @@ export type GetStoreItemData = {
 
 export type GetStoreItemErrors = {
     /**
-     * No store item exists with the specified ID.
+     * Bad Request
      */
     400: HttpError;
     /**
-     * The upstream NI software store API did not respond in time.
+     * Unauthorized
+     */
+    401: HttpError;
+    /**
+     * Gateway Timeout
      */
     504: unknown;
 };
@@ -499,9 +543,43 @@ export type GetStoreItemError = GetStoreItemErrors[keyof GetStoreItemErrors];
 
 export type GetStoreItemResponses = {
     /**
-     * The store item with the specified ID, including download items, installers, and suite contents.
+     * OK
      */
     200: StoreItemResponse;
 };
 
 export type GetStoreItemResponse = GetStoreItemResponses[keyof GetStoreItemResponses];
+
+export type RootEndpointData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/nirepo';
+};
+
+export type RootEndpointResponses = {
+    /**
+     * The available API versions and their operations.
+     */
+    200: {
+        [key: string]: VersionInfo;
+    };
+};
+
+export type RootEndpointResponse = RootEndpointResponses[keyof RootEndpointResponses];
+
+export type V1Data = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/nirepo/v1';
+};
+
+export type V1Responses = {
+    /**
+     * The operations available in this API version.
+     */
+    200: VersionInfo;
+};
+
+export type V1Response = V1Responses[keyof V1Responses];

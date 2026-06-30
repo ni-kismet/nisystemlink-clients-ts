@@ -44,13 +44,13 @@ export type CreateLocationRequest = {
      */
     scanCode?: string | null;
     /**
-     * Gets or sets the custom properties for a location.
+     * The custom properties for a location.
      */
     properties?: {
         [key: string]: string;
     } | null;
     /**
-     * Gets or sets the keywords for a location.
+     * The keywords for a location.
      */
     keywords?: Array<string> | null;
 };
@@ -70,7 +70,7 @@ export type DeleteLocationsRequest = {
  */
 export type GetLocationsResponse = {
     /**
-     * Gets or sets the collection of locations.
+     * The collection of locations.
      */
     locations: Array<Location> | null;
 };
@@ -184,13 +184,13 @@ export type Location = {
      */
     scanCode: string | null;
     /**
-     * Gets or sets the custom properties for a location.
+     * The custom properties for a location.
      */
     properties?: {
         [key: string]: string;
     } | null;
     /**
-     * Gets or sets the keywords for a location.
+     * The keywords for a location.
      */
     keywords?: Array<string> | null;
 };
@@ -259,6 +259,9 @@ export type GetLocationsResponses = {
 export type GetLocationsResponse2 = GetLocationsResponses[keyof GetLocationsResponses];
 
 export type CreateLocationData = {
+    /**
+     * The properties for the new location.
+     */
     body?: CreateLocationRequest;
     path?: never;
     query?: never;
@@ -334,6 +337,9 @@ export type GetLocationByIdResponses = {
 export type GetLocationByIdResponse = GetLocationByIdResponses[keyof GetLocationByIdResponses];
 
 export type UpdateLocationsData = {
+    /**
+     * The list of location updates to apply.
+     */
     body?: UpdateLocationsRequest;
     path?: never;
     query?: never;
@@ -371,6 +377,9 @@ export type UpdateLocationsResponses = {
 export type UpdateLocationsResponse = UpdateLocationsResponses[keyof UpdateLocationsResponses];
 
 export type DeleteLocationsData = {
+    /**
+     * The IDs of the locations to delete.
+     */
     body?: DeleteLocationsRequest;
     path?: never;
     query?: never;

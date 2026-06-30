@@ -19,7 +19,14 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Queries the resolved dynamic form fields configurations that match the request.
+ * Query resolved configurations
+ *
+ * Returns the resolved dynamic form field configurations that match the specified
+ * resource type and workspaces. A resolved configuration includes all referenced groups
+ * and fields inline, ready to render as a form in the UI.
+ *
+ * Use this endpoint to retrieve the full form definition for a specific resource type
+ * (e.g., `asset:asset`, `workitem:workitem`) within one or more workspaces.
  *
  * Backward Compatibility Support for 'workorder:testplan':
  * - When querying with resourceType='workorder:testplan', the API converts it to 'workitem:workitem'
@@ -40,7 +47,11 @@ export const queryResolvedDynamicFormConfiguration = <ThrowOnError extends boole
 });
 
 /**
- * Gets the resolved dynamic form fields configuration by ID.
+ * Get a resolved configuration
+ *
+ * Returns a single resolved dynamic form field configuration by its ID, including
+ * all referenced views, groups, and fields inline. Use this to retrieve the complete
+ * form definition needed to render custom input fields for a resource.
  */
 export const getDynamicFormConfigurationById = <ThrowOnError extends boolean = false>(options?: Options<GetDynamicFormConfigurationByIdData, ThrowOnError>) => (options?.client ?? client).get<GetDynamicFormConfigurationByIdResponses, GetDynamicFormConfigurationByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -49,7 +60,12 @@ export const getDynamicFormConfigurationById = <ThrowOnError extends boolean = f
 });
 
 /**
- * Gets the list of accessible dynamic form fields configurations.
+ * List configurations
+ *
+ * Returns all dynamic form field configurations the caller has access to. Each
+ * configuration defines the resource type it applies to, a display rule expression,
+ * and references to its views, groups, and fields. Use the optional pagination
+ * parameters to page through large result sets.
  */
 export const getDynamicFormConfigurations = <ThrowOnError extends boolean = false>(options?: Options<GetDynamicFormConfigurationsData, ThrowOnError>) => (options?.client ?? client).get<GetDynamicFormConfigurationsResponses, GetDynamicFormConfigurationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -58,7 +74,12 @@ export const getDynamicFormConfigurations = <ThrowOnError extends boolean = fals
 });
 
 /**
- * Creates dynamic form fields configurations.
+ * Create configurations
+ *
+ * Creates one or more dynamic form field configurations along with their views, groups,
+ * and fields in a single request. Each configuration must specify a workspace, resource
+ * type, and a unique key. Optionally include a display rule expression to control when
+ * the form appears based on resource properties or keywords.
  *
  * Backward Compatibility Support for 'workorder:testplan':
  * - When creating with resourceType='workorder:testplan', the API converts it to 'workitem:workitem'
@@ -81,7 +102,11 @@ export const createDynamicFormConfiguration = <ThrowOnError extends boolean = fa
 });
 
 /**
- * Gets the list of accessible dynamic form fields groups.
+ * List groups
+ *
+ * Returns all dynamic form field groups the caller has access to. Groups organize
+ * fields into logical sections within a view tab. Each group references a set of
+ * field keys and controls the display text and ordering of that section.
  */
 export const getDynamicFormGroups = <ThrowOnError extends boolean = false>(options?: Options<GetDynamicFormGroupsData, ThrowOnError>) => (options?.client ?? client).get<GetDynamicFormGroupsResponses, GetDynamicFormGroupsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -90,7 +115,13 @@ export const getDynamicFormGroups = <ThrowOnError extends boolean = false>(optio
 });
 
 /**
- * Gets the list of accessible dynamic form fields.
+ * List fields
+ *
+ * Returns all dynamic form fields the caller has access to. Fields define the
+ * individual input elements that appear in a form. Supported types are Text, Number,
+ * Boolean, Enum, DateTime, Table, and LinkedResource. Each field can specify
+ * validation rules, default values, placeholder text, visibility, editability, and
+ * localization overrides.
  */
 export const getDynamicFormFields = <ThrowOnError extends boolean = false>(options?: Options<GetDynamicFormFieldsData, ThrowOnError>) => (options?.client ?? client).get<GetDynamicFormFieldsResponses, GetDynamicFormFieldsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -99,7 +130,10 @@ export const getDynamicFormFields = <ThrowOnError extends boolean = false>(optio
 });
 
 /**
- * Updates dynamic form fields configurations.
+ * Update configurations
+ *
+ * Updates one or more dynamic form field configurations including their views, groups,
+ * fields, and display rules. Fields not included in the update are left unchanged.
  *
  * Backward Compatibility Support for 'workorder:testplan':
  * - When updating with resourceType='workorder:testplan' (if provided), the API converts it to 'workitem:workitem'
@@ -118,7 +152,10 @@ export const updateDynamicFormConfigurations = <ThrowOnError extends boolean = f
 });
 
 /**
- * Deletes dynamic form fields configurations.
+ * Delete configurations
+ *
+ * Permanently removes the specified configurations and their associated groups and
+ * fields.
  */
 export const deleteDynamicFormConfiguration = <ThrowOnError extends boolean = false>(options?: Options<DeleteDynamicFormConfigurationData, ThrowOnError>) => (options?.client ?? client).post<DeleteDynamicFormConfigurationResponses, DeleteDynamicFormConfigurationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -131,7 +168,9 @@ export const deleteDynamicFormConfiguration = <ThrowOnError extends boolean = fa
 });
 
 /**
- * Creates table properties.
+ * Create table properties
+ *
+ * Creates one or more table properties associated with a resource.
  */
 export const createTables = <ThrowOnError extends boolean = false>(options?: Options<CreateTablesData, ThrowOnError>) => (options?.client ?? client).post<CreateTablesResponses, CreateTablesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -144,7 +183,10 @@ export const createTables = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * Queries the table properties that match the request
+ * Query table properties
+ *
+ * Returns table properties matching the specified workspace, resource type, resource
+ * ID, and optional key filters.
  */
 export const queryTables = <ThrowOnError extends boolean = false>(options?: Options<QueryTablesData, ThrowOnError>) => (options?.client ?? client).post<QueryTablesResponses, QueryTablesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -157,7 +199,9 @@ export const queryTables = <ThrowOnError extends boolean = false>(options?: Opti
 });
 
 /**
- * Gets the table property by ID.
+ * Get a table property
+ *
+ * Returns a single table property by its unique identifier.
  */
 export const getTablePropertyById = <ThrowOnError extends boolean = false>(options?: Options<GetTablePropertyByIdData, ThrowOnError>) => (options?.client ?? client).get<GetTablePropertyByIdResponses, GetTablePropertyByIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -166,7 +210,9 @@ export const getTablePropertyById = <ThrowOnError extends boolean = false>(optio
 });
 
 /**
- * Deletes table properties.
+ * Delete table properties
+ *
+ * Permanently removes the specified table properties.
  */
 export const deleteTableProperties = <ThrowOnError extends boolean = false>(options?: Options<DeleteTablePropertiesData, ThrowOnError>) => (options?.client ?? client).post<DeleteTablePropertiesResponses, DeleteTablePropertiesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -179,7 +225,10 @@ export const deleteTableProperties = <ThrowOnError extends boolean = false>(opti
 });
 
 /**
- * Updates table properties.
+ * Update table properties
+ *
+ * Updates one or more table properties. Fields not included in the update are left
+ * unchanged.
  */
 export const updateTableProperties = <ThrowOnError extends boolean = false>(options?: Options<UpdateTablePropertiesData, ThrowOnError>) => (options?.client ?? client).post<UpdateTablePropertiesResponses, UpdateTablePropertiesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -192,7 +241,10 @@ export const updateTableProperties = <ThrowOnError extends boolean = false>(opti
 });
 
 /**
- * Determines the status of the service
+ * Determine service status (deprecated)
+ *
+ * Returns the health status of the Dynamic Form Fields service. This endpoint is
+ * deprecated and will be removed in a future version.
  *
  * @deprecated
  */
@@ -203,9 +255,9 @@ export const up = <ThrowOnError extends boolean = false>(options?: Options<UpDat
 });
 
 /**
- * API Information.
+ * API information
  *
- * Returns information about API and available operations.
+ * Returns information about API versions and available operations.
  */
 export const rootEndPoint = <ThrowOnError extends boolean = false>(options?: Options<RootEndPointData, ThrowOnError>) => (options?.client ?? client).get<RootEndPointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -214,9 +266,9 @@ export const rootEndPoint = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * Information about API versions and available operations of version V1 of APIs.
+ * API version information
  *
- * Returns available operations for version V1 of the API.
+ * Returns available operations for a single version of the API.
  */
 export const v1OperationsRootEndPoint = <ThrowOnError extends boolean = false>(options?: Options<V1OperationsRootEndPointData, ThrowOnError>) => (options?.client ?? client).get<V1OperationsRootEndPointResponses, unknown, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
