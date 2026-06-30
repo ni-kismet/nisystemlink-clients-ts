@@ -1,0 +1,7 @@
+{
+  "packageName": "@ni/systemlink-clients-ts",
+  "email": "1458528+fredvisser@users.noreply.github.com",
+  "dependentChangeType": "patch",
+  "type": "patch",
+  "comment": "Update development dependencies to resolve npm audit findings, including secure Vitest and Hey API versions plus an esbuild override for the patched transitive toolchain release."
+}
