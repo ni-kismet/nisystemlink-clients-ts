@@ -52,12 +52,12 @@ describe.skipIf(!configured)('Work Order Service (DEPRECATED — use work-item)'
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getNiworkorder({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
 
     it('v1 endpoint is reachable', async () => {
       const { response } = await getNiworkorderV1({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
@@ -72,8 +72,8 @@ describe.skipIf(!configured)('Work Order Service (DEPRECATED — use work-item)'
         body: { take: 1 },
       });
       // Accept both 200 (still active) and 4xx (removed from server)
-      expect(response.status).toBeGreaterThanOrEqual(200);
-      if (response.status === 200) {
+      expect(response!.status).toBeGreaterThanOrEqual(200);
+      if (response!.status === 200) {
         console.warn(
           '[DEPRECATION] postNiworkorderV1QueryTestplans still active — migrate callers to postNiworkitemV1QueryWorkitems',
         );
@@ -85,8 +85,8 @@ describe.skipIf(!configured)('Work Order Service (DEPRECATED — use work-item)'
         client,
         body: { take: 1 },
       });
-      expect(response.status).toBeGreaterThanOrEqual(200);
-      if (response.status === 200) {
+      expect(response!.status).toBeGreaterThanOrEqual(200);
+      if (response!.status === 200) {
         console.warn(
           '[DEPRECATION] postNiworkorderV1QueryWorkflows still active — migrate callers to postNiworkitemV1QueryWorkflows',
         );
@@ -104,13 +104,13 @@ describe.skipIf(!configured)('Work Order Service (DEPRECATED — use work-item)'
       const elapsed = Date.now() - start;
       if (elapsed > 5000) console.warn(`[SLOW] postNiworkorderV1QueryWorkorders took ${elapsed}ms`);
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
 
     it('returns work order summary', async () => {
       const { data, error, response } = await getNiworkorderV1WorkordersSummary({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });

@@ -44,14 +44,14 @@ describe.skipIf(!configured)('Notification Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getNinotification({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
   describe('Address Groups', () => {
     it('lists address groups', async () => {
       const { data, error, response } = await getNinotificationV1AddressGroups({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
 
@@ -65,8 +65,8 @@ describe.skipIf(!configured)('Notification Service', () => {
         },
       });
       // 400 = interpreting service not configured on this server instance
-      expect([200, 400], `Create failed: ${JSON.stringify(error)}`).toContain(response.status);
-      if (response.status !== 200) {
+      expect([200, 400], `Create failed: ${JSON.stringify(error)}`).toContain(response!.status);
+      if (response!.status !== 200) {
         console.warn(`[INFO] createAddressGroup: interpreting service not available — ${(error as any)?.error?.message}`);
         return;
       }
@@ -78,7 +78,7 @@ describe.skipIf(!configured)('Notification Service', () => {
           client,
           path: { id },
         });
-        expect(fetchResp.status).toBe(200);
+        expect(fetchResp!.status).toBe(200);
         expect((fetched as any)?.id).toBe(id);
       }
     });
@@ -87,7 +87,7 @@ describe.skipIf(!configured)('Notification Service', () => {
   describe('Message Templates', () => {
     it('lists message templates', async () => {
       const { data, error, response } = await getNinotificationV1MessageTemplates({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -95,7 +95,7 @@ describe.skipIf(!configured)('Notification Service', () => {
   describe('Notification Strategies', () => {
     it('lists notification strategies', async () => {
       const { data, error, response } = await getNinotificationV1NotificationStrategies({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });

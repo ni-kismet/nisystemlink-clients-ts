@@ -16,7 +16,9 @@ import {
   getResultsV2,
   getResultV2,
   createResultsV2,
+  createStepsV2,
   deleteResultsV2,
+  getStepV2,
   getProductsV2,
   queryProductsV2,
   queryProductValuesV2,
@@ -87,12 +89,12 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await rootEndpoint({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
 
     it('v2 operations endpoint is reachable', async () => {
       const { response } = await rootEndpointV2({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
@@ -105,7 +107,7 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
       });
       const elapsed = Date.now() - start;
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(Array.isArray(data!.results)).toBe(true);
 
       if (elapsed > 5000) {
@@ -146,7 +148,7 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
         client,
         body: createProjectedResultsQuery({ take: 1, continuationToken: token }),
       });
-      expect(second.response.status).toBe(200);
+      expect(second.response!.status).toBe(200);
     });
 
     it('supports Dynamic LINQ filter', async () => {
@@ -157,7 +159,7 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
           take: 5,
         }),
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(Array.isArray(data?.results)).toBe(true);
     });
 
@@ -175,7 +177,7 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
   describe('getResultsV2 (GET list — same data, different verb)', () => {
     it('returns results matching queryResultsV2 shape', async () => {
       const { data, error, response } = await getResultsV2({ client, query: { take: 5 } });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(Array.isArray(data!.results)).toBe(true);
     });
   });
@@ -186,7 +188,7 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
         client,
         body: { field: 'PROGRAM_NAME' },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -205,7 +207,7 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
         },
       });
 
-      expect([200, 201], `Create failed: ${JSON.stringify(error)}`).toContain(response.status);
+      expect([200, 201], `Create failed: ${JSON.stringify(error)}`).toContain(response!.status);
       const id = created?.results?.[0]?.id;
       expect(id).toBeTruthy();
       createdResultIds.push(id!);
@@ -215,22 +217,82 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
         client,
         path: { resultId: id! },
       });
-      expect(fetchResp.status).toBe(200);
+      expect(fetchResp!.status).toBe(200);
       expect(fetched?.id).toBe(id);
       expect(fetched?.programName).toBe('ts-sdk-e2e');
+    });
+
+    it('round-trips primitive step input values accepted by the service', async () => {
+      const { data: createdResult, error: createResultError, response: createResultResponse } =
+        await createResultsV2({
+          client,
+          body: {
+            results: [
+              {
+                programName: 'ts-sdk-e2e-primitive-input',
+                status: { statusType: 'RUNNING' },
+              },
+            ],
+          },
+        });
+
+      expect([200, 201], `Create result failed: ${JSON.stringify(createResultError)}`).toContain(
+        createResultResponse!.status,
+      );
+
+      const resultId = createdResult?.results?.[0]?.id;
+      expect(resultId).toBeTruthy();
+      createdResultIds.push(resultId!);
+
+      const { data: createdStep, error: createStepError, response: createStepResponse } =
+        await createStepsV2({
+          client,
+          body: {
+            steps: [
+              {
+                resultId,
+                name: 'primitive-input-step',
+                stepType: 'NumericLimitTest',
+                status: { statusType: 'PASSED' },
+                inputs: [
+                  {
+                    name: 'Voltage',
+                    value: 1.3,
+                  },
+                ],
+              },
+            ],
+          },
+        });
+
+      expect([200, 201], `Create step failed: ${JSON.stringify(createStepError)}`).toContain(
+        createStepResponse!.status,
+      );
+
+      const step = createdStep?.steps?.[0];
+      expect(step?.stepId).toBeTruthy();
+
+      const { data: fetchedStep, error: getStepError, response: getStepResponse } = await getStepV2({
+        client,
+        path: { resultId: resultId!, stepId: step?.stepId! },
+      });
+
+      expect(getStepResponse!.status, `Get step failed: ${JSON.stringify(getStepError)}`).toBe(200);
+      expect(fetchedStep?.inputs?.[0]?.name).toBe('Voltage');
+      expect(fetchedStep?.inputs?.[0]?.value as unknown).toBe(1.3);
     });
   });
 
   describe('Products', () => {
     it('getProductsV2 lists products', async () => {
       const { data, error, response } = await getProductsV2({ client, query: { take: 10 } });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(Array.isArray(data!.products)).toBe(true);
     });
 
     it('queryProductsV2 queries with empty body', async () => {
       const { data, response } = await queryProductsV2({ client, body: { take: 5 } });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(Array.isArray(data?.products)).toBe(true);
     });
 
@@ -239,7 +301,7 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
         client,
         body: { field: 'FAMILY' },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -269,7 +331,7 @@ describe.skipIf(!configured)('Test Monitor Service (v2)', () => {
           ...(pathFilterParts.length > 0 ? { filter: pathFilterParts.join(' AND ') } : {}),
         },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(Array.isArray(data?.paths)).toBe(true);
     });
   });

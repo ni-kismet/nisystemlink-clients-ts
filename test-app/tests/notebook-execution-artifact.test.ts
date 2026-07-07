@@ -65,7 +65,7 @@ describe.skipIf(!configured)('Notebook Execution Artifact Service', () => {
 
       // The upload may require an associated execution ID on some server versions
       // Accept both 200/201 (created) and 422/400 (bad request without execution context)
-      if (response.status === 200 || response.status === 201) {
+      if (response!.status === 200 || response!.status === 201) {
         const id = (data as any)?.id ?? (data as any)?.artifactId;
         if (id) {
           createdArtifactId = id;
@@ -74,7 +74,7 @@ describe.skipIf(!configured)('Notebook Execution Artifact Service', () => {
       } else {
         // Document the server requirement
         console.log(
-          `[INFO] createArtifact returned HTTP ${response.status}: ${JSON.stringify(error)}. ` +
+          `[INFO] createArtifact returned HTTP ${response!.status}: ${JSON.stringify(error)}. ` +
             'Artifact upload may require an executionId. Skipping downstream tests.',
         );
       }
@@ -86,7 +86,7 @@ describe.skipIf(!configured)('Notebook Execution Artifact Service', () => {
         client,
         path: { artifactId: createdArtifactId },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect((data as any)?.id ?? (data as any)?.artifactId).toBe(createdArtifactId);
     });
 
@@ -98,7 +98,7 @@ describe.skipIf(!configured)('Notebook Execution Artifact Service', () => {
         path: { artifactId: createdArtifactId },
         body: { expiresAt } as any,
       });
-      expect([200, 204]).toContain(response.status);
+      expect([200, 204]).toContain(response!.status);
     });
   });
 });

@@ -45,14 +45,14 @@ describe.skipIf(!configured)('Location Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getNilocation({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
   describe('getNilocationV1Locations (list)', () => {
     it('lists locations', async () => {
       const { data, error, response } = await getNilocationV1Locations({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
 
@@ -73,7 +73,7 @@ describe.skipIf(!configured)('Location Service', () => {
         client,
         body: { name: `ts-sdk-e2e-${Date.now()}` },
       });
-      expect([200, 201], `Create location failed: ${JSON.stringify(error)}`).toContain(response.status);
+      expect([200, 201], `Create location failed: ${JSON.stringify(error)}`).toContain(response!.status);
       const id = (data as any)?.id;
       if (id) {
         createdLocationIds.push(id);
@@ -89,7 +89,7 @@ describe.skipIf(!configured)('Location Service', () => {
         client,
         path: { locationId: id },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect((data as any)?.id).toBe(id);
     });
   });

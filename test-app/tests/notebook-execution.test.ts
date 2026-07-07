@@ -51,12 +51,12 @@ describe.skipIf(!configured)('Notebook Execution Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getNinbexecution({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
 
     it('v1 endpoint is reachable', async () => {
       const { response } = await getNinbexecutionV1({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
@@ -71,7 +71,7 @@ describe.skipIf(!configured)('Notebook Execution Service', () => {
       if (elapsed > 5000)
         console.warn(`[SLOW] postNinbexecutionV1QueryExecutions took ${elapsed}ms`);
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
       // Response is Array<Execution>
       expect(Array.isArray(data)).toBe(true);
@@ -83,8 +83,8 @@ describe.skipIf(!configured)('Notebook Execution Service', () => {
         body: { filter: 'status == "CANCELED"' },
       });
       // 200 = results found, 204 = no content (no matching executions)
-      expect([200, 204]).toContain(response.status);
-      if (response.status === 200) expect(Array.isArray(data)).toBe(true);
+      expect([200, 204]).toContain(response!.status);
+      if (response!.status === 200) expect(Array.isArray(data)).toBe(true);
     });
 
     it('fetches most recent execution by id if any exist', async () => {
@@ -101,7 +101,7 @@ describe.skipIf(!configured)('Notebook Execution Service', () => {
         client,
         path: { id },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect((single as any)?.id).toBe(id);
     });
   });

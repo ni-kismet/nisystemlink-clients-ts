@@ -33,7 +33,7 @@ describe.skipIf(!configured)('Notebook Service', () => {
       body: { take: 10 },
     });
 
-    expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+    expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
     expect(error).toBeUndefined();
     expect(data).toBeDefined();
     expect(Array.isArray(data!.notebooks)).toBe(true);

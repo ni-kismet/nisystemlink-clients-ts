@@ -42,7 +42,7 @@ describe.skipIf(!configured)('Asset Management Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getNiapm({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
@@ -52,7 +52,7 @@ describe.skipIf(!configured)('Asset Management Service', () => {
         client,
         query: { Take: 10 },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(Array.isArray(data!.assets)).toBe(true);
     });
 
@@ -76,7 +76,7 @@ describe.skipIf(!configured)('Asset Management Service', () => {
   describe('getNiapmV1AssetSummary', () => {
     it('returns summary statistics', async () => {
       const { data, error, response } = await getNiapmV1AssetSummary({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -90,7 +90,7 @@ describe.skipIf(!configured)('Asset Management Service', () => {
       });
       const elapsed = Date.now() - start;
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
       expect(Array.isArray(data!.assets)).toBe(true);
 
@@ -104,7 +104,7 @@ describe.skipIf(!configured)('Asset Management Service', () => {
         client,
         body: { filter: 'AssetType = "GENERIC"', take: 5 },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(Array.isArray(data?.assets)).toBe(true);
     });
 
@@ -123,7 +123,7 @@ describe.skipIf(!configured)('Asset Management Service', () => {
       const { data, error, response } = await postNiapmV1QueryAssets({ client });
       const elapsed = Date.now() - start;
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(Array.isArray(data!.assets)).toBe(true);
 
       if (elapsed > 5000) {
@@ -142,7 +142,7 @@ describe.skipIf(!configured)('Asset Management Service', () => {
         client,
         path: { assetId: firstId },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toHaveProperty('id', firstId);
     });
   });
@@ -163,7 +163,7 @@ describe.skipIf(!configured)('Asset Management Service', () => {
         body: { take: 10 },
       });
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBeLessThan(400);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBeLessThan(400);
       expect(data).toBeDefined();
     });
 
@@ -186,7 +186,7 @@ describe.skipIf(!configured)('Asset Management Service', () => {
         },
       });
 
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 });

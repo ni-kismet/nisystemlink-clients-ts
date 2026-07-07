@@ -68,19 +68,19 @@ describe.skipIf(!configured)('Tags Service', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await rootEndpoint({ client });
       // /nitag returns 404 on some instances — accept any non-server-error status
-      expect(response.status).toBeLessThan(500);
+      expect(response!.status).toBeLessThan(500);
     });
 
     it('version endpoint is reachable', async () => {
       const { response } = await rootEndpointWithVersion({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
   describe('getTags (list)', () => {
     it('lists tags', async () => {
       const { data, error, response } = await getTags({ client, query: { take: 10 } });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(Array.isArray(data!.tags)).toBe(true);
     });
 
@@ -109,7 +109,7 @@ describe.skipIf(!configured)('Tags Service', () => {
       });
       const elapsed = Date.now() - start;
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
 
       if (elapsed > 5000) {
@@ -124,7 +124,7 @@ describe.skipIf(!configured)('Tags Service', () => {
         client,
         path: { path: createdTagPath! },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toHaveProperty('path', createdTagPath);
     });
 
@@ -139,7 +139,7 @@ describe.skipIf(!configured)('Tags Service', () => {
         client,
         path: { path: createdTagPath! },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -147,7 +147,7 @@ describe.skipIf(!configured)('Tags Service', () => {
   describe('Selections API', () => {
     it('lists selections', async () => {
       const { data, response } = await getSelections({ client });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(data).toBeDefined();
     });
 
@@ -156,7 +156,7 @@ describe.skipIf(!configured)('Tags Service', () => {
         client,
         body: { searchPaths: [createdTagPath!] },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       createdSelectionId = data?.id;
       expect(createdSelectionId).toBeTruthy();
     });

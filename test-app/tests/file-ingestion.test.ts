@@ -55,12 +55,12 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await rootEndpoint({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
 
     it.skip('lists service groups (times out on dev server)', async () => {
       const { data, error, response } = await listServiceGroups({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -71,7 +71,7 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
         client,
         query: { take: 10 },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
 
@@ -90,8 +90,8 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
       });
       // Document the bug: server returns 400 for this value even though the
       // OpenAPI spec declares it as valid.
-      expect([200, 400]).toContain(response.status);
-      if (response.status === 400) {
+      expect([200, 400]).toContain(response!.status);
+      if (response!.status === 400) {
         console.warn('[BUG] listAvailableFiles: orderBy=lastUpdatedTimestamp returns 400 — spec is incorrect');
       }
     });
@@ -106,7 +106,7 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
       });
       const elapsed = Date.now() - start;
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
 
       if (elapsed > 5000) {
@@ -119,7 +119,7 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
         client,
         body: { filter: 'size > 0', take: 5 },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(data).toBeDefined();
     });
 
@@ -128,7 +128,7 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
         client,
         body: { orderBy: 'created', orderByDescending: true, take: 5 },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -142,7 +142,7 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
       });
       const elapsed = Date.now() - start;
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
 
       if (elapsed > 5000) {
@@ -161,7 +161,7 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
         client,
         body: { file },
       });
-      expect([200, 201], `Upload failed: ${JSON.stringify(error)}`).toContain(response.status);
+      expect([200, 201], `Upload failed: ${JSON.stringify(error)}`).toContain(response!.status);
       const id = (data as any)?.id;
       if (id) {
         uploadedFileIds.push(id);
@@ -181,7 +181,7 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
           replaceExisting: false,
         },
       });
-      expect([200, 204]).toContain(response.status);
+      expect([200, 204]).toContain(response!.status);
     });
   });
 });

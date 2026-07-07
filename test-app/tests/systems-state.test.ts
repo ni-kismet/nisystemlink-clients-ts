@@ -52,12 +52,12 @@ describe.skipIf(!configured)('Systems State Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getNisystemsstate({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
 
     it('v1 endpoint is reachable', async () => {
       const { response } = await getNisystemsstateV1({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
@@ -68,7 +68,7 @@ describe.skipIf(!configured)('Systems State Service', () => {
       const elapsed = Date.now() - start;
       if (elapsed > 5000) console.warn(`[SLOW] getNisystemsstateV1States took ${elapsed}ms`);
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
       // Response is StateDescriptionListResponse with a 'states' array
       expect(Array.isArray((data as any)?.states)).toBe(true);
@@ -79,7 +79,7 @@ describe.skipIf(!configured)('Systems State Service', () => {
         client,
         query: { Take: 5 },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       const items = (data as any)?.states ?? [];
       expect(items.length).toBeLessThanOrEqual(5);
     });
@@ -97,8 +97,8 @@ describe.skipIf(!configured)('Systems State Service', () => {
       });
       expect(
         [200, 201],
-        `HTTP ${response.status}: ${JSON.stringify(error)}`,
-      ).toContain(response.status);
+        `HTTP ${response!.status}: ${JSON.stringify(error)}`,
+      ).toContain(response!.status);
       const id = (data as any)?.id;
       if (id) {
         createdStateIds.push(id);
@@ -112,7 +112,7 @@ describe.skipIf(!configured)('Systems State Service', () => {
         client,
         path: { stateId: createdStateIds[0] },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect((data as any)?.id).toBe(createdStateIds[0]);
     });
 
@@ -123,7 +123,7 @@ describe.skipIf(!configured)('Systems State Service', () => {
         path: { stateId: createdStateIds[0] },
         body: { description: 'Updated by ts-sdk e2e tests' },
       });
-      expect([200, 204]).toContain(response.status);
+      expect([200, 204]).toContain(response!.status);
     });
 
     it('fetches state version history', async () => {
@@ -132,7 +132,7 @@ describe.skipIf(!configured)('Systems State Service', () => {
         client,
         path: { stateId: createdStateIds[0] },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });
