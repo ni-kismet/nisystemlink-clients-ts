@@ -23,52 +23,9 @@ const HTTP_METHODS = ['get', 'post', 'put', 'patch', 'delete', 'options', 'head'
  * Only services with known bugs need an entry here.
  */
 export const specPatches: Partial<Record<string, PatchFn>> = {
-  'file-ingestion': patchFileIngestion,
   routines: patchRoutines,
+  'test-monitor': patchTestMonitor,
 };
-
-// ---------------------------------------------------------------------------
-// file-ingestion
-// BUG-001: GET /v1/service-groups/Default/files — orderBy enum includes
-//          'lastUpdatedTimestamp', which the server rejects with HTTP 400.
-//          Valid values are: 'created', 'id', 'size'.
-// Remove when: spec removes 'lastUpdatedTimestamp' from the orderBy enum.
-//
-// BUG-003: POST /v1/service-groups/Default/query-files — propertiesQuery field
-//          lacks a warning that it performs non-indexed scans and can time out.
-// Remove when: spec adds appropriate description/warning to the propertiesQuery field.
-// ---------------------------------------------------------------------------
-function patchFileIngestion(spec: Spec): Spec {
-  // BUG-001: drop the invalid enum member from the GET files orderBy parameter.
-  const getFilesOp = spec.paths?.['/v1/service-groups/Default/files']?.get;
-  if (getFilesOp?.parameters) {
-    const orderByParam = getFilesOp.parameters.find((p: Spec) => p.name === 'orderBy');
-    if (orderByParam?.enum) {
-      orderByParam.enum = (orderByParam.enum as string[]).filter(
-        (v) => v !== 'lastUpdatedTimestamp',
-      );
-    }
-  }
-
-  // BUG-003: add a timeout warning to the propertiesQuery field in the request schema.
-  const timeoutWarning =
-    'Warning: queries on custom (un-indexed) properties are very likely to time out ' +
-    'on the server for large file collections. For large datasets, prefer listing files ' +
-    'with `GET /v1/service-groups/Default/files` and filtering client-side, or use ' +
-    '`POST /v1/service-groups/Default/query-files-linq` with indexed filter expressions.';
-  const queryFilesOp = spec.paths?.['/v1/service-groups/Default/query-files']?.post;
-  const requestBodySchema = queryFilesOp?.requestBody?.content?.['application/json']?.schema;
-  const requestBodyParam = queryFilesOp?.parameters?.find((p: Spec) => p.in === 'body' && p.name === 'query');
-  const propertiesQueryField =
-    requestBodySchema?.properties?.propertiesQuery ?? requestBodyParam?.schema?.properties?.propertiesQuery;
-  if (propertiesQueryField && !String(propertiesQueryField.description ?? '').includes('time out')) {
-    propertiesQueryField.description = propertiesQueryField.description
-      ? `${propertiesQueryField.description} ${timeoutWarning}`
-      : timeoutWarning;
-  }
-
-  return spec;
-}
 
 // ---------------------------------------------------------------------------
 // routines (v1)
@@ -92,5 +49,30 @@ function patchRoutines(spec: Spec): Spec {
       }
     }
   }
+  return spec;
+}
+
+// ---------------------------------------------------------------------------
+// test-monitor
+// BUG-010: NamedValueObject.value is typed as object in the spec, but the live
+//          service accepts primitive JSON values and returns them unchanged.
+// Remove when: spec models NamedValueObject.value as arbitrary JSON instead of
+//              type: object.
+// ---------------------------------------------------------------------------
+function patchTestMonitor(spec: Spec): Spec {
+  const valueSchema = spec.components?.schemas?.NamedValueObject?.properties?.value;
+  if (!valueSchema) return spec;
+
+  // Model the field as arbitrary JSON so generated SDKs accept the values
+  // that the live service already supports.
+  valueSchema.oneOf = [
+    { type: 'string' },
+    { type: 'number' },
+    { type: 'boolean' },
+    { type: 'object', additionalProperties: true },
+    { type: 'array', items: {} },
+  ];
+  delete valueSchema.type;
+
   return spec;
 }

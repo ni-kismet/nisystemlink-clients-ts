@@ -69,17 +69,17 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getNiworkitem({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
 
     it('v1 endpoint is reachable', async () => {
       const { response } = await getNiworkitemV1({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
 
     it('lists work item types', async () => {
       const { data, error, response } = await getNiworkitemV1Workitemtypes({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -94,7 +94,7 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
       const elapsed = Date.now() - start;
       if (elapsed > 5000) console.warn(`[SLOW] postNiworkitemV1QueryWorkitems took ${elapsed}ms`);
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
       expect(typeof (data as any)?.totalCount).toBe('number');
     });
@@ -104,7 +104,7 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
         client,
         body: { filter: `name.Contains("${testName}")` },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -112,7 +112,7 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
   describe('getNiworkitemV1WorkitemsSummary', () => {
     it('returns work item summary stats', async () => {
       const { data, error, response } = await getNiworkitemV1WorkitemsSummary({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -127,7 +127,7 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
       const elapsed = Date.now() - start;
       if (elapsed > 5000) console.warn(`[SLOW] postNiworkitemV1QueryWorkflows took ${elapsed}ms`);
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -147,9 +147,9 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
       // Accept 400 gracefully; downstream tests skip when createdWorkflowIds is empty
       expect(
         [200, 201, 400],
-        `HTTP ${response.status}: ${JSON.stringify(error)}`,
-      ).toContain(response.status);
-      if (response.status === 400) {
+        `HTTP ${response!.status}: ${JSON.stringify(error)}`,
+      ).toContain(response!.status);
+      if (response!.status === 400) {
         console.warn('[INFO] createWorkflow: states validation — must define a state for each work item state');
         return;
       }
@@ -166,7 +166,7 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
         client,
         path: { workflowId: createdWorkflowIds[0] },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect((data as any)?.id).toBe(createdWorkflowIds[0]);
     });
 
@@ -181,7 +181,7 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
         path: { workflowId: createdWorkflowIds[0] },
         body: { ...(current as any), name: `${testName}-updated` },
       });
-      expect([200, 204]).toContain(response.status);
+      expect([200, 204]).toContain(response!.status);
     });
   });
 
@@ -197,8 +197,8 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
       });
       expect(
         [200, 201],
-        `HTTP ${response.status}: ${JSON.stringify(error)}`,
-      ).toContain(response.status);
+        `HTTP ${response!.status}: ${JSON.stringify(error)}`,
+      ).toContain(response!.status);
       const id = (data as any)?.id;
       if (id) {
         createdWorkItemIds.push(id);
@@ -212,7 +212,7 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
         client,
         path: { workItemId: createdWorkItemIds[0] },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect((data as any)?.id).toBe(createdWorkItemIds[0]);
     });
   });

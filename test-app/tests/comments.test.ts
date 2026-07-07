@@ -46,7 +46,7 @@ describe.skipIf(!configured)('Comments Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getApiInfo({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
@@ -58,7 +58,7 @@ describe.skipIf(!configured)('Comments Service', () => {
         client,
         query: { ResourceType: 'testmonitor:result', ResourceId: 'ts-sdk-e2e-dummy' },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(Array.isArray(data?.comments)).toBe(true);
     });
 
@@ -100,7 +100,7 @@ describe.skipIf(!configured)('Comments Service', () => {
       });
 
       // 200 = all created; 201 = created; 207 = partial success; 400 = resource not found (ok for e2e)
-      expect([200, 201, 207, 400]).toContain(response.status);
+      expect([200, 201, 207, 400]).toContain(response!.status);
       const id = created?.createdComments?.[0]?.id;
       if (id) {
         createdCommentIds.push(id);
@@ -111,7 +111,7 @@ describe.skipIf(!configured)('Comments Service', () => {
           path: { id },
           body: { message: 'ts-sdk-e2e updated' },
         });
-        expect([200, 204]).toContain(updateResp.status);
+        expect([200, 204]).toContain(updateResp!.status);
       }
     });
   });

@@ -52,7 +52,7 @@ describe.skipIf(!configured)('DataFrame Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getNidataframe({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
@@ -62,7 +62,7 @@ describe.skipIf(!configured)('DataFrame Service', () => {
         client,
         query: { take: 10 },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -76,7 +76,7 @@ describe.skipIf(!configured)('DataFrame Service', () => {
       });
       const elapsed = Date.now() - start;
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
 
       if (elapsed > 5000) {
@@ -103,7 +103,7 @@ describe.skipIf(!configured)('DataFrame Service', () => {
           ],
         },
       });
-      expect([200, 201], `Create table failed: ${JSON.stringify(error)}`).toContain(response.status);
+      expect([200, 201], `Create table failed: ${JSON.stringify(error)}`).toContain(response!.status);
       createdTableId = created?.id;
       expect(createdTableId).toBeTruthy();
     });
@@ -122,7 +122,7 @@ describe.skipIf(!configured)('DataFrame Service', () => {
         },
       });
       // 204 = No Content (write accepted, no body returned)
-      expect([200, 204], `Write data failed: ${JSON.stringify(error)}`).toContain(response.status);
+      expect([200, 204], `Write data failed: ${JSON.stringify(error)}`).toContain(response!.status);
     });
 
     it('queries data from the table with filter', async () => {
@@ -135,7 +135,7 @@ describe.skipIf(!configured)('DataFrame Service', () => {
       });
       const elapsed = Date.now() - start;
 
-      expect(response.status, `Query data failed: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `Query data failed: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
 
       if (elapsed > 5000) {

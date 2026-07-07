@@ -46,14 +46,14 @@ describe.skipIf(!configured)('Routines v2 Service (preferred)', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await rootEndpoint({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
   describe('queryRoutines (GET list)', () => {
     it('lists routines', async () => {
       const { data, error, response } = await queryRoutines({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
 
@@ -62,7 +62,7 @@ describe.skipIf(!configured)('Routines v2 Service (preferred)', () => {
         client,
         query: { Enabled: true },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -82,7 +82,7 @@ describe.skipIf(!configured)('Routines v2 Service (preferred)', () => {
           actions: [{ type: 'log', configuration: { message: 'ts-sdk-e2e' } }],
         },
       });
-      expect(response.status, `Create routine failed: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `Create routine failed: ${JSON.stringify(error)}`).toBe(200);
       createdRoutineId = (data as any)?.id;
       if (createdRoutineId) {
         expect(typeof createdRoutineId).toBe('string');
@@ -95,7 +95,7 @@ describe.skipIf(!configured)('Routines v2 Service (preferred)', () => {
         client,
         path: { id: createdRoutineId },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect((data as any)?.id).toBe(createdRoutineId);
     });
 
@@ -106,7 +106,7 @@ describe.skipIf(!configured)('Routines v2 Service (preferred)', () => {
         path: { id: createdRoutineId },
         body: { enabled: false },
       });
-      expect([200, 204]).toContain(response.status);
+      expect([200, 204]).toContain(response!.status);
     });
   });
 });

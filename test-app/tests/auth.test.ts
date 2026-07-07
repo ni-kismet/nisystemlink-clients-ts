@@ -45,12 +45,12 @@ describe.skipIf(!configured)('Auth Service', () => {
   describe('auth / user info', () => {
     it('auth endpoint validates the API key', async () => {
       const { response } = await auth({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
 
     it('user endpoint returns current user info', async () => {
       const { data, error, response } = await user({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
       // Response is { user: {...}, org?: {...}, workspaces?: [...], ... }
       expect(data?.user).toHaveProperty('id');
@@ -60,7 +60,7 @@ describe.skipIf(!configured)('Auth Service', () => {
   describe('API Keys', () => {
     it('lists existing API keys', async () => {
       const { data, error, response } = await getKeys({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
 
@@ -69,8 +69,8 @@ describe.skipIf(!configured)('Auth Service', () => {
         client,
         body: { name: `ts-sdk-e2e-${Date.now()}` },
       });
-      expect([200, 403], `Create key failed: ${JSON.stringify(error)}`).toContain(response.status);
-      if (response.status === 403) {
+      expect([200, 403], `Create key failed: ${JSON.stringify(error)}`).toContain(response!.status);
+      if (response!.status === 403) {
         console.warn('[INFO] API key limit reached — cannot create new key with this account');
         return;
       }
@@ -82,7 +82,7 @@ describe.skipIf(!configured)('Auth Service', () => {
         client,
         path: { id: id! },
       });
-      expect(fetchResp.status).toBe(200);
+      expect(fetchResp!.status).toBe(200);
       expect(fetched?.id).toBe(id);
     });
   });
@@ -90,7 +90,7 @@ describe.skipIf(!configured)('Auth Service', () => {
   describe('Policies', () => {
     it('lists policies', async () => {
       const { data, error, response } = await getPolicies({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -98,7 +98,7 @@ describe.skipIf(!configured)('Auth Service', () => {
   describe('Policy Templates', () => {
     it('lists policy templates', async () => {
       const { data, error, response } = await getPolicyTemplates({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });

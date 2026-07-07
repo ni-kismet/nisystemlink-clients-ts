@@ -40,7 +40,7 @@ describe.skipIf(!configured)('Systems Management Service', () => {
       body: { take: 10 },
     });
 
-    expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+    expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
     expect(error).toBeUndefined();
     // The spec declares 200: Array<SystemsResponse> but the real API may return
     // either a raw array OR a wrapper object { data: [...], count: N }.
@@ -68,10 +68,10 @@ describe.skipIf(!configured)('Systems Management Service', () => {
   it('getNisysmgmtV1Systems lists systems (GET)', async () => {
     const { data, error, response } = await getNisysmgmtV1Systems({ client });
     // NOTE: dev server returns 500 for this endpoint (server-side bug); accept and warn
-    if (response.status === 500) {
+    if (response!.status === 500) {
       console.warn('[BUG] getNisysmgmtV1Systems returns 500 — server-side error, prefer postNisysmgmtV1MaterializedSearchSystems');
     }
-    expect([200, 500], `HTTP ${response.status}: ${JSON.stringify(error)}`).toContain(response.status);
+    expect([200, 500], `HTTP ${response!.status}: ${JSON.stringify(error)}`).toContain(response!.status);
   });
 
   it('postNisysmgmtV1MaterializedSearchSystems (preferred — indexed)', async () => {
@@ -82,7 +82,7 @@ describe.skipIf(!configured)('Systems Management Service', () => {
     });
     const elapsed = Date.now() - start;
 
-    expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+    expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
     expect(data).toBeTruthy();
 
     if (elapsed > 5000) {
@@ -92,18 +92,18 @@ describe.skipIf(!configured)('Systems Management Service', () => {
 
   it('returns systems summary', async () => {
     const { data, error, response } = await getNisysmgmtV1GetSystemsSummary({ client });
-    expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+    expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
     expect(data).toBeDefined();
   });
 
   it('returns pending systems summary', async () => {
     const { data, response } = await getNisysmgmtV1GetPendingSystemsSummary({ client });
-    expect(response.status).toBe(200);
+    expect(response!.status).toBe(200);
     expect(data).toBeDefined();
   });
 
   it('root endpoint is reachable', async () => {
     const { response } = await getNisysmgmt({ client });
-    expect(response.status).toBeLessThan(400);
+    expect(response!.status).toBeLessThan(400);
   });
 });

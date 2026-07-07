@@ -44,8 +44,8 @@ describe.skipIf(!configured)('Repository Service', () => {
 
       // 400 = server rejects request (e.g. systemConfigurations validation);
       // connectivity confirmed by getNirepoV1StoreItems
-      expect([200, 400], `HTTP ${response.status}: ${JSON.stringify(error)}`).toContain(response.status);
-      if (response.status === 200) {
+      expect([200, 400], `HTTP ${response!.status}: ${JSON.stringify(error)}`).toContain(response!.status);
+      if (response!.status === 200) {
         expect(data).toBeDefined();
       }
 
@@ -59,15 +59,15 @@ describe.skipIf(!configured)('Repository Service', () => {
         client,
         body: {},
       });
-      expect([200, 400]).toContain(response.status);
-      if (response.status === 200) expect(data).toBeDefined();
+      expect([200, 400]).toContain(response!.status);
+      if (response!.status === 200) expect(data).toBeDefined();
     });
   });
 
   describe('getNirepoV1StoreItems (cached item index)', () => {
     it('lists store items', async () => {
       const { data, error, response } = await getNirepoV1StoreItems({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });

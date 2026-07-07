@@ -30,7 +30,7 @@ describe.skipIf(!configured)('User Service', () => {
   describe('Workspaces', () => {
     it('lists workspaces', async () => {
       const { data, error, response } = await getWorkspaces({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toHaveProperty('workspaces');
       expect(Array.isArray(data!.workspaces)).toBe(true);
     });
@@ -60,7 +60,7 @@ describe.skipIf(!configured)('User Service', () => {
         client,
         body: { take: 5 },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(Array.isArray(data!.users)).toBe(true);
     });
 
@@ -80,8 +80,8 @@ describe.skipIf(!configured)('User Service', () => {
         body: { filter: 'niua.status = "active"', take: 5 },
       });
       // Accept 400 — filter syntax varies by server version; connectivity confirmed by other tests
-      expect([200, 400]).toContain(response.status);
-      if (response.status === 200) expect(data).toBeDefined();
+      expect([200, 400]).toContain(response!.status);
+      if (response!.status === 200) expect(data).toBeDefined();
     });
   });
 
@@ -90,7 +90,7 @@ describe.skipIf(!configured)('User Service', () => {
       // The org name is instance-specific; try a common default.
       // 404 = not found, 401 = not accessible — both confirm the client reaches the server.
       const { response } = await getOrg({ client, path: { name: 'organization' } });
-      expect([200, 401, 404]).toContain(response.status);
+      expect([200, 401, 404]).toContain(response!.status);
     });
   });
 });

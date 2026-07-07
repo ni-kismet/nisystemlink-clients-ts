@@ -30,7 +30,7 @@ describe.skipIf(!configured)('Feeds Service', () => {
   it('lists feeds', async () => {
     const { data, error, response } = await getNifeedV1Feeds({ client });
 
-    expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+    expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
     expect(error).toBeUndefined();
     expect(data).toBeDefined();
     expect(Array.isArray(data!.feeds)).toBe(true);

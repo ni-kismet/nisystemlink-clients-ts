@@ -52,12 +52,12 @@ describe.skipIf(!configured)('User Data Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getNiuserdata({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
 
     it('v1 endpoint is reachable', async () => {
       const { response } = await getNiuserdataV1({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
@@ -74,7 +74,7 @@ describe.skipIf(!configured)('User Data Service', () => {
       const elapsed = Date.now() - start;
       if (elapsed > 5000) console.warn(`[SLOW] postNiuserdataV1QueryItems took ${elapsed}ms`);
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
       expect(Array.isArray(data?.items)).toBe(true);
     });
@@ -84,7 +84,7 @@ describe.skipIf(!configured)('User Data Service', () => {
         client,
         body: { names: [testKey] },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -92,7 +92,7 @@ describe.skipIf(!configured)('User Data Service', () => {
   describe('getNiuserdataV1Items (GET — caller-owned items only)', () => {
     it('lists own user data items', async () => {
       const { data, error, response } = await getNiuserdataV1Items({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -114,8 +114,8 @@ describe.skipIf(!configured)('User Data Service', () => {
       });
       expect(
         [200, 201],
-        `HTTP ${response.status}: ${JSON.stringify(error)}`,
-      ).toContain(response.status);
+        `HTTP ${response!.status}: ${JSON.stringify(error)}`,
+      ).toContain(response!.status);
       // Response is union: CreateOrUpdateUserDataItemResponseModel (200) | UserDataItemModel[] (201)
       const id = Array.isArray(data) ? data[0]?.id : data?.succeeded?.[0]?.id;
       if (id) {
@@ -130,7 +130,7 @@ describe.skipIf(!configured)('User Data Service', () => {
         client,
         path: { id: createdItemIds[0] },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data?.id).toBe(createdItemIds[0]);
       expect(data?.name).toBe(testKey);
     });
@@ -147,7 +147,7 @@ describe.skipIf(!configured)('User Data Service', () => {
           },
         ],
       });
-      expect([200, 201, 207]).toContain(response.status);
+      expect([200, 201, 207]).toContain(response!.status);
     });
 
     it('queries and finds the created item by name', async () => {
@@ -156,7 +156,7 @@ describe.skipIf(!configured)('User Data Service', () => {
         client,
         body: { names: [testKey] },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       const found = data?.items?.some((item: { id?: string | null }) => item.id === createdItemIds[0]);
       if (!found) {
         console.log('[INFO] Created item not yet visible in query (possible indexing delay)');

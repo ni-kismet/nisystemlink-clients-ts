@@ -57,7 +57,7 @@ describe.skipIf(!configured)('Web Application Service', () => {
       const elapsed = Date.now() - start;
       if (elapsed > 5000) console.warn(`[SLOW] query (webapps) took ${elapsed}ms`);
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
 
@@ -66,7 +66,7 @@ describe.skipIf(!configured)('Web Application Service', () => {
         client,
         body: { filter: `name.Contains("${testName}")` },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -74,7 +74,7 @@ describe.skipIf(!configured)('Web Application Service', () => {
   describe('listWebapps (GET — alternative)', () => {
     it('lists web applications', async () => {
       const { data, error, response } = await listWebapps({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -91,9 +91,9 @@ describe.skipIf(!configured)('Web Application Service', () => {
       // 400 = PolicyIds validation fails when no valid policy exists on this instance
       expect(
         [200, 201, 400],
-        `HTTP ${response.status}: ${JSON.stringify(error)}`,
-      ).toContain(response.status);
-      if (response.status === 400) {
+        `HTTP ${response!.status}: ${JSON.stringify(error)}`,
+      ).toContain(response!.status);
+      if (response!.status === 400) {
         console.warn('[INFO] createWebapp: PolicyIds validation failed — skipping downstream CRUD tests');
         return;
       }
@@ -110,7 +110,7 @@ describe.skipIf(!configured)('Web Application Service', () => {
         client,
         path: { id: createdWebappId },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect((data as any)?.id).toBe(createdWebappId);
       expect((data as any)?.name).toBe(testName);
     });
@@ -125,7 +125,7 @@ describe.skipIf(!configured)('Web Application Service', () => {
           type: 'DASHBOARD',
         } as any,
       });
-      expect([200, 204]).toContain(response.status);
+      expect([200, 204]).toContain(response!.status);
     });
 
     it('finds created webapp via query', async () => {
@@ -134,7 +134,7 @@ describe.skipIf(!configured)('Web Application Service', () => {
         client,
         body: { filter: `id == "${createdWebappId}"` },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       const found = (data as any)?.webapps?.some((w: any) => w.id === createdWebappId);
       if (!found) {
         console.log('[INFO] Created webapp not yet visible in query (possible indexing delay)');

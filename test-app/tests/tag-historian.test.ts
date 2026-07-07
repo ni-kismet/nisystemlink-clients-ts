@@ -42,7 +42,7 @@ describe.skipIf(!configured)('Tag Historian Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await rootEndpoint({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
 
     it('version endpoint is reachable', async () => {
@@ -50,7 +50,7 @@ describe.skipIf(!configured)('Tag Historian Service', () => {
         client,
         path: { version: 'v2' },
       });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
@@ -73,7 +73,7 @@ describe.skipIf(!configured)('Tag Historian Service', () => {
       if (elapsed > 5000) console.warn(`[SLOW] queryHistory took ${elapsed}ms`);
 
       // 200 if history exists; 200 with empty results if no data
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
 
@@ -89,7 +89,7 @@ describe.skipIf(!configured)('Tag Historian Service', () => {
           take: 5,
         },
       });
-      expect([200, 400]).toContain(response.status);
+      expect([200, 400]).toContain(response!.status);
     });
   });
 
@@ -111,7 +111,7 @@ describe.skipIf(!configured)('Tag Historian Service', () => {
       const elapsed = Date.now() - start;
       if (elapsed > 5000) console.warn(`[SLOW] queryDecimatedHistory took ${elapsed}ms`);
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });

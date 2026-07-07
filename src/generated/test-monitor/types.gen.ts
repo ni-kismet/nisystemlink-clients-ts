@@ -136,9 +136,9 @@ export type NamedValueObject = {
     /**
      * The value
      */
-    value?: {
+    value?: string | number | boolean | {
         [key: string]: unknown;
-    };
+    } | Array<unknown>;
 };
 
 /**

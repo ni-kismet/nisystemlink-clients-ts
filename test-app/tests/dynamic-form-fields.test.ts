@@ -41,14 +41,14 @@ describe.skipIf(!configured)('Dynamic Form Fields Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getNidynamicformfields({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
   describe('Configurations', () => {
     it('lists configurations', async () => {
       const { data, error, response } = await getNidynamicformfieldsV1Configurations({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
 
@@ -61,7 +61,7 @@ describe.skipIf(!configured)('Dynamic Form Fields Service', () => {
       const elapsed = Date.now() - start;
 
       // NOTE: workorder:testplan is auto-converted internally — use workitem:workitem
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
 
       if (elapsed > 5000) {
@@ -73,13 +73,13 @@ describe.skipIf(!configured)('Dynamic Form Fields Service', () => {
   describe('Groups and Fields (metadata)', () => {
     it('lists groups', async () => {
       const { data, error, response } = await getNidynamicformfieldsV1Groups({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
 
     it('lists fields', async () => {
       const { data, error, response } = await getNidynamicformfieldsV1Fields({ client });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });
@@ -96,7 +96,7 @@ describe.skipIf(!configured)('Dynamic Form Fields Service', () => {
           resourceId: 'ts-sdk-e2e-dummy',
         },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
     });
   });

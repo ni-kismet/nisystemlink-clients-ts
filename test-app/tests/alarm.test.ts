@@ -36,12 +36,12 @@ describe.skipIf(!configured)('Alarm Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getNialarm({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
 
     it('version endpoint returns available operations', async () => {
       const { response, data } = await getNialarmByVersion({ client, path: { version: 'v1' } });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
       // Response may have an operations array or similar structure
       expect(data).toBeDefined();
     });
@@ -56,7 +56,7 @@ describe.skipIf(!configured)('Alarm Service', () => {
       });
       const elapsed = Date.now() - start;
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(error).toBeUndefined();
       expect(data).toBeDefined();
       expect(data).toHaveProperty('alarms');
@@ -86,8 +86,8 @@ describe.skipIf(!configured)('Alarm Service', () => {
         body: { filter: 'IsAcknowledged = false', take: 5 },
       });
       // Accept 400 — alarm filter syntax is server-version specific; connectivity confirmed by other tests
-      expect([200, 400]).toContain(response.status);
-      if (response.status === 200) expect(Array.isArray(data?.alarms)).toBe(true);
+      expect([200, 400]).toContain(response!.status);
+      if (response!.status === 200) expect(Array.isArray(data?.alarms)).toBe(true);
     });
 
     it('respects take limit', async () => {
@@ -103,7 +103,7 @@ describe.skipIf(!configured)('Alarm Service', () => {
         client,
         body: { take: 1, returnCount: true },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       // totalCount may be present when returnCount is true
       expect(typeof data?.totalCount === 'number' || data?.totalCount === undefined).toBe(true);
     });
@@ -116,7 +116,7 @@ describe.skipIf(!configured)('Alarm Service', () => {
         body: { take: 5 },
       });
       // Verify it still responds; document as deprecated in any client-facing code
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(Array.isArray(data?.filterMatches)).toBe(true);
     });
   });

@@ -30,14 +30,14 @@ describe.skipIf(!configured)('Routines Service', () => {
 
   it('root endpoint is reachable', async () => {
     const { response } = await getNiroutine({ client });
-    expect(response.status).toBeLessThan(400);
+    expect(response!.status).toBeLessThan(400);
   });
 
   it('lists routines (v1 — notebook routines only; prefer v2 for new code)', async () => {
     // The routines list endpoint does not support skip/take — returns all routines
     const { data, error, response } = await getNiroutineV1Routines({ client });
 
-    expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+    expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
     expect(error).toBeUndefined();
     expect(data).toBeDefined();
     expect(Array.isArray(data!.routines)).toBe(true);

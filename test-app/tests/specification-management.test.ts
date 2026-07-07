@@ -47,12 +47,12 @@ describe.skipIf(!configured)('Specification Management Service', () => {
   describe('API info', () => {
     it('root endpoint is reachable', async () => {
       const { response } = await getNispec({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
 
     it('v1 endpoint is reachable', async () => {
       const { response } = await getNispecV1({ client });
-      expect(response.status).toBeLessThan(400);
+      expect(response!.status).toBeLessThan(400);
     });
   });
 
@@ -67,7 +67,7 @@ describe.skipIf(!configured)('Specification Management Service', () => {
       const elapsed = Date.now() - start;
       if (elapsed > 5000) console.warn(`[SLOW] postNispecV1QuerySpecs took ${elapsed}ms`);
 
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data).toBeDefined();
       expect(Array.isArray(data?.specs)).toBe(true);
     });
@@ -77,7 +77,7 @@ describe.skipIf(!configured)('Specification Management Service', () => {
         client,
         body: { productIds: ['ts-sdk-test-product-id'], filter: `specId == "${testTag}"` },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       expect(data).toBeDefined();
     });
 
@@ -86,7 +86,7 @@ describe.skipIf(!configured)('Specification Management Service', () => {
         client,
         body: { productIds: ['ts-sdk-test-product-id'], take: 1 },
       });
-      expect(first.response.status).toBe(200);
+      expect(first.response!.status).toBe(200);
       // If there are more results, continuationToken should be present
       const firstData = first.data;
       if (firstData?.continuationToken) {
@@ -94,7 +94,7 @@ describe.skipIf(!configured)('Specification Management Service', () => {
           client,
           body: { productIds: ['ts-sdk-test-product-id'], take: 1, continuationToken: firstData.continuationToken },
         });
-        expect(second.response.status).toBe(200);
+        expect(second.response!.status).toBe(200);
       }
     });
   });
@@ -119,8 +119,8 @@ describe.skipIf(!configured)('Specification Management Service', () => {
       });
       expect(
         [200, 201],
-        `HTTP ${response.status}: ${JSON.stringify(error)}`,
-      ).toContain(response.status);
+        `HTTP ${response!.status}: ${JSON.stringify(error)}`,
+      ).toContain(response!.status);
       const id = data?.createdSpecs?.[0]?.id ?? (data as any)?.specs?.[0]?.id;
       if (id) {
         createdSpecIds.push(id);
@@ -134,7 +134,7 @@ describe.skipIf(!configured)('Specification Management Service', () => {
         client,
         path: { id: createdSpecIds[0] },
       });
-      expect(response.status, `HTTP ${response.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
       expect(data?.id).toBe(createdSpecIds[0]);
     });
 
@@ -158,7 +158,7 @@ describe.skipIf(!configured)('Specification Management Service', () => {
           ],
         },
       });
-      expect([200, 207]).toContain(response.status);
+      expect([200, 207]).toContain(response!.status);
     });
 
     it('queries and finds the created specification by specId', async () => {
@@ -167,7 +167,7 @@ describe.skipIf(!configured)('Specification Management Service', () => {
         client,
         body: { productIds: ['ts-sdk-test-product-id'], filter: `specId == "${testTag}"` },
       });
-      expect(response.status).toBe(200);
+      expect(response!.status).toBe(200);
       const found = data?.specs?.some((spec: { id?: string | null }) => spec.id === createdSpecIds[0]);
       if (!found) {
         // Server may have indexing delay — acceptable
