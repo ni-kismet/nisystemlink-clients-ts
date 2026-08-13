@@ -5,16 +5,6 @@ export type ClientOptions = {
 };
 
 /**
- * Model for request to activate systems by checking out a license seat for each one.
- */
-export type ActivateSystemsRequest = {
-    /**
-     * Array of strings representing the IDs of the systems to activate.
-     */
-    systemIds?: Array<string> | null;
-};
-
-/**
  * Represents the advanced grains (system facts and attributes) collected from managed systems via Salt.
  * Grains include hardware, operating system, network, and NI-specific details about managed devices.
  */
@@ -952,10 +942,6 @@ export type MaterializedSystemModel = {
      * The connection state of the system (e.g., connected, disconnected).
      */
     connected?: string | null;
-    /**
-     * Whether the system has been activated.
-     */
-    activated?: boolean | null;
     /**
      * Whether the system is connected over HTTP.
      */

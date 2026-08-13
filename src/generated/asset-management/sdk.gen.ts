@@ -22,10 +22,10 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
  * Get assets
  *
  * Returns a page of assets for the workspaces the caller can access. Use the query string to
- * control paging with `Skip` and `Take`, to request a total count with `ReturnCount`, and to limit
- * the results to calibratable assets with `CalibratableOnly`. Set `ResponseFormat` to JSON to
+ * control paging with <b>Skip</b> and <b>Take</b>, to request a total count with <b>ReturnCount</b>, and to limit
+ * the results to calibratable assets with <b>CalibratableOnly</b>. Set <b>ResponseFormat</b> to JSON to
  * receive the assets inline, or to CSV to generate a report that is either returned as a
- * downloadable file or uploaded to the file service depending on the `Destination` value. This
+ * downloadable file or uploaded to the file service depending on the <b>Destination</b> value. This
  * route is best suited to simple listing scenarios; use query-assets when you need filtering,
  * ordering, or projection.
  */
@@ -71,12 +71,12 @@ export const assetSummary = <ThrowOnError extends boolean = false>(options?: Opt
 /**
  * Query assets
  *
- * Returns assets that match the criteria in the request body. Use `filter` to express a query,
- * `skip` and `take` for paging, `orderBy` and `descending` for sorting, and `projection` to limit
- * the returned fields. Set `returnCount` to include the total number of matching assets. When
- * `destination` is set the route produces a CSV report instead of an inline response, either as a
+ * Returns assets that match the criteria in the request body. Use <b>filter</b> to express a query,
+ * <b>skip</b> and <b>take</b> for paging, <b>orderBy</b> and <b>descending</b> for sorting, and <b>projection</b> to limit
+ * the returned fields. Set <b>returnCount</b> to include the total number of matching assets. When
+ * <b>destination</b> is set the route produces a CSV report instead of an inline response, either as a
  * downloadable file or uploaded to the file service; ordering is not applied to report requests.
- * The deprecated fields `ids` and `calibratableOnly` are only applicable when generating CSV
+ * The deprecated fields <b>ids</b> and <b>calibratableOnly</b> are only applicable when generating CSV
  * reports.
  */
 export const queryAssets = <ThrowOnError extends boolean = false>(options?: Options<QueryAssetsData, ThrowOnError>): RequestResult<QueryAssetsResponses, QueryAssetsErrors, ThrowOnError> => (options?.client ?? client).post<QueryAssetsResponses, QueryAssetsErrors, ThrowOnError>({
@@ -92,9 +92,9 @@ export const queryAssets = <ThrowOnError extends boolean = false>(options?: Opti
 /**
  * Export an assets report
  *
- * Generates a CSV report of the assets that match the `filter` in the request body. When
- * `destination` is the file service the report is uploaded and its file identifier is returned;
- * otherwise the report is returned directly as a downloadable CSV file. Use `fileIngestionWorkspace`
+ * Generates a CSV report of the assets that match the <b>filter</b> in the request body. When
+ * <b>destination</b> is the file service the report is uploaded and its file identifier is returned;
+ * otherwise the report is returned directly as a downloadable CSV file. Use <b>fileIngestionWorkspace</b>
  * to control which workspace the uploaded file is stored in.
  */
 export const exportAssets = <ThrowOnError extends boolean = false>(options?: Options<ExportAssetsData, ThrowOnError>): RequestResult<ExportAssetsResponses, ExportAssetsErrors, ThrowOnError> => (options?.client ?? client).post<ExportAssetsResponses, ExportAssetsErrors, ThrowOnError>({
@@ -110,7 +110,7 @@ export const exportAssets = <ThrowOnError extends boolean = false>(options?: Opt
 /**
  * Update asset metadata
  *
- * Updates the `keywords` and `properties` of a single asset identified by assetId. This route is
+ * Updates the <b>keywords</b> and <b>properties</b> of a single asset identified by assetId. This route is
  * deprecated; use update-assets instead, which supports bulk updates and a wider set of fields.
  * Properties that fail validation are reported in a partial success response while the remaining
  * properties are applied.
@@ -131,7 +131,7 @@ export const updateMetadata = <ThrowOnError extends boolean = false>(options: Op
  * Update assets
  *
  * Updates one or more assets in a single request. Each asset in the request is identified by an
- * ID that combines `serialNumber`, `model`, and `vendor`, and can change metadata, keywords,
+ * ID that combines <b>serialNumber</b>, <b>model</b>, and <b>vendor</b>, and can change metadata, keywords,
  * properties, and location. The operation is processed per asset and returns a partial
  * success response that lists the assets that were updated alongside
  * the assets that failed, grouped by reason such as missing identifier, not found, or insufficient
@@ -151,9 +151,9 @@ export const updateAssets = <ThrowOnError extends boolean = false>(options?: Opt
  * Query asset location history
  *
  * Returns the history of locations that the asset identified by assetId has occupied over time.
- * Use `startTime` and `endTime` to bound the time window, which defaults to the last 90 days when
- * not supplied, and `locationFilter` to narrow the results to specific locations. Results are paged
- * with a `continuationToken`; pass the token returned by a previous call to retrieve the next page.
+ * Use <b>startTime</b> and <b>endTime</b> to bound the time window, which defaults to the last 90 days when
+ * not supplied, and <b>locationFilter</b> to narrow the results to specific locations. Results are paged
+ * with a <b>continuationToken</b>; pass the token returned by a previous call to retrieve the next page.
  * When the request specifies a report destination the history is returned as a CSV report instead
  * of an inline response.
  */
@@ -170,7 +170,7 @@ export const queryAssetLocationHistory = <ThrowOnError extends boolean = false>(
 /**
  * Delete assets
  *
- * Deletes one or more assets identified by the `ids` in the request body. The operation is
+ * Deletes one or more assets identified by the <b>ids</b> in the request body. The operation is
  * processed per asset and returns the identifiers that were deleted along with the identifiers that
  * could not be deleted, such as identifiers that do not exist or are invalid. Deleting an asset
  * removes its record, including its location, utilization, and calibration history.
@@ -201,7 +201,7 @@ export const getAsset = <ThrowOnError extends boolean = false>(options: Options<
 /**
  * Link files to an asset
  *
- * Associates one or more file identifiers from `fileIds` with the asset identified by assetId,
+ * Associates one or more file identifiers from <b>fileIds</b> with the asset identified by assetId,
  * adding them to any files already linked. The files are typically stored in the file service and
  * may include datasheets, calibration certificates, or other supporting documents. File
  * identifiers that fail validation are reported in a partial success response while the valid
@@ -233,7 +233,7 @@ export const unlinkFileFromAsset = <ThrowOnError extends boolean = false>(option
 /**
  * Delete one or more calibration history entries for an asset
  *
- * Deletes the calibration history entries identified by `calibrationIds` from the asset identified
+ * Deletes the calibration history entries identified by <b>calibrationIds</b> from the asset identified
  * by assetId. The operation is processed per entry and returns the identifiers that were deleted
  * along with the identifiers that could not be found, so you can reconcile which entries remain.
  */
@@ -252,7 +252,7 @@ export const deleteCalibrationHistory = <ThrowOnError extends boolean = false>(o
  *
  * Returns a page of calibration history entries for the asset identified by assetId, ordered from
  * most recent. Each entry records a past calibration event, such as when the asset was calibrated
- * and the resulting due date. Use `Skip` and `Take` to page through the history and `ReturnCount`
+ * and the resulting due date. Use <b>Skip</b> and <b>Take</b> to page through the history and <b>ReturnCount</b>
  * to include the total number of entries. Entries are sorted by date descending, with external
  * calibrations returned before self-calibrations within the same date. Use this history to review
  * an asset's calibration record and make maintenance decisions.
@@ -267,8 +267,8 @@ export const getAssetCalibrationHistory = <ThrowOnError extends boolean = false>
  * Export calibration history
  *
  * Generates a CSV report of the full calibration history for the asset identified by assetId. When
- * `destination` is the file service the report is uploaded and its file identifier is returned;
- * otherwise the report is returned directly as a downloadable CSV file. Use `fileIngestionWorkspace`
+ * <b>destination</b> is the file service the report is uploaded and its file identifier is returned;
+ * otherwise the report is returned directly as a downloadable CSV file. Use <b>fileIngestionWorkspace</b>
  * to control which workspace the uploaded file is stored in.
  */
 export const exportCalibrationHistory = <ThrowOnError extends boolean = false>(options: Options<ExportCalibrationHistoryData, ThrowOnError>): RequestResult<ExportCalibrationHistoryResponses, ExportCalibrationHistoryErrors, ThrowOnError> => (options.client ?? client).post<ExportCalibrationHistoryResponses, ExportCalibrationHistoryErrors, ThrowOnError>({
@@ -284,8 +284,8 @@ export const exportCalibrationHistory = <ThrowOnError extends boolean = false>(o
 /**
  * Calculate the asset calibration forecast for a configured timeframe
  *
- * Calculates how many assets are due for calibration within the time range given by `startTime` and
- * `endTime`, which are interpreted in UTC. Use this route to drive a calibration forecast dashboard
+ * Calculates how many assets are due for calibration within the time range given by <b>startTime</b> and
+ * <b>endTime</b>, which are interpreted in UTC. Use this route to drive a calibration forecast dashboard
  * and plan upcoming calibration work. This route is available only when the calibration forecast
  * feature is enabled for the service.
  */
@@ -431,8 +431,8 @@ export const queryLocationMoves = <ThrowOnError extends boolean = false>(options
  * Search assets with advanced filters
  *
  * Searches a materialized index of assets that supports richer filtering than the standard asset
- * query. Use `filter` to express the search, `skip` and `take` for paging, `orderBy` and
- * `descending` for sorting, and `projection` to limit the returned fields. The page size is capped
+ * query. Use <b>filter</b> to express the search, <b>skip</b> and <b>take</b> for paging, <b>orderBy</b> and
+ * <b>descending</b> for sorting, and <b>projection</b> to limit the returned fields. The page size is capped
  * by the service's configured maximum. This route is available only when advanced asset search is
  * enabled for the service.
  */
@@ -449,8 +449,8 @@ export const searchAssets = <ThrowOnError extends boolean = false>(options?: Opt
 /**
  * Export a materialized assets report
  *
- * Generates a CSV report of the assets in the materialized index that match the `filter` in the
- * request body. When `destination` is the file service the report is uploaded and its file
+ * Generates a CSV report of the assets in the materialized index that match the <b>filter</b> in the
+ * request body. When <b>destination</b> is the file service the report is uploaded and its file
  * identifier is returned; otherwise the report is returned directly as a downloadable CSV file.
  * This route is available only when advanced asset search is enabled for the service.
  */
@@ -467,10 +467,10 @@ export const exportMaterializedAssets = <ThrowOnError extends boolean = false>(o
 /**
  * Query asset utilization history
  *
- * Returns historical utilization sessions for assets. Use `assetFilter` and `utilizationFilter` to
- * narrow the results, `startTime` and `endTime` to bound the time window, which defaults to the
- * last 90 days when not supplied, and `orderBy` with `orderByDescending` to sort. Results are paged
- * with a `continuationToken`; pass the token returned by a previous call to retrieve the next page.
+ * Returns historical utilization sessions for assets. Use <b>assetFilter</b> and <b>utilizationFilter</b> to
+ * narrow the results, <b>startTime</b> and <b>endTime</b> to bound the time window, which defaults to the
+ * last 90 days when not supplied, and <b>orderBy</b> with <b>orderByDescending</b> to sort. Results are paged
+ * with a <b>continuationToken</b>; pass the token returned by a previous call to retrieve the next page.
  * Use this history to analyze how much assets are used over time.
  */
 export const queryAssetUtilizationHistory = <ThrowOnError extends boolean = false>(options?: Options<QueryAssetUtilizationHistoryData, ThrowOnError>): RequestResult<QueryAssetUtilizationHistoryResponses, QueryAssetUtilizationHistoryErrors, ThrowOnError> => (options?.client ?? client).post<QueryAssetUtilizationHistoryResponses, QueryAssetUtilizationHistoryErrors, ThrowOnError>({

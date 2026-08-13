@@ -26,7 +26,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
  * and fields inline, ready to render as a form in the UI.
  *
  * Use this endpoint to retrieve the full form definition for a specific resource type
- * (e.g., `asset:asset`, `workitem:workitem`) within one or more workspaces.
+ * (e.g., <b>asset:asset</b>, <b>workitem:workitem</b>) within one or more workspaces.
  *
  * Backward Compatibility Support for 'workorder:testplan':
  * - When querying with resourceType='workorder:testplan', the API converts it to 'workitem:workitem'

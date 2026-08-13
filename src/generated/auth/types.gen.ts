@@ -217,9 +217,15 @@ export type Key = {
         [key: string]: string;
     };
     /**
-     * A list of policy definitions including statements and permissions
+     * A list of full policy records. Present when expandPolicyIds is true (the default). Omitted when expandPolicyIds=false.
+     *
      */
     policies?: Array<Policy>;
+    /**
+     * A list of raw policy IDs as stored on the key record. Present only when expandPolicyIds=false. Omitted when expandPolicyIds is true.
+     *
+     */
+    policyIds?: Array<string>;
 };
 
 /**
@@ -295,7 +301,7 @@ export type User = {
      */
     entitlements?: {
         [key: string]: unknown;
-    };
+    } | null;
 };
 
 /**
@@ -506,6 +512,16 @@ export type GetKeysData = {
          * Sort by ascending or descending order
          */
         order?: 'ascending' | 'descending';
+        /**
+         * Whether to calculate and return the total number of matching keys. Set to false to skip the count query for improved performance. Defaults to true.
+         *
+         */
+        includeTotalCount?: boolean;
+        /**
+         * Whether to expand policy IDs into full policy records. When false, a policyIds field is returned with the raw IDs instead of a policies field, and no policy or policy-template database queries are issued. Defaults to true.
+         *
+         */
+        expandPolicyIds?: boolean;
     };
     url: '/keys';
 };
@@ -539,7 +555,8 @@ export type GetKeysResponses = {
      */
     200: {
         /**
-         * Total number of keys which match a given query
+         * Total number of keys which match the given query. Omitted when includeTotalCount=false.
+         *
          */
         totalCount?: number;
         /**

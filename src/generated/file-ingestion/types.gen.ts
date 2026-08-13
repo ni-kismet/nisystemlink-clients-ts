@@ -870,7 +870,7 @@ export type QueryAvailableFilesData = {
         sizeMinQuery?: IntegerQuery;
         createdQuery?: DateQuery;
         /**
-         * An array of queries for file properties. Warning: queries on custom (un-indexed) properties are very likely to time out on the server for large file collections. For large datasets, use `POST /v1/service-groups/Default/query-files-linq` with indexed filter expressions.
+         * An array of queries for file properties. Warning: queries on custom (un-indexed) properties are very likely to time out on the server for large file collections. For large datasets, use <b>POST /v1/service-groups/Default/query-files-linq</b> with indexed filter expressions.
          */
         propertiesQuery?: Array<PropertyQuery>;
     };
@@ -1055,7 +1055,7 @@ export type SearchFilesResponses = {
              * Describes the relation the returned total count value has with respect to the total number of files matched by the search.
              * Possible values:
              * "eq" -> equals, meaning that the returned items are all the items that matched the filter
-             * "gte" -> greater or equal, meaning that the `take` limit has been hit, but there are further items that match the search in the database
+             * "gte" -> greater or equal, meaning that the <b>take</b> limit has been hit, but there are further items that match the search in the database
              */
             relation?: string;
             /**

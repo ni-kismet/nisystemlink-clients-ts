@@ -76,12 +76,6 @@ export type User = {
      * The status of the users' registration
      */
     status?: 'pending' | 'active';
-    /**
-     * Licensing entitlements granted to the user, populated from the user's license status during authentication. Describes the features and products the user is entitled to use.
-     */
-    entitlements?: {
-        [key: string]: unknown;
-    };
 };
 
 /**

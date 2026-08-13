@@ -22,12 +22,12 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
  * Acknowledge alarms
  *
  * Marks one or more active alarm instances as reviewed by an operator or automated process, signaling that
- * the condition has been noted and responsibility has been accepted. When combined with `forceClear`,
+ * the condition has been noted and responsibility has been accepted. When combined with <b>forceClear</b>,
  * the alarm is simultaneously cleared and acknowledged in a single request, transitioning it to inactive.
  * Use this for batch acknowledgment in monitoring dashboards, automated response workflows, or integration
  * with incident management systems. When one or more alarms in the batch fail to be acknowledged, the
  * response still returns 200 and includes the failed instance IDs along with error details in the
- * `error.innerErrors` array. Added in version 2 of the `writeAlarmInstances` operation.
+ * <b>error.innerErrors</b> array. Added in version 2 of the <b>writeAlarmInstances</b> operation.
  */
 export const acknowledgeByInstanceIds = <ThrowOnError extends boolean = false>(options?: Options<AcknowledgeByInstanceIdsData, ThrowOnError>): RequestResult<AcknowledgeByInstanceIdsResponses, AcknowledgeByInstanceIdsErrors, ThrowOnError> => (options?.client ?? client).post<AcknowledgeByInstanceIdsResponses, AcknowledgeByInstanceIdsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -42,12 +42,12 @@ export const acknowledgeByInstanceIds = <ThrowOnError extends boolean = false>(o
 /**
  * Create or update an alarm
  *
- * Reports a state change for the condition identified by `alarmId`, either creating a new alarm instance
+ * Reports a state change for the condition identified by <b>alarmId</b>, either creating a new alarm instance
  * if one is not currently active, or transitioning the existing active alarm based on the requested
- * `transition`. Use `SET` transitions to raise or escalate an alarm to a new severity level, and
- * `CLEAR` transitions to signal that the monitored condition has resolved. When an alarm with the same
- * `alarmId` is already active, only `alarmId`, `workspace`, and `transition` are
- * are applied. Fields such as `displayName`, `keywords`, and `properties` are set only during
+ * <b>transition</b>. Use <b>SET</b> transitions to raise or escalate an alarm to a new severity level, and
+ * <b>CLEAR</b> transitions to signal that the monitored condition has resolved. When an alarm with the same
+ * <b>alarmId</b> is already active, only <b>alarmId</b>, <b>workspace</b>, and <b>transition</b> are
+ * are applied. Fields such as <b>displayName</b>, <b>keywords</b>, and <b>properties</b> are set only during
  * creation. Commonly used by tag rule engines, health monitors, and custom condition sensors to integrate
  * with the alarm lifecycle. A 409 Conflict is returned when the requested transition is not valid for the
  * existing alarm state, such as clearing an alarm that is already clear or setting an alarm at a severity
@@ -66,7 +66,7 @@ export const createOrUpdateAlarm = <ThrowOnError extends boolean = false>(option
 /**
  * Delete an alarm
  *
- * Permanently removes the alarm record for the specified `instanceId`. Use this to clean up alarms
+ * Permanently removes the alarm record for the specified <b>instanceId</b>. Use this to clean up alarms
  * created in error, remove closed instances as part of a retention policy, or delete test data in
  * non-production environments.
  */
@@ -79,8 +79,8 @@ export const deleteAlarm = <ThrowOnError extends boolean = false>(options: Optio
 /**
  * Get an alarm
  *
- * Retrieves the full alarm record for the specified `instanceId`, including current state flags
- * (`active`, `clear`, `acknowledged`), all stored severity transitions, timestamps,
+ * Retrieves the full alarm record for the specified <b>instanceId</b>, including current state flags
+ * (<b>active</b>, <b>clear</b>, <b>acknowledged</b>), all stored severity transitions, timestamps,
  * notes, keywords, and properties. Use this to inspect an individual alarm instance for investigation,
  * display alarm details in a UI, or retrieve alarm metadata for downstream processing.
  */
@@ -94,8 +94,8 @@ export const getAlarm = <ThrowOnError extends boolean = false>(options: Options<
  * Query alarms
  *
  * Queries alarm instances using field-level filter predicates. As of version 4 of the
- * `readAlarmInstances` operation, this route is deprecated. Use
- * `POST /nialarm/v1/query-instances-with-filter` instead, which supports Dynamic LINQ
+ * <b>readAlarmInstances</b> operation, this route is deprecated. Use
+ * <b>POST /nialarm/v1/query-instances-with-filter</b> instead, which supports Dynamic LINQ
  * filter expressions for more flexible and expressive querying across all alarm fields.
  *
  * @deprecated
@@ -132,13 +132,13 @@ export const queryAlarmsWithFilter = <ThrowOnError extends boolean = false>(opti
 /**
  * Delete alarms
  *
- * Deletes multiple alarm instances in a single batch request. Returns `204 No Content` when all
- * instances are successfully deleted. Returns `200` with a partial success body when one or more
- * instances fail to delete, listing both the successfully deleted and failed `instanceId`s. Use
+ * Deletes multiple alarm instances in a single batch request. Returns <b>204 No Content</b> when all
+ * instances are successfully deleted. Returns <b>200</b> with a partial success body when one or more
+ * instances fail to delete, listing both the successfully deleted and failed <b>instanceId</b>s. Use
  * this for bulk cleanup, retention policy enforcement, or removing alarm data when an associated system
  * is decommissioned. When all instances are deleted successfully, returns 204 No Content. When one or
  * more instances fail, returns 200 with a partial success body listing the successfully deleted and
- * failed instance IDs, with details for each failure in the `error.innerErrors` array.
+ * failed instance IDs, with details for each failure in the <b>error.innerErrors</b> array.
  */
 export const deleteAlarmsByInstanceId = <ThrowOnError extends boolean = false>(options?: Options<DeleteAlarmsByInstanceIdData, ThrowOnError>): RequestResult<DeleteAlarmsByInstanceIdResponses, DeleteAlarmsByInstanceIdErrors, ThrowOnError> => (options?.client ?? client).post<DeleteAlarmsByInstanceIdResponses, DeleteAlarmsByInstanceIdErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

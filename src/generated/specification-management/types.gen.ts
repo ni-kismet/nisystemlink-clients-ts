@@ -279,7 +279,7 @@ export type QuerySpecificationsRequest = {
      */
     productIds: Array<string>;
     /**
-     * Maximum number of specifications to return in the current API response. Uses the default if the specified value is negative. The default value is `1000` specs.
+     * Maximum number of specifications to return in the current API response. Uses the default if the specified value is negative. The default value is <b>1000</b> specs.
      */
     take?: number | null;
     /**
@@ -295,30 +295,30 @@ export type QuerySpecificationsRequest = {
      *
      * Allowed properties in the filter are:
      *
-     * - `id`: String representing the ID of a specification. Field supports only equals '=' and not equal '!=' operators for filtering.
+     * - <b>id</b>: String representing the ID of a specification. Field supports only equals '=' and not equal '!=' operators for filtering.
      *
-     * - `specId`: String representing the SpecID of a specification.
+     * - <b>specId</b>: String representing the SpecID of a specification.
      *
-     * - `name`: String representing the name of a specification.
+     * - <b>name</b>: String representing the name of a specification.
      *
-     * - `category`: String representing the category of a specification.
+     * - <b>category</b>: String representing the category of a specification.
      *
-     * - `type`: String enumeration representing the type of the specification. Possible values are : PARAMETRIC, FUNCTIONAL
-     * - `block`: String representing the block of a specification.
+     * - <b>type</b>: String enumeration representing the type of the specification. Possible values are : PARAMETRIC, FUNCTIONAL
+     * - <b>block</b>: String representing the block of a specification.
      *
-     * - `symbol`: String representing the symbol of a specification.
+     * - <b>symbol</b>: String representing the symbol of a specification.
      *
-     * - `unit`: String representing the unit of a specification.
+     * - <b>unit</b>: String representing the unit of a specification.
      *
-     * - `workspace`: String representing the ID of the workspace the specification belongs to.
+     * - <b>workspace</b>: String representing the ID of the workspace the specification belongs to.
      *
-     * - `createdBy`: String representing the ID of the user who created the specification.
+     * - <b>createdBy</b>: String representing the ID of the user who created the specification.
      *
-     * - `createdAt`: ISO-8601 formatted UTC timestamp indicating when the specification was created.
+     * - <b>createdAt</b>: ISO-8601 formatted UTC timestamp indicating when the specification was created.
      *
-     * - `updatedBy`: String representing the ID of the user who updated the specification.
+     * - <b>updatedBy</b>: String representing the ID of the user who updated the specification.
      *
-     * - `updatedAt`: ISO-8601 formatted UTC timestamp indicating when the specification was updated.
+     * - <b>updatedAt</b>: ISO-8601 formatted UTC timestamp indicating when the specification was updated.
      *
      */
     filter?: string | null;
@@ -328,11 +328,11 @@ export type QuerySpecificationsRequest = {
      */
     projection?: Array<'ID' | 'PRODUCT_ID' | 'SPEC_ID' | 'NAME' | 'CATEGORY' | 'TYPE' | 'SYMBOL' | 'BLOCK' | 'LIMIT' | 'UNIT' | 'CONDITION_NAME' | 'CONDITION_VALUES' | 'CONDITION_UNIT' | 'CONDITION_TYPE' | 'KEYWORDS' | 'PROPERTIES' | 'WORKSPACE' | 'CREATED_AT' | 'CREATED_BY'> | null;
     /**
-     * Specifies the field to use to sort specifications. By default, specifications are sorted by `ID`.
+     * Specifies the field to use to sort specifications. By default, specifications are sorted by <b>ID</b>.
      */
     orderBy?: 'ID' | 'SPEC_ID';
     /**
-     * Specifies whether to return the specifications in descending order. By default, this value is `false` and specifications are sorted in ascending order.
+     * Specifies whether to return the specifications in descending order. By default, this value is <b>false</b> and specifications are sorted in ascending order.
      */
     orderByDescending?: boolean;
 };

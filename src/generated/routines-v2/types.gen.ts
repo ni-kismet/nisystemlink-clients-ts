@@ -28,7 +28,7 @@ export type CreateRoutineRequest = {
      */
     description?: string | null;
     /**
-     * If `true`, the routine will be enabled upon creation.
+     * If <b>true</b>, the routine will be enabled upon creation.
      */
     enabled?: boolean;
     /**
@@ -111,7 +111,7 @@ export type HttpTriggerCondition = {
 
 /**
  * An operation provided by the API. Each route functionality is covered by an operation.
- * As new functionality is added to an operation, the `version` is incremented.
+ * As new functionality is added to an operation, the <b>version</b> is incremented.
  */
 export type Operation = {
     /**
@@ -147,7 +147,7 @@ export type UpdateRoutineRequest = {
      */
     description?: string | null;
     /**
-     * If `true`, the routine will be enabled upon creation.
+     * If <b>true</b>, the routine will be enabled upon update.
      */
     enabled?: boolean | null;
     /**

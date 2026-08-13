@@ -21,10 +21,10 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Creates one or more specifications
  *
- * Creates new specifications from the request. The server automatically generates the "id" for the new specifications.
+ * Creates new specifications from the request. The server automatically generates the <b>id</b> for the new specifications.
  *
  *
- * When converted to their base SI units, values for limits and numeric conditions must be between `-7.9E+28` and `7.9E+28`.
+ * When converted to their base SI units, values for limits and numeric conditions must be between <b>-7.9E+28</b> and <b>7.9E+28</b>.
  * Values outside this range will result in an error response.
  */
 export const createSpecifications = <ThrowOnError extends boolean = false>(options?: Options<CreateSpecificationsData, ThrowOnError>): RequestResult<CreateSpecificationsResponses, CreateSpecificationsErrors, ThrowOnError> => (options?.client ?? client).post<CreateSpecificationsResponses, CreateSpecificationsErrors, ThrowOnError>({
@@ -43,13 +43,13 @@ export const createSpecifications = <ThrowOnError extends boolean = false>(optio
  * Updates the existing specification(s) with the information provided in the request.
  *
  *
- * Each specification will get updated only when the `version` number provided in the request matches the latest value for the specification.
+ * Each specification will get updated only when the <b>version</b> number provided in the request matches the latest value for the specification.
  *
  *
  * This request only replaces the specified fields. All other fields are unaffected.
  *
  *
- * When converted to their base SI units, values for limits and numeric conditions must be between `-7.9E+28` and `7.9E+28`.
+ * When converted to their base SI units, values for limits and numeric conditions must be between <b>-7.9E+28</b> and <b>7.9E+28</b>.
  * Values outside this range will result in an error response.
  */
 export const updateSpecifications = <ThrowOnError extends boolean = false>(options?: Options<UpdateSpecificationsData, ThrowOnError>): RequestResult<UpdateSpecificationsResponses, UpdateSpecificationsErrors, ThrowOnError> => (options?.client ?? client).post<UpdateSpecificationsResponses, UpdateSpecificationsErrors, ThrowOnError>({
@@ -65,16 +65,16 @@ export const updateSpecifications = <ThrowOnError extends boolean = false>(optio
 /**
  * Queries specifications based on information given in the request.
  *
- * Queries specifications for the provided `productIds`.
+ * Queries specifications for the provided <b>productIds</b>.
  *
  *
- * Uses the optional dynamic linq `filter` to filter the specifications.
+ * Uses the optional dynamic linq <b>filter</b> to filter the specifications.
  *
  *
- * Uses the `take` and `continuationToken` properties to give paged responses.
+ * Uses the <b>take</b> and <b>continuationToken</b> properties to give paged responses.
  *
  *
- * Uses the `orderBy` and `orderByDescending` properties to sort the specifications.
+ * Uses the <b>orderBy</b> and <b>orderByDescending</b> properties to sort the specifications.
  */
 export const querySpecifications = <ThrowOnError extends boolean = false>(options?: Options<QuerySpecificationsData, ThrowOnError>): RequestResult<QuerySpecificationsResponses, QuerySpecificationsErrors, ThrowOnError> => (options?.client ?? client).post<QuerySpecificationsResponses, QuerySpecificationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -89,7 +89,7 @@ export const querySpecifications = <ThrowOnError extends boolean = false>(option
 /**
  * Gets a specification.
  *
- * Gets a specification with the provided `ID`.
+ * Gets a specification with the provided <b>ID</b>.
  */
 export const getSpecification = <ThrowOnError extends boolean = false>(options: Options<GetSpecificationData, ThrowOnError>): RequestResult<GetSpecificationResponses, GetSpecificationErrors, ThrowOnError> => (options.client ?? client).get<GetSpecificationResponses, GetSpecificationErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -100,7 +100,7 @@ export const getSpecification = <ThrowOnError extends boolean = false>(options: 
 /**
  * Deletes one or more specifications.
  *
- * Deletes the specifications with the IDs specified in the `Ids` list.
+ * Deletes the specifications with the IDs specified in the <b>Ids</b> list.
  */
 export const deleteSpecifications = <ThrowOnError extends boolean = false>(options?: Options<DeleteSpecificationsData, ThrowOnError>): RequestResult<DeleteSpecificationsResponses, DeleteSpecificationsErrors, ThrowOnError> => (options?.client ?? client).post<DeleteSpecificationsResponses, DeleteSpecificationsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],

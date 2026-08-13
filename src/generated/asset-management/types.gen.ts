@@ -20,7 +20,7 @@ export type AssetCalibrationForecastModel = {
  */
 export type AssetCalibrationForecastRequest = {
     /**
-     * A list of properties after which the backend will perform the `GroupBy` operation.
+     * A list of properties after which the backend will perform the <b>GroupBy</b> operation.
      */
     groupBy?: Array<'None' | 'DAY' | 'MONTH' | 'WEEK' | 'LOCATION' | 'MODEL' | 'WORKSPACE' | 'VENDOR_NAME' | 'BUS_TYPE' | 'ASSET_TYPE'> | null;
     /**
@@ -1451,22 +1451,8 @@ export type QueryAssetUtilizationHistoryRequest = {
      * - Category: String representing the utilization task category.
      * - UserName: String representing the name of the operator who utilized the asset.
      * - TaskName: String representing the name of the task.
-     * - StartTimestamp:
-     * description: >-
-     * A date time value which can be used to specify the start of an utilization.
-     *
-     * This parameter is required to have the "ISO 8601" format in order to be considered valid.
-     * type: string
-     * format: date-time
-     * example: '2019-05-20T00:00:00Z'
-     * - EndTimestamp:
-     * description: >-
-     * A date time value which can be used to specify the end of an utilization.
-     *
-     * This parameter is required to have the "ISO 8601" format in order to be considered valid.
-     * type: string
-     * format: date-time
-     * example: '2019-05-20T00:00:00Z'
+     * - StartTimestamp: A date-time string in ISO 8601 format specifying the start of a utilization. Example: '2019-05-20T00:00:00Z'
+     * - EndTimestamp: A date-time string in ISO 8601 format specifying the end of a utilization. Example: '2019-05-20T00:00:00Z'
      */
     utilizationFilter?: string | null;
     /**
@@ -1598,7 +1584,7 @@ export type QueryAssetsRequest = {
     take?: number;
     /**
      * Field by which assets can be ordered/sorted. If OrderBy is not specified, no sorting
-     * will applied. OrderBy is supported only for the `INLINE` destination option.
+     * will be applied. OrderBy is supported only for the <b>INLINE</b> destination option.
      */
     orderBy?: 'LAST_UPDATED_TIMESTAMP' | 'ID';
     /**

@@ -11,11 +11,11 @@ export type ClientOptions = {
  */
 export type AcknowledgeByInstanceIdRequest = {
     /**
-     * The `instanceId`s of the alarms which should be acknowledged.
+     * The <b>instanceId</b>s of the alarms which should be acknowledged.
      */
     instanceIds: Array<string>;
     /**
-     * Whether or not the affected alarms should have their `clear`
+     * Whether or not the affected alarms should have their <b>clear</b>
      * field set to true.
      */
     forceClear?: boolean;
@@ -28,12 +28,12 @@ export type AcknowledgeByInstanceIdRequest = {
  */
 export type AcknowledgeByInstanceIdResponse = {
     /**
-     * The `instanceId`s of the alarms which were successfully acknowledged.
+     * The <b>instanceId</b>s of the alarms which were successfully acknowledged.
      */
     acknowledged: Array<string>;
     /**
-     * The `instanceId`s of the alarms which were not acknowledged. See
-     * `error` for why each instance failed to be acknowledged. Reasons include
+     * The <b>instanceId</b>s of the alarms which were not acknowledged. See
+     * <b>error</b> for why each instance failed to be acknowledged. Reasons include
      * the instance could not be found, the instance was already acknowledged, or
      * the caller was not authorized to acknowledge the instance.
      */
@@ -61,7 +61,7 @@ export type AlarmNote = {
      */
     createdAt?: string;
     /**
-     * The `userId` of the person who created the note.
+     * The <b>userId</b> of the person who created the note.
      */
     readonly user?: string;
 };
@@ -120,9 +120,9 @@ export type CreateAlarmTransition = {
      */
     occurredAt?: string | null;
     /**
-     * The severity of the transition. Valid values for `CLEAR` transitions are [-1, -1].
-     * Valid values for `SET` transitions are [1, infinity]. Note that the SystemLink
-     * Alarm UI only has display strings for `SET` severities in the range [1, 4].
+     * The severity of the transition. Valid values for <b>CLEAR</b> transitions are [-1, -1].
+     * Valid values for <b>SET</b> transitions are [1, infinity]. Note that the SystemLink
+     * Alarm UI only has display strings for <b>SET</b> severities in the range [1, 4].
      */
     severityLevel?: number;
     /**
@@ -160,7 +160,7 @@ export type CreateAlarmTransition = {
  * Create or Update Alarm Request
  *
  * Contains information about the alarm to create or update. If an alarm is
- * being updated, only `alarmId`, `workspace`, and `transition`
+ * being updated, only <b>alarmId</b>, <b>workspace</b>, and <b>transition</b>
  * are applied.
  */
 export type CreateOrUpdateAlarmRequest = {
@@ -174,7 +174,7 @@ export type CreateOrUpdateAlarmRequest = {
     /**
      * The ID of the workspace in which to create or update the alarm. When not specified,
      * the default workspace is used based on the requesting user. Added in version 2 of
-     * the `writeAlarmInstances` operation.
+     * the <b>writeAlarmInstances</b> operation.
      */
     workspace?: string | null;
     /**
@@ -244,12 +244,12 @@ export type CreateOrUpdateAlarmResponse = {
  */
 export type DeleteByInstanceIdPartialSuccess = {
     /**
-     * The `instanceId`s of the alarms that were successfully deleted.
+     * The <b>instanceId</b>s of the alarms that were successfully deleted.
      */
     deleted: Array<string>;
     /**
-     * The `instanceId`s of the alarms that were not deleted. See
-     * `error` for why each instance failed to delete. Reasons include
+     * The <b>instanceId</b>s of the alarms that were not deleted. See
+     * <b>error</b> for why each instance failed to delete. Reasons include
      * the instance could not be found or the caller is not authorized to
      * delete the instance.
      */
@@ -269,7 +269,7 @@ export type DeleteByInstanceIdPartialSuccess = {
  */
 export type DeleteByInstanceIdRequest = {
     /**
-     * The `instanceId`s of the alarms which should be deleted.
+     * The <b>instanceId</b>s of the alarms which should be deleted.
      */
     instanceIds: Array<string>;
 };
@@ -294,7 +294,7 @@ export type ErrorResponse = {
  * An individual instance, or occurrence, of an alarm (an <i>alarm</i>, for short).
  * The lifecycle of an alarm begins the first time it is triggered and ends when it has been both
  * acknowledged and cleared. The service enforces the invariant that there can be at most one
- * `active=True` alarm with the same `alarmId`.
+ * <b>active=True</b> alarm with the same <b>alarmId</b>.
  */
 export type HttpAlarm = {
     /**
@@ -315,41 +315,41 @@ export type HttpAlarm = {
     /**
      * Whether or not the alarm is active. An active alarm
      * deserves human or automated attention. Alarms always
-     * begin life with `active=True`. This field will be automatically
-     * set to `false` when the `clear`
-     * and `acknowledged` fields are set to `true`.
+     * begin life with <b>active=True</b>. This field will be automatically
+     * set to <b>false</b> when the <b>clear</b>
+     * and <b>acknowledged</b> fields are set to <b>true</b>.
      */
     active: boolean;
     /**
-     * When set to `true`, the condition that triggered the alarm
+     * When set to <b>true</b>, the condition that triggered the alarm
      * no longer matches the trigger condition. When an alarm is created,
-     * `clear` is initially set to `false`. The creator of the alarm
+     * <b>clear</b> is initially set to <b>false</b>. The creator of the alarm
      * (typically a rule engine or application element of some sort) may determine
      * that the trigger condition no longer applies, and may send an update, clearing
      * the alarm. Clearing the alarm does not deactivate the alarm, unless the alarm
-     * had previously been acknowledged. As long as the alarm is `active=true`,
-     * the alarm may transition from `clear=True`to `clear=False` (or vice versa)
+     * had previously been acknowledged. As long as the alarm is <b>active=true</b>,
+     * the alarm may transition from <b>clear=True</b> to <b>clear=False</b> (or vice versa)
      * multiple times.
      */
     clear: boolean;
     /**
-     * When set to `true`, the alarm has been acknowledged by an
+     * When set to <b>true</b>, the alarm has been acknowledged by an
      * alarm handler, which is typically a human. Alarms always begin life with
-     * `acknowledged=False`. Acknowledging an alarm will not
-     * affect the `active` flag unless `clear` is also `true`.
-     * When `clear` and `acknowledged`/> are `true`, the alarm will become
-     * inactive (`active=False`). This field is automatically reset to `false`
-     * when the alarm's `highestSeverityLevel` field increases.
+     * <b>acknowledged=False</b>. Acknowledging an alarm will not
+     * affect the <b>active</b> flag unless <b>clear</b> is also <b>true</b>.
+     * When <b>clear</b> and <b>acknowledged</b> are <b>true</b>, the alarm will become
+     * inactive (<b>active=False</b>). This field is automatically reset to <b>false</b>
+     * when the alarm's <b>highestSeverityLevel</b> field increases.
      */
     acknowledged: boolean;
     /**
      * The date and time when the alarm instance was acknowledged. This field will be cleared
-     * when the alarm's `highestSeverityLevel`> field increases.
+     * when the alarm's <b>highestSeverityLevel</b> field increases.
      */
     acknowledgedAt: string | null;
     /**
-     * The `userId` of the individual who acknowledged the alarm. This field will be
-     * cleared when the alarm's `highestSeverityLevel` field increases.
+     * The <b>userId</b> of the individual who acknowledged the alarm. This field will be
+     * cleared when the alarm's <b>highestSeverityLevel</b> field increases.
      */
     acknowledgedBy: string | null;
     /**
@@ -366,21 +366,21 @@ export type HttpAlarm = {
      */
     createdBy: string;
     /**
-     * A collection of `AlarmTransitions` for the alarm. The service stores the first
+     * A collection of <b>AlarmTransitions</b> for the alarm. The service stores the first
      * transition and the most recent 99 other transitions by default. The configuration
      * for the service determines the total number of stored transitions per alarm.
      */
     transitions: Array<HttpAlarmTransition>;
     /**
-     * The number of transitions which overflowed the `transitions` field for the alarm.
-     * For example, if the alarm transitioned 250 times, `transitionOverflowCount` is set
-     * to 150 and `transitions` contains the first and most recent 99 transitions. The
+     * The number of transitions which overflowed the <b>transitions</b> field for the alarm.
+     * For example, if the alarm transitioned 250 times, <b>transitionOverflowCount</b> is set
+     * to 150 and <b>transitions</b> contains the first and most recent 99 transitions. The
      * configuration for the service determines the total number of stored transitions per alarm.
      */
     transitionOverflowCount: number;
     /**
      * The IDs of the notification strategies which will be triggered when the alarm
-     * is first created and when its `highestSeverityLevel` increases.
+     * is first created and when its <b>highestSeverityLevel</b> increases.
      */
     notificationStrategyIds: Array<string>;
     /**
@@ -393,12 +393,12 @@ export type HttpAlarm = {
     highestSeverityLevel: number;
     /**
      * The date and time of the most recent occurrence of a
-     * `SET transition`. This property only considers `transitions` that cause an alarm state change.
+     * <b>SET transition</b>. This property only considers <b>transitions</b> that cause an alarm state change.
      */
     mostRecentSetOccurredAt: string | null;
     /**
      * The date and time of the most recent occurrence of a
-     * `transition`. This property only considers `transitions` that cause an alarm state change.
+     * <b>transition</b>. This property only considers <b>transitions</b> that cause an alarm state change.
      */
     mostRecentTransitionOccurredAt: string | null;
     /**
@@ -446,7 +446,7 @@ export type HttpAlarm = {
  * Alarm Transition
  *
  * A transition within an instance, or occurrence, of an alarm. Alarm transitions record changes
- * to an alarm's `clear` field as well as an alarm increasing or decreasing in severity.
+ * to an alarm's <b>clear</b> field as well as an alarm increasing or decreasing in severity.
  */
 export type HttpAlarmTransition = {
     /**
@@ -467,9 +467,9 @@ export type HttpAlarmTransition = {
      */
     occurredAt: string;
     /**
-     * The severity of the transition. Valid values for `CLEAR` transitions are [-1, -1].
-     * Valid values for `SET` transitions are [1, infinity]. Note that the SystemLink
-     * Alarm UI only has display strings for `SET` severities in the range [1, 4].
+     * The severity of the transition. Valid values for <b>CLEAR</b> transitions are [-1, -1].
+     * Valid values for <b>SET</b> transitions are [1, infinity]. Note that the SystemLink
+     * Alarm UI only has display strings for <b>SET</b> severities in the range [1, 4].
      */
     severityLevel: number;
     /**
@@ -541,7 +541,7 @@ export type HttpError = {
 
 /**
  * An operation provided by the API. Each route functionality is covered by an operation.
- * As new functionality is added to an operation, the `version` is incremented.
+ * As new functionality is added to an operation, the <b>version</b> is incremented.
  */
 export type Operation = {
     /**
@@ -558,105 +558,105 @@ export type Operation = {
  * Query
  *
  * Object describing the fields of an alarm query which can be composed in the query
- * request's `subQuery` array, enabling multiple queries to be AND'ed together.
+ * request's <b>subQuery</b> array, enabling multiple queries to be AND'ed together.
  */
 export type QueryFilter = {
     /**
-     * AlarmId query. The service will return alarms whose `alarmId`
+     * AlarmId query. The service will return alarms whose <b>alarmId</b>
      * fields are equal to the query. This query takes case into account.
      */
     alarmId?: string | null;
     /**
-     * Description query. The service will return alarms whose `description`
+     * Description query. The service will return alarms whose <b>description</b>
      * fields contain the description query string. This query does not take
      * case into account.
      */
     description?: string | null;
     /**
-     * Display name query. The service will return alarms whose `displayName`
+     * Display name query. The service will return alarms whose <b>displayName</b>
      * fields contain the display name query string. This query does not take
      * case into account.
      */
     displayName?: string | null;
     /**
-     * Active status query. The service will return alarms whose `active`
+     * Active status query. The service will return alarms whose <b>active</b>
      * fields are equal to the query.
      */
     active?: boolean | null;
     /**
-     * Clear status query. The service will return alarms whose `clear`
+     * Clear status query. The service will return alarms whose <b>clear</b>
      * fields are equal to the query.
      */
     clear?: boolean | null;
     /**
-     * Acknowledged status query. The service will return alarms whose `acknowledged`
+     * Acknowledged status query. The service will return alarms whose <b>acknowledged</b>
      * fields are equal to the query.
      */
     acknowledged?: boolean | null;
     /**
      * Acknowledged at minimum date query. The service will return alarms which were
-     * acknowledged between `acknowledgedAtMin` and `acknowledgedAtMax`,
+     * acknowledged between <b>acknowledgedAtMin</b> and <b>acknowledgedAtMax</b>,
      * inclusive.
      */
     acknowledgedAtMin?: string | null;
     /**
      * Acknowledged at maximum date query. The service will return alarms which were
-     * acknowledged between `acknowledgedAtMin` and `acknowledgedAtMax`,
+     * acknowledged between <b>acknowledgedAtMin</b> and <b>acknowledgedAtMax</b>,
      * inclusive.
      */
     acknowledgedAtMax?: string | null;
     /**
      * Occurred at minimum date query. The service will return alarms which occurred
-     * between `occurredAtMin` and `occurredAtMax`, inclusive.
+     * between <b>occurredAtMin</b> and <b>occurredAtMax</b>, inclusive.
      */
     occurredAtMin?: string | null;
     /**
      * Occurred at maximum date query. The service will return alarms which occurred
-     * between `occurredAtMin` and `occurredAtMax`, inclusive.
+     * between <b>occurredAtMin</b> and <b>occurredAtMax</b>, inclusive.
      */
     occurredAtMax?: string | null;
     /**
      * Current severity minimum query. The service will return alarms whose current
-     * severity is between `currentSeverityLevelMin` and
-     * `currentSeverityLevelMax`, inclusive.
+     * severity is between <b>currentSeverityLevelMin</b> and
+     * <b>currentSeverityLevelMax</b>, inclusive.
      */
     currentSeverityLevelMin?: number | null;
     /**
      * Current severity maximum query. The service will return alarms whose current
-     * severity is between `currentSeverityLevelMin` and
-     * `currentSeverityLevelMax`, inclusive.
+     * severity is between <b>currentSeverityLevelMin</b> and
+     * <b>currentSeverityLevelMax</b>, inclusive.
      */
     currentSeverityLevelMax?: number | null;
     /**
      * Highest severity minimum query. The service will return alarms whose highest
-     * severity is between `highestSeverityLevelMin` and
-     * `highestSeverityLevelMax`, inclusive.
+     * severity is between <b>highestSeverityLevelMin</b> and
+     * <b>highestSeverityLevelMax</b>, inclusive.
      */
     highestSeverityLevelMin?: number | null;
     /**
      * Highest severity maximum query. The service will return alarms whose highest
-     * severity is between `highestSeverityLevelMin` and
-     * `highestSeverityLevelMax`, inclusive.
+     * severity is between <b>highestSeverityLevelMin</b> and
+     * <b>highestSeverityLevelMax</b>, inclusive.
      */
     highestSeverityLevelMax?: number | null;
     /**
-     * Created by query. The service will return alarms whose `createdBy` fields
+     * Created by query. The service will return alarms whose <b>createdBy</b> fields
      * are equal to the query. This query takes case into account.
      */
     createdBy?: string | null;
     /**
-     * Channel query. The service will return alarms whose `channel` fields are
+     * Channel query. The service will return alarms whose <b>channel</b> fields are
      * equal to the query. This query takes case into account and supports wildcard
      * match checking with glob-style wildcards.
      */
     channel?: string | null;
     /**
-     * Resource type query. The service will return alarms whose `resourceType`
+     * Resource type query. The service will return alarms whose <b>resourceType</b>
      * fields are equal to the query. This query takes case into account.
      */
     resourceType?: string | null;
     /**
-     * Property query. The service will return alarms whose `properties` fields
+     * Property query. The service will return alarms whose <b>properties</b> fields
      * contain all of the specified key/value pairs. Property keys must be between 1
      * and 255 characters.
      */
@@ -664,15 +664,15 @@ export type QueryFilter = {
         [key: string]: string;
     } | null;
     /**
-     * Keyword query. The service will return alarms whose `keywords` fields
+     * Keyword query. The service will return alarms whose <b>keywords</b> fields
      * contain all of the specified keywords.
      */
     keywords?: Array<string> | null;
     /**
-     * Workspace query. The service will return alarms whose `workspace` field
+     * Workspace query. The service will return alarms whose <b>workspace</b> field
      * is one of the specified workspaces. By default, only instances in the default
-     * workspace are returned. Specify an array containing a single value of `*`
-     * to query all workspaces. Added in version 3 of the `readAlarmInstances` operation.
+     * workspace are returned. Specify an array containing a single value of <b>*</b>
+     * to query all workspaces. Added in version 3 of the <b>readAlarmInstances</b> operation.
      */
     workspaces?: Array<string> | null;
 };
@@ -685,13 +685,13 @@ export type QueryFilter = {
 export type QueryRequest = QueryFilter & {
     /**
      * Additional queries. The service will return alarms which match any of the
-     * queries in the `subQueries` array. If a top-level query was provided,
+     * queries in the <b>subQueries</b> array. If a top-level query was provided,
      * the top-level query will be AND'ed with each of the sub queries.
      */
     subQueries?: Array<QueryFilter> | null;
     /**
      * Whether or not the Alarm Service should group the alarms matched
-     * by this query by `alarmId`, and then only return the most recent
+     * by this query by <b>alarmId</b>, and then only return the most recent
      * alarm for each grouping. In this context, recency is based on when
      * the alarm occurred, not when it was last updated.
      */
@@ -699,20 +699,20 @@ export type QueryRequest = QueryFilter & {
     /**
      * How results should be sorted:
      *
-     * - DATE_UPDATED_FORWARD: Results are sorted in ascending order relative to the alarm's `updatedAt` field.
+     * - DATE_UPDATED_FORWARD: Results are sorted in ascending order relative to the alarm's <b>updatedAt</b> field.
      *
-     * - DATE_UPDATED_BACKWARD: Results are sorted in descending order relative to the alarm's `updatedAt` field.
+     * - DATE_UPDATED_BACKWARD: Results are sorted in descending order relative to the alarm's <b>updatedAt</b> field.
      */
     orderBy?: 'DATE_UPDATED_FORWARD' | 'DATE_UPDATED_BACKWARD';
     /**
      * Number of entries to skip in the response list. Typically used
-     * in combination with the `take` parameter to implement pagination.
+     * in combination with the <b>take</b> parameter to implement pagination.
      */
     skip?: number | null;
     /**
      * Number of entries to include in the response list, or 0 to use the default.
-     * The number of alarms returned may be smaller than the specified `take`.
-     * Typically used in combination with the `skip` parameter to
+     * The number of alarms returned may be smaller than the specified <b>take</b>.
+     * Typically used in combination with the <b>skip</b> parameter to
      * implement pagination.
      */
     take?: number | null;
@@ -745,92 +745,92 @@ export type QueryWithFilterRequest = {
      * Allowed properties in the filter are:
      *
      *
-     * - `acknowledged`: A Boolean value that indicates an alarm acknowledgment
+     * - <b>acknowledged</b>: A Boolean value that indicates an alarm acknowledgment
      *
      *
-     * - `acknowledgedAt`: A DateTime value that represents when the alarm was acknowledged
+     * - <b>acknowledgedAt</b>: A DateTime value that represents when the alarm was acknowledged
      *
      *
-     * - `active`: A Boolean value that indicates an active alarm
+     * - <b>active</b>: A Boolean value that indicates an active alarm
      *
      *
-     * - `alarmId`: A String value that identifies the process or condition tracked by the alarm
+     * - <b>alarmId</b>: A String value that identifies the process or condition tracked by the alarm
      *
      *
-     * - `channel`: A String value that identifies the tag or resource associated with the alarm
+     * - <b>channel</b>: A String value that identifies the tag or resource associated with the alarm
      *
      *
-     * - `clear`: A Boolean value that indicates an alarm clearance
+     * - <b>clear</b>: A Boolean value that indicates an alarm clearance
      *
      *
-     * - `createdBy`: A String value that identifies the user that created the alarm
+     * - <b>createdBy</b>: A String value that identifies the user that created the alarm
      *
      *
-     * - `currentSeverityLevel`: A Int32 value that represents the severity level of the alarm
+     * - <b>currentSeverityLevel</b>: A Int32 value that represents the severity level of the alarm
      *
      *
-     * - `description`: A String value that describes the alarm
+     * - <b>description</b>: A String value that describes the alarm
      *
      *
-     * - `displayName`: A String value that represents the alarm name in the user interface
+     * - <b>displayName</b>: A String value that represents the alarm name in the user interface
      *
      *
-     * - `highestSeverityLevel`: An Int32 value that represents the highest severity level of the alarm
+     * - <b>highestSeverityLevel</b>: An Int32 value that represents the highest severity level of the alarm
      *
      *
-     * - `keywords`: A list of string values associated with the alarm
+     * - <b>keywords</b>: A list of string values associated with the alarm
      *
      *
-     * - `mostRecentSetOccurredAt`: A DateTime value that represents when the most recent set transition occurred
+     * - <b>mostRecentSetOccurredAt</b>: A DateTime value that represents when the most recent set transition occurred
      *
      *
-     * - `mostRecentTransitionOccurredAt`: A DateTime value that represents when the most recent transition occurred
+     * - <b>mostRecentTransitionOccurredAt</b>: A DateTime value that represents when the most recent transition occurred
      *
      *
-     * - `occurredAt`: A DateTime value that represents when the alarm was created or first occurred
+     * - <b>occurredAt</b>: A DateTime value that represents when the alarm was created or first occurred
      *
      *
-     * - `occurredWithin`: A TimeSpan value that represents when the alarm was created or first occurred
+     * - <b>occurredWithin</b>: A TimeSpan value that represents when the alarm was created or first occurred
      *
      *
-     * - `properties`: A dictionary that contains the string keys and values representing alarm metadata
+     * - <b>properties</b>: A dictionary that contains the string keys and values representing alarm metadata
      *
      *
-     * - `resourceType`: A String value that represents the resource type of the alarm
+     * - <b>resourceType</b>: A String value that represents the resource type of the alarm
      *
      *
-     * - `workspace`: A String value that indicates the workspace to use in the query
+     * - <b>workspace</b>: A String value that indicates the workspace to use in the query
      *
      *
-     * - `workspaceName`: A String value that indicates the workspace of the alarm
+     * - <b>workspaceName</b>: A String value that indicates the workspace of the alarm
      *
      *
      *
      * Allowed constants in the filter are:
      *
      *
-     * - `RelativeTime.CurrentDay`: A CurrentDayTimeSpan value that represents the elapsed time between now and the start of the day
+     * - <b>RelativeTime.CurrentDay</b>: A CurrentDayTimeSpan value that represents the elapsed time between now and the start of the day
      *
      *
-     * - `RelativeTime.CurrentWeek`: A TimeSpan value that represents the elapsed time between now and the start of the week
+     * - <b>RelativeTime.CurrentWeek</b>: A TimeSpan value that represents the elapsed time between now and the start of the week
      *
      *
-     * - `RelativeTime.CurrentMonth`: A TimeSpan value that represents the elapsed time between now and the start of the month
+     * - <b>RelativeTime.CurrentMonth</b>: A TimeSpan value that represents the elapsed time between now and the start of the month
      *
      *
-     * - `RelativeTime.CurrentYear`: A TimeSpan value that represents the elapsed time between now and the start of the year
+     * - <b>RelativeTime.CurrentYear</b>: A TimeSpan value that represents the elapsed time between now and the start of the year
      */
     filter?: string | null;
     /**
      * Makes substitutions in the query filter expression. Substitutions for the query expression are indicated
-     * by non-negative integers that are prefixed with the `@` symbol. Each substitution in the given expression
+     * by non-negative integers that are prefixed with the <b>@</b> symbol. Each substitution in the given expression
      * will be replaced by the element at the corresponding index (zero-based) in this list. For example,
-     * `@0` in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
+     * <b>@0</b> in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
      */
     substitutions?: Array<boolean | number | string | null> | null;
     /**
      * Whether or not the Alarm Service should group the alarms matched
-     * by this query by `alarmId`, and then only return the most recent
+     * by this query by <b>alarmId</b>, and then only return the most recent
      * alarm for each grouping. In this context, recency is based on when
      * the alarm occurred, not when it was last updated.
      */
@@ -846,7 +846,7 @@ export type QueryWithFilterRequest = {
      */
     transitionInclusionOption?: 'NONE' | 'MOST_RECENT_ONLY' | 'ALL';
     /**
-     * The date and time to use as the reference point for `RelativeTime` filters, including time zone information.
+     * The date and time to use as the reference point for <b>RelativeTime</b> filters, including time zone information.
      * Defaults to the current time in UTC.
      */
     referenceTime?: string | null;
@@ -926,7 +926,7 @@ export type RootEndpointResponse = {
 /**
  * V1 Operations
  *
- * The operations available in the routes provided by the `/v1` HTTP API.
+ * The operations available in the routes provided by the <b>/v1</b> HTTP API.
  */
 export type V1Operations = {
     /**
@@ -961,7 +961,7 @@ export type AlarmNoteWritable = {
  * An individual instance, or occurrence, of an alarm (an <i>alarm</i>, for short).
  * The lifecycle of an alarm begins the first time it is triggered and ends when it has been both
  * acknowledged and cleared. The service enforces the invariant that there can be at most one
- * `active=True` alarm with the same `alarmId`.
+ * <b>active=True</b> alarm with the same <b>alarmId</b>.
  */
 export type HttpAlarmWritable = {
     /**
@@ -982,41 +982,41 @@ export type HttpAlarmWritable = {
     /**
      * Whether or not the alarm is active. An active alarm
      * deserves human or automated attention. Alarms always
-     * begin life with `active=True`. This field will be automatically
-     * set to `false` when the `clear`
-     * and `acknowledged` fields are set to `true`.
+     * begin life with <b>active=True</b>. This field will be automatically
+     * set to <b>false</b> when the <b>clear</b>
+     * and <b>acknowledged</b> fields are set to <b>true</b>.
      */
     active: boolean;
     /**
-     * When set to `true`, the condition that triggered the alarm
+     * When set to <b>true</b>, the condition that triggered the alarm
      * no longer matches the trigger condition. When an alarm is created,
-     * `clear` is initially set to `false`. The creator of the alarm
+     * <b>clear</b> is initially set to <b>false</b>. The creator of the alarm
      * (typically a rule engine or application element of some sort) may determine
      * that the trigger condition no longer applies, and may send an update, clearing
      * the alarm. Clearing the alarm does not deactivate the alarm, unless the alarm
-     * had previously been acknowledged. As long as the alarm is `active=true`,
-     * the alarm may transition from `clear=True`to `clear=False` (or vice versa)
+     * had previously been acknowledged. As long as the alarm is <b>active=true</b>,
+     * the alarm may transition from <b>clear=True</b> to <b>clear=False</b> (or vice versa)
      * multiple times.
      */
     clear: boolean;
     /**
-     * When set to `true`, the alarm has been acknowledged by an
+     * When set to <b>true</b>, the alarm has been acknowledged by an
      * alarm handler, which is typically a human. Alarms always begin life with
-     * `acknowledged=False`. Acknowledging an alarm will not
-     * affect the `active` flag unless `clear` is also `true`.
-     * When `clear` and `acknowledged`/> are `true`, the alarm will become
-     * inactive (`active=False`). This field is automatically reset to `false`
-     * when the alarm's `highestSeverityLevel` field increases.
+     * <b>acknowledged=False</b>. Acknowledging an alarm will not
+     * affect the <b>active</b> flag unless <b>clear</b> is also <b>true</b>.
+     * When <b>clear</b> and <b>acknowledged</b> are <b>true</b>, the alarm will become
+     * inactive (<b>active=False</b>). This field is automatically reset to <b>false</b>
+     * when the alarm's <b>highestSeverityLevel</b> field increases.
      */
     acknowledged: boolean;
     /**
      * The date and time when the alarm instance was acknowledged. This field will be cleared
-     * when the alarm's `highestSeverityLevel`> field increases.
+     * when the alarm's <b>highestSeverityLevel</b> field increases.
      */
     acknowledgedAt: string | null;
     /**
-     * The `userId` of the individual who acknowledged the alarm. This field will be
-     * cleared when the alarm's `highestSeverityLevel` field increases.
+     * The <b>userId</b> of the individual who acknowledged the alarm. This field will be
+     * cleared when the alarm's <b>highestSeverityLevel</b> field increases.
      */
     acknowledgedBy: string | null;
     /**
@@ -1033,21 +1033,21 @@ export type HttpAlarmWritable = {
      */
     createdBy: string;
     /**
-     * A collection of `AlarmTransitions` for the alarm. The service stores the first
+     * A collection of <b>AlarmTransitions</b> for the alarm. The service stores the first
      * transition and the most recent 99 other transitions by default. The configuration
      * for the service determines the total number of stored transitions per alarm.
      */
     transitions: Array<HttpAlarmTransition>;
     /**
-     * The number of transitions which overflowed the `transitions` field for the alarm.
-     * For example, if the alarm transitioned 250 times, `transitionOverflowCount` is set
-     * to 150 and `transitions` contains the first and most recent 99 transitions. The
+     * The number of transitions which overflowed the <b>transitions</b> field for the alarm.
+     * For example, if the alarm transitioned 250 times, <b>transitionOverflowCount</b> is set
+     * to 150 and <b>transitions</b> contains the first and most recent 99 transitions. The
      * configuration for the service determines the total number of stored transitions per alarm.
      */
     transitionOverflowCount: number;
     /**
      * The IDs of the notification strategies which will be triggered when the alarm
-     * is first created and when its `highestSeverityLevel` increases.
+     * is first created and when its <b>highestSeverityLevel</b> increases.
      */
     notificationStrategyIds: Array<string>;
     /**
@@ -1060,12 +1060,12 @@ export type HttpAlarmWritable = {
     highestSeverityLevel: number;
     /**
      * The date and time of the most recent occurrence of a
-     * `SET transition`. This property only considers `transitions` that cause an alarm state change.
+     * <b>SET transition</b>. This property only considers <b>transitions</b> that cause an alarm state change.
      */
     mostRecentSetOccurredAt: string | null;
     /**
      * The date and time of the most recent occurrence of a
-     * `transition`. This property only considers `transitions` that cause an alarm state change.
+     * <b>transition</b>. This property only considers <b>transitions</b> that cause an alarm state change.
      */
     mostRecentTransitionOccurredAt: string | null;
     /**
@@ -1188,7 +1188,7 @@ export type CreateOrUpdateAlarmData = {
      * Create or Update Alarm Request
      *
      * Contains information about the alarm to create or update. If an alarm is
-     * being updated, only `alarmId`, `workspace`, and `transition`
+     * being updated, only <b>alarmId</b>, <b>workspace</b>, and <b>transition</b>
      * are applied.
      */
     body?: CreateOrUpdateAlarmRequest;

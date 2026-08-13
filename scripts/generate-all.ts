@@ -25,6 +25,7 @@ const OUTPUT_BASE = resolve(ROOT, 'src', 'generated');
 
 /** All SystemLink services with their OpenAPI spec paths and output directory names. */
 const SERVICES = [
+  { name: 'aiassistant',              spec: '/niaiassistant/swagger/v1/aiassistant.json' },
   { name: 'alarm',                    spec: '/nialarm/swagger/v1/nialarm.json' },
   { name: 'asset-management',         spec: '/niapm/swagger/v1/niapm.json' },
   { name: 'auth',                     spec: '/niauth/swagger/v1/niauth.yaml' },
@@ -46,6 +47,7 @@ const SERVICES = [
   { name: 'systems-state',            spec: '/nisystemsstate/swagger/v1/nisystemsstate.json' },
   { name: 'tag-historian',            spec: '/nitaghistorian/swagger/v2/nitaghistorian.yaml' },
   { name: 'tags',                     spec: '/nitag/swagger/v2/nitag.yaml' },
+  { name: 'tdmreader',                spec: '/nitdmreader/swagger/v2/nitdmreader.json' },
   { name: 'test-monitor',             spec: '/nitestmonitor/swagger/v2/nitestmonitor-v2.yml' },
   { name: 'user-data',                spec: '/niuserdata/swagger/v1/niuserdata.json' },
   { name: 'user',                     spec: '/niuser/swagger/v1/niuser.yaml' },
