@@ -60,7 +60,7 @@ export type CreateWorkItemRequest = {
      */
     description?: string | null;
     /**
-     * ID of the parent work item.
+     * ID of the parent work item. The parent work item must be of type <b>workorder</b>.
      */
     parentId?: string | null;
     /**
@@ -566,7 +566,7 @@ export type Job = {
      */
     arguments: Array<Array<unknown>>;
     /**
-     * Systems Management Job metadata. `queued` will be ignored.
+     * Systems Management Job metadata. <b>queued</b> will be ignored.
      */
     metadata?: {
         [key: string]: unknown;
@@ -714,54 +714,54 @@ export type QueryWorkItemTemplatesRequest = {
      *
      * Allowed properties in the filter are:
      *
-     * - `id`: String representing the ID of a work item template. The value must be a numeric string. Field supports only equals '=' and not equal '!=' operators for filtering.
+     * - <b>id</b>: String representing the ID of a work item template. The value must be a numeric string. Field supports only equals '=' and not equal '!=' operators for filtering.
      *
-     * - `productFamilies`: Array of strings representing the product families to which the work item template belongs.
+     * - <b>productFamilies</b>: Array of strings representing the product families to which the work item template belongs.
      *
-     * - `partNumbers`: Array of strings representing the part numbers of the products linked to the work item template.
+     * - <b>partNumbers</b>: Array of strings representing the part numbers of the products linked to the work item template.
      *
-     * - `fileIds`: Array of file IDs associated with the work item template.
+     * - <b>fileIds</b>: Array of file IDs associated with the work item template.
      *
-     * - `name`: String representing the name of a work item template.
+     * - <b>name</b>: String representing the name of a work item template.
      *
-     * - `type`: String representing the type of work item created from this template.
+     * - <b>type</b>: String representing the type of work item created from this template.
      *
-     * - `summary`: String representing the summary of a work item template.
+     * - <b>summary</b>: String representing the summary of a work item template.
      *
-     * - `description`: String representing description of the work item created from this template.
+     * - <b>description</b>: String representing description of the work item created from this template.
      *
-     * - `templateGroup`: String representing the template group defined by the user.
+     * - <b>templateGroup</b>: String representing the template group defined by the user.
      *
-     * - `testProgram`: String representing the name of the test program to be executed as part of the work item created from this template.
+     * - <b>testProgram</b>: String representing the name of the test program to be executed as part of the work item created from this template.
      *
-     * - `resources.systems.filter`: String representing the filter criteria for selecting the systems that can be used to carry out the work item created from this template.
+     * - <b>resources.systems.filter</b>: String representing the filter criteria for selecting the systems that can be used to carry out the work item created from this template.
      *
-     * - `resources.assets.filter`: String representing the filter criteria for selecting the assets that can be used to carry out the work item created from this template.
+     * - <b>resources.assets.filter</b>: String representing the filter criteria for selecting the assets that can be used to carry out the work item created from this template.
      *
-     * - `resources.duts.filter`: String representing the filter criteria for selecting the DUTs that can be used to carry out the work item created from this template.
+     * - <b>resources.duts.filter</b>: String representing the filter criteria for selecting the DUTs that can be used to carry out the work item created from this template.
      *
-     * - `resources.fixtures.filter`: String representing the filter criteria for selecting the fixtures that can be used to carry out the work item created from this template.
+     * - <b>resources.fixtures.filter</b>: String representing the filter criteria for selecting the fixtures that can be used to carry out the work item created from this template.
      *
-     * - `workspace`: String representing the ID of the workspace where the work item template is stored.
+     * - <b>workspace</b>: String representing the ID of the workspace where the work item template is stored.
      *
-     * - `createdBy`: String representing the user who created the work item template.
+     * - <b>createdBy</b>: String representing the user who created the work item template.
      *
-     * - `updatedBy`: String representing the user who most recently updated the work item template.
+     * - <b>updatedBy</b>: String representing the user who most recently updated the work item template.
      *
-     * - `createdAt`: ISO-8601 formatted timestamp indicating when the work item template was created.
+     * - <b>createdAt</b>: ISO-8601 formatted timestamp indicating when the work item template was created.
      *
-     * - `updatedAt`: ISO-8601 formatted timestamp indicating when the work item template was updated.
+     * - <b>updatedAt</b>: ISO-8601 formatted timestamp indicating when the work item template was updated.
      *
-     * - `properties`: Properties associated with the work item created from this template as key-value pairs. Example: properties.Any(key == \"Location\" & value == \"Austin\")
-     * - `workflowId`: String representing the ID of the workflow associated with the work item created from this template.
+     * - <b>properties</b>: Properties associated with the work item created from this template as key-value pairs. Example: properties.Any(key == \"Location\" & value == \"Austin\")
+     * - <b>workflowId</b>: String representing the ID of the workflow associated with the work item created from this template.
      *
      */
     filter?: string | null;
     /**
      * Makes substitutions in the query filter expression using non-negative integers. These integers use the
-     * `@` symbol as a prefix. The filter expression replaces each substitution with the element at the corresponding
+     * <b>@</b> symbol as a prefix. The filter expression replaces each substitution with the element at the corresponding
      * index in this list. The index is zero-based. For example, an element at the zeroth index of the substitutions
-     * list replaces `@0` in the filter expression.
+     * list replaces <b>@0</b> in the filter expression.
      */
     substitutions?: Array<unknown> | null;
     /**
@@ -827,105 +827,105 @@ export type QueryWorkItemsRequest = {
      *
      * Allowed properties in the filter are:
      *
-     * - `id`: String representing the ID of a work item. The value must be a numeric string. Field supports only equals '=' and not equal '!=' operators for filtering.
+     * - <b>id</b>: String representing the ID of a work item. The value must be a numeric string. Field supports only equals '=' and not equal '!=' operators for filtering.
      *
-     * - `name`: String representing the name of a work item.
+     * - <b>name</b>: String representing the name of a work item.
      *
-     * - `type`: String representing the type of a work item.
+     * - <b>type</b>: String representing the type of a work item.
      *
-     * - `state`: String enumeration representing the state of the work item. Possible values are: NEW, DEFINED, REVIEWED, SCHEDULED, IN_PROGRESS, PENDING_APPROVAL, CLOSED, CANCELED.
+     * - <b>state</b>: String enumeration representing the state of the work item. Possible values are: NEW, DEFINED, REVIEWED, SCHEDULED, IN_PROGRESS, PENDING_APPROVAL, CLOSED, CANCELED.
      *
-     * - `substate`: String representing the substate of the work item state.
+     * - <b>substate</b>: String representing the substate of the work item state.
      *
-     * - `description`: String representing details of a work item.
+     * - <b>description</b>: String representing details of a work item.
      *
-     * - `parentId`: String representing the ID of the parent work item.
+     * - <b>parentId</b>: String representing the ID of the parent work item.
      *
-     * - `templateId`: String representing the ID of the work item template from which the work item was created.
+     * - <b>templateId</b>: String representing the ID of the work item template from which the work item was created.
      *
-     * - `assignedTo`: String representing the user to whom the work item is currently assigned.
+     * - <b>assignedTo</b>: String representing the user to whom the work item is currently assigned.
      *
-     * - `requestedBy`: String representing the user who requested the work item.
+     * - <b>requestedBy</b>: String representing the user who requested the work item.
      *
-     * - `testProgram`: String representing the name of the test program to be executed as part of the work item.
+     * - <b>testProgram</b>: String representing the name of the test program to be executed as part of the work item.
      *
-     * - `partNumber`: String representing the part number of the product linked to the work item.
+     * - <b>partNumber</b>: String representing the part number of the product linked to the work item.
      *
-     * - `timeline.earliestStartDateTime`: ISO-8601 formatted timestamp indicating the earliest date and time when the work item is expected to start.
+     * - <b>timeline.earliestStartDateTime</b>: ISO-8601 formatted timestamp indicating the earliest date and time when the work item is expected to start.
      *
-     * - `timeline.dueDateTime`: ISO-8601 formatted timestamp indicating the date and time when the work item is expected to close.
+     * - <b>timeline.dueDateTime</b>: ISO-8601 formatted timestamp indicating the date and time when the work item is expected to close.
      *
-     * - `timeline.estimatedDurationInSeconds`: Integer representing the estimated duration in seconds for the work item to be completed.
+     * - <b>timeline.estimatedDurationInSeconds</b>: Integer representing the estimated duration in seconds for the work item to be completed.
      *
-     * - `schedule.plannedStartDateTime`: ISO-8601 formatted timestamp indicating the date and time when the work item is scheduled to start.
+     * - <b>schedule.plannedStartDateTime</b>: ISO-8601 formatted timestamp indicating the date and time when the work item is scheduled to start.
      *
-     * - `schedule.plannedEndDateTime`: ISO-8601 formatted timestamp indicating the date and time when the work item is scheduled to end.
+     * - <b>schedule.plannedEndDateTime</b>: ISO-8601 formatted timestamp indicating the date and time when the work item is scheduled to end.
      *
-     * - `schedule.plannedDurationInSeconds`: Integer representing the planned duration in seconds specified at the time of scheduling for the work item to be completed.
+     * - <b>schedule.plannedDurationInSeconds</b>: Integer representing the planned duration in seconds specified at the time of scheduling for the work item to be completed.
      *
-     * - `resources.systems.selections.id`: String representing the ID of the system reserved to carry out the work item..
+     * - <b>resources.systems.selections.id</b>: String representing the ID of the system reserved to carry out the work item..
      *
-     * - `resources.systems.selections.targetLocationId`: String representing ID of the location where the system is to be moved.
+     * - <b>resources.systems.selections.targetLocationId</b>: String representing ID of the location where the system is to be moved.
      *
-     * - `resources.systems.filter`: String representing the filter criteria for selecting the systems that can be used to carry out the work item.
+     * - <b>resources.systems.filter</b>: String representing the filter criteria for selecting the systems that can be used to carry out the work item.
      *
-     * - `resources.assets.selections.id`: String representing the ID of the asset reserved to carry out the work item.
+     * - <b>resources.assets.selections.id</b>: String representing the ID of the asset reserved to carry out the work item.
      *
-     * - `resources.assets.selections.targetLocationId`: String representing the ID of the location where the asset is to be moved
+     * - <b>resources.assets.selections.targetLocationId</b>: String representing the ID of the location where the asset is to be moved
      *
-     * - `resources.assets.selections.targetSystemId`: String representing the ID of the system where the asset is to be moved.
+     * - <b>resources.assets.selections.targetSystemId</b>: String representing the ID of the system where the asset is to be moved.
      *
-     * - `resources.assets.selections.targetParentId`: String representing the ID of the parent asset to which the asset is to be connected.
+     * - <b>resources.assets.selections.targetParentId</b>: String representing the ID of the parent asset to which the asset is to be connected.
      *
-     * - `resources.assets.filter`: String representing the filter criteria for selecting the assets that can be used to carry out the work item.
+     * - <b>resources.assets.filter</b>: String representing the filter criteria for selecting the assets that can be used to carry out the work item.
      *
-     * - `resources.duts.selections.id`: String representing the ID of the DUT reserved to carry out the work item.
+     * - <b>resources.duts.selections.id</b>: String representing the ID of the DUT reserved to carry out the work item.
      *
-     * - `resources.duts.selections.targetLocationId`: String representing the ID of the location where the DUT is to be moved.
+     * - <b>resources.duts.selections.targetLocationId</b>: String representing the ID of the location where the DUT is to be moved.
      *
-     * - `resources.duts.selections.targetSystemId`: String representing the ID of the system where the DUT is to be moved.
+     * - <b>resources.duts.selections.targetSystemId</b>: String representing the ID of the system where the DUT is to be moved.
      *
-     * - `resources.duts.selections.targetParentId`: String representing the ID of the parent asset to which the DUT is to be connected.
+     * - <b>resources.duts.selections.targetParentId</b>: String representing the ID of the parent asset to which the DUT is to be connected.
      *
-     * - `resources.duts.filter`: String representing the filter criteria for selecting the DUTs reserved to carry out the work item.
+     * - <b>resources.duts.filter</b>: String representing the filter criteria for selecting the DUTs reserved to carry out the work item.
      *
-     * - `resources.fixtures.selections.id`: String representing the ID of the fixture reserved to carry out the work item.
+     * - <b>resources.fixtures.selections.id</b>: String representing the ID of the fixture reserved to carry out the work item.
      *
-     * - `resources.fixtures.selections.targetLocationId`: String representing the ID of the location where the fixture is to be moved.
+     * - <b>resources.fixtures.selections.targetLocationId</b>: String representing the ID of the location where the fixture is to be moved.
      *
-     * - `resources.fixtures.selections.targetSystemId`: String representing the ID of the system where the fixture is to be moved.
+     * - <b>resources.fixtures.selections.targetSystemId</b>: String representing the ID of the system where the fixture is to be moved.
      *
-     * - `resources.fixtures.selections.targetParentId`: String representing the ID of the parent asset to which the fixture is to be connected.
+     * - <b>resources.fixtures.selections.targetParentId</b>: String representing the ID of the parent asset to which the fixture is to be connected.
      *
-     * - `resources.fixtures.filter`: String representing the filter criteria for selecting the fixtures that can be used to carry out the work item.
+     * - <b>resources.fixtures.filter</b>: String representing the filter criteria for selecting the fixtures that can be used to carry out the work item.
      *
-     * - `fileIdsFromTemplate`: Array of file IDs from the template linked to the work item.
+     * - <b>fileIdsFromTemplate</b>: Array of file IDs from the template linked to the work item.
      *
-     * - `properties`: Properties associated with the work item as key-value pairs. Example: properties.Any(key == "Location" & value == "Austin")
+     * - <b>properties</b>: Properties associated with the work item as key-value pairs. Example: properties.Any(key == "Location" & value == "Austin")
      *
-     * - `dashboard`: String representing the ID for the dashboard associated with the work item. Example: dashboard.Id == "1234"
+     * - <b>dashboard</b>: String representing the ID for the dashboard associated with the work item. Example: dashboard.Id == "1234"
      *
-     * - `createdBy`: String representing the user who created the work item.
+     * - <b>createdBy</b>: String representing the user who created the work item.
      *
-     * - `createdAt`: ISO-8601 formatted timestamp indicating when the work item was created.
+     * - <b>createdAt</b>: ISO-8601 formatted timestamp indicating when the work item was created.
      *
-     * - `updatedBy`: String representing the user who most recently updated the work item.
+     * - <b>updatedBy</b>: String representing the user who most recently updated the work item.
      *
-     * - `updatedAt`: ISO-8601 formatted timestamp indicating when the work item was updated.
+     * - <b>updatedAt</b>: ISO-8601 formatted timestamp indicating when the work item was updated.
      *
-     * - `workspace`: String representing the ID of the workspace where the work item is stored.
+     * - <b>workspace</b>: String representing the ID of the workspace where the work item is stored.
      *
-     * - `workflowId`: String representing the ID of the workflow associated with the work item.
+     * - <b>workflowId</b>: String representing the ID of the workflow associated with the work item.
      *
-     * - `legacyWorkOrderId`: String representing the original numeric work order ID assigned before migration, present only on migrated work items of type `workorder`. Field supports only equals '=' and not equal '!=' operators for filtering.
+     * - <b>legacyWorkOrderId</b>: String representing the original numeric work order ID assigned before migration, present only on migrated work items of type <b>workorder</b>. Field supports only equals '=' and not equal '!=' operators for filtering.
      *
      */
     filter?: string | null;
     /**
      * Makes substitutions in the query filter expression using non-negative integers. These integers use the
-     * `@` symbol as a prefix. The filter expression replaces each substitution with the element at the corresponding
+     * <b>@</b> symbol as a prefix. The filter expression replaces each substitution with the element at the corresponding
      * index in this list. The index is zero-based. For example, an element at the zeroth index of the substitutions
-     * list replaces `@0` in the filter expression.
+     * list replaces <b>@0</b> in the filter expression.
      */
     substitutions?: Array<unknown> | null;
     /**
@@ -973,7 +973,7 @@ export type QueryWorkItemsResponse = {
      */
     continuationToken?: string | null;
     /**
-     * The total number of work items which match the provided filter, disregarding the take value. The `TotalCount` will be added to the response only if the `ReturnCount` is set to `true` in the request.
+     * The total number of work items which match the provided filter, disregarding the take value. The <b>TotalCount</b> will be added to the response only if the <b>ReturnCount</b> is set to <b>true</b> in the request.
      */
     totalCount?: number | null;
 };
@@ -1036,15 +1036,15 @@ export type ResourceDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ResourceDefinitionValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: ResourceDefinition | null;
 } | null;
@@ -1072,15 +1072,15 @@ export type ResourceSelectionDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ResourceSelectionDefinitionIListValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: Array<ResourceSelectionDefinition> | null;
 } | null;
@@ -1108,15 +1108,15 @@ export type ResourcesDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ResourcesDefinitionValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: ResourcesDefinition | null;
 } | null;
@@ -1140,15 +1140,15 @@ export type ScheduleDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ScheduleDefinitionValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: ScheduleDefinition | null;
 } | null;
@@ -1164,15 +1164,15 @@ export type ScheduleResourceDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ScheduleResourceDefinitionValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: ScheduleResourceDefinition | null;
 } | null;
@@ -1200,15 +1200,15 @@ export type ScheduleResourcesDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ScheduleResourcesDefinitionValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: ScheduleResourcesDefinition | null;
 } | null;
@@ -1224,15 +1224,15 @@ export type ScheduleSystemResourceDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ScheduleSystemResourceDefinitionValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: ScheduleSystemResourceDefinition | null;
 } | null;
@@ -1246,7 +1246,7 @@ export type ScheduleWorkItemRequest = {
      */
     id: string;
     /**
-     * ID of the user to whom the work item is curently assigned.
+     * ID of the user to whom the work item is currently assigned.
      */
     assignedTo?: string | null;
     /**
@@ -1312,15 +1312,15 @@ export type SystemResourceDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type SystemResourceDefinitionValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: SystemResourceDefinition | null;
 } | null;
@@ -1340,15 +1340,15 @@ export type SystemResourceSelectionDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type SystemResourceSelectionDefinitionIListValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: Array<SystemResourceSelectionDefinition> | null;
 } | null;
@@ -1414,15 +1414,15 @@ export type TimelineDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type TimelineDefinitionValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: TimelineDefinition | null;
 } | null;
@@ -1438,15 +1438,15 @@ export type UpdateTemplateResourceDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type UpdateTemplateResourceDefinitionValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: UpdateTemplateResourceDefinition | null;
 } | null;
@@ -1474,15 +1474,15 @@ export type UpdateTemplateResourcesDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type UpdateTemplateResourcesDefinitionValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: UpdateTemplateResourcesDefinition | null;
 } | null;
@@ -1498,15 +1498,15 @@ export type UpdateTemplateTimelineDefinition = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type UpdateTemplateTimelineDefinitionValueNullOrUnset = {
     /**
-     * Gets whether the instance has a value (which may be `null`).
+     * Gets whether the instance has a value (which may be <b>null</b>).
      */
     readonly isSet?: boolean;
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: UpdateTemplateTimelineDefinition | null;
 } | null;
@@ -1532,7 +1532,7 @@ export type UpdateWorkItemRequest = {
      */
     description?: string | null;
     /**
-     * ID of the parent work item.
+     * ID of the parent work item. The parent work item must be of type <b>workorder</b>.
      */
     parentId?: string | null;
     /**
@@ -1548,7 +1548,7 @@ export type UpdateWorkItemRequest = {
      */
     partNumber?: string | null;
     /**
-     * ID of the workspace where the work item is stored. Setting to `null` will retain the existing workspace.
+     * ID of the workspace where the work item is stored. Setting to <b>null</b> will retain the existing workspace.
      * Updating the workspace requires permission to delete the work item in the current workspace and
      * create the work item in the new workspace.
      */
@@ -1643,7 +1643,7 @@ export type UpdateWorkItemTemplateRequest = {
      */
     fileIds?: Array<string> | null;
     /**
-     * ID of the workspace where the work item template is stored. Setting to `null` will retain the existing workspace.
+     * ID of the workspace where the work item template is stored. Setting to <b>null</b> will retain the existing workspace.
      * Updating the workspace requires permission to delete the work item template in the current workspace and create
      * the work item template in the new workspace.
      */
@@ -1871,7 +1871,7 @@ export type WorkItemResponseBase = {
      */
     description?: string | null;
     /**
-     * ID of the parent work item.
+     * ID of the parent work item. The parent work item is of type <b>workorder</b>.
      */
     parentId?: string | null;
     /**
@@ -1981,35 +1981,35 @@ export type WorkItemResponseWithExecutionsBase = WorkItemResponseBase & {
  */
 export type WorkItemSummaryResponse = {
     /**
-     * Number of work items `assigned to` the current user which are neither `closed` nor `canceled`.
+     * Number of work items <b>assigned to</b> the current user which are neither <b>closed</b> nor <b>canceled</b>.
      */
     assignedToUserCount?: number;
     /**
-     * Number of work items `created by` the current user which are neither `closed` nor `canceled`.
+     * Number of work items <b>created by</b> the current user which are neither <b>closed</b> nor <b>canceled</b>.
      */
     createdByUserCount?: number;
     /**
-     * Number of work items `requested by` the current user which are neither `closed` nor `canceled`.
+     * Number of work items <b>requested by</b> the current user which are neither <b>closed</b> nor <b>canceled</b>.
      */
     requestedByUserCount?: number;
     /**
-     * Number of work items in the `defined` state.
+     * Number of work items in the <b>defined</b> state.
      */
     definedCount?: number;
     /**
-     * Number of work items in the `scheduled` state.
+     * Number of work items in the <b>scheduled</b> state.
      */
     scheduledCount?: number;
     /**
-     * Number of work items in the `in progress` state.
+     * Number of work items in the <b>in progress</b> state.
      */
     inProgressCount?: number;
     /**
-     * Number of work items in the `pending approval` state.
+     * Number of work items in the <b>pending approval</b> state.
      */
     pendingApprovalCount?: number;
     /**
-     * Number of work items past their due date as of the current date which are neither `closed` nor `canceled`.
+     * Number of work items past their due date as of the current date which are neither <b>closed</b> nor <b>canceled</b>.
      */
     pastDueDateCount?: number;
 };
@@ -2185,8 +2185,8 @@ export type WorkflowAction = {
      */
     i18n?: Array<WorkflowTranslation> | null;
     /**
-     * The resources for which the user must have the `workitem:ExecuteWithSpecificity` privilege.
-     * The user must also have the `workitem:Execute` privilege.
+     * The resources for which the user must have the <b>workitem:ExecuteWithSpecificity</b> privilege.
+     * The user must also have the <b>workitem:Execute</b> privilege.
      */
     privilegeSpecificity?: Array<string> | null;
     /**
@@ -2331,131 +2331,131 @@ export type WorkflowTranslation = {
 };
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ResourceDefinitionValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: ResourceDefinition | null;
 } | null;
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ResourceSelectionDefinitionIListValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: Array<ResourceSelectionDefinition> | null;
 } | null;
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ResourcesDefinitionValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: ResourcesDefinition | null;
 } | null;
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ScheduleDefinitionValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: ScheduleDefinition | null;
 } | null;
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ScheduleResourceDefinitionValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: ScheduleResourceDefinition | null;
 } | null;
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ScheduleResourcesDefinitionValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: ScheduleResourcesDefinition | null;
 } | null;
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type ScheduleSystemResourceDefinitionValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: ScheduleSystemResourceDefinition | null;
 } | null;
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type SystemResourceDefinitionValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: SystemResourceDefinition | null;
 } | null;
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type SystemResourceSelectionDefinitionIListValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: Array<SystemResourceSelectionDefinition> | null;
 } | null;
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type TimelineDefinitionValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: TimelineDefinition | null;
 } | null;
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type UpdateTemplateResourceDefinitionValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: UpdateTemplateResourceDefinition | null;
 } | null;
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type UpdateTemplateResourcesDefinitionValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: UpdateTemplateResourcesDefinition | null;
 } | null;
 
 /**
- * Represents a tristate value that may have a value, be set to `null`, or be unset.
+ * Represents a tristate value that may have a value, be set to <b>null</b>, or be unset.
  */
 export type UpdateTemplateTimelineDefinitionValueNullOrUnsetWritable = {
     /**
-     * Gets the value (which may be `null`). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is `false`, returns a default <typeparamref name="T" />.
+     * Gets the value (which may be <b>null</b>). If NationalInstruments.WorkItem.Model.ValueNullOrUnset`1.IsSet is <b>false</b>, returns a default <typeparamref name="T" />.
      */
     value?: UpdateTemplateTimelineDefinition | null;
 } | null;
@@ -2551,7 +2551,7 @@ export type GetWorkflowError = GetWorkflowErrors[keyof GetWorkflowErrors];
 
 export type GetWorkflowResponses = {
     /**
-     * The workflow was retreived successfully.
+     * The workflow was retrieved successfully.
      */
     200: GetWorkflowResponse;
 };
@@ -2843,7 +2843,7 @@ export type UpdateWorkItemsError = UpdateWorkItemsErrors[keyof UpdateWorkItemsEr
 
 export type UpdateWorkItemsResponses = {
     /**
-     * The work items were partially updated.
+     * The work items were updated successfully, with any update failures included in the response.
      */
     200: UpdateWorkItemsPartialSuccessResponse;
 };
@@ -2875,7 +2875,7 @@ export type ScheduleWorkItemsError = ScheduleWorkItemsErrors[keyof ScheduleWorkI
 
 export type ScheduleWorkItemsResponses = {
     /**
-     * The work items were partially scheduled.
+     * The work items were scheduled successfully, with any scheduling failures included in the response.
      */
     200: ScheduleWorkItemsPartialSuccessResponse;
 };
@@ -3028,7 +3028,7 @@ export type UpdateWorkItemTemplatesError = UpdateWorkItemTemplatesErrors[keyof U
 
 export type UpdateWorkItemTemplatesResponses = {
     /**
-     * The work item templates were partially updated.
+     * The work item templates were updated successfully, with any update failures included in the response.
      */
     200: UpdateWorkItemTemplatesPartialSuccessResponse;
 };

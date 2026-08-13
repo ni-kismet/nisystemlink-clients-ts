@@ -29,7 +29,7 @@ export type CreateExecution = {
     workspaceId: string;
     /**
      * The number of seconds the execution runs before it aborts if uncompleted.
-     * The timer starts once status is IN_PROGRESS. 0 means infinite.
+     * The timer starts once status is IN_PROGRESS. An execution cannot run longer than 24 hours.
      */
     timeout?: number | null;
     /**
@@ -102,7 +102,7 @@ export type CreatedExecutionModel = {
     workspaceId?: string | null;
     /**
      * The number of seconds the execution runs before it aborts if uncompleted.
-     * The timer starts once status is IN_PROGRESS. 0 means infinite.
+     * The timer starts once status is IN_PROGRESS. An execution cannot run longer than 24 hours.
      */
     timeout?: number;
     /**
@@ -201,7 +201,7 @@ export type Execution = {
     workspaceId?: string | null;
     /**
      * The number of seconds the execution runs before it aborts if uncompleted.
-     * The timer starts once status is IN_PROGRESS. 0 means infinite.
+     * The timer starts once status is IN_PROGRESS. An execution cannot run longer than 24 hours.
      */
     timeout?: number;
     /**

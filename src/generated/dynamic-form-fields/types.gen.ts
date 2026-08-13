@@ -184,7 +184,7 @@ export type CreateDynamicFormFieldResponse = {
      */
     columns?: Array<string> | null;
     /**
-     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the `field.type`.
+     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the <b>field.type</b>.
      */
     defaultValue?: unknown;
     validation?: DynamicFormFieldValidation;
@@ -413,19 +413,19 @@ export type CustomFilterConfiguration = {
  * notation, in the range [-3.40282347E+38, 3.40282347E+38], surrounded by quotes. Not all values
  * within the range can be represented with 32 bits. To preserve the exact binary encoding of
  * the value when converting to a string, clients should serialize 9 digits after the decimal.
- * Instead of a number, the value may be `"NaN"` (not a number), `"Infinity"` (positive infinity),
- * or `"-Infinity"` (negative infinity), case-sensitive.
+ * Instead of a number, the value may be <b>"NaN"</b> (not a number), <b>"Infinity"</b> (positive infinity),
+ * or <b>"-Infinity"</b> (negative infinity), case-sensitive.
  *
  * - FLOAT64: A decimal number using a period for the decimal point, optionally in scientific
  * notation, in the range [-1.7976931348623157E+308, 1.7976931348623157E+308], surrounded by quotes.
  * Not all values within the range can be represented with 64 bits. To preserve the exact binary
  * encoding of the value when converting to a string, clients should serialize 17 digits after the
- * decimal. Instead of a number, the value may be `"NaN"` (not a number), `"Infinity"` (positive
- * infinity), or `"-Infinity"` (negative infinity), case-sensitive.
+ * decimal. Instead of a number, the value may be <b>"NaN"</b> (not a number), <b>"Infinity"</b> (positive
+ * infinity), or <b>"-Infinity"</b> (negative infinity), case-sensitive.
  *
  * - STRING: Any quoted string, escaped as required by JSON.
  *
- * The format is the same as a serialized Pandas DataFrame with `orient="split"` and `index=False`.
+ * The format is the same as a serialized Pandas DataFrame with <b>orient="split"</b> and <b>index=False</b>.
  * See https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_json.html.
  */
 export type DataFrame = {
@@ -679,7 +679,7 @@ export type DynamicFormField = {
      */
     columns?: Array<string> | null;
     /**
-     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the `field.type`.
+     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the <b>field.type</b>.
      */
     defaultValue?: unknown;
     validation?: DynamicFormFieldValidation;
@@ -1214,7 +1214,7 @@ export type ListDynamicFormFieldResponse = {
      */
     columns?: Array<string> | null;
     /**
-     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the `field.type`.
+     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the <b>field.type</b>.
      */
     defaultValue?: unknown;
     validation?: DynamicFormFieldValidation;
@@ -1473,7 +1473,7 @@ export type QueryDynamicFormFieldResponse = {
      */
     columns?: Array<string> | null;
     /**
-     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the `field.type`.
+     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the <b>field.type</b>.
      */
     defaultValue?: unknown;
     validation?: DynamicFormFieldValidation;
@@ -1912,7 +1912,7 @@ export type UpdateDynamicFormFieldRequest = {
      */
     columns?: Array<string> | null;
     /**
-     * Contains a value that will be applied by default if no user input was provided yet.The value must match the `field.type`.
+     * Contains a value that will be applied by default if no user input was provided yet.The value must match the <b>field.type</b>.
      */
     defaultValue?: string | null;
     validation?: DynamicFormFieldValidation;
@@ -1976,7 +1976,7 @@ export type UpdateDynamicFormFieldResponse = {
      */
     columns?: Array<string> | null;
     /**
-     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the `field.type`.
+     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the <b>field.type</b>.
      */
     defaultValue?: unknown;
     validation?: DynamicFormFieldValidation;
@@ -2199,7 +2199,7 @@ export type UpdateTablePropertyResponse = {
 };
 
 /**
- * The operations available in the routes provided by the `/v1` HTTP API.
+ * The operations available in the routes provided by the <b>/v1</b> HTTP API.
  */
 export type V1Operations = {
     operations: AvailableV1Operations;
@@ -2327,7 +2327,7 @@ export type CreateDynamicFormFieldResponseWritable = {
      */
     columns?: Array<string> | null;
     /**
-     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the `field.type`.
+     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the <b>field.type</b>.
      */
     defaultValue?: unknown;
     validation?: DynamicFormFieldValidation;
@@ -2599,7 +2599,7 @@ export type ListDynamicFormFieldResponseWritable = {
      */
     columns?: Array<string> | null;
     /**
-     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the `field.type`.
+     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the <b>field.type</b>.
      */
     defaultValue?: unknown;
     validation?: DynamicFormFieldValidation;
@@ -2735,7 +2735,7 @@ export type QueryDynamicFormFieldResponseWritable = {
      */
     columns?: Array<string> | null;
     /**
-     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the `field.type`.
+     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the <b>field.type</b>.
      */
     defaultValue?: unknown;
     validation?: DynamicFormFieldValidation;
@@ -2942,7 +2942,7 @@ export type UpdateDynamicFormFieldResponseWritable = {
      */
     columns?: Array<string> | null;
     /**
-     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the `field.type`.
+     * The value that is displayed until the user provides an input. If no user input is provided, the DefaultValue will be saved. The value must match the <b>field.type</b>.
      */
     defaultValue?: unknown;
     validation?: DynamicFormFieldValidation;

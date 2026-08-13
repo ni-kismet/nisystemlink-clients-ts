@@ -39,7 +39,7 @@ export type ActionTransitionDefinition = {
      */
     nextSubstate?: string | null;
     /**
-     * If `true`, the action is shown in UIs. If `false`,
+     * If <b>true</b>, the action is shown in UIs. If <b>false</b>,
      * the action is hidden from UIs and can only be invoked programmatically.
      */
     showInUI?: boolean;
@@ -730,7 +730,7 @@ export type Job = {
      */
     arguments: Array<Array<unknown>>;
     /**
-     * Systems Management Job metadata. `queued` will be ignored.
+     * Systems Management Job metadata. <b>queued</b> will be ignored.
      */
     metadata?: {
         [key: string]: unknown;
@@ -883,48 +883,48 @@ export type QueryTestPlanTemplatesRequest = {
      *
      * Allowed properties in the filter are:
      *
-     * - `id`: String representing the ID of a test plan template. The value must be a numeric string. Field supports only equals '=' and not equal '!=' operators for filtering.
+     * - <b>id</b>: String representing the ID of a test plan template. The value must be a numeric string. Field supports only equals '=' and not equal '!=' operators for filtering.
      *
-     * - `productFamilies`: Array of strings representing the product families to which the test plan template belongs.
+     * - <b>productFamilies</b>: Array of strings representing the product families to which the test plan template belongs.
      *
-     * - `partNumbers`: Array of strings representing the part numbers of the products to which the test plan template belongs.
+     * - <b>partNumbers</b>: Array of strings representing the part numbers of the products to which the test plan template belongs.
      *
-     * - `fileIds`: The array of file IDs associated with the test plan template.
+     * - <b>fileIds</b>: The array of file IDs associated with the test plan template.
      *
-     * - `name`: String representing the name of a test plan template.
+     * - <b>name</b>: String representing the name of a test plan template.
      *
-     * - `summary`: String representing the summary of a test plan template.
+     * - <b>summary</b>: String representing the summary of a test plan template.
      *
-     * - `description`: String representing description of the test plan created from this template.
+     * - <b>description</b>: String representing description of the test plan created from this template.
      *
-     * - `templateGroup`: String representing the template group defined by the user.
+     * - <b>templateGroup</b>: String representing the template group defined by the user.
      *
-     * - `testProgram`: String representing the test program name of the test plan created from this template.
+     * - <b>testProgram</b>: String representing the test program name of the test plan created from this template.
      *
-     * - `systemFilter`: String representing the LINQ filter used to filter the potential list of systems capable of executing test plans created from this template.
+     * - <b>systemFilter</b>: String representing the LINQ filter used to filter the potential list of systems capable of executing test plans created from this template.
      *
-     * - `dutFilter`: String representing the LINQ filter used to filter the potential list of DUTs capable of executing test plans created from this template.
+     * - <b>dutFilter</b>: String representing the LINQ filter used to filter the potential list of DUTs capable of executing test plans created from this template.
      *
-     * - `workspace`: String representing the workspace where the test plan template belongs.
+     * - <b>workspace</b>: String representing the workspace where the test plan template belongs.
      *
-     * - `createdBy`: String representing the user who created the test plan template.
+     * - <b>createdBy</b>: String representing the user who created the test plan template.
      *
-     * - `updatedBy`: String representing the user who updated the test plan template.
+     * - <b>updatedBy</b>: String representing the user who updated the test plan template.
      *
-     * - `createdAt`: ISO-8601 formatted timestamp indicating when the test plan template was created.
+     * - <b>createdAt</b>: ISO-8601 formatted timestamp indicating when the test plan template was created.
      *
-     * - `updatedAt`: ISO-8601 formatted timestamp indicating when the test plan template was most recently updated.
+     * - <b>updatedAt</b>: ISO-8601 formatted timestamp indicating when the test plan template was most recently updated.
      *
-     * - `properties`: Collection of key-value pairs related to a test plan created from this template. Example: properties.Any(key == \"Location\" & value == \"Austin\")
-     * - `workflowId`: String representing the ID of the workflow associated with the test plan template.
+     * - <b>properties</b>: Collection of key-value pairs related to a test plan created from this template. Example: properties.Any(key == \"Location\" & value == \"Austin\")
+     * - <b>workflowId</b>: String representing the ID of the workflow associated with the test plan template.
      *
      */
     filter?: string | null;
     /**
      * Makes substitutions in the query filter expression using non-negative integers. These integers use the
-     * `@` symbol as a prefix. The filter expression replaces each substitution with the element at the corresponding
+     * <b>@</b> symbol as a prefix. The filter expression replaces each substitution with the element at the corresponding
      * index in this list. The index is zero-based. For example, an element at the zeroth index of the substitutions
-     * list replaces `@0` in the filter expression.
+     * list replaces <b>@0</b> in the filter expression.
      */
     substitutions?: Array<unknown> | null;
     /**
@@ -990,66 +990,66 @@ export type QueryTestPlansRequest = {
      *
      * Allowed properties in the filter are:
      *
-     * - `id`: String representing the ID of a test plan. The value must be a numeric string. Field supports only equals '=' and not equal '!=' operators for filtering.
+     * - <b>id</b>: String representing the ID of a test plan. The value must be a numeric string. Field supports only equals '=' and not equal '!=' operators for filtering.
      *
-     * - `templateId` The ID of the test plan template used to create this test plan. The value must be a numeric string.
+     * - <b>templateId</b> The ID of the test plan template used to create this test plan. The value must be a numeric string.
      *
-     * - `name`: String representing the name of a test plan.
+     * - <b>name</b>: String representing the name of a test plan.
      *
-     * - `state`: String enumeration representing the state of the test plan. Possible values are: New, Defined, Reviewed, Scheduled, InProgress, PendingApproval, Closed, Canceled.
+     * - <b>state</b>: String enumeration representing the state of the test plan. Possible values are: New, Defined, Reviewed, Scheduled, InProgress, PendingApproval, Closed, Canceled.
      *
-     * - `description`: String representing details of a test plan.
+     * - <b>description</b>: String representing details of a test plan.
      *
-     * - `assignedTo`: String representing the user to whom the test plan is assigned.
+     * - <b>assignedTo</b>: String representing the user to whom the test plan is assigned.
      *
-     * - `workOrderId`: String representing the ID of the work order with which the test plan is linked. The value must be a numeric string.
+     * - <b>workOrderId</b>: String representing the ID of the work order with which the test plan is linked. The value must be a numeric string.
      *
-     * - `partNumber`: String representing the part number of the product for which the test is planned.
+     * - <b>partNumber</b>: String representing the part number of the product for which the test is planned.
      *
-     * - `dutId`: String representing the ID of the asset for which the test is planned.
+     * - <b>dutId</b>: String representing the ID of the asset for which the test is planned.
      *
-     * - `dutSerialNumber`: String representing the serial number of the asset for which the test is planned.
+     * - <b>dutSerialNumber</b>: String representing the serial number of the asset for which the test is planned.
      *
-     * - `testProgram`: String representing the Name of the planned test program.
+     * - <b>testProgram</b>: String representing the Name of the planned test program.
      *
-     * - `systemFilter`: String representing the LINQ filter used to filter the potential list of systems capable of executing test plans.
+     * - <b>systemFilter</b>: String representing the LINQ filter used to filter the potential list of systems capable of executing test plans.
      *
-     * - `dutFilter`: String representing the LINQ filter used to filter the potential list of DUTs capable of executing test plans.
+     * - <b>dutFilter</b>: String representing the LINQ filter used to filter the potential list of DUTs capable of executing test plans.
      *
-     * - `systemId`: String representing the ID of the system where the test is planned.
+     * - <b>systemId</b>: String representing the ID of the system where the test is planned.
      *
-     * - `fixtureIds`: The array of fixture IDs (asset IDs) where the test is planned.
+     * - <b>fixtureIds</b>: The array of fixture IDs (asset IDs) where the test is planned.
      *
-     * - `plannedStartDateTime`: ISO-8601 formatted timestamp indicating when the test plan will be started.
+     * - <b>plannedStartDateTime</b>: ISO-8601 formatted timestamp indicating when the test plan will be started.
      *
-     * - `estimatedEndDateTime`: ISO-8601 formatted timestamp indicating when the test plan will be completed.
+     * - <b>estimatedEndDateTime</b>: ISO-8601 formatted timestamp indicating when the test plan will be completed.
      *
-     * - `EstimatedDurationInSeconds`: Integer representing the estimated time in seconds for the test plan to be executed.
+     * - <b>estimatedDurationInSeconds</b>: Integer representing the estimated time in seconds for the test plan to be executed.
      *
-     * - `workspace`: String representing the workspace where the test plan belongs.
+     * - <b>workspace</b>: String representing the workspace where the test plan belongs.
      *
-     * - `fileIdsFromTemplate`: The array of file IDs from the template linked to the test plan.
+     * - <b>fileIdsFromTemplate</b>: The array of file IDs from the template linked to the test plan.
      *
-     * - `createdBy`: String representing the user who created the test plan.
+     * - <b>createdBy</b>: String representing the user who created the test plan.
      *
-     * - `updatedBy`: String representing the user who updated the test plan.
+     * - <b>updatedBy</b>: String representing the user who updated the test plan.
      *
-     * - `createdAt`: ISO-8601 formatted timestamp indicating when the test plan was created.
+     * - <b>createdAt</b>: ISO-8601 formatted timestamp indicating when the test plan was created.
      *
-     * - `updatedAt`: ISO-8601 formatted timestamp indicating when the test plan was most recently updated.
+     * - <b>updatedAt</b>: ISO-8601 formatted timestamp indicating when the test plan was most recently updated.
      *
-     * - `properties`: Collection of key-value pairs related to a test plan. Example: properties.Any(key == \"Location\" & value == \"Austin\")
-     * - `dashboard`: String representing the ID for the dashboard associated with this test plan. Example: dashboard.Id == \"1234\"
+     * - <b>properties</b>: Collection of key-value pairs related to a test plan. Example: properties.Any(key == \"Location\" & value == \"Austin\")
+     * - <b>dashboard</b>: String representing the ID for the dashboard associated with this test plan. Example: dashboard.Id == \"1234\"
      *
-     * - `workflowId`: String representing the workflow ID for the test plan.
+     * - <b>workflowId</b>: String representing the workflow ID for the test plan.
      *
      */
     filter?: string | null;
     /**
      * Makes substitutions in the query filter expression using non-negative integers. These integers use the
-     * `@` symbol as a prefix. The filter expression replaces each substitution with the element at the corresponding
+     * <b>@</b> symbol as a prefix. The filter expression replaces each substitution with the element at the corresponding
      * index in this list. The index is zero-based. For example, an element at the zeroth index of the substitutions
-     * list replaces `@0` in the filter expression.
+     * list replaces <b>@0</b> in the filter expression.
      */
     substitutions?: Array<unknown> | null;
     /**
@@ -1097,7 +1097,7 @@ export type QueryTestPlansResponse = {
      */
     continuationToken?: string | null;
     /**
-     * The total number of test plans which match the provided filter, disregarding the take value. The `TotalCount` will be added to the response only if the `ReturnCount` is set to `true` in the request.
+     * The total number of test plans which match the provided filter, disregarding the take value. The <b>TotalCount</b> will be added to the response only if the <b>ReturnCount</b> is set to <b>true</b> in the request.
      */
     totalCount?: number | null;
 };
@@ -1129,41 +1129,41 @@ export type QueryWorkOrdersRequest = {
      *
      * Allowed properties in the filter are:
      *
-     * - `id`: String representing the ID of a work order. The value must be a numeric string. Field supports only equals '=' and not equal '!=' operators for filtering.
+     * - <b>id</b>: String representing the ID of a work order. The value must be a numeric string. Field supports only equals '=' and not equal '!=' operators for filtering.
      *
-     * - `name`: String representing the name of a work order.
+     * - <b>name</b>: String representing the name of a work order.
      *
-     * - `type`: String enumeration representing the type of the work order. Possible values are : TestRequest
-     * - `state`: String enumeration representing the state of the work order. Possible values are: New, Defined, Reviewed, Scheduled, InProgress, PendingApproval, Closed, Canceled.
+     * - <b>type</b>: String enumeration representing the type of the work order. Possible values are : TestRequest
+     * - <b>state</b>: String enumeration representing the state of the work order. Possible values are: New, Defined, Reviewed, Scheduled, InProgress, PendingApproval, Closed, Canceled.
      *
-     * - `description`: String representing details of a work order.
+     * - <b>description</b>: String representing details of a work order.
      *
-     * - `assignedTo`: String representing the user to whom the work order is assigned.
+     * - <b>assignedTo</b>: String representing the user to whom the work order is assigned.
      *
-     * - `workspace`: String representing the workspace where the work order belongs.
+     * - <b>workspace</b>: String representing the workspace where the work order belongs.
      *
-     * - `requestedBy`: String representing the user who requested the work order.
+     * - <b>requestedBy</b>: String representing the user who requested the work order.
      *
-     * - `createdBy`: String representing the user who created the work order.
+     * - <b>createdBy</b>: String representing the user who created the work order.
      *
-     * - `updatedBy`: String representing the user who updated the work order.
+     * - <b>updatedBy</b>: String representing the user who updated the work order.
      *
-     * - `createdAt`: ISO-8601 formatted timestamp indicating when the work order was created.
+     * - <b>createdAt</b>: ISO-8601 formatted timestamp indicating when the work order was created.
      *
-     * - `updatedAt`: ISO-8601 formatted timestamp indicating when the work order was most recently updated.
+     * - <b>updatedAt</b>: ISO-8601 formatted timestamp indicating when the work order was most recently updated.
      *
-     * - `earliestStartDate`: ISO-8601 formatted timestamp indicating from when the work order can be started.
+     * - <b>earliestStartDate</b>: ISO-8601 formatted timestamp indicating from when the work order can be started.
      *
-     * - `dueDate`: ISO-8601 formatted timestamp indicating when the work order has to be completed.
+     * - <b>dueDate</b>: ISO-8601 formatted timestamp indicating when the work order has to be completed.
      *
-     * - `properties`: Collection of key-value pairs related to a work order. Example: properties.Any(key == \"Location\" & value == \"Austin\")
+     * - <b>properties</b>: Collection of key-value pairs related to a work order. Example: properties.Any(key == \"Location\" & value == \"Austin\")
      */
     filter?: string | null;
     /**
      * Makes substitutions in the query filter expression using non-negative integers. These integers use the
-     * `@` symbol as a prefix. The filter expression replaces each substitution with the element at the corresponding
+     * <b>@</b> symbol as a prefix. The filter expression replaces each substitution with the element at the corresponding
      * index in this list. The index is zero-based. For example, an element at the zeroth index of the substitutions
-     * list replaces `@0` in the filter expression.
+     * list replaces <b>@0</b> in the filter expression.
      */
     substitutions?: Array<unknown> | null;
     /**
@@ -1211,7 +1211,7 @@ export type QueryWorkOrdersResponse = {
      */
     continuationToken?: string | null;
     /**
-     * The total number of work orders which match the provided filter, disregarding the take value. The `TotalCount` will be added to the response only if the `ReturnCount` is set to `true` in the request.
+     * The total number of work orders which match the provided filter, disregarding the take value. The <b>TotalCount</b> will be added to the response only if the <b>ReturnCount</b> is set to <b>true</b> in the request.
      */
     totalCount?: number | null;
 };
@@ -1285,7 +1285,7 @@ export type ScheduleTestPlanRequest = {
     systemId?: string | null;
     /**
      * The array of fixture IDs (asset IDs) where the test is planned.
-     * `systemId` must be provided if `fixtureIds` are provided.
+     * <b>systemId</b> must be provided if <b>fixtureIds</b> are provided.
      */
     fixtureIds?: Array<string> | null;
     /**
@@ -1522,7 +1522,7 @@ export type TestPlanResponseWithExecutionsBase = TestPlanResponseBase & {
      */
     executionActions?: Array<NoneExecutionDefinition | ManualExecutionDefinition | NotebookExecutionDefinition | JobExecutionDefinition> | null;
     /**
-     * [Deprecated] The workflow definition associated with this test plan. This has been replace by `workflowSnapshot`.
+     * [Deprecated] The workflow definition associated with this test plan. This has been replace by <b>workflowSnapshot</b>.
      */
     workflow?: WorkflowDefinition | null;
     /**
@@ -1536,27 +1536,27 @@ export type TestPlanResponseWithExecutionsBase = TestPlanResponseBase & {
  */
 export type TestPlanSummaryResponse = {
     /**
-     * Number of test plans `assigned to` the current user which are neither `closed` nor `canceled`.
+     * Number of test plans <b>assigned to</b> the current user which are neither <b>closed</b> nor <b>canceled</b>.
      */
     assignedToUserCount?: number;
     /**
-     * Number of test plans `created by` the current user which are neither `closed` nor `canceled`.
+     * Number of test plans <b>created by</b> the current user which are neither <b>closed</b> nor <b>canceled</b>.
      */
     createdByUserCount?: number;
     /**
-     * Number of test plans in the `defined` state.
+     * Number of test plans in the <b>defined</b> state.
      */
     definedCount?: number;
     /**
-     * Number of test plans in the `scheduled` state.
+     * Number of test plans in the <b>scheduled</b> state.
      */
     scheduledCount?: number;
     /**
-     * Number of test plans in the `in progress` state.
+     * Number of test plans in the <b>in progress</b> state.
      */
     inProgressCount?: number;
     /**
-     * Number of test plans in the `pending approval` state.
+     * Number of test plans in the <b>pending approval</b> state.
      */
     pendingApprovalCount?: number;
 };
@@ -1718,7 +1718,7 @@ export type UpdateTestPlanRequest = {
      */
     fileIdsFromTemplate?: Array<string> | null;
     /**
-     * ID of the workspace where the test plan belongs. Setting to `null` will retain the existing workspace.
+     * ID of the workspace where the test plan belongs. Setting to <b>null</b> will retain the existing workspace.
      * Updating the workspace requires permission to delete the test plan in the current workspace and
      * create the test plan in the new workspace.
      */
@@ -1797,7 +1797,7 @@ export type UpdateTestPlanTemplateRequest = {
      */
     fileIds?: Array<string> | null;
     /**
-     * ID of the workspace where the test plan template belongs. Setting to `null` will retain the existing workspace.
+     * ID of the workspace where the test plan template belongs. Setting to <b>null</b> will retain the existing workspace.
      * Updating the workspace requires permission to delete the test plan template in the current workspace and create
      * the test plan template in the new workspace.
      */
@@ -1883,7 +1883,7 @@ export type UpdateTestPlansRequest = {
      */
     testPlans?: Array<UpdateTestPlanRequest> | null;
     /**
-     * When `true`, existing properties are replaced instead of merged.
+     * When <b>true</b>, existing properties are replaced instead of merged.
      */
     replace?: boolean;
 };
@@ -1925,7 +1925,7 @@ export type UpdateWorkOrderRequest = {
      */
     dueDate?: string | null;
     /**
-     * ID of the workspace where the work order belongs. Settings to `null` will retain the existing workspace.
+     * ID of the workspace where the work order belongs. Settings to <b>null</b> will retain the existing workspace.
      * Updating the workspace requires permission to delete the work order in the current workspace and
      * create the work order in the new workspace.
      */
@@ -1970,7 +1970,7 @@ export type UpdateWorkOrdersRequest = {
      */
     workOrders?: Array<UpdateWorkOrderRequest> | null;
     /**
-     * When `true`, existing properties are replaced instead of merged.
+     * When <b>true</b>, existing properties are replaced instead of merged.
      */
     replace?: boolean;
 };
@@ -2146,27 +2146,27 @@ export type WorkOrderResponseBase = {
  */
 export type WorkOrdersSummaryResponse = {
     /**
-     * Number of work orders `assigned to` the current user which are neither `closed` nor `canceled`.
+     * Number of work orders <b>assigned to</b> the current user which are neither <b>closed</b> nor <b>canceled</b>.
      */
     assignedToUserCount?: number;
     /**
-     * Number of work orders `requested by` the current user which are neither `closed` nor `canceled`.
+     * Number of work orders <b>requested by</b> the current user which are neither <b>closed</b> nor <b>canceled</b>.
      */
     requestedByUserCount?: number;
     /**
-     * Number of work orders in the `defined` state.
+     * Number of work orders in the <b>defined</b> state.
      */
     definedCount?: number;
     /**
-     * Number of work orders in the `in progress` state.
+     * Number of work orders in the <b>in progress</b> state.
      */
     inProgressCount?: number;
     /**
-     * Number of work orders in the `pending approval` state.
+     * Number of work orders in the <b>pending approval</b> state.
      */
     pendingApprovalCount?: number;
     /**
-     * Number of work orders past their due date as of the current date which are neither `closed` nor `canceled`.
+     * Number of work orders past their due date as of the current date which are neither <b>closed</b> nor <b>canceled</b>.
      */
     pastDueDateCount?: number;
 };
@@ -2192,8 +2192,8 @@ export type WorkflowAction = {
      */
     i18n?: Array<WorkflowTranslation> | null;
     /**
-     * The resources for which the user must have the `workitem:ExecuteWithSpecificity` privilege.
-     * The user must also have the `workitem:Execute` privilege.
+     * The resources for which the user must have the <b>workitem:ExecuteWithSpecificity</b> privilege.
+     * The user must also have the <b>workitem:Execute</b> privilege.
      */
     privilegeSpecificity?: Array<string> | null;
     /**
@@ -2438,7 +2438,7 @@ export type TestPlanResponseWithExecutionsBaseWritable = TestPlanResponseBase & 
      */
     executionActions?: Array<NoneExecutionDefinition | ManualExecutionDefinition | NotebookExecutionDefinition | JobExecutionDefinition> | null;
     /**
-     * [Deprecated] The workflow definition associated with this test plan. This has been replace by `workflowSnapshot`.
+     * [Deprecated] The workflow definition associated with this test plan. This has been replace by <b>workflowSnapshot</b>.
      */
     workflow?: WorkflowDefinition | null;
 };
@@ -2667,7 +2667,7 @@ export type UpdateTestPlansError = UpdateTestPlansErrors[keyof UpdateTestPlansEr
 
 export type UpdateTestPlansResponses = {
     /**
-     * The test plans were partially updated.
+     * The test plans were updated successfully, with any update failures included in the response.
      */
     200: UpdateTestPlansPartialSuccessResponse;
 };
@@ -2699,7 +2699,7 @@ export type ScheduleTestPlansError = ScheduleTestPlansErrors[keyof ScheduleTestP
 
 export type ScheduleTestPlansResponses = {
     /**
-     * The test plans were partially scheduled.
+     * The test plans were scheduled successfully, with any scheduling failures included in the response.
      */
     200: ScheduleTestPlansPartialSuccessResponse;
 };
@@ -2888,7 +2888,7 @@ export type UpdateTestPlanTemplatesError = UpdateTestPlanTemplatesErrors[keyof U
 
 export type UpdateTestPlanTemplatesResponses = {
     /**
-     * The test plan templates were partially updated.
+     * The test plan templates were updated successfully, with any update failures included in the response.
      */
     200: UpdateTestPlanTemplatesPartialSuccessResponse;
 };
@@ -3018,7 +3018,7 @@ export type GetWorkflowError = GetWorkflowErrors[keyof GetWorkflowErrors];
 
 export type GetWorkflowResponses = {
     /**
-     * The workflow was retreived successfully.
+     * The workflow was retrieved successfully.
      */
     200: GetWorkflowResponse;
 };
@@ -3290,7 +3290,7 @@ export type UpdateWorkOrdersError = UpdateWorkOrdersErrors[keyof UpdateWorkOrder
 
 export type UpdateWorkOrdersResponses = {
     /**
-     * The work orders were partially updated.
+     * The work orders were updated successfully, with any update failures included in the response.
      */
     200: UpdateWorkOrdersPartialSuccessResponse;
 };

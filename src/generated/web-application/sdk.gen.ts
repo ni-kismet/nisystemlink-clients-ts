@@ -2,7 +2,7 @@
 
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
-import type { CreateWebappData, CreateWebappErrors, CreateWebappResponses, DeleteWebappData, DeleteWebappErrors, DeleteWebappResponses, DuplicateContentData, DuplicateContentErrors, DuplicateContentResponses, DuplicateWebappData, DuplicateWebappErrors, DuplicateWebappResponses, GetContentData, GetContentErrors, GetContentIndexData, GetContentIndexErrors, GetContentIndexResponses, GetContentResponses, GetWebappData, GetWebappErrors, GetWebappResponses, ImportWebappsData, ImportWebappsErrors, ImportWebappsResponses, ListSharedEmailsData, ListSharedEmailsErrors, ListSharedEmailsResponses, ListWebappsData, ListWebappsErrors, ListWebappsResponses, QueryData, QueryErrors, QueryResponses, UpdateContentData, UpdateContentErrors, UpdateContentResponses, UpdateWebappData, UpdateWebappErrors, UpdateWebappResponses, UpdateWebappSharingData, UpdateWebappSharingErrors, UpdateWebappSharingResponses } from './types.gen';
+import type { CreateWebappData, CreateWebappErrors, CreateWebappResponses, DeleteWebappData, DeleteWebappErrors, DeleteWebappResponses, DuplicateContentData, DuplicateContentErrors, DuplicateContentResponses, DuplicateWebappData, DuplicateWebappErrors, DuplicateWebappResponses, GetContentData, GetContentErrors, GetContentIndexData, GetContentIndexErrors, GetContentIndexResponses, GetContentNipkgData, GetContentNipkgErrors, GetContentNipkgResponses, GetContentResponses, GetServiceV1VersionInfoData, GetServiceV1VersionInfoErrors, GetServiceV1VersionInfoResponses, GetWebappData, GetWebappErrors, GetWebappResponses, ImportWebappsData, ImportWebappsErrors, ImportWebappsResponses, ListWebappsData, ListWebappsErrors, ListWebappsResponses, QueryData, QueryErrors, QueryResponses, UpdateContentData, UpdateContentErrors, UpdateContentNipkgData, UpdateContentNipkgErrors, UpdateContentNipkgResponses, UpdateContentResponses, UpdateWebappData, UpdateWebappErrors, UpdateWebappResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -19,9 +19,9 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Delete webapp by Id
+ * Delete a webapp
  *
- * Delete existing webapp metadata and content
+ * Permanently delete a webapp identified by its ID, removing both its metadata and all of its stored content. This operation cannot be undone.
  */
 export const deleteWebapp = <ThrowOnError extends boolean = false>(options: Options<DeleteWebappData, ThrowOnError>): RequestResult<DeleteWebappResponses, DeleteWebappErrors, ThrowOnError> => (options.client ?? client).delete<DeleteWebappResponses, DeleteWebappErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -30,9 +30,9 @@ export const deleteWebapp = <ThrowOnError extends boolean = false>(options: Opti
 });
 
 /**
- * Get webapp metadata by Id
+ * Get a webapp
  *
- * Get webapp metadata by Id
+ * Returns the metadata for the webapp with the specified ID, including its name, type, workspace, and properties.
  */
 export const getWebapp = <ThrowOnError extends boolean = false>(options: Options<GetWebappData, ThrowOnError>): RequestResult<GetWebappResponses, GetWebappErrors, ThrowOnError> => (options.client ?? client).get<GetWebappResponses, GetWebappErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -41,9 +41,9 @@ export const getWebapp = <ThrowOnError extends boolean = false>(options: Options
 });
 
 /**
- * Update webapp metadata by Id
+ * Update a webapp
  *
- * Update existing webapp metadata
+ * Update the editable metadata of an existing webapp, such as its name, type, owning workspace, access-control policies, and custom properties. The webapp's content is not affected by this route; use the content routes to change what the webapp renders. Fields omitted from the request are left unchanged.
  */
 export const updateWebapp = <ThrowOnError extends boolean = false>(options: Options<UpdateWebappData, ThrowOnError>): RequestResult<UpdateWebappResponses, UpdateWebappErrors, ThrowOnError> => (options.client ?? client).put<UpdateWebappResponses, UpdateWebappErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -56,9 +56,9 @@ export const updateWebapp = <ThrowOnError extends boolean = false>(options: Opti
 });
 
 /**
- * List the webapps
+ * List webapps
  *
- * List the webapps
+ * Returns the available webapps, optionally filtered by name, type, owner, or workspace. Results are paginated; use the returned continuation token to retrieve subsequent pages.
  */
 export const listWebapps = <ThrowOnError extends boolean = false>(options?: Options<ListWebappsData, ThrowOnError>): RequestResult<ListWebappsResponses, ListWebappsErrors, ThrowOnError> => (options?.client ?? client).get<ListWebappsResponses, ListWebappsErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -67,9 +67,9 @@ export const listWebapps = <ThrowOnError extends boolean = false>(options?: Opti
 });
 
 /**
- * Create a new webapp
+ * Create a webapp
  *
- * Create a new webapp
+ * Create a new webapp with the provided metadata. Content can be uploaded separately once the webapp exists.
  */
 export const createWebapp = <ThrowOnError extends boolean = false>(options?: Options<CreateWebappData, ThrowOnError>): RequestResult<CreateWebappResponses, CreateWebappErrors, ThrowOnError> => (options?.client ?? client).post<CreateWebappResponses, CreateWebappErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -82,7 +82,7 @@ export const createWebapp = <ThrowOnError extends boolean = false>(options?: Opt
 });
 
 /**
- * Query the webapps
+ * Query webapps
  *
  * Use the Dynamic Linq query language to specify filters for webapps. An empty request body queries all webapps.
  */
@@ -94,32 +94,6 @@ export const query = <ThrowOnError extends boolean = false>(options?: Options<Qu
         'Content-Type': 'application/json',
         ...options?.headers
     }
-});
-
-/**
- * Update sharing settings of the webapp
- *
- * Update sharing settings of the webapp
- */
-export const updateWebappSharing = <ThrowOnError extends boolean = false>(options: Options<UpdateWebappSharingData, ThrowOnError>): RequestResult<UpdateWebappSharingResponses, UpdateWebappSharingErrors, ThrowOnError> => (options.client ?? client).put<UpdateWebappSharingResponses, UpdateWebappSharingErrors, ThrowOnError>({
-    security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
-    url: '/webapps/{id}/sharing',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
-});
-
-/**
- * List the emails with which the user has shared webapps
- *
- * List the emails with which the user has shared webapps
- */
-export const listSharedEmails = <ThrowOnError extends boolean = false>(options?: Options<ListSharedEmailsData, ThrowOnError>): RequestResult<ListSharedEmailsResponses, ListSharedEmailsErrors, ThrowOnError> => (options?.client ?? client).get<ListSharedEmailsResponses, ListSharedEmailsErrors, ThrowOnError>({
-    security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
-    url: '/webapps/shared-emails',
-    ...options
 });
 
 /**
@@ -141,7 +115,7 @@ export const importWebapps = <ThrowOnError extends boolean = false>(options?: Op
 /**
  * Get webapp content
  *
- * Get the content of a webapp. ContentType varies from JSON for dashboards and templates or redirect to main HTML for WebVIs
+ * Get the rendered content of a webapp. The response content type varies by webapp type: raw content for most types, or a redirect to the main HTML file for WebVIs. Use this route when loading or displaying a webapp (for example, the browser or an iframe rendering the app). To export the entire webapp as a single installable package, use GET /webapps/{id}/content/nipkg instead.
  */
 export const getContentIndex = <ThrowOnError extends boolean = false>(options: Options<GetContentIndexData, ThrowOnError>): RequestResult<GetContentIndexResponses, GetContentIndexErrors, ThrowOnError> => (options.client ?? client).get<GetContentIndexResponses, GetContentIndexErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -150,16 +124,44 @@ export const getContentIndex = <ThrowOnError extends boolean = false>(options: O
 });
 
 /**
- * Upload content for an existing webapp
+ * Upload webapp content
  *
- * Upload content for an existing webapp
+ * Upload (replace) the content of an existing webapp. This is the standard upload route used by the web UI for all webapp types; the request is dispatched based on the webapp's type, so the same route accepts an *.nipkg package as well as raw content. Prefer this route for uploading content. The PUT /webapps/{id}/content/nipkg route is an alias of this route and behaves identically.
  */
 export const updateContent = <ThrowOnError extends boolean = false>(options: Options<UpdateContentData, ThrowOnError>): RequestResult<UpdateContentResponses, UpdateContentErrors, ThrowOnError> => (options.client ?? client).put<UpdateContentResponses, UpdateContentErrors, ThrowOnError>({
+    bodySerializer: null,
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
     url: '/webapps/{id}/content',
     ...options,
     headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/octet-stream',
+        ...options.headers
+    }
+});
+
+/**
+ * Download webapp content as a package
+ *
+ * Download the entire webapp packaged as a single installable *.nipkg archive (returned as application/gzip). Unlike GET /webapps/{id}/content, which serves an individual file for rendering, this route gathers all of the webapp's files and repackages them into one artifact. Use it to export, back up, or move a webapp to another server, or to round-trip the app back to a build pipeline. This route requires the webapp:DownloadWebApp permission.
+ */
+export const getContentNipkg = <ThrowOnError extends boolean = false>(options: Options<GetContentNipkgData, ThrowOnError>): RequestResult<GetContentNipkgResponses, GetContentNipkgErrors, ThrowOnError> => (options.client ?? client).get<GetContentNipkgResponses, GetContentNipkgErrors, ThrowOnError>({
+    security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
+    url: '/webapps/{id}/content/nipkg',
+    ...options
+});
+
+/**
+ * Upload webapp content as a package
+ *
+ * An alias of PUT /webapps/{id}/content. It is handled by the same logic and behaves identically, including accepting an *.nipkg package. New clients should use PUT /webapps/{id}/content instead.
+ */
+export const updateContentNipkg = <ThrowOnError extends boolean = false>(options: Options<UpdateContentNipkgData, ThrowOnError>): RequestResult<UpdateContentNipkgResponses, UpdateContentNipkgErrors, ThrowOnError> => (options.client ?? client).put<UpdateContentNipkgResponses, UpdateContentNipkgErrors, ThrowOnError>({
+    bodySerializer: null,
+    security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
+    url: '/webapps/{id}/content/nipkg',
+    ...options,
+    headers: {
+        'Content-Type': 'application/octet-stream',
         ...options.headers
     }
 });
@@ -167,7 +169,7 @@ export const updateContent = <ThrowOnError extends boolean = false>(options: Opt
 /**
  * Get webapp content by path
  *
- * Get the webapp content at a path. This applies to webapps with multiple files, such as WebVIs.
+ * Retrieve a single file from a multi-file webapp by its relative path within the package (for example, <b>index.html</b> or <b>js/app.js</b>). This applies to webapps made up of more than one file, such as WebVIs, and is how the browser fetches the individual assets a WebVI references after the initial redirect. The file is streamed with its own content type; send an If-Modified-Since header to take advantage of caching.
  */
 export const getContent = <ThrowOnError extends boolean = false>(options: Options<GetContentData, ThrowOnError>): RequestResult<GetContentResponses, GetContentErrors, ThrowOnError> => (options.client ?? client).get<GetContentResponses, GetContentErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
@@ -176,7 +178,7 @@ export const getContent = <ThrowOnError extends boolean = false>(options: Option
 });
 
 /**
- * Duplicate webapp
+ * Duplicate a webapp
  *
  * Duplicate a webapp by creating new webapp metadata with the specified name and duplicating existing content into the new webapp.
  */
@@ -193,10 +195,21 @@ export const duplicateWebapp = <ThrowOnError extends boolean = false>(options: O
 /**
  * Duplicate webapp content
  *
- * Duplicate webapp content
+ * Copy the content of a source webapp into an existing target webapp, replacing the target's current content.
  */
 export const duplicateContent = <ThrowOnError extends boolean = false>(options: Options<DuplicateContentData, ThrowOnError>): RequestResult<DuplicateContentResponses, DuplicateContentErrors, ThrowOnError> => (options.client ?? client).post<DuplicateContentResponses, DuplicateContentErrors, ThrowOnError>({
     security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
-    url: '/webapps/{id}/duplicate/{sourceId}',
+    url: '/webapps/{id}/content/duplicate/{sourceId}',
+    ...options
+});
+
+/**
+ * API version information
+ *
+ * Returns available operations for a single version of the API.
+ */
+export const getServiceV1VersionInfo = <ThrowOnError extends boolean = false>(options?: Options<GetServiceV1VersionInfoData, ThrowOnError>): RequestResult<GetServiceV1VersionInfoResponses, GetServiceV1VersionInfoErrors, ThrowOnError> => (options?.client ?? client).get<GetServiceV1VersionInfoResponses, GetServiceV1VersionInfoErrors, ThrowOnError>({
+    security: [{ name: 'x-ni-api-key', type: 'apiKey' }],
+    url: '/',
     ...options
 });

@@ -26,7 +26,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
  * workspaces via auth-mappings, to populate user selection lists in
  * administration UIs, or to audit which accounts exist in the
  * organization. An empty request body returns all user accounts. Results
- * are paginated; use the `continuationToken` from the response to
+ * are paginated; use the <b>continuationToken</b> from the response to
  * retrieve subsequent pages.
  *
  */
@@ -107,8 +107,8 @@ export const getUser = <ThrowOnError extends boolean = false>(options: Options<G
  * properties for organizational tagging. Only the fields included in the
  * request body are modified; omitted fields remain unchanged.
  *
- * Note: For accounts with `type == "user"`, the `firstName`, `lastName`,
- * `email`, and `login` fields are automatically managed by the application
+ * Note: For accounts with <b>type == "user"</b>, the <b>firstName</b>, <b>lastName</b>,
+ * <b>email</b>, and <b>login</b> fields are automatically managed by the application
  * and will be overwritten with values from the identity provider the next
  * time the user logs in.
  *
@@ -129,9 +129,9 @@ export const updateUser = <ThrowOnError extends boolean = false>(options: Option
  * List the workspaces of an organization for administrative operations
  * such as verifying a workspace exists before creating auth-mappings or
  * managing workspace configuration. Only workspaces for which the caller
- * has the `workspace:Read` permission are returned. Few users are granted
+ * has the <b>workspace:Read</b> permission are returned. Few users are granted
  * this permission; to list workspaces accessible to the current user for
- * non-administrative purposes, use the Auth Service's `/niauth/v1/auth`
+ * non-administrative purposes, use the Auth Service's <b>/niauth/v1/auth</b>
  * route instead.
  *
  */
@@ -188,7 +188,7 @@ export const updateWorkspace = <ThrowOnError extends boolean = false>(options: O
  * to audit which permissions are configured for a given workspace, display
  * the current access configuration in an administration UI, or
  * troubleshoot why a user has or lacks specific permissions. Filter by
- * `workspace` or `type` to narrow results.
+ * <b>workspace</b> or <b>type</b> to narrow results.
  *
  */
 export const getAuthMappings = <ThrowOnError extends boolean = false>(options?: Options<GetAuthMappingsData, ThrowOnError>): RequestResult<GetAuthMappingsResponses, GetAuthMappingsErrors, ThrowOnError> => (options?.client ?? client).get<GetAuthMappingsResponses, GetAuthMappingsErrors, ThrowOnError>({
@@ -202,11 +202,11 @@ export const getAuthMappings = <ThrowOnError extends boolean = false>(options?: 
  *
  * Create a new authorization mapping that assigns a policy (or policy
  * template bound to a workspace) to users matching a selector criteria.
- * The most common pattern is to specify a `policyTemplateId` (a role like
- * "Collaborator" or "Data Maintainer") together with a `workspace` ID so
+ * The most common pattern is to specify a <b>policyTemplateId</b> (a role like
+ * "Collaborator" or "Data Maintainer") together with a <b>workspace</b> ID so
  * that the system creates a workspace-scoped policy from the template.
- * Use `type: "user-id"` for individual assignments, or
- * `type: "oidc-claim"` to provision groups of users based on identity
+ * Use <b>type: "user-id"</b> for individual assignments, or
+ * <b>type: "oidc-claim"</b> to provision groups of users based on identity
  * provider claims.
  *
  */
@@ -276,8 +276,8 @@ export const getOrg = <ThrowOnError extends boolean = false>(options: Options<Ge
  * notifications when new workspaces are created, allowing UIs to refresh
  * workspace lists or services to automatically provision default resources.
  * After opening the connection, send a
- * `UserAsyncWorkspacesSubscribeRequest` message to subscribe to workspace
- * creation events. The server sends `UserWorkspacesCreatedRoutedMessage`
+ * <b>UserAsyncWorkspacesSubscribeRequest</b> message to subscribe to workspace
+ * creation events. The server sends <b>UserWorkspacesCreatedRoutedMessage</b>
  * messages when new workspaces are created. Refer to the *Models* section
  * for message schemas.
  *

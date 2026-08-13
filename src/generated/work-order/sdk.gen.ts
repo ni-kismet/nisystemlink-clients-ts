@@ -21,19 +21,19 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Creates test plans
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
  * Creates one or more test plans with the provided data.
  *
  *
- * Note: If `templateId` is specified, the user requires
+ * Note: If <b>templateId</b> is specified, the user requires
  * the privilege to query test plan templates.
  *
  *
- * The `estimatedDurationInSeconds` specifies only the estimated duration for the work item.
- * To set the planned duration for the work item, utilize the `schedule-testplans` API.
+ * The <b>estimatedDurationInSeconds</b> specifies only the estimated duration for the work item.
+ * To set the planned duration for the work item, utilize the <b>schedule-testplans</b> API.
  *
  * @deprecated
  */
@@ -50,30 +50,30 @@ export const createTestPlans = <ThrowOnError extends boolean = false>(options?: 
 /**
  * Queries test plans
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
  * Queries test plans with the provided parameters.
  *
  *
- * Uses the dynamic LINQ `filter` and `substitutions` properties to filter the test plans. These properties are optional.
+ * Uses the dynamic LINQ <b>filter</b> and <b>substitutions</b> properties to filter the test plans. These properties are optional.
  *
  *
- * Uses the `take` and `continuationToken` properties to provide paged responses.
+ * Uses the <b>take</b> and <b>continuationToken</b> properties to provide paged responses.
  *
  *
- * Uses the `orderBy` property to sort the test plans.
+ * Uses the <b>orderBy</b> property to sort the test plans.
  *
  *
- * Uses the `returnCount` to get the `totalCount` of test plans matching the filter.
+ * Uses the <b>returnCount</b> to get the <b>totalCount</b> of test plans matching the filter.
  *
  *
- * Uses the `projection` to only include the specified fields in the response.
+ * Uses the <b>projection</b> to only include the specified fields in the response.
  *
  *
- * Note: The `estimatedDurationInSeconds` returns the planned duration for the work item,
- * as set through the `schedule-testplans` API.
+ * Note: The <b>estimatedDurationInSeconds</b> returns the planned duration for the work item,
+ * as set through the <b>schedule-testplans</b> API.
  *
  * @deprecated
  */
@@ -90,7 +90,7 @@ export const queryTestPlans = <ThrowOnError extends boolean = false>(options?: O
 /**
  * Get test plans summary
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -107,15 +107,15 @@ export const getTestPlansSummary = <ThrowOnError extends boolean = false>(option
 /**
  * Gets a test plan
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
  * Gets a test plan with the provided ID.
  *
  *
- * Note: The `estimatedDurationInSeconds` returns the planned duration for the work item,
- * as set through the `schedule-testplans` API.
+ * Note: The <b>estimatedDurationInSeconds</b> returns the planned duration for the work item,
+ * as set through the <b>schedule-testplans</b> API.
  *
  * @deprecated
  */
@@ -128,7 +128,7 @@ export const getTestPlan = <ThrowOnError extends boolean = false>(options: Optio
 /**
  * Deletes test plans
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -149,7 +149,7 @@ export const deleteTestPlans = <ThrowOnError extends boolean = false>(options?: 
 /**
  * Updates test plans
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -159,9 +159,9 @@ export const deleteTestPlans = <ThrowOnError extends boolean = false>(options?: 
  * Note: Only basic test plan properties can be updated using this API.
  *
  *
- * The `estimatedDurationInSeconds` specifies only the estimated duration for the work item.
- * To update scheduling related properties such as `systemId`, `fixtureIds`, `estimatedStartDate`, and `estimatedEndDate`,
- * as well as the planned duration for the work item, utilize the `schedule-testplans` API.
+ * The <b>estimatedDurationInSeconds</b> specifies only the estimated duration for the work item.
+ * To update scheduling related properties such as <b>systemId</b>, <b>fixtureIds</b>, <b>estimatedStartDate</b>, and <b>estimatedEndDate</b>,
+ * as well as the planned duration for the work item, utilize the <b>schedule-testplans</b> API.
  *
  * @deprecated
  */
@@ -178,7 +178,7 @@ export const updateTestPlans = <ThrowOnError extends boolean = false>(options?: 
 /**
  * Schedule test plans
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -188,8 +188,8 @@ export const updateTestPlans = <ThrowOnError extends boolean = false>(options?: 
  * Note: Only scheduling related test plan properties can be updated using this API.
  *
  *
- * The `estimatedDurationInSeconds` specifies the planned duration for the work item.
- * To update other properties, utilize the `update-testplans` API.
+ * The <b>estimatedDurationInSeconds</b> specifies the planned duration for the work item.
+ * To update other properties, utilize the <b>update-testplans</b> API.
  *
  * @deprecated
  */
@@ -206,7 +206,7 @@ export const scheduleTestPlans = <ThrowOnError extends boolean = false>(options?
 /**
  * Executes a test plan action
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -230,7 +230,7 @@ export const executeTestPlan = <ThrowOnError extends boolean = false>(options: O
 /**
  * Creates test plan templates
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -251,23 +251,23 @@ export const createTestPlanTemplates = <ThrowOnError extends boolean = false>(op
 /**
  * Queries test plan templates
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
  * Queries test plan templates with the provided parameters.
  *
  *
- * Uses the dynamic LINQ `filter` and `substitutions` properties to filter the test plan templates These properties are optional.
+ * Uses the dynamic LINQ <b>filter</b> and <b>substitutions</b> properties to filter the test plan templates These properties are optional.
  *
  *
- * Uses the `take` and `continuationToken` properties to provide paged responses.
+ * Uses the <b>take</b> and <b>continuationToken</b> properties to provide paged responses.
  *
  *
- * Uses the `orderBy` property to sort the test plan templates.
+ * Uses the <b>orderBy</b> property to sort the test plan templates.
  *
  *
- * Uses the `projection` to only include the specified fields in the response.
+ * Uses the <b>projection</b> to only include the specified fields in the response.
  *
  *
  *
@@ -286,7 +286,7 @@ export const queryTestPlanTemplates = <ThrowOnError extends boolean = false>(opt
 /**
  * Deletes test plan templates
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -307,7 +307,7 @@ export const deleteTestPlanTemplates = <ThrowOnError extends boolean = false>(op
 /**
  * Updates test plan templates
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -328,7 +328,7 @@ export const updateTestPlanTemplates = <ThrowOnError extends boolean = false>(op
 /**
  * API Information
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -345,7 +345,7 @@ export const rootEndPoint = <ThrowOnError extends boolean = false>(options?: Opt
 /**
  * Information about API versions and available operations of version V1 of APIs
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -362,7 +362,7 @@ export const v1OperationsRootEndPoint = <ThrowOnError extends boolean = false>(o
 /**
  * Creates a workflow
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -383,7 +383,7 @@ export const createWorkflow = <ThrowOnError extends boolean = false>(options?: O
 /**
  * Queries workflows
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -404,7 +404,7 @@ export const queryWorkflows = <ThrowOnError extends boolean = false>(options?: O
 /**
  * Get a workflow
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -421,7 +421,7 @@ export const getWorkflow = <ThrowOnError extends boolean = false>(options: Optio
 /**
  * Updates a workflow
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -442,7 +442,7 @@ export const updateWorkflow = <ThrowOnError extends boolean = false>(options: Op
 /**
  * Deletes workflows
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -463,7 +463,7 @@ export const deleteWorkflows = <ThrowOnError extends boolean = false>(options?: 
 /**
  * Creates work orders
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -484,26 +484,26 @@ export const createWorkOrders = <ThrowOnError extends boolean = false>(options?:
 /**
  * Queries work orders
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
  * Queries work orders with the provided parameters.
  *
  *
- * Uses the dynamic LINQ `filter` and `substitutions` properties to filter the work orders. These properties are optional.
+ * Uses the dynamic LINQ <b>filter</b> and <b>substitutions</b> properties to filter the work orders. These properties are optional.
  *
  *
- * Uses the `take` and `continuationToken` properties to provide paged responses.
+ * Uses the <b>take</b> and <b>continuationToken</b> properties to provide paged responses.
  *
  *
- * Uses the `orderBy` property to sort the work orders.
+ * Uses the <b>orderBy</b> property to sort the work orders.
  *
  *
- * Uses the `returnCount` to get the `totalCount` of work orders matching the filter.
+ * Uses the <b>returnCount</b> to get the <b>totalCount</b> of work orders matching the filter.
  *
  *
- * Uses the `projection` to only include the specified fields in the response.
+ * Uses the <b>projection</b> to only include the specified fields in the response.
  *
  * @deprecated
  */
@@ -520,7 +520,7 @@ export const queryWorkOrders = <ThrowOnError extends boolean = false>(options?: 
 /**
  * Deletes work orders
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -541,7 +541,7 @@ export const deleteWorkOrders = <ThrowOnError extends boolean = false>(options?:
 /**
  * Get work orders summary
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -558,7 +558,7 @@ export const getWorkOrdersSummary = <ThrowOnError extends boolean = false>(optio
 /**
  * Gets a work order
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *
@@ -575,7 +575,7 @@ export const getWorkOrder = <ThrowOnError extends boolean = false>(options: Opti
 /**
  * Updates work orders
  *
- * The `/niworkorder` endpoint is deprecated and will be removed in the future. Use the equivalent `/niworkitem` endpoint instead.
+ * The <b>/niworkorder</b> endpoint is deprecated and will be removed in the future. Use the equivalent <b>/niworkitem</b> endpoint instead.
  *
  * ---
  *

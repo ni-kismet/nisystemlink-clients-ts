@@ -79,6 +79,16 @@
       "import": "./dist/client.js",
       "require": "./dist/client.cjs"
     },
+    "./aiassistant": {
+      "types": "./dist/aiassistant.d.ts",
+      "import": "./dist/aiassistant.js",
+      "require": "./dist/aiassistant.cjs"
+    },
+    "./aiassistant/client": {
+      "types": "./dist/aiassistant/client.d.ts",
+      "import": "./dist/aiassistant/client.js",
+      "require": "./dist/aiassistant/client.cjs"
+    },
     "./alarm": {
       "types": "./dist/alarm.d.ts",
       "import": "./dist/alarm.js",
@@ -288,6 +298,16 @@
       "types": "./dist/tags/client.d.ts",
       "import": "./dist/tags/client.js",
       "require": "./dist/tags/client.cjs"
+    },
+    "./tdmreader": {
+      "types": "./dist/tdmreader.d.ts",
+      "import": "./dist/tdmreader.js",
+      "require": "./dist/tdmreader.cjs"
+    },
+    "./tdmreader/client": {
+      "types": "./dist/tdmreader/client.d.ts",
+      "import": "./dist/tdmreader/client.js",
+      "require": "./dist/tdmreader/client.cjs"
     },
     "./test-monitor": {
       "types": "./dist/test-monitor.d.ts",

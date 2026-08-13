@@ -21,7 +21,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Authenticate an API key
  *
- * Validates the provided `x-ni-api-key` and returns information about the
+ * Validates the provided <b>x-ni-api-key</b> and returns information about the
  * authenticated caller, including their user account details, organization,
  * accessible workspaces, and resolved authorization policies.
  *
@@ -123,8 +123,8 @@ export const getPolicies = <ThrowOnError extends boolean = false>(options?: Opti
  * Create a policy
  *
  * Create a new authorization policy. A policy can either contain inline
- * statements or reference a policy template via `templateId`. When using a
- * template, the `statements` field is ignored and the policy automatically
+ * statements or reference a policy template via <b>templateId</b>. When using a
+ * template, the <b>statements</b> field is ignored and the policy automatically
  * synchronizes with the template's statements.
  *
  * This operation is idempotent. If a policy with a matching name and body
@@ -295,9 +295,9 @@ export const deleteSessionKeySelf = <ThrowOnError extends boolean = false>(optio
 /**
  * Get the current user's identity and permissions
  *
- * Authenticates the provided `x-ni-api-key` and returns the caller's user
+ * Authenticates the provided <b>x-ni-api-key</b> and returns the caller's user
  * details, organization, workspaces, and resolved policies including policy
- * template references. Similar to `/auth` but includes additional policy
+ * template references. Similar to <b>/auth</b> but includes additional policy
  * template information.
  *
  */

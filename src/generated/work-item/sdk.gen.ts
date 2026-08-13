@@ -110,19 +110,19 @@ export const createWorkItems = <ThrowOnError extends boolean = false>(options?: 
  * Queries work items with the provided parameters.
  *
  *
- * Uses the dynamic LINQ `filter` and `substitutions` properties to filter the work items.These properties are optional.
+ * Uses the dynamic LINQ <b>filter</b> and <b>substitutions</b> properties to filter the work items.These properties are optional.
  *
  *
- * Uses the `take` and `continuationToken` properties to provide paged responses.
+ * Uses the <b>take</b> and <b>continuationToken</b> properties to provide paged responses.
  *
  *
- * Uses the `orderBy` property to sort the work items.
+ * Uses the <b>orderBy</b> property to sort the work items.
  *
  *
- * Uses the `returnCount` to get the `totalCount` of work items matching the filter.
+ * Uses the <b>returnCount</b> to get the <b>totalCount</b> of work items matching the filter.
  *
  *
- * Uses the `projection` to only include the specified fields in the response.
+ * Uses the <b>projection</b> to only include the specified fields in the response.
  */
 export const queryWorkItems = <ThrowOnError extends boolean = false>(options?: Options<QueryWorkItemsData, ThrowOnError>): RequestResult<QueryWorkItemsResponses, QueryWorkItemsErrors, ThrowOnError> => (options?.client ?? client).post<QueryWorkItemsResponses, QueryWorkItemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -175,8 +175,8 @@ export const deleteWorkItems = <ThrowOnError extends boolean = false>(options?: 
  * Updates work items
  *
  * Updates one or more work items with the provided data.
- * <ol>Note: Only basic work item properties can be updated using this API.
- * To update scheduling related properties such as `plannedStartDateTime`, `plannedEndDateTime` and `plannedDurationInSeconds`, utilize the `schedule-workitems` API.</ol>
+ * <b>Note:</b> Only basic work item properties can be updated using this API.
+ * To update scheduling related properties such as <b>plannedStartDateTime</b>, <b>plannedEndDateTime</b> and <b>plannedDurationInSeconds</b>, utilize the <b>schedule-workitems</b> API.
  */
 export const updateWorkItems = <ThrowOnError extends boolean = false>(options?: Options<UpdateWorkItemsData, ThrowOnError>): RequestResult<UpdateWorkItemsResponses, UpdateWorkItemsErrors, ThrowOnError> => (options?.client ?? client).post<UpdateWorkItemsResponses, UpdateWorkItemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -192,8 +192,8 @@ export const updateWorkItems = <ThrowOnError extends boolean = false>(options?: 
  * Schedule work items
  *
  * Schedule work items with the provided information.
- * <ol>Note: Only scheduling related work item properties can be updated using this API.
- * To update other properties, utilize the `update-workitems` API.</ol>
+ * <b>Note:</b> Only scheduling related work item properties can be updated using this API.
+ * To update other properties, utilize the <b>update-workitems</b> API.
  */
 export const scheduleWorkItems = <ThrowOnError extends boolean = false>(options?: Options<ScheduleWorkItemsData, ThrowOnError>): RequestResult<ScheduleWorkItemsResponses, ScheduleWorkItemsErrors, ThrowOnError> => (options?.client ?? client).post<ScheduleWorkItemsResponses, ScheduleWorkItemsErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -209,8 +209,8 @@ export const scheduleWorkItems = <ThrowOnError extends boolean = false>(options?
  * Executes a work item action
  *
  * Executes the specified action for the work item.
- * <ol>Note: START and END actions will always be enabled, even if the action is not defined on the work item. If no action
- * is defined for START or END, the default action will be MANUAL.</ol>
+ * <b>Note:</b> START and END actions will always be enabled, even if the action is not defined on the work item. If no action
+ * is defined for START or END, the default action will be MANUAL.
  */
 export const executeWorkItem = <ThrowOnError extends boolean = false>(options: Options<ExecuteWorkItemData, ThrowOnError>): RequestResult<ExecuteWorkItemResponses, ExecuteWorkItemErrors, ThrowOnError> => (options.client ?? client).post<ExecuteWorkItemResponses, ExecuteWorkItemErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -243,16 +243,16 @@ export const createWorkItemTemplates = <ThrowOnError extends boolean = false>(op
  * Queries work item templates with the provided parameters.
  *
  *
- * Uses the dynamic LINQ `filter` and `substitutions` properties to filter the work item templates These properties are optional.
+ * Uses the dynamic LINQ <b>filter</b> and <b>substitutions</b> properties to filter the work item templates These properties are optional.
  *
  *
- * Uses the `take` and `continuationToken` properties to provide paged responses.
+ * Uses the <b>take</b> and <b>continuationToken</b> properties to provide paged responses.
  *
  *
- * Uses the `orderBy` property to sort the work item templates.
+ * Uses the <b>orderBy</b> property to sort the work item templates.
  *
  *
- * Uses the `projection` to only include the specified fields in the response.
+ * Uses the <b>projection</b> to only include the specified fields in the response.
  *
  *
  */

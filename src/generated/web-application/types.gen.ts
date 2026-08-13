@@ -13,9 +13,11 @@ export type WebApp = {
      */
     id?: string;
     /**
-     * The webapp type
+     * The kind of webapp, which determines how its content is stored, validated, and rendered.
+     * - <b>DataSpace</b>: a saved data-exploration workspace that captures queries, plots, and statistical analysis of parametric or data-table results.
+     * - <b>WebVI</b>: a multi-file web application packaged as an *.nipkg, typically built with G Web Development Software. This type also covers other JavaScript-based UI applications.
      */
-    type?: 'Dashboard' | 'TileDashboard' | 'DashboardTemplate' | 'WebVI' | 'Visualization' | 'VisualizationTemplate' | 'DataSpace';
+    type?: 'WebVI' | 'DataSpace' | 'MSTRNavigation' | 'MSTRAttributeMapping' | 'Notebook';
     /**
      * The webapp name
      */
@@ -29,15 +31,7 @@ export type WebApp = {
      */
     userId?: string;
     /**
-     * The webapp's sharing option
-     */
-    shared?: 'private' | 'direct' | 'public';
-    /**
-     * List of emails of users to share the webapp with. Applies when "shared" option is "direct"
-     */
-    sharedEmails?: Array<string>;
-    /**
-     * List of policy Ids associated with the webapp, which give it access to the user's resources"
+     * List of policy Ids associated with the webapp, which give it access to the user's resources
      */
     policyIds?: Array<string>;
     /**
@@ -59,9 +53,99 @@ export type WebApp = {
 /**
  * WebApp Content
  *
- * The webapp binary content. Depending on the webapp's type it can be a dashboard, template or *.nipkg file exported from LabVIEW NXG
+ * The webapp content. Depending on the webapp's type this is raw content or a multi-file *.nipkg package built with G Web Development Software (for WebVIs).
  */
 export type WebAppContent = Blob | File;
+
+/**
+ * Create WebApp Request
+ *
+ * The metadata used to create a new webapp.
+ */
+export type CreateWebAppRequest = {
+    /**
+     * The webapp's name
+     */
+    name?: string;
+    /**
+     * The kind of webapp, which determines how its content is stored, validated, and rendered. Defaults to <b>WebVI</b> when omitted.
+     * - <b>DataSpace</b>: a saved data-exploration workspace configuration that captures queries, plots, and statistical analysis of parametric or data-table results.
+     * - <b>WebVI</b>: a multi-file web application packaged as an *.nipkg, typically built with G Web Development Software. This type also covers other JavaScript-based UI applications.
+     */
+    type?: 'WebVI' | 'DataSpace' | 'MSTRNavigation' | 'MSTRAttributeMapping' | 'Notebook';
+    /**
+     * The workspace Id for the webapp. If this is not specified, the webapp will be created in the default workspace.
+     */
+    workspace?: string;
+    /**
+     * List of policy Ids associated with the webapp, which give it access to the user's resources
+     */
+    policyIds?: Array<string>;
+    /**
+     * A map of key value properties associated with the webapp
+     */
+    properties?: {
+        [key: string]: string;
+    };
+};
+
+/**
+ * Update WebApp Request
+ *
+ * The metadata fields to update on an existing webapp.
+ */
+export type UpdateWebAppRequest = {
+    /**
+     * The webapp's name
+     */
+    name?: string;
+    /**
+     * The webapp type. Changing a webapp's type after creation is accepted but should be done with caution: the existing stored content was written for the original type, and changing the type without also replacing the content is likely to produce a broken webapp.
+     */
+    type?: 'WebVI' | 'DataSpace' | 'MSTRNavigation' | 'MSTRAttributeMapping' | 'Notebook';
+    /**
+     * The workspace Id for the webapp. If this is not specified, the webapp will remain in its existing workspace.
+     */
+    workspace?: string;
+    /**
+     * List of policy Ids associated with the webapp, which give it access to the user's resources
+     */
+    policyIds?: Array<string>;
+    /**
+     * A map of key value properties associated with the webapp
+     */
+    properties?: {
+        [key: string]: string;
+    };
+};
+
+/**
+ * Import WebApp Metadata Request
+ *
+ * A list of webapp metadata to import.
+ */
+export type ImportWebAppsRequest = {
+    /**
+     * List of webapps to import
+     */
+    webapps?: Array<WebApp>;
+};
+
+/**
+ * Duplicate WebApp Request
+ *
+ * The metadata for the new webapp created by duplicating an existing webapp.
+ */
+export type DuplicateWebAppRequest = {
+    /**
+     * The name of the new webapp created during the duplication
+     */
+    name?: string;
+    /**
+     * The Id of the workspace in which to create the new webapp. If no workspace is specified, the new webapp will be put in the default workspace.
+     */
+    workspace?: string;
+};
 
 /**
  * Advanced Query Object for WebApps
@@ -91,7 +175,6 @@ export type WebAppsAdvancedQuery = {
      * - properties.embedLocation
      * - properties.interface
      * - properties.dataSource
-     * - shared
      * - type
      * - workspace
      * - userId
@@ -141,6 +224,36 @@ export type Error = {
 };
 
 /**
+ * V1 Operations
+ *
+ * The supported operations for this version of the API.
+ */
+export type V1Operations = {
+    /**
+     * The supported operations for this endpoint, keyed by operation name.
+     */
+    operations: {
+        [key: string]: OperationAvailability;
+    };
+};
+
+/**
+ * Operation Availability
+ *
+ * Defines the availability and version of a given operation.
+ */
+export type OperationAvailability = {
+    /**
+     * Whether the endpoint is available.
+     */
+    available: boolean;
+    /**
+     * The supported API version for this endpoint.
+     */
+    version: number;
+};
+
+/**
  * The webapp identifier
  */
 export type WebAppId = string;
@@ -164,13 +277,17 @@ export type DeleteWebappData = {
 
 export type DeleteWebappErrors = {
     /**
-     * API Key is missing or invalid
+     * Unauthorized
      */
-    401: unknown;
+    401: string;
     /**
-     * The resource was not found.
+     * ErrorResponse
+     *
+     * Error response
      */
-    404: unknown;
+    404: {
+        error?: Error;
+    };
     /**
      * ErrorResponse
      *
@@ -185,10 +302,12 @@ export type DeleteWebappError = DeleteWebappErrors[keyof DeleteWebappErrors];
 
 export type DeleteWebappResponses = {
     /**
-     * Success
+     * The webapp metadata and content were deleted successfully.
      */
-    200: unknown;
+    204: void;
 };
+
+export type DeleteWebappResponse = DeleteWebappResponses[keyof DeleteWebappResponses];
 
 export type GetWebappData = {
     body?: never;
@@ -204,13 +323,17 @@ export type GetWebappData = {
 
 export type GetWebappErrors = {
     /**
-     * API Key is missing or invalid
+     * Unauthorized
      */
-    401: unknown;
+    401: string;
     /**
-     * The resource was not found.
+     * ErrorResponse
+     *
+     * Error response
      */
-    404: unknown;
+    404: {
+        error?: Error;
+    };
     /**
      * ErrorResponse
      *
@@ -225,7 +348,7 @@ export type GetWebappError = GetWebappErrors[keyof GetWebappErrors];
 
 export type GetWebappResponses = {
     /**
-     * Get WebApp Response
+     * OK
      */
     200: WebApp;
 };
@@ -235,29 +358,8 @@ export type GetWebappResponse = GetWebappResponses[keyof GetWebappResponses];
 export type UpdateWebappData = {
     /**
      * Update WebApp Request
-     *
-     * Update WebApp Request
      */
-    body?: {
-        /**
-         * The webapp's name
-         */
-        name?: string;
-        /**
-         * The workspace Id for the webapp. If this is not specified, the webapp will remain in its existing workspace.
-         */
-        workspace?: string;
-        /**
-         * List of policy Ids associated with the webapp, which give it access to the user's resources"
-         */
-        policyIds?: Array<string>;
-        /**
-         * A map of key value properties associated with the webapp
-         */
-        properties?: {
-            [key: string]: string;
-        };
-    };
+    body?: UpdateWebAppRequest;
     path: {
         /**
          * The webapp identifier
@@ -270,17 +372,25 @@ export type UpdateWebappData = {
 
 export type UpdateWebappErrors = {
     /**
-     * Invalid input data
+     * ErrorResponse
+     *
+     * Error response
      */
-    400: unknown;
+    400: {
+        error?: Error;
+    };
     /**
-     * API Key is missing or invalid
+     * Unauthorized
      */
-    401: unknown;
+    401: string;
     /**
-     * The resource was not found.
+     * ErrorResponse
+     *
+     * Error response
      */
-    404: unknown;
+    404: {
+        error?: Error;
+    };
     /**
      * ErrorResponse
      *
@@ -295,7 +405,7 @@ export type UpdateWebappError = UpdateWebappErrors[keyof UpdateWebappErrors];
 
 export type UpdateWebappResponses = {
     /**
-     * Update WebApp Response
+     * OK
      */
     200: WebApp;
 };
@@ -311,9 +421,9 @@ export type ListWebappsData = {
          */
         name?: string;
         /**
-         * Filters the webapps by type
+         * Filters the webapps to a single type, such as DataSpace, WebVI, MSTRNavigation, MSTRAttributeMapping, or Notebook.
          */
-        type?: 'Dashboard' | 'DashboardTemplate' | 'WebVI';
+        type?: 'WebVI' | 'DataSpace' | 'MSTRNavigation' | 'MSTRAttributeMapping' | 'Notebook';
         /**
          * Filters the webapps by the user Id of the owner
          */
@@ -340,13 +450,17 @@ export type ListWebappsData = {
 
 export type ListWebappsErrors = {
     /**
-     * Invalid input data
+     * ErrorResponse
+     *
+     * Error response
      */
-    400: unknown;
+    400: {
+        error?: Error;
+    };
     /**
-     * API Key is missing or invalid
+     * Unauthorized
      */
-    401: unknown;
+    401: string;
     /**
      * ErrorResponse
      *
@@ -363,7 +477,7 @@ export type ListWebappsResponses = {
     /**
      * List WebApps Response
      *
-     * List WebApps Response
+     * OK
      */
     200: {
         /**
@@ -386,29 +500,8 @@ export type ListWebappsResponse = ListWebappsResponses[keyof ListWebappsResponse
 export type CreateWebappData = {
     /**
      * Create WebApp Request
-     *
-     * Create WebApp Request
      */
-    body?: {
-        /**
-         * The webapp's name
-         */
-        name?: string;
-        /**
-         * The workspace Id for the webapp. If this is not specified, the webapp will be created in the default workspace.
-         */
-        workspace?: string;
-        /**
-         * List of policy Ids associated with the webapp, which give it access to the user's resources"
-         */
-        policyIds?: Array<string>;
-        /**
-         * A map of key value properties associated with the webapp
-         */
-        properties?: {
-            [key: string]: string;
-        };
-    };
+    body?: CreateWebAppRequest;
     path?: never;
     query?: never;
     url: '/webapps';
@@ -416,9 +509,17 @@ export type CreateWebappData = {
 
 export type CreateWebappErrors = {
     /**
-     * API Key is missing or invalid
+     * ErrorResponse
+     *
+     * Error response
      */
-    401: unknown;
+    400: {
+        error?: Error;
+    };
+    /**
+     * Unauthorized
+     */
+    401: string;
     /**
      * ErrorResponse
      *
@@ -433,9 +534,9 @@ export type CreateWebappError = CreateWebappErrors[keyof CreateWebappErrors];
 
 export type CreateWebappResponses = {
     /**
-     * Create WebApp Response
+     * OK
      */
-    200: WebApp;
+    201: WebApp;
 };
 
 export type CreateWebappResponse = CreateWebappResponses[keyof CreateWebappResponses];
@@ -457,13 +558,17 @@ export type QueryData = {
 
 export type QueryErrors = {
     /**
-     * Invalid input data
+     * ErrorResponse
+     *
+     * Error response
      */
-    400: unknown;
+    400: {
+        error?: Error;
+    };
     /**
-     * API Key is missing or invalid
+     * Unauthorized
      */
-    401: unknown;
+    401: string;
     /**
      * ErrorResponse
      *
@@ -480,7 +585,7 @@ export type QueryResponses = {
     /**
      * List WebApps Response
      *
-     * List WebApps Response
+     * OK
      */
     200: {
         /**
@@ -500,113 +605,11 @@ export type QueryResponses = {
 
 export type QueryResponse = QueryResponses[keyof QueryResponses];
 
-export type UpdateWebappSharingData = {
-    /**
-     * Update WebApp Sharing Request
-     *
-     * Update WebApp Sharing Request
-     */
-    body?: {
-        /**
-         * The webapp's sharing option
-         */
-        shared?: 'private' | 'direct' | 'public';
-        /**
-         * List of emails of users to share the webapp with. Applies when "shared" option is "direct"
-         */
-        sharedEmails?: Array<string>;
-    };
-    path: {
-        /**
-         * The webapp identifier
-         */
-        id: string;
-    };
-    query?: never;
-    url: '/webapps/{id}/sharing';
-};
-
-export type UpdateWebappSharingErrors = {
-    /**
-     * Invalid input data
-     */
-    400: unknown;
-    /**
-     * API Key is missing or invalid
-     */
-    401: unknown;
-    /**
-     * The resource was not found.
-     */
-    404: unknown;
-    /**
-     * ErrorResponse
-     *
-     * Error response
-     */
-    default: {
-        error?: Error;
-    };
-};
-
-export type UpdateWebappSharingError = UpdateWebappSharingErrors[keyof UpdateWebappSharingErrors];
-
-export type UpdateWebappSharingResponses = {
-    /**
-     * Update WebApp Sharing Response
-     */
-    200: WebApp;
-};
-
-export type UpdateWebappSharingResponse = UpdateWebappSharingResponses[keyof UpdateWebappSharingResponses];
-
-export type ListSharedEmailsData = {
-    body?: never;
-    path?: never;
-    query?: never;
-    url: '/webapps/shared-emails';
-};
-
-export type ListSharedEmailsErrors = {
-    /**
-     * API Key is missing or invalid
-     */
-    401: unknown;
-    /**
-     * ErrorResponse
-     *
-     * Error response
-     */
-    default: {
-        error?: Error;
-    };
-};
-
-export type ListSharedEmailsError = ListSharedEmailsErrors[keyof ListSharedEmailsErrors];
-
-export type ListSharedEmailsResponses = {
-    /**
-     * Shared Emails Response
-     *
-     * Shared Emails Response
-     */
-    200: Array<string>;
-};
-
-export type ListSharedEmailsResponse = ListSharedEmailsResponses[keyof ListSharedEmailsResponses];
-
 export type ImportWebappsData = {
     /**
      * Import WebApp Metadata Request
-     *
-     * Import WebApp Metadata Request
      */
-    body?: {
-        /**
-         * List of webapps to import
-         */
-        webapps?: Array<WebApp>;
-    };
+    body?: ImportWebAppsRequest;
     path?: never;
     query?: never;
     url: '/webapps/import';
@@ -614,9 +617,17 @@ export type ImportWebappsData = {
 
 export type ImportWebappsErrors = {
     /**
-     * API Key is missing or invalid
+     * ErrorResponse
+     *
+     * Error response
      */
-    401: unknown;
+    400: {
+        error?: Error;
+    };
+    /**
+     * Unauthorized
+     */
+    401: string;
     /**
      * ErrorResponse
      *
@@ -633,13 +644,18 @@ export type ImportWebappsResponses = {
     /**
      * Import WebApps Response
      *
-     * Import WebApps Response
+     * OK
      */
     200: {
         /**
-         * List of webapps that were imported
+         * The webapps that were successfully imported.
          */
         webapps?: Array<WebApp>;
+        /**
+         * The input records that could not be imported. Present on every response (empty array when all records succeeded).
+         */
+        failures?: Array<WebApp>;
+        error?: Error;
     };
 };
 
@@ -659,13 +675,17 @@ export type GetContentIndexData = {
 
 export type GetContentIndexErrors = {
     /**
-     * API Key is missing or invalid
+     * Unauthorized
      */
-    401: unknown;
+    401: string;
     /**
-     * The resource was not found.
+     * ErrorResponse
+     *
+     * Error response
      */
-    404: unknown;
+    404: {
+        error?: Error;
+    };
     /**
      * ErrorResponse
      *
@@ -680,14 +700,16 @@ export type GetContentIndexError = GetContentIndexErrors[keyof GetContentIndexEr
 
 export type GetContentIndexResponses = {
     /**
-     * The webapp's content. JSON for Dashboards, HTML for WebVIs
+     * The rendered webapp content, streamed as the response body with the webapp's own content type. WebVIs instead respond with a redirect to the app's main HTML file.
      */
-    200: unknown;
+    200: WebAppContent;
 };
+
+export type GetContentIndexResponse = GetContentIndexResponses[keyof GetContentIndexResponses];
 
 export type UpdateContentData = {
     /**
-     * The webapp content to upload
+     * The raw webapp content to upload, sent as the request body. Depending on the webapp's type this is an *.nipkg package, or raw JSON or HTML content.
      */
     body: WebAppContent;
     path: {
@@ -702,17 +724,25 @@ export type UpdateContentData = {
 
 export type UpdateContentErrors = {
     /**
-     * Invalid input data
+     * ErrorResponse
+     *
+     * Error response
      */
-    400: unknown;
+    400: {
+        error?: Error;
+    };
     /**
-     * API Key is missing or invalid
+     * Unauthorized
      */
-    401: unknown;
+    401: string;
     /**
-     * The resource was not found.
+     * ErrorResponse
+     *
+     * Error response
      */
-    404: unknown;
+    404: {
+        error?: Error;
+    };
     /**
      * ErrorResponse
      *
@@ -727,10 +757,115 @@ export type UpdateContentError = UpdateContentErrors[keyof UpdateContentErrors];
 
 export type UpdateContentResponses = {
     /**
-     * Success
+     * The content was uploaded successfully.
      */
-    200: unknown;
+    204: void;
 };
+
+export type UpdateContentResponse = UpdateContentResponses[keyof UpdateContentResponses];
+
+export type GetContentNipkgData = {
+    body?: never;
+    path: {
+        /**
+         * The webapp identifier
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/webapps/{id}/content/nipkg';
+};
+
+export type GetContentNipkgErrors = {
+    /**
+     * Unauthorized
+     */
+    401: string;
+    /**
+     * ErrorResponse
+     *
+     * Error response
+     */
+    404: {
+        error?: Error;
+    };
+    /**
+     * ErrorResponse
+     *
+     * Error response
+     */
+    default: {
+        error?: Error;
+    };
+};
+
+export type GetContentNipkgError = GetContentNipkgErrors[keyof GetContentNipkgErrors];
+
+export type GetContentNipkgResponses = {
+    /**
+     * The webapp packaged as a single gzip-compressed *.nipkg archive, streamed as the response body.
+     */
+    200: WebAppContent;
+};
+
+export type GetContentNipkgResponse = GetContentNipkgResponses[keyof GetContentNipkgResponses];
+
+export type UpdateContentNipkgData = {
+    /**
+     * The raw webapp content to upload, sent as the request body. Depending on the webapp's type this is an *.nipkg package, or raw JSON or HTML content.
+     */
+    body: WebAppContent;
+    path: {
+        /**
+         * The webapp identifier
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/webapps/{id}/content/nipkg';
+};
+
+export type UpdateContentNipkgErrors = {
+    /**
+     * ErrorResponse
+     *
+     * Error response
+     */
+    400: {
+        error?: Error;
+    };
+    /**
+     * Unauthorized
+     */
+    401: string;
+    /**
+     * ErrorResponse
+     *
+     * Error response
+     */
+    404: {
+        error?: Error;
+    };
+    /**
+     * ErrorResponse
+     *
+     * Error response
+     */
+    default: {
+        error?: Error;
+    };
+};
+
+export type UpdateContentNipkgError = UpdateContentNipkgErrors[keyof UpdateContentNipkgErrors];
+
+export type UpdateContentNipkgResponses = {
+    /**
+     * The content was uploaded successfully.
+     */
+    204: void;
+};
+
+export type UpdateContentNipkgResponse = UpdateContentNipkgResponses[keyof UpdateContentNipkgResponses];
 
 export type GetContentData = {
     body?: never;
@@ -750,13 +885,17 @@ export type GetContentData = {
 
 export type GetContentErrors = {
     /**
-     * API Key is missing or invalid
+     * Unauthorized
      */
-    401: unknown;
+    401: string;
     /**
-     * The resource was not found.
+     * ErrorResponse
+     *
+     * Error response
      */
-    404: unknown;
+    404: {
+        error?: Error;
+    };
     /**
      * ErrorResponse
      *
@@ -771,27 +910,18 @@ export type GetContentError = GetContentErrors[keyof GetContentErrors];
 
 export type GetContentResponses = {
     /**
-     * The webapp binary content. Depending on the webapp's type it can be a dashboard, template or *.nipkg file exported from LabVIEW NXG
+     * The file at the requested path, streamed as the response body with the file's own content type.
      */
-    200: unknown;
+    200: WebAppContent;
 };
+
+export type GetContentResponse = GetContentResponses[keyof GetContentResponses];
 
 export type DuplicateWebappData = {
     /**
      * Duplicate WebApp Request
-     *
-     * Duplicate WebApp Request
      */
-    body?: {
-        /**
-         * The name of the new webapp created during the duplication
-         */
-        name?: string;
-        /**
-         * The Id of the workspace in which to create the new webapp. If no workspace is specified, the new webapp will be put in the default workspace.
-         */
-        workspace?: string;
-    };
+    body?: DuplicateWebAppRequest;
     path: {
         /**
          * The Id of the source webapp to copy content from
@@ -804,13 +934,25 @@ export type DuplicateWebappData = {
 
 export type DuplicateWebappErrors = {
     /**
-     * API Key is missing or invalid
+     * ErrorResponse
+     *
+     * Error response
      */
-    401: unknown;
+    400: {
+        error?: Error;
+    };
     /**
-     * The resource was not found.
+     * Unauthorized
      */
-    404: unknown;
+    401: string;
+    /**
+     * ErrorResponse
+     *
+     * Error response
+     */
+    404: {
+        error?: Error;
+    };
     /**
      * ErrorResponse
      *
@@ -825,7 +967,7 @@ export type DuplicateWebappError = DuplicateWebappErrors[keyof DuplicateWebappEr
 
 export type DuplicateWebappResponses = {
     /**
-     * Create WebApp Response
+     * OK
      */
     200: WebApp;
 };
@@ -845,18 +987,22 @@ export type DuplicateContentData = {
         sourceId: string;
     };
     query?: never;
-    url: '/webapps/{id}/duplicate/{sourceId}';
+    url: '/webapps/{id}/content/duplicate/{sourceId}';
 };
 
 export type DuplicateContentErrors = {
     /**
-     * API Key is missing or invalid
+     * Unauthorized
      */
-    401: unknown;
+    401: string;
     /**
-     * The resource was not found.
+     * ErrorResponse
+     *
+     * Error response
      */
-    404: unknown;
+    404: {
+        error?: Error;
+    };
     /**
      * ErrorResponse
      *
@@ -871,7 +1017,38 @@ export type DuplicateContentError = DuplicateContentErrors[keyof DuplicateConten
 
 export type DuplicateContentResponses = {
     /**
-     * Success
+     * The content was duplicated successfully.
      */
-    200: unknown;
+    204: void;
 };
+
+export type DuplicateContentResponse = DuplicateContentResponses[keyof DuplicateContentResponses];
+
+export type GetServiceV1VersionInfoData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/';
+};
+
+export type GetServiceV1VersionInfoErrors = {
+    /**
+     * ErrorResponse
+     *
+     * Error response
+     */
+    default: {
+        error?: Error;
+    };
+};
+
+export type GetServiceV1VersionInfoError = GetServiceV1VersionInfoErrors[keyof GetServiceV1VersionInfoErrors];
+
+export type GetServiceV1VersionInfoResponses = {
+    /**
+     * OK
+     */
+    200: V1Operations;
+};
+
+export type GetServiceV1VersionInfoResponse = GetServiceV1VersionInfoResponses[keyof GetServiceV1VersionInfoResponses];
