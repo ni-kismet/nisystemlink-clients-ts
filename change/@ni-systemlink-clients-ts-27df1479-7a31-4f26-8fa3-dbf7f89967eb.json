@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Regenerate clients from updated OpenAPI specs. Add tdmreader and aiassistent clients.",
+  "packageName": "@ni/systemlink-clients-ts",
+  "email": "1458528+fredvisser@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
