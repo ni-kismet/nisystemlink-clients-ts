@@ -61,9 +61,9 @@ export type CreateTestPlanRequest = {
      */
     name?: string | null;
     /**
-     * State of the work order.
+     * State of the test plan.
      */
-    state?: string | null;
+    state?: 'NEW' | 'DEFINED' | 'REVIEWED' | 'SCHEDULED' | 'IN_PROGRESS' | 'PENDING_APPROVAL' | 'CLOSED' | 'CANCELED';
     /**
      * ID of the test plan template used to create this test plan.
      */
@@ -1666,9 +1666,9 @@ export type UpdateTestPlanRequest = {
      */
     name?: string | null;
     /**
-     * State of the work order.
+     * State of the test plan.
      */
-    state?: string | null;
+    state?: 'NEW' | 'DEFINED' | 'REVIEWED' | 'SCHEDULED' | 'IN_PROGRESS' | 'PENDING_APPROVAL' | 'CLOSED' | 'CANCELED';
     /**
      * Description of the test plan.
      */
@@ -1903,7 +1903,7 @@ export type UpdateWorkOrderRequest = {
     /**
      * State of the work order.
      */
-    state?: string | null;
+    state?: 'NEW' | 'DEFINED' | 'REVIEWED' | 'SCHEDULED' | 'IN_PROGRESS' | 'PENDING_APPROVAL' | 'CLOSED' | 'CANCELED';
     /**
      * Description of the work order.
      */

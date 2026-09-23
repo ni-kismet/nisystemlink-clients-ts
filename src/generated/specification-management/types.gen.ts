@@ -326,11 +326,11 @@ export type QuerySpecificationsRequest = {
      * Specifies the fields to include in the returned specifications. Fields you do not specify are
      * excluded. Returns all fields if no value is specified.
      */
-    projection?: Array<'ID' | 'PRODUCT_ID' | 'SPEC_ID' | 'NAME' | 'CATEGORY' | 'TYPE' | 'SYMBOL' | 'BLOCK' | 'LIMIT' | 'UNIT' | 'CONDITION_NAME' | 'CONDITION_VALUES' | 'CONDITION_UNIT' | 'CONDITION_TYPE' | 'KEYWORDS' | 'PROPERTIES' | 'WORKSPACE' | 'CREATED_AT' | 'CREATED_BY'> | null;
+    projection?: Array<'ID' | 'PRODUCT_ID' | 'SPEC_ID' | 'NAME' | 'CATEGORY' | 'TYPE' | 'SYMBOL' | 'BLOCK' | 'LIMIT' | 'UNIT' | 'CONDITION_NAME' | 'CONDITION_VALUES' | 'CONDITION_UNIT' | 'CONDITION_TYPE' | 'KEYWORDS' | 'PROPERTIES' | 'WORKSPACE' | 'CREATED_AT' | 'CREATED_BY' | 'UPDATED_AT'> | null;
     /**
      * Specifies the field to use to sort specifications. By default, specifications are sorted by <b>ID</b>.
      */
-    orderBy?: 'ID' | 'SPEC_ID';
+    orderBy?: 'ID' | 'SPEC_ID' | 'UPDATED_AT';
     /**
      * Specifies whether to return the specifications in descending order. By default, this value is <b>false</b> and specifications are sorted in ascending order.
      */
