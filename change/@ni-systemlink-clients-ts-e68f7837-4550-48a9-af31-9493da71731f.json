@@ -1,7 +1,0 @@
-{
-  "type": "major",
-  "comment": "Assistant tool results now use a required state enum instead of approved and expose approval/error/timing metadata. Work Item and Work Order state inputs are narrowed to documented states. Work Item adds resource filter-language selection; Test Monitor distinct-value queries add take; Specification Management adds UPDATED_AT projection and ordering.",
-  "packageName": "@ni/systemlink-clients-ts",
-  "email": "1458528+fredvisser@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
