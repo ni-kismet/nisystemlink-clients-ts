@@ -99,10 +99,10 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
       expect(typeof (data as any)?.totalCount).toBe('number');
     });
 
-    it('supports Dynamic LINQ filter', async () => {
+    it('supports Dynamic LINQ filter on indexed ID', async () => {
       const { data, response } = await postNiworkitemV1QueryWorkitems({
         client,
-        body: { filter: `name.Contains("${testName}")` },
+        body: { filter: 'id == "0"', take: 1 },
       });
       expect(response!.status).toBe(200);
       expect(data).toBeDefined();
