@@ -973,6 +973,10 @@ export type ProductValuesQuery = {
      * Only return string values prefixed by this value (case sensitive).
      */
     startsWith?: string;
+    /**
+     * The maximum number of distinct values to return. The default is 1000. The default maximum is 100000 and is configurable with the requestTakeLimit Helm value.
+     */
+    take?: number;
 };
 
 /**
@@ -991,6 +995,10 @@ export type ResultValuesQuery = {
      * Only return string values prefixed by this value (case sensitive).
      */
     startsWith?: string;
+    /**
+     * The maximum number of distinct values to return. The default is 1000. The default maximum is 100000 and is configurable with the requestTakeLimit Helm value.
+     */
+    take?: number;
 };
 
 /**
@@ -1009,6 +1017,10 @@ export type StepValuesQuery = {
      * Only return string values prefixed by this value (case sensitive).
      */
     startsWith?: string;
+    /**
+     * The maximum number of distinct values to return. The default is 1000. The default maximum is 100000 and is configurable with the requestTakeLimit Helm value.
+     */
+    take?: number;
 };
 
 /**

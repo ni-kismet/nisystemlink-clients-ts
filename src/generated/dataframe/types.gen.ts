@@ -7,8 +7,8 @@ export type ClientOptions = {
 /**
  * Append Table Data Request
  *
- * Contains the rows to append and optional flags. The `frame` property is
- * required unless `endOfData` is true.
+ * Contains the rows to append and optional flags. The <b>frame</b> property is
+ * required unless <b>endOfData</b> is true.
  */
 export type AppendTableDataRequest = {
     /**
@@ -83,7 +83,7 @@ export type ColumnMetadataPatch = {
     name: string;
     /**
      * The properties to modify. A map of key value properties containing the metadata to be added or
-     * modified. Set a property value to `null` to delete that property.
+     * modified. Set a property value to <b>null</b> to delete that property.
      */
     properties: {
         [key: string]: string | null;
@@ -124,10 +124,10 @@ export type CreateTableColumn = {
      * - NORMAL: The column has no special properties. This is the default behavior.
      *
      * - INDEX: The column provides a unique value per row. Each table must provide exactly one INDEX column.
-     * The column's `dataType` must be `INT32`, `INT64`, or `TIMESTAMP`.
+     * The column's <b>dataType</b> must be <b>INT32</b>, <b>INT64</b>, or <b>TIMESTAMP</b>.
      *
-     * - NULLABLE: Rows may contain `null` values for this column. When appending rows, NULLABLE columns may be left out entirely,
-     * in which case all rows being appended will use `null` values for that column.
+     * - NULLABLE: Rows may contain <b>null</b> values for this column. When appending rows, NULLABLE columns may be left out entirely,
+     * in which case all rows being appended will use <b>null</b> values for that column.
      */
     columnType?: 'NORMAL' | 'INDEX' | 'NULLABLE';
     /**
@@ -141,11 +141,11 @@ export type CreateTableColumn = {
 /**
  * Create Table Request
  *
- * The tables's column definitions and metadata. Exactly one column must have a `columnType` of `INDEX`.
+ * The tables's column definitions and metadata. Exactly one column must have a <b>columnType</b> of <b>INDEX</b>.
  */
 export type CreateTableRequest = {
     /**
-     * The tables's column definitions. Exactly one column must have a `columnType` of `INDEX`.
+     * The tables's column definitions. Exactly one column must have a <b>columnType</b> of <b>INDEX</b>.
      */
     columns: Array<CreateTableColumn>;
     /**
@@ -160,7 +160,7 @@ export type CreateTableRequest = {
     } | null;
     /**
      * The ID of the test result associated with the table. A null or empty string indicates
-     * there is no associated test result. Added in version 2 of the `createTables` operation.
+     * there is no associated test result. Added in version 2 of the <b>createTables</b> operation.
      */
     testResultId?: string | null;
     /**
@@ -184,10 +184,10 @@ export type CreatedResponse = {
 /**
  * Data Frame
  *
- * Data read from or to be written to a table. Values may be `null` (if the column is of type
- * `NULLABLE`) or encoded as a string in a format according to each column's datatype:
+ * Data read from or to be written to a table. Values may be <b>null</b> (if the column is of type
+ * <b>NULLABLE</b>) or encoded as a string in a format according to each column's datatype:
  *
- * - BOOL: One of `"true"` or `"false"`, case-insensitive.
+ * - BOOL: One of <b>"true"</b> or <b>"false"</b>, case-insensitive.
  *
  * - INT32: Any integer number in the range [-2147483648, 2147483647], surrounded by quotes.
  *
@@ -197,33 +197,33 @@ export type CreatedResponse = {
  * notation, in the range [-3.40282347E+38, 3.40282347E+38], surrounded by quotes. Not all values
  * within the range can be represented with 32 bits. To preserve the exact binary encoding of
  * the value when converting to a string, clients should serialize 9 digits after the decimal.
- * Instead of a number, the value may be `"NaN"` (not a number), `"Infinity"` (positive infinity),
- * or `"-Infinity"` (negative infinity), case-sensitive.
+ * Instead of a number, the value may be <b>"NaN"</b> (not a number), <b>"Infinity"</b> (positive infinity),
+ * or <b>"-Infinity"</b> (negative infinity), case-sensitive.
  *
  * - FLOAT64: A decimal number using a period for the decimal point, optionally in scientific
  * notation, in the range [-1.7976931348623157E+308, 1.7976931348623157E+308], surrounded by quotes.
  * Not all values within the range can be represented with 64 bits. To preserve the exact binary
  * encoding of the value when converting to a string, clients should serialize 17 digits after the
- * decimal. Instead of a number, the value may be `"NaN"` (not a number), `"Infinity"` (positive
- * infinity), or `"-Infinity"` (negative infinity), case-sensitive.
+ * decimal. Instead of a number, the value may be <b>"NaN"</b> (not a number), <b>"Infinity"</b> (positive
+ * infinity), or <b>"-Infinity"</b> (negative infinity), case-sensitive.
  *
  * - STRING: Any quoted string, escaped as required by JSON.
  *
  * - TIMESTAMP: A date and time with millisecond precision in ISO-8601 format and time zone.
- * For example: `"2022-08-19T16:17:30.123Z"`. If a time zone is not provided, UTC is assumed.
+ * For example: <b>"2022-08-19T16:17:30.123Z"</b>. If a time zone is not provided, UTC is assumed.
  * If a time zone other than UTC is provided, the value will be converted to UTC. If more than
  * three digits of fractional seconds are provided, the time will be truncated to three digits
  * (i.e. milliseconds).
  *
- * The format is the same as a serialized Pandas DataFrame with `orient="split"` and `index=False`.
+ * The format is the same as a serialized Pandas DataFrame with <b>orient="split"</b> and <b>index=False</b>.
  * See https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_json.html.
  *
  * When providing a DataFrame for appending rows, any of the table's columns not
- * specified `columns` will receive a value of `null`. If any such columns aren't
- * nullable, an error will be returned. If the entire `columns` property is left
+ * specified <b>columns</b> will receive a value of <b>null</b>. If any such columns aren't
+ * nullable, an error will be returned. If the entire <b>columns</b> property is left
  * out, each row is assumed to contain all columns in the order specified when the
- * table was created. When specified, the `columns` property must appear in the JSON
- * before the `data` property.
+ * table was created. When specified, the <b>columns</b> property must appear in the JSON
+ * before the <b>data</b> property.
  */
 export type DataFrame = {
     /**
@@ -246,7 +246,7 @@ export type DataFrameQueryResponse = {
     /**
      * Data Frame
      *
-     * The `DataFrame` with the data to return in the query response.
+     * The <b>DataFrame</b> with the data to return in the query response.
      */
     frame: DataFrame;
     /**
@@ -272,7 +272,7 @@ export type DecimatedDataFrameQueryResponse = {
     /**
      * Data Frame
      *
-     * The `DataFrame` with the decimated data to return in the query response.
+     * The <b>DataFrame</b> with the decimated data to return in the query response.
      */
     frame: DataFrame;
 };
@@ -357,10 +357,10 @@ export type HttpColumn = {
      * - NORMAL: The column has no special properties. This is the default behavior.
      *
      * - INDEX: The column provides a unique value per row. Each table must provide exactly one INDEX column.
-     * The column's `dataType` must be `INT32`, `INT64`, or `TIMESTAMP`.
+     * The column's <b>dataType</b> must be <b>INT32</b>, <b>INT64</b>, or <b>TIMESTAMP</b>.
      *
-     * - NULLABLE: Rows may contain `null` values for this column. When appending rows, NULLABLE columns may be left out entirely,
-     * in which case all rows being appended will use `null` values for that column.
+     * - NULLABLE: Rows may contain <b>null</b> values for this column. When appending rows, NULLABLE columns may be left out entirely,
+     * in which case all rows being appended will use <b>null</b> values for that column.
      */
     columnType?: 'NORMAL' | 'INDEX' | 'NULLABLE';
     /**
@@ -411,8 +411,8 @@ export type HttpError = {
  * Table Metadata
  *
  * Contains information about a table, including its properties and column definitions. Each
- * table must provide exactly one column with `columnType` of `INDEX`. All fields except
- * `columnCount` and `testResultId` are required, unless a projection is specified in the
+ * table must provide exactly one column with <b>columnType</b> of <b>INDEX</b>. All fields except
+ * <b>columnCount</b> and <b>testResultId</b> are required, unless a projection is specified in the
  * request.
  */
 export type HttpTableMetadata = {
@@ -422,7 +422,7 @@ export type HttpTableMetadata = {
     id: string;
     /**
      * The number of columns in the table. This field is only present when a projection
-     * containing `COLUMN_COUNT` is specified in the request.
+     * containing <b>COLUMN_COUNT</b> is specified in the request.
      */
     columnCount?: number;
     /**
@@ -461,13 +461,13 @@ export type HttpTableMetadata = {
      */
     rowsModifiedAt?: string;
     /**
-     * Whether the table supports appending additional rows of data. Clients may pass an `endOfData`
+     * Whether the table supports appending additional rows of data. Clients may pass an <b>endOfData</b>
      * flag when appending rows to mark all data received.
      */
     supportsAppend?: boolean;
     /**
      * The ID of the test result associated with the table. Responses do not include this
-     * field when there is no associated test result. Added in version 2 of the `listTables`
+     * field when there is no associated test result. Added in version 2 of the <b>listTables</b>
      * operation.
      */
     testResultId?: string | null;
@@ -505,29 +505,29 @@ export type ListTablesResponse = {
 export type ModifyTableRequest = {
     /**
      * When specified, this is an integer that must match the last known revision number of the table,
-     * incremented by one. If it doesn't match the current `metadataRevision` incremented by one at the
+     * incremented by one. If it doesn't match the current <b>metadataRevision</b> incremented by one at the
      * time of execution, the modify request will be rejected with a 409 Conflict. This is used to
      * ensure that changes to this table's metadata are based on a known, previous state.
      */
     metadataRevision?: number;
     /**
-     * The new name of the table. Set to `null` to reset the name to the table's ID.
+     * The new name of the table. Set to <b>null</b> to reset the name to the table's ID.
      */
     name?: string | null;
     /**
-     * The new test result ID associated with the table. Set to `null` or an empty string to
-     * remove the test result ID. Added in version 2 of the `modifyMetadata` operation.
+     * The new test result ID associated with the table. Set to <b>null</b> or an empty string to
+     * remove the test result ID. Added in version 2 of the <b>modifyMetadata</b> operation.
      */
     testResultId?: string | null;
     /**
-     * The new workspace for the table. Set to `null` to reset to the default workspace.
+     * The new workspace for the table. Set to <b>null</b> to reset to the default workspace.
      * Changing the workspace requires permission to delete the table in its current workspace
      * and permission to create the table in its new workspace.
      */
     workspace?: string | null;
     /**
      * The properties to modify. A map of key value properties containing the metadata to be added or
-     * modified. Set a property value to `null` to delete that property.
+     * modified. Set a property value to <b>null</b> to delete that property.
      */
     properties?: {
         [key: string]: string | null;
@@ -570,14 +570,14 @@ export type ModifyTablesRequest = {
      */
     tables: Array<TableMetadataModification>;
     /**
-     * When `true`, existing properties are replaced instead of merged.
+     * When <b>true</b>, existing properties are replaced instead of merged.
      */
     replace?: boolean;
 };
 
 /**
  * An operation provided by the API. Each route functionality is covered by an operation.
- * As new functionality is added to an operation, the `version` is incremented.
+ * As new functionality is added to an operation, the <b>version</b> is incremented.
  */
 export type Operation = {
     /**
@@ -601,90 +601,90 @@ export type QueryTablesRequest = {
      * Allowed properties in the filter are:
      *
      *
-     * - `columns`: List of columns in the table (see below)
+     * - <b>columns</b>: List of columns in the table (see below)
      *
      *
-     * - `createdAt`: DateTime the table was created
+     * - <b>createdAt</b>: DateTime the table was created
      *
      *
-     * - `createdWithin`: TimeSpan in which the table was created
+     * - <b>createdWithin</b>: TimeSpan in which the table was created
      *
      *
-     * - `id`: String value uniquely identifying the table
+     * - <b>id</b>: String value uniquely identifying the table
      *
      *
-     * - `name`: String name for the table
+     * - <b>name</b>: String name for the table
      *
      *
-     * - `metadataModifiedAt`: DateTime the table's metadata was last modified
+     * - <b>metadataModifiedAt</b>: DateTime the table's metadata was last modified
      *
      *
-     * - `metadataModifiedWithin`: TimeSpan in which the table's metadata was last modified
+     * - <b>metadataModifiedWithin</b>: TimeSpan in which the table's metadata was last modified
      *
      *
-     * - `properties`: Dictionary with string keys and values representing table metadata
+     * - <b>properties</b>: Dictionary with string keys and values representing table metadata
      *
      *
-     * - `rowsModifiedAt`: DateTime rows were last appended to the table
+     * - <b>rowsModifiedAt</b>: DateTime rows were last appended to the table
      *
      *
-     * - `rowsModifiedWithin`: TimeSpan within rows were last appended to the table
+     * - <b>rowsModifiedWithin</b>: TimeSpan within rows were last appended to the table
      *
      *
-     * - `rowCount`: Int32 number of rows in the table
+     * - <b>rowCount</b>: Int32 number of rows in the table
      *
      *
-     * - `supportsAppend`: Boolean indicating whether or not the table supports appending additional rows of data
+     * - <b>supportsAppend</b>: Boolean indicating whether or not the table supports appending additional rows of data
      *
      *
-     * - `testResultId`: String ID of the test result associated with the table
+     * - <b>testResultId</b>: String ID of the test result associated with the table
      *
      *
-     * - `workspace`: String ID of the workspace the table belongs to
+     * - <b>workspace</b>: String ID of the workspace the table belongs to
      *
      *
-     * - `workspaceName`: String name of the workspace the table belongs to
+     * - <b>workspaceName</b>: String name of the workspace the table belongs to
      *
      *
      *
-     * Allowed properties in the `columns` list are:
+     * Allowed properties in the <b>columns</b> list are:
      *
      *
-     * - `name`: String name of the column (requires a `testResultId` filter)
+     * - <b>name</b>: String name of the column (requires a <b>testResultId</b> filter)
      *
      *
      *
      * Allowed constants in the filter are:
      *
      *
-     * - `RelativeTime.CurrentDay`: TimeSpan representing the elapsed time between now and the start of the current day
+     * - <b>RelativeTime.CurrentDay</b>: TimeSpan representing the elapsed time between now and the start of the current day
      *
      *
-     * - `RelativeTime.CurrentWeek`: TimeSpan representing the elapsed time between now and the start of the current week
+     * - <b>RelativeTime.CurrentWeek</b>: TimeSpan representing the elapsed time between now and the start of the current week
      *
      *
-     * - `RelativeTime.CurrentMonth`: TimeSpan representing the elapsed time between now and the start of the current month
+     * - <b>RelativeTime.CurrentMonth</b>: TimeSpan representing the elapsed time between now and the start of the current month
      *
      *
-     * - `RelativeTime.CurrentYear`: TimeSpan representing the elapsed time between now and the start of the current year
+     * - <b>RelativeTime.CurrentYear</b>: TimeSpan representing the elapsed time between now and the start of the current year
      */
     filter?: string | null;
     /**
      * Makes substitutions in the query filter expression. Substitutions for the query expression are indicated
-     * by non-negative integers that are prefixed with the `@` symbol. Each substitution in the given expression
+     * by non-negative integers that are prefixed with the <b>@</b> symbol. Each substitution in the given expression
      * will be replaced by the element at the corresponding index (zero-based) in this list. For example,
-     * `@0` in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
+     * <b>@0</b> in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
      */
     substitutions?: Array<boolean | number | string | null> | null;
     /**
-     * The date and time to use as the reference point for `RelativeTime` filters, including time zone information.
+     * The date and time to use as the reference point for <b>RelativeTime</b> filters, including time zone information.
      * Defaults to the current time in UTC.
      */
     referenceTime?: string | null;
     /**
      * The list of fields to return for each table in the response. When not specified, all
      * fields are returned. When empty, only table IDs are returned. When specifying both
-     * `orderBy` and `projection`, the `orderBy` field must be included in the `projection` list.
+     * <b>orderBy</b> and <b>projection</b>, the <b>orderBy</b> field must be included in the <b>projection</b> list.
      */
     projection?: Array<'COLUMN_COUNT' | 'COLUMN_NAME' | 'COLUMN_DATA_TYPE' | 'COLUMN_COLUMN_TYPE' | 'COLUMN_PROPERTIES' | 'CREATED_AT' | 'METADATA_MODIFIED_AT' | 'METADATA_REVISION' | 'NAME' | 'PROPERTIES' | 'ROW_COUNT' | 'ROWS_MODIFIED_AT' | 'SUPPORTS_APPEND' | 'TEST_RESULT_ID' | 'WORKSPACE'> | null;
     /**
@@ -701,7 +701,7 @@ export type QueryTablesRequest = {
     continuationToken?: string | null;
     /**
      * The sort order of the returned list of tables. By default, tables are sorted in ascending order based on the specified value.
-     * When specifying both `orderBy` and `projection`, the `orderBy` field must be included in the `projection` list:
+     * When specifying both <b>orderBy</b> and <b>projection</b>, the <b>orderBy</b> field must be included in the <b>projection</b> list:
      *
      * - CREATED_AT: The date and time the table was created (default oldest table first).
      *
@@ -757,16 +757,16 @@ export type StringColumnFilter = {
      */
     column: string;
     /**
-     * How to compare the column's value with the specified `value` property. An error
+     * How to compare the column's value with the specified <b>value</b> property. An error
      * is returned if the column's data type does not support the specified operation:
      *
-     * - String columns only support `EQUALS`, `NOT_EQUALS`, `CONTAINS`, and `NOT_CONTAINS`.
+     * - String columns only support <b>EQUALS</b>, <b>NOT_EQUALS</b>, <b>CONTAINS</b>, and <b>NOT_CONTAINS</b>.
      *
-     * - Non-string columns do not support `CONTAINS` or `NOT_CONTAINS`.
+     * - Non-string columns do not support <b>CONTAINS</b> or <b>NOT_CONTAINS</b>.
      *
-     * - When `value` is null, `operation` must be `EQUALS` or `NOT_EQUALS`.
+     * - When <b>value</b> is null, <b>operation</b> must be <b>EQUALS</b> or <b>NOT_EQUALS</b>.
      *
-     * - When `value` is `NaN` for a floating-point column, `operation` must be `NOT_EQUALS`.
+     * - When <b>value</b> is <b>NaN</b> for a floating-point column, <b>operation</b> must be <b>NOT_EQUALS</b>.
      */
     operation: 'EQUALS' | 'LESS_THAN' | 'LESS_THAN_EQUALS' | 'GREATER_THAN' | 'GREATER_THAN_EQUALS' | 'NOT_EQUALS' | 'CONTAINS' | 'NOT_CONTAINS';
     /**
@@ -801,14 +801,14 @@ export type StringDecimatedDataQueryRequest = {
      * The names of columns to include in the response.
      * The response will include the columns in the same order specified in this parameter.
      * All columns are included in the order specified at table creation if this property is excluded.
-     * When `distribution` is `EQUAL_WIDTH`, a configurable maximum number of columns applies
+     * When <b>distribution</b> is <b>EQUAL_WIDTH</b>, a configurable maximum number of columns applies
      * (default: 20).
      */
     columns?: Array<string> | null;
     /**
      * A list of columns to filter by.
      * Only rows whose columns contain values matching all of the specified filters are returned.
-     * The columns used for filtering do not need to be included in the `columns` list,
+     * The columns used for filtering do not need to be included in the <b>columns</b> list,
      * in which case they are not returned in the response.
      * These filters are applied before data is decimated.
      */
@@ -829,41 +829,41 @@ export type StringDecimationOptions = {
     /**
      * The name of the column that will be used as the x-axis for decimating the data.
      * The column in the table that was specified as Index will be used if this property is excluded.
-     * Only numeric columns are supported. i.e. `INT32`, `INT64`, `FLOAT32`, `FLOAT64` and `TIMESTAMP`.
+     * Only numeric columns are supported. i.e. <b>INT32</b>, <b>INT64</b>, <b>FLOAT32</b>, <b>FLOAT64</b> and <b>TIMESTAMP</b>.
      */
     xColumn?: string | null;
     /**
      * A list of columns to decimate by.
-     * This property is only needed when the specified `method` is `MAX_MIN` or `ENTRY_EXIT`.
-     * Only numeric columns are supported. i.e. `INT32`, `INT64`, `FLOAT32`, `FLOAT64` and `TIMESTAMP`.
-     * When `distribution` is `EQUAL_WIDTH`, a configurable maximum number of columns applies
+     * This property is only needed when the specified <b>method</b> is <b>MAX_MIN</b> or <b>ENTRY_EXIT</b>.
+     * Only numeric columns are supported. i.e. <b>INT32</b>, <b>INT64</b>, <b>FLOAT32</b>, <b>FLOAT64</b> and <b>TIMESTAMP</b>.
+     * When <b>distribution</b> is <b>EQUAL_WIDTH</b>, a configurable maximum number of columns applies
      * (default: 10).
      */
     yColumns?: Array<string> | null;
     /**
-     * Number of intervals to use for decimation. When `distribution` is `EQUAL_WIDTH`, a
+     * Number of intervals to use for decimation. When <b>distribution</b> is <b>EQUAL_WIDTH</b>, a
      * configurable maximum applies (default: 5000).
      */
     intervals?: number;
     /**
      * Specifies the method used to decimate the data:
      *
-     * - LOSSY: Creates an `xColumn` ordered set and returns an uniformly distributed sample of
-     * rows with as many rows as the number specified as `intervals`.
+     * - LOSSY: Creates an <b>xColumn</b> ordered set and returns an uniformly distributed sample of
+     * rows with as many rows as the number specified as <b>intervals</b>.
      *
-     * - MAX_MIN: Creates an `xColumn` ordered set which will be divided in the number of `intervals` specified.
+     * - MAX_MIN: Creates an <b>xColumn</b> ordered set which will be divided in the number of <b>intervals</b> specified.
      * For each of the intervals, the maximum and minimum values for all the
-     * columns specified in `yColumns` will be returned.
+     * columns specified in <b>yColumns</b> will be returned.
      *
-     * - ENTRY_EXIT: Creates an `xColumn` ordered set which will be divided in the number of `intervals` specified.
+     * - ENTRY_EXIT: Creates an <b>xColumn</b> ordered set which will be divided in the number of <b>intervals</b> specified.
      * For each of the intervals, the first and last row within the interval will be returned
-     * in addition to the maximum and minimum values for all the columns specified in `yColumns`.
+     * in addition to the maximum and minimum values for all the columns specified in <b>yColumns</b>.
      */
     method?: 'LOSSY' | 'MAX_MIN' | 'ENTRY_EXIT';
     /**
-     * Specifies the method used to distribute data into intervals when `method` is `MAX_MIN`
-     * or `ENTRY_EXIT`. This property is not valid when `method` is `LOSSY`. Added in version
-     * 5 of the `readData` operation:
+     * Specifies the method used to distribute data into intervals when <b>method</b> is <b>MAX_MIN</b>
+     * or <b>ENTRY_EXIT</b>. This property is not valid when <b>method</b> is <b>LOSSY</b>. Added in version
+     * 5 of the <b>readData</b> operation:
      *
      * - EQUAL_FREQUENCY: Each interval contains the same number of data points, maximizing the density of the
      * decimated data. Best for data with discrete or clustered x-axis values where gaps in
@@ -905,12 +905,12 @@ export type StringExportTableDataRequest = {
      *
      * - INLINE: Returns the exported data as the body of the response.
      *
-     * - DOWNLOAD_LINK: Creates a one-time download URL for executing an export as a file download. Make a `GET` request to the URL returned
-     * in the `Location` response header to retrieve the requested export data.
+     * - DOWNLOAD_LINK: Creates a one-time download URL for executing an export as a file download. Make a <b>GET</b> request to the URL returned
+     * in the <b>Location</b> response header to retrieve the requested export data.
      */
     destination?: 'INLINE' | 'DOWNLOAD_LINK';
     /**
-     * The format of the exported data. The only response format currently supported is `CSV`:
+     * The format of the exported data. The only response format currently supported is <b>CSV</b>:
      *
      * - CSV: Comma-separated values.
      */
@@ -928,11 +928,11 @@ export type StringQueryTableDataRequest = {
      */
     columns?: Array<string> | null;
     /**
-     * A list of columns to order the results by. Multiple columns may be specified to order rows that have the same value for prior columns. The columns used for sorting do not need to be included in the `columns` list, in which case they are not returned in the response. If orderBy is not specified, then the order in which results are returned is undefined.
+     * A list of columns to order the results by. Multiple columns may be specified to order rows that have the same value for prior columns. The columns used for sorting do not need to be included in the <b>columns</b> list, in which case they are not returned in the response. If orderBy is not specified, then the order in which results are returned is undefined.
      */
     orderBy?: Array<StringColumnOrderBy> | null;
     /**
-     * A list of columns to filter by. Only rows whose columns contain values matching all of the specified filters are returned. The columns used for filtering do not need to be included in the `columns` list, in which case they are not returned in the response.
+     * A list of columns to filter by. Only rows whose columns contain values matching all of the specified filters are returned. The columns used for filtering do not need to be included in the <b>columns</b> list, in which case they are not returned in the response.
      */
     filters?: Array<StringColumnFilter> | null;
     /**
@@ -953,7 +953,7 @@ export type StringQueryTableDataRequest = {
  * Table Metadata Modification
  *
  * Contains the modifications for a table's metadata. Values not included in the request body
- * or included with a `null` value will remain unchanged.
+ * or included with a <b>null</b> value will remain unchanged.
  */
 export type TableMetadataModification = {
     /**
@@ -962,7 +962,7 @@ export type TableMetadataModification = {
     id: string;
     /**
      * When specified, this is an integer that must match the last known revision number of the table,
-     * incremented by one. If it doesn't match the current `metadataRevision` incremented by one at the
+     * incremented by one. If it doesn't match the current <b>metadataRevision</b> incremented by one at the
      * time of execution, the modify request will be rejected with a conflict error. This is used to
      * ensure that changes to this table's metadata are based on a known, previous state.
      */
@@ -973,7 +973,7 @@ export type TableMetadataModification = {
     name?: string | null;
     /**
      * The new test result ID associated with the table. Set to an empty string to remove the
-     * test result ID. Added in version 2 of the `modifyMetadata` operation.
+     * test result ID. Added in version 2 of the <b>modifyMetadata</b> operation.
      */
     testResultId?: string | null;
     /**
@@ -983,8 +983,8 @@ export type TableMetadataModification = {
     workspace?: string | null;
     /**
      * The properties to modify. A map of key value properties containing the metadata to be added or
-     * modified. Set a property value to `null` to delete that property. Existing properties not
-     * included in the map are unaffected unless `replace` is `true` in the top-level request object.
+     * modified. Set a property value to <b>null</b> to delete that property. Existing properties not
+     * included in the map are unaffected unless <b>replace</b> is <b>true</b> in the top-level request object.
      */
     properties?: {
         [key: string]: string | null;
@@ -994,7 +994,7 @@ export type TableMetadataModification = {
 /**
  * V1 Operations
  *
- * The operations available in the routes provided by the `/v1` HTTP API.
+ * The operations available in the routes provided by the <b>/v1</b> HTTP API.
  */
 export type V1Operations = {
     /**
@@ -1022,7 +1022,7 @@ export type GetTableDataData = {
         columns?: string;
         /**
          * A comma-separated list of the names of columns to order the results by. Multiple columns may be specified to order rows that have the same value for prior columns.
-         * The columns used for ordering do not need to be included in the `columns` list, in which case they are not returned in the response.
+         * The columns used for ordering do not need to be included in the <b>columns</b> list, in which case they are not returned in the response.
          * If orderBy is not specified, then the order in which results are returned is undefined.
          */
         orderBy?: string;
@@ -1033,8 +1033,8 @@ export type GetTableDataData = {
          */
         orderByDescending?: boolean;
         /**
-         * Limits the returned list to the specified number of results. Use with the `continuationToken` property
-         * to implement pagination. As of version 4 of the `readData` operation, the maximum value is 10,000.
+         * Limits the returned list to the specified number of results. Use with the <b>continuationToken</b> property
+         * to implement pagination. As of version 4 of the <b>readData</b> operation, the maximum value is 10,000.
          */
         take?: number;
         /**
@@ -1071,8 +1071,8 @@ export type PostTableDataData = {
     /**
      * Append Table Data Request
      *
-     * Contains the rows to append and optional flags. The `frame` property is
-     * required unless `endOfData` is true.
+     * Contains the rows to append and optional flags. The <b>frame</b> property is
+     * required unless <b>endOfData</b> is true.
      */
     body?: AppendTableDataRequest;
     path: {
@@ -1084,8 +1084,8 @@ export type PostTableDataData = {
     query?: {
         /**
          * Whether the table should expect any additional rows to be appended in future requests.
-         * Not valid for JSON requests; use the `endOfData` property in the request body instead.
-         * Added in version 2 of the `writeData` operation.
+         * Not valid for JSON requests; use the <b>endOfData</b> property in the request body instead.
+         * Added in version 2 of the <b>writeData</b> operation.
          */
         endOfData?: boolean;
     };
@@ -1294,7 +1294,7 @@ export type CreateTableData = {
     /**
      * Create Table Request
      *
-     * The tables's column definitions and metadata. Exactly one column must have a `columnType` of `INDEX`.
+     * The tables's column definitions and metadata. Exactly one column must have a <b>columnType</b> of <b>INDEX</b>.
      */
     body?: CreateTableRequest;
     path?: never;

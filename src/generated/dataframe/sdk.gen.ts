@@ -21,7 +21,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Get rows of data from the specified table
  *
- * Reads raw data from the table identified by its ID. For more advanced filtering and ordering, use the `POST /v1/tables/{id}/query-data` route.
+ * Reads raw data from the table identified by its ID. For more advanced filtering and ordering, use the <b>POST /v1/tables/{id}/query-data</b> route.
  */
 export const getTableData = <ThrowOnError extends boolean = false>(options: Options<GetTableDataData, ThrowOnError>): RequestResult<GetTableDataResponses, GetTableDataErrors, ThrowOnError> => (options.client ?? client).get<GetTableDataResponses, GetTableDataErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -32,22 +32,22 @@ export const getTableData = <ThrowOnError extends boolean = false>(options: Opti
 /**
  * Append one or more rows of data to the table identified by its ID
  *
- * Multiple data formats are supported, distinguished by the `Content-Type` header
+ * Multiple data formats are supported, distinguished by the <b>Content-Type</b> header
  * of the request:
  *
  *
- * - `application/json`: Each row of data must contain a value for each non-nullable column
+ * - <b>application/json</b>: Each row of data must contain a value for each non-nullable column
  * in the table, in a format that can be converted to the column's datatype. Any nullable
- * columns not included in `data` will receive a null value for each appended row. `endOfData`
+ * columns not included in <b>data</b> will receive a null value for each appended row. <b>endOfData</b>
  * is provided in the request body.
  *
  *
- * - `application/vnd.apache.arrow.stream`: [Apache Arrow IPC Streaming](https://www.ni.com/r/arrow-ipc-format)
+ * - <b>application/vnd.apache.arrow.stream</b>: [Apache Arrow IPC Streaming](https://www.ni.com/r/arrow-ipc-format)
  * binary format. The data must contain a column for each non-nullable column in the table
  * using data types compatible with the column's datatype. Any nullable columns not included
  * in the request will receive a null value for each appended row. Timestamp values are
- * truncated to milliseconds, even when using nanosecond or microsecond units. `endOfData`
- * is provided as a query parameter. Added in version 2 of the `writeData` operation.
+ * truncated to milliseconds, even when using nanosecond or microsecond units. <b>endOfData</b>
+ * is provided as a query parameter. Added in version 2 of the <b>writeData</b> operation.
  */
 export const postTableData = <ThrowOnError extends boolean = false>(options: Options<PostTableDataData, ThrowOnError>): RequestResult<PostTableDataResponses, PostTableDataErrors, ThrowOnError> => (options.client ?? client).post<PostTableDataResponses, PostTableDataErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -65,20 +65,20 @@ export const postTableData = <ThrowOnError extends boolean = false>(options: Opt
  * Reads rows of data that match a filter from the table identified by its ID.
  *
  *
- * Use the `columns` property to return a subset of each row.
+ * Use the <b>columns</b> property to return a subset of each row.
  *
  *
- * Use the `filters` property to filter the returned rows.
+ * Use the <b>filters</b> property to filter the returned rows.
  *
  *
- * Use the `orderBy` and `filters` properties to order and filter the returned rows.
+ * Use the <b>orderBy</b> and <b>filters</b> properties to order and filter the returned rows.
  *
  *
- * Use the `take` and `continuationToken` properties to return paged responses.
- * As of version 4 of the `readData` operation, the maximum `take` value is 10,000.
+ * Use the <b>take</b> and <b>continuationToken</b> properties to return paged responses.
+ * As of version 4 of the <b>readData</b> operation, the maximum <b>take</b> value is 10,000.
  *
  *
- * For requests that don't require filtering, use the `GET /v1/tables/{id}/data` route.
+ * For requests that don't require filtering, use the <b>GET /v1/tables/{id}/data</b> route.
  */
 export const queryTableData = <ThrowOnError extends boolean = false>(options: Options<QueryTableDataData, ThrowOnError>): RequestResult<QueryTableDataResponses, QueryTableDataErrors, ThrowOnError> => (options.client ?? client).post<QueryTableDataResponses, QueryTableDataErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -96,19 +96,19 @@ export const queryTableData = <ThrowOnError extends boolean = false>(options: Op
  * Exports rows of data that match a filter from the table identified by its ID.
  *
  *
- * Use the `columns` property to return a subset of each row.
+ * Use the <b>columns</b> property to return a subset of each row.
  *
  *
- * Use the `orderBy` and `filters` properties to order and filter the returned rows.
+ * Use the <b>orderBy</b> and <b>filters</b> properties to order and filter the returned rows.
  *
  *
- * Use the `take` property to limit the number of rows returned.
+ * Use the <b>take</b> property to limit the number of rows returned.
  *
  *
- * Use the `responseFormat` property to select the format of the exported content. The only response format currently supported is `CSV`.
+ * Use the <b>responseFormat</b> property to select the format of the exported content. The only response format currently supported is <b>CSV</b>.
  *
  *
- * Added in version 2 of the `readData` operation. The `take` property was added in version 3 of the `readData` operation.
+ * Added in version 2 of the <b>readData</b> operation. The <b>take</b> property was added in version 3 of the <b>readData</b> operation.
  */
 export const exportTableData = <ThrowOnError extends boolean = false>(options: Options<ExportTableDataData, ThrowOnError>): RequestResult<ExportTableDataResponses, ExportTableDataErrors, ThrowOnError> => (options.client ?? client).post<ExportTableDataResponses, ExportTableDataErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -126,16 +126,16 @@ export const exportTableData = <ThrowOnError extends boolean = false>(options: O
  * Reads rows of data that match a filter from the table identified by its ID.
  *
  *
- * Use the `columns` property to return a subset of each row.
+ * Use the <b>columns</b> property to return a subset of each row.
  *
  *
- * Use the `filters` property to filter the returned rows.
+ * Use the <b>filters</b> property to filter the returned rows.
  *
  *
- * Use the `decimation` property to specify parameters on how data will be decimated.
+ * Use the <b>decimation</b> property to specify parameters on how data will be decimated.
  *
  *
- * For more requests that don't require data decimation, use the `POST /v1/tables/{id}/query-data` route.
+ * For more requests that don't require data decimation, use the <b>POST /v1/tables/{id}/query-data</b> route.
  */
 export const queryDecimatedTableData = <ThrowOnError extends boolean = false>(options: Options<QueryDecimatedTableDataData, ThrowOnError>): RequestResult<QueryDecimatedTableDataResponses, QueryDecimatedTableDataErrors, ThrowOnError> => (options.client ?? client).post<QueryDecimatedTableDataResponses, QueryDecimatedTableDataErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -153,10 +153,10 @@ export const queryDecimatedTableData = <ThrowOnError extends boolean = false>(op
  * Lists available tables on the SystemLink DataFrame service.
  *
  *
- * Use the `take` and `continuationToken` parameters to return paged responses.
+ * Use the <b>take</b> and <b>continuationToken</b> parameters to return paged responses.
  *
  *
- * The `orderBy` and `orderByDescending` parameters can be used to manage sorting the list by metadata objects.
+ * The <b>orderBy</b> and <b>orderByDescending</b> parameters can be used to manage sorting the list by metadata objects.
  */
 export const getTables = <ThrowOnError extends boolean = false>(options?: Options<GetTablesData, ThrowOnError>): RequestResult<GetTablesResponses, GetTablesErrors, ThrowOnError> => (options?.client ?? client).get<GetTablesResponses, GetTablesErrors, ThrowOnError>({
     security: [{ name: 'X-NI-API-KEY', type: 'apiKey' }],
@@ -185,10 +185,10 @@ export const createTable = <ThrowOnError extends boolean = false>(options?: Opti
  * Queries available tables on the SystemLink DataFrame service and returns the table metadata.
  *
  *
- * Use the `take` and `continuationToken` properties to return paged responses.
+ * Use the <b>take</b> and <b>continuationToken</b> properties to return paged responses.
  *
  *
- * The `orderBy` and `orderByDescending` properties can be used to manage sorting the list by metadata objects.
+ * The <b>orderBy</b> and <b>orderByDescending</b> properties can be used to manage sorting the list by metadata objects.
  *
  *
  */

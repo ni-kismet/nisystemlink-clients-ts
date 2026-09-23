@@ -30,9 +30,9 @@ export type ApiVersion = {
  * Client-provided application context used to tailor the assistant per request.
  *
  * Matches the ``application_context`` schema: ``url_path`` selects the skill
- * categories loaded into the system prompt (and, in turn, the available tools). The model
- * is extensible: unknown fields are preserved so new use cases can add fields without
- * breaking existing consumers.
+ * categories loaded into the system prompt (and, in turn, the available tools), while
+ * ``time_zone`` identifies the browser's IANA time zone. The model is extensible: unknown
+ * fields are preserved so new use cases can add fields without breaking existing consumers.
  */
 export type ApplicationContext = {
     /**
@@ -41,6 +41,12 @@ export type ApplicationContext = {
      * Current URL path, used by the backend to select skills and tools.
      */
     urlPath: string;
+    /**
+     * Timezone
+     *
+     * IANA time zone reported by the browser.
+     */
+    timeZone?: string | null;
     [key: string]: unknown;
 };
 
@@ -106,7 +112,7 @@ export type ChatRequest = {
     /**
      * Toolresults
      *
-     * User decisions for tool calls awaiting approval. When present, the request resumes a paused conversation instead of sending a new user message.
+     * Outcomes for tool calls awaiting resumption. When present, the request resumes a paused conversation instead of sending a new user message.
      */
     toolResults?: Array<ToolResult> | null;
 };
@@ -388,6 +394,12 @@ export type ThreadMessage = {
      * Message creation timestamp
      */
     created_at: string;
+    /**
+     * Parts
+     *
+     * Ordered structured parts, with each tool marker built from its durable tool execution.
+     */
+    parts?: Array<UiMessagePart>;
 };
 
 /**
@@ -413,11 +425,11 @@ export type ThreadResponse = {
 /**
  * ToolResult
  *
- * A user's decision (and optional output) for a tool call awaiting approval.
+ * An outcome submitted for a tool call awaiting resumption.
  *
  * Sent by the frontend to resume a paused conversation after a tool-approval-request.
- * For an approved client-side tool the ``output`` carries the browser-executed result;
- * a denial omits ``output`` and may include a ``message`` shown to the model.
+ * A server-side tool accepts an approval or rejection. A client-side tool accepts a
+ * successful output, execution failure, or rejection.
  */
 export type ToolResult = {
     /**
@@ -427,11 +439,15 @@ export type ToolResult = {
      */
     toolCallId: string;
     /**
-     * Approved
+     * Approvalid
      *
-     * Whether the user approved the tool call.
+     * The approval request ID, when the result answers an approval prompt.
      */
-    approved: boolean;
+    approvalId?: string | null;
+    /**
+     * The approval decision or client-side execution outcome.
+     */
+    state: ToolResultState;
     /**
      * Output
      *
@@ -439,12 +455,31 @@ export type ToolResult = {
      */
     output?: unknown | null;
     /**
+     * Errortext
+     *
+     * The client-side tool execution error when execution was approved but failed.
+     */
+    errorText?: string | null;
+    /**
+     * Durationmilliseconds
+     *
+     * Browser-measured client-side tool execution duration in milliseconds.
+     */
+    durationMilliseconds?: number | null;
+    /**
      * Message
      *
      * Optional message returned to the model, typically explaining a denial.
      */
     message?: string | null;
 };
+
+/**
+ * ToolResultState
+ *
+ * Outcome submitted to resume an interrupted tool call.
+ */
+export type ToolResultState = 'approved' | 'rejected' | 'succeeded' | 'failed';
 
 /**
  * UIMessage
@@ -524,7 +559,7 @@ export type UiMessagePart = {
     /**
      * State
      *
-     * Tool state: input-streaming, input-available, output-available, output-error
+     * Tool state: input-available, output-available, output-error, output-denied, approval-requested (awaiting a user decision), or pending-client (awaiting browser-side execution).
      */
     state?: string | null;
     /**
@@ -533,6 +568,12 @@ export type UiMessagePart = {
      * Error text for tool errors
      */
     errorText?: string | null;
+    /**
+     * Approvalid
+     *
+     * The approval request ID, when this tool call awaited or received a decision.
+     */
+    approvalId?: string | null;
 };
 
 export type RootNiaiassistantGetData = {

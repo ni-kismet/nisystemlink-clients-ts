@@ -20,7 +20,9 @@ import {
   listAvailableFiles,
   queryFilesLinq,
   queryAvailableFiles,
-  upload,
+  uploadSessionAppend,
+  uploadSessionFinish,
+  uploadSessionStart,
   updateMetadata,
   delete_ as deleteFile,
   deleteMultiple,
@@ -29,6 +31,18 @@ import { createClient, createConfig } from '../../src/generated/file-ingestion/c
 import { client as generatedClient } from '../../src/generated/file-ingestion/client.gen';
 
 const configured = isConfigured();
+
+const fetchWithMultipartContentLength: typeof fetch = async (input, init) => {
+  const request = new Request(input, init);
+  if (!request.headers.get('content-type')?.startsWith('multipart/form-data')) {
+    return fetch(request);
+  }
+
+  const body = await request.arrayBuffer();
+  const headers = new Headers(request.headers);
+  headers.set('Content-Length', String(body.byteLength));
+  return fetch(new Request(request, { body, headers }));
+};
 
 describe.skipIf(!configured)('File Ingestion Service', () => {
   let client: ReturnType<typeof createClient>;
@@ -40,6 +54,7 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
       createConfig({
         baseUrl: buildServiceBaseUrl(specBaseUrl),
         headers: { 'x-ni-api-key': process.env.SYSTEMLINK_API_KEY! },
+        fetch: fetchWithMultipartContentLength,
       }),
     );
   });
@@ -152,21 +167,32 @@ describe.skipIf(!configured)('File Ingestion Service', () => {
   });
 
   describe('Upload, update metadata, delete', () => {
-    it('uploads a text file', async () => {
+    it('uploads a text file in one chunk', async () => {
       const content = `ts-sdk-e2e content ${Date.now()}`;
-      const blob = new Blob([content], { type: 'text/plain' });
-      const file = new File([blob], 'ts-sdk-e2e.txt', { type: 'text/plain' });
+      const file = new File([content], 'ts-sdk-e2e.txt', { type: 'text/plain' });
 
-      const { data, error, response } = await upload({
+      const { data: session, error: startError, response: startResponse } = await uploadSessionStart({ client });
+      expect(startResponse!.status, `Upload session start failed: ${JSON.stringify(startError)}`).toBe(201);
+      expect(session?.id).toBeDefined();
+
+      const sessionId = session!.id!;
+      const { error: appendError, response: appendResponse } = await uploadSessionAppend({
         client,
+        query: { sessionId, chunk: 1, close: true },
         body: { file },
       });
-      expect([200, 201], `Upload failed: ${JSON.stringify(error)}`).toContain(response!.status);
-      const id = (data as any)?.id;
-      if (id) {
-        uploadedFileIds.push(id);
-        expect(typeof id).toBe('string');
-      }
+      expect(appendResponse!.status, `Chunk upload failed: ${JSON.stringify(appendError)}`).toBe(204);
+
+      const { data, error, response } = await uploadSessionFinish({
+        client,
+        query: { sessionId },
+        body: { name: 'ts-sdk-e2e.txt', properties: {} },
+      });
+      expect(response!.status, `Upload finish failed: ${JSON.stringify(error)}`).toBe(201);
+
+      const id = data?.uri?.split(/[/?#]/).filter(Boolean).at(-1);
+      expect(id).toBeDefined();
+      if (id) uploadedFileIds.push(id);
     });
 
     it('updates metadata on uploaded file', async () => {
