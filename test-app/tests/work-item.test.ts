@@ -100,12 +100,31 @@ describe.skipIf(!configured)('Work Item Service (preferred over work-order)', ()
     });
 
     it('supports Dynamic LINQ filter on indexed ID', async () => {
-      const { data, response } = await postNiworkitemV1QueryWorkitems({
+      const { data, error, response } = await postNiworkitemV1QueryWorkitems({
         client,
-        body: { filter: 'id == "0"', take: 1 },
+        body: { filter: 'id != "0"', take: 1, returnCount: true },
       });
-      expect(response!.status).toBe(200);
-      expect(data).toBeDefined();
+      expect(response!.status, `HTTP ${response!.status}: ${JSON.stringify(error)}`).toBe(200);
+      expect(data?.totalCount).toBeGreaterThan(1);
+
+      const limitedItems = data?.workItems ?? [];
+      expect(limitedItems).toHaveLength(1);
+      const workItemId = limitedItems[0]?.id;
+      expect(workItemId).toMatch(/^\d+$/);
+      expect(workItemId).not.toBe('0');
+
+      const { data: filteredData, error: filterError, response: filterResponse } =
+        await postNiworkitemV1QueryWorkitems({
+          client,
+          body: { filter: `id == "${workItemId}"`, take: 2, returnCount: true },
+        });
+      expect(
+        filterResponse!.status,
+        `HTTP ${filterResponse!.status}: ${JSON.stringify(filterError)}`,
+      ).toBe(200);
+      expect(filteredData?.totalCount).toBe(1);
+      expect(filteredData?.workItems).toHaveLength(1);
+      expect(filteredData?.workItems?.[0]?.id).toBe(workItemId);
     });
   });
 
